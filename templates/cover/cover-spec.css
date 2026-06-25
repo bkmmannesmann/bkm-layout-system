@@ -195,7 +195,7 @@ html, body {
    Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
 
 .cover__intro {
-  max-width: 174mm;   /* Volle verfuegbare Breite (210mm - 2x18mm) fuer max 2 Zeilen */
+  max-width: 120mm;   /* Breite wie im Original-PDF, passend fuer 2 Zeilen */
   
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
