@@ -181,7 +181,7 @@ html, body {
   letter-spacing: 0;
   text-transform: none;  /* KEINE Versalien! */
   
-  margin: 0 0 2.46mm 0;  /* 2.46mm (= 30px bei 300dpi) Abstand nach unten zum Fließtext */
+  margin: 0 0 0.85mm 0;  /* 0.85mm (= 10px bei 300dpi) Abstand nach unten zum Fließtext */
   padding: 0;
 }
 
