@@ -61,8 +61,9 @@ VARIANTS = {
         "logo_file": "bkm-logo-white-puregreen.svg",
         "keyvisual_file": "keyvisual-on-light.png",
         "headline_color": "#ffffff",
-        "subheadline_color": "#b4e717",
+        "subheadline_color": "#4daf46",  # Pure Green
         "intro_color": "#ffffff",
+        "text_shadow": True,  # Leichter Schatten
     },
     "homeline": {
         "variant_class": "cover--homeline",
@@ -83,7 +84,7 @@ VARIANTS = {
         "logo_file": "bkm-logo-white-puregreen.svg",
         "keyvisual_file": "keyvisual-on-light.png",
         "headline_color": "#ffffff",
-        "subheadline_color": "#b4e717",
+        "subheadline_color": "#4daf46",  # Pure Green
         "intro_color": "#ffffff",
     },
     "anleitung": {
@@ -143,12 +144,22 @@ def build_cover(variant_key: str, content: dict):
     
     # Inline-CSS für varianten-spezifische Farben injizieren
     # (WeasyPrint unterstützt CSS-Variablen nicht zuverlässig in allen Kontexten)
+    # Text-Shadow fuer Fachbetriebe
+    shadow_css = ""
+    if variant.get("text_shadow"):
+        shadow_css = """
+      .cover__headline, .cover__subheadline, .cover__intro {
+        text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      }
+"""
+    
     color_overrides = f"""
     <style>
       .cover__color-box {{ background-color: {variant['color_box_bg']}; }}
       .cover__headline {{ color: {variant['headline_color']}; }}
       .cover__subheadline {{ color: {variant['subheadline_color']}; }}
       .cover__intro {{ color: {variant['intro_color']}; }}
+      {shadow_css}
     </style>
     """
     html_content = html_content.replace("</head>", f"{color_overrides}\n</head>")
