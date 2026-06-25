@@ -161,7 +161,7 @@ html, body {
   text-transform: uppercase;
   
   color: #ffffff;
-  margin: 0 0 7.8mm 0;   /* 7.8mm (= 92px bei 300dpi) Abstand nach unten zur Subheadline */
+  margin: 0 0 7.87mm 0;  /* 7.87mm (= 95px bei 300dpi) Abstand nach unten zur Subheadline */
   padding: 0;
 }
 
@@ -181,7 +181,7 @@ html, body {
   letter-spacing: 0;
   text-transform: none;  /* KEINE Versalien! */
   
-  margin: 0 0 2.5mm 0;  /* 2.5mm (= 30px bei 300dpi) Abstand nach unten zum Fließtext */
+  margin: 0 0 2.46mm 0;  /* 2.46mm (= 30px bei 300dpi) Abstand nach unten zum Fließtext */
   padding: 0;
 }
 
