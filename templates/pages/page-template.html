@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title | default('BKM Broschüre – Innenseiten') }}</title>
+  <link rel="stylesheet" href="pages-spec.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       SEITE: EINLEITUNG MIT GROSSER HEADLINE + 3-SPALTEN
+       ============================================================ -->
+  <div class="page">
+    <div class="section-head">
+      <h1 class="section-head__title--large">{{ headline_large | default('IHR ZUHAUSE<br>VERDIENT SCHUTZ.') }}</h1>
+      <p class="section-head__lead">{{ leadline | default('Für Eigentümer, die ihr Haus langfristig schützen wollen.') }}</p>
+    </div>
+
+    <div class="text-columns-3 mb-5">
+      {{ body_text_3col | default('Wenn im eigenen Keller Feuchtigkeit auftritt, stehen viele Eigentümer vor einer schwierigen Entscheidung. Was tun? Wen fragen? Und wie erkennt man, ob eine Maßnahme wirklich sinnvoll ist? Hochwertige Materialien sind wichtig. Aber bei Feuchtigkeitsschäden entscheidet nicht allein das Material über das Ergebnis. Entscheidend ist, ob die Ursache richtig eingeordnet, die passende Systemlösung gewählt und die Maßnahme fachgerecht umgesetzt wird. So entsteht aus Unsicherheit ein nachvollziehbarer Sanierungsprozess. Sie investieren also nicht nur in eine Abdichtungsmaßnahme. Sie investieren in Klarheit, Werterhalt und eine fachgerecht geplante Lösung.') }}
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-card__text">{{ quote_text | default('Prüfen. Erklären. Empfehlen. Fachgerecht umsetzen. Vorbeugen.') }}</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SEITE: BILD-TEXT-SPLIT (Bild links)
+       ============================================================ -->
+  <div class="page">
+    <div class="split mb-5">
+      <div class="split__image">
+        {% if split_image %}
+        <img src="{{ split_image }}" alt="">
+        {% endif %}
+      </div>
+      <div class="split__text">
+        <div class="section-head">
+          <h2 class="section-head__title">{{ split_headline | default('Was Sie sehen, ist selten die Ursache') }}</h2>
+          <p class="section-head__lead">{{ split_lead | default('Sichtbare Schäden sind selten das eigentliche Problem.') }}</p>
+        </div>
+        <div class="text-columns-2">
+          {{ split_body | default('Viele Eigentümer bemerken das Problem erst, wenn es sichtbar wird: feuchte Wände, Schimmel, abblätternde Farbe. Doch was an der Oberfläche erscheint, hat meist tiefere Ursachen. Wer nur die sichtbaren Folgen behandelt, riskiert, dass der Schaden zurückkehrt. Ein spezialisierter BKM Fachbetrieb arbeitet deshalb systematisch.') }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Untere Hälfte: Headline + 3-Spalten + Bild rechts -->
+    <div class="split split--reversed">
+      <div class="split__image">
+        {% if split_image_2 %}
+        <img src="{{ split_image_2 }}" alt="">
+        {% endif %}
+      </div>
+      <div class="split__text">
+        <div class="section-head">
+          <h2 class="section-head__title">{{ split_headline_2 | default('Warum spezialisierte BKM Fachbetriebe anders arbeiten') }}</h2>
+          <p class="section-head__lead">{{ split_lead_2 | default('Feuchteschäden sind keine Standardbaustelle.') }}</p>
+        </div>
+        <div class="text-columns-1">
+          {{ split_body_2 | default('Bei Feuchtigkeitsschäden reicht es nicht, einfach irgendeine Maßnahme anzubieten. Entscheidend ist, ob diese Maßnahme zur Ursache, zum Schadensbild und zum Gebäude passt. Ein spezialisierter BKM Fachbetrieb arbeitet deshalb systematisch.') }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SEITE: PROZESS-SCHRITTE + KONTRASTSEKTION
+       ============================================================ -->
+  <div class="page" style="padding: 0;">
+    <!-- Obere Hälfte: Weiß mit Prozess-Liste -->
+    <div style="padding: 18mm; height: 148.5mm;">
+      <div class="section-head">
+        <h1 class="section-head__title--large">{{ process_headline | default('DER WEG ZUR<br>RICHTIGEN LÖSUNG') }}</h1>
+        <p class="section-head__lead">{{ process_lead | default('Ein klarer Ablauf schafft Sicherheit.') }}</p>
+      </div>
+
+      <div class="process-list">
+        {% for step in process_steps %}
+        <div class="process-list__item">
+          <p class="process-list__title">{{ step.number }}. {{ step.title }}</p>
+          <p class="process-list__text">{{ step.text }}</p>
+        </div>
+        {% endfor %}
+
+        {% if process_benefit %}
+        <div class="process-list__benefit">
+          <p class="process-list__benefit-title">{{ process_benefit.title }}</p>
+          <p class="process-list__benefit-text">{{ process_benefit.text }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Untere Hälfte: Kontrastsektion -->
+    <div class="contrast-section contrast-section--green" style="height: 148.5mm;">
+      <div class="section-head">
+        <h2 class="section-head__title" style="color: #ffffff;">{{ contrast_headline | default('Woran Sie ein fachlich sauberes Angebot erkennen') }}</h2>
+        <p class="section-head__lead" style="color: #ffffff;">{{ contrast_lead | default('Ein gutes Angebot erklärt die Entscheidung.') }}</p>
+      </div>
+      <div class="text-columns-3" style="color: #ffffff;">
+        {{ contrast_body | default('Bei Feuchtigkeitsschäden reicht eine pauschale Position wie „Kellerabdichtung" oft nicht aus. Für Eigentümer ist entscheidend, ob nachvollziehbar wird, warum eine bestimmte Maßnahme empfohlen wird. Ein fachlich sauberes Angebot sollte deshalb nicht nur beschreiben, was gemacht wird, sondern auch, worauf diese Empfehlung basiert.') }}
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SEITE: INHALTSVERZEICHNIS
+       ============================================================ -->
+  <div class="page toc">
+    <h2 class="toc__title">{{ toc_title | default('Inhalt') }}</h2>
+    <ul class="toc__list">
+      {% for item in toc_items %}
+      <li class="toc__item {% if item.is_chapter %}toc__item--chapter{% endif %}">
+        <span class="toc__item-title">{{ item.title }}</span>
+        <span class="toc__item-dots"></span>
+        <span class="toc__item-page">{{ item.page }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- ============================================================
+       SEITE: RÜCKSEITE
+       ============================================================ -->
+  <div class="back-cover">
+    <div class="back-cover__hero">
+      {% if back_hero_image %}
+      <img src="{{ back_hero_image }}" alt="">
+      {% endif %}
+    </div>
+    <div class="back-cover__content">
+      <h2 class="back-cover__headline">{{ back_headline | default('Der sicherste erste Schritt –<br>Ihre kostenlose Schadensanalyse') }}</h2>
+      <p class="back-cover__text">{{ back_text | default('Das größte Risiko bei Feuchtigkeitsschäden ist, nichts zu tun. Jeder Tag des Zögerns kann den Schaden vergrößern und die Kosten in die Höhe treiben. Machen Sie den ersten, sicheren Schritt in eine trockene Zukunft für Ihr Zuhause.') }}</p>
+      <p class="back-cover__cta">{{ back_cta | default('Fordern Sie jetzt Ihre kostenlose und unverbindliche Schadensanalyse durch einen zertifizierten Fachpartner in Ihrer Nähe an.') }}</p>
+    </div>
+    <div class="back-cover__footer">
+      <div class="back-cover__logos">
+        {% if badge_image %}
+        <img src="{{ badge_image }}" alt="Badge">
+        {% endif %}
+        <img src="../../assets/images/logos/bkm-logo-grey-green.svg" alt="BKM">
+      </div>
+      <div class="back-cover__contact">
+        <strong>{{ contact_company | default('BKM Mauertrocknungs GmbH') }}</strong>
+        {{ contact_address | default('Wideystraße 23<br>59174 Kamen (Germany)') }}
+        <br><br>
+        {{ contact_web | default('www.bkm-mannesmann.de') }}<br>
+        {{ contact_email | default('info@bkm-mannesmann.de') }}
+        <br><br>
+        Tel.: {{ contact_phone | default('+49 (0) 2307-99034-0') }}
+      </div>
+    </div>
+    <p class="back-cover__imprint">{{ imprint | default('Ausgegeben am 06/2026 - All rights reserved. Reproduction only with our permission. Diese Version ist urheberrechtlich geschützt und darf nicht vervielfältigt werden.') }}</p>
+  </div>
+
+</body>
+</html>

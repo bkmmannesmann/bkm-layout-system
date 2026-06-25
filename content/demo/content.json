@@ -1,0 +1,91 @@
+{
+  "title": "BKM Fachbetrieb – Demo-Broschüre",
+  "headline_large": "IHR ZUHAUSE<br>VERDIENT SCHUTZ.",
+  "leadline": "Für Eigentümer, die ihr Haus langfristig schützen wollen.",
+  "body_text_3col": "Wenn im eigenen Keller Feuchtigkeit auftritt, stehen viele Eigentümer vor einer schwierigen Entscheidung. Was tun? Wen fragen? Und wie erkennt man, ob eine Maßnahme wirklich sinnvoll ist? Hochwertige Materialien sind wichtig. Aber bei Feuchtigkeitsschäden entscheidet nicht allein das Material über das Ergebnis. Entscheidend ist, ob die Ursache richtig eingeordnet, die passende Systemlösung gewählt und die Maßnahme fachgerecht umgesetzt wird. So entsteht aus Unsicherheit ein nachvollziehbarer Sanierungsprozess. Sie investieren also nicht nur in eine Abdichtungsmaßnahme. Sie investieren in Klarheit, Werterhalt und eine fachgerecht geplante Lösung.",
+  "quote_text": "Prüfen. Erklären. Empfehlen. Fachgerecht umsetzen. Vorbeugen.",
+  "split_headline": "Was Sie sehen, ist selten die Ursache",
+  "split_lead": "Sichtbare Schäden sind selten das eigentliche Problem.",
+  "split_body": "Viele Eigentümer bemerken das Problem erst, wenn es sichtbar wird: feuchte Wände, Schimmel, abblätternde Farbe. Doch was an der Oberfläche erscheint, hat meist tiefere Ursachen. Wer nur die sichtbaren Folgen behandelt, riskiert, dass der Schaden zurückkehrt.",
+  "split_headline_2": "Warum spezialisierte BKM Fachbetriebe anders arbeiten",
+  "split_lead_2": "Feuchteschäden sind keine Standardbaustelle.",
+  "split_body_2": "Bei Feuchtigkeitsschäden reicht es nicht, einfach irgendeine Maßnahme anzubieten. Entscheidend ist, ob diese Maßnahme zur Ursache, zum Schadensbild und zum Gebäude passt. Ein spezialisierter BKM Fachbetrieb arbeitet deshalb systematisch.",
+  "process_headline": "DER WEG ZUR<br>RICHTIGEN LÖSUNG",
+  "process_lead": "Ein klarer Ablauf schafft Sicherheit.",
+  "process_steps": [
+    {
+      "number": "1",
+      "title": "Vor-Ort-Analyse",
+      "text": "Der Fachbetrieb nimmt das Schadensbild auf und prüft, welche Ursachen infrage kommen."
+    },
+    {
+      "number": "2",
+      "title": "Einschätzung und Empfehlung",
+      "text": "Sie erhalten eine verständliche Erklärung, was hinter dem Schaden steckt und welche Maßnahmen sinnvoll erscheinen."
+    },
+    {
+      "number": "3",
+      "title": "Fachgerechte Umsetzung",
+      "text": "Die ausgewählte Lösung wird passend zum Gebäude umgesetzt. Dabei kommen professionelle BKM Pro Line Systeme zum Einsatz."
+    }
+  ],
+  "process_benefit": {
+    "title": "Ihr Vorteil",
+    "text": "Sie behalten die Kontrolle, ohne selbst Sanierungsexperte werden zu müssen."
+  },
+  "contrast_headline": "Woran Sie ein fachlich sauberes Angebot erkennen",
+  "contrast_lead": "Ein gutes Angebot erklärt die Entscheidung.",
+  "contrast_body": "Bei Feuchtigkeitsschäden reicht eine pauschale Position wie 'Kellerabdichtung' oft nicht aus. Für Eigentümer ist entscheidend, ob nachvollziehbar wird, warum eine bestimmte Maßnahme empfohlen wird. Ein fachlich sauberes Angebot sollte deshalb nicht nur beschreiben, was gemacht wird, sondern auch, worauf diese Empfehlung basiert. Ihr Fachbetrieb systematisch prüft, Feuchte- oder Wasserbelastung auf das Gebäude einwirkt. Fachleute sprechen hier von Wassereinwirkungsklassen.",
+  "toc_title": "Inhalt",
+  "toc_items": [
+    {
+      "title": "Ihr Zuhause verdient Schutz",
+      "page": "02",
+      "is_chapter": true
+    },
+    {
+      "title": "Was Sie sehen, ist selten die Ursache",
+      "page": "03",
+      "is_chapter": false
+    },
+    {
+      "title": "Warum spezialisierte Fachbetriebe anders arbeiten",
+      "page": "04",
+      "is_chapter": false
+    },
+    {
+      "title": "Der Weg zur richtigen Lösung",
+      "page": "05",
+      "is_chapter": true
+    },
+    {
+      "title": "Woran Sie ein sauberes Angebot erkennen",
+      "page": "06",
+      "is_chapter": false
+    },
+    {
+      "title": "Erst prüfen, dann richtig entscheiden",
+      "page": "07",
+      "is_chapter": true
+    },
+    {
+      "title": "Was Sie beim Fachbetrieb zusätzlich erhalten",
+      "page": "08",
+      "is_chapter": false
+    },
+    {
+      "title": "Ihre kostenlose Schadensanalyse",
+      "page": "09",
+      "is_chapter": false
+    }
+  ],
+  "back_headline": "Der sicherste erste Schritt –<br>Ihre kostenlose Schadensanalyse",
+  "back_text": "Das größte Risiko bei Feuchtigkeitsschäden ist, nichts zu tun. Jeder Tag des Zögerns kann den Schaden vergrößern und die Kosten in die Höhe treiben. Machen Sie den ersten, sicheren Schritt in eine trockene Zukunft für Ihr Zuhause.",
+  "back_cta": "Fordern Sie jetzt Ihre kostenlose und unverbindliche Schadensanalyse durch einen zertifizierten Fachpartner in Ihrer Nähe an.",
+  "contact_company": "BKM Mauertrocknungs GmbH",
+  "contact_address": "Wideystraße 23<br>59174 Kamen (Germany)",
+  "contact_web": "www.bkm-mannesmann.de",
+  "contact_email": "info@bkm-mannesmann.de",
+  "contact_phone": "+49 (0) 2307-99034-0",
+  "imprint": "Ausgegeben am 06/2026 - All rights reserved. Reproduction only with our permission."
+}
