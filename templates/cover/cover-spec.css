@@ -117,84 +117,84 @@ html, body {
   z-index: 2;       /* Gleiche Ebene wie Farbkasten */
 }
 
+/* === TEXT-CONTENT CONTAINER ===
+   Flow-Layout: Elemente fließen vertikal mit definierten Abständen.
+   Subheadline und Fließtext passen sich an die tatsächliche Textlänge an
+   (ein- oder mehrzeilig, KEIN künstlicher Umbruch). */
+
+.cover__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 210mm;
+  height: 118.1mm;
+  padding: 18mm 18mm 0 18mm;  /* 18mm von oben und links */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 /* === LOGO ===
-   Position: 18mm von oben, 18mm von links
    Breite: 42mm (1/5 der Formatbreite)
    Die linke Außenkante definiert die Fluchtlinie für alle Textelemente */
 
 .cover__logo {
-  position: absolute;
-  top: 18mm;
-  left: 18mm;
   width: 42mm;    /* 1/5 von 210mm */
   height: auto;
-  z-index: 10;
+  margin-bottom: 18mm;  /* 18mm Abstand zwischen Logo-Unterkante und Headline */
 }
 
 /* === HEADLINE ===
-   Position: 18mm von links, 18mm unter Logo-Unterkante
    Schrift: Unbounded Black (900), 30pt, Versalien
-   Laufweite: -25% (-0.025em)
-   Zeilenabstand: 1.25 (37.5pt)
+   Zeilenabstand: 1.25
    IMMER zweizeilig (Zeile 1 kürzer als Zeile 2)
    Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
 
 .cover__headline {
-  position: absolute;
-  top: 46.1mm;    /* 18mm (Logo-Top) + ~10mm (Logo-Höhe) + 18mm (Abstand) */
-  left: 18mm;
   max-width: 130mm;
   
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
   font-size: 30pt;
   line-height: 1.25;
-  letter-spacing: 0;          /* Keine negative Laufweite – Unbounded ist von Natur aus kompakt */
+  letter-spacing: 0;
   text-transform: uppercase;
   
   color: #ffffff;
-  margin: 0;
+  margin: 0 0 10.6mm 0;  /* 10.6mm (= 30pt) Abstand nach unten zur Subheadline */
   padding: 0;
-  z-index: 10;
 }
 
 /* === SUBHEADLINE ===
-   Position: 30pt (Zeichenhöhe) Abstand unter Headline Zeile 2 Unterkante
    Schrift: Unbounded Black (900), 12pt, KEINE Versalien
-   Laufweite: -25% (-0.025em)
+   Ein- oder zweizeilig je nach Textlänge (KEIN künstlicher Umbruch!)
    Verhältnis zu Headline: 30pt:12pt = 2.5:1
    Farbe: Variabel je nach Hintergrund */
 
 .cover__subheadline {
-  position: absolute;
-  top: 80.5mm;    /* Headline-Ende (~69.9mm) + 30pt (10.6mm) Abstand */
-  left: 18mm;
-  max-width: 120mm;
+  max-width: 140mm;
   
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
   font-size: 12pt;
   line-height: 1.3;
-  letter-spacing: 0;          /* Keine negative Laufweite */
+  letter-spacing: 0;
   text-transform: none;  /* KEINE Versalien! */
   
-  margin: 0;
+  margin: 0 0 6mm 0;  /* 6mm Abstand nach unten zum Fließtext (IMMER gleich) */
   padding: 0;
-  z-index: 10;
 }
 
 /* === FLIESSTEXT / INTRO ===
-   Position: Direkt unter Subheadline
    Schrift: TT Norms Pro Regular (400), 12pt
-   Laufweite: -15% (-0.015em)
-   Zeilenabstand: 1.25 (15pt)
-   Max 3 Zeilen, max 107mm breit
+   Zeilenabstand: 1.25
+   Ein- bis dreizeilig je nach Textlänge
+   Max-Breite: 107mm
+   Abstand zur Subheadline ist IMMER gleich (6mm) – egal ob Sub ein- oder zweizeilig
    Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
 
 .cover__intro {
-  position: absolute;
-  top: 89.0mm;    /* Subheadline-Ende + Abstand */
-  left: 18mm;
   max-width: 107mm;
   
   font-family: 'TT Norms Pro', sans-serif;
@@ -206,7 +206,6 @@ html, body {
   color: #ffffff;
   margin: 0;
   padding: 0;
-  z-index: 10;
 }
 
 /* === KEY VISUAL ===

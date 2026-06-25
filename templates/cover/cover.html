@@ -75,40 +75,41 @@
          Farbe: Gleiche Farbe wie der 16:9-Farbkasten -->
     <div class="cover__corner-box"></div>
 
-    <!-- LOGO
-         Position: X=18mm Y=18mm
-         Breite: 42mm (1/5 der Formatbreite)
-         Variante: Abhängig vom Hintergrund (Kontrast-Regel) -->
-    <img class="cover__logo" 
-         src="{{ logo_path }}" 
-         alt="BKM Mannesmann">
+    <!-- TEXT-CONTENT CONTAINER (Flow-Layout)
+         Position: X=18mm Y=18mm (Padding im Container)
+         Die Textelemente fließen vertikal mit definierten Abständen.
+         Subheadline und Fließtext sind NICHT fest positioniert –
+         sie passen sich an die tatsächliche Textlänge an. -->
+    <div class="cover__content">
 
-    <!-- HEADLINE
-         Position: X=18mm, Y=18mm unter Logo-Unterkante
-         Schrift: Unbounded Black (900), 30pt
-         Laufweite: -0.025em (-25%)
-         Zeilenabstand: 1.25
-         Transform: UPPERCASE (Versalien)
-         Regel: IMMER 2-zeilig, Zeile 1 kürzer als Zeile 2 -->
-    <h1 class="cover__headline">{{ headline }}</h1>
+      <!-- LOGO
+           Breite: 42mm (1/5 der Formatbreite)
+           Variante: Abhängig vom Hintergrund (Kontrast-Regel) -->
+      <img class="cover__logo" 
+           src="{{ logo_path }}" 
+           alt="BKM Mannesmann">
 
-    <!-- SUBHEADLINE
-         Position: 30pt (10.6mm) unter Headline Zeile 2 Unterkante
-         Schrift: Unbounded Black (900), 12pt
-         Laufweite: -0.025em (-25%)
-         Transform: none (KEINE Versalien!)
-         Verhältnis: Headline:Sub = 2.5:1
-         Farbe: Variabel (Lime Green / Deep Green / Pure Green) -->
-    <p class="cover__subheadline">{{ subheadline }}</p>
+      <!-- HEADLINE
+           Schrift: Unbounded Black (900), 30pt, Versalien
+           Abstand oben: 18mm (unter Logo)
+           Regel: IMMER 2-zeilig, Zeile 1 kürzer als Zeile 2 -->
+      <h1 class="cover__headline">{{ headline }}</h1>
 
-    <!-- FLIESSTEXT
-         Position: Unter Subheadline
-         Schrift: TT Norms Pro Regular (400), 12pt
-         Laufweite: -0.015em (-15%)
-         Zeilenabstand: 1.25
-         Max-Breite: 107mm
-         Max-Zeilen: 3 -->
-    <p class="cover__intro">{{ intro_text }}</p>
+      <!-- SUBHEADLINE
+           Schrift: Unbounded Black (900), 12pt, keine Versalien
+           Abstand oben: 10.6mm (= 30pt Zeichenhöhe)
+           Ein- oder zweizeilig je nach Textlänge (KEIN künstlicher Umbruch)
+           Farbe: Variabel (Lime Green / Deep Green / Pure Green) -->
+      <p class="cover__subheadline">{{ subheadline }}</p>
+
+      <!-- FLIESSTEXT
+           Schrift: TT Norms Pro Regular (400), 12pt
+           Abstand oben: Immer gleich nah an Subheadline (6mm)
+           Ein- bis dreizeilig je nach Textlänge
+           Max-Breite: 107mm -->
+      <p class="cover__intro">{{ intro_text }}</p>
+
+    </div>
 
     <!-- KEY VISUAL
          WICHTIG: Vorgerenderte Bilddatei! NICHT in Code nachbauen!
