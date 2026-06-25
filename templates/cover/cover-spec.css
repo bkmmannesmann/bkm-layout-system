@@ -162,7 +162,7 @@ html, body {
   text-transform: uppercase;
   
   color: #ffffff;
-  margin: 0 0 8.2mm 0;   /* 8.2mm (= 97px bei 300dpi) Abstand nach unten zur Subheadline */
+  margin: 0 0 7.8mm 0;   /* 7.8mm (= 92px bei 300dpi) Abstand nach unten zur Subheadline */
   padding: 0;
 }
 
@@ -195,13 +195,19 @@ html, body {
    Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
 
 .cover__intro {
-  max-width: 107mm;
+  max-width: 174mm;   /* Volle verfuegbare Breite (210mm - 2x18mm) fuer max 2 Zeilen */
   
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 12pt;
   line-height: 1.25;
   letter-spacing: -0.015em;
+  
+  /* HARTE BEGRENZUNG: Maximal 2 Zeilen, Rest wird abgeschnitten */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   
   color: #ffffff;
   margin: 0;

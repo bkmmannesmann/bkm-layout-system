@@ -203,7 +203,7 @@ def main():
         "proline": {
             "headline": "BKM PRO LINE<br>FACHGERECHT SANIEREN",
             "subheadline": "Feuchtigkeitsschutz mit System",
-            "intro_text": "F\u00fcr professionelle Verarbeitung und komplexe Anwendungen optimiert.<br>BKM Systemqualit\u00e4t vom Hersteller. \u2013 Made in Germany.",
+            "intro_text": "F\u00fcr professionelle Verarbeitung und komplexe Anwendungen optimiert. BKM Systemqualit\u00e4t vom Hersteller. \u2013 Made in Germany.",
             "hero_image_alt": "BKM Pro Line Produkte",
         },
         "anleitung": {
