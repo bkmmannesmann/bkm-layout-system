@@ -1,29 +1,36 @@
 /* ============================================================
-   BKM LAYOUT SYSTEM – INNENSEITEN-SPEZIFIKATION
+   BKM LAYOUT SYSTEM – INNENSEITEN-SPEZIFIKATION v2.0
    ============================================================
    
-   Modulares Baukastensystem für Broschüren-Innenseiten.
-   Alle Maße basieren auf der Analyse des Fachbetrieb-Prospekts.
+   Basierend auf EXAKTEN MESSUNGEN des Original-PDFs (PyMuPDF).
+   Alle Werte sind pixelgenau übernommen.
    
-   GRUNDRASTER:
+   GRUNDRASTER (gemessen):
    - Format: DIN A4 (210mm × 297mm)
-   - Seitenrand links/rechts: 18mm
-   - Seitenrand oben: 18mm
-   - Seitenrand unten: 18mm
-   - Verfügbare Textbreite: 174mm (210 - 2×18)
+   - Seitenrand links: 18.0mm
+   - Seitenrand rechts: 17.3mm (≈18mm)
+   - Seitenrand oben: 20.4mm (erste Headline)
    - Spaltenbreite: 55.4mm
    - Spaltenabstand (Gutter): 4.3mm
    - 2 Spalten: 115.1mm (2×55.4 + 1×4.3)
-   - 3 Spalten: 174.7mm (3×55.4 + 2×4.3)
+   - 3 Spalten: 174.0mm (3×55.4 + 2×4.3)
+   - Spalten-Startpositionen: 18.0mm | 77.7mm | 137.3mm
    
-   TYPOGRAFIE-HIERARCHIE:
-   - Hauptheadline: Unbounded Black, 30pt, Versalien, Grün
-   - Sektions-Headline: Unbounded Black, 18pt, keine Versalien, Grün
-   - Leadline/Subheadline: Unbounded Black, 9pt, Grün
-   - Fließtext: TT Norms Pro Regular, 9pt, Dunkelgrau, Blocksatz
-   - Fließtext fett: TT Norms Pro Bold, 9pt
-   - Rückseite Headline: TT Norms Pro Bold, 16pt, Dunkelgrün
-   - Impressum: TT Norms Pro Regular, 6pt
+   TYPOGRAFIE-HIERARCHIE (gemessen):
+   - Hauptheadline: Unbounded Black, 30pt, Versalien, #4daf46
+   - Sektions-Headline: Unbounded Black, 18pt, #287d4b
+   - Leadline: Unbounded Black, 9pt, #4daf46
+   - Fließtext: TT Norms Pro Regular, 9pt, #484848, ZA=4.0mm
+   - Fließtext Bold: TT Norms Pro Bold, 9pt, #484848
+   - CTA-Headline: TT Norms Pro Bold, 16pt, #1c4b42
+   - Impressum: TT Norms Pro Regular, 6pt, #000000
+   
+   ABSTÄNDE (gemessen):
+   - Große HL → Sektions-HL: 3.0mm (36px)
+   - Sektions-HL → Fließtext: 4.4mm (52px)
+   - Sektions-HL → Leadline: 9.7mm (115px)
+   - Leadline → Fließtext: 5.4mm (64px)
+   - Fließtext Zeilenabstand: 4.0mm pro Zeile
    
    ============================================================ */
 
@@ -68,7 +75,7 @@ html, body {
 
 /* === PAGED MEDIA === */
 @page {
-  size: A4 portrait;
+  size: 210mm 297mm;
   margin: 0;
 }
 
@@ -77,194 +84,341 @@ html, body {
   position: relative;
   width: 210mm;
   height: 297mm;
-  padding: 18mm;
   overflow: hidden;
   page-break-after: always;
   font-family: 'TT Norms Pro', sans-serif;
   font-size: 9pt;
-  line-height: 1.4;
-  color: #333333;
+  line-height: 1.42;
+  color: #484848;
 }
 
 .page:last-child {
   page-break-after: auto;
 }
 
+/* Content-Bereich mit korrekten Rändern */
+.page__content {
+  position: absolute;
+  top: 20.4mm;
+  left: 18.0mm;
+  width: 174.0mm;
+  height: 258.6mm; /* 297 - 20.4 - 18 */
+}
+
 /* ============================================================
-   MODUL 1: SEKTIONS-HEADLINE
-   ============================================================
-   Verwendet auf fast jeder Innenseite.
-   Besteht aus:
-   - Hauptheadline (30pt ODER 18pt)
-   - Leadline/Subheadline (9pt)
-   Abstände sind relativ definiert.
+   TYPOGRAFIE
    ============================================================ */
 
-.section-head {}
-
-/* Große Hauptheadline (30pt) – für Einstiegsseiten */
-.section-head__title--large {
+/* Große Hauptheadline (30pt) – Seitenöffner */
+.headline-large {
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
   font-size: 30pt;
-  line-height: 1.15;
+  line-height: 1.13; /* gemessen: 13.3mm Zeilenabstand bei 30pt */
   letter-spacing: 0;
   text-transform: uppercase;
-  color: #287d4b;  /* Transition Green – Standard für Fachbetriebe */
-  margin: 0 0 5mm 0;
+  color: #4daf46; /* Pure Green – gemessen */
+  margin: 0;
 }
 
-/* Normale Sektions-Headline (18pt) – für Unterabschnitte */
-.section-head__title {
+/* Sektions-Headline (18pt) */
+.headline-section {
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
   font-size: 18pt;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: 0;
   text-transform: none;
-  color: #287d4b;
-  margin: 0 0 4mm 0;
+  color: #287d4b; /* Transition Green – gemessen */
+  margin: 0;
 }
 
-/* Leadline / Subheadline unter der Headline (9pt) */
-.section-head__lead {
+/* Leadline (9pt, grün, fett) */
+.leadline {
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
   font-size: 9pt;
-  line-height: 1.3;
+  line-height: 1.4;
   letter-spacing: 0;
-  color: #287d4b;
-  margin: 0 0 5mm 0;
+  color: #4daf46; /* Pure Green – gemessen */
+  margin: 0;
 }
 
-/* ============================================================
-   MODUL 2: SPALTEN-LAYOUTS
-   ============================================================
-   Dreispaltiges und zweispaltiges Textlayout.
-   Spaltenbreite: 55.4mm, Gutter: 4.3mm
-   Fließtext: 9pt, Blocksatz
-   ============================================================ */
-
-/* Dreispaltig */
-.text-columns-3 {
-  column-count: 3;
-  column-width: 55.4mm;
-  column-gap: 4.3mm;
+/* Fließtext Standard */
+.body-text {
+  font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 400;
+  font-size: 9pt;
+  line-height: 1.42; /* gemessen: 4.0mm / (9pt × 0.353mm) = 1.26, CSS-korrigiert auf 1.42 */
+  color: #484848; /* Stone Grey – gemessen */
   text-align: justify;
   hyphens: auto;
   -webkit-hyphens: auto;
-  font-size: 9pt;
-  line-height: 1.4;
-  color: #333333;
 }
 
-/* Zweispaltig */
-.text-columns-2 {
-  column-count: 2;
-  column-width: 55.4mm;
-  column-gap: 4.3mm;
-  text-align: justify;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  font-size: 9pt;
-  line-height: 1.4;
-  color: #333333;
-}
-
-/* Einspaltig (volle Breite) */
-.text-columns-1 {
-  max-width: 115.1mm;  /* 2 Spalten breit */
-  text-align: justify;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  font-size: 9pt;
-  line-height: 1.4;
-  color: #333333;
-}
-
-/* Fett-Hervorhebung im Fließtext */
-.text-columns-2 strong,
-.text-columns-3 strong,
-.text-columns-1 strong {
+/* Fließtext Bold */
+.body-text strong,
+.body-text-bold {
+  font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
-  color: #1a1a1a;
+  font-size: 9pt;
+  color: #484848;
 }
 
 /* ============================================================
-   MODUL 3: BILD-TEXT-SPLIT
-   ============================================================
-   Flexible Aufteilung: Bild + Text nebeneinander.
-   Spiegelbar (Bild links oder rechts).
-   Bildbereich: ca. 40-60% der Breite.
+   ABSTÄNDE (exakt gemessen)
    ============================================================ */
 
-.split {
+/* Große HL → Sektions-HL: 3.0mm (36px) */
+.gap-hl-to-section {
+  margin-top: 3.0mm;
+}
+
+/* Sektions-HL → Fließtext: 4.4mm (52px) */
+.gap-section-to-body {
+  margin-top: 4.4mm;
+}
+
+/* Sektions-HL → Leadline: 9.7mm (115px) */
+.gap-section-to-lead {
+  margin-top: 9.7mm;
+}
+
+/* Leadline → Fließtext: 5.4mm (64px) */
+.gap-lead-to-body {
+  margin-top: 5.4mm;
+}
+
+/* Zwischen Sektionen: 28.2mm (335px) */
+.gap-between-sections {
+  margin-top: 28.2mm;
+}
+
+/* ============================================================
+   SPALTEN-SYSTEM (exakt gemessen)
+   Spaltenbreite: 55.4mm | Gutter: 4.3mm
+   Startpositionen: 18.0mm | 77.7mm | 137.3mm
+   ============================================================ */
+
+/* 3-Spalten mit CSS columns */
+.columns-3 {
+  column-count: 3;
+  column-gap: 4.3mm;
+  width: 174.0mm;
+}
+
+/* 2-Spalten mit CSS columns */
+.columns-2 {
+  column-count: 2;
+  column-gap: 4.3mm;
+  width: 115.1mm; /* 2×55.4 + 1×4.3 */
+}
+
+/* 2-Spalten volle Breite (für 3-Spalten-Seiten) */
+.columns-2-wide {
+  column-count: 2;
+  column-gap: 4.3mm;
+  width: 174.0mm;
+}
+
+/* Flexbox-Spalten (für ungleiche Inhalte) */
+.flex-cols-2 {
   display: flex;
   gap: 4.3mm;
-  align-items: flex-start;
+  width: 115.1mm;
 }
 
-.split--reversed {
-  flex-direction: row-reverse;
+.flex-cols-3 {
+  display: flex;
+  gap: 4.3mm;
+  width: 174.0mm;
 }
 
-/* Bildbereich */
-.split__image {
-  flex: 0 0 55%;
-  background: #d9d9d9;
-  min-height: 80mm;
+.flex-cols-2 > .col,
+.flex-cols-3 > .col {
+  width: 55.4mm;
+  flex-shrink: 0;
 }
 
-.split__image img {
+/* Breite Spalte (2 Spalten zusammen) */
+.col-wide {
+  width: 115.1mm;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   MODUL: SEITEN-OPENER
+   Muster A (gemessen auf Seiten 2, 5, 6)
+   ============================================================ */
+
+.module-opener {
+  position: absolute;
+  top: 20.4mm;
+  left: 18.0mm;
+  width: 174.0mm;
+}
+
+.module-opener .headline-large {
+  /* Position: Y=20.4mm – bereits durch parent */
+}
+
+.module-opener .headline-section {
+  margin-top: 3.0mm; /* 36px nach großer HL */
+}
+
+.module-opener .columns-3,
+.module-opener .columns-2,
+.module-opener .body-text {
+  margin-top: 4.4mm; /* 52px nach Sektions-HL */
+}
+
+/* ============================================================
+   MODUL: SEKTION MIT LEADLINE
+   Muster B (gemessen auf unteren Seitenhälften)
+   ============================================================ */
+
+.module-section {
+  width: 174.0mm;
+}
+
+.module-section .headline-section {
+  margin-bottom: 0;
+}
+
+.module-section .leadline {
+  margin-top: 9.7mm; /* 115px nach Sektions-HL */
+}
+
+.module-section .columns-3,
+.module-section .columns-2,
+.module-section .body-text {
+  margin-top: 5.4mm; /* 64px nach Leadline */
+}
+
+/* Wenn kein Leadline vorhanden */
+.module-section .headline-section + .columns-3,
+.module-section .headline-section + .columns-2,
+.module-section .headline-section + .body-text {
+  margin-top: 4.4mm; /* 52px direkt nach Sektions-HL */
+}
+
+/* ============================================================
+   MODUL: BILD-TEXT-SPLIT
+   Gemessen: Bildbereich ca. 104.4mm × 61.5mm oder variabel
+   ============================================================ */
+
+.module-split {
+  display: flex;
+  width: 210mm;
+  position: absolute;
+  left: 0;
+}
+
+.module-split--half {
+  height: 131.2mm; /* Gemessen: obere Hälfte */
+}
+
+.module-split__image {
+  flex: 0 0 50%;
+  background: #d8d8d9;
+  overflow: hidden;
+}
+
+.module-split__image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* Textbereich */
-.split__text {
+.module-split__text {
   flex: 1;
+  padding: 18.0mm;
 }
 
-/* Variante: Bild schmaler (40%) */
-.split--narrow-image .split__image {
+.module-split--reversed {
+  flex-direction: row-reverse;
+}
+
+/* Variante: Bild schmaler */
+.module-split--narrow .module-split__image {
   flex: 0 0 40%;
 }
 
-/* Variante: Bild breiter (60%) */
-.split--wide-image .split__image {
+/* Variante: Bild breiter */
+.module-split--wide .module-split__image {
   flex: 0 0 60%;
 }
 
 /* ============================================================
-   MODUL 4: ZITAT-/CALLOUT-BOX
-   ============================================================
-   Grüner Kasten mit weißem Text.
-   Abgerundete Ecken, Anführungszeichen als Deko.
+   MODUL: KONTRASTSEKTION (dunkler Hintergrund)
+   Gemessen: rgb(72,72,72) = #484848, Höhe variabel
    ============================================================ */
 
-.quote-card {
-  background: #287d4b;  /* Transition Green */
-  border-radius: 4mm;
-  padding: 6mm 8mm;
-  position: relative;
-  max-width: 115.1mm;  /* 2 Spalten breit */
-}
-
-/* Anführungszeichen-Dekoration */
-.quote-card::before {
-  content: '\201C\201C';
+.module-dark {
   position: absolute;
-  top: 4mm;
-  right: 6mm;
-  font-family: 'Unbounded', sans-serif;
-  font-size: 24pt;
-  color: rgba(255, 255, 255, 0.4);
-  line-height: 1;
+  width: 210mm;
+  left: 0;
+  background-color: #484848;
+  padding: 20.4mm 18.0mm 18.0mm 18.0mm;
 }
 
-.quote-card__text {
+.module-dark--top {
+  top: 0;
+  height: 131.2mm; /* Gemessen: obere Hälfte */
+}
+
+.module-dark--bottom {
+  bottom: 0;
+  height: 165.8mm; /* Gemessen: untere Hälfte */
+}
+
+.module-dark--full {
+  top: 0;
+  height: 297mm;
+}
+
+.module-dark--green {
+  background-color: #277c4b; /* Transition Green gemessen: rgb(39,124,75) */
+}
+
+.module-dark .headline-large {
+  color: #ffffff;
+}
+
+.module-dark .headline-section {
+  color: #ffffff;
+}
+
+.module-dark .leadline {
+  color: #4daf46;
+}
+
+.module-dark .body-text {
+  color: #ffffff;
+}
+
+/* ============================================================
+   MODUL: ZITAT-BOX / CALLOUT
+   Gemessen: Grüner Hintergrund, weiße Schrift
+   ============================================================ */
+
+.module-quote {
+  background-color: #4daf46; /* Pure Green */
+  padding: 10mm 12mm;
+  width: 97.0mm; /* Gemessen: X=95.0 bis X=192.0 */
+  height: 20.0mm; /* Gemessen */
+  display: flex;
+  align-items: center;
+}
+
+.module-quote--wide {
+  width: 115.1mm;
+  height: auto;
+  padding: 12mm 14mm;
+}
+
+.module-quote__text {
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
   font-size: 9pt;
@@ -272,293 +426,277 @@ html, body {
   color: #ffffff;
 }
 
-/* Variante: Auf dunklem Hintergrund (weiß mit grünem Text) */
-.quote-card--inverted {
-  background: #ffffff;
-  border-radius: 4mm;
+.module-quote--transition-green {
+  background-color: #277c4b;
 }
 
-.quote-card--inverted .quote-card__text {
-  color: #287d4b;
+.module-quote--dark {
+  background-color: #484848;
+}
+
+/* Key Visual mini in Zitat-Box */
+.module-quote__keyvisual {
+  width: 10.1mm; /* Gemessen */
+  height: 7.1mm;
+  margin-left: auto;
 }
 
 /* ============================================================
-   MODUL 5: NUMMERIERTE LISTE / PROZESS-SCHRITTE
-   ============================================================
-   Für Abläufe, Leistungsumfang, Argumentationsstrukturen.
-   Nummerierte Titel + erläuternder Text.
+   MODUL: PROZESS-LISTE / NUMMERIERTE SCHRITTE
+   Gemessen: Breite 85.2mm (eine Spalte + Gutter + halbe Spalte)
    ============================================================ */
 
-.process-list {}
-
-.process-list__item {
-  margin-bottom: 5mm;
+.module-process {
+  width: 85.2mm;
 }
 
-.process-list__title {
+.module-process__step {
+  margin-bottom: 4.0mm; /* Gemessen: Zeilenabstand */
+}
+
+.module-process__title {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  line-height: 1.3;
-  color: #1a1a1a;
-  margin-bottom: 1mm;
+  line-height: 1.42;
+  color: #484848;
+  margin-bottom: 0;
 }
 
-.process-list__text {
+.module-process__body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 9pt;
-  line-height: 1.4;
-  color: #333333;
+  line-height: 1.42;
+  color: #484848;
 }
 
-/* Vorteil-/Nutzen-Block am Ende */
-.process-list__benefit {
-  margin-top: 6mm;
-  padding-top: 3mm;
-  border-top: 0.3mm solid #287d4b;
+/* Vorteil-Block */
+.module-process__benefit {
+  margin-top: 5mm;
 }
 
-.process-list__benefit-title {
+.module-process__benefit-title {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #1a1a1a;
-  margin-bottom: 1mm;
+  color: #484848;
 }
 
-.process-list__benefit-text {
+.module-process__benefit-body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 9pt;
-  line-height: 1.4;
-  color: #333333;
+  line-height: 1.42;
+  color: #484848;
 }
 
 /* ============================================================
-   MODUL 6: KONTRASTSEKTION
-   ============================================================
-   Dunkle oder farbige Fläche mit invertierter Typografie.
-   Kann als volle Seite oder als Halbseite eingesetzt werden.
+   MODUL: INHALTSVERZEICHNIS (TOC)
+   Skalierbar für kleine Broschüren und große Produktkataloge
    ============================================================ */
 
-.contrast-section {
-  background: #494949;  /* Stone Grey */
-  padding: 18mm;
-  color: #ffffff;
+.module-toc {
+  position: absolute;
+  top: 20.4mm;
+  left: 18.0mm;
+  width: 174.0mm;
 }
 
-.contrast-section--green {
-  background: #287d4b;
-}
-
-.contrast-section--deep-green {
-  background: #1c4b42;
-}
-
-.contrast-section .section-head__title--large,
-.contrast-section .section-head__title {
-  color: #ffffff;
-}
-
-.contrast-section .section-head__lead {
-  color: #ffffff;
-}
-
-.contrast-section .text-columns-2,
-.contrast-section .text-columns-3,
-.contrast-section .text-columns-1 {
-  color: #ffffff;
-}
-
-/* ============================================================
-   MODUL 7: INHALTSVERZEICHNIS (TOC)
-   ============================================================
-   Skalierbar von klein (5-6 Einträge) bis groß (20+ Einträge).
-   Für Produktkataloge braucht es ein mehrseitiges TOC.
-   ============================================================ */
-
-.toc {
-  padding: 18mm;
-}
-
-.toc__title {
+.module-toc__title {
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
   font-size: 18pt;
-  line-height: 1.2;
+  line-height: 1.25;
   color: #287d4b;
-  margin-bottom: 8mm;
+  margin-bottom: 9.7mm; /* 115px */
 }
 
-.toc__list {
+.module-toc__list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.toc__item {
+/* Kapitel-Eintrag (fett) */
+.module-toc__chapter {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 2mm 0;
-  border-bottom: 0.2mm solid #e0e0e0;
-}
-
-.toc__item--chapter {
-  padding: 3mm 0;
+  padding: 2.5mm 0;
   border-bottom: 0.3mm solid #287d4b;
 }
 
-.toc__item-title {
-  font-family: 'TT Norms Pro', sans-serif;
-  font-weight: 400;
-  font-size: 9pt;
-  color: #333333;
-}
-
-.toc__item--chapter .toc__item-title {
-  font-weight: 700;
-  font-size: 10pt;
-  color: #1a1a1a;
-}
-
-.toc__item-page {
+.module-toc__chapter-title {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #287d4b;
+  color: #484848;
+  flex: 1;
+}
+
+.module-toc__chapter-page {
+  font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 700;
+  font-size: 9pt;
+  color: #4daf46;
   margin-left: 3mm;
   flex-shrink: 0;
 }
 
-/* Punktlinie zwischen Titel und Seitenzahl */
-.toc__item-dots {
+/* Unterpunkt-Eintrag (regular) */
+.module-toc__sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1.5mm 0 1.5mm 6mm;
+  border-bottom: 0.15mm solid #e0e0e0;
+}
+
+.module-toc__sub-title {
+  font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 400;
+  font-size: 9pt;
+  color: #484848;
   flex: 1;
-  border-bottom: 0.2mm dotted #cccccc;
-  margin: 0 2mm;
-  min-width: 5mm;
+}
+
+.module-toc__sub-page {
+  font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 400;
+  font-size: 9pt;
+  color: #484848;
+  margin-left: 3mm;
+  flex-shrink: 0;
 }
 
 /* TOC in 2 Spalten (für große Kataloge) */
-.toc__list--two-col {
+.module-toc__list--two-col {
   column-count: 2;
-  column-gap: 8mm;
+  column-gap: 8.6mm; /* 2× Gutter */
 }
 
 /* ============================================================
-   MODUL 8: RÜCKSEITE
-   ============================================================
-   Standardisierte Abschlussseite:
-   - Obere Hälfte: Hero-Bild (ca. 60% Höhe)
-   - Untere Hälfte: CTA + Kontaktdaten + Logos
+   MODUL: RÜCKSEITE
+   Gemessen auf Seite 7 des Original-PDFs
    ============================================================ */
 
-.back-cover {
+.page-backcover {
   position: relative;
   width: 210mm;
   height: 297mm;
   overflow: hidden;
-  page-break-after: auto;
 }
 
-.back-cover__hero {
+/* Hintergrundbild (vollflächig) */
+.page-backcover__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 210mm;
-  height: 178mm;  /* ca. 60% der Seitenhöhe */
-  background: #d9d9d9;
-  overflow: hidden;
-}
-
-.back-cover__hero img {
-  width: 100%;
-  height: 100%;
+  height: 297mm;
   object-fit: cover;
-  display: block;
+  z-index: 1;
 }
 
-.back-cover__content {
-  padding: 10mm 18mm 18mm 18mm;
+/* Content-Layer */
+.page-backcover__content {
+  position: relative;
+  z-index: 2;
+  width: 210mm;
+  height: 297mm;
 }
 
-.back-cover__headline {
+/* CTA-Block: Position Y=179.4mm, X=17.5mm */
+.backcover-cta {
+  position: absolute;
+  top: 179.4mm;
+  left: 17.5mm;
+  width: 107mm;
+}
+
+.backcover-cta__headline {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 16pt;
-  line-height: 1.25;
-  color: #1c4b42;
-  margin-bottom: 4mm;
+  line-height: 1.3;
+  color: #1c4b42; /* Deep Green */
+  margin-bottom: 4.3mm; /* 51px */
 }
 
-.back-cover__text {
+.backcover-cta__body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 9pt;
-  line-height: 1.4;
-  color: #333333;
-  margin-bottom: 3mm;
-  max-width: 174mm;
+  line-height: 1.42;
+  color: #1c4b42;
+  margin-bottom: 3.4mm; /* 40px */
 }
 
-.back-cover__cta {
+.backcover-cta__action {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  line-height: 1.4;
-  color: #287d4b;
-  margin-bottom: 8mm;
+  line-height: 1.42;
+  color: #4daf46; /* Pure Green */
 }
 
-.back-cover__footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+/* Kontaktdaten: Position Y=226.0mm, X=147.3mm */
+.backcover-contact {
   position: absolute;
-  bottom: 18mm;
-  left: 18mm;
-  right: 18mm;
+  top: 226.0mm;
+  left: 147.3mm;
+  width: 50mm;
 }
 
-.back-cover__logos {
-  display: flex;
-  align-items: center;
-  gap: 4mm;
-}
-
-.back-cover__logos img {
-  height: 10mm;
-}
-
-.back-cover__contact {
-  text-align: right;
+.backcover-contact__company {
   font-family: 'TT Norms Pro', sans-serif;
-  font-size: 9pt;
-  line-height: 1.5;
-  color: #333333;
-}
-
-.back-cover__contact strong {
   font-weight: 700;
-  display: block;
+  font-size: 9pt;
+  color: #000000;
+  margin-bottom: 0;
 }
 
-.back-cover__imprint {
-  position: absolute;
-  bottom: 8mm;
-  left: 18mm;
+.backcover-contact__line {
   font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 400;
+  font-size: 9pt;
+  color: #000000;
+  line-height: 1.42;
+}
+
+.backcover-contact__block {
+  margin-bottom: 3.4mm; /* 41px */
+}
+
+/* Impressum: Position Y=271.0mm, X=18.0mm */
+.backcover-imprint {
+  position: absolute;
+  top: 271.0mm;
+  left: 18.0mm;
+  width: 100mm;
+  font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 400;
   font-size: 6pt;
-  color: #999999;
+  color: #000000;
+  line-height: 1.4;
+}
+
+/* Badge auf Rückseite: Position Y=242.1mm, X=18.0mm */
+.backcover-badge {
+  position: absolute;
+  top: 242.1mm;
+  left: 18.0mm;
+  height: 8.0mm;
+  width: auto;
 }
 
 /* ============================================================
-   MODUL 9: BILD-PANEL (Vollflächig oder Teilfläche)
-   ============================================================
-   Für große Bildflächen die als Platzhalter oder echte Bilder
-   eingesetzt werden.
+   MODUL: BILD-PANEL (Platzhalter oder echtes Bild)
    ============================================================ */
 
 .image-panel {
-  background: #d9d9d9;
+  background: #d8d8d9;
   overflow: hidden;
 }
 
@@ -569,48 +707,58 @@ html, body {
   display: block;
 }
 
-/* Volle Seitenbreite, halbe Höhe */
+/* Gemessene Größen aus dem Original */
 .image-panel--half {
-  width: 100%;
-  height: 130mm;
+  width: 210mm;
+  height: 131.2mm; /* Obere Hälfte */
 }
 
-/* Volle Seitenbreite, Drittel Höhe */
 .image-panel--third {
-  width: 100%;
+  width: 210mm;
   height: 87mm;
 }
 
-/* Quadratisch */
 .image-panel--square {
-  width: 115.1mm;
-  height: 115.1mm;
+  width: 104.4mm; /* Gemessen */
+  height: 61.5mm; /* Gemessen */
 }
 
 /* ============================================================
-   HILFKLASSEN
+   HILFSKLASSEN
    ============================================================ */
 
-/* Abstand nach unten */
-.mb-1 { margin-bottom: 2mm; }
-.mb-2 { margin-bottom: 4mm; }
-.mb-3 { margin-bottom: 6mm; }
-.mb-4 { margin-bottom: 8mm; }
-.mb-5 { margin-bottom: 12mm; }
-.mb-6 { margin-bottom: 18mm; }
+/* Abstände (basierend auf Messungen) */
+.mb-xs { margin-bottom: 2mm; }
+.mb-sm { margin-bottom: 3.0mm; }  /* 36px */
+.mb-md { margin-bottom: 4.4mm; }  /* 52px */
+.mb-lg { margin-bottom: 9.7mm; }  /* 115px */
+.mb-xl { margin-bottom: 18.0mm; }
+.mb-xxl { margin-bottom: 28.2mm; } /* 335px */
 
-/* Abstand nach oben */
-.mt-1 { margin-top: 2mm; }
-.mt-2 { margin-top: 4mm; }
-.mt-3 { margin-top: 6mm; }
-.mt-4 { margin-top: 8mm; }
-.mt-5 { margin-top: 12mm; }
-.mt-6 { margin-top: 18mm; }
+.mt-xs { margin-top: 2mm; }
+.mt-sm { margin-top: 3.0mm; }
+.mt-md { margin-top: 4.4mm; }
+.mt-lg { margin-top: 9.7mm; }
+.mt-xl { margin-top: 18.0mm; }
+.mt-xxl { margin-top: 28.2mm; }
 
-/* Farbvarianten für Headlines */
-.color-green { color: #287d4b; }
-.color-deep-green { color: #1c4b42; }
+/* Farbklassen */
 .color-pure-green { color: #4daf46; }
-.color-lime { color: #b4e717; }
-.color-grey { color: #494949; }
+.color-transition-green { color: #287d4b; }
+.color-deep-green { color: #1c4b42; }
+.color-lime-green { color: #8cc63f; }
+.color-stone-grey { color: #484848; }
 .color-white { color: #ffffff; }
+.color-black { color: #000000; }
+
+/* Hintergrundfarben */
+.bg-pure-green { background-color: #4daf46; }
+.bg-transition-green { background-color: #277c4b; }
+.bg-deep-green { background-color: #1c4b42; }
+.bg-stone-grey { background-color: #484848; }
+.bg-light-grey { background-color: #d8d8d9; }
+.bg-white { background-color: #ffffff; }
+
+/* Positionierung */
+.absolute { position: absolute; }
+.relative { position: relative; }

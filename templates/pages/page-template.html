@@ -2,158 +2,351 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>{{ title | default('BKM Broschüre – Innenseiten') }}</title>
+  <title>{{ title | default('BKM Broschüre') }}</title>
   <link rel="stylesheet" href="pages-spec.css">
 </head>
 <body>
 
-  <!-- ============================================================
-       SEITE: EINLEITUNG MIT GROSSER HEADLINE + 3-SPALTEN
-       ============================================================ -->
-  <div class="page">
-    <div class="section-head">
-      <h1 class="section-head__title--large">{{ headline_large | default('IHR ZUHAUSE<br>VERDIENT SCHUTZ.') }}</h1>
-      <p class="section-head__lead">{{ leadline | default('Für Eigentümer, die ihr Haus langfristig schützen wollen.') }}</p>
-    </div>
+{% for page in pages %}
 
-    <div class="text-columns-3 mb-5">
-      {{ body_text_3col | default('Wenn im eigenen Keller Feuchtigkeit auftritt, stehen viele Eigentümer vor einer schwierigen Entscheidung. Was tun? Wen fragen? Und wie erkennt man, ob eine Maßnahme wirklich sinnvoll ist? Hochwertige Materialien sind wichtig. Aber bei Feuchtigkeitsschäden entscheidet nicht allein das Material über das Ergebnis. Entscheidend ist, ob die Ursache richtig eingeordnet, die passende Systemlösung gewählt und die Maßnahme fachgerecht umgesetzt wird. So entsteht aus Unsicherheit ein nachvollziehbarer Sanierungsprozess. Sie investieren also nicht nur in eine Abdichtungsmaßnahme. Sie investieren in Klarheit, Werterhalt und eine fachgerecht geplante Lösung.') }}
-    </div>
-
-    <div class="quote-card">
-      <p class="quote-card__text">{{ quote_text | default('Prüfen. Erklären. Empfehlen. Fachgerecht umsetzen. Vorbeugen.') }}</p>
-    </div>
-  </div>
-
-  <!-- ============================================================
-       SEITE: BILD-TEXT-SPLIT (Bild links)
-       ============================================================ -->
-  <div class="page">
-    <div class="split mb-5">
-      <div class="split__image">
-        {% if split_image %}
-        <img src="{{ split_image }}" alt="">
-        {% endif %}
-      </div>
-      <div class="split__text">
-        <div class="section-head">
-          <h2 class="section-head__title">{{ split_headline | default('Was Sie sehen, ist selten die Ursache') }}</h2>
-          <p class="section-head__lead">{{ split_lead | default('Sichtbare Schäden sind selten das eigentliche Problem.') }}</p>
-        </div>
-        <div class="text-columns-2">
-          {{ split_body | default('Viele Eigentümer bemerken das Problem erst, wenn es sichtbar wird: feuchte Wände, Schimmel, abblätternde Farbe. Doch was an der Oberfläche erscheint, hat meist tiefere Ursachen. Wer nur die sichtbaren Folgen behandelt, riskiert, dass der Schaden zurückkehrt. Ein spezialisierter BKM Fachbetrieb arbeitet deshalb systematisch.') }}
-        </div>
-      </div>
-    </div>
-
-    <!-- Untere Hälfte: Headline + 3-Spalten + Bild rechts -->
-    <div class="split split--reversed">
-      <div class="split__image">
-        {% if split_image_2 %}
-        <img src="{{ split_image_2 }}" alt="">
-        {% endif %}
-      </div>
-      <div class="split__text">
-        <div class="section-head">
-          <h2 class="section-head__title">{{ split_headline_2 | default('Warum spezialisierte BKM Fachbetriebe anders arbeiten') }}</h2>
-          <p class="section-head__lead">{{ split_lead_2 | default('Feuchteschäden sind keine Standardbaustelle.') }}</p>
-        </div>
-        <div class="text-columns-1">
-          {{ split_body_2 | default('Bei Feuchtigkeitsschäden reicht es nicht, einfach irgendeine Maßnahme anzubieten. Entscheidend ist, ob diese Maßnahme zur Ursache, zum Schadensbild und zum Gebäude passt. Ein spezialisierter BKM Fachbetrieb arbeitet deshalb systematisch.') }}
-        </div>
-      </div>
+<!-- ============================================================
+     SEITENTYP: OPENER (Spread-Doppelseite)
+     Obere Hälfte: Farbiger Hintergrund mit Headline + Spaltentext
+     Untere Hälfte: Anderer Farbhintergrund mit Headline + Leadline + Text
+     ============================================================ -->
+{% if page.type == 'opener' %}
+<div class="page">
+  <!-- Obere Hälfte -->
+  <div style="position: absolute; top: 0; left: 0; width: 210mm; height: 131.2mm; background: {{ page.upper_bg | default('#484848') }}; padding: 20.4mm 18.0mm 0 18.0mm; overflow: hidden;">
+    <h1 class="headline-large" style="color: {{ page.headline_color | default('#4daf46') }};">{{ page.headline }}</h1>
+    <h2 class="headline-section gap-hl-to-section" style="color: {{ page.section_hl_color | default('#ffffff') }};">{{ page.section_headline }}</h2>
+    <div class="columns-{{ page.upper_cols | default(3) }} gap-section-to-body body-text" style="color: {{ page.upper_text_color | default('#ffffff') }}; width: 174.0mm;">
+      {{ page.upper_text }}
     </div>
   </div>
 
-  <!-- ============================================================
-       SEITE: PROZESS-SCHRITTE + KONTRASTSEKTION
-       ============================================================ -->
-  <div class="page" style="padding: 0;">
-    <!-- Obere Hälfte: Weiß mit Prozess-Liste -->
-    <div style="padding: 18mm; height: 148.5mm;">
-      <div class="section-head">
-        <h1 class="section-head__title--large">{{ process_headline | default('DER WEG ZUR<br>RICHTIGEN LÖSUNG') }}</h1>
-        <p class="section-head__lead">{{ process_lead | default('Ein klarer Ablauf schafft Sicherheit.') }}</p>
-      </div>
+  <!-- Untere Hälfte -->
+  <div style="position: absolute; top: 131.2mm; left: 0; width: 210mm; height: 165.8mm; background: {{ page.lower_bg | default('#277c4b') }}; padding: 20.4mm 18.0mm 0 18.0mm; overflow: hidden;">
+    <h2 class="headline-section" style="color: {{ page.lower_hl_color | default('#ffffff') }};">{{ page.lower_headline }}</h2>
+    {% if page.lower_leadline %}
+    <p class="leadline" style="margin-top: 9.7mm; color: {{ page.lower_lead_color | default('#ffffff') }};">{{ page.lower_leadline }}</p>
+    <div class="columns-{{ page.lower_cols | default(2) }} body-text" style="margin-top: 5.4mm; color: {{ page.lower_text_color | default('#ffffff') }}; width: 174.0mm;">
+      {{ page.lower_text }}
+    </div>
+    {% else %}
+    <div class="columns-{{ page.lower_cols | default(2) }} gap-section-to-body body-text" style="color: {{ page.lower_text_color | default('#ffffff') }}; width: 174.0mm;">
+      {{ page.lower_text }}
+    </div>
+    {% endif %}
+    {% if page.lower_quote %}
+    <div style="position: absolute; bottom: 18mm; left: 18mm; background: {{ page.quote_bg | default('#4daf46') }}; padding: 10mm 12mm; max-width: 115.1mm;">
+      <p class="module-quote__text">{{ page.lower_quote }}</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
 
-      <div class="process-list">
-        {% for step in process_steps %}
-        <div class="process-list__item">
-          <p class="process-list__title">{{ step.number }}. {{ step.title }}</p>
-          <p class="process-list__text">{{ step.text }}</p>
+<!-- ============================================================
+     SEITENTYP: CONTENT (Headline + Leadline + Spaltentext)
+     Weißer Hintergrund, volle Seitenbreite für Text
+     ============================================================ -->
+{% elif page.type == 'content' %}
+<div class="page">
+  <div class="page__content">
+    {% if page.headline_large %}
+    <h1 class="headline-large">{{ page.headline_large }}</h1>
+    {% endif %}
+
+    {% if page.headline_section %}
+    <h2 class="headline-section {% if page.headline_large %}gap-hl-to-section{% endif %}">{{ page.headline_section }}</h2>
+    {% endif %}
+
+    {% if page.leadline %}
+    <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
+    {% endif %}
+
+    {% if page.columns == 3 %}
+    <div class="flex-cols-3" style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %};">
+      {% for col in page.col_content %}
+      <div class="col">
+        <p class="body-text">{{ col }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% elif page.columns == 2 %}
+    <div class="flex-cols-2" style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %}; width: 174.0mm;">
+      {% for col in page.col_content %}
+      <div class="col">
+        <p class="body-text">{{ col }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="body-text" style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %}; max-width: 115.1mm;">
+      <p>{{ page.col_content[0] }}</p>
+    </div>
+    {% endif %}
+
+    {% if page.quote %}
+    <div style="margin-top: 9.7mm; background: {{ page.quote_bg | default('#4daf46') }}; padding: 10mm 12mm; max-width: 115.1mm;">
+      <p class="module-quote__text">{{ page.quote }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Zweiter Block (untere Seitenhälfte) -->
+    {% if page.section2 %}
+    <div class="module-section" style="margin-top: 28.2mm;">
+      <h2 class="headline-section">{{ page.section2.headline }}</h2>
+      {% if page.section2.leadline %}
+      <p class="leadline" style="margin-top: 9.7mm;">{{ page.section2.leadline }}</p>
+      {% endif %}
+      {% if page.section2.columns == 3 %}
+      <div class="flex-cols-3" style="margin-top: {% if page.section2.leadline %}5.4mm{% else %}4.4mm{% endif %};">
+        {% for col in page.section2.col_content %}
+        <div class="col">
+          <p class="body-text">{{ col }}</p>
         </div>
         {% endfor %}
-
-        {% if process_benefit %}
-        <div class="process-list__benefit">
-          <p class="process-list__benefit-title">{{ process_benefit.title }}</p>
-          <p class="process-list__benefit-text">{{ process_benefit.text }}</p>
+      </div>
+      {% elif page.section2.columns == 2 %}
+      <div class="flex-cols-2" style="margin-top: {% if page.section2.leadline %}5.4mm{% else %}4.4mm{% endif %}; width: 174.0mm;">
+        {% for col in page.section2.col_content %}
+        <div class="col">
+          <p class="body-text">{{ col }}</p>
         </div>
-        {% endif %}
+        {% endfor %}
       </div>
+      {% endif %}
+      {% if page.section2.quote %}
+      <div style="margin-top: 9.7mm; background: {{ page.section2.quote_bg | default('#4daf46') }}; padding: 10mm 12mm; max-width: 115.1mm;">
+        <p class="module-quote__text">{{ page.section2.quote }}</p>
+      </div>
+      {% endif %}
     </div>
+    {% endif %}
+  </div>
+</div>
 
-    <!-- Untere Hälfte: Kontrastsektion -->
-    <div class="contrast-section contrast-section--green" style="height: 148.5mm;">
-      <div class="section-head">
-        <h2 class="section-head__title" style="color: #ffffff;">{{ contrast_headline | default('Woran Sie ein fachlich sauberes Angebot erkennen') }}</h2>
-        <p class="section-head__lead" style="color: #ffffff;">{{ contrast_lead | default('Ein gutes Angebot erklärt die Entscheidung.') }}</p>
-      </div>
-      <div class="text-columns-3" style="color: #ffffff;">
-        {{ contrast_body | default('Bei Feuchtigkeitsschäden reicht eine pauschale Position wie „Kellerabdichtung" oft nicht aus. Für Eigentümer ist entscheidend, ob nachvollziehbar wird, warum eine bestimmte Maßnahme empfohlen wird. Ein fachlich sauberes Angebot sollte deshalb nicht nur beschreiben, was gemacht wird, sondern auch, worauf diese Empfehlung basiert.') }}
-      </div>
+<!-- ============================================================
+     SEITENTYP: FEATURE (Bild-Text-Kombination)
+     Bild nimmt einen Teil der Seite ein, Text den anderen
+     ============================================================ -->
+{% elif page.type == 'feature' %}
+<div class="page">
+  {% if page.layout == 'top-image' %}
+  <!-- Bild oben, Text unten -->
+  <div style="position: absolute; top: 0; left: 0; width: 210mm; height: {{ page.image_height | default('131.2mm') }}; background: #d8d8d9; overflow: hidden;">
+    {% if page.image %}
+    <img src="{{ page.image }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+    {% endif %}
+  </div>
+  <div style="position: absolute; top: {{ page.image_height | default('131.2mm') }}; left: 0; width: 210mm; padding: 20.4mm 18.0mm 0 18.0mm;">
+    <h2 class="headline-section">{{ page.headline }}</h2>
+    {% if page.leadline %}
+    <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
+    {% endif %}
+    <div class="columns-{{ page.columns | default(3) }} body-text" style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %}; width: 174.0mm;">
+      {{ page.text }}
     </div>
   </div>
 
-  <!-- ============================================================
-       SEITE: INHALTSVERZEICHNIS
-       ============================================================ -->
-  <div class="page toc">
-    <h2 class="toc__title">{{ toc_title | default('Inhalt') }}</h2>
-    <ul class="toc__list">
-      {% for item in toc_items %}
-      <li class="toc__item {% if item.is_chapter %}toc__item--chapter{% endif %}">
-        <span class="toc__item-title">{{ item.title }}</span>
-        <span class="toc__item-dots"></span>
-        <span class="toc__item-page">{{ item.page }}</span>
+  {% elif page.layout == 'left-image' %}
+  <!-- Bild links, Text rechts -->
+  <div style="position: absolute; top: 0; left: 0; width: {{ page.image_width | default('105mm') }}; height: {{ page.image_height | default('131.2mm') }}; background: #d8d8d9; overflow: hidden;">
+    {% if page.image %}
+    <img src="{{ page.image }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+    {% endif %}
+  </div>
+  <div style="position: absolute; top: 20.4mm; left: {{ page.image_width | default('105mm') }}; width: calc(210mm - {{ page.image_width | default('105mm') }}); padding: 0 18.0mm 0 18.0mm;">
+    <h2 class="headline-section">{{ page.headline }}</h2>
+    {% if page.leadline %}
+    <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
+    {% endif %}
+    <div class="body-text" style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %};">
+      {{ page.text }}
+    </div>
+  </div>
+
+  {% elif page.layout == 'right-image' %}
+  <!-- Text links, Bild rechts -->
+  <div style="position: absolute; top: 20.4mm; left: 18.0mm; width: calc(210mm - {{ page.image_width | default('105mm') }} - 18.0mm);">
+    <h2 class="headline-section">{{ page.headline }}</h2>
+    {% if page.leadline %}
+    <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
+    {% endif %}
+    <div class="columns-{{ page.columns | default(2) }} body-text" style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %};">
+      {{ page.text }}
+    </div>
+  </div>
+  <div style="position: absolute; top: 0; right: 0; width: {{ page.image_width | default('105mm') }}; height: {{ page.image_height | default('297mm') }}; background: #d8d8d9; overflow: hidden;">
+    {% if page.image %}
+    <img src="{{ page.image }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <!-- Unterer Block (optional) -->
+  {% if page.lower_section %}
+  <div style="position: absolute; top: {{ page.lower_top | default('165.8mm') }}; left: 0; width: 210mm; {% if page.lower_bg %}background: {{ page.lower_bg }}; {% endif %}padding: 20.4mm 18.0mm 0 18.0mm;">
+    <h2 class="headline-section" style="{% if page.lower_bg %}color: #ffffff;{% endif %}">{{ page.lower_section.headline }}</h2>
+    {% if page.lower_section.leadline %}
+    <p class="leadline" style="margin-top: 9.7mm; {% if page.lower_bg %}color: #4daf46;{% endif %}">{{ page.lower_section.leadline }}</p>
+    {% endif %}
+    <div class="columns-{{ page.lower_section.columns | default(3) }} body-text" style="margin-top: {% if page.lower_section.leadline %}5.4mm{% else %}4.4mm{% endif %}; width: 174.0mm; {% if page.lower_bg %}color: #ffffff;{% endif %}">
+      {{ page.lower_section.text }}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<!-- ============================================================
+     SEITENTYP: PROCESS (Nummerierte Schritte)
+     Headline + Leadline + Nummerierte Prozessschritte
+     ============================================================ -->
+{% elif page.type == 'process' %}
+<div class="page">
+  <div class="page__content">
+    {% if page.headline_large %}
+    <h1 class="headline-large">{{ page.headline_large }}</h1>
+    {% endif %}
+    {% if page.headline_section %}
+    <h2 class="headline-section {% if page.headline_large %}gap-hl-to-section{% endif %}">{{ page.headline_section }}</h2>
+    {% endif %}
+    {% if page.leadline %}
+    <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
+    {% endif %}
+
+    <!-- Bild + Text nebeneinander -->
+    {% if page.image %}
+    <div style="display: flex; gap: 4.3mm; margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %};">
+      <div style="flex: 0 0 {{ page.image_width | default('55.4mm') }}; height: {{ page.image_height | default('80mm') }}; background: #d8d8d9; overflow: hidden;">
+        <img src="{{ page.image }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div style="flex: 1;">
+        <p class="body-text">{{ page.intro_text }}</p>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if page.quote %}
+    <div style="margin-top: 9.7mm; background: {{ page.quote_bg | default('#4daf46') }}; padding: 10mm 12mm; max-width: 115.1mm;">
+      <p class="module-quote__text">{{ page.quote }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Prozess-Schritte -->
+    <div style="margin-top: {% if page.quote %}9.7mm{% else %}5.4mm{% endif %}; max-width: 115.1mm;">
+      {% for step in page.steps %}
+      <div style="margin-bottom: 4.0mm;">
+        <p style="font-family: 'TT Norms Pro', sans-serif; font-weight: 700; font-size: 9pt; color: #484848; margin: 0;">{{ step.number }}. {{ step.title }}</p>
+        <p class="body-text" style="margin: 0;">{{ step.body }}</p>
+      </div>
+      {% endfor %}
+      {% if page.benefit %}
+      <div style="margin-top: 5mm;">
+        <p style="font-family: 'TT Norms Pro', sans-serif; font-weight: 700; font-size: 9pt; color: #484848; margin: 0;">{{ page.benefit.title }}</p>
+        <p class="body-text" style="margin: 0;">{{ page.benefit.body }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SEITENTYP: LIST (Aufzählung mit fetten Überschriften)
+     Headline + Liste mit Titel/Body-Paaren
+     ============================================================ -->
+{% elif page.type == 'list' %}
+<div class="page">
+  <div class="page__content">
+    <h2 class="headline-section">{{ page.headline }}</h2>
+    {% if page.leadline %}
+    <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
+    {% endif %}
+    <div style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %}; max-width: 115.1mm;">
+      {% for item in page.entries %}
+      <div style="margin-bottom: 5mm;">
+        <p style="font-family: 'TT Norms Pro', sans-serif; font-weight: 700; font-size: 9pt; color: #484848; margin: 0 0 1mm 0;">{{ item.title }}</p>
+        <p class="body-text" style="margin: 0;">{{ item.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% if page.footer_text %}
+    <p class="body-text" style="margin-top: 9.7mm; max-width: 174.0mm;">{{ page.footer_text }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<!-- ============================================================
+     SEITENTYP: TOC (Inhaltsverzeichnis)
+     Skalierbar: 1-spaltig (kleine Broschüren) oder 2-spaltig (Kataloge)
+     ============================================================ -->
+{% elif page.type == 'toc' %}
+<div class="page">
+  <div class="module-toc">
+    <h2 class="module-toc__title">{{ page.title | default('Inhalt') }}</h2>
+    <ul class="module-toc__list {% if page.two_columns %}module-toc__list--two-col{% endif %}">
+      {% for item in page.entries %}
+      {% if item.is_chapter %}
+      <li class="module-toc__chapter">
+        <span class="module-toc__chapter-title">{{ item.title }}</span>
+        <span class="module-toc__chapter-page">{{ item.page }}</span>
       </li>
+      {% else %}
+      <li class="module-toc__sub">
+        <span class="module-toc__sub-title">{{ item.title }}</span>
+        <span class="module-toc__sub-page">{{ item.page }}</span>
+      </li>
+      {% endif %}
       {% endfor %}
     </ul>
   </div>
+</div>
 
-  <!-- ============================================================
-       SEITE: RÜCKSEITE
-       ============================================================ -->
-  <div class="back-cover">
-    <div class="back-cover__hero">
-      {% if back_hero_image %}
-      <img src="{{ back_hero_image }}" alt="">
-      {% endif %}
+<!-- ============================================================
+     SEITENTYP: BACKCOVER (Rückseite)
+     Hero-Bild + CTA + Kontaktdaten + Impressum
+     ============================================================ -->
+{% elif page.type == 'backcover' %}
+<div class="page page-backcover">
+  {% if page.image %}
+  <img class="page-backcover__bg" src="{{ page.image }}" alt="">
+  {% else %}
+  <div class="page-backcover__bg" style="background: #d8d8d9;"></div>
+  {% endif %}
+
+  <div class="page-backcover__content">
+    <div class="backcover-cta">
+      <h2 class="backcover-cta__headline">{{ page.cta_headline }}</h2>
+      <p class="backcover-cta__body">{{ page.cta_body }}</p>
+      <p class="backcover-cta__action">{{ page.cta_action }}</p>
     </div>
-    <div class="back-cover__content">
-      <h2 class="back-cover__headline">{{ back_headline | default('Der sicherste erste Schritt –<br>Ihre kostenlose Schadensanalyse') }}</h2>
-      <p class="back-cover__text">{{ back_text | default('Das größte Risiko bei Feuchtigkeitsschäden ist, nichts zu tun. Jeder Tag des Zögerns kann den Schaden vergrößern und die Kosten in die Höhe treiben. Machen Sie den ersten, sicheren Schritt in eine trockene Zukunft für Ihr Zuhause.') }}</p>
-      <p class="back-cover__cta">{{ back_cta | default('Fordern Sie jetzt Ihre kostenlose und unverbindliche Schadensanalyse durch einen zertifizierten Fachpartner in Ihrer Nähe an.') }}</p>
-    </div>
-    <div class="back-cover__footer">
-      <div class="back-cover__logos">
-        {% if badge_image %}
-        <img src="{{ badge_image }}" alt="Badge">
-        {% endif %}
-        <img src="../../assets/images/logos/bkm-logo-grey-green.svg" alt="BKM">
+
+    <div class="backcover-contact">
+      <p class="backcover-contact__company">{{ page.contact.company }}</p>
+      <div class="backcover-contact__block">
+        <p class="backcover-contact__line">{{ page.contact.street }}</p>
+        <p class="backcover-contact__line">{{ page.contact.city }}</p>
       </div>
-      <div class="back-cover__contact">
-        <strong>{{ contact_company | default('BKM Mauertrocknungs GmbH') }}</strong>
-        {{ contact_address | default('Wideystraße 23<br>59174 Kamen (Germany)') }}
-        <br><br>
-        {{ contact_web | default('www.bkm-mannesmann.de') }}<br>
-        {{ contact_email | default('info@bkm-mannesmann.de') }}
-        <br><br>
-        Tel.: {{ contact_phone | default('+49 (0) 2307-99034-0') }}
+      <div class="backcover-contact__block">
+        <p class="backcover-contact__line">{{ page.contact.web }}</p>
+        <p class="backcover-contact__line">{{ page.contact.email }}</p>
       </div>
+      <p class="backcover-contact__line">Tel.: {{ page.contact.phone }}</p>
     </div>
-    <p class="back-cover__imprint">{{ imprint | default('Ausgegeben am 06/2026 - All rights reserved. Reproduction only with our permission. Diese Version ist urheberrechtlich geschützt und darf nicht vervielfältigt werden.') }}</p>
+
+    {% if page.badge %}
+    <img class="backcover-badge" src="{{ page.badge }}" alt="">
+    {% endif %}
+
+    <div class="backcover-imprint">
+      <p>{{ page.imprint | default('Ausgegeben am 06/2026 - All rights reserved.') }}</p>
+    </div>
   </div>
+</div>
+
+{% endif %}
+{% endfor %}
 
 </body>
 </html>
