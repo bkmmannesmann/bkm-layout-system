@@ -113,11 +113,23 @@ def build_cover(variant_key: str, content: dict):
     logo_path = f"../../assets/images/logos/{variant['logo_file']}"
     keyvisual_path = f"../../assets/images/{variant['keyvisual_file']}"
     
+    # Badge-Pfad (nur für Home Line und Pro Line Produktbroschüren)
+    badge_path = ""
+    badge_alt = ""
+    if variant_key == "homeline":
+        badge_path = "../../assets/images/badge-homeline.png"
+        badge_alt = "HOME LINE"
+    elif variant_key == "proline":
+        badge_path = "../../assets/images/badge-proline.png"
+        badge_alt = "PRO LINE"
+    
     # Template-Variablen zusammenführen
     template_vars = {
         "variant_class": variant["variant_class"],
         "logo_path": logo_path,
         "keyvisual_path": keyvisual_path,
+        "badge_path": badge_path,
+        "badge_alt": badge_alt,
         "headline": content.get("headline", "HEADLINE HIER\nZWEITE ZEILE"),
         "subheadline": content.get("subheadline", "Subheadline hier"),
         "intro_text": content.get("intro_text", "Einleitungstext hier."),
@@ -168,19 +180,47 @@ def main():
     # Argument: Variante
     variant_arg = sys.argv[1] if len(sys.argv) > 1 else "all"
     
+    # Variantenspezifischer Content
+    VARIANT_CONTENT = {
+        "mannesmann": {
+            "headline": "IHR ZUHAUSE IN<br>SICHEREN HÄNDEN",
+            "subheadline": "Feuchte Wände \u00b7 Ihr Keller wird unbrauchbar?",
+            "intro_text": "Mit einem zertifizierten BKM Fachbetrieb erhalten Sie eine fachkundige Einschätzung und Sicherheit für Ihr Zuhause.",
+            "hero_image_alt": "BKM Mannesmann AG",
+        },
+        "fachbetriebe": {
+            "headline": "IHR ZUHAUSE IN<br>SICHEREN HÄNDEN",
+            "subheadline": "Feuchte Wände \u00b7 Ihr Keller wird unbrauchbar?",
+            "intro_text": "Mit einem zertifizierten BKM Fachbetrieb erhalten Sie eine fachkundige Einschätzung und Sicherheit für Ihr Zuhause.",
+            "hero_image_alt": "BKM Fachbetrieb Beratung",
+        },
+        "homeline": {
+            "headline": "BKM HOME LINE<br>SELBST SANIEREN",
+            "subheadline": "Feuchtigkeitsschutz mit System",
+            "intro_text": "F\u00fcr die einfache Anwendung im Heimwerkerbereich optimiert. BKM Systemqualit\u00e4t vom Hersteller \u2013 Made in Germany.",
+            "hero_image_alt": "BKM Home Line Produkte",
+        },
+        "proline": {
+            "headline": "BKM PRO LINE<br>FACHGERECHT SANIEREN",
+            "subheadline": "Feuchtigkeitsschutz mit System",
+            "intro_text": "F\u00fcr professionelle Verarbeitung und komplexe Anwendungen optimiert.<br>BKM Systemqualit\u00e4t vom Hersteller. \u2013 Made in Germany.",
+            "hero_image_alt": "BKM Pro Line Produkte",
+        },
+        "anleitung": {
+            "headline": "VERARBEITUNGS-<br>ANLEITUNG",
+            "subheadline": "Schritt f\u00fcr Schritt zum Ergebnis",
+            "intro_text": "Detaillierte Anweisungen f\u00fcr die fachgerechte Verarbeitung unserer Produkte.",
+            "hero_image_alt": "BKM Verarbeitungsanleitung",
+        },
+    }
+    
     # Content laden (falls vorhanden)
     content_path = PROJECT_ROOT / "content" / "cover" / "content.json"
     if content_path.exists():
         with open(content_path, "r", encoding="utf-8") as f:
             content = json.load(f)
     else:
-        # Standard-Content (Fachbetrieb-Beispiel)
-        content = {
-            "headline": "IHR ZUHAUSE IN\nSICHEREN HÄNDEN",
-            "subheadline": "Feuchte Wände · Ihr Keller wird unbrauchbar?",
-            "intro_text": "Mit einem zertifizierten BKM Fachbetrieb erhalten Sie eine fachkundige Einschätzung und Sicherheit für Ihr Zuhause.",
-            "hero_image_alt": "BKM Fachbetrieb Beratung",
-        }
+        content = {}
     
     print("=" * 60)
     print("BKM COVER BUILDER v2.0")
@@ -193,12 +233,17 @@ def main():
     if variant_arg == "all":
         for key in VARIANTS:
             v = VARIANTS[key]
+            # Variantenspezifischer Content hat Vorrang, dann JSON, dann Fallback
+            variant_content = VARIANT_CONTENT.get(key, {})
+            merged_content = {**variant_content, **content}  # JSON überschreibt Defaults
             print(f"\n→ {v['label']} ({key}) – BG: {v['color_box_name']}")
-            build_cover(key, content)
+            build_cover(key, merged_content)
     elif variant_arg in VARIANTS:
         v = VARIANTS[variant_arg]
+        variant_content = VARIANT_CONTENT.get(variant_arg, {})
+        merged_content = {**variant_content, **content}
         print(f"\n→ {v['label']} ({variant_arg}) – BG: {v['color_box_name']}")
-        build_cover(variant_arg, content)
+        build_cover(variant_arg, merged_content)
     else:
         print(f"Unbekannte Variante: {variant_arg}")
         print(f"Verfügbar: {', '.join(VARIANTS.keys())}, all")

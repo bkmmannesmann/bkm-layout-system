@@ -152,7 +152,7 @@ html, body {
    Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
 
 .cover__headline {
-  max-width: 130mm;
+  max-width: 170mm;   /* Breit genug damit Umbruch NUR am <br> erfolgt */
   
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
@@ -162,7 +162,7 @@ html, body {
   text-transform: uppercase;
   
   color: #ffffff;
-  margin: 0 0 10.6mm 0;  /* 10.6mm (= 30pt) Abstand nach unten zur Subheadline */
+  margin: 0 0 8.2mm 0;   /* 8.2mm (= 97px bei 300dpi) Abstand nach unten zur Subheadline */
   padding: 0;
 }
 
@@ -182,16 +182,16 @@ html, body {
   letter-spacing: 0;
   text-transform: none;  /* KEINE Versalien! */
   
-  margin: 0 0 6mm 0;  /* 6mm Abstand nach unten zum Fließtext (IMMER gleich) */
+  margin: 0 0 2.5mm 0;  /* 2.5mm (= 30px bei 300dpi) Abstand nach unten zum Fließtext */
   padding: 0;
 }
 
 /* === FLIESSTEXT / INTRO ===
    Schrift: TT Norms Pro Regular (400), 12pt
    Zeilenabstand: 1.25
-   Ein- bis dreizeilig je nach Textlänge
+   MAXIMAL 2 Zeilen (NIE mehr!)
    Max-Breite: 107mm
-   Abstand zur Subheadline ist IMMER gleich (6mm) – egal ob Sub ein- oder zweizeilig
+   Abstand zur Subheadline: 2.5mm (= 30px bei 300dpi) – IMMER gleich
    Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
 
 .cover__intro {
@@ -206,6 +206,23 @@ html, body {
   color: #ffffff;
   margin: 0;
   padding: 0;
+}
+
+/* === PRODUKT-BADGE (nur Home Line + Pro Line) ===
+   Position: Linksbündig (left=18mm), vertikal zentriert auf Unterkante Farbkasten
+   Das Badge sitzt mittig auf der Linie Y=118.1mm
+   (top = 118.1mm - halbe Badge-Höhe = 118.1mm - 7.35mm = 110.75mm)
+   Größe: 61mm × 14.7mm
+   Ebene: z-index 4 (vor Key Visual und Farbkasten) */
+
+.cover__badge {
+  position: absolute;
+  top: 110.75mm;    /* 118.1mm - (14.7mm / 2) = vertikal zentriert auf Farbkasten-Unterkante */
+  left: 0;          /* Linksbündig am Seitenrand (schräger Ansatz ragt über Rand) */
+  width: 61mm;      /* 720px bei 300dpi */
+  height: auto;
+  z-index: 4;       /* Vor Key Visual (3), vor Farbkasten (2), vor Hero (1) */
+  display: block;
 }
 
 /* === KEY VISUAL ===

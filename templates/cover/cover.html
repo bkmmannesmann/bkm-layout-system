@@ -93,7 +93,7 @@
            Schrift: Unbounded Black (900), 30pt, Versalien
            Abstand oben: 18mm (unter Logo)
            Regel: IMMER 2-zeilig, Zeile 1 kürzer als Zeile 2 -->
-      <h1 class="cover__headline">{{ headline }}</h1>
+      <h1 class="cover__headline">{{ headline | safe }}</h1>
 
       <!-- SUBHEADLINE
            Schrift: Unbounded Black (900), 12pt, keine Versalien
@@ -107,7 +107,7 @@
            Abstand oben: Immer gleich nah an Subheadline (6mm)
            Ein- bis dreizeilig je nach Textlänge
            Max-Breite: 107mm -->
-      <p class="cover__intro">{{ intro_text }}</p>
+      <p class="cover__intro">{{ intro_text | safe }}</p>
 
     </div>
 
@@ -116,11 +116,25 @@
          Position: Rechts bündig (right=0), Oberkante Y=102.3mm
          Breite: 42mm (1/5 der Formatbreite)
          Variante: on-dark (auf farbigem BG) / on-light (auf weißem BG) -->
+    <!-- PRODUKT-BADGE (nur bei Home Line und Pro Line Produktbroschüren)
+         Position: Linksbündig (18mm), vertikal zentriert auf Unterkante Farbkasten (Y=118.1mm)
+         Größe: 61mm × 14.7mm
+         Home Line: Silber/Grau
+         Pro Line: Gold
+         Wird als vorgerenderte Bilddatei platziert -->
+    {% if badge_path %}
+    <img class="cover__badge" 
+         src="{{ badge_path }}" 
+         alt="{{ badge_alt }}">
+    {% endif %}
+
+    <!-- KEY VISUAL
+         WICHTIG: Vorgerenderte Bilddatei! NICHT in Code nachbauen!
+         Position: Rechts bündig (right=0), Oberkante Y=102.3mm
+         Breite: 42mm (1/5 der Formatbreite) -->
     <img class="cover__keyvisual" 
          src="{{ keyvisual_path }}" 
          alt="BKM Key Visual">
-
-
 
   </div>
 
