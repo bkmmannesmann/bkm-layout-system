@@ -100,7 +100,21 @@ html, body {
   left: 0;
   width: 210mm;
   height: 118.1mm;  /* 16:9 Verhältnis zur Breite */
-  z-index: 1;
+  z-index: 2;
+}
+
+/* === 8x8mm FARBKASTEN ===
+   Position: Rechts bündig, Oberkante an Unterkante des 16:9-Kastens
+   Gleiche Farbe wie der 16:9-Farbkasten
+   Gleiche Ebene wie der 16:9-Farbkasten (z-index: 2) */
+
+.cover__corner-box {
+  position: absolute;
+  top: 118.1mm;     /* Direkt an Unterkante des 16:9-Kastens */
+  right: 0;         /* Rechts bündig am Seitenrand */
+  width: 8mm;
+  height: 8mm;
+  z-index: 2;       /* Gleiche Ebene wie Farbkasten */
 }
 
 /* === LOGO ===
@@ -214,22 +228,23 @@ html, body {
   right: 0;       /* Bündig rechts */
   width: 42mm;    /* 1/5 von 210mm */
   height: auto;
-  z-index: 5;     /* Über Hero-Bild, unter Text */
+  z-index: 3;     /* VOR Farbkasten und 8x8mm Kasten, VOR Hero-Bild */
 }
 
 /* === HERO-BILD ===
-   Großes Bild unterhalb des 16:9-Farbkastens
-   Füllt den gesamten restlichen Seitenbereich
-   Key Visual überlagert den Übergang */
+   UNTERSTE EBENE (z-index: 1)
+   Vollflächig hinter allem – das Foto füllt die gesamte Seite.
+   Der 16:9-Farbkasten und der 8x8mm Kasten liegen darüber.
+   Das Key Visual liegt vor allem. */
 
 .cover__hero {
   position: absolute;
-  top: 118.1mm;   /* Unterkante des 16:9-Farbkastens */
+  top: 0;
   left: 0;
   width: 210mm;
-  height: 178.9mm; /* 297mm - 118.1mm */
+  height: 297mm;
   overflow: hidden;
-  z-index: 2;
+  z-index: 1;     /* UNTERSTE Ebene */
 }
 
 .cover__hero img {
@@ -244,7 +259,8 @@ html, body {
    ============================================================================= */
 
 /* --- BKM MANNESMANN AG (Deep Green) --- */
-.cover--mannesmann .cover__color-box {
+.cover--mannesmann .cover__color-box,
+.cover--mannesmann .cover__corner-box {
   background-color: #1c4b42;
 }
 .cover--mannesmann .cover__headline { color: #ffffff; }
@@ -252,17 +268,17 @@ html, body {
 .cover--mannesmann .cover__intro { color: #ffffff; }
 
 /* --- FACHBETRIEBE (Transition Green) --- */
-.cover--fachbetriebe .cover__color-box {
+.cover--fachbetriebe .cover__color-box,
+.cover--fachbetriebe .cover__corner-box {
   background-color: #287d4b;
 }
 .cover--fachbetriebe .cover__headline { color: #ffffff; }
 .cover--fachbetriebe .cover__subheadline { color: #b4e717; }
 .cover--fachbetriebe .cover__intro { color: #ffffff; }
 
-/* --- BKM HOME LINE (Pure Green) ---
-   ACHTUNG: Key Visual darf NICHT auf Pure Green!
-   Lösung: Key Visual nur im Bildbereich platzieren */
-.cover--homeline .cover__color-box {
+/* --- BKM HOME LINE (Pure Green) --- */
+.cover--homeline .cover__color-box,
+.cover--homeline .cover__corner-box {
   background-color: #4daf46;
 }
 .cover--homeline .cover__headline { color: #ffffff; }
@@ -270,7 +286,8 @@ html, body {
 .cover--homeline .cover__intro { color: #ffffff; }
 
 /* --- BKM PRO LINE (Stone Grey) --- */
-.cover--proline .cover__color-box {
+.cover--proline .cover__color-box,
+.cover--proline .cover__corner-box {
   background-color: #494949;
 }
 .cover--proline .cover__headline { color: #ffffff; }
@@ -278,7 +295,8 @@ html, body {
 .cover--proline .cover__intro { color: #ffffff; }
 
 /* --- VERARBEITUNGSANLEITUNG (Weiß) --- */
-.cover--anleitung .cover__color-box {
+.cover--anleitung .cover__color-box,
+.cover--anleitung .cover__corner-box {
   background-color: #ffffff;
   border-bottom: 1px solid #e8e6e1;
 }

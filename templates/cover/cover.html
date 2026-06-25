@@ -25,13 +25,18 @@
        │  ├─ Fließtext (unter Subheadline)        ┌──┐│
        │  │                                       │KV││ 102.3mm
        │  │                                       │  ││
-       ├──┴───────────────────────────────────────┤  ├┤ 118.1mm
-       │                                          │  ││
-       │  HERO-BILD (210mm × 178.9mm)             │  ││
-       │                                          └──┘│
+       ├──┴──────────────────────────────────────┤  ├┤ 118.1mm
+       │                                       │  │█│ █ = 8x8mm Kasten
+       │  HERO-BILD (210mm × 178.9mm)          │  │█│     (gleiche Farbe
+       │                                       └──┘│      wie Farbkasten)
        │                                              │
        │                                              │
        └──────────────────────────────────────────────┘ 297mm
+       
+       EBENEN (z-index, von hinten nach vorne):
+       1. Hero-Bild (unterste Ebene)
+       2. 16:9-Farbkasten + 8x8mm Kasten (gleiche Ebene)
+       3. Key Visual (immer davor)
        
        VARIANTEN (CSS-Klasse auf .cover):
        - .cover--mannesmann    → Deep Green (#1c4b42)
@@ -50,11 +55,25 @@
 
   <div class="cover {{ variant_class }}">
 
-    <!-- 16:9 FARBKASTEN
+    <!-- HERO-BILD (UNTERSTE EBENE, z-index: 1)
+         Position: Y=0 (vollflächig hinter allem)
+         Breite: 210mm, Höhe: 297mm
+         Fit: cover -->
+    <div class="cover__hero">
+      <img src="{{ hero_image_path }}" alt="{{ hero_image_alt }}">
+    </div>
+
+    <!-- 16:9 FARBKASTEN (z-index: 2)
          Breite: 210mm (vollflächig)
          Höhe: 118.1mm (= 210/16*9)
          Farbe: Je nach Variante -->
     <div class="cover__color-box"></div>
+
+    <!-- 8x8mm FARBKASTEN (z-index: 2, gleiche Ebene wie 16:9-Kasten)
+         Position: Rechts bündig, Oberkante an Unterkante des 16:9-Kastens
+         Größe: 8mm × 8mm
+         Farbe: Gleiche Farbe wie der 16:9-Farbkasten -->
+    <div class="cover__corner-box"></div>
 
     <!-- LOGO
          Position: X=18mm Y=18mm
@@ -100,14 +119,7 @@
          src="{{ keyvisual_path }}" 
          alt="BKM Key Visual">
 
-    <!-- HERO-BILD
-         Position: Y=118.1mm (Unterkante 16:9-Kasten)
-         Breite: 210mm (vollflächig)
-         Höhe: 178.9mm (bis Seitenende)
-         Fit: cover -->
-    <div class="cover__hero">
-      <img src="{{ hero_image_path }}" alt="{{ hero_image_alt }}">
-    </div>
+
 
   </div>
 
