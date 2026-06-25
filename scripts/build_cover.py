@@ -48,7 +48,7 @@ VARIANTS = {
         "color_box_bg": "#1c4b42",
         "color_box_name": "Deep Green",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-dark.png",
+        "keyvisual_file": "keyvisual-on-light.png",
         "headline_color": "#ffffff",
         "subheadline_color": "#b4e717",
         "intro_color": "#ffffff",
@@ -59,7 +59,7 @@ VARIANTS = {
         "color_box_bg": "#287d4b",
         "color_box_name": "Transition Green",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-dark.png",
+        "keyvisual_file": "keyvisual-on-light.png",
         "headline_color": "#ffffff",
         "subheadline_color": "#b4e717",
         "intro_color": "#ffffff",
@@ -70,8 +70,7 @@ VARIANTS = {
         "color_box_bg": "#4daf46",
         "color_box_name": "Pure Green",
         "logo_file": "bkm-logo-white.svg",
-        "keyvisual_file": "keyvisual-on-dark.png",
-        "keyvisual_note": "ACHTUNG: Key Visual auf Pure Green ist laut CD verboten! Prüfen!",
+        "keyvisual_file": "keyvisual-on-light.png",
         "headline_color": "#ffffff",
         "subheadline_color": "#1c4b42",
         "intro_color": "#ffffff",
@@ -82,7 +81,7 @@ VARIANTS = {
         "color_box_bg": "#494949",
         "color_box_name": "Stone Grey",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-dark.png",
+        "keyvisual_file": "keyvisual-on-light.png",
         "headline_color": "#ffffff",
         "subheadline_color": "#b4e717",
         "intro_color": "#ffffff",
@@ -105,10 +104,6 @@ def build_cover(variant_key: str, content: dict):
     """Generiert ein Cover-PDF für eine bestimmte Variante."""
     
     variant = VARIANTS[variant_key]
-    
-    # Warnung bei Home Line (Key Visual auf Pure Green)
-    if "keyvisual_note" in variant:
-        print(f"  ⚠ {variant['keyvisual_note']}")
     
     # Jinja2 Template laden
     env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
