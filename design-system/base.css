@@ -1,0 +1,236 @@
+/* ============================================================
+   BKM MANNESMANN – BASIS-STYLESHEET
+   ============================================================
+   Grundlegende Typografie, Reset und Paged Media Definitionen.
+   ============================================================ */
+
+@import url('variables.css');
+
+/* ──────────────────────────────────────────────────────────
+   FONT-FACE DEFINITIONEN
+   ────────────────────────────────────────────────────────── */
+
+/* Unbounded – Display-Schrift für Headlines */
+@font-face {
+  font-family: 'Unbounded';
+  src: url('../assets/fonts/Unbounded-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  src: url('../assets/fonts/Unbounded-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  src: url('../assets/fonts/Unbounded-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  src: url('../assets/fonts/Unbounded-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  src: url('../assets/fonts/Unbounded-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  src: url('../assets/fonts/Unbounded-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  src: url('../assets/fonts/Unbounded-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  src: url('../assets/fonts/Unbounded-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+/* TT Norms Pro – Fließtext-Schrift */
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/TT_Norms_Pro_Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/TT_Norms_Pro_Bold_Italic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/TT_Norms_Pro_DemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/TT_Norms_Pro_Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/TT_Norms_Pro_Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/TT_Norms_Pro_Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/TT_Norms_Pro_Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* ──────────────────────────────────────────────────────────
+   PAGED MEDIA – Seitendefinitionen für Print
+   ────────────────────────────────────────────────────────── */
+
+@page {
+  size: A4 portrait;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+
+  @bottom-center {
+    content: none;
+  }
+}
+
+@page :first {
+  margin: 0;
+}
+
+@page :blank {
+  @bottom-center {
+    content: none;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────
+   RESET & GRUNDLAGEN
+   ────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10pt;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--bkm-black);
+  background: var(--bkm-white);
+}
+
+/* ──────────────────────────────────────────────────────────
+   TYPOGRAFIE – Globale Stile
+   ────────────────────────────────────────────────────────── */
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--bkm-pure-green);
+  line-height: var(--lh-display);
+  font-weight: var(--fw-black);
+}
+
+h1 {
+  font-size: var(--fs-display-xl);
+  margin-bottom: var(--space-md);
+}
+
+h2 {
+  font-size: var(--fs-display-lg);
+  margin-bottom: var(--space-sm);
+}
+
+h3 {
+  font-size: var(--fs-display-md);
+  margin-bottom: var(--space-sm);
+}
+
+/* Subheadlines – grün, kursiv/bold */
+.subheadline {
+  font-family: var(--font-body);
+  font-size: var(--fs-subheadline);
+  font-weight: var(--fw-bold);
+  font-style: italic;
+  color: var(--bkm-pure-green);
+  line-height: var(--lh-subheadline);
+  margin-bottom: var(--space-md);
+}
+
+p {
+  margin-bottom: var(--space-sm);
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+strong {
+  font-weight: var(--fw-bold);
+}
+
+/* ──────────────────────────────────────────────────────────
+   SEITENUMBRUCH-STEUERUNG
+   ────────────────────────────────────────────────────────── */
+
+.page-break {
+  page-break-after: always;
+  break-after: page;
+}
+
+.no-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+section {
+  page-break-before: always;
+  break-before: page;
+}
+
+section:first-of-type {
+  page-break-before: auto;
+  break-before: auto;
+}

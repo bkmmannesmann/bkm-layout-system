@@ -1,0 +1,406 @@
+/* ============================================================
+   BKM MANNESMANN – LAYOUT-KOMPONENTEN
+   ============================================================
+   Wiederverwendbare Bausteine für alle BKM Print-Dokumente.
+   ============================================================ */
+
+/* ──────────────────────────────────────────────────────────
+   COVER-SEITE
+   ────────────────────────────────────────────────────────── */
+
+.cover {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  page-break-after: always;
+}
+
+.cover__header {
+  background-color: var(--bkm-deep-green);
+  padding: 15mm 15mm 20mm 15mm;
+  position: relative;
+  z-index: 2;
+}
+
+.cover__logo {
+  width: 80mm;
+  margin-bottom: var(--space-lg);
+}
+
+.cover__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-xl);
+  font-weight: var(--fw-black);
+  color: var(--bkm-white);
+  line-height: var(--lh-display);
+  margin-bottom: var(--space-md);
+}
+
+.cover__subtitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-subheadline);
+  font-weight: var(--fw-bold);
+  font-style: italic;
+  color: var(--bkm-lime-green);
+  margin-bottom: var(--space-sm);
+}
+
+.cover__intro {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  color: var(--bkm-white);
+  max-width: 130mm;
+}
+
+.cover__hero {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 150mm;
+  overflow: hidden;
+}
+
+.cover__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Chevron-Grafik (Markenzeichen) */
+.cover__chevrons {
+  position: absolute;
+  right: 10mm;
+  bottom: 20mm;
+  z-index: 3;
+}
+
+.cover__chevrons svg {
+  width: 60mm;
+  height: auto;
+}
+
+/* ──────────────────────────────────────────────────────────
+   HEADLINE-BLOCK
+   ────────────────────────────────────────────────────────── */
+
+.headline-block {
+  margin-bottom: var(--space-lg);
+}
+
+.headline-block__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-lg);
+  font-weight: var(--fw-black);
+  color: var(--bkm-pure-green);
+  line-height: var(--lh-display);
+  margin-bottom: var(--space-xs);
+}
+
+.headline-block__subtitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-subheadline);
+  font-weight: var(--fw-bold);
+  font-style: italic;
+  color: var(--bkm-pure-green);
+  line-height: var(--lh-subheadline);
+}
+
+/* ──────────────────────────────────────────────────────────
+   SPALTEN-LAYOUTS
+   ────────────────────────────────────────────────────────── */
+
+.columns-2 {
+  column-count: 2;
+  column-gap: var(--column-gap);
+}
+
+.columns-3 {
+  column-count: 3;
+  column-gap: var(--column-gap);
+}
+
+.columns-2 p,
+.columns-3 p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+/* Grid-basiertes 2-Spalten-Layout (asymmetrisch) */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.grid-2--wide-left {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-lg);
+}
+
+.grid-2--wide-right {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-lg);
+}
+
+/* ──────────────────────────────────────────────────────────
+   ZITAT-/CALLOUT-BOX
+   ────────────────────────────────────────────────────────── */
+
+.quote-box {
+  background-color: var(--quote-box-bg);
+  color: var(--quote-box-text);
+  border-radius: var(--quote-box-radius);
+  padding: var(--quote-box-padding);
+  position: relative;
+  page-break-inside: avoid;
+}
+
+.quote-box::before {
+  content: "\201C\201C";  /* Anführungszeichen */
+  font-family: var(--font-display);
+  font-size: 36pt;
+  color: rgba(255, 255, 255, 0.4);
+  position: absolute;
+  top: 3mm;
+  left: 6mm;
+  line-height: 1;
+}
+
+.quote-box__text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  font-style: italic;
+  color: var(--bkm-white);
+  line-height: var(--lh-subheadline);
+  position: relative;
+  z-index: 1;
+}
+
+/* ──────────────────────────────────────────────────────────
+   BILD-PLATZHALTER
+   ────────────────────────────────────────────────────────── */
+
+.image-block {
+  width: 100%;
+  overflow: hidden;
+  page-break-inside: avoid;
+}
+
+.image-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-block--placeholder {
+  background-color: var(--placeholder-bg);
+  min-height: 60mm;
+}
+
+.image-block--rounded {
+  border-radius: 4mm;
+}
+
+/* ──────────────────────────────────────────────────────────
+   DUNKLE KONTRASTFLÄCHE
+   ────────────────────────────────────────────────────────── */
+
+.dark-section {
+  background-color: var(--dark-section-bg);
+  color: var(--dark-section-text);
+  padding: var(--space-lg);
+}
+
+.dark-section h2,
+.dark-section h3 {
+  color: var(--bkm-white);
+}
+
+.dark-section .headline-block__title {
+  color: var(--bkm-white);
+}
+
+.dark-section .headline-block__subtitle {
+  color: var(--bkm-lime-green);
+}
+
+.dark-section p {
+  color: var(--bkm-white);
+}
+
+/* ──────────────────────────────────────────────────────────
+   PROZESS-LISTE (Nummerierte Schritte)
+   ────────────────────────────────────────────────────────── */
+
+.process-list {
+  list-style: none;
+  padding: 0;
+}
+
+.process-list__item {
+  margin-bottom: var(--space-md);
+  page-break-inside: avoid;
+}
+
+.process-list__number {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  color: var(--bkm-pure-green);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.process-list__title {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  color: var(--bkm-black);
+  margin-bottom: var(--space-xs);
+}
+
+.process-list__description {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  color: var(--bkm-black);
+}
+
+/* ──────────────────────────────────────────────────────────
+   CTA-BEREICH (Call to Action)
+   ────────────────────────────────────────────────────────── */
+
+.cta-text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  color: var(--bkm-pure-green);
+  margin-top: var(--space-md);
+}
+
+/* ──────────────────────────────────────────────────────────
+   FOOTER / KONTAKT-BEREICH
+   ────────────────────────────────────────────────────────── */
+
+.footer {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+}
+
+.footer__logos {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.footer__logos img {
+  height: 10mm;
+  width: auto;
+}
+
+.footer__contact {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.footer__contact strong {
+  font-weight: var(--fw-bold);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.footer__copyright {
+  font-size: var(--fs-small);
+  color: var(--bkm-grey-50);
+  margin-top: var(--space-lg);
+}
+
+/* ──────────────────────────────────────────────────────────
+   INFO-BLOCK (Ursachen-Übersicht etc.)
+   ────────────────────────────────────────────────────────── */
+
+.info-block {
+  margin-bottom: var(--space-md);
+  page-break-inside: avoid;
+}
+
+.info-block__title {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  color: var(--bkm-pure-green);
+  margin-bottom: var(--space-xs);
+}
+
+.info-block__text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+}
+
+/* ──────────────────────────────────────────────────────────
+   CONTENT-SEITE (Standard-Inhaltsseite)
+   ────────────────────────────────────────────────────────── */
+
+.content-page {
+  padding: 0;
+}
+
+.content-page__upper {
+  margin-bottom: var(--space-xl);
+}
+
+.content-page__lower {
+  margin-top: var(--space-xl);
+}
+
+/* Halbe Seite mit Bild + Text nebeneinander */
+.split-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 130mm;
+}
+
+.split-section--image-left .split-section__image {
+  order: 1;
+}
+
+.split-section--image-left .split-section__content {
+  order: 2;
+  padding-left: var(--space-lg);
+}
+
+.split-section--image-right .split-section__image {
+  order: 2;
+}
+
+.split-section--image-right .split-section__content {
+  order: 1;
+  padding-right: var(--space-lg);
+}
+
+.split-section__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.split-section__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
