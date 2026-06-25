@@ -1,225 +1,277 @@
 {
   "_meta": {
     "name": "BKM Titelblatt Layout-Spezifikation",
-    "version": "1.0.0",
-    "source": "BKM_Prospekt_Image-Fachbetrieb_DinA4.indd",
-    "analyzed_with": "PyMuPDF (exakte Textpositionen aus PDF-Export)",
-    "format": "DIN A4 Hochformat",
-    "units": "mm (Millimeter), pt (Punkt = 1/72 Zoll = 0.3528mm)"
+    "version": "2.0.0",
+    "source_design_repo": "bkmmannesmann/bkm-design-system",
+    "source_indesign": "BKM_Prospekt_Image-Fachbetrieb_DinA4.indd",
+    "format": "DIN A4 Hochformat (210mm x 297mm)",
+    "units": "mm (Millimeter), pt (Punkt = 1/72 Zoll = 0.3528mm), px (Pixel bei 300dpi)"
   },
 
   "page": {
     "width_mm": 210,
     "height_mm": 297,
     "bleed_mm": 3,
-    "color_space": "CMYK"
+    "color_space": "CMYK",
+    "columns": 2,
+    "column_width_mm": 105
   },
 
   "grid": {
+    "description": "DIN A4 in 2 Spalten unterteilt. Oberer Bereich ist ein vollflächiger 16:9-Farbkasten.",
     "left_margin_mm": 18.0,
     "right_margin_mm": 18.0,
     "top_margin_mm": 18.0,
     "content_width_mm": 174.0,
-    "note": "Der linke Textrand (18mm) ist konsistent für Logo, Headline, Subline und Fließtext"
+    "key_visual_width_rule": "1/5 der Formatbreite = 42mm",
+    "logo_width_rule": "1/5 der Formatbreite = 42mm"
+  },
+
+  "color_box_16_9": {
+    "description": "Vollflächiger Farbkasten im 16:9-Seitenverhältnis, bildet den oberen Bereich des Titelblatts.",
+    "width_mm": 210,
+    "height_mm": 118.1,
+    "height_calculation": "210 / 16 * 9 = 118.125mm ≈ 118.1mm",
+    "height_px_300dpi": 1395,
+    "position": { "x_mm": 0, "y_mm": 0 },
+    "note": "Der Farbkasten enthält Logo, Headline, Subheadline und Fließtext. Darunter beginnt der Bildbereich."
   },
 
   "elements": {
+
     "logo": {
-      "position": { "x_mm": 18.0, "y_mm": 18.0 },
-      "size": { "width_mm": 50.0, "height_mm": 10.1 },
-      "components": {
-        "text_part": { "x_mm": 18.0, "width_mm": 33.9, "color": "#ffffff" },
-        "chevron_part": { "x_mm": 45.5, "width_mm": 14.5, "color": "#4dae45" }
+      "description": "BKM Mannesmann Logo, oben links im Farbkasten.",
+      "position": {
+        "x_mm": 18.0,
+        "y_mm": 18.0,
+        "x_px_300dpi": 213,
+        "y_px_300dpi": 213
       },
-      "variant": "white-green (auf dunklem Hintergrund)"
+      "size": {
+        "width_mm": 42.0,
+        "width_rule": "1/5 der Formatbreite (210mm / 5 = 42mm)"
+      },
+      "variant_rules": {
+        "on_deep_green": "bkm-logo-white-puregreen.svg (Weiß + Pure Green M)",
+        "on_transition_green": "bkm-logo-white-puregreen.svg (Weiß + Pure Green M)",
+        "on_stone_grey": "bkm-logo-white-puregreen.svg (Weiß + Pure Green M)",
+        "on_pure_green": "bkm-logo-white.svg (komplett Weiß, da Pure Green M verschwinden würde)",
+        "on_white": "bkm-logo-stonegrey-puregreen.svg (Stone Grey + Pure Green M)"
+      },
+      "critical_rule": "Immer die Variante mit höchstem Kontrast zum Hintergrund wählen."
     },
 
     "headline": {
-      "position": { "x_mm": 18.0, "y_mm": 40.8 },
+      "description": "Hauptüberschrift, immer zweizeilig, Versalien. Zeile 1 kürzer als Zeile 2 für homogeneres Erscheinungsbild.",
+      "position": {
+        "x_mm": 18.0,
+        "y_from_logo_bottom_mm": 18.0,
+        "y_absolute_mm": 46.1,
+        "y_absolute_note": "Logo-Unterkante (~28.1mm) + 18mm Abstand = 46.1mm (gemessen: 40.8mm – Abweichung durch Logo-Höhe)",
+        "x_px_300dpi": 213,
+        "alignment": "Linke Außenkante des Logos = Beginn der Headline"
+      },
       "typography": {
         "font_family": "Unbounded",
         "font_weight": "Black (900)",
-        "font_size_pt": 30.0,
+        "font_size_pt": 30,
+        "font_size_mm": 10.6,
         "line_height_ratio": 1.25,
-        "line_height_pt": 37.4,
-        "line_height_mm": 13.2,
-        "letter_spacing": "-0.02em",
-        "text_transform": "uppercase",
-        "color": "#ffffff"
+        "line_height_pt": 37.5,
+        "letter_spacing": "-0.025em (-25% Laufweite)",
+        "text_transform": "uppercase (Versalien)"
+      },
+      "color_rules": {
+        "default": "#ffffff (Weiß)",
+        "on_white_background": "#494949 (Stone Grey)"
       },
       "constraints": {
-        "max_width_mm": 130,
-        "max_lines": 3,
-        "note": "Headline bricht bei 130mm um. Typisch 2-3 Zeilen."
-      },
-      "measured_lines": [
-        { "text": "IHR ZUHAUSE IN", "y_mm": 40.8, "width_mm": 105.0 },
-        { "text": "SICHEREN HÄNDEN", "y_mm": 54.0, "width_mm": 129.3 }
-      ]
+        "min_lines": 2,
+        "max_lines": 2,
+        "line_1_rule": "Weniger Zeichen als Zeile 2 (für homogenes Erscheinungsbild)",
+        "max_width_mm": 130
+      }
     },
 
     "subheadline": {
-      "position": { "x_mm": 18.0, "y_mm": 73.1 },
+      "description": "Subheadline direkt unter der Headline. Nicht in Versalien, gleiche Schriftfamilie.",
+      "position": {
+        "spacing_rule": "Abstand = 30pt (Zeichenhöhe der Headline) unter Unterkante Headline Zeile 2",
+        "spacing_mm": 10.6,
+        "x_mm": 18.0,
+        "alignment": "Gleiche linke Kante wie Logo und Headline"
+      },
       "typography": {
         "font_family": "Unbounded",
         "font_weight": "Black (900)",
-        "font_size_pt": 12.0,
-        "line_height_ratio": 1.0,
-        "color": "variabel (siehe Farbvarianten)",
-        "separator": "· (Mittelpunkt)"
+        "font_size_pt": 12,
+        "font_size_mm": 4.2,
+        "letter_spacing": "-0.025em (-25% Laufweite)",
+        "text_transform": "none (keine Versalien, normale Schreibweise)"
       },
-      "constraints": {
-        "max_width_mm": 120,
-        "max_lines": 1,
-        "note": "Einzeilig. Trennzeichen zwischen Themen: Mittelpunkt (·)"
+      "color_rules": {
+        "on_deep_green": "#b4e717 (Lime Green)",
+        "on_transition_green": "#b4e717 (Lime Green)",
+        "on_stone_grey": "#b4e717 (Lime Green)",
+        "on_pure_green": "#1c4b42 (Deep Green)",
+        "on_white": "#4daf46 (Pure Green)"
       },
-      "spacing": {
-        "distance_to_headline_bottom_mm": 2.1,
-        "note": "73.1 - (54.0 + 17.0) = 2.1mm unter der Headline-Unterkante"
-      }
+      "ratio_to_headline": "Headline:Subheadline = 30pt:12pt = 2.5:1"
     },
 
     "intro_text": {
-      "position": { "x_mm": 17.7, "y_mm": 79.9 },
+      "description": "Fließtext unter der Subheadline. Kurze Einleitung (2-3 Zeilen).",
+      "position": {
+        "x_mm": 18.0,
+        "spacing_rule": "Direkt unter Subheadline (Abstand noch zu definieren)",
+        "alignment": "Gleiche linke Kante wie Logo, Headline, Subheadline"
+      },
       "typography": {
         "font_family": "TT Norms Pro",
         "font_weight": "Regular (400)",
-        "font_size_pt": 12.0,
+        "font_size_pt": 12,
+        "font_size_mm": 4.2,
         "line_height_ratio": 1.25,
-        "line_height_pt": 15.0,
-        "line_height_mm": 5.3,
-        "color": "#ffffff"
+        "line_height_pt": 15,
+        "letter_spacing": "-0.015em (-15% Laufweite)"
+      },
+      "color_rules": {
+        "default": "#ffffff (Weiß)",
+        "on_white_background": "#494949 (Stone Grey)"
       },
       "constraints": {
         "max_width_mm": 107,
-        "max_lines": 3,
-        "note": "2-3 Zeilen Einleitungstext. Schmaler als Headline."
-      },
-      "spacing": {
-        "distance_to_subheadline_bottom_mm": 0,
-        "note": "Direkt anschließend an Subheadline-Unterkante"
+        "max_lines": 3
       }
     },
 
-    "header_background": {
-      "position": { "x_mm": 0, "y_mm": 0 },
-      "size": { "width_mm": 210, "height_mm": 134.3 },
-      "shape": "polygon_with_diagonal_bottom_edge",
-      "polygon_points_mm": [
-        { "x": 0, "y": 0, "label": "oben_links" },
-        { "x": 210, "y": 0, "label": "oben_rechts" },
-        { "x": 210, "y": 126.9, "label": "rechts_unten" },
-        { "x": 189, "y": 111.4, "label": "knick_rechts" },
-        { "x": 178.4, "y": 118.1, "label": "knick_mitte" },
-        { "x": 0, "y": 118.1, "label": "links_unten" }
-      ],
-      "note": "Diagonale Unterkante erzeugt Dynamik. Links bei 118.1mm, rechts bei 126.9mm."
-    },
-
-    "chevrons": {
-      "container": {
-        "position": { "x_mm": 168.0, "y_mm": 102.3 },
-        "size": { "width_mm": 42.0, "height_mm": 99.0 }
+    "key_visual": {
+      "description": "BKM Key Visual (3 gestaffelte Chevron-Formen). Wird IMMER als vorgerenderte Bilddatei platziert, NIEMALS in Code nachgebaut.",
+      "position": {
+        "horizontal": "Rechte Außenkante bündig mit rechtem Seitenrand (X_right = 210mm)",
+        "vertical_rule": "Linke obere Pure-Green-Außenkante auf Flucht der Unterkante des 16:9-Farbkastens",
+        "y_top_mm": 102.3,
+        "y_top_px_300dpi": 1210,
+        "note": "Das Key Visual ragt ca. 15.8mm über die Farbkasten-Unterkante hinaus nach oben in den Farbkasten hinein"
       },
-      "items": [
-        {
-          "id": "chevron_1",
-          "label": "Oberer Chevron (hellstes Grün)",
-          "position_relative": { "x_mm": 0, "y_mm": 0 },
-          "size": { "width_mm": 42.0, "height_mm": 36.5 },
-          "color_fachbetriebe": "#4dae45"
-        },
-        {
-          "id": "chevron_2",
-          "label": "Mittlerer Chevron",
-          "position_relative": { "x_mm": 0, "y_mm": 31.1 },
-          "size": { "width_mm": 42.0, "height_mm": 36.6 },
-          "color_fachbetriebe": "#277c4b"
-        },
-        {
-          "id": "chevron_3",
-          "label": "Unterer Chevron (dunkelstes Grün)",
-          "position_relative": { "x_mm": 0, "y_mm": 62.3 },
-          "size": { "width_mm": 42.0, "height_mm": 36.5 },
-          "color_fachbetriebe": "#1c4b42"
-        }
-      ],
-      "pattern": {
-        "shape": "V-förmiges Polygon, Spitze zeigt nach oben-rechts",
-        "vertical_spacing_mm": 31.1,
-        "note": "Chevrons überlagern den Übergang Header/Bild als Brückenelement"
-      }
+      "size": {
+        "width_mm": 42.0,
+        "width_rule": "1/5 der Formatbreite (210mm / 5 = 42mm)",
+        "height_mm": 99.6,
+        "aspect_ratio": "Original-Seitenverhältnis beibehalten (1046:2480 = ca. 1:2.37)"
+      },
+      "variant_rules": {
+        "on_dark_backgrounds": "keyvisual-on-dark.png/svg (alle Chevrons Weiß)",
+        "on_light_backgrounds": "keyvisual-on-light.png/svg (Pure Green + Transition Green + Deep Green)",
+        "forbidden": "NIEMALS auf Pure Green oder Lime Green Hintergrund platzieren!"
+      },
+      "critical_rules": [
+        "NIEMALS in Code nachbauen (kein SVG, kein CSS)",
+        "Immer als vorgerenderte Bilddatei verwenden",
+        "Rechte Kante bündig mit Seitenrand",
+        "Nicht beschneiden"
+      ]
     },
 
     "hero_image": {
-      "position": { "x_mm": -0.5, "y_mm": 111.4 },
-      "size": { "width_mm": 211.1, "height_mm": 186.0 },
-      "clip_shape": "polygon_with_diagonal_top_edge",
-      "clip_polygon_mm": [
-        { "x": 178.4, "y": 118.1 },
-        { "x": 0, "y": 118.1 },
-        { "x": 0, "y": 297 },
-        { "x": 210, "y": 297 },
-        { "x": 210, "y": 126.9 },
-        { "x": 189, "y": 111.4 }
-      ],
+      "description": "Großes Bild unterhalb des 16:9-Farbkastens, füllt den restlichen Seitenbereich.",
+      "position": {
+        "x_mm": 0,
+        "y_mm": 118.1,
+        "y_note": "Beginnt an der Unterkante des 16:9-Farbkastens"
+      },
+      "size": {
+        "width_mm": 210,
+        "height_mm": 178.9,
+        "height_calculation": "297mm - 118.1mm = 178.9mm"
+      },
       "fit": "cover (Bild füllt den Bereich, wird ggf. beschnitten)",
-      "note": "Bild beginnt bei 111.4mm, sichtbar ab der diagonalen Kante (~118mm links)"
+      "note": "Das Key Visual überlagert den Übergang zwischen Farbkasten und Hero-Bild"
     }
   },
 
   "variants": {
     "mannesmann": {
       "label": "BKM Mannesmann AG",
-      "header_bg": "#006837",
-      "subline_color": "#8CC63F",
-      "chevron_colors": ["#4dae45", "#277c4b", "#1c4b42"]
+      "color_box_bg": "#1c4b42",
+      "color_box_bg_name": "Deep Green",
+      "logo_file": "bkm-logo-white-puregreen.svg",
+      "keyvisual_file": "keyvisual-on-dark.svg",
+      "headline_color": "#ffffff",
+      "subheadline_color": "#b4e717",
+      "subheadline_color_name": "Lime Green",
+      "intro_color": "#ffffff"
     },
     "fachbetriebe": {
       "label": "Fachbetriebe",
-      "header_bg": "#009245",
-      "subline_color": "#8CC63F",
-      "chevron_colors": ["#4dae45", "#277c4b", "#1c4b42"]
+      "color_box_bg": "#287d4b",
+      "color_box_bg_name": "Transition Green",
+      "logo_file": "bkm-logo-white-puregreen.svg",
+      "keyvisual_file": "keyvisual-on-dark.svg",
+      "headline_color": "#ffffff",
+      "subheadline_color": "#b4e717",
+      "subheadline_color_name": "Lime Green",
+      "intro_color": "#ffffff"
     },
     "homeline": {
       "label": "BKM Home Line",
-      "header_bg": "#006837",
-      "subline_color": "#00A99D",
-      "chevron_colors": ["#00A99D", "#006837", "#004d29"]
+      "color_box_bg": "#4daf46",
+      "color_box_bg_name": "Pure Green",
+      "logo_file": "bkm-logo-white.svg",
+      "keyvisual_file": "keyvisual-on-dark.svg",
+      "keyvisual_note": "ACHTUNG: Laut DESIGN.md ist Key Visual auf Pure Green VERBOTEN! Alternative Lösung nötig.",
+      "headline_color": "#ffffff",
+      "subheadline_color": "#1c4b42",
+      "subheadline_color_name": "Deep Green",
+      "intro_color": "#ffffff"
     },
     "proline": {
       "label": "BKM Pro Line",
-      "header_bg": "#1c4b42",
-      "subline_color": "#4dae45",
-      "chevron_colors": ["#009245", "#006837", "#1c4b42"]
+      "color_box_bg": "#494949",
+      "color_box_bg_name": "Stone Grey",
+      "logo_file": "bkm-logo-white-puregreen.svg",
+      "keyvisual_file": "keyvisual-on-dark.svg",
+      "headline_color": "#ffffff",
+      "subheadline_color": "#b4e717",
+      "subheadline_color_name": "Lime Green",
+      "intro_color": "#ffffff"
     },
     "anleitung": {
       "label": "Verarbeitungsanleitung",
-      "header_bg": "#4A4A4A",
-      "subline_color": "#009245",
-      "chevron_colors": ["#009245", "#006837", "#4A4A4A"]
+      "color_box_bg": "#ffffff",
+      "color_box_bg_name": "Weiß",
+      "logo_file": "bkm-logo-stonegrey-puregreen.svg",
+      "keyvisual_file": "keyvisual-on-light.svg",
+      "headline_color": "#494949",
+      "subheadline_color": "#4daf46",
+      "subheadline_color_name": "Pure Green",
+      "intro_color": "#494949"
     }
   },
 
-  "spacing_reference": {
-    "description": "Vertikale Abstände von der Seitenoberkante (Y=0)",
-    "markers_mm": {
-      "logo_top": 18.0,
-      "logo_bottom": 28.1,
-      "headline_top": 40.8,
-      "headline_line2_top": 54.0,
-      "headline_bottom": 71.0,
-      "subheadline_top": 73.1,
-      "subheadline_bottom": 79.9,
-      "intro_top": 79.9,
-      "intro_bottom_2lines": 91.2,
-      "chevron1_top": 102.3,
-      "hero_image_top": 111.4,
-      "header_bottom_left": 118.1,
-      "header_bottom_right": 126.9,
-      "chevron2_top": 133.4,
-      "chevron3_top": 164.6,
-      "page_bottom": 297.0
-    }
+  "spacing_vertical_flow": {
+    "description": "Vertikaler Aufbau des Titelblatts von oben nach unten",
+    "flow": [
+      { "element": "Seitenoberkante", "y_mm": 0 },
+      { "element": "Logo Oberkante", "y_mm": 18.0, "rule": "18mm Abstand von oben" },
+      { "element": "Logo Unterkante", "y_mm": 28.1, "rule": "Logo-Höhe ca. 10.1mm" },
+      { "element": "Headline Oberkante Zeile 1", "y_mm": 46.1, "rule": "18mm unter Logo-Unterkante" },
+      { "element": "Headline Unterkante Zeile 1", "y_mm": 56.7, "rule": "30pt Zeichenhöhe" },
+      { "element": "Headline Oberkante Zeile 2", "y_mm": 59.3, "rule": "Leading 37.5pt = 13.2mm" },
+      { "element": "Headline Unterkante Zeile 2", "y_mm": 69.9, "rule": "30pt Zeichenhöhe" },
+      { "element": "Subheadline Oberkante", "y_mm": 80.5, "rule": "30pt (10.6mm) Abstand unter Headline Zeile 2" },
+      { "element": "Subheadline Unterkante", "y_mm": 84.7, "rule": "12pt Zeichenhöhe" },
+      { "element": "Fließtext Oberkante", "y_mm": 89.0, "rule": "Abstand unter Subheadline (ca. 4mm)" },
+      { "element": "Key Visual Oberkante", "y_mm": 102.3, "rule": "1210px bei 300dpi" },
+      { "element": "16:9-Farbkasten Unterkante", "y_mm": 118.1, "rule": "210/16*9 = 118.1mm" },
+      { "element": "Hero-Bild Oberkante", "y_mm": 118.1, "rule": "Direkt unter Farbkasten" },
+      { "element": "Seitenunterkante", "y_mm": 297.0 }
+    ]
+  },
+
+  "typography_ratios": {
+    "headline_to_subheadline": "30pt : 12pt = 2.5 : 1",
+    "headline_to_body": "30pt : 12pt = 2.5 : 1",
+    "subheadline_to_body": "12pt : 12pt = 1 : 1 (gleiche Größe, unterschiedliche Schriftfamilie)"
   }
 }
