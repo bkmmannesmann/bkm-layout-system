@@ -1,0 +1,225 @@
+{
+  "_meta": {
+    "name": "BKM Titelblatt Layout-Spezifikation",
+    "version": "1.0.0",
+    "source": "BKM_Prospekt_Image-Fachbetrieb_DinA4.indd",
+    "analyzed_with": "PyMuPDF (exakte Textpositionen aus PDF-Export)",
+    "format": "DIN A4 Hochformat",
+    "units": "mm (Millimeter), pt (Punkt = 1/72 Zoll = 0.3528mm)"
+  },
+
+  "page": {
+    "width_mm": 210,
+    "height_mm": 297,
+    "bleed_mm": 3,
+    "color_space": "CMYK"
+  },
+
+  "grid": {
+    "left_margin_mm": 18.0,
+    "right_margin_mm": 18.0,
+    "top_margin_mm": 18.0,
+    "content_width_mm": 174.0,
+    "note": "Der linke Textrand (18mm) ist konsistent für Logo, Headline, Subline und Fließtext"
+  },
+
+  "elements": {
+    "logo": {
+      "position": { "x_mm": 18.0, "y_mm": 18.0 },
+      "size": { "width_mm": 50.0, "height_mm": 10.1 },
+      "components": {
+        "text_part": { "x_mm": 18.0, "width_mm": 33.9, "color": "#ffffff" },
+        "chevron_part": { "x_mm": 45.5, "width_mm": 14.5, "color": "#4dae45" }
+      },
+      "variant": "white-green (auf dunklem Hintergrund)"
+    },
+
+    "headline": {
+      "position": { "x_mm": 18.0, "y_mm": 40.8 },
+      "typography": {
+        "font_family": "Unbounded",
+        "font_weight": "Black (900)",
+        "font_size_pt": 30.0,
+        "line_height_ratio": 1.25,
+        "line_height_pt": 37.4,
+        "line_height_mm": 13.2,
+        "letter_spacing": "-0.02em",
+        "text_transform": "uppercase",
+        "color": "#ffffff"
+      },
+      "constraints": {
+        "max_width_mm": 130,
+        "max_lines": 3,
+        "note": "Headline bricht bei 130mm um. Typisch 2-3 Zeilen."
+      },
+      "measured_lines": [
+        { "text": "IHR ZUHAUSE IN", "y_mm": 40.8, "width_mm": 105.0 },
+        { "text": "SICHEREN HÄNDEN", "y_mm": 54.0, "width_mm": 129.3 }
+      ]
+    },
+
+    "subheadline": {
+      "position": { "x_mm": 18.0, "y_mm": 73.1 },
+      "typography": {
+        "font_family": "Unbounded",
+        "font_weight": "Black (900)",
+        "font_size_pt": 12.0,
+        "line_height_ratio": 1.0,
+        "color": "variabel (siehe Farbvarianten)",
+        "separator": "· (Mittelpunkt)"
+      },
+      "constraints": {
+        "max_width_mm": 120,
+        "max_lines": 1,
+        "note": "Einzeilig. Trennzeichen zwischen Themen: Mittelpunkt (·)"
+      },
+      "spacing": {
+        "distance_to_headline_bottom_mm": 2.1,
+        "note": "73.1 - (54.0 + 17.0) = 2.1mm unter der Headline-Unterkante"
+      }
+    },
+
+    "intro_text": {
+      "position": { "x_mm": 17.7, "y_mm": 79.9 },
+      "typography": {
+        "font_family": "TT Norms Pro",
+        "font_weight": "Regular (400)",
+        "font_size_pt": 12.0,
+        "line_height_ratio": 1.25,
+        "line_height_pt": 15.0,
+        "line_height_mm": 5.3,
+        "color": "#ffffff"
+      },
+      "constraints": {
+        "max_width_mm": 107,
+        "max_lines": 3,
+        "note": "2-3 Zeilen Einleitungstext. Schmaler als Headline."
+      },
+      "spacing": {
+        "distance_to_subheadline_bottom_mm": 0,
+        "note": "Direkt anschließend an Subheadline-Unterkante"
+      }
+    },
+
+    "header_background": {
+      "position": { "x_mm": 0, "y_mm": 0 },
+      "size": { "width_mm": 210, "height_mm": 134.3 },
+      "shape": "polygon_with_diagonal_bottom_edge",
+      "polygon_points_mm": [
+        { "x": 0, "y": 0, "label": "oben_links" },
+        { "x": 210, "y": 0, "label": "oben_rechts" },
+        { "x": 210, "y": 126.9, "label": "rechts_unten" },
+        { "x": 189, "y": 111.4, "label": "knick_rechts" },
+        { "x": 178.4, "y": 118.1, "label": "knick_mitte" },
+        { "x": 0, "y": 118.1, "label": "links_unten" }
+      ],
+      "note": "Diagonale Unterkante erzeugt Dynamik. Links bei 118.1mm, rechts bei 126.9mm."
+    },
+
+    "chevrons": {
+      "container": {
+        "position": { "x_mm": 168.0, "y_mm": 102.3 },
+        "size": { "width_mm": 42.0, "height_mm": 99.0 }
+      },
+      "items": [
+        {
+          "id": "chevron_1",
+          "label": "Oberer Chevron (hellstes Grün)",
+          "position_relative": { "x_mm": 0, "y_mm": 0 },
+          "size": { "width_mm": 42.0, "height_mm": 36.5 },
+          "color_fachbetriebe": "#4dae45"
+        },
+        {
+          "id": "chevron_2",
+          "label": "Mittlerer Chevron",
+          "position_relative": { "x_mm": 0, "y_mm": 31.1 },
+          "size": { "width_mm": 42.0, "height_mm": 36.6 },
+          "color_fachbetriebe": "#277c4b"
+        },
+        {
+          "id": "chevron_3",
+          "label": "Unterer Chevron (dunkelstes Grün)",
+          "position_relative": { "x_mm": 0, "y_mm": 62.3 },
+          "size": { "width_mm": 42.0, "height_mm": 36.5 },
+          "color_fachbetriebe": "#1c4b42"
+        }
+      ],
+      "pattern": {
+        "shape": "V-förmiges Polygon, Spitze zeigt nach oben-rechts",
+        "vertical_spacing_mm": 31.1,
+        "note": "Chevrons überlagern den Übergang Header/Bild als Brückenelement"
+      }
+    },
+
+    "hero_image": {
+      "position": { "x_mm": -0.5, "y_mm": 111.4 },
+      "size": { "width_mm": 211.1, "height_mm": 186.0 },
+      "clip_shape": "polygon_with_diagonal_top_edge",
+      "clip_polygon_mm": [
+        { "x": 178.4, "y": 118.1 },
+        { "x": 0, "y": 118.1 },
+        { "x": 0, "y": 297 },
+        { "x": 210, "y": 297 },
+        { "x": 210, "y": 126.9 },
+        { "x": 189, "y": 111.4 }
+      ],
+      "fit": "cover (Bild füllt den Bereich, wird ggf. beschnitten)",
+      "note": "Bild beginnt bei 111.4mm, sichtbar ab der diagonalen Kante (~118mm links)"
+    }
+  },
+
+  "variants": {
+    "mannesmann": {
+      "label": "BKM Mannesmann AG",
+      "header_bg": "#006837",
+      "subline_color": "#8CC63F",
+      "chevron_colors": ["#4dae45", "#277c4b", "#1c4b42"]
+    },
+    "fachbetriebe": {
+      "label": "Fachbetriebe",
+      "header_bg": "#009245",
+      "subline_color": "#8CC63F",
+      "chevron_colors": ["#4dae45", "#277c4b", "#1c4b42"]
+    },
+    "homeline": {
+      "label": "BKM Home Line",
+      "header_bg": "#006837",
+      "subline_color": "#00A99D",
+      "chevron_colors": ["#00A99D", "#006837", "#004d29"]
+    },
+    "proline": {
+      "label": "BKM Pro Line",
+      "header_bg": "#1c4b42",
+      "subline_color": "#4dae45",
+      "chevron_colors": ["#009245", "#006837", "#1c4b42"]
+    },
+    "anleitung": {
+      "label": "Verarbeitungsanleitung",
+      "header_bg": "#4A4A4A",
+      "subline_color": "#009245",
+      "chevron_colors": ["#009245", "#006837", "#4A4A4A"]
+    }
+  },
+
+  "spacing_reference": {
+    "description": "Vertikale Abstände von der Seitenoberkante (Y=0)",
+    "markers_mm": {
+      "logo_top": 18.0,
+      "logo_bottom": 28.1,
+      "headline_top": 40.8,
+      "headline_line2_top": 54.0,
+      "headline_bottom": 71.0,
+      "subheadline_top": 73.1,
+      "subheadline_bottom": 79.9,
+      "intro_top": 79.9,
+      "intro_bottom_2lines": 91.2,
+      "chevron1_top": 102.3,
+      "hero_image_top": 111.4,
+      "header_bottom_left": 118.1,
+      "header_bottom_right": 126.9,
+      "chevron2_top": 133.4,
+      "chevron3_top": 164.6,
+      "page_bottom": 297.0
+    }
+  }
+}

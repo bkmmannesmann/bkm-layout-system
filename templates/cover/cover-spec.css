@@ -1,0 +1,389 @@
+/* ============================================================
+   BKM TITELBLATT – EXAKTE LAYOUT-SPEZIFIKATION
+   ============================================================
+   
+   Dieses Stylesheet definiert das Titelblatt-Layout pixelgenau
+   basierend auf der Analyse der InDesign-Originaldatei.
+   
+   QUELLE: BKM_Prospekt_Image-Fachbetrieb_DinA4.indd
+   ANALYSIERT MIT: PyMuPDF (exakte Textpositionen aus PDF)
+   
+   SEITENFORMAT: DIN A4 (210mm x 297mm)
+   BESCHNITT: 3mm umlaufend
+   
+   ============================================================ */
+
+/* ──────────────────────────────────────────────────────────
+   SEITEN-DEFINITION
+   ────────────────────────────────────────────────────────── */
+
+@page cover {
+  size: 210mm 297mm;
+  margin: 0;
+  /* Kein Rand – alle Elemente werden absolut positioniert */
+}
+
+/* ──────────────────────────────────────────────────────────
+   FARBVARIANTEN – 5 Broschüren-Typen
+   ──────────────────────────────────────────────────────────
+   
+   Jede Variante definiert:
+   - Header-Hintergrundfarbe
+   - Subheadline-Farbe
+   - Chevron-Farben (3 Stufen)
+   - Logo-Variante (Weiß auf Dunkel)
+   
+   ────────────────────────────────────────────────────────── */
+
+/* VARIANTE 1: BKM MANNESMANN AG (Corporate / Dachmarke) */
+.cover--mannesmann {
+  --cover-header-bg: #006837;          /* Deep Green */
+  --cover-subline-color: #8CC63F;      /* Lime Green */
+  --cover-chevron-1: #4dae45;          /* Helles Grün (oben) */
+  --cover-chevron-2: #277c4b;          /* Mittleres Grün */
+  --cover-chevron-3: #1c4b42;          /* Dunkles Grün (unten) */
+  --cover-text-color: #ffffff;
+  --cover-logo-variant: "white-green"; /* Weißes Logo mit grünem Chevron */
+}
+
+/* VARIANTE 2: FACHBETRIEBE (Pure Green statt Deep Green) */
+.cover--fachbetriebe {
+  --cover-header-bg: #009245;          /* Pure Green */
+  --cover-subline-color: #8CC63F;      /* Lime Green */
+  --cover-chevron-1: #4dae45;          /* Helles Grün (oben) */
+  --cover-chevron-2: #277c4b;          /* Mittleres Grün */
+  --cover-chevron-3: #1c4b42;          /* Dunkles Grün (unten) */
+  --cover-text-color: #ffffff;
+  --cover-logo-variant: "white-green";
+}
+
+/* VARIANTE 3: BKM HOME LINE (Consumer / Heimwerker) */
+.cover--homeline {
+  --cover-header-bg: #006837;          /* Deep Green */
+  --cover-subline-color: #00A99D;      /* Transition Green / Türkis */
+  --cover-chevron-1: #00A99D;          /* Türkis (oben) */
+  --cover-chevron-2: #006837;          /* Deep Green */
+  --cover-chevron-3: #004d29;          /* Dunkelgrün (unten) */
+  --cover-text-color: #ffffff;
+  --cover-logo-variant: "white-green";
+}
+
+/* VARIANTE 4: BKM PRO LINE (Professionell / Fachhandwerk) */
+.cover--proline {
+  --cover-header-bg: #1c4b42;          /* Sehr dunkles Grün */
+  --cover-subline-color: #4dae45;      /* Mittleres Grün */
+  --cover-chevron-1: #009245;          /* Pure Green (oben) */
+  --cover-chevron-2: #006837;          /* Deep Green */
+  --cover-chevron-3: #1c4b42;          /* Dunkelgrün (unten) */
+  --cover-text-color: #ffffff;
+  --cover-logo-variant: "white-green";
+}
+
+/* VARIANTE 5: VERARBEITUNGSANLEITUNG (Technisch / Neutral) */
+.cover--anleitung {
+  --cover-header-bg: #4A4A4A;          /* Stone Grey */
+  --cover-subline-color: #009245;      /* Pure Green */
+  --cover-chevron-1: #009245;          /* Pure Green (oben) */
+  --cover-chevron-2: #006837;          /* Deep Green */
+  --cover-chevron-3: #4A4A4A;          /* Stone Grey (unten) */
+  --cover-text-color: #ffffff;
+  --cover-logo-variant: "white-green";
+}
+
+/* ──────────────────────────────────────────────────────────
+   COVER-CONTAINER
+   ────────────────────────────────────────────────────────── */
+
+.cover {
+  page: cover;
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  page-break-after: always;
+}
+
+/* ──────────────────────────────────────────────────────────
+   HEADER-BEREICH (Obere Hälfte mit Farb-Hintergrund)
+   
+   GEMESSENE WERTE:
+   - Hintergrund-Bild: X=-0.4mm Y=-0.4mm W=210.8mm H=134.3mm
+   - Das bedeutet: Der Header-Bereich reicht von 0 bis ~134mm
+   - Die diagonale Unterkante wird durch einen Polygon-Pfad definiert
+   
+   POLYGON-PFAD (aus PDF extrahiert):
+   - Links unten:  (0mm, 118.1mm)
+   - Rechts unten: (210mm, 126.9mm) → Diagonale!
+   - Knick bei:    (178.4mm, 118.1mm) und (189mm, 111.4mm)
+   ────────────────────────────────────────────────────────── */
+
+.cover__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 210mm;
+  height: 134.3mm;
+  background-color: var(--cover-header-bg);
+  /* Die diagonale Unterkante wird per clip-path realisiert */
+  clip-path: polygon(
+    0% 0%,                    /* Oben links */
+    100% 0%,                  /* Oben rechts */
+    100% 95.3%,               /* Rechts unten (126.9/134.3 = 94.5%) */
+    85% 88%,                  /* Knick bei 178.4mm */
+    0% 88%                    /* Links unten (118.1/134.3 = 87.9%) */
+  );
+  z-index: 1;
+}
+
+/* ──────────────────────────────────────────────────────────
+   LOGO
+   
+   GEMESSENE WERTE:
+   - Weißer Teil (BKM Text): X=18.0mm Y=18.0mm W=33.9mm H=10.1mm
+   - Grüner Teil (Chevron):  X=45.5mm Y=18.0mm W=14.5mm H=10.1mm
+   - Gesamtbreite Logo:      33.9 + 14.5 ≈ 48.4mm (gerundet ~50mm)
+   - Gesamthöhe:             10.1mm
+   ────────────────────────────────────────────────────────── */
+
+.cover__logo {
+  position: absolute;
+  top: 18.0mm;
+  left: 18.0mm;
+  width: 50mm;
+  height: auto;
+  z-index: 10;
+}
+
+/* ──────────────────────────────────────────────────────────
+   HEADLINE (Hauptüberschrift)
+   
+   GEMESSENE WERTE (aus PyMuPDF):
+   - Schrift:       Unbounded-Black
+   - Größe:         30.0pt
+   - Farbe:         #ffffff (Weiß)
+   - Position:      X=18.0mm Y=40.8mm (Oberkante erste Zeile)
+   - Zweite Zeile:  X=18.0mm Y=54.0mm
+   - Zeilenabstand: 54.0 - 40.8 = 13.2mm (= ca. 37.4pt bei 30pt Schrift)
+   - Leading-Ratio: 37.4 / 30 = 1.25
+   - Span-Höhe:     17.0mm pro Zeile
+   - Max-Breite:    129.3mm (Zeile 2 ist breiter als Zeile 1: 105mm)
+   - Textumbruch:   Bei ca. 130mm
+   
+   AUS INDESIGN BESTÄTIGT:
+   - H1 Hauptüberschrift: 37.5pt (InDesign-Wert, im PDF auf 30pt skaliert)
+   - Headline7: 37.5pt
+   - Titelblatt: 37.5pt
+   ────────────────────────────────────────────────────────── */
+
+.cover__headline {
+  position: absolute;
+  top: 40.8mm;
+  left: 18.0mm;
+  max-width: 130mm;
+  z-index: 10;
+
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;                    /* Black */
+  font-size: 30pt;
+  line-height: 1.25;                   /* 37.4pt / 30pt */
+  letter-spacing: -0.02em;             /* Leichtes Tracking für Display */
+  color: var(--cover-text-color);
+  text-transform: uppercase;
+}
+
+/* ──────────────────────────────────────────────────────────
+   SUBHEADLINE (Grüne Zeile unter der Headline)
+   
+   GEMESSENE WERTE (aus PyMuPDF):
+   - Schrift:       Unbounded-Black
+   - Größe:         12.0pt
+   - Farbe:         #4daf46 (≈ Pure Green / Lime Green Mischung)
+   - Position:      X=17.9mm Y=73.1mm
+   - Span-Höhe:     6.8mm
+   - Breite:        119.2mm
+   - Abstand zur Headline-Unterkante: 73.1 - (54.0 + 17.0) = 2.1mm
+   
+   HINWEIS: Im PDF wird die Subline als Bild gerendert (756x64px),
+   was auf eine spezielle Schrift-Einbettung hindeutet.
+   Im Template verwenden wir die Schrift direkt.
+   ────────────────────────────────────────────────────────── */
+
+.cover__subheadline {
+  position: absolute;
+  top: 73.1mm;
+  left: 18.0mm;
+  max-width: 120mm;
+  z-index: 10;
+
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;                    /* Black */
+  font-size: 12pt;
+  line-height: 1.0;
+  color: var(--cover-subline-color);
+}
+
+/* ──────────────────────────────────────────────────────────
+   FLIESSTEXT / INTRO (Weißer Text unter der Subheadline)
+   
+   GEMESSENE WERTE (aus PyMuPDF):
+   - Schrift:       TTNormsPro-Rg (TT Norms Pro Regular)
+   - Größe:         12.0pt
+   - Farbe:         #ffffff (Weiß)
+   - Position Z1:   X=17.7mm Y=79.9mm
+   - Position Z2:   X=17.7mm Y=85.2mm
+   - Zeilenabstand: 85.2 - 79.9 = 5.3mm (= ca. 15pt bei 12pt Schrift)
+   - Leading-Ratio: 15 / 12 = 1.25
+   - Span-Höhe:     6.0mm pro Zeile
+   - Max-Breite:    107mm
+   - Abstand zur Subline: 79.9 - (73.1 + 6.8) = 0mm (direkt anschließend)
+   ────────────────────────────────────────────────────────── */
+
+.cover__intro {
+  position: absolute;
+  top: 79.9mm;
+  left: 18.0mm;
+  max-width: 107mm;
+  z-index: 10;
+
+  font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 400;                    /* Regular */
+  font-size: 12pt;
+  line-height: 1.25;                   /* 15pt / 12pt */
+  color: var(--cover-text-color);
+}
+
+/* ──────────────────────────────────────────────────────────
+   HERO-BILD (Untere Hälfte)
+   
+   GEMESSENE WERTE (aus PyMuPDF):
+   - Position:      X=-0.5mm Y=111.4mm (beginnt bei 111.4mm von oben)
+   - Breite:        211.1mm (volle Breite + Bleed)
+   - Höhe:          186.0mm (bis Seitenende + Bleed)
+   - Pixel:         1053 x 928px
+   - Unterkante:    111.4 + 186.0 = 297.4mm (über Seitenrand = Bleed)
+   
+   HINTERGRUND-POLYGON (aus PDF-Pfad):
+   - Das Bild wird durch ein Polygon maskiert:
+     (178.4mm, 118.1mm) → (0mm, 118.1mm) → (0mm, 297mm) →
+     (210mm, 297mm) → (210mm, 126.9mm) → (189mm, 111.4mm)
+   - Dies erzeugt die diagonale Oberkante des Bildbereichs
+   ────────────────────────────────────────────────────────── */
+
+.cover__hero {
+  position: absolute;
+  top: 111.4mm;
+  left: -0.5mm;
+  width: 211.1mm;
+  height: 186.0mm;
+  overflow: hidden;
+  z-index: 0;
+  /* Diagonale Oberkante passend zum Header-Polygon */
+  clip-path: polygon(
+    0% 5.1%,                  /* Links: (118.1-111.4)/186 = 3.6% */
+    84.9% 5.1%,              /* Knick bei 178.4mm: gleiche Höhe */
+    90% 0%,                  /* 189mm: Spitze (111.4mm = 0%) */
+    100% 11.8%,             /* Rechts: (126.9-111.4)/186 = 8.3% */
+    100% 100%,               /* Rechts unten */
+    0% 100%                  /* Links unten */
+  );
+}
+
+.cover__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* ──────────────────────────────────────────────────────────
+   CHEVRONS (3 gestaffelte Pfeilformen, rechts)
+   
+   GEMESSENE WERTE (aus PyMuPDF Pfad-Analyse):
+   
+   CHEVRON 1 (oben, hellstes Grün):
+   - BBox:          X=168.0mm Y=102.3mm W=42.0mm H=36.5mm
+   - Farbe:         #4dae45 (RGB: 77, 174, 69)
+   - Pfad-Punkte:   (168, 118.1) → (168, 133.7) → (189, 117.9) →
+                    (189, 123.1) → (210, 138.9) → (210, 123.3)
+   
+   CHEVRON 2 (mitte, mittleres Grün):
+   - BBox:          X=168.0mm Y=133.4mm W=42.0mm H=36.6mm
+   - Farbe:         #277c4b (RGB: 39, 124, 75)
+   - Pfad-Punkte:   (168, 149.3) → (168, 164.8) → (189, 149.0) →
+                    (189, 154.2) → (210, 170.0) → (210, 154.5)
+   
+   CHEVRON 3 (unten, dunkelstes Grün):
+   - BBox:          X=168.0mm Y=164.6mm W=42.0mm H=36.5mm
+   - Farbe:         #1c4b42 (RGB: 28, 75, 66)
+   
+   MUSTER:
+   - Alle 3 Chevrons: Breite 42mm, Höhe ~36.5mm
+   - Vertikaler Abstand zwischen Chevrons: ~31mm (Mitte zu Mitte)
+   - Horizontale Position: Rechter Rand (168mm bis 210mm = Seitenrand)
+   - Jeder Chevron besteht aus einem "V"-förmigen Polygon
+   - Die Spitze zeigt nach oben-rechts (Richtung: aufsteigend)
+   ────────────────────────────────────────────────────────── */
+
+.cover__chevrons {
+  position: absolute;
+  top: 102.3mm;
+  right: 0;
+  width: 42.0mm;
+  height: 99.0mm;              /* 3 Chevrons: 36.5 + 31 + 31 ≈ 99mm */
+  z-index: 5;
+}
+
+.cover__chevron {
+  position: absolute;
+  left: 0;
+  width: 42.0mm;
+  height: 36.5mm;
+}
+
+.cover__chevron--1 {
+  top: 0;
+  /* Farbe wird über die Variante gesteuert */
+}
+
+.cover__chevron--2 {
+  top: 31.1mm;                 /* 133.4 - 102.3 = 31.1mm */
+}
+
+.cover__chevron--3 {
+  top: 62.3mm;                 /* 164.6 - 102.3 = 62.3mm */
+}
+
+/* SVG-Chevron-Form (als Inline-SVG im HTML) */
+.cover__chevron svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ──────────────────────────────────────────────────────────
+   ABSTÄNDE-ZUSAMMENFASSUNG (für schnelle Referenz)
+   
+   Von Seitenoberkante gemessen:
+   ├── 18.0mm  → Logo (Oberkante)
+   ├── 28.1mm  → Logo (Unterkante, 18 + 10.1)
+   ├── 40.8mm  → Headline Zeile 1 (Oberkante)
+   ├── 54.0mm  → Headline Zeile 2 (Oberkante)
+   ├── 71.0mm  → Headline Zeile 2 (Unterkante, 54 + 17)
+   ├── 73.1mm  → Subheadline (Oberkante)
+   ├── 79.9mm  → Subheadline (Unterkante) / Fließtext (Oberkante)
+   ├── 91.2mm  → Fließtext (Unterkante, 2 Zeilen)
+   ├── 102.3mm → Chevron 1 (Oberkante)
+   ├── 111.4mm → Hero-Bild (Oberkante, diagonale Kante)
+   ├── 118.1mm → Header-Unterkante (links)
+   ├── 126.9mm → Header-Unterkante (rechts)
+   ├── 133.4mm → Chevron 2 (Oberkante)
+   ├── 164.6mm → Chevron 3 (Oberkante)
+   └── 297.0mm → Seitenunterkante
+   
+   Horizontale Positionen:
+   ├── 18.0mm  → Linker Textrand (Logo, Headline, Sub, Intro)
+   ├── 130mm   → Max-Breite Headline
+   ├── 107mm   → Max-Breite Fließtext
+   ├── 120mm   → Max-Breite Subheadline
+   ├── 168.0mm → Chevrons (linke Kante)
+   └── 210.0mm → Seitenrand rechts
+   ────────────────────────────────────────────────────────── */

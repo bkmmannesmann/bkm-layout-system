@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }} – BKM Titelblatt</title>
+  <link rel="stylesheet" href="../../design-system/variables.css">
+  <link rel="stylesheet" href="../../design-system/base.css">
+  <link rel="stylesheet" href="cover-spec.css">
+  <style>
+    /* Varianten-spezifische Farben (über Jinja2 injiziert) */
+    .cover__header {
+      background-color: {{ header_bg }};
+    }
+    .cover__subheadline {
+      color: {{ subline_color }};
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       BKM TITELBLATT – LAYOUT-SPEZIFIKATION
+       
+       VARIANTEN:
+       - mannesmann     → BKM Mannesmann AG (Deep Green)
+       - fachbetriebe   → Fachbetriebe (Pure Green)
+       - homeline       → BKM Home Line (Türkis-Akzent)
+       - proline        → BKM Pro Line (Dunkelgrün)
+       - anleitung      → Verarbeitungsanleitung (Stone Grey)
+       
+       ELEMENTE-HIERARCHIE:
+       ┌─ .cover (Container, 210mm x 297mm)
+       │  ├─ .cover__header (Farbfläche, diagonale Unterkante)
+       │  ├─ .cover__logo (X=18mm Y=18mm, 50mm breit)
+       │  ├─ .cover__headline (X=18mm Y=40.8mm, Unbounded Black 30pt)
+       │  ├─ .cover__subheadline (X=18mm Y=73.1mm, Unbounded Black 12pt)
+       │  ├─ .cover__intro (X=18mm Y=79.9mm, TT Norms Pro 12pt)
+       │  ├─ .cover__chevrons (X=168mm Y=102.3mm, 3x 42mm breit)
+       │  └─ .cover__hero (X=0 Y=111.4mm, volle Breite)
+       └─────────────────────────────────────────────────────
+       ============================================================ -->
+
+  <div class="cover {{ variant_class }}">
+
+    <!-- HEADER-HINTERGRUND
+         Farbfläche von 0 bis ~134mm Höhe
+         Diagonale Unterkante: links bei 118.1mm, rechts bei 126.9mm -->
+    <div class="cover__header"></div>
+
+    <!-- LOGO
+         Position: X=18.0mm Y=18.0mm
+         Größe: ~50mm breit, 10.1mm hoch
+         Variante: Weiß + Grüner Chevron auf dunklem Hintergrund -->
+    <img class="cover__logo" 
+         src="{{ logo_path }}" 
+         alt="BKM Mannesmann">
+
+    <!-- HEADLINE
+         Position: X=18.0mm Y=40.8mm
+         Schrift: Unbounded Black, 30pt
+         Farbe: #ffffff (Weiß)
+         Zeilenabstand: 1.25 (37.4pt / 13.2mm)
+         Max-Breite: 130mm
+         Text-Transform: uppercase -->
+    <h1 class="cover__headline">{{ headline }}</h1>
+
+    <!-- SUBHEADLINE
+         Position: X=18.0mm Y=73.1mm
+         Schrift: Unbounded Black, 12pt
+         Farbe: variabel (Lime Green / Türkis je nach Variante)
+         Max-Breite: 120mm
+         Trennzeichen: · (Mittelpunkt) -->
+    <p class="cover__subheadline">{{ subheadline }}</p>
+
+    <!-- FLIESSTEXT / INTRO
+         Position: X=17.7mm Y=79.9mm
+         Schrift: TT Norms Pro Regular, 12pt
+         Farbe: #ffffff (Weiß)
+         Zeilenabstand: 1.25 (15pt / 5.3mm)
+         Max-Breite: 107mm
+         Max-Zeilen: 3 -->
+    <p class="cover__intro">{{ intro_text }}</p>
+
+    <!-- CHEVRONS (3 gestaffelte Pfeil-Grafiken)
+         Container: X=168.0mm Y=102.3mm, W=42mm H=99mm
+         Jeder Chevron: 42mm breit, 36.5mm hoch
+         Vertikaler Abstand: 31.1mm
+         Form: V-Polygon, Spitze nach oben-rechts -->
+    <div class="cover__chevrons">
+      <div class="cover__chevron cover__chevron--1">
+        <svg viewBox="0 0 119 103.5" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,44.7 0,89.1 59.5,44.3 59.5,58.8 119,103.5 119,59.4 59.5,15.7 59.5,0" 
+                   fill="{{ chevron_1_color }}"/>
+        </svg>
+      </div>
+      <div class="cover__chevron cover__chevron--2">
+        <svg viewBox="0 0 119 103.5" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,44.7 0,89.1 59.5,44.3 59.5,58.8 119,103.5 119,59.4 59.5,15.7 59.5,0" 
+                   fill="{{ chevron_2_color }}"/>
+        </svg>
+      </div>
+      <div class="cover__chevron cover__chevron--3">
+        <svg viewBox="0 0 119 103.5" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,44.7 0,89.1 59.5,44.3 59.5,58.8 119,103.5 119,59.4 59.5,15.7 59.5,0" 
+                   fill="{{ chevron_3_color }}"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- HERO-BILD
+         Position: X=-0.5mm Y=111.4mm
+         Größe: W=211.1mm H=186.0mm (volle Breite + Bleed)
+         Diagonale Oberkante (Clip-Path)
+         Object-Fit: cover -->
+    <div class="cover__hero">
+      <img src="{{ hero_image_path }}" alt="{{ hero_image_alt }}">
+    </div>
+
+  </div>
+
+</body>
+</html>
