@@ -20,17 +20,26 @@ Dieses Repository ermöglicht die automatisierte Generierung druckfertiger PDFs 
 pip3 install weasyprint jinja2
 ```
 
-### PDF generieren
+### Cover generieren (alle 5 Varianten)
 
 ```bash
-# Standard-Build (nutzt content/prospekt-fachbetrieb/content.json)
+python3 scripts/build_cover.py all
+```
+
+### Einzelne Cover-Variante generieren
+
+```bash
+python3 scripts/build_cover.py mannesmann
+python3 scripts/build_cover.py fachbetriebe
+python3 scripts/build_cover.py homeline
+python3 scripts/build_cover.py proline
+python3 scripts/build_cover.py anleitung
+```
+
+### Prospekt generieren (Innenseiten)
+
+```bash
 python3 scripts/build.py prospekt-fachbetrieb
-
-# Mit benutzerdefiniertem Content
-python3 scripts/build.py prospekt-fachbetrieb --content content/mein-projekt/content.json
-
-# Mit benutzerdefiniertem Output-Pfad
-python3 scripts/build.py prospekt-fachbetrieb --output output/mein-prospekt.pdf
 ```
 
 Das generierte PDF liegt anschließend im `/output/`-Verzeichnis.
@@ -40,123 +49,130 @@ Das generierte PDF liegt anschließend im `/output/`-Verzeichnis.
 ```
 bkm-layout-system/
 ├── assets/
-│   ├── fonts/              ← Schriftdateien (Unbounded, TT Norms Pro)
+│   ├── fonts/                    ← Schriftdateien (woff2)
+│   │   ├── Unbounded_400.woff2
+│   │   ├── Unbounded_700.woff2
+│   │   ├── Unbounded_900.woff2
+│   │   ├── TT_Norms_Pro_Compact_Regular.woff2
+│   │   └── TT_Norms_Pro_Bold.woff2
 │   └── images/
-│       ├── logos/          ← BKM-Logos (SVG/EPS)
-│       ├── icons/          ← Icons und Symbole
-│       └── placeholder/    ← Platzhalter-Bilder für Entwicklung
+│       ├── logos/                ← BKM-Logos (4 Varianten: SVG + PNG)
+│       ├── keyvisual-on-light.png
+│       ├── keyvisual-on-dark.png
+│       ├── badge-homeline.png
+│       ├── badge-proline.png
+│       └── placeholder/
 ├── design-system/
-│   ├── variables.css       ← Zentrale CD-Variablen (Farben, Schriften, Abstände)
-│   └── base.css            ← Basis-Stylesheet (Reset, Typografie, Paged Media)
+│   ├── variables.css             ← Zentrale CD-Variablen
+│   └── base.css                  ← Basis-Stylesheet
 ├── components/
-│   └── components.css      ← Wiederverwendbare Layout-Bausteine
+│   └── components.css            ← Wiederverwendbare Layout-Bausteine
 ├── templates/
+│   ├── cover/                    ← TITELBLATT (pixelgenau definiert)
+│   │   ├── cover.html            ← HTML-Template mit Jinja2
+│   │   ├── cover-spec.css        ← Exakte Layout-Spezifikation
+│   │   └── cover-layout.json     ← Maschinenlesbare Maße
 │   └── prospekt-fachbetrieb/
-│       ├── template.html   ← HTML-Template mit Jinja2-Platzhaltern
-│       └── template.css    ← Template-spezifisches CSS
+│       ├── template.html
+│       └── template.css
 ├── content/
 │   └── prospekt-fachbetrieb/
-│       └── content.json    ← Texte, Bildpfade und Metadaten
+│       └── content.json
 ├── scripts/
-│   ├── build.py            ← Haupt-Build-Skript
-│   └── validate_json.py    ← JSON-Validierung
-├── output/                 ← Generierte PDFs (gitignored)
+│   ├── build_cover.py            ← Cover-Builder (5 Varianten)
+│   ├── build.py                  ← Prospekt-Builder
+│   └── validate_json.py
+├── output/                       ← Generierte PDFs (gitignored)
+│   └── covers/
 └── README.md
 ```
 
-## Corporate Design
+## Corporate Design – Titelblatt
 
-### Schriften
+### Grundraster
 
-| Schrift | Verwendung | Schnitte |
+| Parameter | Wert | Berechnung |
 |:---|:---|:---|
-| **Unbounded** | Display-Headlines | Black, ExtraBold, Bold, SemiBold, Medium, Regular, Light, ExtraLight |
-| **TT Norms Pro** | Fließtext, Subheadlines | Bold, DemiBold, Medium, Regular, Light (jeweils + Italic) |
+| Format | DIN A4 (210mm × 297mm) | — |
+| Farbkasten | 210mm × 118.1mm | 16:9 Verhältnis zur Breite |
+| 8mm-Erweiterung | Rechts unten, bündig | L-förmige Farbfläche |
+| Key Visual Breite | 42mm | 1/5 der Formatbreite |
+| Logo Breite | 42mm | 1/5 der Formatbreite |
+| Linker Rand | 18mm | Fluchtlinie für alle Textelemente |
 
-Die Schriftdateien müssen in `/assets/fonts/` abgelegt werden. Sie sind nicht im Repository enthalten (lizenziert).
+### Typografie
 
-### Farbpalette
+| Element | Schrift | Größe | Laufweite | Besonderheiten |
+|:---|:---|:---|:---|:---|
+| Headline | Unbounded Black (900) | 30pt | 0 | VERSALIEN, immer 2-zeilig, Z1 < Z2, NIE 3-zeilig |
+| Subheadline | Unbounded Black (900) | 12pt | 0 | Keine Versalien, ein- oder zweizeilig |
+| Fließtext | TT Norms Pro Regular (400) | 12pt | -0.015em | Max 2 Zeilen, NIE mehr |
 
-| Variable | Farbe | Hex | Verwendung |
-|:---|:---|:---|:---|
-| `--bkm-pure-green` | Pure Green | `#009245` | Haupt-Markenfarbe, Headlines, CTAs |
-| `--bkm-deep-green` | Deep Green | `#006837` | Chevrons, Akzente |
-| `--bkm-transition-green` | Transition Green | `#00A99D` | Hintergründe |
-| `--bkm-lime-green` | Lime Green | `#8CC63F` | Subheadlines, Highlights |
-| `--bkm-stone-grey` | Stone Grey | `#4A4A4A` | Kontrastflächen |
-| `--bkm-black` | Schwarz | `#000000` | Fließtext |
-| `--bkm-white` | Weiß | `#FFFFFF` | Hintergrund |
+### Abstände (pixelgenau bei 300dpi)
 
-## Verfügbare Komponenten
-
-Das System bietet folgende wiederverwendbare Layout-Bausteine:
-
-| Komponente | CSS-Klasse | Beschreibung |
+| Von → Nach | Abstand | mm |
 |:---|:---|:---|
-| Cover | `.cover` | Titelseite mit Logo, Headline, Hero-Bild und Chevron-Grafik |
-| Headline-Block | `.headline-block` | Grüne Headline + kursive Subline |
-| Spalten-Layout | `.columns-2`, `.columns-3` | Mehrspaltige Textblöcke |
-| Grid-Layout | `.grid-2`, `.grid-2--wide-left` | Asymmetrische Raster |
-| Zitat-Box | `.quote-box` | Grüne Box mit abgerundeten Ecken und Anführungszeichen |
-| Bild-Block | `.image-block` | Bildplatzhalter mit Cover-Fit |
-| Dunkle Sektion | `.dark-section` | Kontrastfläche mit weißem Text |
-| Prozess-Liste | `.process-list` | Nummerierte Schritte |
-| Info-Block | `.info-block` | Titel + Beschreibung (für Aufzählungen) |
-| CTA-Text | `.cta-text` | Grüner Call-to-Action |
-| Footer | `.footer` | Logos + Kontaktdaten |
-| Rückseite | `.back-cover` | Hero-Bild + CTA + Kontakt |
+| Logo Oberkante → Seitenrand oben | 18mm | 213px |
+| Logo Linkskante → Seitenrand links | 18mm | 213px |
+| Logo Unterkante → Headline Oberkante | 18mm | 213px |
+| Headline Unterkante → Subheadline Oberkante | **95px** | 7.87mm |
+| Subheadline Unterkante → Fließtext Oberkante | **10px** | 0.85mm |
 
-## Workflow: Neues Dokument erstellen
+### Ebenen (z-index, von hinten nach vorne)
 
-### 1. Content-Datei anlegen
+1. Hero-Bild (unterste Ebene, vollflächig)
+2. L-förmige Farbfläche (16:9-Kasten + 8mm-Erweiterung)
+3. Key Visual + Badge (immer davor)
+4. Text-Elemente (Logo, Headline, Subheadline, Fließtext)
 
-Erstelle eine neue JSON-Datei unter `/content/<projektname>/content.json`:
+### 5 Broschüren-Varianten
 
-```json
-{
-  "meta": {
-    "title": "Mein neues Dokument",
-    "template": "prospekt-fachbetrieb",
-    "format": "DIN A4",
-    "language": "de"
-  },
-  "global": {
-    "logo_path": "../../assets/images/logos/bkm-logo-weiss.svg",
-    "company_name": "BKM Mauertrocknungs GmbH",
-    ...
-  },
-  "page1_cover": {
-    "cover_title": "MEINE HEADLINE",
-    "cover_subtitle": "Meine Subline",
-    ...
-  }
-}
-```
+| Variante | Hintergrund | Logo | Headline + Fließtext | Subheadline | Badge |
+|:---|:---|:---|:---|:---|:---|
+| BKM Mannesmann AG | Deep Green (#1c4b42) | Weiß-Grün | Weiß | Lime Green (#b4e717) | — |
+| Fachbetriebe | Transition Green (#287d4b) | Weiß-Grün | Weiß | Pure Green (#4daf46) | — |
+| BKM Home Line | Pure Green (#4daf46) | Weiß-Grün | Weiß | Deep Green (#1c4b42) | Home Line (Silber) |
+| BKM Pro Line | Stone Grey (#494949) | Weiß-Grün | Weiß | Pure Green (#4daf46) | Pro Line (Gold) |
+| Verarbeitungsanleitung | Weiß (#ffffff) | Grau-Grün | Stone Grey (#494949) | Pure Green (#4daf46) | — |
 
-### 2. Bilder bereitstellen
+### Regeln
 
-Lege die Bilder unter `/assets/images/` ab und referenziere sie in der Content-Datei mit relativen Pfaden.
+- **Headline:** IMMER 2-zeilig, NIE 3-zeilig. Zeile 1 hat weniger Zeichen als Zeile 2.
+- **Fließtext:** MAXIMAL 2 Zeilen, NIE mehr.
+- **Logo-Kontrast:** Immer die Variante mit höchstem Kontrast zum Hintergrund.
+- **Text auf dunklem BG:** Weiß. Text auf weißem BG: Stone Grey.
+- **Key Visual:** IMMER das dreifarbige (on-light), NIE in Code nachbauen.
+- **Badge:** Nur bei Home Line und Pro Line. Linksbündig, zentriert auf Farbkasten-Unterkante.
 
-### 3. PDF generieren
+## Farbpalette (korrigierte Werte)
 
-```bash
-python3 scripts/build.py prospekt-fachbetrieb --content content/mein-projekt/content.json
-```
+| Name | Hex | Verwendung |
+|:---|:---|:---|
+| Deep Green | `#1c4b42` | BKM Mannesmann AG Hintergrund |
+| Transition Green | `#287d4b` | Fachbetriebe Hintergrund |
+| Pure Green | `#4daf46` | Home Line Hintergrund, Subheadline-Akzent |
+| Lime Green | `#b4e717` | Subheadline-Akzent (auf dunklem BG) |
+| Stone Grey | `#494949` | Pro Line Hintergrund, Text auf Weiß |
+| Weiß | `#ffffff` | Verarbeitungsanleitung Hintergrund |
 
-## Neues Template erstellen
+## Schriften
 
-1. Erstelle einen neuen Ordner unter `/templates/<template-name>/`
-2. Erstelle `template.html` mit Jinja2-Platzhaltern (`{{ variable_name }}`)
-3. Erstelle `template.css` für template-spezifische Stile
-4. Importiere das Design-System und die Komponenten im HTML-Head
-5. Erstelle eine passende Content-JSON-Datei unter `/content/<template-name>/`
+Die Schriftdateien liegen in `/assets/fonts/` (woff2-Format):
 
-## Hinweise
+| Datei | Schrift | Gewicht |
+|:---|:---|:---|
+| `Unbounded_900.woff2` | Unbounded Black | 900 – Headline + Subheadline |
+| `Unbounded_700.woff2` | Unbounded Bold | 700 |
+| `Unbounded_400.woff2` | Unbounded Regular | 400 |
+| `TT_Norms_Pro_Compact_Regular.woff2` | TT Norms Pro | 400 – Fließtext |
+| `TT_Norms_Pro_Bold.woff2` | TT Norms Pro Bold | 700 |
 
-- **Schriften:** Die Schriftdateien (Unbounded, TT Norms Pro) sind lizenziert und müssen separat in `/assets/fonts/` abgelegt werden.
-- **Bilder:** Platzhalter-Bilder können durch echte Bilder ersetzt werden, indem die Pfade in der Content-JSON angepasst werden.
-- **Print-Qualität:** Für Druckproduktion sollten Bilder mindestens 300 DPI haben.
-- **CMYK:** WeasyPrint generiert RGB-PDFs. Für CMYK-Konvertierung kann Ghostscript oder ein professionelles Preflight-Tool verwendet werden.
+## Nächste Schritte (TODO)
+
+- [ ] Innenseiten-Templates (Spalten, Zitat-Box, Produkt-Grid)
+- [ ] Rückseiten-Template
+- [ ] Content-Pipeline für verschiedene Broschüren-Typen
+- [ ] CMYK-Konvertierung für Druckproduktion
 
 ## Lizenz
 
