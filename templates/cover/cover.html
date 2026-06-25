@@ -63,17 +63,13 @@
       <img src="{{ hero_image_path }}" alt="{{ hero_image_alt }}">
     </div>
 
-    <!-- 16:9 FARBKASTEN (z-index: 2)
-         Breite: 210mm (vollflächig)
-         Höhe: 118.1mm (= 210/16*9)
+    <!-- L-FÖRMIGE FARBFLÄCHE (z-index: 2)
+         Besteht aus:
+         - 16:9 Farbkasten: 210mm × 118.1mm (vollflächig oben)
+         - 8×8mm Erweiterung: rechts unten, bündig an Unterkante
+         Zusammen eine einzige L-förmige Fläche.
          Farbe: Je nach Variante -->
     <div class="cover__color-box"></div>
-
-    <!-- 8x8mm FARBKASTEN (z-index: 2, gleiche Ebene wie 16:9-Kasten)
-         Position: Rechts bündig, Oberkante an Unterkante des 16:9-Kastens
-         Größe: 8mm × 8mm
-         Farbe: Gleiche Farbe wie der 16:9-Farbkasten -->
-    <div class="cover__corner-box"></div>
 
     <!-- TEXT-CONTENT CONTAINER (Flow-Layout)
          Position: X=18mm Y=18mm (Padding im Container)
