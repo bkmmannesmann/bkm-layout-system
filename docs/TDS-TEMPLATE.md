@@ -48,6 +48,7 @@ Die Metadaten `revision` und `issue_date` erscheinen im Kopf und in der Fußzeil
 | Line-Badge | `assets/images/badge-homeline.png` oder `assets/images/badge-proline.png` | Muss zur Produktlinie passen. |
 | Produktbild | `assets/images/products/<produkt-slug>.png` | PNG mit transparentem Hintergrund; im Release Pflicht. |
 | Schriften | `assets/fonts/` | Lokal bereitstellen; aufgrund der Lizenz nicht versioniert. |
+| Abschnittsicons | `templates/tds/icons/` | Kuratierte lokale Phosphor-Icons im Gewicht Bold; Quelle und Regeln: `bkm-design-system/docs/icon-system.md`. |
 
 ## Entwurf und Veröffentlichung
 

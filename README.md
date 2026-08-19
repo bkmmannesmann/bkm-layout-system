@@ -60,7 +60,7 @@ python3 scripts/build_tds.py \
   --release
 ```
 
-Die verbindlichen Regeln stehen in [`docs/REDAKTIONSSTANDARD.md`](docs/REDAKTIONSSTANDARD.md); die Arbeitsanleitung in [`docs/TDS-WORKFLOW.md`](docs/TDS-WORKFLOW.md). Das generierte PDF liegt anschließend im `/output/`-Verzeichnis.
+Die verbindlichen Regeln stehen in [`docs/REDAKTIONSSTANDARD.md`](docs/REDAKTIONSSTANDARD.md); die Arbeitsanleitung in [`docs/TDS-WORKFLOW.md`](docs/TDS-WORKFLOW.md). Die festgelegte zentrale Markenrevision, einschließlich der Phosphor-Bold-und-Fill-Icon-Regel, ist in [`BRAND-SOURCE.md`](BRAND-SOURCE.md) dokumentiert. Das generierte PDF liegt anschließend im `/output/`-Verzeichnis.
 
 ## Projektstruktur
 
@@ -113,6 +113,7 @@ bkm-layout-system/
 │   └── validate_tds.py           ← TDS-Validierung und Release-Sperren
 ├── output/                       ← Generierte PDFs (gitignored)
 │   └── covers/
+├── BRAND-SOURCE.md              ← Pin auf zentrale Marken- und Icon-Governance
 └── README.md
 ```
 
