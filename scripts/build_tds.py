@@ -16,13 +16,44 @@ import sys
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from markupsafe import Markup
 from weasyprint import HTML
 
 from validate_tds import validate_data
 
 ROOT_DIR = Path(__file__).parent.parent.resolve()
 TEMPLATE_DIR = ROOT_DIR / "templates" / "tds"
+ICON_DIR = TEMPLATE_DIR / "icons"
 OUTPUT_DIR = ROOT_DIR / "output"
+ICON_COLOR_PATTERN = re.compile(r"--tds-lime:\s*(#[0-9a-fA-F]{3,8})")
+
+
+def icon_color() -> str:
+    """Liest die Icon-Farbe aus der zentralen Markenvariable in template.css."""
+    match = ICON_COLOR_PATTERN.search((TEMPLATE_DIR / "template.css").read_text(encoding="utf-8"))
+    if not match:
+        raise SystemExit("FEHLER: --tds-lime ist in templates/tds/template.css nicht definiert.")
+    return match.group(1)
+
+
+def make_icon_renderer(color: str):
+    """Bindet ein Abschnittsicon mit gesetzter Füllfarbe ein.
+
+    WeasyPrint rendert eingebettete SVG mit einer eigenen Engine; die CSS des
+    Dokuments und damit auch `currentColor` erreichen den SVG-Baum nicht. Ohne
+    gesetztes fill-Attribut zeichnet WeasyPrint die Phosphor-Glyphen schwarz.
+    Die Farbe wird deshalb beim Rendern eingesetzt, damit die Icon-Dateien
+    unverändert dem Stand aus BRAND-SOURCE.md entsprechen.
+    """
+
+    def render_icon(name: str) -> Markup:
+        source = ICON_DIR / f"{name}.svg"
+        if not source.is_file():
+            return Markup("")
+        svg = source.read_text(encoding="utf-8")
+        return Markup(svg.replace('fill="currentColor"', f'fill="{color}"', 1))
+
+    return render_icon
 
 
 def page_count(pdf_path: Path) -> int | None:
@@ -77,6 +108,7 @@ def main() -> int:
         loader=FileSystemLoader(str(TEMPLATE_DIR)),
         autoescape=select_autoescape(("html", "xml")),
     )
+    environment.globals["icon"] = make_icon_renderer(icon_color())
     html = environment.get_template("template.html").render(**data)
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(output_path))
 
