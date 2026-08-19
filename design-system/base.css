@@ -10,110 +10,43 @@
    FONT-FACE DEFINITIONEN
    ────────────────────────────────────────────────────────── */
 
-/* Unbounded – Display-Schrift für Headlines */
+/* Unbounded – Display-Schrift für Headlines.
+   Quelle: bkm-design-system, assets/fonts/ (Revision siehe BRAND-SOURCE.md).
+   Die drei Dateien sind derselbe variable Font (Achse wght 200–900); die
+   Gewichtsangabe je @font-face instanziiert die benötigte Achsposition. */
 @font-face {
   font-family: 'Unbounded';
-  src: url('../assets/fonts/Unbounded-Black.ttf') format('truetype');
+  src: url('../assets/fonts/Unbounded_900.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Unbounded';
-  src: url('../assets/fonts/Unbounded-ExtraBold.ttf') format('truetype');
-  font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Unbounded';
-  src: url('../assets/fonts/Unbounded-Bold.ttf') format('truetype');
+  src: url('../assets/fonts/Unbounded_700.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Unbounded';
-  src: url('../assets/fonts/Unbounded-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Unbounded';
-  src: url('../assets/fonts/Unbounded-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Unbounded';
-  src: url('../assets/fonts/Unbounded-Regular.ttf') format('truetype');
+  src: url('../assets/fonts/Unbounded_400.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'Unbounded';
-  src: url('../assets/fonts/Unbounded-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Unbounded';
-  src: url('../assets/fonts/Unbounded-ExtraLight.ttf') format('truetype');
-  font-weight: 200;
-  font-style: normal;
-}
-
-/* TT Norms Pro – Fließtext-Schrift */
+/* TT Norms Pro – Fließtext-Schrift. Quelle wie oben. */
 @font-face {
   font-family: 'TT Norms Pro';
-  src: url('../assets/fonts/TT_Norms_Pro_Bold.otf') format('opentype');
+  src: url('../assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TT Norms Pro';
-  src: url('../assets/fonts/TT_Norms_Pro_Bold_Italic.otf') format('opentype');
-  font-weight: 700;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'TT Norms Pro';
-  src: url('../assets/fonts/TT_Norms_Pro_DemiBold.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'TT Norms Pro';
-  src: url('../assets/fonts/TT_Norms_Pro_Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'TT Norms Pro';
-  src: url('../assets/fonts/TT_Norms_Pro_Regular.otf') format('opentype');
+  src: url('../assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');
   font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'TT Norms Pro';
-  src: url('../assets/fonts/TT_Norms_Pro_Italic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'TT Norms Pro';
-  src: url('../assets/fonts/TT_Norms_Pro_Light.otf') format('opentype');
-  font-weight: 300;
   font-style: normal;
 }
 

@@ -17,8 +17,17 @@ Dieses Repository ermöglicht die automatisierte Generierung druckfertiger PDFs 
 ### Voraussetzungen
 
 ```bash
-pip3 install weasyprint jinja2
+pip3 install -r requirements.txt
 ```
+
+Die lizenzierten Markenschriften sind in diesem Repository nicht versioniert. Hole sie einmalig aus der in [`BRAND-SOURCE.md`](BRAND-SOURCE.md) festgelegten Revision des zentralen Design-Systems:
+
+```bash
+python3 scripts/sync_fonts.py          # lädt die fünf woff2 nach assets/fonts/
+python3 scripts/sync_fonts.py --check  # prüft nur den lokalen Bestand
+```
+
+Ohne diesen Schritt setzt WeasyPrint Ersatzschriften; Laufweite und Umbruch weichen dann ab und der TDS-Release-Build bricht ab.
 
 ### Cover generieren (alle 5 Varianten)
 
@@ -187,7 +196,7 @@ bkm-layout-system/
 
 ## Schriften
 
-Die Schriftdateien liegen in `/assets/fonts/` (woff2-Format):
+Die Schriftdateien liegen in `/assets/fonts/` (woff2-Format) und werden mit `python3 scripts/sync_fonts.py` aus dem zentralen Design-System geholt. Sie sind lizenziert und deshalb nicht Teil dieses Repositories.
 
 | Datei | Schrift | Gewicht |
 |:---|:---|:---|
@@ -196,6 +205,8 @@ Die Schriftdateien liegen in `/assets/fonts/` (woff2-Format):
 | `Unbounded_400.woff2` | Unbounded Regular | 400 |
 | `TT_Norms_Pro_Compact_Regular.woff2` | TT Norms Pro | 400 – Fließtext |
 | `TT_Norms_Pro_Bold.woff2` | TT Norms Pro Bold | 700 |
+
+Die drei Unbounded-Dateien sind derselbe variable Font (Achse `wght` 200–900); die Gewichtsangabe im jeweiligen `@font-face` instanziiert die benötigte Achsposition.
 
 ## Nächste Schritte (TODO)
 

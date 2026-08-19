@@ -76,7 +76,7 @@ python3 scripts/build_tds.py \
 
 ## Visuelle Schlussprüfung
 
-Nach einem erfolgreichen Release-Build öffnet die verantwortliche Person die PDF und prüft mindestens Produktbild, Umbruch, Tabellenzeilen, Markenbadge, Abschnittsicons, Erstelldatum und Seitenzählung. Die lizenzierten Schriften müssen lokal unter `assets/fonts/` verfügbar sein. Dieser Ordner ist absichtlich nicht versioniert; ohne die Schriften setzt WeasyPrint Ersatzschriften, wodurch Laufweite und Umbruch abweichen — der Release-Build bricht deshalb ab.
+Nach einem erfolgreichen Release-Build öffnet die verantwortliche Person die PDF und prüft mindestens Produktbild, Umbruch, Tabellenzeilen, Markenbadge, Abschnittsicons, Erstelldatum und Seitenzählung. Die lizenzierten Schriften müssen lokal unter `assets/fonts/` verfügbar sein. Dieser Ordner ist absichtlich nicht versioniert; hole die Dateien mit `python3 scripts/sync_fonts.py` aus der in `BRAND-SOURCE.md` festgelegten Revision des Design-Systems. Ohne die Schriften setzt WeasyPrint Ersatzschriften, wodurch Laufweite und Umbruch abweichen — der Release-Build bricht deshalb ab.
 
 ## Änderungen am System
 
