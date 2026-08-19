@@ -1,0 +1,199 @@
+{
+  "title": "Technisches Datenblatt – NovuSticks",
+  "product_name": "NovuSticks",
+  "product_subtitle": "Hydrophobierende Faserstäbchen für nachträgliche Horizontalsperren",
+  "product_short": "Horizontalsperre",
+  "product_line": "HOME LINE",
+  "line_badge": "../../assets/images/badge-homeline.png",
+  "product_image": "../../assets/images/products/novusticks.png",
+  "description": "NovuSticks sind wirkstoffgetränkte Faserstäbchen für die nachträgliche Horizontalsperre in feuchtem Mauerwerk. Der hydrophobierende Wirkstoff verteilt sich vom Stäbchen aus in die kapillaraktiven Bereiche des Mauerwerks. Entlang der Bohrreihe entsteht eine wasserabweisende Sperrzone gegen aufsteigende Feuchtigkeit.",
+  "advantages": [
+    "Saubere Anwendung ohne Flüssigkeit",
+    "Einfache Dosierung je Bohrloch",
+    "Planbarer Materialverbrauch je Meter",
+    "Ohne Injektionsgerät einsetzbar",
+    "An jede Wandstärke anpassbar",
+    "Gebrauchsfertig ohne Anmischen"
+  ],
+  "properties": [
+    "Hydrophobierend",
+    "Faserbasiert",
+    "Feste Stäbchenform",
+    "Wirkstoffgetränkt",
+    "Zuschneidbar"
+  ],
+  "technical_data_page1": [
+    {
+      "parameter": "Produktart",
+      "value": "hydrophobierende Faserstäbchen"
+    },
+    {
+      "parameter": "Wirkweise",
+      "value": "hydrophobierend"
+    },
+    {
+      "parameter": "Basis",
+      "value": "[ANGABE FEHLT: Wirkstoffbasis und Fasermaterial]",
+      "marker": true
+    },
+    {
+      "parameter": "Farbe",
+      "value": "weiß"
+    },
+    {
+      "parameter": "Geruch",
+      "value": "[ANGABE FEHLT: Geruch]",
+      "marker": true
+    },
+    {
+      "parameter": "Konsistenz",
+      "value": "festes Stäbchen"
+    },
+    {
+      "parameter": "Länge",
+      "value": "180 mm"
+    },
+    {
+      "parameter": "Durchmesser Stäbchen",
+      "value": "12 mm",
+      "note": "[ZU PRÜFEN: Die Quelle nennt nur „Durchmesser“; ob der Wert das Stäbchen oder das Bohrloch beschreibt, ist nicht belegt]"
+    },
+    {
+      "parameter": "Dichte",
+      "value": "[ANGABE FEHLT: Dichte mit Prüfnorm]",
+      "marker": true
+    },
+    {
+      "parameter": "pH-Wert",
+      "value": "[ANGABE FEHLT: pH-Wert]",
+      "marker": true
+    },
+    {
+      "parameter": "Wirkstoffgehalt",
+      "value": "[ANGABE FEHLT: Wirkstoffgehalt in Gew.-%]",
+      "marker": true
+    },
+    {
+      "parameter": "VOC-Gehalt",
+      "value": "[ANGABE FEHLT: VOC-Gehalt mit Bezugsnorm]",
+      "marker": true
+    }
+  ],
+  "technical_data_page2": [
+    {
+      "parameter": "Verarbeitungstemperatur",
+      "value": "[ANGABE FEHLT: Verarbeitungstemperatur für Umgebung und Untergrund]",
+      "marker": true
+    },
+    {
+      "parameter": "Verarbeitungsmethode",
+      "value": "Einsetzen in vorbereitete Bohrlöcher, drucklos und ohne Gerät"
+    },
+    {
+      "parameter": "Injektionsdruck",
+      "value": "entfällt, die Stäbchen werden drucklos eingesetzt"
+    },
+    {
+      "parameter": "Bohrlochdurchmesser",
+      "value": "[ANGABE FEHLT: Bohrlochdurchmesser]",
+      "marker": true
+    },
+    {
+      "parameter": "Bohrlochabstand",
+      "value": "120 mm"
+    },
+    {
+      "parameter": "Bohrtiefe",
+      "value": "[ANGABE FEHLT: Bohrtiefe; die Quelle nennt nur ein Versenken um ca. 10 mm hinter der Mauerwerksoberfläche]",
+      "marker": true
+    },
+    {
+      "parameter": "Verbrauch Horizontalsperre",
+      "condition": "je laufendem Meter",
+      "value": "Wandstärke in cm ÷ 3 = Stäbchen je Meter",
+      "note": "[ZU PRÜFEN: Bei 120 mm Bohrlochabstand liegen rund 8 Bohrlöcher je Meter. Die Reihe der Quelle ergibt 4 Stäbchen bei 12 cm und 16 Stäbchen bei 48 cm Wandstärke und passt damit zu keinem ganzzahligen Wert je Bohrloch]"
+    },
+    {
+      "parameter": "Verbrauch je Bohrloch",
+      "value": "[ANGABE FEHLT: Menge je Bohrloch]",
+      "marker": true
+    },
+    {
+      "parameter": "Geeigneter Durchfeuchtungsgrad",
+      "value": "[ANGABE FEHLT: geeigneter Durchfeuchtungsgrad mit Nachweis]",
+      "marker": true
+    },
+    {
+      "parameter": "Reaktionszeit",
+      "value": "[ANGABE FEHLT: Reaktionszeit bis zur wirksamen Sperrzone]",
+      "marker": true
+    },
+    {
+      "parameter": "WTA-Konformität",
+      "value": "[ZU PRÜFEN: „WTA zertifizierte Wirkung“ ohne Merkblatt- und Zertifikatsnummer]",
+      "marker": true
+    }
+  ],
+  "applications": "NovuSticks eignen sich für die nachträgliche Horizontalsperre in feuchtem mineralischem Mauerwerk, etwa Ziegel-, Kalksandstein-, Betonstein- und Natursteinmauerwerk mit durchgehender Lagerfuge. Du kannst sie einsetzen, wenn aufsteigende Feuchtigkeit auf eine fehlende oder nicht ausreichend wirksame Horizontalsperre zurückgeht. Je nach Bauteilsituation arbeitest du von innen oder von außen. Voraussetzung ist eine durchgehende, zugängliche und ausreichend feste Lagerfuge. Nicht geeignet sind Betonbauteile ohne durchgehende Fuge sowie Bauteile mit drückendem Wasser, mit seitlich eindringender Feuchtigkeit oder mit reiner Kondensationsfeuchte.",
+  "applications_note": "Die Lagerfuge muss erkennbar zusammenhängend sein: nicht stark ausgebrochen, nicht hohl liegend und nicht durch lose Bestandteile unterbrochen.",
+  "manual_reference": "Für eine detaillierte Erklärung zur Verwendung des Produktes nutze bitte unsere separate Verarbeitungsanleitung.",
+  "notes": "Stark geschädigte oder nicht zusammenhängende Fugen können die gleichmäßige Verteilung des Wirkstoffs beeinträchtigen. Halte die Bohrlöcher frei von Bohrmehl und losen Bestandteilen. Kürze die Stäbchen bei abweichenden Wandstärken mit einem Cuttermesser oder einer Schere auf die passende Länge. Versenke sie anschließend um etwa 10 mm hinter der Mauerwerksoberfläche, damit du die Bohrlöcher verschließen kannst. Verschließe die Bohrlöcher sofort nach dem Einbringen mit BKM FBM Füll- und Bohrlochmörtel. Trage bei der Verarbeitung geeignete Schutzhandschuhe.",
+  "sds_reference": "Gefahrenhinweise und Sicherheitsratschläge sind auf den Gebinden und im Sicherheitsdatenblatt zu finden. Das aktuelle Sicherheitsdatenblatt ist auf Anfrage erhältlich.",
+  "packaging": [
+    {
+      "size": "1 Päckchen mit 10 Stäbchen",
+      "article_number": "1413139-01"
+    },
+    {
+      "size": "1 Paket mit 50 Stäbchen",
+      "article_number": "144143-05"
+    },
+    {
+      "size": "1 Päckchen mit 500 Stäbchen",
+      "article_number": "144146-50"
+    }
+  ],
+  "system_components": [
+    {
+      "size": "BKM FBM Füll- und Bohrlochmörtel",
+      "article_number": "[ANGABE FEHLT: Gebindegröße und Artikelnummer]"
+    }
+  ],
+  "packaging_note": "[ZU PRÜFEN: Die Artikelnummern der Reihe haben unterschiedliche Stellenzahlen — 1413139-01 siebenstellig, 144143-05 und 144146-50 sechsstellig. Die 500er-Einheit trägt zudem dieselbe Gebindeart „Päckchen“ wie die 10er-Einheit]",
+  "storage": "Lagere die Stäbchen flach liegend, kühl und trocken in der ungeöffneten Originalverpackung und schütze sie vor Feuchtigkeit. Verschließe angebrochene Verpackungen gut und verbrauche sie zeitnah. In der ungeöffneten Originalverpackung ist das Produkt 12 Monate haltbar. [ANGABE FEHLT: Lagertemperaturbereich und Bezugspunkt der Haltbarkeit ab Herstellungsdatum]",
+  "disposal": "Die Entsorgung muss gemäß den örtlichen Vorschriften erfolgen. Restentleerte Verpackungen können der Wiederverwertung zugeführt werden.",
+  "legal": [
+    "Diese Hinweise basieren auf unserem aktuellen Wissensstand und Erfahrungen, unter der Voraussetzung, dass unsere Produkte ordnungsgemäß gelagert und eingesetzt werden. Aufgrund unterschiedlicher Materialien und Bedingungen können wir keine Garantie für das Arbeitsergebnis übernehmen. Eine Haftung unsererseits besteht nur bei nachweislichem Vorsatz oder grober Fahrlässigkeit.",
+    "Der Anwender ist verantwortlich, die Produkte auf deren Eignung für den vorgesehenen Zweck zu prüfen. Die jeweils aktuelle Produktspezifikation sollte berücksichtigt werden. Änderungen sind vorbehalten. Eventuelle Schutzrechte Dritter sind zu beachten.",
+    "Für die Qualität unserer Produkte bürgen wir gemäß unseren Verkaufs- und Lieferbedingungen. Eine Garantie für den Anwendungserfolg wird nicht übernommen. Unsere technischen Datenblätter bieten eine unverbindliche Beratung und erfordern schriftliche Zustimmung für Zusicherungen, die darüber hinausgehen."
+  ],
+  "final_note": "Achten Sie bitte auf das neueste Produktdatenblatt als verbindliche Informationsquelle.",
+  "review": {
+    "open_points": [
+      "Der Verbrauch widerspricht dem Bohrlochabstand: 120 mm ergeben rund 8 Bohrlöcher je Meter, die Quelle nennt aber 4 Stäbchen bei 12 cm Wandstärke. Die Menge je Bohrloch fehlt ganz (P05).",
+      "Bohrtiefe und Bohrlochdurchmesser fehlen. Die Quelle nennt nur „Durchmesser 12 mm“ ohne Zuordnung; ein 12-mm-Bohrloch wäre für ein 12-mm-Stäbchen nicht einbaubar.",
+      "„WTA zertifizierte Wirkung“ steht ohne Merkblatt- und Zertifikatsnummer und ist damit kein zulässiger Beleg (P07).",
+      "Wirkstoffbasis und Fasermaterial fehlen; die Wirkaussage „hydrophobierend“ ist dadurch nicht gedeckt (P08).",
+      "Dichte, pH-Wert, Wirkstoffgehalt in Gew.-% und VOC-Gehalt fehlen; alle vier sind Pflichtkennwerte nach Abschnitt 5.",
+      "Verarbeitungstemperatur, geeigneter Durchfeuchtungsgrad und Reaktionszeit fehlen (P09, P10).",
+      "Die Verbrauchsreihe endet bei 48 cm Wandstärke; für größere Wandstärken fehlt die Angabe.",
+      "Der Lagertemperaturbereich fehlt, und die Haltbarkeit von 12 Monaten ist ohne Bezug zum Herstellungsdatum angegeben.",
+      "Artikelnummern sechs- und siebenstellig gemischt (P12); zu BKM FBM fehlen Gebindegröße und Artikelnummer (P11)."
+    ],
+    "changes": [
+      "Den DOCX-Entwurf in die feste Blockreihenfolge überführt und die Kennwerte in der Pflichtreihenfolge der Produktgruppe sortiert.",
+      "Die vier Verbrauchszeilen als exakt lineare Reihe geprüft und nach Abschnitt 5.2 zu einer Formelzeile zusammengefasst; eine Verbrauchstabelle entfällt damit.",
+      "Die zusammengelaufene Quellzeile „Durchmesser / Bohrlochabstand“ in zwei getrennte Kennwertzeilen aufgelöst.",
+      "„WTA zertifizierte Wirkung“ aus den Vorteilen entfernt und als Kennwertzeile WTA-Konformität mit Marker geführt.",
+      "Die Vorteile auf drei bis sieben Wörter gekürzt und auf den Nutzen bezogen; die Eigenschaften bleiben rein technisch.",
+      "Die Voraussetzung an die Lagerfuge als eigenen Absatz unter die Anwendungsgebiete gestellt; die Ausschlüsse stehen geschlossen am Ende des Blocks.",
+      "Die Hinweise in die direkte Ansprache umgeschrieben, „ca. 1 cm“ als 10 mm geführt und BKM FBM als Systemkomponente in den Gebindeblock aufgenommen.",
+      "Die Produktbeschreibung auf 360 Zeichen ohne Verarbeitungsschritte gekürzt, „Sticks“ im Text durch „Stäbchen“ ersetzt und den Schluss-Hinweis auf den Fixbaustein zurückgesetzt."
+    ],
+    "protocol": "P01 nicht bestanden, sechs Pflichtkennwerte ohne Wert und Einheit · P02 bis P04 entfallen, kein Flächenverbrauch und keine Mischangaben · P05 nicht bestanden, 120 mm Abstand ergeben rund 8 Bohrlöcher je Meter gegenüber 4 bis 16 Stäbchen je Meter · P06 bestanden, die Reihe 4/8/12/16 zu 12/24/36/48 cm steigt monoton und ist exakt linear, Rechenregel dokumentiert · P07 nicht bestanden, WTA-Bezug ohne Nummer · P08 nicht bestanden, Wirkstoffbasis fehlt · P09 und P10 nicht prüfbar, Grenzwerte und Reaktionszeit fehlen · P11 nicht bestanden, BKM FBM ohne Artikelnummer · P12 nicht bestanden, Stellenzahlen gemischt."
+  },
+  "page_count": 3,
+  "logo": "../../assets/images/logos/logo-deepgreen-green.png",
+  "keyvisual": "../../assets/images/keyvisual-on-light.png",
+  "created_date": "19.08.2026"
+}
