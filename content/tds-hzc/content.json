@@ -1,0 +1,275 @@
+{
+  "title": "Technisches Datenblatt – BKM HZ-C",
+  "product_name": "BKM HZ-C",
+  "product_subtitle": "Injektionscreme gegen aufsteigende Feuchtigkeit",
+  "product_line": "PRO LINE",
+  "page_count": 3,
+  "logo": "../../assets/images/logos/logo-deepgreen-green.png",
+  "keyvisual": "../../assets/images/keyvisual-on-light.png",
+  "line_badge": "../../assets/images/badge-proline.png",
+  "product_image": "../../assets/images/products/hzc.png",
+  "description": "BKM HZ-C ist eine anwendungsfertige Injektionscreme auf Silan-Basis zur nachträglichen Abdichtung gegen kapillar aufsteigende Feuchtigkeit. Nach der Injektion dringt das Material durch Saugwirkung tief in die Kapillaren ein und imprägniert sie dauerhaft. Die Kapillarporen bleiben offen, das Mauerwerk oberhalb der Injektionsebene kann austrocknen.",
+  "advantages": [
+    "Sofort verarbeitungsfertig",
+    "Tiefenwirksamer Feuchteschutz",
+    "Exakt kalkulierbarer Verbrauch",
+    "Für Innenräume geeignet",
+    "Drucklos oder mit Pumpe",
+    "Kein Nachlaufen im Bohrloch"
+  ],
+  "properties": [
+    "Silanbasiert",
+    "Lösemittelfrei",
+    "Wirkstoffgehalt über 80 %",
+    "Alkalibeständig",
+    "Kapillarporen bleiben offen",
+    "Hydrophobierend",
+    "Emissionsarm"
+  ],
+  "technical_data_page1": [
+    {
+      "parameter": "Basis",
+      "value": "Silan"
+    },
+    {
+      "parameter": "Wirkweise",
+      "value": "hydrophobierend"
+    },
+    {
+      "parameter": "Farbe",
+      "value": "weißlich"
+    },
+    {
+      "parameter": "Geruch",
+      "value": "[ANGABE FEHLT: Geruch]",
+      "marker": true
+    },
+    {
+      "parameter": "Konsistenz",
+      "value": "pastös, cremeartig"
+    },
+    {
+      "parameter": "Dichte",
+      "value": "ca. 0,89 g/cm³",
+      "note": "[ANGABE FEHLT: Prüfnorm]"
+    },
+    {
+      "parameter": "Wirkstoffgehalt",
+      "value": "ca. 83 Gew.-%"
+    },
+    {
+      "parameter": "pH-Wert",
+      "value": "[ANGABE FEHLT: pH-Wert]",
+      "marker": true
+    },
+    {
+      "parameter": "VOC-Gehalt",
+      "value": "[ANGABE FEHLT: VOC-Gehalt — „lösemittelfrei“ und „emissionsarm“ sind ohne Wert nicht belegt]",
+      "marker": true
+    },
+    {
+      "parameter": "Verarbeitungstemperatur",
+      "value": "ab +5 °C",
+      "note": "[ANGABE FEHLT: obere Grenze]"
+    },
+    {
+      "parameter": "Verarbeitungsmethode",
+      "value": "Schlauchbeutelpresse, Injektionspistole, Injektionspumpe"
+    }
+  ],
+  "technical_data_page2": [
+    {
+      "parameter": "Injektionsdruck",
+      "value": "[ANGABE FEHLT: Druckbereich bei Verarbeitung mit Injektionspumpe]",
+      "marker": true
+    },
+    {
+      "parameter": "Bohrlochdurchmesser",
+      "value": "14 mm"
+    },
+    {
+      "parameter": "Bohrlochabstand",
+      "value": "10 cm",
+      "condition": "waagerechte Bohrung, seitlicher Abstand"
+    },
+    {
+      "parameter": "Bohrtiefe",
+      "value": "Wandstärke in cm − 5 cm",
+      "note": "[ZU PRÜFEN: erste Zeile der Verbrauchstabelle weicht ab – 10,0 cm Wandstärke ergibt 5,5 cm statt 5,0 cm]"
+    },
+    {
+      "parameter": "Verbrauch",
+      "value": "abhängig von der Wandstärke (siehe Verbrauchstabelle)"
+    },
+    {
+      "parameter": "Menge je Meter",
+      "value": "10 × Menge je Bohrloch (bei 10 cm Abstand)"
+    },
+    {
+      "parameter": "Geeigneter Durchfeuchtungsgrad",
+      "value": "bis 95 %",
+      "note": "[ZU PRÜFEN: Novusan nennt 99,9 %, HZ250 Pro 99,99 % – Abstufung ohne Prüfbezug]"
+    },
+    {
+      "parameter": "Reaktionszeit",
+      "value": "[ANGABE FEHLT: Reaktions- bzw. Wirkzeit]",
+      "marker": true
+    },
+    {
+      "parameter": "WTA-Konformität",
+      "value": "[ZU PRÜFEN: „WTA geprüfte Wirksamkeit“ ohne Merkblatt- und Zertifikatsnummer]",
+      "marker": true
+    }
+  ],
+  "matrix": {
+    "title": "Verbrauchstabelle",
+    "columns": [
+      "Wandstärke (cm)",
+      "Bohrtiefe (cm)",
+      "Menge je Bohrloch (ml)",
+      "Menge je Meter (ml)"
+    ],
+    "rows": [
+      [
+        "10,0",
+        "5,5",
+        "9",
+        "90"
+      ],
+      [
+        "12,5",
+        "7,5",
+        "13",
+        "130"
+      ],
+      [
+        "15,0",
+        "10,0",
+        "17",
+        "170"
+      ],
+      [
+        "17,5",
+        "12,5",
+        "21",
+        "210"
+      ],
+      [
+        "20,0",
+        "15,0",
+        "25",
+        "250"
+      ],
+      [
+        "24,5",
+        "19,5",
+        "33",
+        "330"
+      ],
+      [
+        "30,0",
+        "25,0",
+        "42",
+        "420"
+      ],
+      [
+        "33,0",
+        "28,0",
+        "47",
+        "470"
+      ],
+      [
+        "36,5",
+        "31,5",
+        "53",
+        "530"
+      ],
+      [
+        "40,0",
+        "35,0",
+        "59",
+        "590"
+      ],
+      [
+        "42,0",
+        "37,0",
+        "63",
+        "630"
+      ],
+      [
+        "44,0",
+        "39,0",
+        "66",
+        "660"
+      ],
+      [
+        "48,0",
+        "43,0",
+        "73",
+        "730"
+      ],
+      [
+        "50,0",
+        "45,0",
+        "76",
+        "760"
+      ]
+    ],
+    "note": "Bohrung 14 mm waagerecht, seitlicher Abstand 10 cm.",
+    "note_marker": "[ZU PRÜFEN: Rechenregel fehlt – die Menge je Bohrloch steigt von 0,9 auf 1,52 ml je cm Wandstärke, Zwischenwerte sind nicht ableitbar]"
+  },
+  "applications": "BKM HZ-C dient der Erstellung einer Horizontalsperre gegen kapillar aufsteigende Feuchtigkeit durch nachträgliche Injektion in mineralisches Mauerwerk. Das Mauerwerk muss mineralisch und saugfähig sein. Nicht geeignet ist das Produkt für Hochlochziegel und für Flächensperren gegen Querdurchfeuchtung — dafür ist Novusan vorgesehen.",
+  "manual_reference": "Für eine detaillierte Erklärung zur Verwendung des Produktes nutze bitte unsere separate Verarbeitungsanleitung.",
+  "notes": "Entferne vor der Injektion feuchte- und salzgeschädigte Putze im betroffenen Bereich und kratze lose oder beschädigte Fugen aus. Die Bohrlöcher werden horizontal in eine Lager- oder Mörtelfuge eingebracht und anschließend gründlich von Staub und Bohrmehl befreit. Achte auf eine fachgerechte Bohrlochanordnung; in Eckbereichen werden die Bohrungen leicht versetzt erstellt. Verschließe die Bohrlöcher nach der Injektion sofort mit BKM FBM. Damit das Mauerwerk oberhalb der Injektionsebene austrocknen kann, dürfen keine diffusionsdichten Beschichtungen vorhanden sein; gegebenenfalls sind zusätzliche Maßnahmen zur Trocknung oder Abdichtung erforderlich. Arbeitsgeräte und Werkzeuge reinigst du unmittelbar nach der Verarbeitung mit Wasser. Der tatsächliche Verbrauch richtet sich nach Untergrund, Fugenbild und Verarbeitungsmethode.",
+  "notes_on_page3": true,
+  "sds_reference": "Gefahrenhinweise und Sicherheitsratschläge sind auf den Gebinden und im Sicherheitsdatenblatt zu finden. Das aktuelle Sicherheitsdatenblatt ist auf Anfrage erhältlich.",
+  "packaging": [
+    {
+      "size": "600 ml Schlauchbeutel",
+      "article_number": "125137-01"
+    },
+    {
+      "size": "12 × 600 ml Schlauchbeutel, Paket",
+      "article_number": "124140-12"
+    },
+    {
+      "size": "10 l Kunststoffeimer",
+      "article_number": "13616-01"
+    }
+  ],
+  "packaging_note": "[ZU PRÜFEN: Artikelnummern der Reihe mit unterschiedlicher Stellenzahl – 13616-01 fünfstellig, 125137-01 und 124140-12 sechsstellig]",
+  "storage": "Kühl, trocken und frostfrei lagern, direkte Sonneneinstrahlung vermeiden. Die Lagertemperatur liegt zwischen +5 °C und +25 °C. In ungeöffneten Originalgebinden beträgt die Lagerfähigkeit etwa 12 Monate ab Herstellungsdatum. [ANGABE FEHLT: Umgang mit angebrochenen Gebinden]",
+  "disposal": "Die Entsorgung muss gemäß den örtlichen Vorschriften erfolgen. Restentleerte Verpackungen können der Wiederverwertung zugeführt werden.",
+  "legal": [
+    "Diese Hinweise basieren auf unserem aktuellen Wissensstand und Erfahrungen, unter der Voraussetzung, dass unsere Produkte ordnungsgemäß gelagert und eingesetzt werden. Aufgrund unterschiedlicher Materialien und Bedingungen können wir keine Garantie für das Arbeitsergebnis übernehmen. Eine Haftung unsererseits besteht nur bei nachweislichem Vorsatz oder grober Fahrlässigkeit.",
+    "Der Anwender ist verantwortlich, die Produkte auf deren Eignung für den vorgesehenen Zweck zu prüfen. Die jeweils aktuelle Produktspezifikation sollte berücksichtigt werden. Änderungen sind vorbehalten. Eventuelle Schutzrechte Dritter sind zu beachten.",
+    "Für die Qualität unserer Produkte bürgen wir gemäß unseren Verkaufs- und Lieferbedingungen. Eine Garantie für den Anwendungserfolg wird nicht übernommen. Unsere technischen Datenblätter bieten eine unverbindliche Beratung und erfordern schriftliche Zustimmung für Zusicherungen, die darüber hinausgehen."
+  ],
+  "final_note": "Achten Sie bitte auf das neueste Produktdatenblatt als verbindliche Informationsquelle.",
+  "review": {
+    "open_points": [
+      "Rechenregel der Verbrauchstabelle fehlt. Die Menge je Bohrloch steigt nicht linear (0,9 ml je cm bei 10 cm Wandstärke, 1,52 ml je cm bei 50 cm); Zwischenwerte sind nicht ableitbar. Nach Abschnitt 5.2 muss die Regel unter der Tabelle stehen.",
+      "Bohrtiefe folgt der Regel Wandstärke − 5 cm, mit Ausnahme der ersten Zeile (10,0 cm → 5,5 cm statt 5,0 cm). Zeile korrigieren oder Abweichung begründen.",
+      "„WTA geprüfte Wirksamkeit“ ohne Merkblatt- und Zertifikatsnummer. Nummern ergänzen oder Aussage streichen.",
+      "Durchfeuchtungsgrad bis 95 % ohne Prüfbezug, während Novusan 99,9 % und HZ250 Pro 99,99 % nennen. Abstufung belegen.",
+      "VOC-Gehalt fehlt; „lösemittelfrei“ und „emissionsarm“ sind ohne Wert nicht belegt.",
+      "Injektionsdruck fehlt, obwohl die Verarbeitung mit Injektionspumpe genannt wird. HZ250 Pro führt 0,5–6 bar.",
+      "Geruch, pH-Wert, Reaktionszeit und die obere Verarbeitungstemperatur fehlen; die Quelle nennt nur „ab +5 °C“.",
+      "Prüfnorm zur Dichte fehlt (ca. 0,89 g/cm³).",
+      "Artikelnummern der Reihe mit unterschiedlicher Stellenzahl: 13616-01 fünfstellig gegen 125137-01 und 124140-12 sechsstellig.",
+      "Umgang mit angebrochenen Gebinden ist nicht geregelt — bei einem Schlauchbeutel-Produkt praxisrelevant."
+    ],
+    "changes": [
+      "Elf gemischte Stichpunkte auf sechs Vorteile und sieben Eigenschaften getrennt; „Sehr gute Penetration bis in feinste Kapillarporen“ auf „Tiefenwirksamer Feuchteschutz“ gekürzt.",
+      "Bohrlochdurchmesser 14 mm und seitlicher Abstand 10 cm aus der Fußnote der Verbrauchstabelle in eigene Kennwertzeilen überführt.",
+      "Menge je Meter als Formelzeile nach Abschnitt 5.1 geführt: 10 × Menge je Bohrloch bei 10 cm Abstand.",
+      "Bohrtiefe als Formelzeile geführt, Abweichung der ersten Tabellenzeile markiert.",
+      "Produktname durchgehend BKM HZ-C; die Quelle wechselt zwischen „BKM HZ-C“ und „BKM HZ-C Creme“.",
+      "Gebindeblock als Liste nach Abschnitt 5.3, sortiert von Einzelgebinde über Paket zum Großgebinde."
+    ],
+    "protocol": "P01 Einheiten vollständig · P05 Menge je Meter = 10 × Menge je Bohrloch bei 10 cm Abstand, über alle 14 Zeilen bestätigt · P06 nicht bestanden, Rechenregel fehlt, siehe Punkt 1 · P07 keine Norm- oder Klassenangabe im Blatt · P08 nicht bestanden, WTA- und Durchfeuchtungsaussage ohne Nachweis · P09 Bohrlochabstand 10 cm in Tabelle, Kennwert und Fußnote übereinstimmend · P11 BKM FBM und Novusan werden verwiesen und existieren · P12 nicht bestanden, siehe Punkt 9."
+  },
+  "product_short": "Injektionscreme",
+  "revision": "1.0",
+  "issue_date": "19.08.2026"
+}

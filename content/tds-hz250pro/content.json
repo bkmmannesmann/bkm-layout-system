@@ -1,0 +1,184 @@
+{
+  "title": "Technisches Datenblatt – BKM HZ250 Pro",
+  "product_name": "BKM HZ250 Pro",
+  "product_subtitle": "Dauerhafte Kapillarsperre für die professionelle Anwendung",
+  "product_short": "Kapillarsperre",
+  "product_line": "PRO LINE",
+  "line_badge": "../../assets/images/badge-proline.png",
+  "product_image": "../../assets/images/products/hz250-pro.png",
+  "description": "BKM HZ250 Pro ist ein rein organisches, gebrauchsfertiges Injektionsmittel für mineralisches Mauerwerk. Es stellt eine horizontale oder flächige Barriere gegen aufsteigende Feuchtigkeit und Querdurchfeuchtung her und unterbricht den kapillaren Feuchtetransport gezielt. Die hohe Kriechfähigkeit verteilt das Material gleichmäßig.",
+  "advantages": [
+    "Gebrauchsfertig ohne Anmischen",
+    "Exakt kalkulierbarer Verbrauch",
+    "Gleichmäßige Selbstverteilung",
+    "Für Durchfeuchtung bis 99,99 %",
+    "Horizontal- und Flächensperre",
+    "Keine Hohlkammerverfüllung nötig"
+  ],
+  "properties": [
+    "Organisch",
+    "Hydrophobierend",
+    "pH-neutral",
+    "Alkalifrei",
+    "Hohe Kriechfähigkeit",
+    "VOC-frei",
+    "Kapillarporen bleiben offen"
+  ],
+  "technical_data_page1": [
+    {
+      "parameter": "Basis",
+      "value": "rein organisch",
+      "note": "[ANGABE FEHLT: Wirkstoffgruppe]"
+    },
+    {
+      "parameter": "Wirkweise",
+      "value": "hydrophobierend"
+    },
+    {
+      "parameter": "Farbe",
+      "value": "farblos"
+    },
+    {
+      "parameter": "Geruch",
+      "value": "schwach"
+    },
+    {
+      "parameter": "Konsistenz",
+      "value": "[ANGABE FEHLT: Konsistenz und Viskosität — „hohe Kriechfähigkeit“ ist ohne Wert nicht belegt]",
+      "marker": true
+    },
+    {
+      "parameter": "Dichte",
+      "value": "0,77 g/cm³ nach DIN 51757"
+    },
+    {
+      "parameter": "pH-Wert",
+      "value": "neutral, alkalifrei"
+    },
+    {
+      "parameter": "VOC-Gehalt",
+      "value": "0 % nach IE-Richtlinie 2010/75/EU"
+    },
+    {
+      "parameter": "Verarbeitungstemperatur",
+      "value": "min. +3 °C",
+      "note": "[ANGABE FEHLT: obere Grenze]"
+    },
+    {
+      "parameter": "Verarbeitungsmethode",
+      "value": "Injektionslanze im Niederdruckverfahren, Injektionsflasche drucklos"
+    },
+    {
+      "parameter": "Injektionsdruck",
+      "value": "0,5–6 bar"
+    }
+  ],
+  "technical_data_page2": [
+    {
+      "parameter": "Bohrlochdurchmesser",
+      "value": "[ANGABE FEHLT: Bohrlochdurchmesser — ohne ihn ist der Verbrauch nicht nachvollziehbar]",
+      "marker": true
+    },
+    {
+      "parameter": "Standard-Bohrlochabstand",
+      "condition": "für mineralisches Mauerwerk",
+      "value": "25 cm"
+    },
+    {
+      "parameter": "Empfohlener Bohrlochabstand",
+      "condition": "nach WTA-Vorgabe",
+      "value": "12,5 cm"
+    },
+    {
+      "parameter": "Halbierter Bohrlochabstand",
+      "condition": "bei Beton, Natur- und Bruchstein, Kalksandstein und Porenbeton",
+      "value": "12,5 cm",
+      "note": "[ZU PRÜFEN: identisch mit dem WTA-Wert — zwei Zeilen mit demselben Ergebnis]"
+    },
+    {
+      "parameter": "Verbrauch Horizontalsperre",
+      "condition": "bei 25 cm Bohrlochabstand",
+      "value": "14 × Wandstärke in cm = ml je Bohrloch"
+    },
+    {
+      "parameter": "Verbrauch Horizontalsperre",
+      "condition": "bei 12,5 cm Bohrlochabstand",
+      "value": "7 × Wandstärke in cm = ml je Bohrloch"
+    },
+    {
+      "parameter": "Verbrauch Flächensperre",
+      "condition": "bei 25 cm Bohrlochabstand",
+      "value": "10 × Wandstärke in cm = ml je Bohrloch"
+    },
+    {
+      "parameter": "Verbrauch Flächensperre",
+      "condition": "bei 12,5 cm Bohrlochabstand",
+      "value": "5 × Wandstärke in cm = ml je Bohrloch"
+    },
+    {
+      "parameter": "Geeigneter Durchfeuchtungsgrad",
+      "value": "bis 99,99 %",
+      "note": "[ZU PRÜFEN: Novusan nennt 99,9 %, HZ-C 95 % — Abstufung ohne Prüfbezug]"
+    },
+    {
+      "parameter": "Reaktionszeit",
+      "value": "[ANGABE FEHLT: Reaktions- bzw. Wirkzeit]",
+      "marker": true
+    },
+    {
+      "parameter": "WTA-Konformität",
+      "value": "[ZU PRÜFEN: WTA-Richtlinie wird zitiert, Merkblatt- und Zertifikatsnummer fehlen]",
+      "marker": true
+    }
+  ],
+  "applications": "BKM HZ250 Pro eignet sich für Ziegel- und Klinkermauerwerk, Naturstein- und Bruchsteinmauerwerk, Sandsteinmauerwerk, Kalksandstein, Porenbeton sowie Gitter- und Hohlkammersteine. Du kannst es zur Herstellung einer Horizontalsperre gegen aufsteigende Feuchtigkeit sowie als Flächensperre gegen Querdurchfeuchtung einsetzen. Nicht geeignet ist das Produkt für WU-Beton.",
+  "notes": "Wähle den Bohrlochabstand so, dass mindestens eine Bohrung je Stein erfolgt. Bei Horizontalsperren nach WTA-Richtlinie ist ein maximaler Bohrlochabstand von 12,5 cm einzuhalten; Flächensperren fallen nicht unter diese Richtlinie. Flächige Abdichtungen gegen kapillare Querdurchfeuchtung in Hohlkammersteinmauerwerk sind nur bei durchgehenden und intakten Lagerfugen oder gedeckelten Hohlkammersteinen möglich. Bei zweischaligem Mauerwerk kann nur die erste Mauerwerksschale injiziert werden — prüfe das vor Beginn. Verschließe die Bohrlöcher unmittelbar nach der Injektion mit BKM FBM. Alte Putze und Anstriche müssen nach der Injektion entfernt werden; vor neuen Putzen oder Anstrichen ist BKM MHG MultiHaftGrund als Grundierung erforderlich. Diffusionsdichte Putze und Farben sind ungeeignet. Die Trocknungsdauer hängt vom Durchfeuchtungsgrad und von ausreichender Be- und Entlüftung ab; Trocknungsgeräte kannst du direkt nach der Injektion einsetzen. Bis zum Erreichen der Ausgleichsfeuchte können Salzausblühungen an der Oberfläche auftreten.",
+  "packaging": [
+    {
+      "size": "25 l Kanister",
+      "article_number": "174276-01"
+    },
+    {
+      "size": "1.000 l IBC",
+      "article_number": "174355-01"
+    }
+  ],
+  "storage": "Frostfrei lagern. In ungeöffneten Originalgebinden beträgt die Haltbarkeit 12 Monate ab Herstellungsdatum. Das Produkt reagiert mit Luftfeuchtigkeit; angebrochene Gebinde dürfen nicht über längere Zeit mit Luft oder Wasser in Kontakt kommen. [ANGABE FEHLT: Lagertemperaturbereich]",
+  "review": {
+    "open_points": [
+      "Zwei Zeilen nennen 12,5 cm: „empfohlen nach WTA-Vorgabe“ und „halbiert bei Beton, Natur- und Bruchstein“. Entweder zu einer Zeile zusammenführen oder die zweite als abweichenden Wert belegen.",
+      "Bohrlochdurchmesser fehlt vollständig. Ohne ihn sind die vier Verbrauchsformeln nicht nachvollziehbar; HZ-C führt 14 mm.",
+      "Faktor Flächensperre 10 gegen Horizontalsperre 14 bei gleichem Abstand — die Differenz ist nicht begründet.",
+      "Konsistenz und Viskosität fehlen, obwohl „hohe Kriechfähigkeit“ und „hohe Selbstverteilung“ als Eigenschaften geführt werden.",
+      "Obere Verarbeitungstemperatur fehlt; die Quelle nennt nur „min. +3 °C“.",
+      "Reaktions- bzw. Wirkzeit fehlt.",
+      "WTA-Richtlinie wird zweimal zitiert, Merkblatt- und Zertifikatsnummer fehlen.",
+      "Durchfeuchtungsgrad bis 99,99 % ohne Prüfbezug, während HZ-C 95 % und Novusan 99,9 % nennen.",
+      "Wirkstoffgruppe fehlt; „rein organisch“ ist keine Basisangabe.",
+      "Lagertemperaturbereich fehlt; „frostfrei“ ist keine Angabe."
+    ],
+    "changes": [
+      "Dreizehn gemischte Stichpunkte auf sechs Vorteile und sieben Eigenschaften getrennt; mehrzeilige Punkte auf drei bis fünf Wörter gekürzt.",
+      "Produktname durchgehend BKM HZ250 Pro; die Quelle wechselt zwischen „BKM HZ250 Pro“ und „BKM HZ 250 Pro“.",
+      "Vier Verbrauchsangaben als Formelzeilen nach Abschnitt 5.1 geführt. Alle Reihen sind linear, daher keine Verbrauchstabelle nach 5.2.",
+      "Drei Bohrlochabstände als Bedingungszeilen nach Abschnitt 5.1 geführt.",
+      "Verarbeitungsmethode und Injektionsdruck aus den Hinweisen in eigene Kennwertzeilen überführt.",
+      "„Kein Verstopfen der Kapillarporen“ auf „Kapillarporen bleiben offen“ vereinheitlicht — gleiche Formulierung wie bei HZ-C."
+    ],
+    "protocol": "P01 Einheiten vollständig · P05 Faktoren halbieren sich mit dem Bohrlochabstand (14→7, 10→5), in sich schlüssig · P06 bestanden, alle vier Reihen linear, daher Formelzeile statt Matrix · P07 Dichte mit Prüfnorm DIN 51757, VOC mit IE-Richtlinie 2010/75/EU belegt · P08 nicht bestanden, WTA- und Durchfeuchtungsaussage ohne Nachweis · P09 nicht bestanden, zwei Bohrlochabstandszeilen mit demselben Wert · P11 BKM FBM und BKM MHG MultiHaftGrund werden verwiesen und existieren · P12 beide Artikelnummern sechsstellig, Format konsistent."
+  },
+  "page_count": 3,
+  "logo": "../../assets/images/logos/logo-deepgreen-green.png",
+  "keyvisual": "../../assets/images/keyvisual-on-light.png",
+  "manual_reference": "Für eine detaillierte Erklärung zur Verwendung des Produktes nutze bitte unsere separate Verarbeitungsanleitung.",
+  "sds_reference": "Gefahrenhinweise und Sicherheitsratschläge sind auf den Gebinden und im Sicherheitsdatenblatt zu finden. Das aktuelle Sicherheitsdatenblatt ist auf Anfrage erhältlich.",
+  "disposal": "Die Entsorgung muss gemäß den örtlichen Vorschriften erfolgen. Restentleerte Verpackungen können der Wiederverwertung zugeführt werden.",
+  "legal": [
+    "Diese Hinweise basieren auf unserem aktuellen Wissensstand und Erfahrungen, unter der Voraussetzung, dass unsere Produkte ordnungsgemäß gelagert und eingesetzt werden. Aufgrund unterschiedlicher Materialien und Bedingungen können wir keine Garantie für das Arbeitsergebnis übernehmen. Eine Haftung unsererseits besteht nur bei nachweislichem Vorsatz oder grober Fahrlässigkeit.",
+    "Der Anwender ist verantwortlich, die Produkte auf deren Eignung für den vorgesehenen Zweck zu prüfen. Die jeweils aktuelle Produktspezifikation sollte berücksichtigt werden. Änderungen sind vorbehalten. Eventuelle Schutzrechte Dritter sind zu beachten.",
+    "Für die Qualität unserer Produkte bürgen wir gemäß unseren Verkaufs- und Lieferbedingungen. Eine Garantie für den Anwendungserfolg wird nicht übernommen. Unsere technischen Datenblätter bieten eine unverbindliche Beratung und erfordern schriftliche Zustimmung für Zusicherungen, die darüber hinausgehen."
+  ],
+  "final_note": "Achten Sie bitte auf das neueste Produktdatenblatt als verbindliche Informationsquelle.",
+  "revision": "1.0",
+  "issue_date": "19.08.2026"
+}

@@ -1,0 +1,190 @@
+{
+  "title": "Technisches Datenblatt – BKM KS",
+  "product_name": "BKM KS",
+  "product_subtitle": "Mineralische Kalziumsilikatplatte zur Feuchteregulierung",
+  "product_short": "Kalziumsilikatplatte",
+  "product_line": "PRO LINE",
+  "line_badge": "../../assets/images/badge-proline.png",
+  "product_image": "../../assets/images/products/ks.png",
+  "description": "BKM KS ist eine weiße, mineralische Kalziumsilikatplatte für den Feuchtehaushalt an Wänden und Decken. Kapillaraktiv und diffusionsoffen nimmt sie erhöhte Raumluftfeuchte auf und gibt sie bei günstigeren Bedingungen wieder ab. Die hohe Alkalität unterstützt die Vorbeugung von Schimmelbildung.",
+  "advantages": [
+    "Reguliert die Raumluftfeuchte",
+    "Reduziert Kondenswasserbildung",
+    "Unterstützt Schimmelvorbeugung",
+    "Verbessert das Raumklima",
+    "Für Wände und Decken",
+    "Steigert die Energieeffizienz",
+    "Keine Grundierung nötig"
+  ],
+  "properties": [
+    "Zellstoffverstärktes Kalziumsilikat",
+    "Kapillaraktiv",
+    "Diffusionsoffen",
+    "Wärmedämmend",
+    "Hoch alkalisch",
+    "Mikroporöse Struktur",
+    "Nicht brennbar, Klasse A1"
+  ],
+  "technical_data_page1": [
+    {
+      "parameter": "Material",
+      "value": "zellstoffverstärktes Kalziumsilikat"
+    },
+    {
+      "parameter": "Farbton",
+      "value": "weiß"
+    },
+    {
+      "parameter": "Format",
+      "value": "1000 × 500 mm, Stärken 25 / 30 / 50 mm (siehe Formattabelle)"
+    },
+    {
+      "parameter": "Baustoffklasse",
+      "value": "A1 nach EN 13501-1"
+    },
+    {
+      "parameter": "Rohdichtebereich",
+      "value": "200–245 kg/m³"
+    },
+    {
+      "parameter": "Druckfestigkeit",
+      "value": "≥ 1.500 kPa",
+      "note": "[ANGABE FEHLT: Prüfnorm]"
+    },
+    {
+      "parameter": "pH-Wert",
+      "value": "ca. 10"
+    },
+    {
+      "parameter": "Wasserdampfdiffusionswiderstandszahl µ",
+      "value": "3"
+    },
+    {
+      "parameter": "Wärmeleitfähigkeit λD",
+      "value": "0,075 W/(m·K)"
+    },
+    {
+      "parameter": "Wärmeleitfähigkeit Bemessungswert",
+      "value": "0,079 W/(m·K)"
+    }
+  ],
+  "technical_data_page2": [
+    {
+      "parameter": "Kapillare Wasseraufnahme",
+      "value": "[ANGABE FEHLT: Wasseraufnahmekoeffizient — „kapillaraktiv“ ist die Kernaussage des Produkts und ohne Wert nicht belegt]",
+      "marker": true
+    },
+    {
+      "parameter": "Flächengewicht",
+      "value": "[ANGABE FEHLT: Gewicht je Platte oder je m² — für Transport und Verklebung relevant]",
+      "marker": true
+    },
+    {
+      "parameter": "Verarbeitungstemperatur",
+      "value": "[ANGABE FEHLT: Verarbeitungstemperatur]",
+      "marker": true
+    },
+    {
+      "parameter": "Kleberverbrauch",
+      "value": "[ANGABE FEHLT: Verbrauch BKM KS-K je m² bei vollflächiger Verklebung]",
+      "marker": true
+    }
+  ],
+  "matrix": {
+    "title": "Formattabelle",
+    "columns": [
+      "Variante",
+      "Format",
+      "Stärke (mm)",
+      "Art.-Nr."
+    ],
+    "rows": [
+      [
+        "BKM KS Kalziumsilikatplatte",
+        "1000 × 500 mm",
+        "25",
+        "23898137-01"
+      ],
+      [
+        "BKM KS Kalziumsilikatplatte",
+        "1000 × 500 mm",
+        "30",
+        "23938137-01"
+      ],
+      [
+        "BKM KS Kalziumsilikatplatte",
+        "1000 × 500 mm",
+        "50",
+        "232378131-01"
+      ],
+      [
+        "BKM KS-L Laibungsplatte",
+        "250 × 500 mm",
+        "15",
+        "23904141-01"
+      ],
+      [
+        "BKM KS-W Wandanschlusskeil",
+        "625 × 250 mm",
+        "25 → 3",
+        "2392416-01"
+      ]
+    ],
+    "note": "Der Wandanschlusskeil verjüngt sich keilförmig von 25 mm auf 3 mm.",
+    "note_marker": "[ZU PRÜFEN: Artikelnummern mit unterschiedlicher Stellenzahl — 2392416-01 siebenstellig, 232378131-01 neunstellig, die übrigen achtstellig]"
+  },
+  "applications": "BKM KS eignet sich für Wand- und Deckenflächen im Innenbereich zur Feuchteregulierung, zur Reduzierung von Kondenswasserbildung, zur Wärmedämmung und zur Unterstützung der Schimmelvorbeugung. Geeignete Untergründe sind mineralisch: Beton, Leichtbeton, Ziegelmauerwerk, Kalksandstein sowie Kalkzement- und Zementputze. Besonders sinnvoll ist der Einsatz auf Innenflächen mit erhöhter Feuchtebelastung oder ungünstigem Oberflächenklima. Nicht geeignet ist das Produkt für Gipsputze und Gipskartonplatten sowie für Untergründe mit nicht beseitigten Baumängeln, eindringender Feuchtigkeit oder aktivem Schimmelbefall.",
+  "notes": "Der Untergrund muss sauber, fest, tragfähig, spannungsfrei und frei von haftungsmindernden Stoffen sein. Entferne Tapeten vollständig, bevor du die Platten verarbeitest. Vorhandene Feuchteursachen, bauliche Mängel und Schimmelbefall sind vorher fachgerecht zu beseitigen. Bereite unebene Untergründe so vor, dass eine vollflächige Verklebung möglich ist. Die raumseitige Plattenoberfläche ist vorgrundiert; auf der Kleberseite ist keine Grundierung notwendig. Kreuzfugen sind unzulässig. Entkopple den Kontakt zu angrenzenden Bauteilen wie Decke, Wand und Boden umlaufend mit einem Kompriband — es gleicht Bauteilbewegungen und Unebenheiten aus und verhindert offene Randfugen. Nachträgliche Befestigungen müssen bis ins tragende Mauerwerk verankert werden; Beschädigungen durch Nägel oder Dübel können die Funktion beeinträchtigen. Beim Zuschneiden entsteht Staub, beachte geeignete Schutzmaßnahmen.",
+  "packaging": [],
+  "system_components": [
+    {
+      "size": "BKM KS-K",
+      "article_number": "Kleber"
+    },
+    {
+      "size": "BKM KS-S",
+      "article_number": "Spachtel"
+    },
+    {
+      "size": "BKM KS-G",
+      "article_number": "Gewebe"
+    }
+  ],
+  "packaging_note": "[ANGABE FEHLT: Artikelnummern und Gebindegrößen für KS-K, KS-S und KS-G]",
+  "storage": "Trocken und vor Feuchtigkeit geschützt lagern. Unter diesen Bedingungen ist die Haltbarkeit unbegrenzt.",
+  "review": {
+    "open_points": [
+      "Wasseraufnahmekoeffizient fehlt. „Kapillaraktiv“ ist die zentrale Produktaussage und ohne Wert nicht belegt.",
+      "Artikelnummern mit drei verschiedenen Stellenzahlen: 2392416-01 siebenstellig, 232378131-01 neunstellig, die übrigen achtstellig. Sehr wahrscheinlich Tippfehler in der Quelle.",
+      "Gewicht je Platte oder je m² fehlt — für Transport, Verklebung und Statik relevant.",
+      "Verarbeitungstemperatur fehlt.",
+      "Kleberverbrauch je m² fehlt, obwohl vollflächige Verklebung vorgeschrieben ist.",
+      "Artikelnummern und Gebindegrößen der Systemkomponenten KS-K, KS-S und KS-G fehlen vollständig.",
+      "Prüfnorm zur Druckfestigkeit fehlt (≥ 1.500 kPa).",
+      "Die Quelle nennt zwei Wärmeleitfähigkeiten (λD 0,075 und Bemessungswert 0,079) ohne Angabe der zugrunde liegenden Norm."
+    ],
+    "changes": [
+      "Vierzehn gemischte Stichpunkte auf sieben Vorteile und sieben Eigenschaften getrennt: Wirkung und Nutzen unter Vorteile, Materialeigenschaften unter Eigenschaften.",
+      "Fünf Maßangaben zu einer Formattabelle nach Abschnitt 5.3 zusammengefasst; die Datentabelle trägt nur noch einen Verweis.",
+      "Die Gebindeliste der Quelle enthielt Format und Artikelnummer gemischt — beides steht jetzt in der Formattabelle, sortiert von der Hauptplatte zu den Zubehörformaten.",
+      "Systemkomponenten als eigener Block nach Abschnitt 5.3 geführt, getrennt von den Maßvarianten.",
+      "Produktbeschreibung von zwei Absätzen auf 291 Zeichen gekürzt; die Systemzugehörigkeit steht in den Anwendungsgebieten und im Komponentenblock.",
+      "Zwei getrennte Untergrundabschnitte in den Anwendungsgebieten zusammengeführt."
+    ],
+    "protocol": "P01 Einheiten vollständig · P04 Rohdichte 200–245 kg/m³ und λ 0,075 W/(m·K) sind für Kalziumsilikat plausibel · P06 entfällt, keine verbrauchsabhängige Reihe · P07 Baustoffklasse A1 mit EN 13501-1 belegt, Druckfestigkeit und λ ohne Norm · P08 keine unbelegte Prüfaussage außer der Kapillaraktivität, siehe Punkt 1 · P11 KS-K, KS-S, KS-G, KS-L und KS-W werden verwiesen und existieren · P12 nicht bestanden, drei verschiedene Stellenzahlen, siehe Punkt 2."
+  },
+  "page_count": 3,
+  "logo": "../../assets/images/logos/logo-deepgreen-green.png",
+  "keyvisual": "../../assets/images/keyvisual-on-light.png",
+  "manual_reference": "Für eine detaillierte Erklärung zur Verwendung des Produktes nutze bitte unsere separate Verarbeitungsanleitung.",
+  "sds_reference": "Gefahrenhinweise und Sicherheitsratschläge sind auf den Gebinden und im Sicherheitsdatenblatt zu finden. Das aktuelle Sicherheitsdatenblatt ist auf Anfrage erhältlich.",
+  "disposal": "Die Entsorgung muss gemäß den örtlichen Vorschriften erfolgen. Restentleerte Verpackungen können der Wiederverwertung zugeführt werden.",
+  "legal": [
+    "Diese Hinweise basieren auf unserem aktuellen Wissensstand und Erfahrungen, unter der Voraussetzung, dass unsere Produkte ordnungsgemäß gelagert und eingesetzt werden. Aufgrund unterschiedlicher Materialien und Bedingungen können wir keine Garantie für das Arbeitsergebnis übernehmen. Eine Haftung unsererseits besteht nur bei nachweislichem Vorsatz oder grober Fahrlässigkeit.",
+    "Der Anwender ist verantwortlich, die Produkte auf deren Eignung für den vorgesehenen Zweck zu prüfen. Die jeweils aktuelle Produktspezifikation sollte berücksichtigt werden. Änderungen sind vorbehalten. Eventuelle Schutzrechte Dritter sind zu beachten.",
+    "Für die Qualität unserer Produkte bürgen wir gemäß unseren Verkaufs- und Lieferbedingungen. Eine Garantie für den Anwendungserfolg wird nicht übernommen. Unsere technischen Datenblätter bieten eine unverbindliche Beratung und erfordern schriftliche Zustimmung für Zusicherungen, die darüber hinausgehen."
+  ],
+  "final_note": "Achten Sie bitte auf das neueste Produktdatenblatt als verbindliche Informationsquelle.",
+  "revision": "1.0",
+  "issue_date": "19.08.2026"
+}

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="../../design-system/variables.css">
+  <link rel="stylesheet" href="../../design-system/base.css">
+  <link rel="stylesheet" href="../../components/components.css">
+  <link rel="stylesheet" href="template.css">
+</head>
+<body>
+
+  <!-- SEITE 1 – Kopf, Vorteile, Eigenschaften und Beginn der technischen Daten -->
+  <section class="tds-page">
+    <header class="tds-head">
+      <div class="tds-head__row">
+        <img class="tds-head__logo" src="{{ logo }}" alt="BKM Mannesmann">
+        <div class="tds-head__doc">Technisches Datenblatt<div class="tds-head__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div></div>
+      </div>
+      <img class="tds-head__keyvisual" src="{{ keyvisual }}" alt="">
+      <div class="tds-head__main">
+        <div class="tds-head__intro">
+          <h1 class="tds-title">{{ product_name }}</h1>
+          <p class="tds-subtitle">{{ product_subtitle }}</p>
+          <img class="tds-badge" src="{{ line_badge }}" alt="{{ product_line }}">
+          <p class="tds-lead">{{ description }}</p>
+        </div>
+        <div class="tds-head__image"><img src="{{ product_image }}" alt="{{ product_name }}"></div>
+      </div>
+    </header>
+    <div class="tds-band" aria-hidden="true"></div>
+
+    <div class="tds-body">
+      <div class="tds-cols">
+        <div>
+          <div class="tds-section-head"><span class="tds-icon">{% include 'icons/check.svg' ignore missing %}</span><h2 class="tds-section-title">Vorteile</h2></div>
+          <ul class="tds-list">{% for item in advantages %}<li>{{ item }}</li>{% endfor %}</ul>
+        </div>
+        <div>
+          <div class="tds-section-head"><span class="tds-icon">{% include 'icons/chevron.svg' ignore missing %}</span><h2 class="tds-section-title">Eigenschaften</h2></div>
+          <ul class="tds-list">{% for item in properties %}<li>{{ item }}</li>{% endfor %}</ul>
+        </div>
+      </div>
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/rows.svg' ignore missing %}</span><h2 class="tds-section-title">Technische Daten</h2></div>
+      <table class="tds-table"><tbody>
+        {% for r in technical_data_page1 %}<tr><th>{{ r.parameter }}{% if r.condition %}<small>{{ r.condition }}</small>{% endif %}</th><td>{% if r.marker %}<span class="tds-marker">{{ r.value }}</span>{% else %}{{ r.value }}{% if r.note %} <span class="tds-marker">{{ r.note }}</span>{% endif %}{% endif %}</td></tr>{% endfor %}
+      </tbody></table>
+    </div>
+    <footer class="tds-foot">
+      <div class="tds-foot__copy">Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany<br>Phone: +49 (0) 2307 99 034 0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.</div>
+      <div class="tds-foot__right"><div class="tds-foot__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div><div class="tds-foot__page">1/{{ page_count }}</div></div>
+    </footer>
+  </section>
+
+  <!-- SEITE 2 – Rest der Daten, Matrix, Anwendungsgebiete und Hinweise -->
+  <section class="tds-page">
+    <div class="tds-body tds-body--full">
+      <div class="tds-runhead"><div class="tds-runhead__doc">Technisches Datenblatt<div class="tds-runhead__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/rows.svg' ignore missing %}</span><h2 class="tds-section-title">Technische Daten</h2></div>
+      <table class="tds-table"><tbody>
+        {% for r in technical_data_page2 %}<tr><th>{{ r.parameter }}{% if r.condition %}<small>{{ r.condition }}</small>{% endif %}</th><td>{% if r.marker %}<span class="tds-marker">{{ r.value }}</span>{% else %}{{ r.value }}{% if r.note %} <span class="tds-marker">{{ r.note }}</span>{% endif %}{% endif %}</td></tr>{% endfor %}
+      </tbody></table>
+      {% if matrix %}
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/rows.svg' ignore missing %}</span><h2 class="tds-section-title">{{ matrix.title }}</h2></div>
+      <table class="tds-matrix"><thead><tr>{% for col in matrix.columns %}<th{% if not loop.first %} class="num"{% endif %}>{{ col }}</th>{% endfor %}</tr></thead><tbody>{% for r in matrix.rows %}<tr>{% for cell in r %}<td{% if not loop.first %} class="num"{% endif %}>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody></table>
+      <p class="tds-matrix-note">{{ matrix.note }}{% if matrix.note_marker %} <span class="tds-marker">{{ matrix.note_marker }}</span>{% endif %}</p>
+      {% endif %}
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/home.svg' ignore missing %}</span><h2 class="tds-section-title">Anwendungsgebiete</h2></div>
+      <p class="tds-text">{{ applications }}</p>{% if applications_note %}<p class="tds-text tds-text--note">{{ applications_note }}</p>{% endif %}<p class="tds-text tds-text--accent">{{ manual_reference }}</p>
+      {% if not notes_on_page3 %}
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/alert.svg' ignore missing %}</span><h2 class="tds-section-title">Hinweise</h2></div>
+      <p class="tds-text">{{ notes }}</p><p class="tds-text tds-text--accent">{{ sds_reference }}</p>
+      {% endif %}
+    </div>
+    <footer class="tds-foot">
+      <div class="tds-foot__copy">Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany<br>Phone: +49 (0) 2307 99 034 0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.</div>
+      <div class="tds-foot__right"><div class="tds-foot__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div><div class="tds-foot__page">2/{{ page_count }}</div></div>
+    </footer>
+  </section>
+
+  <!-- SEITE 3 – Gebinde, Lagerung, Entsorgung und rechtliche Hinweise -->
+  <section class="tds-page">
+    <div class="tds-body tds-body--full">
+      <div class="tds-runhead"><div class="tds-runhead__doc">Technisches Datenblatt<div class="tds-runhead__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/box.svg' ignore missing %}</span><h2 class="tds-section-title">Verpackungseinheiten / Gebinde</h2></div>
+      <div class="tds-packaging">
+        {% for unit in packaging %}<div class="tds-packaging__unit"><strong>{{ unit.size }}</strong><span>Art.-Nr. {{ unit.article_number }}</span></div>{% endfor %}
+        {% if system_components %}<div class="tds-packaging__group">Systemkomponenten</div>{% for unit in system_components %}<div class="tds-packaging__unit"><strong>{{ unit.size }}</strong><span>Art.-Nr. {{ unit.article_number }}</span></div>{% endfor %}{% endif %}
+      </div>
+      {% if packaging_note %}<p class="tds-matrix-note"><span class="tds-marker">{{ packaging_note }}</span></p>{% endif %}
+      {% if notes_on_page3 %}
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/alert.svg' ignore missing %}</span><h2 class="tds-section-title">Hinweise</h2></div>
+      <p class="tds-text">{{ notes }}</p><p class="tds-text tds-text--accent">{{ sds_reference }}</p>
+      {% endif %}
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/store.svg' ignore missing %}</span><h2 class="tds-section-title">Lagerbedingungen</h2></div><p class="tds-text">{{ storage }}</p>
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/trash.svg' ignore missing %}</span><h2 class="tds-section-title">Entsorgung</h2></div><p class="tds-text">{{ disposal }}</p>
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/scales.svg' ignore missing %}</span><h2 class="tds-section-title">Rechtliche Hinweise</h2></div>
+      {% for para in legal %}<p class="tds-legal">{{ para }}</p>{% endfor %}<p class="tds-legal tds-legal--final">Hinweis:<br>{{ final_note }}</p>
+    </div>
+    <footer class="tds-foot">
+      <div class="tds-foot__copy">Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany<br>Phone: +49 (0) 2307 99 034 0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.</div>
+      <div class="tds-foot__right"><div class="tds-foot__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div><div class="tds-foot__page">3/{{ page_count }}</div></div>
+    </footer>
+  </section>
+
+  <!-- Interner Prüfteil: Nur für Entwürfe. Ein Release-Build blockiert, solange dieser Block oder Marker vorhanden sind. -->
+  {% if review %}
+  <section class="tds-page">
+    <div class="tds-body tds-body--full">
+      <div class="tds-runhead"><div class="tds-runhead__doc">Interner Prüfteil<div class="tds-runhead__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
+      <div class="tds-review-note"><strong>Interner Prüfteil – nicht Teil des veröffentlichten Datenblatts.</strong> Er wird erst nach vollständig dokumentierter Freigabe entfernt.</div>
+      <div class="tds-review-bar">Offene Punkte / zu prüfen</div><ol class="tds-review-list">{% for item in review.open_points %}<li>{{ item }}</li>{% endfor %}</ol>
+      <div class="tds-review-bar">Änderungen gegenüber Quell-Input</div><ul class="tds-review-list">{% for item in review.changes %}<li>{{ item }}</li>{% endfor %}</ul>
+      <div class="tds-review-protocol"><span class="tds-review-protocol__label">Prüfprotokoll</span>{{ review.protocol }}</div>
+    </div>
+    <footer class="tds-foot">
+      <div class="tds-foot__copy">Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany<br>Phone: +49 (0) 2307 99 034 0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.</div>
+      <div class="tds-foot__right"><div class="tds-foot__meta">Interner Prüfteil</div></div>
+    </footer>
+  </section>
+  {% endif %}
+</body>
+</html>

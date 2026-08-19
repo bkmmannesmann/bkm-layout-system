@@ -42,7 +42,25 @@ python3 scripts/build_cover.py anleitung
 python3 scripts/build.py prospekt-fachbetrieb
 ```
 
-Das generierte PDF liegt anschließend im `/output/`-Verzeichnis.
+### Technisches Datenblatt erstellen
+
+Das TDS-System trennt Produktinhalt, Markenlayout und Freigabeprüfung. Kopiere für einen neuen Entwurf eine passende Referenz aus `content/tds*/`, pflege die bestätigten Produktdaten in `content.json` und führe anschließend die Entwurfsprüfung aus:
+
+```bash
+python3 scripts/validate_tds.py content/tds-neues-produkt/content.json
+python3 scripts/build_tds.py --content content/tds-neues-produkt/content.json
+```
+
+Der Veröffentlichungs-Build blockiert fehlende Produktbilder, offene Marker und interne Prüfseiten. Er darf erst nach dokumentierter fachlicher Freigabe verwendet werden:
+
+```bash
+python3 scripts/build_tds.py \
+  --content content/tds-neues-produkt/content.json \
+  --output output/tds-neues-produkt-r1.0.pdf \
+  --release
+```
+
+Die verbindlichen Regeln stehen in [`docs/REDAKTIONSSTANDARD.md`](docs/REDAKTIONSSTANDARD.md); die Arbeitsanleitung in [`docs/TDS-WORKFLOW.md`](docs/TDS-WORKFLOW.md). Das generierte PDF liegt anschließend im `/output/`-Verzeichnis.
 
 ## Projektstruktur
 
@@ -72,16 +90,27 @@ bkm-layout-system/
 │   │   ├── cover.html            ← HTML-Template mit Jinja2
 │   │   ├── cover-spec.css        ← Exakte Layout-Spezifikation
 │   │   └── cover-layout.json     ← Maschinenlesbare Maße
-│   └── prospekt-fachbetrieb/
+│   ├── prospekt-fachbetrieb/
+│   │   ├── template.html
+│   │   └── template.css
+│   └── tds/                      ← Technische Datenblätter
 │       ├── template.html
-│       └── template.css
+│       ├── template.css
+│       └── icons/
 ├── content/
-│   └── prospekt-fachbetrieb/
-│       └── content.json
+│   ├── prospekt-fachbetrieb/
+│   └── tds-*/                    ← Ein Produktordner pro TDS
+├── docs/
+│   ├── REDAKTIONSSTANDARD.md
+│   ├── TDS-TEMPLATE.md
+│   ├── TDS-WORKFLOW.md
+│   └── tds-content.schema.json
 ├── scripts/
 │   ├── build_cover.py            ← Cover-Builder (5 Varianten)
 │   ├── build.py                  ← Prospekt-Builder
-│   └── validate_json.py
+│   ├── build_tds.py              ← TDS-Builder mit Seitenzahlprüfung
+│   ├── validate_json.py
+│   └── validate_tds.py           ← TDS-Validierung und Release-Sperren
 ├── output/                       ← Generierte PDFs (gitignored)
 │   └── covers/
 └── README.md
