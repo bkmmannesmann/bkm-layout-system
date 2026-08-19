@@ -18,10 +18,9 @@ from typing import Any
 ROOT_DIR = Path(__file__).parent.parent.resolve()
 TEMPLATE_DIR = ROOT_DIR / "templates" / "tds"
 MARKER_PATTERN = re.compile(r"\[(?:ANGABE FEHLT|ZU PRÜFEN):[^\]]+\]")
-REVISION_PATTERN = re.compile(r"^\d+\.\d+$")
 REQUIRED_FIELDS = (
     "title", "product_name", "product_subtitle", "product_short", "product_line",
-    "revision", "issue_date", "page_count", "logo", "keyvisual", "line_badge",
+    "created_date", "page_count", "logo", "keyvisual", "line_badge",
     "product_image", "description", "advantages", "properties",
     "technical_data_page1", "technical_data_page2", "applications",
     "manual_reference", "notes", "sds_reference", "packaging", "storage",
@@ -74,13 +73,14 @@ def validate_data(data: dict[str, Any], release: bool = False) -> tuple[list[str
     if data["page_count"] != 3:
         errors.append("page_count muss für das aktuelle TDS-Template 3 sein.")
 
-    if not REVISION_PATTERN.fullmatch(str(data["revision"])):
-        errors.append("revision muss dem Format n.n entsprechen, zum Beispiel '1.0'.")
-
     try:
-        datetime.strptime(str(data["issue_date"]), "%d.%m.%Y")
+        datetime.strptime(str(data["created_date"]), "%d.%m.%Y")
     except ValueError:
-        errors.append("issue_date muss das Format TT.MM.JJJJ haben.")
+        errors.append("created_date muss das Format TT.MM.JJJJ haben.")
+
+    for legacy_field in ("revision", "issue_date", "packaging_image"):
+        if legacy_field in data:
+            errors.append(f"{legacy_field} ist kein Feld des TDS-Datenvertrags mehr; bitte entfernen.")
 
     if len(str(data["description"])) > 360:
         errors.append("description überschreitet die zulässigen 360 Zeichen.")
@@ -162,7 +162,11 @@ def validate_data(data: dict[str, Any], release: bool = False) -> tuple[list[str
         warnings.append("Marker ohne review-Block: offene Punkte und Prüfprotokoll dokumentieren.")
 
     if not (ROOT_DIR / "assets" / "fonts").is_dir() or not list((ROOT_DIR / "assets" / "fonts").glob("*")):
-        warnings.append("Lizenzierte Schriften liegen nicht im lokalen assets/fonts/-Ordner; die PDF-Ansicht kann Ersatzschriften verwenden.")
+        message = "Lizenzierte Schriften liegen nicht im lokalen assets/fonts/-Ordner; die PDF-Ansicht kann Ersatzschriften verwenden."
+        if release:
+            errors.append(message + " Ein Veröffentlichungs-Build ist damit gesperrt.")
+        else:
+            warnings.append(message)
 
     return errors, warnings
 

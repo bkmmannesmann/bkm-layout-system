@@ -148,6 +148,5 @@
     "protocol": "P01 Einheiten vollständig · P02 Verbrauchsrechnung: 1,4 kg/m² je mm × 10 mm = 14 kg/m², 25 kg Sack ≈ 1,8 m² bei 10 mm · P03 offen, Frischmörteldichte fehlt · P07 Klassenangabe widersprüchlich, siehe Punkt 1 · P10 Verarbeitungszeit 30–45 min < Überarbeitbarkeit 3 h, schlüssig · P12 eine Artikelnummer, Format achtstellig."
   },
   "product_short": "Hohlkehlenmörtel und Sperrputz",
-  "revision": "1.0",
-  "issue_date": "19.08.2026"
+  "created_date": "19.08.2026"
 }

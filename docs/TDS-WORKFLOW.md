@@ -11,7 +11,7 @@ Dieses Dokument beschreibt den verbindlichen Ablauf zur Erstellung eines **BKM t
 | Redaktion | Strukturiert Quellinformationen, formuliert in BKM-Sprache und dokumentiert Änderungen. | Vollständiger Entwurf mit `review`-Block. |
 | Anwendungstechnik | Prüft Kennwerte, Verarbeitung, Verbrauch und Plausibilität. | Abgezeichnetes Prüfprotokoll. |
 | Qualitätsmanagement | Prüft Normen, Prüfzeugnisse und Nachweise. | Nachweisprüfung ohne offene Marker. |
-| Leitung Technik | Erteilt die fachliche Freigabe. | Freigabe mit Datum und Revision. |
+| Leitung Technik | Erteilt die fachliche Freigabe. | Freigabe mit Datum, dokumentiert im Freigaberegister. |
 | Satz und Versionierung | Führt den Release-Build aus und prüft die PDF-Ausgabe. | Veröffentlichungsfähige PDF. |
 
 ## Verzeichnis- und Dateikonventionen
@@ -21,7 +21,7 @@ Neue Datenblätter erhalten einen eigenen Ordner im Muster `content/tds-<produkt
 | Artefakt | Verbindlicher Ort | Regel |
 |---|---|---|
 | TDS-Layout | `templates/tds/` | Nur durch berechtigte Layoutpflege ändern. |
-| Inhalt eines Produkts | `content/tds-<produkt-slug>/content.json` | Eine Datei pro Produkt und Revision. |
+| Inhalt eines Produkts | `content/tds-<produkt-slug>/content.json` | Eine Datei pro Produkt. |
 | Produktbild | `assets/images/products/<produkt-slug>.png` | Freigestelltes PNG mit transparentem Hintergrund. |
 | Freigaberegeln | `docs/REDAKTIONSSTANDARD.md` | Fachlich verbindliche Quelle. |
 | Datenvertrag | `docs/tds-content.schema.json` | Maschinenlesbare Strukturreferenz. |
@@ -31,25 +31,24 @@ Die fünf vorhandenen Referenzen decken die wesentlichen Fälle ab: `tds` für d
 
 ## Neuer Entwurf
 
-Kopiere zunächst die strukturell passendste Referenz in einen neuen Produktordner. Verwende den kurzen Standardfall, wenn keine Matrix oder Systemkomponenten erforderlich sind. Für nichtlineare Verbrauchswerte ist `tds-hzc` die Referenz, bei Formaten und Systemteilen `tds-ks`. Ersetze anschließend ausschließlich die Werte in `content.json`; HTML und CSS bleiben unverändert.
+Kopiere zunächst die strukturell passendste Referenz in einen neuen Produktordner. Verwende den kurzen Standardfall, wenn keine Matrix oder Systemkomponenten erforderlich sind. Für nichtlineare Verbrauchswerte ist `tds-hzc` die Referenz, bei Formaten und Systemteilen `tds-ks`. Ersetze anschließend ausschließlich die Werte in `content.json`; HTML und CSS bleiben unverändert. Setze `created_date` auf das Datum, an dem du die Datei erzeugst.
 
 ```bash
 cp -R content/tds content/tds-neues-produkt
-mv assets/images/products/neues-produkt.png /tmp/neues-produkt.png 2>/dev/null || true
 # Das freigestellte, freigegebene Produktbild nach assets/images/products/neues-produkt.png legen.
 python3 scripts/validate_tds.py content/tds-neues-produkt/content.json
 python3 scripts/build_tds.py --content content/tds-neues-produkt/content.json
 ```
 
-Für einen Entwurf sind offene Punkte zulässig, sofern sie sichtbar als `[ANGABE FEHLT: …]` oder `[ZU PRÜFEN: …]` markiert und im `review`-Block vollständig erläutert werden. Der Entwurfs-Build erzeugt dann eine zusätzliche interne Prüfseite. Eine fehlende Produktgrafik oder lokal nicht installierte Lizenzschrift wird als Warnung angezeigt, damit die technische Inhaltsprüfung nicht stillschweigend zur Layoutfreigabe wird.
+Für einen Entwurf sind offene Punkte zulässig, sofern sie sichtbar als `[ANGABE FEHLT: …]` oder `[ZU PRÜFEN: …]` markiert und im `review`-Block vollständig erläutert werden. Der Entwurfs-Build erzeugt dann eine zusätzliche interne Prüfseite ohne Seitenzahl. Eine fehlende Produktgrafik oder lokal nicht installierte Lizenzschrift wird im Entwurf als Warnung angezeigt, damit die technische Inhaltsprüfung nicht stillschweigend zur Layoutfreigabe wird.
 
 ## Pflichtangaben und Markenregeln
 
-Die Felder `revision` und `issue_date` sind für jeden Entwurf Pflicht. Das Datum hat das Format `TT.MM.JJJJ`; die Revision das Format `n.n`. Eine rein redaktionelle Änderung erhöht die Revision um `0.1`, technische Änderungen um `1.0`. Das Feld `product_line` ist exakt `HOME LINE` oder `PRO LINE`; der zugehörige Badge wird automatisch gegengeprüft.
+Das Feld `created_date` ist für jeden Entwurf Pflicht und trägt das **Erstelldatum** im Format `TT.MM.JJJJ` — den Tag, an dem die Datei erzeugt wird, nie das Ausgabedatum eines älteren Quellblatts. Eine Revisionsnummer wird nicht geführt; Änderungen sind über den Commit-Verlauf und das Freigaberegister nachvollziehbar. Das Feld `product_line` ist exakt `HOME LINE` oder `PRO LINE`; der zugehörige Badge wird automatisch gegengeprüft. Produkte mit dem Namensbestandteil **Novu** gehören zur Home Line.
 
 Die Produktbeschreibung darf maximal 360 Zeichen enthalten. Vorteile und Eigenschaften umfassen jeweils fünf bis sieben Einträge. Das Template erzwingt die BKM-Grundachse von 18 mm, die Bildfläche von 230 × 312 Pixel und die zentral gepflegten BKM-Farben. Aus diesem Grund dürfen keine individuellen CSS-Änderungen in einzelnen Produktordnern angelegt werden.
 
-Lange Hinweise bleiben grundsätzlich auf Seite 2. Reicht der Platz trotz präziser, fachlich vollständiger Formulierung nicht aus, setzt die Redaktion `"notes_on_page3": true`. Das Template verlagert dann den vollständigen Hinweisblock kontrolliert auf Seite 3. Diese Ausnahme ist nur nach Sichtprüfung der PDF zulässig; der HZ-C-Referenzfall demonstriert sie.
+Lange Hinweise bleiben grundsätzlich auf Seite 2. Reicht der Platz trotz präziser, fachlich vollständiger Formulierung nicht aus, setzt die Redaktion `"notes_on_page3": true`. Das Template verlagert dann den vollständigen Hinweisblock kontrolliert auf Seite 3. Der Text wird dabei nicht kleiner gesetzt. Diese Ausnahme ist nur nach Sichtprüfung der PDF zulässig; der HZ-C-Referenzfall demonstriert sie.
 
 ## Von der Fachprüfung zum Release
 
@@ -59,24 +58,25 @@ Nach der technischen Prüfung übernimmst du die bestätigten Kennwerte. Unbeleg
 |---|---:|---:|
 | JSON-Struktur vollständig | Pflicht | Pflicht |
 | Produktbild vorhanden und transparent | Warnung | Sperre |
+| Markenschriften unter `assets/fonts/` | Warnung | Sperre |
 | Offene Marker | Erlaubt, mit `review` | Sperre |
 | Interner Prüfteil `review` | Pflicht bei offenen Punkten | Sperre |
 | Seitenzahl | 4 Seiten bei Review, sonst 3 | Exakt 3 Seiten |
-| Revisions- und Ausgabedatum | Pflicht | Pflicht |
+| Erstelldatum `created_date` | Pflicht | Pflicht |
 
-Der Release-Build stoppt bei fehlenden Produktassets, offenen Markern, einem noch enthaltenen `review`-Block oder falscher Seitenzahl. Das schützt davor, einen internen Entwurf als produktives Datenblatt zu publizieren.
+Der Release-Build stoppt bei fehlenden Produktassets, fehlenden Markenschriften, offenen Markern, einem noch enthaltenen `review`-Block oder falscher Seitenzahl. Das schützt davor, einen internen Entwurf als produktives Datenblatt zu publizieren.
 
 ```bash
 python3 scripts/validate_tds.py content/tds-neues-produkt/content.json --release
 python3 scripts/build_tds.py \
   --content content/tds-neues-produkt/content.json \
-  --output output/tds-neues-produkt-r1.0.pdf \
+  --output output/tds-neues-produkt.pdf \
   --release
 ```
 
 ## Visuelle Schlussprüfung
 
-Nach einem erfolgreichen Release-Build öffnet die verantwortliche Person die PDF und prüft mindestens Produktbild, Umbruch, Tabellenzeilen, Markenbadge, Revision, Ausgabe und Seitenzählung. Die lizenzierten Schriften müssen lokal unter `assets/fonts/` verfügbar sein. Dieser Ordner ist absichtlich nicht versioniert; ohne die Schriften kann die technische Validierung zwar laufen, die visuelle Markenfreigabe darf jedoch nicht erteilt werden.
+Nach einem erfolgreichen Release-Build öffnet die verantwortliche Person die PDF und prüft mindestens Produktbild, Umbruch, Tabellenzeilen, Markenbadge, Abschnittsicons, Erstelldatum und Seitenzählung. Die lizenzierten Schriften müssen lokal unter `assets/fonts/` verfügbar sein. Dieser Ordner ist absichtlich nicht versioniert; ohne die Schriften setzt WeasyPrint Ersatzschriften, wodurch Laufweite und Umbruch abweichen — der Release-Build bricht deshalb ab.
 
 ## Änderungen am System
 

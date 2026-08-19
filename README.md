@@ -56,7 +56,7 @@ Der Veröffentlichungs-Build blockiert fehlende Produktbilder, offene Marker und
 ```bash
 python3 scripts/build_tds.py \
   --content content/tds-neues-produkt/content.json \
-  --output output/tds-neues-produkt-r1.0.pdf \
+  --output output/tds-neues-produkt.pdf \
   --release
 ```
 

@@ -4,63 +4,223 @@
   "title": "BKM Technisches Datenblatt – Content-Schema",
   "type": "object",
   "required": [
-    "title", "product_name", "product_subtitle", "product_short", "product_line",
-    "revision", "issue_date", "page_count", "logo", "keyvisual", "line_badge",
-    "product_image", "description", "advantages", "properties",
-    "technical_data_page1", "technical_data_page2", "applications",
-    "manual_reference", "notes", "sds_reference", "packaging", "storage",
-    "disposal", "legal", "final_note"
+    "title",
+    "product_name",
+    "product_subtitle",
+    "product_short",
+    "product_line",
+    "created_date",
+    "page_count",
+    "logo",
+    "keyvisual",
+    "line_badge",
+    "product_image",
+    "description",
+    "advantages",
+    "properties",
+    "technical_data_page1",
+    "technical_data_page2",
+    "applications",
+    "manual_reference",
+    "notes",
+    "sds_reference",
+    "packaging",
+    "storage",
+    "disposal",
+    "legal",
+    "final_note"
   ],
   "properties": {
-    "title": {"type": "string", "minLength": 1},
-    "product_name": {"type": "string", "minLength": 1},
-    "product_subtitle": {"type": "string", "minLength": 1},
-    "product_short": {"type": "string", "minLength": 1},
-    "product_line": {"type": "string", "enum": ["HOME LINE", "PRO LINE"]},
-    "revision": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+$"},
-    "issue_date": {"type": "string", "pattern": "^[0-3][0-9]\\.[0-1][0-9]\\.[0-9]{4}$"},
-    "page_count": {"type": "integer", "const": 3},
-    "logo": {"type": "string", "minLength": 1},
-    "keyvisual": {"type": "string", "minLength": 1},
-    "line_badge": {"type": "string", "minLength": 1},
-    "product_image": {"type": "string", "minLength": 1},
-    "description": {"type": "string", "minLength": 1, "maxLength": 360},
-    "advantages": {"$ref": "#/$defs/list_items"},
-    "properties": {"$ref": "#/$defs/list_items"},
-    "technical_data_page1": {"$ref": "#/$defs/data_rows"},
-    "technical_data_page2": {"$ref": "#/$defs/data_rows"},
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "product_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "product_subtitle": {
+      "type": "string",
+      "minLength": 1
+    },
+    "product_short": {
+      "type": "string",
+      "minLength": 1
+    },
+    "product_line": {
+      "type": "string",
+      "enum": [
+        "HOME LINE",
+        "PRO LINE"
+      ]
+    },
+    "created_date": {
+      "type": "string",
+      "pattern": "^[0-3][0-9]\\.[0-1][0-9]\\.[0-9]{4}$",
+      "description": "Erstelldatum: das Datum, an dem die Datei erzeugt wird. Nie das Ausgabedatum eines alten Quellblatts."
+    },
+    "page_count": {
+      "type": "integer",
+      "const": 3
+    },
+    "logo": {
+      "type": "string",
+      "minLength": 1
+    },
+    "keyvisual": {
+      "type": "string",
+      "minLength": 1
+    },
+    "line_badge": {
+      "type": "string",
+      "minLength": 1
+    },
+    "product_image": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 360
+    },
+    "advantages": {
+      "$ref": "#/$defs/list_items"
+    },
+    "properties": {
+      "$ref": "#/$defs/list_items"
+    },
+    "technical_data_page1": {
+      "$ref": "#/$defs/data_rows"
+    },
+    "technical_data_page2": {
+      "$ref": "#/$defs/data_rows"
+    },
     "matrix": {
       "type": "object",
-      "required": ["title", "columns", "rows", "note"],
+      "required": [
+        "title",
+        "columns",
+        "rows",
+        "note"
+      ],
       "properties": {
-        "title": {"type": "string", "minLength": 1},
-        "columns": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 1}},
-        "rows": {"type": "array", "minItems": 1, "items": {"type": "array", "minItems": 2, "items": {"type": ["string", "number"]}}},
-        "note": {"type": "string"},
-        "note_marker": {"type": "string"}
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "columns": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": [
+                "string",
+                "number"
+              ]
+            }
+          }
+        },
+        "note": {
+          "type": "string"
+        },
+        "note_marker": {
+          "type": "string"
+        }
       },
       "additionalProperties": false
     },
-    "applications": {"type": "string", "minLength": 1},
-    "applications_note": {"type": "string"},
-    "manual_reference": {"type": "string", "minLength": 1},
-    "notes": {"type": "string", "minLength": 1},
-    "notes_on_page3": {"type": "boolean", "default": false},
-    "sds_reference": {"type": "string", "minLength": 1},
-    "packaging": {"$ref": "#/$defs/packaging"},
-    "system_components": {"$ref": "#/$defs/packaging"},
-    "packaging_note": {"type": "string"},
-    "storage": {"type": "string", "minLength": 1},
-    "disposal": {"type": "string", "minLength": 1},
-    "legal": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
-    "final_note": {"type": "string", "minLength": 1},
+    "applications": {
+      "type": "string",
+      "minLength": 1
+    },
+    "applications_note": {
+      "type": "string"
+    },
+    "manual_reference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "notes_on_page3": {
+      "type": "boolean",
+      "default": false
+    },
+    "sds_reference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "packaging": {
+      "$ref": "#/$defs/packaging"
+    },
+    "system_components": {
+      "$ref": "#/$defs/packaging"
+    },
+    "packaging_note": {
+      "type": "string"
+    },
+    "storage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "disposal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "legal": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "final_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "copyright_line": {
+      "type": "string"
+    },
+    "copyright_line2": {
+      "type": "string"
+    },
     "review": {
       "type": "object",
-      "required": ["open_points", "changes", "protocol"],
+      "required": [
+        "open_points",
+        "changes",
+        "protocol"
+      ],
       "properties": {
-        "open_points": {"type": "array", "items": {"type": "string"}},
-        "changes": {"type": "array", "items": {"type": "string"}},
-        "protocol": {"type": "string"}
+        "open_points": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocol": {
+          "type": "string"
+        }
       },
       "additionalProperties": false
     }
@@ -70,20 +230,38 @@
       "type": "array",
       "minItems": 5,
       "maxItems": 7,
-      "items": {"type": "string", "minLength": 1}
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     },
     "data_rows": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["parameter", "value"],
+        "required": [
+          "parameter",
+          "value"
+        ],
         "properties": {
-          "parameter": {"type": "string", "minLength": 1},
-          "value": {"type": "string", "minLength": 1},
-          "condition": {"type": "string"},
-          "note": {"type": "string"},
-          "marker": {"type": "boolean"}
+          "parameter": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1
+          },
+          "condition": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "marker": {
+            "type": "boolean"
+          }
         },
         "additionalProperties": false
       }
@@ -92,10 +270,19 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["size", "article_number"],
+        "required": [
+          "size",
+          "article_number"
+        ],
         "properties": {
-          "size": {"type": "string", "minLength": 1},
-          "article_number": {"type": "string", "minLength": 1}
+          "size": {
+            "type": "string",
+            "minLength": 1
+          },
+          "article_number": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "additionalProperties": false
       }

@@ -2,7 +2,7 @@
 
 ## Art der Änderung
 
-- [ ] Neues Datenblatt oder neue Produktrevision
+- [ ] Neues Datenblatt
 - [ ] Korrektur eines bestehenden Produktinhalts
 - [ ] Änderung am TDS-Template, Design-System oder Build-Ablauf
 
@@ -11,7 +11,7 @@
 - [ ] Alle technischen Kennwerte stammen aus einer bestätigten Quellinformation.
 - [ ] Verbrauch, Zeitketten, Einheiten, Normen und Artikelnummern wurden nach `docs/REDAKTIONSSTANDARD.md` geprüft.
 - [ ] Vorteile und Eigenschaften sind getrennt, sachlich und BKM-konform formuliert.
-- [ ] Revision und Ausgabe entsprechen der Änderungsart.
+- [ ] `created_date` trägt das Datum, an dem die Datei erzeugt wurde.
 - [ ] Der technische Freigabestatus ist im vorgesehenen Freigaberegister dokumentiert.
 
 ## Assets und Layout
@@ -19,6 +19,8 @@
 - [ ] Das Produktbild liegt als freigestelltes PNG unter `assets/images/products/` vor.
 - [ ] Das Produktbild wurde visuell auf transparenten Hintergrund und ausreichende Qualität geprüft.
 - [ ] Der korrekte Home-Line- oder Pro-Line-Badge ist gesetzt.
+- [ ] Die Abschnittsicons sind in der PDF sichtbar.
+- [ ] Die Grundschrift steht auf allen Seiten auf derselben Größe.
 - [ ] Die lokale PDF-Prüfung erfolgte mit den lizenzierten BKM-Schriften.
 
 ## Build-Nachweis

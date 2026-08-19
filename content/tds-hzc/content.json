@@ -270,6 +270,5 @@
     "protocol": "P01 Einheiten vollständig · P05 Menge je Meter = 10 × Menge je Bohrloch bei 10 cm Abstand, über alle 14 Zeilen bestätigt · P06 nicht bestanden, Rechenregel fehlt, siehe Punkt 1 · P07 keine Norm- oder Klassenangabe im Blatt · P08 nicht bestanden, WTA- und Durchfeuchtungsaussage ohne Nachweis · P09 Bohrlochabstand 10 cm in Tabelle, Kennwert und Fußnote übereinstimmend · P11 BKM FBM und Novusan werden verwiesen und existieren · P12 nicht bestanden, siehe Punkt 9."
   },
   "product_short": "Injektionscreme",
-  "revision": "1.0",
-  "issue_date": "19.08.2026"
+  "created_date": "19.08.2026"
 }

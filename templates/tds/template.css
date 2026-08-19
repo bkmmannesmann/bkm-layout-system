@@ -2,7 +2,7 @@
    TDS – TECHNISCHES DATENBLATT
    ============================================================
    Innenseiten-Template für BKM Datenblätter (DIN A4).
-   Stand 19.08.2026.
+   Stand 19.08.2026, Korrekturfassung.
 
    Grundsatz: EINE Achse. Alles – Logo, Text, Balken, Abschnitte,
    Tabellen, Fußzeile – steht auf 18 mm. Nur Line-Badge und
@@ -56,8 +56,6 @@ body {
   border-radius: var(--tds-radius);
 }
 
-/* Logo + Dokumentart. Der Abstand zur Oberkante der Versalien
-   des Produktnamens entspricht der Logohöhe (38,5 px). */
 .tds-head__row {
   display: flex; align-items: flex-end; gap: 24px;
   margin-bottom: 29px;
@@ -90,7 +88,6 @@ body {
   padding-right: calc(var(--tds-keyvisual-w) + 10px);
 }
 .tds-head__intro { flex: 1; min-width: 0; }
-/* Produktbild: feste Größe, freigestelltes PNG ohne Hintergrund */
 .tds-head__image { flex: none; width: 230px; height: 312px; align-self: flex-end; margin: 0 0 15px; }
 .tds-head__image img { width: 230px; height: 312px; object-fit: contain; display: block; }
 
@@ -106,22 +103,14 @@ body {
   font-weight: 900; font-size: 13px; line-height: 1.25;
   letter-spacing: -0.025em; color: var(--tds-pure);
 }
-/* Line-Badge zwischen Subheadline und Fließtext, bündig zur Blattkante */
 .tds-badge { height: 44px; width: 182px; display: block; margin: 0 0 16px calc(-1 * var(--tds-axis)); }
-/* Fließtext: maximal 360 Zeichen (Redaktionsstandard, Block 2) */
 .tds-lead { margin: 0; font-size: 12.5px; line-height: 1.55; letter-spacing: -0.015em; text-align: justify; hyphens: auto; }
 
-/* Balken mit Markenclaim, randlos, überlappt den Kopfbereich */
+/* Balken: randlos, ohne Radius, ohne Text, überlappt den Kopfbereich */
 .tds-band {
   flex: none; height: 30px; margin-top: -10px;
   position: relative; z-index: 1;
-  display: flex; align-items: center; padding: 0 var(--tds-axis);
   background: var(--tds-deep);
-}
-.tds-band span {
-  font-family: var(--font-body), 'TT Norms Pro', Arial, sans-serif;
-  font-weight: 700; font-size: 10px; line-height: 1.25;
-  letter-spacing: -0.025em; color: var(--tds-lime); white-space: nowrap;
 }
 
 /* Kopfzeile Folgeseiten */
@@ -148,7 +137,8 @@ body {
   flex: none; width: 20px; height: 20px; border-radius: var(--tds-radius);
   background: var(--tds-deep); display: flex; align-items: center; justify-content: center;
 }
-.tds-icon svg { width: 13px; height: 13px; stroke: var(--tds-lime); fill: none; stroke-width: 2.5; }
+/* Phosphor-Icons sind Flächen-Glyphen: fill, kein stroke. */
+.tds-icon svg { width: 13px; height: 13px; fill: var(--tds-lime); stroke: none; color: var(--tds-lime); display: block; }
 
 .tds-section-title {
   margin: 0;
@@ -166,7 +156,6 @@ body {
   text-align: left; vertical-align: top; font-size: 10.5px; font-weight: 700;
   letter-spacing: 0.02em; text-transform: uppercase; color: var(--tds-deep);
 }
-/* Bedingungszeile (Redaktionsstandard 5.1) */
 .tds-table th small {
   display: block; font-weight: 400; font-size: 10px; letter-spacing: -0.015em;
   text-transform: none; color: #6e6e6e;
@@ -191,23 +180,15 @@ body {
 .tds-matrix tbody tr:nth-child(even) { background: var(--tds-sand); }
 .tds-matrix-note { margin: 0 0 18px; font-size: 10px; line-height: 1.45; letter-spacing: -0.015em; color: #6e6e6e; }
 
-/* Marker für fehlende / zu prüfende Angaben */
 .tds-marker { background: var(--tds-marker-bg); font-family: 'Courier New', monospace; font-size: 10.5px; padding: 1px 4px; }
 
 .tds-text { margin: 0 0 5px; font-size: 12px; line-height: 1.55; letter-spacing: -0.015em; text-align: justify; hyphens: auto; }
 .tds-text--accent { font-weight: 700; color: var(--tds-transition); margin-bottom: 16px; }
 .tds-text--note { font-size: 11px; line-height: 1.5; color: #6e6e6e; }
 
-/* Seite 2 bündelt Daten, Matrix, Anwendung und Hinweise. Für lange, fachlich
-   notwendige Referenzfälle wird nur hier die Satzdichte moderat erhöht. */
-.tds-page:nth-of-type(2) .tds-body--full { padding-top: 16px; }
-.tds-page:nth-of-type(2) .tds-runhead { margin-bottom: 12px; }
-.tds-page:nth-of-type(2) .tds-section-head { margin-bottom: 6px; }
-.tds-page:nth-of-type(2) .tds-table { margin-bottom: 10px; }
-.tds-page:nth-of-type(2) .tds-matrix-note { margin-bottom: 9px; }
-.tds-page:nth-of-type(2) .tds-text { font-size: 10.5px; line-height: 1.42; margin-bottom: 4px; }
-.tds-page:nth-of-type(2) .tds-text--accent { margin-bottom: 9px; }
-.tds-page:nth-of-type(2) .tds-text--note { font-size: 10px; line-height: 1.38; }
+/* Kein seitenweises Verkleinern der Grundschrift: 12 px auf allen Seiten.
+   Läuft eine Seite über, wandert der letzte Block nach hinten
+   (Redaktionsstandard 5.4), er wird nicht kleiner gesetzt. */
 
 /* Gebinde: Kästen nebeneinander, kein Foto */
 .tds-packaging { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; margin-bottom: 18px; }
@@ -232,7 +213,7 @@ body {
 .tds-foot__copy { font-size: 9px; line-height: 1.35; letter-spacing: -0.01em; color: var(--tds-deep); }
 .tds-foot__right { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right; }
 .tds-foot__page { font-size: 9.5px; font-weight: 700; color: var(--tds-deep); white-space: nowrap; }
-.tds-foot__meta { font-size: 8.5px; line-height: 1.35; color: #6e6e6e; white-space: nowrap; }
+.tds-foot__meta { font-size: 9.5px; line-height: 1.35; color: var(--tds-deep); white-space: nowrap; }
 
 /* Interner Prüfteil */
 .tds-review-note {

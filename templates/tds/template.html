@@ -16,7 +16,7 @@
     <header class="tds-head">
       <div class="tds-head__row">
         <img class="tds-head__logo" src="{{ logo }}" alt="BKM Mannesmann">
-        <div class="tds-head__doc">Technisches Datenblatt<div class="tds-head__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div></div>
+        <div class="tds-head__doc">Technisches Datenblatt<div class="tds-head__meta">Erstelldatum: {{ created_date }}</div></div>
       </div>
       <img class="tds-head__keyvisual" src="{{ keyvisual }}" alt="">
       <div class="tds-head__main">
@@ -49,14 +49,14 @@
     </div>
     <footer class="tds-foot">
       <div class="tds-foot__copy">Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany<br>Phone: +49 (0) 2307 99 034 0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.</div>
-      <div class="tds-foot__right"><div class="tds-foot__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div><div class="tds-foot__page">1/{{ page_count }}</div></div>
+      <div class="tds-foot__right"><div class="tds-foot__page">1/{{ page_count }}</div></div>
     </footer>
   </section>
 
   <!-- SEITE 2 – Rest der Daten, Matrix, Anwendungsgebiete und Hinweise -->
   <section class="tds-page">
     <div class="tds-body tds-body--full">
-      <div class="tds-runhead"><div class="tds-runhead__doc">Technisches Datenblatt<div class="tds-runhead__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
+      <div class="tds-runhead"><div class="tds-runhead__doc">Technisches Datenblatt<div class="tds-runhead__meta">Erstelldatum: {{ created_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
       <div class="tds-section-head"><span class="tds-icon">{% include 'icons/rows.svg' ignore missing %}</span><h2 class="tds-section-title">Technische Daten</h2></div>
       <table class="tds-table"><tbody>
         {% for r in technical_data_page2 %}<tr><th>{{ r.parameter }}{% if r.condition %}<small>{{ r.condition }}</small>{% endif %}</th><td>{% if r.marker %}<span class="tds-marker">{{ r.value }}</span>{% else %}{{ r.value }}{% if r.note %} <span class="tds-marker">{{ r.note }}</span>{% endif %}{% endif %}</td></tr>{% endfor %}
@@ -75,14 +75,14 @@
     </div>
     <footer class="tds-foot">
       <div class="tds-foot__copy">Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany<br>Phone: +49 (0) 2307 99 034 0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.</div>
-      <div class="tds-foot__right"><div class="tds-foot__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div><div class="tds-foot__page">2/{{ page_count }}</div></div>
+      <div class="tds-foot__right"><div class="tds-foot__page">2/{{ page_count }}</div></div>
     </footer>
   </section>
 
   <!-- SEITE 3 – Gebinde, Lagerung, Entsorgung und rechtliche Hinweise -->
   <section class="tds-page">
     <div class="tds-body tds-body--full">
-      <div class="tds-runhead"><div class="tds-runhead__doc">Technisches Datenblatt<div class="tds-runhead__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
+      <div class="tds-runhead"><div class="tds-runhead__doc">Technisches Datenblatt<div class="tds-runhead__meta">Erstelldatum: {{ created_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
       <div class="tds-section-head"><span class="tds-icon">{% include 'icons/box.svg' ignore missing %}</span><h2 class="tds-section-title">Verpackungseinheiten / Gebinde</h2></div>
       <div class="tds-packaging">
         {% for unit in packaging %}<div class="tds-packaging__unit"><strong>{{ unit.size }}</strong><span>Art.-Nr. {{ unit.article_number }}</span></div>{% endfor %}
@@ -100,15 +100,15 @@
     </div>
     <footer class="tds-foot">
       <div class="tds-foot__copy">Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany<br>Phone: +49 (0) 2307 99 034 0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.</div>
-      <div class="tds-foot__right"><div class="tds-foot__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div><div class="tds-foot__page">3/{{ page_count }}</div></div>
+      <div class="tds-foot__right"><div class="tds-foot__page">3/{{ page_count }}</div></div>
     </footer>
   </section>
 
-  <!-- Interner Prüfteil: Nur für Entwürfe. Ein Release-Build blockiert, solange dieser Block oder Marker vorhanden sind. -->
+  <!-- Interner Prüfteil: Nur für Entwürfe, ohne Seitenzahl. Ein Release-Build blockiert, solange dieser Block oder Marker vorhanden sind. -->
   {% if review %}
   <section class="tds-page">
     <div class="tds-body tds-body--full">
-      <div class="tds-runhead"><div class="tds-runhead__doc">Interner Prüfteil<div class="tds-runhead__meta">Revision {{ revision }} · Ausgabe {{ issue_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
+      <div class="tds-runhead"><div class="tds-runhead__doc">Interner Prüfteil<div class="tds-runhead__meta">Erstelldatum: {{ created_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
       <div class="tds-review-note"><strong>Interner Prüfteil – nicht Teil des veröffentlichten Datenblatts.</strong> Er wird erst nach vollständig dokumentierter Freigabe entfernt.</div>
       <div class="tds-review-bar">Offene Punkte / zu prüfen</div><ol class="tds-review-list">{% for item in review.open_points %}<li>{{ item }}</li>{% endfor %}</ol>
       <div class="tds-review-bar">Änderungen gegenüber Quell-Input</div><ul class="tds-review-list">{% for item in review.changes %}<li>{{ item }}</li>{% endfor %}</ul>

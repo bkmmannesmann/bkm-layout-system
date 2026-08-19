@@ -1,12 +1,10 @@
 # Redaktionsstandard Technische Datenblätter
 
-Version 1.1 · BKM.MANNESMANN AG · Stand 19.08.2026
+Version 1.0 · BKM.MANNESMANN AG · Stand 19.08.2026
 
 Verbindliche Regeln für die Umwandlung von Produktdaten in ein Technisches Datenblatt.
 
-Dieser Standard legt fest, wie du technische Produktinformationen, Sicherheitsdatenblätter und interne Notizen in einen prüffähigen Entwurf für ein BKM Technisches Datenblatt überführst. Er regelt den festen Aufbau, die sachliche Sprache, die Pflichtkennwerte je Produktgruppe, die Plausibilitätsprüfung und die Kennzeichnung fehlender oder unklarer Angaben. Er setzt den TDS-Workflow in eine prüf- und freigabefähige Form um und ergänzt ihn um Pflichtkennwerte, Rechenproben und die Befunde aus den elf aktuell vorliegenden Datenblättern der Reihen BKM und Novu.
-
-Die technische Umsetzung liegt in `templates/tds/`. Das Datenmodell wird über `docs/tds-content.schema.json` beschrieben. Der verbindliche Build- und Freigabeablauf steht in `docs/TDS-WORKFLOW.md`. Die Felder `revision` und `issue_date` sind Pflicht; ein Feld `created_date` wird nicht verwendet.
+Dieser Standard legt fest, wie du technische Produktinformationen, Sicherheitsdatenblätter und interne Notizen in einen prüffähigen Entwurf für ein BKM Technisches Datenblatt überführst. Er regelt den festen Aufbau, die sachliche Sprache, die Pflichtkennwerte je Produktgruppe, die Plausibilitätsprüfung und die Kennzeichnung fehlender oder unklarer Angaben. Er setzt den Master Prompt des TDS-Assistenten in eine prüf- und freigabefähige Form um und ergänzt ihn um Pflichtkennwerte, Rechenproben und die Befunde aus den elf aktuell vorliegenden Datenblättern der Reihen BKM und Novu.
 
 ## 1 Zweck und Geltungsbereich
 
@@ -22,11 +20,11 @@ Die Blöcke stehen immer in dieser Reihenfolge. Kein Block wird ausgelassen, kei
 
 | # | Block | Inhalt und Regel |
 |---|---|---|
-| 1 | Kopf | Produktlinie, Produktname, funktionaler Untertitel (max. eine Zeile), Bezeichnung „Technisches Datenblatt", Revisionsnummer, Ausgabedatum, Seitenzählung. Alle sechs Metadaten stehen auf Seite 1. |
+| 1 | Kopf | Produktlinie, Produktname, funktionaler Untertitel (max. eine Zeile), Bezeichnung „Technisches Datenblatt", Erstelldatum, Seitenzählung. Alle Metadaten stehen auf Seite 1. |
 | 2 | Produktbeschreibung | Drei bis sechs Sätze, **maximal 360 Zeichen**: was das Produkt ist, wofür es eingesetzt wird, welche Hauptwirkung es hat, welcher Nutzen zentral ist, worauf es im System abgestimmt ist. Der Platz im Kopfbereich ist gesetzt — längerer Quelltext wird gekürzt, nicht kleiner gesetzt. Kein Verweis auf die Verarbeitungsanleitung, keine Verarbeitungsschritte, keine Werbung. |
 | 3 | Vorteile | Fünf bis sieben Stichpunkte Kundennutzen, je drei bis sieben Wörter. Keine ausformulierten Sätze, keine Superlative, keine Garantien, keine Dopplung. |
 | 4 | Eigenschaften | Fünf bis sieben Stichpunkte, ausschließlich echte technische Produkteigenschaften. Keine Maße, keine Lagerhinweise, keine Einsatzbereiche, keine Untergrundanforderungen, keine Verarbeitungshinweise, keine Nutzenaussagen — und nichts, was schon unter Vorteile steht. |
-| 5 | Technische Daten | Beginnt immer auf Seite 1. Zweispaltig, Parameternamen in Großbuchstaben, nur relevante Werte. Pflichtkennwerte nach Abschnitt 5. Produktmaße ausschließlich hier. Bei Überlauf wird die Tabelle an einer inhaltlichen Grenze auf Seite 2 unter derselben Überschrift „Technische Daten“ fortgesetzt und nie durch einen anderen Block unterbrochen. |
+| 5 | Technische Daten | Vollständig auf einer Seite. Zweispaltig, Parameternamen in Großbuchstaben, nur relevante Werte. Pflichtkennwerte nach Abschnitt 5. Produktmaße ausschließlich hier. Läuft die Tabelle über, wird sie mit „Technische Daten (Fortsetzung)" fortgesetzt und nie durch einen anderen Block unterbrochen. |
 | 6 | Anwendungsgebiete | Geeignete Untergründe, Einsatzbereiche, innen oder außen, Systemzugehörigkeit, danach zwingend die klaren Ausschlüsse. Keine Arbeitsschritte, keine Mischanweisung, kein Bohrschema. Abschluss: Verweissatz auf die Verarbeitungsanleitung — nur hier, in keinem anderen Block. |
 | 7 | Hinweise | Allgemeine Bedingungen und Einschränkungen: Untergrundanforderung, Vorbereitung, Verarbeitungsgrenzen, Systemanschluss, Schutz angrenzender Flächen, Verbrauchs- und Trocknungsstreuung. Kurze, für die Eignung relevante Arbeitsschritte dürfen genannt werden — die vollständige Verarbeitungserklärung bleibt in der Verarbeitungsanleitung. Abschluss: Sicherheitsdatenblatt-Satz. |
 | 8 | Verpackungseinheiten | Jede lieferbare Einheit mit Gebindeart, Größe und Artikelnummer. Jede im Text genannte Systemkomponente erscheint hier mit eigener Nummer. Verpackungsangaben stehen nie in den Technischen Daten. |
@@ -42,9 +40,9 @@ Die Blöcke stehen immer in dieser Reihenfolge. Kein Block wird ausgelassen, kei
 
 ## 3 Kopfdaten und Versionierung
 
-Metadaten stehen zusammen, nicht verteilt. Revisionsnummer, Ausgabedatum und Seitenzählung bilden einen Block auf Seite 1. Revision und Ausgabedatum werden zur eindeutigen Zuordnung auf allen veröffentlichten Seiten auch in der Fußzeile wiederholt. Format des Datums: TT.MM.JJJJ. Format der Seitenzählung: n/m, wobei m die tatsächliche Gesamtseitenzahl ist und auf jeder Seite gleich bleibt.
+Metadaten stehen zusammen, nicht verteilt. Erstelldatum und Seitenzählung bilden einen Block auf Seite 1; das Datum wandert nicht in die Fußzeile. Das Erstelldatum ist immer der Tag, an dem die Datei erzeugt wird — nie das „Ausgegeben am" eines älteren Quellblatts. Format des Datums: TT.MM.JJJJ. Format der Seitenzählung: n/m, wobei m die tatsächliche Gesamtseitenzahl ist und auf jeder Seite gleich bleibt.
 
-Die Revisionsnummer ist Pflicht, auch bei der Erstausgabe. Sie steigt um **0.1** bei rein redaktionellen Änderungen und um **1.0**, sobald sich ein Kennwert, ein Anwendungsbereich, eine Systemzuordnung oder eine Artikelnummer ändert. Jede Änderung erzeugt ein neues Ausgabedatum.
+Eine Revisionsnummer wird **nicht** geführt. Änderungen sind über den Commit-Verlauf des Repositories und das Freigaberegister nachvollziehbar; jede neu erzeugte Fassung trägt das Erstelldatum ihres Erzeugungstages.
 
 Der Produktname wird im Kopf in seiner Vollform geführt und danach im gesamten Blatt identisch geschrieben. Eine erklärende Zusatzbezeichnung wird einmal eingeführt und danach weggelassen: BKM MHG MultiHaftGrund im Kopf, BKM MHG im Text.
 
@@ -128,13 +126,13 @@ Der Seitenaufbau ist fest, unabhängig von der Länge des Produkts. Zusätzliche
 |---|---|
 | 1 | Kopfbereich im Verhältnis 16:9, Vorteile, Eigenschaften, Beginn der Technischen Daten. |
 | 2 | Rest der Technischen Daten, danach Verbrauchs- oder Formattabelle, Anwendungsgebiete, Hinweise. |
-| 3 | Gebinde und Systemkomponenten, Lagerbedingungen, Entsorgung, Rechtliche Hinweise, Schluss-Hinweis. Bei nachweislich langen, fachlich notwendigen Hinweisen darf der vollständige Hinweisblock über `notes_on_page3: true` vor den Lagerbedingungen stehen. Das aktuelle TDS-Template erzeugt immer drei veröffentlichte Seiten; freie Fläche bleibt frei. |
+| 3 | Gebinde und Systemkomponenten, Lagerbedingungen, Entsorgung, Rechtliche Hinweise, Schluss-Hinweis. Bei kurzen Produkten wandern diese Blöcke auf Seite 2, das Blatt hat dann zwei Seiten. |
 | letzte | Interner Prüfteil im Entwurf. Entfällt mit der Freigabe. |
 
 - Die Technischen Daten beginnen immer auf Seite 1 und dürfen umbrechen. Alle anderen Blöcke bleiben geschlossen.
 - Der Umbruch der Datentabelle liegt an einer inhaltlichen Grenze — nach den Verarbeitungswerten, vor den Leistungswerten. Nie mitten in einer Wertegruppe.
 - Auf der Folgeseite wird die Tabelle ohne Zusatz fortgesetzt: nur der Titel „Technische Daten", kein „Fortsetzung".
-- Jede Seite ab 2 trägt oben Dokumentart, Produktkurzbezeichnung, Revision und Ausgabedatum; jede Seite unten Copyright, Seitenzählung, Revision und Ausgabedatum.
+- Jede Seite ab 2 trägt oben Dokumentart, Erstelldatum und Produktkurzbezeichnung; jede Seite unten Copyright, Anschrift und Seitenzählung. Die Fußzeile trägt kein Datum.
 
 ## 6 Plausibilitätsprüfung
 
@@ -169,7 +167,7 @@ Jeder Entwurf endet mit zwei Blöcken, direkt hinter dem Schluss-Hinweis:
 
 ## 8 Freigabe
 
-Fünf Stufen, jede mit Namen und Datum dokumentiert: **Entwurf** (Redaktion, Struktur und Sprache) → **technische Prüfung** (Anwendungstechnik, Kennwerte und Plausibilität nach Abschnitt 6) → **Nachweisprüfung** (Qualitätsmanagement, Prüfzeugnisse und Normbezüge) → **Freigabe** (Leitung Technik) → **Satz und Versionierung**. Offene Marker blockieren jede Stufe ab der Nachweisprüfung. Der Release-Build mit `python3 scripts/build_tds.py --content <content.json> --release` ist erst nach Abschluss aller fünf Stufen zulässig.
+Fünf Stufen, jede mit Namen und Datum dokumentiert: **Entwurf** (Redaktion, Struktur und Sprache) → **technische Prüfung** (Anwendungstechnik, Kennwerte und Plausibilität nach Abschnitt 6) → **Nachweisprüfung** (Qualitätsmanagement, Prüfzeugnisse und Normbezüge) → **Freigabe** (Leitung Technik) → **Satz und Versionierung**. Offene Marker blockieren jede Stufe ab der Nachweisprüfung.
 
 ## 9 Befunde aus den elf vorliegenden Datenblättern
 
@@ -177,8 +175,8 @@ Ergebnis der Prüfung nach Abschnitt 6 an den Blättern BKM KS, BKM MHG, BKM SP 
 
 | Nr | Datenblatt | Befund und Empfehlung | K |
 |---|---|---|---|
-| 01 | alle 10 | Ausgabedatum steht in der Fußzeile der zweiten Seite, die Revisionsnummer im Kopf der ersten. → Metadaten in einem Kopfblock zusammenführen. | A |
-| 02 | BKM KS, Novusan, HZ250 Pro | Keine Revisionsnummer im Kopf, während sieben andere Blätter eine führen. → Revisionsnummer nachtragen, auch für Erstausgaben. | A |
+| 01 | alle 10 | Datumsangaben verteilt: Ausgabedatum in der Fußzeile, weitere Metadaten im Kopf. → Ein Erstelldatum im Kopf, Fußzeile ohne Datum. | A |
+| 02 | alle 10 | Revisionsnummern uneinheitlich geführt, teils gar nicht. → Revisionsnummer entfällt vollständig; Nachvollzug über Commit-Verlauf und Freigaberegister. | A |
 | 03 | NovuTop, SP Express | Seitenzählung falsch: dreiseitige Blätter tragen auf Seite 2 die Angabe „2/2". → Gesamtseitenzahl auf allen Seiten identisch setzen. | A |
 | 04 | KS, NovuTop, SP Express, FBM, HZ250 Pro | Die Datentabelle läuft ohne Fortsetzungshinweis auf der Folgeseite weiter, teils erst nach dem Gebindeblock. → Tabelle geschlossen halten, sonst „Technische Daten (Fortsetzung)". | A |
 | 05 | HZ250 Pro | Gebindeblock erst auf Seite 3 und damit hinter den Lagerbedingungen der übrigen Blätter. → Blockreihenfolge nach Abschnitt 2 herstellen. | A |
