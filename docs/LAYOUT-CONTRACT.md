@@ -48,6 +48,11 @@ Die Abschnittsicons sind **Phosphor Bold als lokale SVG-Dateien** in `templates/
 oder `fill: none` — sonst rendern die Icons unsichtbar. Die Größe setzt ausschließlich das CSS;
 die SVGs tragen keine `width`/`height`.
 
+> **Rendererregel:** WeasyPrint löst die CSS-Variable für `currentColor` innerhalb eingebetteter
+> SVGs nicht zuverlässig auf und rendert die Glyphe sonst schwarz. Daher trägt jeder SVG-
+> Wurzelknoten zusätzlich `style="fill:#b4e717"`. Das Attribut `fill="currentColor"` bleibt für
+> die Quellkonvention erhalten; der feste Inline-Wert sichert im PDF die CI-Farbe Lime Green.
+
 **Nur Bold. Keine andere Strichstärke.** Regular, Light, Thin, Duotone und Fill sind nicht
 zugelassen — im Datenblatt stehen die Icons in 20-px-Kacheln, alles unter Bold wirkt dünn und
 verschwindet im Druck. Die Stärke lässt sich am Pfad **nicht** ablesen: Bold-Pfade enthalten

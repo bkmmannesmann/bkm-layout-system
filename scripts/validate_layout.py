@@ -20,21 +20,22 @@ ROOT_DIR = Path(__file__).parent.parent.resolve()
 CSS_PATH = ROOT_DIR / "templates" / "tds" / "template.css"
 HTML_PATH = ROOT_DIR / "templates" / "tds" / "template.html"
 ICON_DIR = ROOT_DIR / "templates" / "tds" / "icons"
-# Feste Zuordnung Inhaltsblock -> Icon. Quelle ist phosphor-icons/core,
-# Verzeichnis assets/bold/<name>-bold.svg. Die Pruefsumme sichert die Identitaet
-# der Datei; die Strichstaerke laesst sich am Pfad selbst NICHT ablesen (Bold-Pfade
-# enthalten legitim a4,4 oder a16,16), deshalb wird sie nicht geraten.
-ICON_SOURCE = "phosphor-icons/core, assets/bold/"
+# Feste Zuordnung Inhaltsblock -> Icon. Die Bold-Pfade stammen aus phosphor-icons/core,
+# assets/bold/<name>-bold.svg; der SVG-Wurzelknoten trägt zusätzlich die feste CI-Farbe
+# #b4e717, weil WeasyPrint CSS-Variablen in Inline-SVG nicht auflöst. Die Prüfsumme
+# sichert die gesamte freigegebene Datei; die Strichstärke lässt sich am Pfad selbst
+# nicht ablesen, deshalb wird sie nicht geraten.
+ICON_SOURCE = "phosphor-icons/core, assets/bold/ + BKM-Lime-Füllung"
 ICON_MANIFEST = {
-    "vorteile.svg":      ("seal-check",          "f29d05b2145f5e01686493632a33c2d306df0c932f57cf9c34e1e7942fa55716"),
-    "eigenschaften.svg": ("atom",                "50b215004b364200416bea5a7d952a841dc9b801c65359410c32209c45a6f709"),
-    "daten.svg":         ("table",               "f0809a3a92d47d85f178324edd5d3b495750809e0d05ebbcf4a44eeae3405b5f"),
-    "anwendung.svg":     ("house-line",          "c8cdf780da2882b25d5530155047b7c519a6cc2bbed476f5313cf95517308656"),
-    "hinweise.svg":      ("warning",             "c2b1af21bbb1b92808c46f5ec01ade9169bd5cff30f8090c42da85e6e95d7558"),
-    "gebinde.svg":       ("package",             "d8edc6001426d6ef610a7a60425357eb300ff2b0abf8a700eb89792c6c5a40d8"),
-    "lagerung.svg":      ("thermometer-simple",  "2e833e800fcb84960d8bd4d39acb2af8b2c1b4df60f20766decd190dd962ac35"),
-    "entsorgung.svg":    ("recycle",             "a46175ae6673793626fa076feb9143f95b7f5ee5563a75471d2af975c5f09caa"),
-    "recht.svg":         ("scales",              "05da65086b033c0604d8f12d6ea0b51b1b47f698e3f5e396af9d2929ce859dae"),
+    "vorteile.svg":      ("seal-check",          "0532d9d0116c98814550429510da80b10a499ba1e026a693a104c8633e7a2b35"),
+    "eigenschaften.svg": ("atom",                "b4a6e5d5040b2dedda12ddf7158f4f58a5b56dcec96aefeead2bab8f757cf65f"),
+    "daten.svg":         ("table",               "ff0b3a8a669d166f8de63472c3ece9e100937f1082ab7e924f5737462d2bc4b1"),
+    "anwendung.svg":     ("house-line",          "067819a7ac3832b3e5ec7bfc80c63cbfc9671b3ceafb3391fbe60594e7e861c8"),
+    "hinweise.svg":      ("warning",             "0a7dde69e5d924541e57e3b690175498bd15de0ac9e37a9b834a765423c80da4"),
+    "gebinde.svg":       ("package",             "18ee52061a25dbf9c47d0c7dcb530b6e438c5d40d2efac72580ef3b0051c5ade"),
+    "lagerung.svg":      ("thermometer-simple",  "4997534fd31142cebabebfe609bcf68f36cbdaeb0b7875c71554c1537f5ab9a0"),
+    "entsorgung.svg":    ("recycle",             "649a31bc251911d05bf130790de3b1a909a9aa33462a6e1fcfcfa6165a18c0c0"),
+    "recht.svg":         ("scales",              "cf214b60261f3f8ddcd030493860530cdcb1f39280d85ea8c48fd5aa7a1c3a28"),
 }
 
 # (Beschreibung, Regex, muss_vorkommen)
