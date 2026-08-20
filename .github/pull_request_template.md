@@ -12,6 +12,8 @@
 - [ ] Verbrauch, Zeitketten, Einheiten, Normen und Artikelnummern wurden nach `docs/REDAKTIONSSTANDARD.md` geprüft.
 - [ ] Vorteile und Eigenschaften sind getrennt, sachlich und BKM-konform formuliert.
 - [ ] `created_date` trägt das Datum, an dem die Datei erzeugt wurde.
+- [ ] Der Wortlaut der Vorlage wurde übernommen; Kritik steht als Marker, nicht als Umformulierung.
+- [ ] Jede Bedingungszeile unter einem Parameternamen steht wörtlich so in der Vorlage.
 - [ ] Der technische Freigabestatus ist im vorgesehenen Freigaberegister dokumentiert.
 
 ## Assets und Layout

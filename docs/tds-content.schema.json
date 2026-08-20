@@ -61,7 +61,9 @@
     },
     "page_count": {
       "type": "integer",
-      "const": 3
+      "minimum": 2,
+      "maximum": 6,
+      "description": "Zahl der veröffentlichten Seiten. Drei ist der Regelfall; umfangreiche Produkte dürfen mehr haben. Der interne Prüfteil zählt nicht mit."
     },
     "logo": {
       "type": "string",

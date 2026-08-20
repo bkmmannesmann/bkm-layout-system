@@ -27,14 +27,14 @@ Neue Datenblätter erhalten einen eigenen Ordner im Muster `content/tds-<produkt
 | Datenvertrag | `docs/tds-content.schema.json` | Maschinenlesbare Strukturreferenz. |
 | Generierte PDFs | `output/` | Nie committen. |
 
-Die fünf vorhandenen Referenzen decken die wesentlichen Fälle ab: `tds` für den kurzen Standardfall, `tds-hz250pro` für lineare Formelzeilen, `tds-hzc` für eine Verbrauchsmatrix, `tds-ks` für Formattabelle und Systemkomponenten sowie `tds-novusan` für die Home Line.
+Im Repository liegen ausschließlich fachlich freigegebene Referenzen. Derzeit sind das `tds-hz250pro` (Pro Line, lineare Formelzeilen) und `tds-novusan` (Home Line, Verbrauch in Gebindeeinheiten). Weitere Produkte werden Blatt für Blatt aus den freigegebenen PDFs aufgebaut und erst nach Abnahme hier abgelegt. Vorlagen aus der Aufbauphase gibt es nicht mehr — kopiere nur von einer freigegebenen Referenz.
 
 ## Neuer Entwurf
 
-Kopiere zunächst die strukturell passendste Referenz in einen neuen Produktordner. Verwende den kurzen Standardfall, wenn keine Matrix oder Systemkomponenten erforderlich sind. Für nichtlineare Verbrauchswerte ist `tds-hzc` die Referenz, bei Formaten und Systemteilen `tds-ks`. Ersetze anschließend ausschließlich die Werte in `content.json`; HTML und CSS bleiben unverändert. Setze `created_date` auf das Datum, an dem du die Datei erzeugst.
+Kopiere zunächst die strukturell passendste freigegebene Referenz in einen neuen Produktordner. `tds-hz250pro` passt für Pro-Line-Produkte mit Formelzeilen, `tds-novusan` für Home-Line-Produkte mit Verbrauch in Gebindeeinheiten. Ersetze anschließend ausschließlich die Werte in `content.json`; HTML und CSS bleiben unverändert. Setze `created_date` auf das Datum, an dem du die Datei erzeugst.
 
 ```bash
-cp -R content/tds content/tds-neues-produkt
+cp -R content/tds-hz250pro content/tds-neues-produkt
 # Das freigestellte, freigegebene Produktbild nach assets/images/products/neues-produkt.png legen.
 python3 scripts/validate_tds.py content/tds-neues-produkt/content.json
 python3 scripts/build_tds.py --content content/tds-neues-produkt/content.json
@@ -58,7 +58,7 @@ Nach der technischen Prüfung übernimmst du die bestätigten Kennwerte. Unbeleg
 |---|---:|---:|
 | JSON-Struktur vollständig | Pflicht | Pflicht |
 | Produktbild vorhanden und transparent | Warnung | Sperre |
-| Markenschriften unter `assets/fonts/` | Warnung | Sperre |
+| Markenschriften unter `assets/fonts/` vollständig | Warnung | Sperre |
 | Offene Marker | Erlaubt, mit `review` | Sperre |
 | Interner Prüfteil `review` | Pflicht bei offenen Punkten | Sperre |
 | Seitenzahl | 4 Seiten bei Review, sonst 3 | Exakt 3 Seiten |
@@ -76,7 +76,7 @@ python3 scripts/build_tds.py \
 
 ## Visuelle Schlussprüfung
 
-Nach einem erfolgreichen Release-Build öffnet die verantwortliche Person die PDF und prüft mindestens Produktbild, Umbruch, Tabellenzeilen, Markenbadge, Abschnittsicons, Erstelldatum und Seitenzählung. Die lizenzierten Schriften müssen lokal unter `assets/fonts/` verfügbar sein. Dieser Ordner ist absichtlich nicht versioniert; ohne die Schriften setzt WeasyPrint Ersatzschriften, wodurch Laufweite und Umbruch abweichen — der Release-Build bricht deshalb ab.
+Nach einem erfolgreichen Release-Build öffnet die verantwortliche Person die PDF und prüft mindestens Produktbild, Umbruch, Tabellenzeilen, Markenbadge, Abschnittsicons, Erstelldatum und Seitenzählung. Die Markenschriften liegen im Repository unter `assets/fonts/` — BKM hält die Nutzungsrechte, niemand muss sie lokal installieren. Fehlt eine Datei, setzt WeasyPrint Ersatzschriften, wodurch Laufweite und Umbruch abweichen; der Release-Build bricht deshalb ab.
 
 ## Änderungen am System
 

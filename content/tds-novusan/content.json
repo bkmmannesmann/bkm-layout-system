@@ -6,34 +6,23 @@
   "product_line": "HOME LINE",
   "line_badge": "../../assets/images/badge-homeline.png",
   "product_image": "../../assets/images/products/novusan.png",
-  "description": "Novusan ist ein gebrauchsfertiges Injektionsmittel für nachträgliche Horizontal- und Flächensperren im Mauerwerk. Es stoppt kapillar aufsteigende Feuchtigkeit und Querdurchfeuchtung, indem es in der Wand eine feuchtigkeitsabweisende Barriere bildet. Auch stark durchfeuchtetes Mauerwerk lässt sich damit behandeln.",
+  "description": "Novusan ist ein gebrauchsfertiges Injektionsmittel zur Herstellung nachträglicher Horizontal- und Flächensperren im Mauerwerk, um kapillar aufsteigende Feuchtigkeit sowie Querdurchfeuchtungen zuverlässig zu stoppen. Das Produkt bildet in der Wand eine wirksame, feuchtigkeitsabweisende Barriere und eignet sich auch für stark durchfeuchtetes Mauerwerk.",
   "advantages": [
-    "Gebrauchsfertig ohne Anmischen",
-    "Abdichten ohne Ausschachten",
-    "Wirksam bis 99,9 % Durchfeuchtung",
+    "Abdichten ohne aufwändiges Ausschachten",
+    "Wirksam bis 95 % Durchfeuchtung",
+    "Geprüft und WTA-Zertifiziert",
     "Für nahezu jedes Mauerwerk",
-    "Exakt kalkulierbarer Verbrauch",
-    "Horizontal- und Flächensperre",
-    "Drucklos oder mit Pumpe"
+    "Exakt kalkulierbar",
+    "Für Horizontal- & Flächensperren geeignet"
   ],
   "properties": [
+    "Gebrauchsfertig",
     "Hydrophobierend",
-    "Hohe Selbstverteilung",
-    "pH-neutral",
-    "Alkalifrei",
-    "Geruchsneutral",
-    "Flüssig und transparent"
+    "Hohe Selbstverteilung im Mauerwerk",
+    "Neutraler pH-Wert, alkalifrei",
+    "Geruchsneutral"
   ],
   "technical_data_page1": [
-    {
-      "parameter": "Basis",
-      "value": "[ANGABE FEHLT: Wirkstoffbasis — HZ-C nennt Silan, HZ250 Pro „rein organisch“]",
-      "marker": true
-    },
-    {
-      "parameter": "Wirkweise",
-      "value": "hydrophobierend"
-    },
     {
       "parameter": "Farbe",
       "value": "transparent"
@@ -47,128 +36,114 @@
       "value": "flüssig"
     },
     {
-      "parameter": "Dichte",
-      "value": "0,8 g/cm³",
-      "note": "[ANGABE FEHLT: Prüfnorm]"
+      "parameter": "Wirkweise",
+      "value": "hydrophobierend"
+    },
+    {
+      "parameter": "Verbrauch pro Bohrloch",
+      "value": "1 Flasche (500 ml)"
+    },
+    {
+      "parameter": "Verbrauch pro Meter",
+      "value": "5 Flaschen (2.500 ml)"
+    },
+    {
+      "parameter": "Verbrauch Flächensperre",
+      "value": "20 Flaschen pro m² (10.000 ml)"
+    }
+  ],
+  "technical_data_page2": [
+    {
+      "parameter": "Verarbeitungstemperatur",
+      "value": "min. +5 °C"
     },
     {
       "parameter": "pH-Wert",
       "value": "neutral, alkalifrei"
     },
     {
-      "parameter": "VOC-Gehalt",
-      "value": "[ANGABE FEHLT: VOC-Gehalt — HZ250 Pro führt 0 % nach IE-Richtlinie 2010/75/EU]",
-      "marker": true
+      "parameter": "Dichte",
+      "value": "0,8 g/cm³"
     },
-    {
-      "parameter": "Verarbeitungstemperatur",
-      "value": "min. +5 °C",
-      "note": "[ANGABE FEHLT: obere Grenze]"
-    },
-    {
-      "parameter": "Verarbeitungsmethode",
-      "value": "Injektionsflasche drucklos, Injektionslanze im Niederdruckverfahren"
-    },
-    {
-      "parameter": "Injektionsdruck",
-      "condition": "bei Verarbeitung mit Pumpe",
-      "value": "0,5–5 bar"
-    }
-  ],
-  "technical_data_page2": [
     {
       "parameter": "Bohrlochdurchmesser",
-      "value": "[ANGABE FEHLT: Bohrlochdurchmesser]",
-      "marker": true
+      "value": "14 mm"
     },
     {
       "parameter": "Bohrlochabstand",
-      "value": "[ANGABE FEHLT: Bohrlochabstand — aus „5 Flaschen je Meter“ folgt rechnerisch 20 cm; die Quelle nennt den Wert nicht]",
-      "marker": true
-    },
-    {
-      "parameter": "Verbrauch je Bohrloch",
-      "value": "500 ml (1 Flasche)",
-      "note": "[ZU PRÜFEN: unabhängig von der Wandstärke — HZ-C und HZ250 Pro rechnen je cm Wandstärke]"
-    },
-    {
-      "parameter": "Verbrauch Horizontalsperre",
-      "condition": "je laufendem Meter",
-      "value": "2.500 ml (5 Flaschen)"
-    },
-    {
-      "parameter": "Verbrauch Flächensperre",
-      "condition": "je Quadratmeter",
-      "value": "10.000 ml (20 Flaschen)"
+      "value": "20 cm"
     },
     {
       "parameter": "Geeigneter Durchfeuchtungsgrad",
-      "value": "bis 99,9 %"
+      "value": "bis 95 % gemäß WTA-Merkblatt 4-10"
     },
     {
-      "parameter": "Reaktionszeit",
-      "value": "min. 3 Wochen bis zum Einsatz von Trocknungsgeräten"
-    },
-    {
-      "parameter": "WTA-Konformität",
-      "value": "[ZU PRÜFEN: „Geprüft und WTA-zertifiziert“ ohne Merkblatt- und Zertifikatsnummer]",
-      "marker": true
+      "parameter": "VOC-Gehalt",
+      "value": "< 1 % nach EU-Richtlinie 2004/42/EG"
     }
   ],
-  "applications": "Novusan eignet sich für mineralisches Mauerwerk: Ziegel- und Klinkermauerwerk, Naturstein- und Bruchsteinmauerwerk, Sandstein, Kalksandstein, Porenbeton, Stampfbeton sowie Gitter- und Hohlkammersteine. Du kannst es sowohl für die nachträgliche Horizontalsperre gegen kapillar aufsteigende Feuchtigkeit als auch für die flächige Abdichtung gegen seitlich eindringende Feuchtigkeit einsetzen — besonders bei nicht freilegbaren Außenwänden und in teilunterkellerten Bereichen. Nicht geeignet ist das Produkt für WU-Beton und für Druckwasserschäden.",
-  "applications_note": "Bei Gitter- und Hohlkammersteinen ist eine Flächensperre nur möglich, wenn die einzelnen Steinreihen vollständig durch eine durchgehende Mörtelfuge unterbrochen sind.",
-  "notes": "Das Mauerwerk muss mineralisch und saugfähig sein. Achte auf eine fachgerechte Bohrlochanordnung; in Eckbereichen werden die Bohrungen leicht versetzt erstellt. Bei Hohlkammersteinen prüfe vorab, ob eine durchgehende Mörtelfuge vorhanden ist und die Steinreihen durchgehend unterbrochen sind. Bei Natursteinmauerwerk setze die Bohrung so, dass Hohlräume oder Mörtelfugen erreicht werden. Schütze empfindliche Materialien wie Natursteinoberflächen vor Produktkontakt, da Farbveränderungen auftreten können. Trocknungsgeräte dürfen erst nach einer Reaktionszeit von mindestens drei Wochen eingesetzt werden. Die Trocknungsdauer hängt stark vom Durchfeuchtungsgrad und der Belüftung ab. Entferne geschädigte Putze nach der Injektion und ersetze sie durch geeignete Sanierputzsysteme; verwende ausschließlich diffusionsoffene Beschichtungen. Das Produkt darf nicht in die Hände von Kindern gelangen.",
+  "applications": "Novusan eignet sich für verschiedene mineralische Mauerwerke. Dazu gehören Ziegel- und Klinkermauerwerk, Naturstein- und Bruchsteinmauerwerk, Sandstein, Kalksandstein, Porenbeton, Stampfbeton sowie Gitter- und Hohlkammersteine*. Für WU-Beton ist es nicht geeignet. Du kannst Novusan sowohl für die nachträgliche Horizontalsperre gegen kapillar aufsteigende Feuchtigkeit als auch für die flächige Abdichtung gegen seitlich eindringende Feuchtigkeit einsetzen. Besonders bei nicht freilegbaren Außenwänden oder in teilunterkellerten Bereichen ist das Produkt die perfekte Lösung. Die Verarbeitung erfolgt drucklos mit Injektionsflaschen.",
+  "applications_note": "* Bei Gitter- und Hohlkammersteinen ist eine Flächensperre nur möglich, wenn die einzelnen Steinreihen vollständig durch eine durchgehende Mörtelfuge unterbrochen sind.",
+  "notes": "Achte auf eine fachgerechte und vorgegebene Bohrlochanordnung der Injektionspunkte. In den Eckbereichen müssen Bohrungen leicht versetzt erstellt werden. Das Mauerwerk muss mineralisch und saugfähig sein. Bei Hohlkammersteinen ist vorab zu prüfen, ob eine durchgehende Mörtelfuge vorhanden ist und die einzelnen Steinreihen durchgehend unterbrochen sind. Bei Natursteinmauerwerk muss die Bohrung so gesetzt werden, dass Hohlräume oder Mörtelfugen erreicht werden. Schütze empfindliche Materialien wie Natursteinoberflächen vor Produktkontakt, da es zu Farbveränderungen kommen kann. Die Trocknungsdauer hängt stark vom Durchfeuchtungsgrad und der Belüftung ab. Trocknungsgeräte dürfen erst nach einer Reaktionszeit von mindestens 3 Wochen eingesetzt werden. Entferne geschädigte Putze nach der Injektion und ersetze sie durch geeignete Sanierputzsysteme. Verwende ausschließlich diffusionsoffene Beschichtungen. Novusan ist nicht für Druckwasserschäden geeignet. Das Produkt darf nicht in die Hände von Kindern gelangen.",
   "packaging": [
     {
       "size": "1 Flasche à 500 ml",
-      "article_number": "111137-01"
+      "article_number": "114137-01"
     },
     {
       "size": "5 Flaschen à 500 ml",
       "article_number": "1014117-05"
     },
     {
-      "size": "5 l Nachfüllkanister",
+      "size": "10 Flaschen à 500 ml",
+      "article_number": "1014118-10"
+    },
+    {
+      "size": "25 Flaschen à 500 ml",
+      "article_number": "1014121-25"
+    },
+    {
+      "size": "50 Flaschen à 500 ml",
+      "article_number": "1014126-50"
+    },
+    {
+      "size": "5 Liter Nachfüllkanister",
       "article_number": "11269-01"
     },
     {
-      "size": "10 l Nachfüllkanister",
+      "size": "10 Liter Nachfüllkanister",
       "article_number": "11272-01"
     },
     {
-      "size": "25 l Nachfüllkanister",
+      "size": "25 Liter Nachfüllkanister",
       "article_number": "11276-01"
     }
   ],
-  "packaging_note": "[ZU PRÜFEN: Artikelnummern mit drei Stellenzahlen — 11269-01 fünfstellig, 111137-01 sechsstellig, 1014117-05 siebenstellig]",
-  "storage": "Frostfrei und in ungeöffneten Originalgebinden lagern. Die Haltbarkeit beträgt 12 Monate ab Herstellungsdatum. Das Produkt reagiert mit Luft und Feuchtigkeit; angebrochene Gebinde sollten nicht über längere Zeit offen stehen. [ANGABE FEHLT: Lagertemperaturbereich]",
+  "storage": "Lagere das Produkt frostfrei und in ungeöffneten Originalgebinden. Die Haltbarkeit beträgt 12 Monate ab Herstellungsdatum. Angebrochene Gebinde sollten nicht über längere Zeit Luft oder Feuchtigkeit ausgesetzt werden, da das Produkt darauf reagiert. Die Lagertemperatur liegt zwischen +5 °C und +35 °C.",
   "review": {
     "open_points": [
-      "Der Verbrauch ist in Flaschen angegeben und unabhängig von der Wandstärke. HZ-C und HZ250 Pro rechnen je cm Wandstärke. Entweder ist die Bezugsgröße zu ergänzen oder die Abweichung zu begründen.",
-      "Bohrlochabstand fehlt. Aus „5 Flaschen je Meter“ bei einer Flasche je Bohrloch folgt rechnerisch 20 cm — der Wert steht nirgends im Blatt.",
-      "Bohrlochdurchmesser fehlt.",
-      "Wirkstoffbasis fehlt vollständig; HZ-C nennt Silan, HZ250 Pro „rein organisch“.",
-      "„Geprüft und WTA-zertifiziert“ ohne Merkblatt- und Zertifikatsnummer. Da dies der einzige Zertifizierungsanspruch der Produktfamilie ist, sollte er belegt werden.",
-      "VOC-Gehalt fehlt; HZ250 Pro führt 0 % nach IE-Richtlinie 2010/75/EU.",
-      "Prüfnorm zur Dichte fehlt (0,8 g/cm³); HZ250 Pro nennt DIN 51757.",
-      "Obere Verarbeitungstemperatur und Lagertemperaturbereich fehlen.",
-      "Artikelnummern mit drei Stellenzahlen: 11269-01 fünfstellig, 111137-01 sechsstellig, 1014117-05 siebenstellig.",
-      "Das Blatt nennt zwei Verarbeitungsarten (drucklos und mit Pumpe), die Anwendungsgebiete aber nur „drucklos mit Injektionsflaschen“. Widerspruch auflösen."
+      "Keine offenen Punkte. Durch die Anwendungstechnik geklärt sind Produktlinie, Verbrauchsbezug, Bohrlochabstand und -durchmesser, Durchfeuchtungsgrad, VOC-Gehalt, Verarbeitungsart, Lagertemperatur und die Gebindeliste. Wirkstoffbasis, Reaktionszeit, obere Verarbeitungstemperatur, Prüfnorm zur Dichte und Zertifikatsnummer werden bewusst nicht geführt; die Begründungen stehen unter Änderungen."
     ],
     "changes": [
-      "Zwölf gemischte Stichpunkte auf sieben Vorteile und sechs Eigenschaften getrennt.",
-      "Verbrauchsangaben in Milliliter umgerechnet und die Flaschenzahl in Klammern belassen — Einheiten nach Abschnitt 4.2.",
-      "„Verbrauch pro Meter“ und „pro m²“ als Bedingungszeilen mit Bezugsgröße geführt.",
-      "Reaktionszeit aus den Hinweisen in eine eigene Kennwertzeile überführt (mindestens drei Wochen).",
-      "Injektionsdruck als Bedingungszeile geführt, da er nur bei Pumpenverarbeitung gilt.",
-      "Die Fußnote zu Gitter- und Hohlkammersteinen steht als eigener Absatz unter den Anwendungsgebieten statt als Sternchenverweis.",
-      "„Nicht für Druckwasserschäden geeignet“ aus den Hinweisen zu den Anwendungsgebieten verschoben, wo die Ausschlüsse stehen."
+      "Wortlaut unverändert aus dem freigegebenen Blatt vom 09.07.2026 übernommen: Beschreibung, Anwendungsgebiete samt Sternchenfußnote, Hinweise und die Fixbausteine. Von den sechs Vorteilen stehen fünf im Quellwortlaut; geändert ist allein die Durchfeuchtungsangabe.",
+      "Produktlinie HOME LINE, bestätigt durch die Anwendungstechnik. Das Quellblatt trug zweimal „PRO LINE“.",
+      "Einheitenschreibweise nach Abschnitt 4.2 vereinheitlicht: „500ml“ zu „500 ml“, „99,9%“ zu „99,9 %“, „min. 5 °C“ zu „min. +5 °C“, „m2“ zu „m²“. Die Milliliterwerte stehen zusätzlich in Klammern hinter der Flaschenzahl.",
+      "Durchfeuchtungsgrad auf „bis 95 % gemäß WTA-Merkblatt 4-10“ gesetzt, gleichlautend im Vorteil und als neue Kennwertzeile. Das Quellblatt nannte 99,9 % ohne Nachweis. Eine Zertifikatsnummer wird auf Weisung nicht ausgewiesen.",
+      "Vier Kennwertzeilen ergänzt, die im Quellblatt fehlten: Bohrlochdurchmesser 14 mm, Bohrlochabstand 20 cm, geeigneter Durchfeuchtungsgrad und VOC-Gehalt < 1 % nach EU-Richtlinie 2004/42/EG.",
+      "Der Verbrauch bleibt wandstärkenunabhängig in Flaschen — von der Anwendungstechnik bestätigt und damit abweichend von BKM HZ250 Pro, das je cm Wandstärke rechnet.",
+      "Niederdruckinjektion entfernt: die Eigenschaft „Niederdruck- oder Flascheninjektion möglich“ und die Kennwertzeile Injektionsdruck sind gestrichen. Die Verarbeitung erfolgt drucklos mit Injektionsflaschen, wie in den Anwendungsgebieten beschrieben.",
+      "Wirkstoffbasis und Reaktionszeit werden auf Weisung nicht als Kennwerte geführt. Die Reaktionszeit von mindestens drei Wochen steht weiterhin im Hinweistext. Eine obere Verarbeitungstemperatur und eine Prüfnorm zur Dichte werden ebenfalls nicht angegeben.",
+      "Gebindeliste vollständig durch die Fassung der Anwendungstechnik ersetzt: acht Einheiten, Artikelnummer der Einzelflasche auf 114137-01 korrigiert, fünf Flaschengrößen und drei Nachfüllkanister.",
+      "Lagerbedingungen um die Lagertemperatur +5 °C bis +35 °C ergänzt; das Quellblatt nannte nur „frostfrei“.",
+      "Gebindeblock von Seite 2 auf Seite 3 verschoben, damit die Datentabelle, Anwendungsgebiete und Hinweise auf Seite 2 zusammenbleiben (Abschnitt 5.4).",
+      "Das Ausgabedatum 09.07.2026 der Quelle wurde nicht übernommen. Der Kopf trägt das Erstelldatum dieser Datei; eine Revisionsnummer wird nicht geführt."
     ],
-    "protocol": "P01 Einheiten nach Umrechnung vollständig · P05 5 Flaschen je Meter bei 1 Flasche je Bohrloch ergeben 20 cm Bohrlochabstand, im Blatt nicht genannt, siehe Punkt 2 · P06 entfällt, keine wandstärkenabhängige Reihe · P07 keine Prüfnorm im Blatt · P08 nicht bestanden, WTA-Zertifizierung ohne Nachweis · P10 Reaktionszeit 3 Wochen vor Trocknungsgeräten, schlüssig · P11 keine Fremdprodukte referenziert · P12 nicht bestanden, siehe Punkt 9."
+    "protocol": "P01 Einheiten nach Vereinheitlichung vollständig; der Verbrauch ist auf Weisung wandstärkenunabhängig in Flaschen geführt · P05 bestanden, 5 Flaschen je Meter bei 1 Flasche je Bohrloch ergeben die angegebenen 20 cm Bohrlochabstand · P06 entfällt, keine wandstärkenabhängige Reihe · P07 VOC mit EU-Richtlinie 2004/42/EG belegt; eine Prüfnorm zur Dichte wird auf Weisung nicht geführt · P08 bestanden, Durchfeuchtungsgrad mit 95 % nach WTA-Merkblatt 4-10 belegt, Vorteil und Kennwert nennen denselben Wert · P09 bestanden, Widerspruch drucklos gegen Niederdruck durch Streichung der Pumpenangabe aufgelöst · P10 Reaktionszeit von drei Wochen vor Einsatz von Trocknungsgeräten, schlüssig · P11 keine Fremd- oder Systemprodukte referenziert · P12 Gebindeliste durch die Anwendungstechnik bestätigt."
   },
   "page_count": 3,
   "logo": "../../assets/images/logos/logo-deepgreen-green.png",
   "keyvisual": "../../assets/images/keyvisual-on-light.png",
+  "created_date": "20.08.2026",
   "manual_reference": "Für eine detaillierte Erklärung zur Verwendung des Produktes nutze bitte unsere separate Verarbeitungsanleitung.",
   "sds_reference": "Gefahrenhinweise und Sicherheitsratschläge sind auf den Gebinden und im Sicherheitsdatenblatt zu finden. Das aktuelle Sicherheitsdatenblatt ist auf Anfrage erhältlich.",
   "disposal": "Die Entsorgung muss gemäß den örtlichen Vorschriften erfolgen. Restentleerte Verpackungen können der Wiederverwertung zugeführt werden.",
@@ -178,5 +153,6 @@
     "Für die Qualität unserer Produkte bürgen wir gemäß unseren Verkaufs- und Lieferbedingungen. Eine Garantie für den Anwendungserfolg wird nicht übernommen. Unsere technischen Datenblätter bieten eine unverbindliche Beratung und erfordern schriftliche Zustimmung für Zusicherungen, die darüber hinausgehen."
   ],
   "final_note": "Achten Sie bitte auf das neueste Produktdatenblatt als verbindliche Informationsquelle.",
-  "created_date": "19.08.2026"
+  "copyright_line": "Copyright BKM.MANNESMANN AG - Wideystraße 23 - 59174 Kamen - Germany - Phone: +49 (0) 2307 99 034 0 - www.bkm-mannesmann.de",
+  "copyright_line2": "All rights reserved. Reproduction only with our permission."
 }

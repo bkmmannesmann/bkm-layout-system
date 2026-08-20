@@ -2,7 +2,8 @@
 """Validiert TDS-Content gegen den BKM-Redaktionsstandard.
 
 Ohne --release werden Entwurfsdaten geprüft. Mit --release blockieren offene
-Marker, interne Prüfblöcke und fehlende Produktionsassets die PDF-Erzeugung.
+Marker, interne Prüfblöcke, fehlende Produktionsassets und fehlende
+Markenschriften die PDF-Erzeugung.
 """
 
 from __future__ import annotations
@@ -17,7 +18,10 @@ from typing import Any
 
 ROOT_DIR = Path(__file__).parent.parent.resolve()
 TEMPLATE_DIR = ROOT_DIR / "templates" / "tds"
+FONT_DIR = ROOT_DIR / "assets" / "fonts"
 MARKER_PATTERN = re.compile(r"\[(?:ANGABE FEHLT|ZU PRÜFEN):[^\]]+\]")
+REQUIRED_FONTS = ("TT_Norms_Pro_Regular.ttf", "TT_Norms_Pro_Bold.ttf", "Unbounded-Black.ttf")
+LEGACY_FIELDS = ("revision", "issue_date", "packaging_image")
 REQUIRED_FIELDS = (
     "title", "product_name", "product_subtitle", "product_short", "product_line",
     "created_date", "page_count", "logo", "keyvisual", "line_badge",
@@ -58,6 +62,13 @@ def validate_data(data: dict[str, Any], release: bool = False) -> tuple[list[str
         if field not in data or data[field] in (None, ""):
             errors.append(f"Pflichtfeld fehlt oder ist leer: {field}")
 
+    for legacy_field in LEGACY_FIELDS:
+        if legacy_field in data:
+            errors.append(
+                f"{legacy_field} ist kein Feld des TDS-Datenvertrags; bitte entfernen. "
+                "Das Datum im Kopf ist created_date, eine Revisionsnummer wird nicht geführt."
+            )
+
     if errors:
         return errors, warnings
 
@@ -69,18 +80,19 @@ def validate_data(data: dict[str, Any], release: bool = False) -> tuple[list[str
             errors.append(
                 f"line_badge passt nicht zu {data['product_line']}; erwartet wird {expected_badge}."
             )
+        if "novu" in str(data["product_name"]).lower() and data["product_line"] != "HOME LINE":
+            errors.append("Produkte mit dem Namensbestandteil Novu gehören zur HOME LINE.")
 
-    if data["page_count"] != 3:
-        errors.append("page_count muss für das aktuelle TDS-Template 3 sein.")
+    if not isinstance(data["page_count"], int) or not 2 <= data["page_count"] <= 6:
+        errors.append(
+            "page_count muss die Zahl der veroeffentlichten Seiten nennen (2 bis 6). "
+            "Drei ist der Regelfall; der interne Pruefteil zaehlt nicht mit."
+        )
 
     try:
         datetime.strptime(str(data["created_date"]), "%d.%m.%Y")
     except ValueError:
         errors.append("created_date muss das Format TT.MM.JJJJ haben.")
-
-    for legacy_field in ("revision", "issue_date", "packaging_image"):
-        if legacy_field in data:
-            errors.append(f"{legacy_field} ist kein Feld des TDS-Datenvertrags mehr; bitte entfernen.")
 
     if len(str(data["description"])) > 360:
         errors.append("description überschreitet die zulässigen 360 Zeichen.")
@@ -147,7 +159,7 @@ def validate_data(data: dict[str, Any], release: bool = False) -> tuple[list[str
                 except ImportError:
                     warnings.append("Transparenz des Produktbilds konnte nicht geprüft werden: Pillow fehlt.")
 
-    markers = MARKER_PATTERN.findall("\n".join(walk_strings(data)))
+    markers = MARKER_PATTERN.findall("\\n".join(walk_strings(data)))
     if markers:
         message = f"{len(markers)} offene Marker gefunden."
         if release:
@@ -161,10 +173,16 @@ def validate_data(data: dict[str, Any], release: bool = False) -> tuple[list[str
     if not release and not review and markers:
         warnings.append("Marker ohne review-Block: offene Punkte und Prüfprotokoll dokumentieren.")
 
-    if not (ROOT_DIR / "assets" / "fonts").is_dir() or not list((ROOT_DIR / "assets" / "fonts").glob("*")):
-        message = "Lizenzierte Schriften liegen nicht im lokalen assets/fonts/-Ordner; die PDF-Ansicht kann Ersatzschriften verwenden."
+    missing_fonts = [name for name in REQUIRED_FONTS if not (FONT_DIR / name).is_file()]
+    if missing_fonts:
+        message = (
+            "Markenschriften fehlen unter assets/fonts/: "
+            + ", ".join(missing_fonts)
+            + ". Sie sind im Repository versioniert - bitte nicht loeschen. Ohne sie setzt "
+            "WeasyPrint Ersatzschriften; Laufweite und Umbruch weichen ab."
+        )
         if release:
-            errors.append(message + " Ein Veröffentlichungs-Build ist damit gesperrt.")
+            errors.append(message)
         else:
             warnings.append(message)
 
