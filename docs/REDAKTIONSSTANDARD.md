@@ -1,6 +1,6 @@
 # Redaktionsstandard Technische Datenblätter
 
-Version 1.0 · BKM.MANNESMANN AG · Stand 19.08.2026
+Version 1.1 · BKM.MANNESMANN AG · Stand 19.08.2026
 
 Verbindliche Regeln für die Umwandlung von Produktdaten in ein Technisches Datenblatt.
 
@@ -24,7 +24,7 @@ Die Blöcke stehen immer in dieser Reihenfolge. Kein Block wird ausgelassen, kei
 | 2 | Produktbeschreibung | Drei bis sechs Sätze, **maximal 360 Zeichen**: was das Produkt ist, wofür es eingesetzt wird, welche Hauptwirkung es hat, welcher Nutzen zentral ist, worauf es im System abgestimmt ist. Der Platz im Kopfbereich ist gesetzt — längerer Quelltext wird gekürzt, nicht kleiner gesetzt. Kein Verweis auf die Verarbeitungsanleitung, keine Verarbeitungsschritte, keine Werbung. |
 | 3 | Vorteile | Fünf bis sieben Stichpunkte Kundennutzen, je drei bis sieben Wörter. Keine ausformulierten Sätze, keine Superlative, keine Garantien, keine Dopplung. |
 | 4 | Eigenschaften | Fünf bis sieben Stichpunkte, ausschließlich echte technische Produkteigenschaften. Keine Maße, keine Lagerhinweise, keine Einsatzbereiche, keine Untergrundanforderungen, keine Verarbeitungshinweise, keine Nutzenaussagen — und nichts, was schon unter Vorteile steht. |
-| 5 | Technische Daten | Vollständig auf einer Seite. Zweispaltig, Parameternamen in Großbuchstaben, nur relevante Werte. Pflichtkennwerte nach Abschnitt 5. Produktmaße ausschließlich hier. Läuft die Tabelle über, wird sie mit „Technische Daten (Fortsetzung)" fortgesetzt und nie durch einen anderen Block unterbrochen. |
+| 5 | Technische Daten | Vollständig auf einer Seite. Zweispaltig, Parameternamen in Großbuchstaben, nur relevante Werte. Pflichtkennwerte nach Abschnitt 5. Produktmaße ausschließlich hier. Läuft die Tabelle über, wird sie auf der Folgeseite unter demselben Titel fortgesetzt und nie durch einen anderen Block unterbrochen. |
 | 6 | Anwendungsgebiete | Geeignete Untergründe, Einsatzbereiche, innen oder außen, Systemzugehörigkeit, danach zwingend die klaren Ausschlüsse. Keine Arbeitsschritte, keine Mischanweisung, kein Bohrschema. Abschluss: Verweissatz auf die Verarbeitungsanleitung — nur hier, in keinem anderen Block. |
 | 7 | Hinweise | Allgemeine Bedingungen und Einschränkungen: Untergrundanforderung, Vorbereitung, Verarbeitungsgrenzen, Systemanschluss, Schutz angrenzender Flächen, Verbrauchs- und Trocknungsstreuung. Kurze, für die Eignung relevante Arbeitsschritte dürfen genannt werden — die vollständige Verarbeitungserklärung bleibt in der Verarbeitungsanleitung. Abschluss: Sicherheitsdatenblatt-Satz. |
 | 8 | Verpackungseinheiten | Jede lieferbare Einheit mit Gebindeart, Größe und Artikelnummer. Jede im Text genannte Systemkomponente erscheint hier mit eigener Nummer. Verpackungsangaben stehen nie in den Technischen Daten. |
@@ -38,9 +38,9 @@ Die Blöcke stehen immer in dieser Reihenfolge. Kein Block wird ausgelassen, kei
 - Datentabelle ohne Lagerfähigkeit und ohne Gebinde; Verbrauch je Schicht und Schichtanzahl getrennt, zwei Trocknungszeiten in zwei Zeilen.
 - Anwendungsgebiete in der Reihenfolge geeignet, nicht geeignet, Verweissatz — die Musterform für alle Blätter.
 
-## 3 Kopfdaten und Versionierung
+## 3 Kopfdaten und Erstelldatum
 
-Metadaten stehen zusammen, nicht verteilt. Erstelldatum und Seitenzählung bilden einen Block auf Seite 1; das Datum wandert nicht in die Fußzeile. Das Erstelldatum ist immer der Tag, an dem die Datei erzeugt wird — nie das „Ausgegeben am" eines älteren Quellblatts. Format des Datums: TT.MM.JJJJ. Format der Seitenzählung: n/m, wobei m die tatsächliche Gesamtseitenzahl ist und auf jeder Seite gleich bleibt.
+Metadaten stehen zusammen, nicht verteilt. Erstelldatum und Seitenzählung bilden einen Block auf Seite 1; das Datum wandert nicht in die Fußzeile. Das Erstelldatum ist immer der Tag, an dem die Datei erzeugt wird — nie das „Ausgegeben am" eines älteren Quellblatts. Format des Datums: TT.MM.JJJJ. Format der Seitenzählung: n/m, wobei m die Zahl der veröffentlichten Seiten dieses Blatts ist — drei im Regelfall, bei umfangreichen Produkten mehr und auf jeder Seite gleich bleibt. Der interne Prüfteil trägt keine Seitenzahl, nur den Vermerk „Interner Prüfteil".
 
 Eine Revisionsnummer wird **nicht** geführt. Änderungen sind über den Commit-Verlauf des Repositories und das Freigaberegister nachvollziehbar; jede neu erzeugte Fassung trägt das Erstelldatum ihres Erzeugungstages.
 
@@ -79,18 +79,33 @@ Der Produktname wird im Kopf in seiner Vollform geführt und danach im gesamten 
 
 ### 4.4 Quell-Input übersetzen
 
-Jede Fremdangabe ist Rohmaterial, kein fertiger Text. Übertechnische, werbliche oder fremdsprachliche Formulierungen werden in BKM-Sprache übersetzt, nicht übernommen.
+Dieser Abschnitt gilt ausschließlich für **technische Ausgangsinformationen aus fremder Quelle**: Laborangaben, Rohdatenblätter, fremdsprachliche oder übertechnische Formulierungen. Sie sind Rohmaterial, kein fertiger Text, und werden in BKM-Sprache übersetzt. Für eine angelieferte BKM-Vorlage gilt stattdessen Abschnitt 4.5.
+
+### 4.5 Angelieferte Vorlagen: übernehmen, nicht umformulieren
+
+Liefert die Fachabteilung eine Vorlage — ein Textdokument, einen ausgefüllten Entwurf, eine Stichpunktliste —, dann ist ihr Wortlaut die Vorgabe. Er wird übernommen, nicht verbessert. Was fachlich kritisch, unbelegt oder widersprüchlich ist, wird mit einem Marker nach Abschnitt 7 gekennzeichnet und im Prüfteil erklärt — nicht stillschweigend umgeschrieben.
+
+- Stichpunkte in Vorteilen und Eigenschaften bleiben im Wortlaut der Vorlage, auch wenn sie gegen 4.1 oder Abschnitt 2 verstoßen. Der Verstoß wird im Prüfteil benannt, ein Formulierungsvorschlag darf beiliegen — die Entscheidung trifft die Redaktion.
+- Eine Wirkaussage ohne Nachweis wird nicht abgeschwächt und nicht gestrichen, sondern markiert: `[ZU PRÜFEN: Wirkaussage ohne Nachweis]`.
+- Muss aus Platzgründen gekürzt werden — etwa bei einer Produktbeschreibung über 360 Zeichen —, wird ein **ganzer Satz weggelassen**, nicht umformuliert. Die Kürzung wird im Prüfteil mit Zeichenzahl dokumentiert.
+- Parameternamen und Zeilenreihenfolge der Vorlage bleiben stehen. Weicht eine Bezeichnung von den übrigen Blättern ab, wird das als offener Punkt vermerkt, nicht vereinheitlicht.
+- Umgekehrte Ausnahme: die Fixbausteine (Entsorgung, Rechtliche Hinweise, Schluss-Hinweis) werden **immer** auf ihren freigegebenen Wortlaut zurückgeführt, auch wenn die Vorlage sie verändert hat. Sie sind juristisch abgestimmt.
+
+Sichtbare Kritik ist der Zweck des Entwurfs. Ein Blatt, das glatt gelesen wirkt, weil die Redaktion die Schwachstellen weggeschrieben hat, ist wertlos für die Fachprüfung.
 
 ## 5 Technische Daten: Pflichtkennwerte
 
-Die Tabelle folgt immer derselben Logik: erst was das Produkt ist (Basis, Farbe, Konsistenz, Dichte), dann wie es verarbeitet wird (Mischung, Temperatur, Zeiten, Verbrauch, Schichtaufbau), dann was es leistet (Festigkeiten, Diffusion, Wasseraufnahme, Brandverhalten). Parameternamen stehen in Großbuchstaben, Werte knapp und eindeutig. Fehlt ein Pflichtkennwert, bleibt die Zeile mit Marker stehen — sie wird nicht gelöscht.
+Die Tabelle folgt immer derselben Logik: erst was das Produkt ist (Basis, Farbe, Konsistenz, Dichte), dann wie es verarbeitet wird (Mischung, Temperatur, Zeiten, Verbrauch, Schichtaufbau), dann was es leistet (Festigkeiten, Diffusion, Wasseraufnahme, Brandverhalten). Parameternamen stehen in Großbuchstaben, Werte knapp und eindeutig. Fehlt ein Pflichtkennwert, bleibt die Zeile im Entwurf mit Marker stehen — sie wird nicht gelöscht.
 
-| Produktgruppe | Pflichtkennwerte in dieser Reihenfolge |
+| Produktgruppe | Pflichtkennwerte in dieser Reihenfolge, soweit vorhanden |
 |---|---|
 | Injektionsmittel Novusan, BKM HZ250 Pro, BKM HZ-C | Basis, Wirkweise, Farbe, Geruch, Konsistenz, Dichte mit Prüfnorm, pH-Wert, Wirkstoffgehalt in Gew.-%, VOC-Gehalt, Verarbeitungstemperatur, Verarbeitungsmethode, Injektionsdruck, Bohrlochdurchmesser, Bohrlochabstand (Standard und WTA), Bohrtiefe, Verbrauch je Bohrloch und je Meter in Abhängigkeit der Wandstärke, geeigneter Durchfeuchtungsgrad mit Nachweis, Reaktionszeit. |
 | Trockenmörtel und Putze BKM SP Express, BKM HS, BKM FBM | Produkttyp, Materialbasis, Farbe, Körnung, Wasserbedarf je Gebindegröße, Mischzeit, Mischdrehzahl, Verarbeitungszeit, Verarbeitungstemperatur, Schichtdicke je Lage, Verbrauch, Ergiebigkeit, Frischmörteldichte, Überarbeitbarkeit, Aushärtungsfortschritt, Druckfestigkeitsklasse nach DIN EN 998-1, Haftzugfestigkeit, Wasserdampfdiffusionswiderstandszahl µ, kapillare Wasseraufnahme mit Zeitbezug und Klasse, Wassereindringtiefe, Wärmeleitfähigkeit, Brandverhalten. |
 | Grundierungen und Beschichtungen BKM MHG, NovuTop, NovuTop Primer | Basis, Farbe, Konsistenz, Dichte, Feststoffgehalt, pH-Wert, Mischungsverhältnis, Auftragsart, Verbrauch je Schicht getrennt nach Untergrund, Schichtaufbau, Trocknungszeit je Schicht, Durchhärtung, Verarbeitungstemperatur für Umgebung und Untergrund, maximale Untergrundfeuchte mit Messverfahren, maximale Luftfeuchte, Temperatur- und UV-Beständigkeit, Haftzugfestigkeit. |
 | Platten und Systemteile BKM KS und Systemkomponenten | Material, Farbton, Format, verfügbare Stärken, Formate der Systemteile, Rohdichtebereich, Druckfestigkeit, Wasserdampfdiffusionswiderstandszahl µ mit Prüfnorm, Wärmeleitfähigkeit λD und Bemessungswert mit Prüfnorm, pH-Wert, Baustoffklasse nach EN 13501-1, systemzugehörige Produkte. |
+| Imprägnierungen und Hydrophobierungen NovuShield, NovuProtect | Basis, Wirkweise, Form, Farbe im Nasszustand und nach Trocknung, Geruch, Dichte mit Prüfnorm, pH-Wert, Wirkstoffgehalt, VOC-Gehalt mit Bezugsnorm, Verarbeitungstemperatur für Umgebung und Untergrund, Auftragsart, Verdünnung, Verbrauch je m² getrennt nach Saugfähigkeit, Anzahl der Arbeitsgänge, Einwirkzeit, Begehbarkeit, Regenfestigkeit, Wasseraufnahmekoeffizient w mit Prüfnorm, Eindringtiefe, UV- und Alkalibeständigkeit. |
+
+**„Soweit vorhanden".** Die Listen nennen die Reihenfolge und den vollständigen Umfang, nicht eine Mindestzahl von Zeilen. Im **Entwurf** bleibt jeder fehlende Kennwert als Markerzeile stehen, damit die Fachprüfung ihn sieht. Entscheidet die Anwendungstechnik, eine Angabe **nicht zu führen** — weil sie nicht existiert, vom Anwendungsfall abhängt oder in der Verarbeitungsanleitung erklärt ist —, entfällt die Zeile in der freigegebenen Fassung. Die Entscheidung und ihr Grund werden im Prüfteil unter „Änderungen gegenüber Quell-Input" festgehalten. Ein stilles Weglassen ist nicht zulässig.
 
 ### 5.1 Drei Zeilentypen — mehr gibt es nicht
 
@@ -99,8 +114,10 @@ Jede Zeile der Datentabelle ist einer dieser drei Typen. Ein vierter Typ wird ni
 | Typ | Aufbau | Beispiel |
 |---|---|---|
 | Standardzeile | Parameter in Versalien, Wert. | SCHICHTDICKE · 3–30 mm je Lage |
-| Bedingungszeile | Parameter in Versalien, darunter die Bedingung in Grundschrift, dann der Wert. Nur wenn ein Kennwert je Anwendungsfall unterschiedlich ausfällt. | HALBIERTER BOHRLOCHABSTAND bei Beton, Natur- und Bruchstein 12,5 cm |
+| Bedingungszeile | Parameter in Versalien, darunter die Bedingung in Grundschrift, dann der Wert. Nur wenn ein Kennwert je Anwendungsfall unterschiedlich ausfällt **und die Bedingung wörtlich in der Vorlage steht**. | HALBIERTER BOHRLOCHABSTAND bei Beton, Natur- und Bruchstein 12,5 cm |
 | Formelzeile | Wert ist eine Rechenregel mit benannter Eingangsgröße und Ergebniseinheit. Zulässig nur, wenn die Regel über den gesamten Anwendungsbereich linear gilt. | VERBRAUCH HORIZONTALSPERRE bei 25 cm Bohrlochabstand 14 × Wandstärke in cm = ml je Bohrloch |
+
+**Grenze der Bedingungszeile.** Die Bedingung wird nie hinzugefügt, um einen Kennwert zu erklären, zu präzisieren oder fachlich zu ergänzen. Zulässig ist `BOHRLOCHABSTAND · nach WTA-Vorgabe`, weil der Wert sonst nicht von den anderen Abstandszeilen zu unterscheiden ist. Unzulässig ist `VERARBEITUNGSTEMPERATUR · Umgebung und Untergrund`, wenn die Vorlage nur „mindestens +5 °C" nennt. Fehlt die Unterscheidung tatsächlich, wird sie nach Abschnitt 7 markiert.
 
 ### 5.2 Verbrauchsmatrix
 
@@ -120,14 +137,14 @@ Sobald der Verbrauch von einer messbaren Größe abhängt und nicht linear ist, 
 
 ### 5.4 Seitenkontingent und Umbruch
 
-Der Seitenaufbau ist fest, unabhängig von der Länge des Produkts. Zusätzlicher Inhalt verlängert das Blatt nach hinten, er verschiebt keinen Block nach vorne.
+Die Reihenfolge der Seiten ist fest, ihre Anzahl nicht. Drei veröffentlichte Seiten sind der Regelfall; braucht ein Produkt mehr Kennwerte, eine Matrix oder längere Hinweise, wird das Blatt vier oder fünf Seiten lang. Zusätzlicher Inhalt verlängert das Blatt nach hinten, er verschiebt keinen Block nach vorne und wird nie kleiner gesetzt. Der interne Prüfteil folgt derselben Regel und darf über mehrere Seiten laufen.
 
 | Seite | Inhalt |
 |---|---|
 | 1 | Kopfbereich im Verhältnis 16:9, Vorteile, Eigenschaften, Beginn der Technischen Daten. |
 | 2 | Rest der Technischen Daten, danach Verbrauchs- oder Formattabelle, Anwendungsgebiete, Hinweise. |
-| 3 | Gebinde und Systemkomponenten, Lagerbedingungen, Entsorgung, Rechtliche Hinweise, Schluss-Hinweis. Bei kurzen Produkten wandern diese Blöcke auf Seite 2, das Blatt hat dann zwei Seiten. |
-| letzte | Interner Prüfteil im Entwurf. Entfällt mit der Freigabe. |
+| 3 | Gebinde und Systemkomponenten, Lagerbedingungen, Entsorgung, Rechtliche Hinweise, Schluss-Hinweis. Reicht der Platz auf Seite 2 für den Hinweisblock nicht, wandert er vollständig hierher. Die Grundschrift bleibt auf allen Seiten gleich groß — Überlauf wird nach hinten verlagert, nicht kleiner gesetzt. |
+| 4 oder mehr | Weitere veröffentlichte Seiten, wenn Kennwerte, Matrix oder Hinweise es erfordern. Danach der interne Prüfteil, ebenfalls über mehrere Seiten möglich. Er trägt keine Seitenzahl und wird nicht mit veröffentlicht. |
 
 - Die Technischen Daten beginnen immer auf Seite 1 und dürfen umbrechen. Alle anderen Blöcke bleiben geschlossen.
 - Der Umbruch der Datentabelle liegt an einer inhaltlichen Grenze — nach den Verarbeitungswerten, vor den Leistungswerten. Nie mitten in einer Wertegruppe.
@@ -178,7 +195,7 @@ Ergebnis der Prüfung nach Abschnitt 6 an den Blättern BKM KS, BKM MHG, BKM SP 
 | 01 | alle 10 | Datumsangaben verteilt: Ausgabedatum in der Fußzeile, weitere Metadaten im Kopf. → Ein Erstelldatum im Kopf, Fußzeile ohne Datum. | A |
 | 02 | alle 10 | Revisionsnummern uneinheitlich geführt, teils gar nicht. → Revisionsnummer entfällt vollständig; Nachvollzug über Commit-Verlauf und Freigaberegister. | A |
 | 03 | NovuTop, SP Express | Seitenzählung falsch: dreiseitige Blätter tragen auf Seite 2 die Angabe „2/2". → Gesamtseitenzahl auf allen Seiten identisch setzen. | A |
-| 04 | KS, NovuTop, SP Express, FBM, HZ250 Pro | Die Datentabelle läuft ohne Fortsetzungshinweis auf der Folgeseite weiter, teils erst nach dem Gebindeblock. → Tabelle geschlossen halten, sonst „Technische Daten (Fortsetzung)". | A |
+| 04 | KS, NovuTop, SP Express, FBM, HZ250 Pro | Die Datentabelle läuft erst nach dem Gebindeblock auf der Folgeseite weiter. → Umbruch an eine inhaltliche Grenze legen, Tabelle nie durch einen anderen Block unterbrechen. | A |
 | 05 | HZ250 Pro | Gebindeblock erst auf Seite 3 und damit hinter den Lagerbedingungen der übrigen Blätter. → Blockreihenfolge nach Abschnitt 2 herstellen. | A |
 | 06 | BKM KS | Kein Hinweis auf das Sicherheitsdatenblatt, obwohl das Blatt Staubentwicklung beim Zuschnitt und pH ca. 10 nennt. → Standardsatz ergänzen. | D |
 | 07 | alle 10 | Der Sicherheitsdatenblatt-Satz wird nach Produktlinie vergeben statt nach Gefahrstoffbezug. → Langfassung mit Gebindehinweis bei bekanntem Gefahrstoffbezug, Kurzfassung sonst — unabhängig von der Linie. | A |

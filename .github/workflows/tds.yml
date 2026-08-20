@@ -1,0 +1,28 @@
+name: TDS
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Layoutvertrag prüfen
+        run: python3 scripts/validate_layout.py
+
+      - name: Content prüfen
+        run: |
+          status=0
+          for dir in content/tds*/; do
+            echo "--- $dir"
+            python3 scripts/validate_tds.py "$dir/content.json" || status=1
+          done
+          exit $status

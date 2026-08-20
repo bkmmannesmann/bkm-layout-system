@@ -137,7 +137,7 @@ body {
   flex: none; width: 20px; height: 20px; border-radius: var(--tds-radius);
   background: var(--tds-deep); display: flex; align-items: center; justify-content: center;
 }
-/* Phosphor-Icons sind Flächen-Glyphen: fill, kein stroke. */
+/* Lokale SVG-Flächenglyphen: fill, kein stroke. */
 .tds-icon svg { width: 13px; height: 13px; fill: var(--tds-lime); stroke: none; color: var(--tds-lime); display: block; }
 
 .tds-section-title {
