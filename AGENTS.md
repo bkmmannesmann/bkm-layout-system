@@ -50,7 +50,7 @@ will, ändert **erst** das Dokument, im selben Pull Request wie den Code.
    nur zulässig, wenn die Bedingung wörtlich in der Vorlage steht. Nie zur fachlichen Ergänzung
    hinzufügen — stattdessen markieren.
 10. **Layoutänderungen gelten für alle Blätter**, nicht nur für das gerade offene.
-11. **Deutsche TT-Norms-Sonderzeichen bleiben abgesichert.** Die Fallback-Faces in `design-system/base.css` leiten ausschließlich Ä/Ö/Ü/ä/ö/ü/ß/ẞ an eine lokale Sans-Serif-Schrift weiter, weil externe PDF- und Druck-Renderer die derzeitigen TT-Norms-Glyphen fehlerhaft ersetzen können. Den Fallback erst nach einem reproduzierbar fehlerfreien Export mit geprüften Vollversionen entfernen.
+11. **Gespeicherte TDS-PDFs bleiben vollständig von TT Norms Pro entkoppelt.** Im Druckmodus setzt `design-system/base.css` den gesamten Fließtext auf die lokal eingebettete Familie `BKM PDF Sans` (Liberation Sans), weil externe PDF-Viewer und Druckertreiber die derzeitigen TT-Norms-Glyphen auch nach dem Speichern fehlerhaft ersetzen können. Diese Regel erst nach reproduzierbar fehlerfreiem Speichern und anschließendem Drucken mit geprüften Vollversionen entfernen.
 
 ## Ablauf für eine Änderung
 
