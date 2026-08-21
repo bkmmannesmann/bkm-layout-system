@@ -66,6 +66,11 @@
       <table class="tds-matrix"><thead><tr>{% for col in matrix.columns %}<th{% if not loop.first %} class="num"{% endif %}>{{ col }}</th>{% endfor %}</tr></thead><tbody>{% for r in matrix.rows %}<tr>{% for cell in r %}<td{% if not loop.first %} class="num"{% endif %}>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody></table>
       <p class="tds-matrix-note">{{ matrix.note }}{% if matrix.note_marker %} <span class="tds-marker">{{ matrix.note_marker }}</span>{% endif %}</p>
       {% endif %}
+      {% if format_table %}
+      <div class="tds-section-head"><span class="tds-icon">{% include 'icons/daten.svg' ignore missing %}</span><h2 class="tds-section-title">{{ format_table.title }}</h2></div>
+      <table class="tds-matrix"><thead><tr>{% for col in format_table.columns %}<th{% if not loop.first %} class="num"{% endif %}>{{ col }}</th>{% endfor %}</tr></thead><tbody>{% for r in format_table.rows %}<tr>{% for cell in r %}<td{% if not loop.first %} class="num"{% endif %}>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody></table>
+      <p class="tds-matrix-note">{{ format_table.note }}{% if format_table.note_marker %} <span class="tds-marker">{{ format_table.note_marker }}</span>{% endif %}</p>
+      {% endif %}
       <div class="tds-section-head"><span class="tds-icon">{% include 'icons/anwendung.svg' ignore missing %}</span><h2 class="tds-section-title">Anwendungsgebiete</h2></div>
       <p class="tds-text">{{ applications }}</p>{% if applications_note %}<p class="tds-text tds-text--note">{{ applications_note }}</p>{% endif %}<p class="tds-text tds-text--accent">{{ manual_reference }}</p>
       {% if not notes_on_page3 %}
@@ -86,8 +91,15 @@
       <div class="tds-section-head"><span class="tds-icon">{% include 'icons/gebinde.svg' ignore missing %}</span><h2 class="tds-section-title">Verpackungseinheiten / Gebinde</h2></div>
       <div class="tds-packaging">
         {% for unit in packaging %}<div class="tds-packaging__unit"><strong>{{ unit.size }}</strong><span>Art.-Nr. {{ unit.article_number }}</span></div>{% endfor %}
-        {% if system_components %}<div class="tds-packaging__group">Systemkomponenten</div>{% for unit in system_components %}<div class="tds-packaging__unit"><strong>{{ unit.size }}</strong><span>Art.-Nr. {{ unit.article_number }}</span></div>{% endfor %}{% endif %}
+        {% if system_components %}
+          {% if system_components is mapping %}
+            <div class="tds-packaging__group">{{ system_components.title }}</div>{% for component in system_components["items"] %}<div class="tds-packaging__unit"><strong>{{ component.name }}</strong><span>{{ component.role }}</span></div>{% endfor %}
+          {% else %}
+            <div class="tds-packaging__group">Systemkomponenten</div>{% for unit in system_components %}<div class="tds-packaging__unit"><strong>{{ unit.size }}</strong><span>Art.-Nr. {{ unit.article_number }}</span></div>{% endfor %}
+          {% endif %}
+        {% endif %}
       </div>
+      {% if system_components is mapping and system_components.note %}<p class="tds-matrix-note">{{ system_components.note }}</p>{% endif %}
       {% if packaging_note %}<p class="tds-matrix-note"><span class="tds-marker">{{ packaging_note }}</span></p>{% endif %}
       {% if notes_on_page3 %}
       <div class="tds-section-head"><span class="tds-icon">{% include 'icons/hinweise.svg' ignore missing %}</span><h2 class="tds-section-title">Hinweise</h2></div>
@@ -111,14 +123,28 @@
       <div class="tds-runhead"><div class="tds-runhead__doc">Interner Prüfteil<div class="tds-runhead__meta">Erstelldatum: {{ created_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
       <div class="tds-review-note"><strong>Interner Prüfteil – nicht Teil des veröffentlichten Datenblatts.</strong> Er wird erst nach vollständig dokumentierter Freigabe entfernt.</div>
       <div class="tds-review-bar">Offene Punkte / zu prüfen</div><ol class="tds-review-list">{% for item in review.open_points %}<li>{{ item }}</li>{% endfor %}</ol>
-      <div class="tds-review-bar">Änderungen gegenüber Quell-Input</div><ul class="tds-review-list">{% for item in review.changes %}<li>{{ item }}</li>{% endfor %}</ul>
-      <div class="tds-review-protocol"><span class="tds-review-protocol__label">Prüfprotokoll</span>{{ review.protocol }}</div>
+      {% set review_split = review.continuation_after if review.continuation_after else review.changes|length %}
+      <div class="tds-review-bar">Änderungen gegenüber Quell-Input</div><ul class="tds-review-list">{% for item in review.changes[:review_split] %}<li>{{ item }}</li>{% endfor %}</ul>
+      {% if not review.continuation_after %}<div class="tds-review-protocol"><span class="tds-review-protocol__label">Prüfprotokoll</span>{{ review.protocol }}</div>{% endif %}
     </div>
     <footer class="tds-foot">
       <div class="tds-foot__copy">Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany<br>Phone: +49 (0) 2307 99 034 0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.</div>
       <div class="tds-foot__right"><div class="tds-foot__meta">Interner Prüfteil</div></div>
     </footer>
   </section>
+  {% if review.continuation_after %}
+  <section class="tds-page">
+    <div class="tds-body tds-body--full">
+      <div class="tds-runhead"><div class="tds-runhead__doc">Interner Prüfteil<div class="tds-runhead__meta">Erstelldatum: {{ created_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
+      <div class="tds-review-bar">Änderungen gegenüber Quell-Input (Fortsetzung)</div><ul class="tds-review-list">{% for item in review.changes[review_split:] %}<li>{{ item }}</li>{% endfor %}</ul>
+      <div class="tds-review-protocol"><span class="tds-review-protocol__label">Prüfprotokoll</span>{{ review.protocol }}</div>
+    </div>
+    <footer class="tds-foot">
+      <div class="tds-foot__copy">Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany<br>Phone: +49 (0) 2307 99 034 0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.</div>
+      <div class="tds-foot__right"><div class="tds-foot__meta">Interner Prüfteil · Fortsetzung</div></div>
+    </footer>
+  </section>
+  {% endif %}
   {% endif %}
 </body>
 </html>

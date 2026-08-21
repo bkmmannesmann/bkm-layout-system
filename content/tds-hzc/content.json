@@ -1,0 +1,232 @@
+{
+  "title": "Technisches Datenblatt – BKM HZ-C Creme",
+  "product_name": "BKM HZ-C Creme",
+  "product_subtitle": "Injektionscreme gegen aufsteigende Feuchtigkeit",
+  "product_short": "Injektionscreme",
+  "product_line": "PRO LINE",
+  "line_badge": "../../assets/images/badge-proline.png",
+  "product_image": "../../assets/images/products/hzc.png",
+  "page_count": 3,
+  "logo": "../../assets/images/logos/logo-deepgreen-green.png",
+  "keyvisual": "../../assets/images/keyvisual-on-light.png",
+  "created_date": "20.08.2026",
+  "description": "Die BKM HZ-C Creme ist eine hochkonzentrierte, anwendungsfertige Injektionscreme auf Silan-Basis zur nachträglichen Abdichtung gegen kapillar aufsteigende Feuchtigkeit im Mauerwerk. Dadurch wird die kapillare Wasseraufnahme reduziert und das Mauerwerk oberhalb der Injektionsebene kann austrocknen.",
+  "advantages": [
+    "WTA geprüfte Wirksamkeit",
+    "Sofort verarbeitungsfertig",
+    "Tiefenwirksamer Feuchteschutz",
+    "Emissionsarm für Innenbereiche",
+    "Für hohe Durchfeuchtung (bis 95 %)"
+  ],
+  "properties": [
+    "Wirkstoffgehalt über 80 %",
+    "Lösemittelfrei",
+    "Sehr gute Penetration bis in feinste Kapillarporen",
+    "Alkalibeständig",
+    "Kapillarporen werden nicht verstopft"
+  ],
+  "technical_data_page1": [
+    {
+      "parameter": "Basis",
+      "value": "Silan-Basis"
+    },
+    {
+      "parameter": "Farbe",
+      "value": "weißlich"
+    },
+    {
+      "parameter": "Konsistenz",
+      "value": "pastös, cremeartig"
+    },
+    {
+      "parameter": "Verbrauch",
+      "value": "abhängig von der Wandstärke (siehe Verbrauchstabelle)"
+    },
+    {
+      "parameter": "Verarbeitungstemperatur",
+      "value": "ab +5 °C"
+    },
+    {
+      "parameter": "Wirkung",
+      "value": "hydrophobierend"
+    },
+    {
+      "parameter": "Wirkstoffgehalt",
+      "value": "ca. 83 % (Gew.-%)"
+    },
+    {
+      "parameter": "Dichte",
+      "value": "ca. 0,89 g/cm³"
+    },
+    {
+      "parameter": "Verarbeitungsmethode",
+      "value": "Schlauchbeutelpresse, Injektionspistole, Injektionspumpe"
+    },
+    {
+      "parameter": "VOC-Gehalt",
+      "value": "< 1 % nach EU-Richtlinie 2004/42/EG"
+    },
+    {
+      "parameter": "Bohrlochdurchmesser",
+      "value": "14 mm"
+    },
+    {
+      "parameter": "Bohrlochabstand",
+      "value": "10 cm"
+    },
+    {
+      "parameter": "Geeigneter Durchfeuchtungsgrad",
+      "value": "bis 95 % gemäß WTA-Merkblatt 4-10"
+    }
+  ],
+  "technical_data_page2": [
+    {
+      "parameter": "Verbrauch",
+      "value": "siehe Verbrauchstabelle"
+    }
+  ],
+  "matrix": {
+    "title": "Verbrauchstabelle",
+    "columns": [
+      "Wandstärke (cm)",
+      "Bohrtiefe (cm)",
+      "Menge je Bohrloch (ml)",
+      "Menge je Meter (ml)"
+    ],
+    "rows": [
+      [
+        "10,0",
+        "5,0",
+        "9",
+        "90"
+      ],
+      [
+        "12,5",
+        "7,5",
+        "13",
+        "130"
+      ],
+      [
+        "15,0",
+        "10,0",
+        "17",
+        "170"
+      ],
+      [
+        "17,5",
+        "12,5",
+        "21",
+        "210"
+      ],
+      [
+        "20,0",
+        "15,0",
+        "25",
+        "250"
+      ],
+      [
+        "24,5",
+        "19,5",
+        "33",
+        "330"
+      ],
+      [
+        "30,0",
+        "25,0",
+        "42",
+        "420"
+      ],
+      [
+        "33,0",
+        "28,0",
+        "47",
+        "470"
+      ],
+      [
+        "36,5",
+        "31,5",
+        "53",
+        "530"
+      ],
+      [
+        "40,0",
+        "35,0",
+        "59",
+        "590"
+      ],
+      [
+        "42,0",
+        "37,0",
+        "63",
+        "630"
+      ],
+      [
+        "44,0",
+        "39,0",
+        "66",
+        "660"
+      ],
+      [
+        "48,0",
+        "43,0",
+        "73",
+        "730"
+      ],
+      [
+        "50,0",
+        "45,0",
+        "76",
+        "760"
+      ]
+    ],
+    "note": "Bohrung 14 mm waagerecht mit seitlichem Abstand von 10 cm. Die Bohrtiefe beträgt durchgehend Wandstärke minus 5 cm. Die Mengenangaben sind auf ganze Milliliter gerundete Richtwerte zur Kalkulation."
+  },
+  "applications": "Zur Erstellung einer Horizontalsperre gegen kapillar aufsteigende Feuchtigkeit, durch nachträgliche Injektion in mineralisches Mauerwerk, um die Bausubstanz vor Feuchtigkeitsschäden zu schützen.",
+  "manual_reference": "Für eine detaillierte Erklärung zur Verwendung des Produktes nutze bitte unsere separate Verarbeitungsanleitung.",
+  "notes": "Entferne vor der Injektion feuchte- und salzgeschädigte Putze im betroffenen Bereich und kratze lose oder beschädigte Fugen aus. Die Bohrlöcher werden horizontal in eine Lager- oder Mörtelfuge eingebracht und anschließend gründlich von Staub und Bohrmehl befreit. Die Injektion erfolgt mit geeigneten 1K-Injektionsgeräten: Führe die Injektionslanze bis zum Ende des Bohrlochs ein und ziehe sie während der Betätigung der Injektionspistole langsam zurück, damit das Bohrloch vollständig gefüllt wird. Verschließe die Bohrlöcher nach der Injektion der Creme ins Mauerwerk sofort mit BKM FBM. Damit das Mauerwerk oberhalb der Injektionsebene austrocknen kann, dürfen keine diffusionsdichten Beschichtungen vorhanden sein. Gegebenenfalls sind zusätzliche Maßnahmen zur Trocknung oder Abdichtung erforderlich. Arbeitsgeräte und Werkzeuge reinigst Du unmittelbar nach der Verarbeitung mit Wasser. Nicht für Hochlochziegel und zur Erstellung von Flächensperren bei Querdurchfeuchtung geeignet. Hier empfehlen wir unser Produkt Novusan.",
+  "notes_on_page3": false,
+  "sds_reference": "Gefahrenhinweise und Sicherheitsratschläge sind auf den Gebinden und im Sicherheitsdatenblatt zu finden. Das aktuelle Sicherheitsdatenblatt ist auf Anfrage erhältlich.",
+  "packaging": [
+    {
+      "size": "600 ml Schlauchbeutel",
+      "article_number": "125137-01"
+    },
+    {
+      "size": "12 × 600 ml Schlauchbeutel Paket",
+      "article_number": "124140-12"
+    },
+    {
+      "size": "10 Liter Kunststoffeimer",
+      "article_number": "13616-01"
+    }
+  ],
+  "storage": "Kühl, trocken und frostfrei lagern. Direkte Sonneneinstrahlung vermeiden. Die Lagertemperatur sollte zwischen +5 °C und +25 °C liegen. In ungeöffneten Originalgebinden beträgt die Lagerfähigkeit etwa 12 Monate.",
+  "disposal": "Die Entsorgung muss gemäß den örtlichen Vorschriften erfolgen. Restentleerte Verpackungen können der Wiederverwertung zugeführt werden.",
+  "legal": [
+    "Diese Hinweise basieren auf unserem aktuellen Wissensstand und Erfahrungen, unter der Voraussetzung, dass unsere Produkte ordnungsgemäß gelagert und eingesetzt werden. Aufgrund unterschiedlicher Materialien und Bedingungen können wir keine Garantie für das Arbeitsergebnis übernehmen. Eine Haftung unsererseits besteht nur bei nachweislichem Vorsatz oder grober Fahrlässigkeit.",
+    "Der Anwender ist verantwortlich, die Produkte auf deren Eignung für den vorgesehenen Zweck zu prüfen. Die jeweils aktuelle Produktspezifikation sollte berücksichtigt werden. Änderungen sind vorbehalten. Eventuelle Schutzrechte Dritter sind zu beachten.",
+    "Für die Qualität unserer Produkte bürgen wir gemäß unseren Verkaufs- und Lieferbedingungen. Eine Garantie für den Anwendungserfolg wird nicht übernommen. Unsere technischen Datenblätter bieten eine unverbindliche Beratung und erfordern schriftliche Zustimmung für Zusicherungen, die darüber hinausgehen."
+  ],
+  "final_note": "Achten Sie bitte auf das neueste Produktdatenblatt als verbindliche Informationsquelle.",
+  "copyright_line": "Copyright BKM.MANNESMANN AG - Wideystraße 23 - 59174 Kamen - Germany - Phone: +49 (0) 2307 99 034 0 - www.bkm-mannesmann.de",
+  "copyright_line2": "All rights reserved. Reproduction only with our permission.",
+  "review": {
+    "open_points": [
+      "Keine offenen Punkte. Durch die Anwendungstechnik geklärt sind Bohrtiefe, Bohrlochabstand, Bohrlochdurchmesser, Durchfeuchtungsgrad, VOC-Gehalt, Merkblattnummer, Artikelnummern, Produktname und der Wortlaut zum Sicherheitsdatenblatt. Rechenregel, pH-Wert und Prüfnorm zur Dichte werden bewusst nicht geführt; die Begründungen stehen unter Änderungen."
+    ],
+    "changes": [
+      "Wortlaut unverändert aus dem freigegebenen Blatt vom 01.04.2026 übernommen: Anwendungsgebiete, Lagerbedingungen und die Fixbausteine — einschließlich „reinigst Du“ mit großem Du, das Abschnitt 4.1 widerspricht.",
+      "Beschreibung von 425 auf 298 Zeichen gekürzt (Grenze 360), durch Weglassen des Mittelsatzes zur Saugwirkung — dieselbe Aussage steht als Eigenschaft.",
+      "Produktname durchgehend BKM HZ-C Creme in Kopf und Laufköpfen, wie von der Anwendungstechnik festgelegt.",
+      "Die 14-zeilige Verbrauchsreihe ist als Verbrauchstabelle nach Abschnitt 5.2 geführt, die Datentabelle trägt die Verweiszeile aus der Quelle. Bohrtiefe der ersten Zeile von 5,5 auf 5,0 cm korrigiert; sie beträgt jetzt durchgehend Wandstärke minus 5 cm.",
+      "Keine Rechenregel im Blatt — auf Weisung. Die Mengen sind auf ganze Milliliter gerundete Richtwerte zur Kalkulation; Angaben mit Nachkommastellen wären für den Anwender irreführend, weil die Creme nicht millilitergenau ins Bohrloch gelangt. Die Fußnote sagt das.",
+      "Vier Kennwertzeilen ergänzt: VOC-Gehalt < 1 % nach EU-Richtlinie 2004/42/EG, Bohrlochdurchmesser 14 mm, Bohrlochabstand 10 cm und geeigneter Durchfeuchtungsgrad bis 95 % gemäß WTA-Merkblatt 4-10 — dieselben Werte wie bei BKM HZ250 Pro.",
+      "pH-Wert entfällt: er ist nicht messbar, weil sich die Creme nicht mit Wasser mischt. Eine Prüfnorm zur Dichte wird wie bei Novusan nicht geführt.",
+      "Satz zum Sicherheitsdatenblatt auf den einheitlichen Wortlaut von HZ250 Pro und Novusan gebracht. Die Quelle nannte „Hinweise zu den enthaltenen Stoffen…“.",
+      "Gebindereihenfolge nach Abschnitt 5.3 von der kleinsten Einheit zum Großgebinde sortiert: Schlauchbeutel, Paket, Eimer. Die Artikelnummern sind bestätigt, auch die abweichende Stellenzahl bei 13616-01.",
+      "Einheitenschreibweise nach Abschnitt 4.2: „(Gew. %)“ zu „(Gew.-%)“, „bis 95%“ zu „bis 95 %“, „12 x 600 ml“ zu „12 × 600 ml“.",
+      "Die Quelle trägt „Revisionsnummer: 1.0“ und das Ausgabedatum 01.04.2026. Beides wurde nicht übernommen — der Kopf trägt das Erstelldatum dieser Datei."
+    ],
+    "protocol": "P01 Einheiten nach Vereinheitlichung vollständig · P05 bestanden, Menge je Meter ist durchgehend das Zehnfache der Menge je Bohrloch und passt zum Bohrlochabstand von 10 cm · P06 bestanden mit Auflage: die Reihe ist auf ganze Milliliter gerundet und als Richtwert deklariert, eine Rechenregel wird auf Weisung nicht ausgewiesen · P07 VOC mit EU-Richtlinie 2004/42/EG belegt; eine Prüfnorm zur Dichte wird wie bei Novusan nicht geführt · P08 bestanden, WTA-Wirksamkeit über Merkblatt 4-10 und Emissionsarmut über den VOC-Gehalt belegt · P10 entfällt, das Blatt führt keine Zeitkette · P11 BKM FBM und Novusan werden verwiesen und existieren; der Verweis betrifft ausschließlich die Flächensperre, nicht die Baustoffeinschränkungen von Novusan · P12 Artikelnummern durch die Anwendungstechnik bestätigt."
+  }
+}

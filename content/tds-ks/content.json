@@ -1,0 +1,193 @@
+{
+  "title": "Technisches Datenblatt – BKM KS",
+  "product_name": "BKM KS",
+  "product_subtitle": "Mineralische Kalziumsilikatplatte zur Feuchteregulierung",
+  "product_short": "Kalziumsilikatplatte",
+  "product_line": "PRO LINE",
+  "line_badge": "../../assets/images/badge-proline.png",
+  "product_image": "../../assets/images/products/ks.png",
+  "page_count": 3,
+  "logo": "../../assets/images/logos/logo-deepgreen-green.png",
+  "keyvisual": "../../assets/images/keyvisual-on-light.png",
+  "created_date": "21.08.2026",
+  "description": "BKM KS ist eine weiße, mineralische Kalziumsilikatplatte für einen verbesserten Feuchtehaushalt an Wänden und Decken. Kapillaraktiv und diffusionsoffen nimmt sie erhöhte Raumluftfeuchte auf und gibt sie bei günstigeren Klimabedingungen wieder ab. Die hohe Alkalität unterstützt die Vorbeugung von Schimmelbildung.",
+  "advantages": [
+    "Reguliert die Raumluftfeuchte",
+    "Reduziert Kondenswasserbildung",
+    "Unterstützt Schimmelvorbeugung",
+    "Verbessert das Raumklima",
+    "Geeignet für Wände und Decken",
+    "Steigert die Energieeffizienz der Immobilie",
+    "Keine zusätzliche Grundierung notwendig"
+  ],
+  "properties": [
+    "Zellstoffverstärktes Kalziumsilikat",
+    "Kapillaraktiv",
+    "Diffusionsoffen",
+    "Wärmedämmend",
+    "Hoch alkalisch",
+    "Nicht brennbar, Klasse A1",
+    "Mikroporöse Struktur"
+  ],
+  "technical_data_page1": [
+    {
+      "parameter": "Material",
+      "value": "zellstoffverstärktes Kalziumsilikat"
+    },
+    {
+      "parameter": "Farbton",
+      "value": "weiß"
+    },
+    {
+      "parameter": "Formate und Plattenstärken",
+      "value": "siehe Formattabelle"
+    },
+    {
+      "parameter": "Baustoffklasse",
+      "value": "A1 nach EN 13501-1"
+    },
+    {
+      "parameter": "Wasserdampfdiffusionswiderstandszahl μ",
+      "value": "3 nach DIN EN 12086"
+    },
+    {
+      "parameter": "Wärmeleitfähigkeit λD",
+      "value": "0,075 W/(m·K)"
+    }
+  ],
+  "technical_data_page2": [
+    {
+      "parameter": "Wärmeleitfähigkeit",
+      "condition": "Bemessungswert",
+      "value": "0,079 W/(m·K)"
+    },
+    {
+      "parameter": "Rohdichtebereich",
+      "value": "200–245 kg/m³"
+    },
+    {
+      "parameter": "Druckfestigkeit",
+      "value": "≥ 1.500 kPa nach DIN EN 826"
+    },
+    {
+      "parameter": "pH-Wert",
+      "value": "ca. 10"
+    },
+    {
+      "parameter": "Flächengewicht",
+      "value": "ca. 5,0–6,13 kg/m²"
+    },
+    {
+      "parameter": "Wärmedurchlasswiderstand R",
+      "condition": "bei 25 mm und 50 mm Plattenstärke",
+      "value": "ca. 0,32 und ca. 0,63 m²K/W"
+    }
+  ],
+  "format_table": {
+    "title": "Formattabelle",
+    "columns": [
+      "Variante",
+      "Format",
+      "Stärke",
+      "Art.-Nr."
+    ],
+    "rows": [
+      [
+        "BKM KS Kalziumsilikatplatte",
+        "1000 × 500 mm",
+        "25 mm",
+        "23898137-01"
+      ],
+      [
+        "BKM KS Kalziumsilikatplatte",
+        "1000 × 500 mm",
+        "30 mm",
+        "23938137-01"
+      ],
+      [
+        "BKM KS Kalziumsilikatplatte",
+        "1000 × 500 mm",
+        "50 mm",
+        "232378131-01"
+      ],
+      [
+        "BKM KS-L Laibungsplatte",
+        "250 × 500 mm",
+        "15 mm",
+        "239018141-20"
+      ],
+      [
+        "BKM KS-W Wandanschlusskeil",
+        "625 × 250 mm",
+        "25 → 3 mm",
+        "2392416-10"
+      ]
+    ],
+    "note": "Der Wandanschlusskeil verjüngt sich keilförmig von 25 mm auf 3 mm."
+  },
+  "packaging": [],
+  "system_components": {
+    "title": "Systemkomponenten",
+    "items": [
+      {
+        "name": "BKM KS-K",
+        "role": "Kleber"
+      },
+      {
+        "name": "BKM KS-S",
+        "role": "Spachtel"
+      },
+      {
+        "name": "BKM KS-G",
+        "role": "Gewebe"
+      },
+      {
+        "name": "BKM KS-L",
+        "role": "Laibungsplatten"
+      },
+      {
+        "name": "BKM KS-W",
+        "role": "Wandanschlusskeile"
+      }
+    ],
+    "note": "BKM KS-K, KS-S und KS-G haben eigene technische Datenblätter; Gebindegrößen und Artikelnummern stehen dort. KS-L und KS-W sind Maßvarianten und in der Formattabelle geführt."
+  },
+  "applications": "BKM KS eignet sich für Wand- und Deckenflächen im Innenbereich. Das Produkt wird zur Feuchteregulierung, zur Reduzierung von Kondenswasserbildung, Wärmedämmung und zur Unterstützung der Schimmelvorbeugung auf geeigneten mineralischen Untergründen wie Beton, Leichtbeton, Ziegelmauerwerk, Kalksandstein sowie Kalkzement- und Zementputze eingesetzt. Geeignete Einsatzbereiche sind insbesondere Innenflächen mit erhöhter Feuchtebelastung oder ungünstigem Oberflächenklima. Nicht geeignet für Gipsputze und Gipskartonplatten. BKM KS-L Laibungsplatten werden für schmale Anschlussbereiche an Türen und Fenstern eingesetzt. BKM KS-W Wandanschlusskeile werden für angrenzende Teilbereiche an Decken und Wänden verwendet. Nicht geeignet sind Untergründe mit nicht beseitigten Baumängeln, mit eindringender Feuchtigkeit oder aktivem Schimmelbefall.",
+  "manual_reference": "Für eine detaillierte Erklärung zur Verwendung des Produktes nutze bitte unsere separate Verarbeitungsanleitung.",
+  "notes": "Der Untergrund muss sauber, fest, tragfähig, spannungsfrei und frei von haftungsmindernden Stoffen sein. Tapeten müssen vor der Verarbeitung der Platten vollständig entfernt werden. Vorhandene Feuchteursachen, bauliche Mängel und Schimmelbefall müssen vor der Ausführung fachgerecht beseitigt werden. Unebene Untergründe sind so vorzubereiten, dass eine vollflächige Verklebung möglich ist. Die raumseitige Plattenoberfläche, auf der anschließend gespachtelt wird, ist bereits vorgrundiert. Eine Grundierung auf der Plattenseite, auf der der Kleber aufgetragen wird, ist nicht notwendig. Kreuzfugen sind unzulässig. Der Kontakt zu angrenzenden Bauteilen (z. B. Decke, Wand, Boden) ist umlaufend mit einem Kompriband zu entkoppeln. Dieses dient zur elastischen Entkopplung der Kalziumsilikatplatten, gleicht Bauteilbewegungen und Unebenheiten aus und verhindert offene Randfugen. Beim Zuschneiden kann Staub entstehen; geeignete Schutzmaßnahmen sind zu beachten. Nachträgliche Befestigungen müssen bis ins tragende Mauerwerk verankert werden. Beschädigungen an der Kalziumsilikatplatte z. B. durch Nägel oder Dübel können die Funktion beeinträchtigen.",
+  "notes_on_page3": true,
+  "sds_reference": "Für Kalziumsilikatplatten als Erzeugnis ist nach REACH kein Sicherheitsdatenblatt erforderlich. Beim Zuschneiden entstehender Staub ist alkalisch; Atem-, Augen- und Hautschutz sind zu verwenden.",
+  "storage": "Trocken und vor Feuchtigkeit geschützt lagern. Unter diesen Bedingungen ist die Haltbarkeit unbegrenzt.",
+  "disposal": "Die Entsorgung muss gemäß den örtlichen Vorschriften erfolgen. Restentleerte Verpackungen können der Wiederverwertung zugeführt werden.",
+  "legal": [
+    "Diese Hinweise basieren auf unserem aktuellen Wissensstand und Erfahrungen, unter der Voraussetzung, dass unsere Produkte ordnungsgemäß gelagert und eingesetzt werden. Aufgrund unterschiedlicher Materialien und Bedingungen können wir keine Garantie für das Arbeitsergebnis übernehmen. Eine Haftung unsererseits besteht nur bei nachweislichem Vorsatz oder grober Fahrlässigkeit.",
+    "Der Anwender ist verantwortlich, die Produkte auf deren Eignung für den vorgesehenen Zweck zu prüfen. Die jeweils aktuelle Produktspezifikation sollte berücksichtigt werden. Änderungen sind vorbehalten. Eventuelle Schutzrechte Dritter sind zu beachten.",
+    "Für die Qualität unserer Produkte bürgen wir gemäß unseren Verkaufs- und Lieferbedingungen. Eine Garantie für den Anwendungserfolg wird nicht übernommen. Unsere technischen Datenblätter bieten eine unverbindliche Beratung und erfordern schriftliche Zustimmung für Zusicherungen, die darüber hinausgehen."
+  ],
+  "final_note": "Achten Sie bitte auf das neueste Produktdatenblatt als verbindliche Informationsquelle.",
+  "copyright_line": "Copyright BKM.MANNESMANN AG - Wideystraße 23 - 59174 Kamen - Germany - Phone: +49 (0) 2307 99 034 0 - www.bkm-mannesmann.de",
+  "copyright_line2": "All rights reserved. Reproduction only with our permission.",
+  "review_page_count": 2,
+  "review": {
+    "continuation_after": 6,
+    "open_points": [
+      "Keine offenen Punkte. Durch die Anwendungstechnik geklärt sind Artikelnummern, Prüfnormen zu Druckfestigkeit und Wasserdampfdiffusion, Flächengewicht, Wärmedurchlasswiderstand, Sicherheitsdatenblatt und Lagerfähigkeit. Wasseraufnahmekoeffizient, Verarbeitungstemperatur und Kleberverbrauch werden bewusst nicht geführt; die Begründungen stehen unter Änderungen."
+    ],
+    "changes": [
+      "Wortlaut unverändert übernommen: sieben Vorteile, sieben Eigenschaften, Lagerbedingungen und die Fixbausteine. Die beiden Stichpunkte „Geeignet für Wände und Decken“ und „Keine zusätzliche Grundierung notwendig“ bleiben unter Vorteile — sie sind zugleich Einsatzbereich und Verarbeitungshinweis, für den Anwender aber ein Vorteil: höherer Einsatzbereich und weniger Arbeit.",
+      "Die Liste „Systemzugehörige Produkte“ aus den Anwendungsgebieten in den Block Systemkomponenten überführt — alle fünf Produkte stehen dort. Die beiden Sätze zum Einsatz von KS-L und KS-W bleiben in den Anwendungsgebieten.",
+      "Beschreibung von 748 auf 313 Zeichen gekürzt (Grenze 360), durch Weglassen des zweiten Absatzes zur Systemzugehörigkeit — derselbe Inhalt steht in den Anwendungsgebieten.",
+      "Die vier Maßzeilen der Quelle sind mit dem Gebindeblock zu einer Formattabelle nach Abschnitt 5.3 zusammengefasst; die Datentabelle trägt nur die Verweiszeile. Alle fünf systemzugehörigen Produkte stehen im Block Systemkomponenten; KS-L und KS-W zusätzlich mit Maß und Artikelnummer in der Formattabelle.",
+      "Artikelnummern durch die Anwendungstechnik bestätigt und korrigiert: KS-L auf 239018141-20, KS-W auf 2392416-10. Die unterschiedlichen Stellenzahlen sind gewollt.",
+      "Zwei Prüfnormen ergänzt: Druckfestigkeit nach DIN EN 826, Wasserdampfdiffusionswiderstandszahl nach DIN EN 12086. Für die Wärmeleitfähigkeit wird keine Norm geführt.",
+      "Zwei Kennwertzeilen ergänzt: Flächengewicht ca. 5,0–6,13 kg/m² und Wärmedurchlasswiderstand R von ca. 0,32 m²K/W bei 25 mm und ca. 0,63 m²K/W bei 50 mm. Damit ist der Vorteil „Steigert die Energieeffizienz“ belegt.",
+      "Verarbeitungstemperatur und Kleberverbrauch entfallen: beide sind bei einer Platte Sache des Klebers und stehen in dessen Datenblatt. Der Wasseraufnahmekoeffizient wurde vom Vorlieferanten nicht bestimmt und wird nicht geführt.",
+      "Der Satz zum Sicherheitsdatenblatt lautet abweichend von den übrigen Blättern: für Kalziumsilikatplatten als Erzeugnis ist nach REACH keines erforderlich. Stattdessen steht der Arbeitsschutzhinweis zum alkalischen Schleifstaub.",
+      "Gebindegrößen und Artikelnummern der Systemkomponenten KS-K, KS-S und KS-G werden nicht geführt — sie haben eigene Datenblätter, hier stehen nur Querverweise.",
+      "„1000 × 500 × 25 mm“ in Format und Stärke getrennt, damit die Spalten der Formattabelle vergleichbar sind; „z. B“ zu „z. B.“ ergänzt.",
+      "Seitenverteilung: Datentabelle, Formattabelle, Systemkomponenten und Anwendungsgebiete stehen auf Seite 2 — für die Hinweise reicht der Platz dort nicht, sie wandern geschlossen auf Seite 3 (Abschnitt 5.4). Das Quellblatt führt die Hinweise auf Seite 2.",
+      "Das Ausgabedatum 30.07.2026 der Quelle wurde nicht übernommen. Der Kopf trägt das Erstelldatum dieser Datei; eine Revisionsnummer wird nicht geführt."
+    ],
+    "protocol": "P01 Einheiten vollständig · P04 Rohdichte 200–245 kg/m³ und λ 0,075 W/(m·K) sind für Kalziumsilikat plausibel · P06 entfällt, keine verbrauchsabhängige Reihe · P07 bestanden: Baustoffklasse nach EN 13501-1, Druckfestigkeit nach DIN EN 826, μ nach DIN EN 12086; für die Wärmeleitfähigkeit wird keine Norm geführt · P08 bestanden, die Energieeffizienz ist über den Wärmedurchlasswiderstand belegt; der Wasseraufnahmekoeffizient liegt beim Vorlieferanten nicht vor · P11 KS-K, KS-S und KS-G sind Querverweise auf eigene Datenblätter, KS-L und KS-W in der Formattabelle geführt · P12 Artikelnummern durch die Anwendungstechnik bestätigt."
+  }
+}

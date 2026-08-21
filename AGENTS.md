@@ -32,8 +32,11 @@ will, ändert **erst** das Dokument, im selben Pull Request wie den Code.
    phosphoricons.com Weight **Bold**, `width`/`height` entfernen, nach `templates/tds/icons/`,
    dann `python3 scripts/validate_layout.py`. Die Zuordnung Block → Icon ist fest und steht in
    `docs/LAYOUT-CONTRACT.md`; die Dateien sind nach dem Block benannt (`vorteile.svg`,
-   `eigenschaften.svg`, `daten.svg` …), werden nicht produktbezogen umbelegt und per sha256 gegen
-   das Manifest im Prüfskript verglichen. Im Verzeichnis liegen genau diese neun Dateien.
+   `eigenschaften.svg`, `daten.svg` …), werden nicht produktbezogen umbelegt und über einen
+   Geometrie-Hash gegen das Manifest im Prüfskript verglichen. Jede Datei trägt
+   `style="fill:#b4e717"` am `svg`-Element — WeasyPrint stylt SVG-Kinder nicht über das
+   Dokument-Stylesheet, ohne Inline-Füllung druckt der Glyph schwarz. Im Verzeichnis liegen genau
+   diese neun Dateien.
 6. **Fixbausteine sind unveränderlich.** Rechtliche Hinweise, Entsorgung und Schluss-Hinweis
    werden wörtlich übernommen — auch nicht in die Du-Form umgeschrieben.
 7. **Kennzeichnung KI-generierter Produktbilder nicht entfernen.** Trägt ein Produktbild den

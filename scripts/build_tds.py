@@ -80,7 +80,8 @@ def main() -> int:
     html = environment.get_template("template.html").render(**data)
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(output_path))
 
-    expected_pages = int(data["page_count"]) + (0 if args.release or not data.get("review") else 1)
+    review_pages = 0 if args.release or not data.get("review") else int(data.get("review_page_count", 1))
+    expected_pages = int(data["page_count"]) + review_pages
     actual_pages = page_count(output_path)
     if actual_pages is None:
         print("WARNUNG: Die Seitenzahl konnte nicht automatisch aus dem PDF gelesen werden.")

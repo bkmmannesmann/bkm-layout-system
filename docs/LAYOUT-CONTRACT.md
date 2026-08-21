@@ -48,18 +48,20 @@ Die Abschnittsicons sind **Phosphor Bold als lokale SVG-Dateien** in `templates/
 oder `fill: none` — sonst rendern die Icons unsichtbar. Die Größe setzt ausschließlich das CSS;
 die SVGs tragen keine `width`/`height`.
 
-> **Rendererregel:** WeasyPrint löst die CSS-Variable für `currentColor` innerhalb eingebetteter
-> SVGs nicht zuverlässig auf und rendert die Glyphe sonst schwarz. Daher trägt jeder SVG-
-> Wurzelknoten zusätzlich `style="fill:#b4e717"`. Das Attribut `fill="currentColor"` bleibt für
-> die Quellkonvention erhalten; der feste Inline-Wert sichert im PDF die CI-Farbe Lime Green.
-
 **Nur Bold. Keine andere Strichstärke.** Regular, Light, Thin, Duotone und Fill sind nicht
 zugelassen — im Datenblatt stehen die Icons in 20-px-Kacheln, alles unter Bold wirkt dünn und
 verschwindet im Druck. Die Stärke lässt sich am Pfad **nicht** ablesen: Bold-Pfade enthalten
-legitim `a4,4` oder `a16,16`, Regular-Pfade `a12,12`. Gesichert wird sie deshalb über die
-Herkunft, nicht über eine Heuristik — `scripts/validate_layout.py` vergleicht jede Datei per
-sha256 gegen das Manifest im Skript. Quelle jeder Datei ist `phosphor-icons/core`,
+legitim `a4,4` oder `a16,16`, Regular-Pfade `a12,12`. Gesichert wird sie deshalb über das Motiv:
+`scripts/validate_layout.py` bildet den sha256 über die aneinandergehängten `d`-Attribute und
+vergleicht ihn mit dem Manifest im Skript. Quelle jeder Datei ist `phosphor-icons/core`,
 Verzeichnis `assets/bold/<name>-bold.svg`.
+
+**Jede Datei trägt ihre Lime-Füllung selbst:** `style="fill:#b4e717"` am `svg`-Element, zusätzlich
+zu `fill="currentColor"`. Grund: WeasyPrint wendet das Stylesheet des Dokuments **nicht** auf die
+Kinder eines inline eingebetteten SVG an — eine CSS-Regel wie `.tds-icon svg { fill: … }` greift im
+Browser, im PDF aber nicht, und der Glyph druckt schwarz. Die Prüfung verlangt den Farbwert deshalb
+in der Datei. Weil der Hash nur die Geometrie erfasst, bleiben Farb- und Größenangaben frei
+änderbar, ohne das Manifest zu berühren.
 
 **Keine Icon-Webfont, kein CDN.** Weder `template.html` noch `template.css` dürfen
 `@phosphor-icons/web` laden oder `class="ph …"` verwenden. Gründe: WeasyPrint bekommt die Font
@@ -89,10 +91,11 @@ Dateien**; weitere SVGs lässt die Prüfung nicht zu, damit kein Altbestand vers
 wieder eingesetzt wird.
 
 Ein neues Icon kommt so ins System: die Datei `assets/bold/<name>-bold.svg` aus
-`phosphor-icons/core` übernehmen, `width`/`height` aus dem Tag entfernen, `fill="currentColor"`
-behalten, unter dem Blocknamen in `templates/tds/icons/` ablegen, Zeile samt sha256 in
-`ICON_MANIFEST` ergänzen, dann `python3 scripts/validate_layout.py`. Die Prüfsumme bewusst zu
-ändern ist erlaubt und sichtbar — ein unbemerkter Austausch nicht.
+`phosphor-icons/core` übernehmen, `width`/`height` aus dem `svg`-Tag entfernen,
+`fill="currentColor" style="fill:#b4e717"` setzen, unter dem Blocknamen in `templates/tds/icons/`
+ablegen, Zeile samt Geometrie-Hash in `ICON_MANIFEST` ergänzen, dann
+`python3 scripts/validate_layout.py`. Den Hash bewusst zu ändern ist erlaubt und sichtbar — ein
+unbemerkter Motivwechsel nicht.
 
 ## Metadaten
 
