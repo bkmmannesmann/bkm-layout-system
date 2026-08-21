@@ -32,7 +32,7 @@ Grundschrift **12 px auf allen Seiten**. Seitenbezogene Dichteregeln sind verbot
 
 Headlines Unbounded Black in Versalien, Zeilenhöhe 125 %, Laufweite −0.025em. Subheadline
 Unbounded Black, keine Versalien, Pure Green. Fließtext TT Norms Pro, Laufweite −0.015em.
-Die Markenschriften liegen im Repository unter `assets/fonts/`; der Release-Build bricht ab, wenn eine Datei fehlt.
+Die Produktbeschreibung im oberen Kopfbereich ist **linksbündiger Flattersatz** (`text-align: left`), niemals Blocksatz; Wortabstände werden nicht gedehnt. Die Markenschriften liegen im Repository unter `assets/fonts/`; der Release-Build bricht ab, wenn eine Datei fehlt.
 
 ## Farben
 

@@ -108,7 +108,7 @@ body {
   letter-spacing: -0.025em; color: var(--tds-pure);
 }
 .tds-badge { height: 44px; width: 182px; display: block; margin: 0 0 16px calc(-1 * var(--tds-axis)); }
-.tds-lead { margin: 0; font-size: 12.5px; line-height: 1.55; letter-spacing: -0.015em; text-align: justify; hyphens: auto; }
+.tds-lead { margin: 0; font-size: 12.5px; line-height: 1.55; letter-spacing: -0.015em; text-align: left; hyphens: auto; }
 
 /* Balken: randlos, ohne Radius, ohne Text, überlappt den Kopfbereich */
 .tds-band {
