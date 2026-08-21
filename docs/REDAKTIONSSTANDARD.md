@@ -146,9 +146,9 @@ Die Reihenfolge der Seiten ist fest, ihre Anzahl nicht. Drei veröffentlichte Se
 | 3 | Gebinde und Systemkomponenten, Lagerbedingungen, Entsorgung, Rechtliche Hinweise, Schluss-Hinweis. Reicht der Platz auf Seite 2 für den Hinweisblock nicht, wandert er vollständig hierher. Die Grundschrift bleibt auf allen Seiten gleich groß — Überlauf wird nach hinten verlagert, nicht kleiner gesetzt. |
 | 4 oder mehr | Weitere veröffentlichte Seiten, wenn Kennwerte, Matrix oder Hinweise es erfordern. Danach der interne Prüfteil, ebenfalls über mehrere Seiten möglich. Er trägt keine Seitenzahl und wird nicht mit veröffentlicht. |
 
-- Die Technischen Daten beginnen immer auf Seite 1 und dürfen umbrechen. Alle anderen Blöcke bleiben geschlossen.
-- Der Umbruch der Datentabelle liegt an einer inhaltlichen Grenze — nach den Verarbeitungswerten, vor den Leistungswerten. Nie mitten in einer Wertegruppe.
-- Auf der Folgeseite wird die Tabelle ohne Zusatz fortgesetzt: nur der Titel „Technische Daten", kein „Fortsetzung".
+- Die Technischen Daten beginnen immer auf Seite 1. Sie nutzen den verfügbaren Raum vollständig: Alle auf Seite 1 passenden Datenzeilen bleiben dort, solange zwischen der letzten Tabellenzeile und der Fußzeile mindestens **18 px** Abstand verbleiben. Eine kurze Tabelle wird nicht aus einem festen Schema heraus fortgesetzt.
+- Erst wenn weitere Zeilen diesen Sicherheitsabstand verletzen würden, beginnt die Fortsetzung auf Seite 2. Der Umbruch liegt dann an einer inhaltlichen Grenze — nach den Verarbeitungswerten, vor den Leistungswerten. Nie mitten in einer Wertegruppe.
+- Auf der Folgeseite wird die Tabelle ohne Zusatz fortgesetzt: nur der Titel „Technische Daten", kein „Fortsetzung". Enthält die Seite 2 keine restlichen Datenzeilen, entfällt dort auch dieser Tabellenkopf.
 - Jede Seite ab 2 trägt oben Dokumentart, Erstelldatum und Produktkurzbezeichnung; jede Seite unten Copyright, Anschrift und Seitenzählung. Die Fußzeile trägt kein Datum.
 
 ## 6 Plausibilitätsprüfung
