@@ -50,6 +50,7 @@ will, ändert **erst** das Dokument, im selben Pull Request wie den Code.
    nur zulässig, wenn die Bedingung wörtlich in der Vorlage steht. Nie zur fachlichen Ergänzung
    hinzufügen — stattdessen markieren.
 10. **Layoutänderungen gelten für alle Blätter**, nicht nur für das gerade offene.
+11. **Deutsche TT-Norms-Sonderzeichen bleiben abgesichert.** Die Fallback-Faces in `design-system/base.css` leiten ausschließlich Ä/Ö/Ü/ä/ö/ü/ß/ẞ an eine lokale Sans-Serif-Schrift weiter, weil externe PDF- und Druck-Renderer die derzeitigen TT-Norms-Glyphen fehlerhaft ersetzen können. Den Fallback erst nach einem reproduzierbar fehlerfreien Export mit geprüften Vollversionen entfernen.
 
 ## Ablauf für eine Änderung
 
@@ -60,7 +61,7 @@ python3 scripts/build_tds.py --content content/<ordner>/content.json
 ```
 
 Die PDF danach ansehen: Icons sichtbar, Schriftgröße auf allen Seiten gleich, Erstelldatum im
-Kopf, Fußzeile ohne Datum, Prüfteil ohne Seitenzahl.
+Kopf, Fußzeile ohne Datum, Prüfteil ohne Seitenzahl sowie Ä/Ö/Ü/ä/ö/ü/ß/ẞ lesbar.
 
 Für einen Release zusätzlich das freigestellte Produkt-PNG unter
 `assets/images/products/<slug>.png` ablegen. Die Markenschriften liegen im Repository.

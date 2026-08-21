@@ -117,6 +117,47 @@
   font-style: normal;
 }
 
+/* Kompatibilitäts-Fallback: Einige externe PDF-/Druck-Renderer ersetzen
+   TT-Norms-Umlaute und ß durch einen Trial-Hinweis. Nur diese acht Glyphen
+   beziehen daher eine lokale Sans-Serif-Schrift; alle anderen Zeichen bleiben
+   unverändert TT Norms Pro. Erst nach bestätigtem Austausch der Vollversionen
+   entfernen. */
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/LiberationSans-Bold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../assets/fonts/LiberationSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+
 /* ──────────────────────────────────────────────────────────
    PAGED MEDIA – Seitendefinitionen für Print
    ────────────────────────────────────────────────────────── */
