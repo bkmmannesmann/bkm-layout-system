@@ -116,21 +116,37 @@ def validate_data(data: dict[str, Any], release: bool = False) -> tuple[list[str
             if not isinstance(row, dict) or not str(row.get("parameter", "")).strip() or not str(row.get("value", "")).strip():
                 errors.append(f"{table_name}, Zeile {position}: parameter und value sind Pflicht.")
 
-    matrix = data.get("matrix")
-    if matrix:
-        if not isinstance(matrix, dict) or not matrix.get("title") or not matrix.get("columns") or not matrix.get("rows"):
-            errors.append("matrix muss title, columns und rows enthalten.")
-        elif any(len(row) != len(matrix["columns"]) for row in matrix["rows"]):
-            errors.append("Jede Zeile der matrix muss genau so viele Werte wie columns enthalten.")
+    for table_name in ("matrix", "format_table"):
+        table = data.get(table_name)
+        if table:
+            if not isinstance(table, dict) or not table.get("title") or not table.get("columns") or not table.get("rows"):
+                errors.append(f"{table_name} muss title, columns und rows enthalten.")
+            elif any(not isinstance(row, list) or len(row) != len(table["columns"]) for row in table["rows"]):
+                errors.append(f"Jede Zeile von {table_name} muss genau so viele Werte wie columns enthalten.")
 
     if not isinstance(data["packaging"], list):
         errors.append("packaging muss eine Liste sein; bei fehlenden Gebinden nutze eine leere Liste.")
-    if not data["packaging"] and not data.get("system_components"):
+    system_components = data.get("system_components")
+    if not data["packaging"] and not system_components:
         errors.append("Mindestens packaging oder system_components muss einen Eintrag enthalten.")
-    for group_name in ("packaging", "system_components"):
-        for position, unit in enumerate(data.get(group_name, []), start=1):
-            if not isinstance(unit, dict) or not str(unit.get("size", "")).strip() or not str(unit.get("article_number", "")).strip():
-                errors.append(f"{group_name}, Eintrag {position}: size und article_number sind Pflicht.")
+    for position, unit in enumerate(data["packaging"], start=1):
+        if not isinstance(unit, dict) or not str(unit.get("size", "")).strip() or not str(unit.get("article_number", "")).strip():
+            errors.append(f"packaging, Eintrag {position}: size und article_number sind Pflicht.")
+    if system_components:
+        if isinstance(system_components, list):
+            for position, unit in enumerate(system_components, start=1):
+                if not isinstance(unit, dict) or not str(unit.get("size", "")).strip() or not str(unit.get("article_number", "")).strip():
+                    errors.append(f"system_components, Eintrag {position}: size und article_number sind Pflicht.")
+        elif isinstance(system_components, dict):
+            items = system_components.get("items")
+            if not str(system_components.get("title", "")).strip() or not isinstance(items, list) or not items:
+                errors.append("system_components als Gruppe muss title und mindestens einen Eintrag unter items enthalten.")
+            else:
+                for position, component in enumerate(items, start=1):
+                    if not isinstance(component, dict) or not str(component.get("name", "")).strip() or not str(component.get("role", "")).strip():
+                        errors.append(f"system_components, Eintrag {position}: name und role sind Pflicht.")
+        else:
+            errors.append("system_components muss eine Liste oder eine Gruppe mit title und items sein.")
 
     if not isinstance(data["legal"], list) or len(data["legal"]) < 1:
         errors.append("legal muss mindestens einen juristisch freigegebenen Absatz enthalten.")
@@ -168,6 +184,23 @@ def validate_data(data: dict[str, Any], release: bool = False) -> tuple[list[str
             warnings.append(message + " Der Entwurf darf nicht veröffentlicht werden.")
 
     review = data.get("review")
+    review_page_count = data.get("review_page_count", 1)
+    if "review_page_count" in data and (not isinstance(review_page_count, int) or review_page_count < 1):
+        errors.append("review_page_count muss eine positive ganze Zahl sein.")
+    if review and "review_page_count" not in data:
+        review_page_count = 1
+    if not review and "review_page_count" in data:
+        errors.append("review_page_count ist nur zusammen mit review zulässig.")
+    if review:
+        continuation_after = review.get("continuation_after")
+        if continuation_after is not None:
+            changes = review.get("changes", [])
+            if not isinstance(continuation_after, int) or not 1 <= continuation_after < len(changes):
+                errors.append("review.continuation_after muss zwischen dem ersten und letzten Änderungspunkt liegen.")
+            if review_page_count != 2:
+                errors.append("Ein geteilter Prüfteil benötigt review_page_count: 2.")
+        elif review_page_count != 1:
+            errors.append("review_page_count größer als 1 benötigt review.continuation_after.")
     if release and review:
         errors.append("review darf im Veröffentlichungs-Build nicht enthalten sein.")
     if not release and not review and markers:

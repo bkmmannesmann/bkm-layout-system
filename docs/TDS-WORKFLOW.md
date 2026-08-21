@@ -27,11 +27,11 @@ Neue Datenblätter erhalten einen eigenen Ordner im Muster `content/tds-<produkt
 | Datenvertrag | `docs/tds-content.schema.json` | Maschinenlesbare Strukturreferenz. |
 | Generierte PDFs | `output/` | Nie committen. |
 
-Im Repository liegen ausschließlich fachlich freigegebene Referenzen. Derzeit sind das `tds-hz250pro` (Pro Line, lineare Formelzeilen) und `tds-novusan` (Home Line, Verbrauch in Gebindeeinheiten). Weitere Produkte werden Blatt für Blatt aus den freigegebenen PDFs aufgebaut und erst nach Abnahme hier abgelegt. Vorlagen aus der Aufbauphase gibt es nicht mehr — kopiere nur von einer freigegebenen Referenz.
+Im Repository liegen ausschließlich fachlich freigegebene Referenzen. Derzeit sind das `tds-hz250pro` (Pro Line, lineare Formelzeilen), `tds-novusan` (Home Line, Verbrauch in Gebindeeinheiten), `tds-hzc` (Pro Line, nichtlineare Verbrauchsmatrix) und `tds-ks` (Pro Line, Formattabelle sowie strukturierte Systemkomponenten). Weitere Produkte werden Blatt für Blatt aus den freigegebenen PDFs aufgebaut und erst nach Abnahme hier abgelegt. Vorlagen aus der Aufbauphase gibt es nicht mehr — kopiere nur von einer freigegebenen Referenz.
 
 ## Neuer Entwurf
 
-Kopiere zunächst die strukturell passendste freigegebene Referenz in einen neuen Produktordner. `tds-hz250pro` passt für Pro-Line-Produkte mit Formelzeilen, `tds-novusan` für Home-Line-Produkte mit Verbrauch in Gebindeeinheiten. Ersetze anschließend ausschließlich die Werte in `content.json`; HTML und CSS bleiben unverändert. Setze `created_date` auf das Datum, an dem du die Datei erzeugst.
+Kopiere zunächst die strukturell passendste freigegebene Referenz in einen neuen Produktordner. `tds-hz250pro` passt für Pro-Line-Produkte mit Formelzeilen, `tds-novusan` für Home-Line-Produkte mit Verbrauch in Gebindeeinheiten, `tds-hzc` für nichtlineare Verbrauchsmatrizen und `tds-ks` für Maßvarianten sowie strukturierte Systemkomponenten. Ersetze anschließend ausschließlich die Werte in `content.json`; HTML und CSS bleiben unverändert. Setze `created_date` auf das Datum, an dem du die Datei erzeugst.
 
 ```bash
 cp -R content/tds-hz250pro content/tds-neues-produkt
@@ -40,7 +40,7 @@ python3 scripts/validate_tds.py content/tds-neues-produkt/content.json
 python3 scripts/build_tds.py --content content/tds-neues-produkt/content.json
 ```
 
-Für einen Entwurf sind offene Punkte zulässig, sofern sie sichtbar als `[ANGABE FEHLT: …]` oder `[ZU PRÜFEN: …]` markiert und im `review`-Block vollständig erläutert werden. Der Entwurfs-Build erzeugt dann eine zusätzliche interne Prüfseite ohne Seitenzahl. Eine fehlende Produktgrafik oder lokal nicht installierte Lizenzschrift wird im Entwurf als Warnung angezeigt, damit die technische Inhaltsprüfung nicht stillschweigend zur Layoutfreigabe wird.
+Für einen Entwurf sind offene Punkte zulässig, sofern sie sichtbar als `[ANGABE FEHLT: …]` oder `[ZU PRÜFEN: …]` markiert und im `review`-Block vollständig erläutert werden. Der Entwurfs-Build erzeugt dann eine zusätzliche interne Prüfseite ohne Seitenzahl; bei umfangreichen Prüfprotokollen wird die kontrollierte zweite Prüfseite über `review_page_count: 2` und `review.continuation_after` dokumentiert. Eine fehlende Produktgrafik oder lokal nicht installierte Lizenzschrift wird im Entwurf als Warnung angezeigt, damit die technische Inhaltsprüfung nicht stillschweigend zur Layoutfreigabe wird.
 
 ## Pflichtangaben und Markenregeln
 
@@ -61,7 +61,7 @@ Nach der technischen Prüfung übernimmst du die bestätigten Kennwerte. Unbeleg
 | Markenschriften unter `assets/fonts/` vollständig | Warnung | Sperre |
 | Offene Marker | Erlaubt, mit `review` | Sperre |
 | Interner Prüfteil `review` | Pflicht bei offenen Punkten | Sperre |
-| Seitenzahl | 4 Seiten bei Review, sonst 3 | Exakt 3 Seiten |
+| Seitenzahl | Öffentliche Seiten plus 1 Prüfseite; bei `review_page_count: 2` plus 2 Prüfseiten | Exakt die veröffentlichte Seitenzahl |
 | Erstelldatum `created_date` | Pflicht | Pflicht |
 
 Der Release-Build stoppt bei fehlenden Produktassets, fehlenden Markenschriften, offenen Markern, einem noch enthaltenen `review`-Block oder falscher Seitenzahl. Das schützt davor, einen internen Entwurf als produktives Datenblatt zu publizieren.

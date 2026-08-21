@@ -32,8 +32,11 @@ will, ändert **erst** das Dokument, im selben Pull Request wie den Code.
    phosphoricons.com Weight **Bold**, `width`/`height` entfernen, nach `templates/tds/icons/`,
    dann `python3 scripts/validate_layout.py`. Die Zuordnung Block → Icon ist fest und steht in
    `docs/LAYOUT-CONTRACT.md`; die Dateien sind nach dem Block benannt (`vorteile.svg`,
-   `eigenschaften.svg`, `daten.svg` …), werden nicht produktbezogen umbelegt und per sha256 gegen
-   das Manifest im Prüfskript verglichen. Im Verzeichnis liegen genau diese neun Dateien.
+   `eigenschaften.svg`, `daten.svg` …), werden nicht produktbezogen umbelegt und über einen
+   Geometrie-Hash gegen das Manifest im Prüfskript verglichen. Jede Datei trägt
+   `style="fill:#b4e717"` am `svg`-Element — WeasyPrint stylt SVG-Kinder nicht über das
+   Dokument-Stylesheet, ohne Inline-Füllung druckt der Glyph schwarz. Im Verzeichnis liegen genau
+   diese neun Dateien.
 6. **Fixbausteine sind unveränderlich.** Rechtliche Hinweise, Entsorgung und Schluss-Hinweis
    werden wörtlich übernommen — auch nicht in die Du-Form umgeschrieben.
 7. **Kennzeichnung KI-generierter Produktbilder nicht entfernen.** Trägt ein Produktbild den
@@ -47,6 +50,7 @@ will, ändert **erst** das Dokument, im selben Pull Request wie den Code.
    nur zulässig, wenn die Bedingung wörtlich in der Vorlage steht. Nie zur fachlichen Ergänzung
    hinzufügen — stattdessen markieren.
 10. **Layoutänderungen gelten für alle Blätter**, nicht nur für das gerade offene.
+11. **Deutsche TT-Norms-Sonderzeichen bleiben abgesichert.** Die Fallback-Faces in `design-system/base.css` leiten ausschließlich Ä/Ö/Ü/ä/ö/ü/ß/ẞ an eine lokale Sans-Serif-Schrift weiter, weil externe PDF- und Druck-Renderer die derzeitigen TT-Norms-Glyphen fehlerhaft ersetzen können. Den Fallback erst nach einem reproduzierbar fehlerfreien Export mit geprüften Vollversionen entfernen.
 
 ## Ablauf für eine Änderung
 
@@ -57,7 +61,7 @@ python3 scripts/build_tds.py --content content/<ordner>/content.json
 ```
 
 Die PDF danach ansehen: Icons sichtbar, Schriftgröße auf allen Seiten gleich, Erstelldatum im
-Kopf, Fußzeile ohne Datum, Prüfteil ohne Seitenzahl.
+Kopf, Fußzeile ohne Datum, Prüfteil ohne Seitenzahl sowie Ä/Ö/Ü/ä/ö/ü/ß/ẞ lesbar.
 
 Für einen Release zusätzlich das freigestellte Produkt-PNG unter
 `assets/images/products/<slug>.png` ablegen. Die Markenschriften liegen im Repository.

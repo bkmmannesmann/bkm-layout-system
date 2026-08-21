@@ -20,22 +20,28 @@ ROOT_DIR = Path(__file__).parent.parent.resolve()
 CSS_PATH = ROOT_DIR / "templates" / "tds" / "template.css"
 HTML_PATH = ROOT_DIR / "templates" / "tds" / "template.html"
 ICON_DIR = ROOT_DIR / "templates" / "tds" / "icons"
-# Feste Zuordnung Inhaltsblock -> Icon. Die Bold-Pfade stammen aus phosphor-icons/core,
-# assets/bold/<name>-bold.svg; der SVG-Wurzelknoten trägt zusätzlich die feste CI-Farbe
-# #b4e717, weil WeasyPrint CSS-Variablen in Inline-SVG nicht auflöst. Die Prüfsumme
-# sichert die gesamte freigegebene Datei; die Strichstärke lässt sich am Pfad selbst
-# nicht ablesen, deshalb wird sie nicht geraten.
-ICON_SOURCE = "phosphor-icons/core, assets/bold/ + BKM-Lime-Füllung"
+# Feste Zuordnung Inhaltsblock -> Icon. Quelle ist phosphor-icons/core,
+# Verzeichnis assets/bold/<name>-bold.svg.
+#
+# Geprueft wird die GEOMETRIE, nicht die Datei: der Hash laeuft ueber die
+# aneinandergehaengten d-Attribute. Damit ist das Motiv und ueber das Motiv auch
+# die Strichstaerke festgenagelt (am Pfad selbst ist sie nicht ablesbar, Bold-Pfade
+# enthalten legitim a4,4 oder a16,16) - waehrend Farb- und Groessenangaben frei
+# bleiben. Genau die muessen anpassbar sein: WeasyPrint wendet das Stylesheet des
+# Dokuments nicht auf die Kinder eines inline eingebetteten SVG an, deshalb braucht
+# jede Datei ihre Lime-Fuellung selbst.
+ICON_SOURCE = "phosphor-icons/core, assets/bold/"
+LIME = "#b4e717"
 ICON_MANIFEST = {
-    "vorteile.svg":      ("seal-check",          "0532d9d0116c98814550429510da80b10a499ba1e026a693a104c8633e7a2b35"),
-    "eigenschaften.svg": ("atom",                "b4a6e5d5040b2dedda12ddf7158f4f58a5b56dcec96aefeead2bab8f757cf65f"),
-    "daten.svg":         ("table",               "ff0b3a8a669d166f8de63472c3ece9e100937f1082ab7e924f5737462d2bc4b1"),
-    "anwendung.svg":     ("house-line",          "067819a7ac3832b3e5ec7bfc80c63cbfc9671b3ceafb3391fbe60594e7e861c8"),
-    "hinweise.svg":      ("warning",             "0a7dde69e5d924541e57e3b690175498bd15de0ac9e37a9b834a765423c80da4"),
-    "gebinde.svg":       ("package",             "18ee52061a25dbf9c47d0c7dcb530b6e438c5d40d2efac72580ef3b0051c5ade"),
-    "lagerung.svg":      ("thermometer-simple",  "4997534fd31142cebabebfe609bcf68f36cbdaeb0b7875c71554c1537f5ab9a0"),
-    "entsorgung.svg":    ("recycle",             "649a31bc251911d05bf130790de3b1a909a9aa33462a6e1fcfcfa6165a18c0c0"),
-    "recht.svg":         ("scales",              "cf214b60261f3f8ddcd030493860530cdcb1f39280d85ea8c48fd5aa7a1c3a28"),
+    "vorteile.svg":      ("seal-check",          "a93e8a92c74e9aae2860edae9fd0ce24a7dda3421361e6027d102bfd1d4040fd"),
+    "eigenschaften.svg": ("atom",                "dd8ed878d3db10bb2dbaf5b59bc1d53a87333c7be5f93946939a14888ee72bc6"),
+    "daten.svg":         ("table",               "1af543527d932353fb082c6486d75ee4a283ddcbfd0658ef2c6fc69659c4f034"),
+    "anwendung.svg":     ("house-line",          "c180f7a7a7e952fa744f0e662da1047d39e2f18b716763038dc14b2a45cba38a"),
+    "hinweise.svg":      ("warning",             "fe869c06f45132ac4b5d88842d9e977956d2b76ab57e4f656e286deffa7e6794"),
+    "gebinde.svg":       ("package",             "ea374c61e84389b3e740de5555c21d185c4736bd179899dc5af5d57efd5b4151"),
+    "lagerung.svg":      ("thermometer-simple",  "bac5de5bc99e4ee6481857c1ef1d1d2f2f0dff32d880d613c130b76cfaf9b968"),
+    "entsorgung.svg":    ("recycle",             "37e035e6d7bce2b35be9eb4f8635ac2162d37ff2eddda19bd4687460fe8ac95d"),
+    "recht.svg":         ("scales",              "f68f32519970482ceb68a648175fe422e933c629a714a3108ba74cdc33eeba20"),
 }
 
 # (Beschreibung, Regex, muss_vorkommen)
@@ -127,24 +133,32 @@ def main() -> int:
                 )
                 continue
 
-            raw = path.read_bytes()
-            actual_sha = hashlib.sha256(raw).hexdigest()
+            body = path.read_text(encoding="utf-8")
+
+            geometry = "|".join(re.findall(r'\bd="([^"]+)"', body))
+            if not geometry:
+                errors.append(f"icons/{name}: kein Pfad gefunden.")
+                continue
+            actual_sha = hashlib.sha256(geometry.encode("utf-8")).hexdigest()
             if actual_sha != expected_sha:
                 errors.append(
-                    f"icons/{name} weicht vom freigegebenen Stand ab. Erwartet wird "
-                    f"{upstream}-bold.svg aus {ICON_SOURCE} (sha256 {expected_sha[:12]}…), "
-                    f"gefunden {actual_sha[:12]}…. Icon neu aus dem Bold-Set holen oder, wenn die "
-                    "Aenderung gewollt ist, die Pruefsumme im Manifest aktualisieren."
+                    f"icons/{name} zeigt ein anderes Motiv als vereinbart. Erwartet wird "
+                    f"{upstream}-bold.svg aus {ICON_SOURCE} (Geometrie {expected_sha[:12]}…), "
+                    f"gefunden {actual_sha[:12]}…. Icon neu aus dem Bold-Set holen oder, wenn der "
+                    "Wechsel gewollt ist, Manifest und docs/LAYOUT-CONTRACT.md gemeinsam aendern."
                 )
 
-            body = raw.decode("utf-8")
-            if 'fill="currentColor"' not in body:
-                errors.append(f"icons/{name}: fill=\"currentColor\" fehlt; die Farbe setzt das CSS.")
+            if LIME.lower() not in body.lower():
+                errors.append(
+                    f"icons/{name}: keine Lime-Fuellung in der Datei. WeasyPrint wendet das "
+                    f"Stylesheet nicht auf SVG-Kinder an, deshalb braucht jedes Icon "
+                    f'style="fill:{LIME}" am svg-Element - sonst druckt der Glyph schwarz.'
+                )
             if "stroke=" in body:
                 errors.append(f"icons/{name}: Kontur-Icon, erwartet wird ein Flaechenglyph.")
             if 'viewBox="0 0 256 256"' not in body:
                 errors.append(f"icons/{name}: viewBox muss 0 0 256 256 sein (Phosphor-Raster).")
-            if "width=" in body or "height=" in body:
+            if re.search(r"<svg[^>]*\b(width|height)=", body):
                 errors.append(f"icons/{name}: feste Groesse im SVG; die Groesse setzt das CSS.")
 
     for error in errors:
