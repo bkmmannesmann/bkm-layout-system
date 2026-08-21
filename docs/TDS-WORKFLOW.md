@@ -48,6 +48,8 @@ Das Feld `created_date` ist für jeden Entwurf Pflicht und trägt das **Erstelld
 
 Die Produktbeschreibung darf maximal 360 Zeichen enthalten. Vorteile und Eigenschaften umfassen jeweils fünf bis sieben Einträge. Das Template erzwingt die BKM-Grundachse von 18 mm, die Bildfläche von 230 × 312 Pixel und die zentral gepflegten BKM-Farben. Aus diesem Grund dürfen keine individuellen CSS-Änderungen in einzelnen Produktordnern angelegt werden.
 
+Die Technischen Daten werden nicht nach einer starren Zeilenzahl aufgeteilt. Zuerst bleiben alle auf Seite 1 passenden Datenzeilen dort. Erst wenn die nächste Zeile den Sicherheitsabstand von 18 px zur Fußzeile verletzen würde, beginnt die Fortsetzung auf Seite 2; der Umbruch liegt dabei an einer inhaltlichen Grenze. Nach jeder Änderung der Datenzeilen muss die erste PDF-Seite sichtbar geprüft werden.
+
 Lange Hinweise bleiben grundsätzlich auf Seite 2. Reicht der Platz trotz präziser, fachlich vollständiger Formulierung nicht aus, setzt die Redaktion `"notes_on_page3": true`. Das Template verlagert dann den vollständigen Hinweisblock kontrolliert auf Seite 3. Der Text wird dabei nicht kleiner gesetzt. Diese Ausnahme ist nur nach Sichtprüfung der PDF zulässig; der HZ-C-Referenzfall demonstriert sie.
 
 ## Von der Fachprüfung zum Release

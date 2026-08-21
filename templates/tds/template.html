@@ -57,10 +57,12 @@
   <section class="tds-page">
     <div class="tds-body tds-body--full">
       <div class="tds-runhead"><div class="tds-runhead__doc">Technisches Datenblatt<div class="tds-runhead__meta">Erstelldatum: {{ created_date }}</div></div><div class="tds-runhead__sub">{{ product_name }} · {{ product_short }}</div></div>
+      {% if technical_data_page2 %}
       <div class="tds-section-head"><span class="tds-icon">{% include 'icons/daten.svg' ignore missing %}</span><h2 class="tds-section-title">Technische Daten</h2></div>
       <table class="tds-table"><tbody>
         {% for r in technical_data_page2 %}<tr><th>{{ r.parameter }}{% if r.condition %}<small>{{ r.condition }}</small>{% endif %}</th><td>{% if r.marker %}<span class="tds-marker">{{ r.value }}</span>{% else %}{{ r.value }}{% if r.note %} <span class="tds-marker">{{ r.note }}</span>{% endif %}{% endif %}</td></tr>{% endfor %}
       </tbody></table>
+      {% endif %}
       {% if matrix %}
       <div class="tds-section-head"><span class="tds-icon">{% include 'icons/daten.svg' ignore missing %}</span><h2 class="tds-section-title">{{ matrix.title }}</h2></div>
       <table class="tds-matrix"><thead><tr>{% for col in matrix.columns %}<th{% if not loop.first %} class="num"{% endif %}>{{ col }}</th>{% endfor %}</tr></thead><tbody>{% for r in matrix.rows %}<tr>{% for cell in r %}<td{% if not loop.first %} class="num"{% endif %}>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody></table>

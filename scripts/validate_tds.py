@@ -26,7 +26,7 @@ REQUIRED_FIELDS = (
     "title", "product_name", "product_subtitle", "product_short", "product_line",
     "created_date", "page_count", "logo", "keyvisual", "line_badge",
     "product_image", "description", "advantages", "properties",
-    "technical_data_page1", "technical_data_page2", "applications",
+    "technical_data_page1", "applications",
     "manual_reference", "notes", "sds_reference", "packaging", "storage",
     "disposal", "legal", "final_note",
 )
@@ -108,9 +108,12 @@ def validate_data(data: dict[str, Any], release: bool = False) -> tuple[list[str
             errors.append(f"{field} darf keine leeren Einträge enthalten.")
 
     for table_name in ("technical_data_page1", "technical_data_page2"):
-        rows = data[table_name]
-        if not isinstance(rows, list) or not rows:
-            errors.append(f"{table_name} muss mindestens eine Datenzeile enthalten.")
+        rows = data.get(table_name, [])
+        if not isinstance(rows, list):
+            errors.append(f"{table_name} muss eine Liste sein.")
+            continue
+        if table_name == "technical_data_page1" and not rows:
+            errors.append("technical_data_page1 muss mindestens eine Datenzeile enthalten.")
             continue
         for position, row in enumerate(rows, start=1):
             if not isinstance(row, dict) or not str(row.get("parameter", "")).strip() or not str(row.get("value", "")).strip():
