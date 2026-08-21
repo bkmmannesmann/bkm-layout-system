@@ -21,7 +21,7 @@ Beitrag, und die Abweichung fällt erst im gedruckten Blatt auf.
 | `--tds-radius` | `3px` | Auf allen eckigen Farbflächen, ohne Ausnahme. Keine Pill-Radien. |
 | `.tds-head` Höhe | `118.1mm` | 16:9 vom Blattrand bis Oberkante des Balkens. |
 | `.tds-band` | `height: 30px`, `margin-top: -10px` | Randlos über die volle Breite, überlappt den Kopfbereich als Blitzerschutz im Druck. Ohne Text. |
-| Produktbild | `230px × 312px` | Feste Fläche, freigestelltes PNG mit Alphakanal, `object-fit: contain`. Kein eingebrannter Schatten. Bei KI-generierten Produktbildern bleibt der Kennzeichnungsvermerk („AI GENERATED") im Bild — er ist nach EU-KI-Verordnung erforderlich und wird nicht wegretuschiert oder beschnitten. |
+| Produktbild | `290px × 312px` | Die Fläche erweitert sich ausschließlich 60 px nach rechts; der negative rechte Außenrand hält den Flex-Fußabdruck bei 230 px, sodass Text, Achse und übrige Grafiken unverändert bleiben. Die rechte Bildkante liegt 5 px vor der linken Key-Visual-Kante. Freigestelltes PNG mit Alphakanal, `object-fit: contain`. Kein eingebrannter Schatten. Bei KI-generierten Produktbildern bleibt der Kennzeichnungsvermerk („AI GENERATED") im Bild — er ist nach EU-KI-Verordnung erforderlich und wird nicht wegretuschiert oder beschnitten. |
 | Line-Badge | `44px × 182px`, linker Rand `-18mm` | Zwischen Subheadline und Fließtext, ragt bis an die Blattkante. |
 
 ## Typografie

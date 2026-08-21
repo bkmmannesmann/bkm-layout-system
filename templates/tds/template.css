@@ -88,8 +88,12 @@ body {
   padding-right: calc(var(--tds-keyvisual-w) + 10px);
 }
 .tds-head__intro { flex: 1; min-width: 0; }
-.tds-head__image { flex: none; width: 230px; height: 312px; align-self: flex-end; margin: 0 0 15px; }
-.tds-head__image img { width: 230px; height: 312px; object-fit: contain; display: block; }
+/* Die Produktbildfläche wächst ausschließlich nach rechts. Der negative rechte
+   Außenrand kompensiert die Mehrbreite im Flex-Layout; Text und Achsen bleiben
+   dadurch exakt an ihrer bisherigen Position. Bei 60 px Erweiterung liegt die
+   rechte Bildkante 5 px vor der linken Key-Visual-Kante. */
+.tds-head__image { flex: none; width: 290px; height: 312px; align-self: flex-end; margin: 0 -60px 15px 0; }
+.tds-head__image img { width: 290px; height: 312px; object-fit: contain; display: block; }
 
 .tds-title {
   margin: 0;
