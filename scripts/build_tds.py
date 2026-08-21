@@ -11,7 +11,6 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import subprocess
 import sys
 from pathlib import Path
 
@@ -56,20 +55,6 @@ def make_icon_renderer(color: str):
     return render_icon
 
 
-def page_count(pdf_path: Path) -> int | None:
-    """Liest die Seitenanzahl mit dem vorhandenen Poppler-Werkzeug aus."""
-    result = subprocess.run(
-        ["pdfinfo", str(pdf_path)],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode != 0:
-        return None
-    match = re.search(r"^Pages:\s+(\d+)$", result.stdout, flags=re.MULTILINE)
-    return int(match.group(1)) if match else None
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description="Erstellt ein BKM-Technisches Datenblatt als PDF.")
     parser.add_argument("--content", required=True, help="Pfad zu content.json, relativ zum Repository oder absolut")
@@ -110,23 +95,25 @@ def main() -> int:
     )
     environment.globals["icon"] = make_icon_renderer(icon_color())
     html = environment.get_template("template.html").render(**data)
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(output_path))
 
+    # Die Seitenzahl kommt aus dem gerenderten Dokument selbst. Das ist die
+    # Sperre aus dem Redaktionsstandard und darf nicht davon abhängen, ob auf
+    # dem Rechner ein externes PDF-Werkzeug installiert ist.
+    document = HTML(string=html, base_url=str(TEMPLATE_DIR)).render()
+    actual_pages = len(document.pages)
     expected_pages = int(data["page_count"]) + (0 if args.release or not data.get("review") else 1)
-    actual_pages = page_count(output_path)
-    if actual_pages is None:
-        print("WARNUNG: Die Seitenzahl konnte nicht automatisch aus dem PDF gelesen werden.")
-    elif actual_pages != expected_pages:
+    if actual_pages != expected_pages:
         print(
             f"FEHLER: PDF hat {actual_pages} Seiten; erwartet werden {expected_pages}. "
             "Inhalte oder Umbruch vor der Freigabe prüfen."
         )
         return 3
 
+    document.write_pdf(str(output_path))
+
     mode = "Release" if args.release else "Entwurf"
     print(f"TDS-PDF erstellt ({mode}): {output_path}")
-    if actual_pages is not None:
-        print(f"Seitenzahl geprüft: {actual_pages}/{expected_pages}")
+    print(f"Seitenzahl geprüft: {actual_pages}/{expected_pages}")
     return 0
 
 
