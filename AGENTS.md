@@ -91,3 +91,16 @@ python3 scripts/validate_brochure.py
 python3 scripts/validate_brochure.py content/<ordner>/content.json
 python3 scripts/build_pages.py <ordner>
 ```
+
+## Dateien von außerhalb
+
+Entwürfe aus Claude Design, Dateien aus anderen BKM-Repositories und exportiertes HTML laufen
+durch keine der beiden Prüfungen. Dafür gibt es `scripts/check_brand_drift.py`: es liest
+beliebige HTML-, CSS-, SVG-, JSON- und JS-Dateien und meldet gesperrte Altwerte, knapp verfehlte
+Palettentöne, fremde Farben und Schriften außerhalb der Markenschriften.
+
+```bash
+python3 scripts/check_brand_drift.py <datei-oder-verzeichnis>
+```
+
+Vor der Übernahme fremder Entwürfe in dieses Repository gehört dieser Lauf dazu.

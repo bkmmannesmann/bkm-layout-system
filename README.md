@@ -47,6 +47,20 @@ python3 scripts/validate_brochure.py content/broschuere-mannesmann/content.json 
 python3 scripts/build_pages.py broschuere-mannesmann                    # Bau + Ausgabeprüfung
 ```
 
+Für alles, was **außerhalb** dieser Templates entsteht und trotzdem im Corporate Design stehen
+soll — Entwürfe aus Claude Design (`.dc.html`), Dateien aus anderen Repositories, exportiertes
+HTML oder SVG — gibt es einen Drift-Prüfer:
+
+```bash
+python3 scripts/check_brand_drift.py --list                  # geltende Palette ausgeben
+python3 scripts/check_brand_drift.py pfad/zur/datei.dc.html  # eine Datei
+python3 scripts/check_brand_drift.py ../anderes-repo         # ein ganzes Verzeichnis
+```
+
+Er meldet gesperrte Altwerte, Töne die einen Palettenwert knapp verfehlen, fremde Farben und
+Schriften außerhalb der Markenschriften. Kommentare und Markdown bleiben außen vor, weil die
+Layoutverträge die Altwerte selbst auflisten.
+
 Der Bau prüft das erzeugte PDF nach: eingebettete Schriften, Vollständigkeit des Textes,
 Lage im Satzspiegel und Zeilenzahl der Hauptheadline. Ein Verstoß schlägt auf den Exit-Code
 durch. Die verbindlichen Regeln stehen in [`docs/BROSCHUERE-LAYOUT.md`](docs/BROSCHUERE-LAYOUT.md).
