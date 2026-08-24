@@ -57,6 +57,7 @@
   --brochure-gutter:         4.3mm;  /* Spaltenabstand */
   --brochure-col-2:        115.1mm;  /* 2x55.4 + 1x4.3 */
   --brochure-col-3:        174.0mm;  /* 3x55.4 + 2x4.3, zugleich Satzspiegelbreite */
+  --brochure-footer-zone:   25.0mm;  /* Fusssteg: Grundlinie 18mm + Zeile + Luft */
 
   /* Rollen, nicht Farben: beide zeigen auf die geltende Palette. */
   --brochure-placeholder-bg: var(--bkm-rule);      /* #d9d7d3, Bildplatzhalter */
@@ -130,6 +131,11 @@ html, body {
   width: 210mm;
   height: 297mm;
   overflow: hidden;
+  /* Spaltenfluss, damit ein Band mit --tail bis zum Blattfuss durchlaeuft.
+     Die absolut gesetzten Kinder (.page__content, .page__footer) bleiben
+     davon unberuehrt. */
+  display: flex;
+  flex-direction: column;
   page-break-after: always;
   font-family: 'TT Norms Pro', sans-serif;
   font-size: 9pt;
@@ -622,6 +628,61 @@ html, body {
 .module-toc__list--two-col {
   column-count: 2;
   column-gap: 8.6mm; /* 2× Gutter */
+}
+
+/* ============================================================
+   SEITENTYP FEATURE: BAENDER IM FLUSS
+   ============================================================
+   Bild- und Textbaender laufen ueber die volle Blattbreite und stehen
+   im normalen Fluss untereinander. Frueher war jedes Band absolut
+   gesetzt und der Unterblock startete auf einer frei gewaehlten
+   Millimeterkante - lag die zu hoch, deckte das Band den Text darueber
+   zu, ohne dass der Build etwas meldete.
+   ============================================================ */
+
+.feature-band {
+  width: 210mm;
+  overflow: hidden;
+}
+
+.feature-band__body {
+  padding: var(--brochure-margin-top) var(--brochure-margin-x);
+}
+
+/* Letztes Band der Seite: laeuft bis zur Blattunterkante durch, damit die
+   Farbflaeche nicht auf halber Hoehe abbricht und die Fusszeile
+   berechenbar auf ihr steht. */
+.feature-band--tail {
+  flex: 1 1 auto;
+  /* Fusssteg freihalten, sonst laeuft der Text in die Seitenzahl. */
+  padding-bottom: var(--brochure-footer-zone);
+}
+
+.feature-band img,
+.feature-split__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.feature-split {
+  display: flex;
+  align-items: flex-start;
+  width: 210mm;
+}
+
+.feature-split--reversed { flex-direction: row-reverse; }
+
+.feature-split__media {
+  flex: none;
+  overflow: hidden;
+  background: var(--brochure-placeholder-bg);
+}
+
+.feature-split__body {
+  flex: 1 1 auto;
+  padding: var(--brochure-margin-top) var(--brochure-margin-x);
 }
 
 /* ============================================================

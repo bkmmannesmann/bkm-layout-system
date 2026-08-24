@@ -117,7 +117,6 @@ def build_demo():
                     "columns": 3,
                     "text": "Bei Feuchtigkeitsschäden reicht eine pauschale Position wie Kellerabdichtung oft nicht aus. Für Eigentümer ist entscheidend, ob nachvollziehbar wird, warum eine bestimmte Maßnahme empfohlen wird. Ein fachlich sauberes Angebot sollte deshalb nicht nur beschreiben, was gemacht wird, sondern auch, worauf diese Empfehlung basiert."
                 },
-                "lower_top": "131.2mm",
                 "lower_bg": "#287d4b"
             },
 

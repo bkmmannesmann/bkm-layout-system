@@ -23,8 +23,12 @@
 {%- macro folio(page, index0, start) -%}
 {%- if not page.no_folio -%}
 {%- set no = start | default(2, true) + index0 -%}
-{%- set on_colour = page.type == 'opener' and page.lower_bg
-                    and page.lower_bg not in ('#ffffff', '#FFFFFF', 'white', 'var(--bkm-white)') -%}
+{#- Die Fusszeile steht auf dem letzten Band der Seite. Bei opener ist das
+    immer die untere Blatthaelfte, bei feature nur dann, wenn ein
+    lower_section vorhanden ist; sonst endet die Seite auf Weiss. -#}
+{%- set tail_bg = page.lower_bg if (page.type == 'opener'
+                  or (page.type == 'feature' and page.lower_section)) else none -%}
+{%- set on_colour = tail_bg and tail_bg not in ('#ffffff', '#FFFFFF', 'white', 'var(--bkm-white)') -%}
 <div class="page__footer page__footer--{{ 'verso' if no % 2 == 0 else 'recto' }}"
      style="color: {{ page.folio_color | default('var(--bkm-white)' if on_colour else 'var(--bkm-stone-grey)', true) }};">
   <span class="page__folio">{{ '%02d' % no }}</span>
@@ -53,7 +57,7 @@
   </div>
 
   <!-- Untere Hälfte -->
-  <div style="position: absolute; top: 131.2mm; left: 0; width: 210mm; height: 165.8mm; background: {{ page.lower_bg | default('var(--bkm-transition-green)') }}; padding: var(--brochure-margin-top) var(--brochure-margin-x) 0 var(--brochure-margin-x); overflow: hidden;">
+  <div style="position: absolute; top: 131.2mm; left: 0; width: 210mm; height: 165.8mm; background: {{ page.lower_bg | default('var(--bkm-transition-green)') }}; padding: var(--brochure-margin-top) var(--brochure-margin-x) var(--brochure-footer-zone) var(--brochure-margin-x); overflow: hidden;">
     <h2 class="headline-section" style="color: {{ page.lower_hl_color | default('var(--bkm-white)') }};">{{ page.lower_headline }}</h2>
     {% if page.lower_leadline %}
     <p class="leadline" style="margin-top: 9.7mm; color: {{ page.lower_lead_color | default('var(--bkm-white)') }};">{{ page.lower_leadline }}</p>
@@ -162,70 +166,56 @@
 {% elif page.type == 'feature' %}
 <div class="page">
   {{ folio(page, loop.index0, page_number_start) }}
-  {% if page.layout == 'top-image' %}
-  <!-- Bild oben, Text unten -->
-  <div style="position: absolute; top: 0; left: 0; width: 210mm; height: {{ page.image_height | default('131.2mm') }}; background: var(--brochure-placeholder-bg); overflow: hidden;">
-    {% if page.image %}
-    <img src="{{ page.image }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    {% endif %}
+
+  {%- if page.layout in ('left-image', 'right-image') %}
+  <div class="feature-split{% if page.layout == 'right-image' %} feature-split--reversed{% endif %}">
+    <div class="feature-split__media"
+         style="width: {{ page.image_width | default('105mm') }}; height: {{ page.image_height | default('131.2mm') }};">
+      {% if page.image %}<img src="{{ page.image }}" alt="">{% endif %}
+    </div>
+    <div class="feature-split__body">
+      <h2 class="headline-section">{{ page.headline }}</h2>
+      {% if page.leadline %}
+      <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
+      {% endif %}
+      <div class="body-text" style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %};">
+        {{ page.text }}
+      </div>
+    </div>
   </div>
-  <div style="position: absolute; top: {{ page.image_height | default('131.2mm') }}; left: 0; width: 210mm; padding: var(--brochure-margin-top) var(--brochure-margin-x) 0 var(--brochure-margin-x);">
+
+  {%- else %}
+  <div class="feature-band"
+       style="height: {{ page.image_height | default('131.2mm') }}; background: var(--brochure-placeholder-bg);">
+    {% if page.image %}<img src="{{ page.image }}" alt="">{% endif %}
+  </div>
+  <div class="feature-band feature-band__body{% if not page.lower_section %} feature-band--tail{% endif %}">
     <h2 class="headline-section">{{ page.headline }}</h2>
     {% if page.leadline %}
     <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
     {% endif %}
-    <div class="columns-{{ page.columns | default(3) }} body-text" style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %}; width: var(--brochure-col-3);">
+    <div class="columns-{{ page.columns | default(3) }} body-text"
+         style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %}; width: var(--brochure-col-3);">
       {{ page.text }}
     </div>
   </div>
+  {%- endif %}
 
-  {% elif page.layout == 'left-image' %}
-  <!-- Bild links, Text rechts -->
-  <div style="position: absolute; top: 0; left: 0; width: {{ page.image_width | default('105mm') }}; height: {{ page.image_height | default('131.2mm') }}; background: var(--brochure-placeholder-bg); overflow: hidden;">
-    {% if page.image %}
-    <img src="{{ page.image }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    {% endif %}
-  </div>
-  <div style="position: absolute; top: var(--brochure-margin-top); left: {{ page.image_width | default('105mm') }}; width: calc(210mm - {{ page.image_width | default('105mm') }}); padding: 0 var(--brochure-margin-x) 0 var(--brochure-margin-x);">
-    <h2 class="headline-section">{{ page.headline }}</h2>
-    {% if page.leadline %}
-    <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
-    {% endif %}
-    <div class="body-text" style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %};">
-      {{ page.text }}
-    </div>
-  </div>
-
-  {% elif page.layout == 'right-image' %}
-  <!-- Text links, Bild rechts -->
-  <div style="position: absolute; top: var(--brochure-margin-top); left: var(--brochure-margin-x); width: calc(210mm - {{ page.image_width | default('105mm') }} - var(--brochure-margin-x));">
-    <h2 class="headline-section">{{ page.headline }}</h2>
-    {% if page.leadline %}
-    <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
-    {% endif %}
-    <div class="columns-{{ page.columns | default(2) }} body-text" style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %};">
-      {{ page.text }}
-    </div>
-  </div>
-  <div style="position: absolute; top: 0; right: 0; width: {{ page.image_width | default('105mm') }}; height: {{ page.image_height | default('297mm') }}; background: var(--brochure-placeholder-bg); overflow: hidden;">
-    {% if page.image %}
-    <img src="{{ page.image }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    {% endif %}
-  </div>
-  {% endif %}
-
-  <!-- Unterer Block (optional) -->
-  {% if page.lower_section %}
-  <div style="position: absolute; top: {{ page.lower_top | default('165.8mm') }}; left: 0; width: 210mm; {% if page.lower_bg %}background: {{ page.lower_bg }}; {% endif %}padding: var(--brochure-margin-top) var(--brochure-margin-x) 0 var(--brochure-margin-x);">
+  {#- Unterer Farbblock: schliesst an den Text darueber an, statt auf einer
+      frei gewaehlten Millimeterkante zu sitzen. lower_top entfaellt. #}
+  {%- if page.lower_section %}
+  <div class="feature-band feature-band__body feature-band--tail"
+       style="{% if page.lower_bg %}background: {{ page.lower_bg }};{% endif %}">
     <h2 class="headline-section" style="{% if page.lower_bg %}color: var(--bkm-white);{% endif %}">{{ page.lower_section.headline }}</h2>
     {% if page.lower_section.leadline %}
     <p class="leadline" style="margin-top: 9.7mm; {% if page.lower_bg %}color: var(--bkm-pure-green);{% endif %}">{{ page.lower_section.leadline }}</p>
     {% endif %}
-    <div class="columns-{{ page.lower_section.columns | default(3) }} body-text" style="margin-top: {% if page.lower_section.leadline %}5.4mm{% else %}4.4mm{% endif %}; width: var(--brochure-col-3); {% if page.lower_bg %}color: var(--bkm-white);{% endif %}">
+    <div class="columns-{{ page.lower_section.columns | default(3) }} body-text"
+         style="margin-top: {% if page.lower_section.leadline %}5.4mm{% else %}4.4mm{% endif %}; width: var(--brochure-col-3); {% if page.lower_bg %}color: var(--bkm-white);{% endif %}">
       {{ page.lower_section.text }}
     </div>
   </div>
-  {% endif %}
+  {%- endif %}
 </div>
 
 <!-- ============================================================
