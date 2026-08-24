@@ -118,17 +118,24 @@ Farbflächen werden über **benannte Flächen** angesprochen, nicht über Hex-We
 bestimmt Fläche, Textfarbe und Akzentfarbe gemeinsam — dadurch kann keine Kombination entstehen,
 die im Druck nicht trägt:
 
-| Name | Fläche | Text | Akzent (Leadline) |
-|:---|:---|:---|:---|
-| `deep` | Deep Green `#1c4b42` | Weiß | Lime `#b4e717` |
-| `transition` | Transition Green `#287d4b` | Weiß | Pure Green `#4daf46` |
-| `pure` | Pure Green `#4daf46` | Weiß | Deep Green `#1c4b42` |
-| `stone` | Stone Grey `#494949` | Weiß | Pure Green `#4daf46` |
-| `sand` | Sand White `#f6f5f2` | Stone Grey | Pure Green `#4daf46` |
-| `white` | Weiß `#ffffff` | Stone Grey | Pure Green `#4daf46` |
+| Name | Fläche | Text | Hauptheadline | Sektions-Headline | Akzent (Leadline) |
+|:---|:---|:---|:---|:---|:---|
+| `deep` | Deep Green `#1c4b42` | Weiß | Lime | Weiß | Lime |
+| `transition` | Transition Green `#287d4b` | Weiß | Lime | Weiß | Lime |
+| `pure` | Pure Green `#4daf46` | Weiß | Deep Green | Weiß | Deep Green |
+| `stone` | Stone Grey `#494949` | Weiß | Pure Green | Weiß | Lime |
+| `sand` | Sand White `#f6f5f2` | Stone Grey | Pure Green | Transition Green | Pure Green |
+| `white` | Weiß `#ffffff` | Stone Grey | Pure Green | Transition Green | Pure Green |
 
-Die Zuordnung folgt dem Titelblatt-Schema aus `README.md`. Andere Kombinationen sind nicht
-zugelassen.
+Der Akzent ist auf allen dunklen Flächen **Lime**, nicht Pure Green. Grund ist der gemessene
+Kontrast: Pure Green auf Transition Green ergibt 1.8:1 und ist als 9-pt-Leadline nicht lesbar.
+Lime bringt auf Transition Green 3.5:1, auf Deep Green 6.7:1 und auf Stone Grey 6.2:1. Das weicht
+bewusst vom Titelblatt-Schema ab, wo die Subheadline in 12pt steht und Pure Green trägt.
+
+Die Hauptheadline behält den Ton der vermessenen Vorlage: Pure Green auf Stone Grey und auf hellem
+Grund, Deep Green auf Pure Green, Lime auf den beiden dunklen Grüntönen.
+
+Andere Kombinationen sind nicht zugelassen.
 
 ## Seitentypen
 

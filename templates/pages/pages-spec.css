@@ -458,10 +458,11 @@ html, body {
    ============================================================ */
 
 .module-quote {
-  background-color: var(--bkm-pure-green); /* Pure Green */
+  /* Grund- und Textfarbe kommen aus der Flaechenklasse, nicht von hier. */
   padding: 10mm 12mm;
-  width: 97.0mm; /* Gemessen: X=95.0 bis X=192.0 */
-  height: 20.0mm; /* Gemessen */
+  width: 97.0mm;      /* Gemessen: X=95.0 bis X=192.0 */
+  min-height: 20.0mm; /* Gemessen; waechst mit laengeren Zitaten mit */
+  margin-top: 9.7mm;
   display: flex;
   align-items: center;
 }
@@ -629,6 +630,107 @@ html, body {
   column-count: 2;
   column-gap: 8.6mm; /* 2× Gutter */
 }
+
+/* ============================================================
+   SEITENTYP OPENER: BLATTHAELFTEN
+   ============================================================
+   Die Hoehen 131.2mm und 165.8mm stammen aus der Vermessung. Die untere
+   Haelfte laeuft bis zur Blattunterkante durch und haelt den Fusssteg
+   frei, weil die Fusszeile auf ihr steht.
+   ============================================================ */
+
+.opener-half {
+  position: absolute;
+  left: 0;
+  width: 210mm;
+  overflow: hidden;
+  padding: var(--brochure-margin-top) var(--brochure-margin-x) 0 var(--brochure-margin-x);
+}
+
+.opener-half--upper { top: 0;        height: 131.2mm; }
+
+.opener-half--lower {
+  top: 131.2mm;
+  height: 165.8mm;
+  padding-bottom: var(--brochure-footer-zone);
+}
+
+/* ============================================================
+   BENANNTE FLAECHEN
+   ============================================================
+   Eine Flaeche legt Grundton, Textfarbe, Headline- und Akzentfarbe
+   gemeinsam fest. Der Content waehlt einen Namen, nie einen Farbwert -
+   dadurch kann keine Kombination entstehen, die im Druck nicht traegt.
+
+   Der Akzent ist auf allen dunklen Flaechen Lime. Pure Green auf
+   Transition Green ergibt ein Kontrastverhaeltnis von 1.8:1 und ist als
+   9-pt-Leadline nicht lesbar; Lime bringt dort 3.5:1, auf Deep Green
+   6.7:1 und auf Stone Grey 6.2:1.
+
+   Die Hauptheadline behaelt den Ton der Vorlage: Pure Green auf Stone
+   Grey und auf hellem Grund, Lime auf den beiden dunklen Gruentoenen,
+   Deep Green auf Pure Green.
+   ============================================================ */
+
+.surface { color: var(--surface-text); }
+
+.surface .headline-large   { color: var(--surface-hl-large); }
+.surface .headline-section { color: var(--surface-hl-section); }
+.surface .leadline         { color: var(--surface-accent); }
+.surface .body-text        { color: var(--surface-text); }
+.surface .body-text strong { color: var(--surface-text); }
+.surface .module-quote__text { color: var(--surface-text); }
+
+.surface--deep {
+  background: var(--bkm-deep-green);
+  --surface-text:       var(--bkm-white);
+  --surface-hl-large:   var(--bkm-lime-green);
+  --surface-hl-section: var(--bkm-white);
+  --surface-accent:     var(--bkm-lime-green);
+}
+
+.surface--transition {
+  background: var(--bkm-transition-green);
+  --surface-text:       var(--bkm-white);
+  --surface-hl-large:   var(--bkm-lime-green);
+  --surface-hl-section: var(--bkm-white);
+  --surface-accent:     var(--bkm-lime-green);
+}
+
+.surface--pure {
+  background: var(--bkm-pure-green);
+  --surface-text:       var(--bkm-white);
+  --surface-hl-large:   var(--bkm-deep-green);
+  --surface-hl-section: var(--bkm-white);
+  --surface-accent:     var(--bkm-deep-green);
+}
+
+.surface--stone {
+  background: var(--bkm-stone-grey);
+  --surface-text:       var(--bkm-white);
+  --surface-hl-large:   var(--bkm-pure-green);
+  --surface-hl-section: var(--bkm-white);
+  --surface-accent:     var(--bkm-lime-green);
+}
+
+.surface--sand {
+  background: var(--bkm-sand-white);
+  --surface-text:       var(--bkm-stone-grey);
+  --surface-hl-large:   var(--bkm-pure-green);
+  --surface-hl-section: var(--bkm-transition-green);
+  --surface-accent:     var(--bkm-pure-green);
+}
+
+.surface--white {
+  background: var(--bkm-white);
+  --surface-text:       var(--bkm-stone-grey);
+  --surface-hl-large:   var(--bkm-pure-green);
+  --surface-hl-section: var(--bkm-transition-green);
+  --surface-accent:     var(--bkm-pure-green);
+}
+
+/* Die Fusszeile erbt die Textfarbe ihrer Flaeche. */
+.surface > .page__footer { color: var(--surface-text); }
 
 /* ============================================================
    SEITENTYP FEATURE: BAENDER IM FLUSS

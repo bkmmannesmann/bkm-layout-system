@@ -23,14 +23,13 @@
 {%- macro folio(page, index0, start) -%}
 {%- if not page.no_folio -%}
 {%- set no = start | default(2, true) + index0 -%}
-{#- Die Fusszeile steht auf dem letzten Band der Seite. Bei opener ist das
-    immer die untere Blatthaelfte, bei feature nur dann, wenn ein
-    lower_section vorhanden ist; sonst endet die Seite auf Weiss. -#}
-{%- set tail_bg = page.lower_bg if (page.type == 'opener'
-                  or (page.type == 'feature' and page.lower_section)) else none -%}
-{%- set on_colour = tail_bg and tail_bg not in ('#ffffff', '#FFFFFF', 'white', 'var(--bkm-white)') -%}
+{#- Die Fusszeile erbt ihre Farbe von der Flaeche, auf der sie steht: bei
+    opener von der unteren Blatthaelfte, bei feature vom letzten Band. Beide
+    tragen die Fusszeile als Kind, deshalb greift .surface > .page__footer.
+    Auf allen uebrigen Seitentypen endet die Seite auf Weiss und die
+    Grundfarbe .page (Stone Grey) gilt. folio_color uebersteuert. -#}
 <div class="page__footer page__footer--{{ 'verso' if no % 2 == 0 else 'recto' }}"
-     style="color: {{ page.folio_color | default('var(--bkm-white)' if on_colour else 'var(--bkm-stone-grey)', true) }};">
+     {%- if page.folio_color %} style="color: {{ page.folio_color }};"{% endif %}>
   <span class="page__folio">{{ '%02d' % no }}</span>
   {%- if page.running_head %}<span class="page__runninghead">{{ page.running_head }}</span>{% endif -%}
 </div>
@@ -46,34 +45,40 @@
      ============================================================ -->
 {% if page.type == 'opener' %}
 <div class="page">
-  {{ folio(page, loop.index0, page_number_start) }}
-  <!-- Obere Hälfte -->
-  <div style="position: absolute; top: 0; left: 0; width: 210mm; height: 131.2mm; background: {{ page.upper_bg | default('var(--bkm-stone-grey)') }}; padding: var(--brochure-margin-top) var(--brochure-margin-x) 0 var(--brochure-margin-x); overflow: hidden;">
-    <h1 class="headline-large" style="color: {{ page.headline_color | default('var(--bkm-pure-green)') }};">{{ page.headline }}</h1>
-    <h2 class="headline-section gap-hl-to-section" style="color: {{ page.section_hl_color | default('var(--bkm-white)') }};">{{ page.section_headline }}</h2>
-    <div class="columns-{{ page.upper_cols | default(3) }} gap-section-to-body body-text" style="color: {{ page.upper_text_color | default('var(--bkm-white)') }}; width: var(--brochure-col-3);">
+
+  {#- Obere Blatthaelfte. Die Flaechenklasse setzt Grund-, Text-, Headline-
+      und Akzentfarbe zusammen; der Content nennt nur ihren Namen. -#}
+  <div class="opener-half opener-half--upper surface surface--{{ page.upper_surface | default('stone') }}">
+    <h1 class="headline-large">{{ page.headline }}</h1>
+    <h2 class="headline-section gap-hl-to-section">{{ page.section_headline }}</h2>
+    <div class="columns-{{ page.upper_cols | default(3) }} gap-section-to-body body-text"
+         style="width: var(--brochure-col-3);">
       {{ page.upper_text }}
     </div>
   </div>
 
-  <!-- Untere Hälfte -->
-  <div style="position: absolute; top: 131.2mm; left: 0; width: 210mm; height: 165.8mm; background: {{ page.lower_bg | default('var(--bkm-transition-green)') }}; padding: var(--brochure-margin-top) var(--brochure-margin-x) var(--brochure-footer-zone) var(--brochure-margin-x); overflow: hidden;">
-    <h2 class="headline-section" style="color: {{ page.lower_hl_color | default('var(--bkm-white)') }};">{{ page.lower_headline }}</h2>
+  {#- Untere Blatthaelfte. Sie laeuft bis zur Blattunterkante durch und
+      traegt daher die Fusszeile. -#}
+  <div class="opener-half opener-half--lower surface surface--{{ page.lower_surface | default('transition') }}">
+    <h2 class="headline-section">{{ page.lower_headline }}</h2>
     {% if page.lower_leadline %}
-    <p class="leadline" style="margin-top: 9.7mm; color: {{ page.lower_lead_color | default('var(--bkm-white)') }};">{{ page.lower_leadline }}</p>
-    <div class="columns-{{ page.lower_cols | default(2) }} body-text" style="margin-top: 5.4mm; color: {{ page.lower_text_color | default('var(--bkm-white)') }}; width: var(--brochure-col-3);">
+    <p class="leadline" style="margin-top: 9.7mm;">{{ page.lower_leadline }}</p>
+    <div class="columns-{{ page.lower_cols | default(2) }} body-text"
+         style="margin-top: 5.4mm; width: var(--brochure-col-3);">
       {{ page.lower_text }}
     </div>
     {% else %}
-    <div class="columns-{{ page.lower_cols | default(2) }} gap-section-to-body body-text" style="color: {{ page.lower_text_color | default('var(--bkm-white)') }}; width: var(--brochure-col-3);">
+    <div class="columns-{{ page.lower_cols | default(2) }} gap-section-to-body body-text"
+         style="width: var(--brochure-col-3);">
       {{ page.lower_text }}
     </div>
     {% endif %}
     {% if page.lower_quote %}
-    <div style="position: absolute; bottom: 18mm; left: 18mm; background: {{ page.quote_bg | default('var(--bkm-pure-green)') }}; padding: 10mm 12mm; max-width: var(--brochure-col-2);">
+    <div class="module-quote surface surface--{{ page.quote_surface | default('pure') }}">
       <p class="module-quote__text">{{ page.lower_quote }}</p>
     </div>
     {% endif %}
+    {{ folio(page, loop.index0, page_number_start) }}
   </div>
 </div>
 
@@ -120,7 +125,7 @@
     {% endif %}
 
     {% if page.quote %}
-    <div style="margin-top: 9.7mm; background: {{ page.quote_bg | default('var(--bkm-pure-green)') }}; padding: 10mm 12mm; max-width: var(--brochure-col-2);">
+    <div class="module-quote surface surface--{{ page.quote_surface | default('pure') }}">
       <p class="module-quote__text">{{ page.quote }}</p>
     </div>
     {% endif %}
@@ -150,7 +155,7 @@
       </div>
       {% endif %}
       {% if page.section2.quote %}
-      <div style="margin-top: 9.7mm; background: {{ page.section2.quote_bg | default('var(--bkm-pure-green)') }}; padding: 10mm 12mm; max-width: var(--brochure-col-2);">
+      <div class="module-quote surface surface--{{ page.section2.quote_surface | default('pure') }}">
         <p class="module-quote__text">{{ page.section2.quote }}</p>
       </div>
       {% endif %}
@@ -165,7 +170,6 @@
      ============================================================ -->
 {% elif page.type == 'feature' %}
 <div class="page">
-  {{ folio(page, loop.index0, page_number_start) }}
 
   {%- if page.layout in ('left-image', 'right-image') %}
   <div class="feature-split{% if page.layout == 'right-image' %} feature-split--reversed{% endif %}">
@@ -189,7 +193,7 @@
        style="height: {{ page.image_height | default('131.2mm') }}; background: var(--brochure-placeholder-bg);">
     {% if page.image %}<img src="{{ page.image }}" alt="">{% endif %}
   </div>
-  <div class="feature-band feature-band__body{% if not page.lower_section %} feature-band--tail{% endif %}">
+  <div class="feature-band feature-band__body">
     <h2 class="headline-section">{{ page.headline }}</h2>
     {% if page.leadline %}
     <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
@@ -203,17 +207,24 @@
 
   {#- Unterer Farbblock: schliesst an den Text darueber an, statt auf einer
       frei gewaehlten Millimeterkante zu sitzen. lower_top entfaellt. #}
+  {#- Jede feature-Seite endet auf einem Band, das bis zur Blattunterkante
+      durchlaeuft und die Fusszeile traegt - mit Inhalt, wenn ein
+      lower_section vorliegt, sonst leer auf Weiss. -#}
   {%- if page.lower_section %}
-  <div class="feature-band feature-band__body feature-band--tail"
-       style="{% if page.lower_bg %}background: {{ page.lower_bg }};{% endif %}">
-    <h2 class="headline-section" style="{% if page.lower_bg %}color: var(--bkm-white);{% endif %}">{{ page.lower_section.headline }}</h2>
+  <div class="feature-band feature-band__body feature-band--tail surface surface--{{ page.lower_surface | default('white') }}">
+    <h2 class="headline-section">{{ page.lower_section.headline }}</h2>
     {% if page.lower_section.leadline %}
-    <p class="leadline" style="margin-top: 9.7mm; {% if page.lower_bg %}color: var(--bkm-pure-green);{% endif %}">{{ page.lower_section.leadline }}</p>
+    <p class="leadline" style="margin-top: 9.7mm;">{{ page.lower_section.leadline }}</p>
     {% endif %}
     <div class="columns-{{ page.lower_section.columns | default(3) }} body-text"
-         style="margin-top: {% if page.lower_section.leadline %}5.4mm{% else %}4.4mm{% endif %}; width: var(--brochure-col-3); {% if page.lower_bg %}color: var(--bkm-white);{% endif %}">
+         style="margin-top: {% if page.lower_section.leadline %}5.4mm{% else %}4.4mm{% endif %}; width: var(--brochure-col-3);">
       {{ page.lower_section.text }}
     </div>
+    {{ folio(page, loop.index0, page_number_start) }}
+  </div>
+  {%- else %}
+  <div class="feature-band feature-band--tail surface surface--white">
+    {{ folio(page, loop.index0, page_number_start) }}
   </div>
   {%- endif %}
 </div>
@@ -249,7 +260,7 @@
     {% endif %}
 
     {% if page.quote %}
-    <div style="margin-top: 9.7mm; background: {{ page.quote_bg | default('var(--bkm-pure-green)') }}; padding: 10mm 12mm; max-width: var(--brochure-col-2);">
+    <div class="module-quote surface surface--{{ page.quote_surface | default('pure') }}">
       <p class="module-quote__text">{{ page.quote }}</p>
     </div>
     {% endif %}

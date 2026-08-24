@@ -61,22 +61,16 @@ def build_demo():
             {
                 "type": "opener",
                 "running_head": "Ihr Zuhause verdient Schutz",
-                "upper_bg": "#494949",
+                "upper_surface": "stone",
                 "headline": "IHR ZUHAUSE VERDIENT SCHUTZ.",
-                "headline_color": "#4daf46",
                 "section_headline": "Für Eigentümer, die ihr Haus langfristig schützen wollen.",
-                "section_hl_color": "#ffffff",
                 "upper_cols": 3,
                 "upper_text": "Wenn im eigenen Keller Feuchtigkeit auftritt, stehen viele Eigentümer vor einer schwierigen Entscheidung. Was tun? Wen fragen? Und wie erkennt man, ob eine Maßnahme wirklich sinnvoll ist? Hochwertige Materialien sind wichtig. Aber bei Feuchtigkeitsschäden entscheidet nicht allein das Material über das Ergebnis. Entscheidend ist, ob die Ursache richtig eingeordnet, die passende Systemlösung gewählt und die Maßnahme fachgerecht umgesetzt wird.",
-                "upper_text_color": "#ffffff",
-                "lower_bg": "#287d4b",
+                "lower_surface": "transition",
                 "lower_headline": "Was einen BKM Fachbetrieb auszeichnet",
-                "lower_hl_color": "#ffffff",
                 "lower_leadline": "Prüfen. Erklären. Empfehlen. Fachgerecht umsetzen. Vorbeugen.",
-                "lower_lead_color": "#ffffff",
                 "lower_cols": 2,
-                "lower_text": "Ein BKM Fachbetrieb arbeitet nach einem klaren Prinzip: Zuerst wird die Ursache geprüft. Dann wird erklärt, was hinter dem Schaden steckt. Auf dieser Grundlage wird eine passende Lösung empfohlen und fachgerecht umgesetzt. Dieser Ablauf sorgt dafür, dass keine wichtigen Schritte übersprungen werden. Und dass Sie als Eigentümer jederzeit nachvollziehen können, warum eine bestimmte Maßnahme empfohlen wird.",
-                "lower_text_color": "#ffffff"
+                "lower_text": "Ein BKM Fachbetrieb arbeitet nach einem klaren Prinzip: Zuerst wird die Ursache geprüft. Dann wird erklärt, was hinter dem Schaden steckt. Auf dieser Grundlage wird eine passende Lösung empfohlen und fachgerecht umgesetzt. Dieser Ablauf sorgt dafür, dass keine wichtigen Schritte übersprungen werden. Und dass Sie als Eigentümer jederzeit nachvollziehen können, warum eine bestimmte Maßnahme empfohlen wird."
             },
 
             # --- SEITE 3: CONTENT (3-Spalten, 2 Sektionen) ---
@@ -117,7 +111,7 @@ def build_demo():
                     "columns": 3,
                     "text": "Bei Feuchtigkeitsschäden reicht eine pauschale Position wie Kellerabdichtung oft nicht aus. Für Eigentümer ist entscheidend, ob nachvollziehbar wird, warum eine bestimmte Maßnahme empfohlen wird. Ein fachlich sauberes Angebot sollte deshalb nicht nur beschreiben, was gemacht wird, sondern auch, worauf diese Empfehlung basiert."
                 },
-                "lower_bg": "#287d4b"
+                "lower_surface": "transition"
             },
 
             # --- SEITE 5: CONTENT (Große HL + 3-Spalten) ---
@@ -139,22 +133,16 @@ def build_demo():
             {
                 "type": "opener",
                 "running_head": "Die richtige Entscheidung",
-                "upper_bg": "#494949",
+                "upper_surface": "stone",
                 "headline": "ERST PRÜFEN DANN RICHTIG ENTSCHEIDEN.",
-                "headline_color": "#4daf46",
                 "section_headline": "Die richtige Lösung beginnt am Gebäude.",
-                "section_hl_color": "#ffffff",
                 "upper_cols": 3,
                 "upper_text": "Feuchtigkeit am Haus sollte nicht ignoriert werden. Gleichzeitig ist vorschnelles Handeln selten der beste Weg. Der sinnvollste erste Schritt ist eine fachkundige Einschätzung. Ihr BKM Fachbetrieb hilft Ihnen dabei, den Schaden zu verstehen, mögliche Ursachen einzuordnen und eine passende Lösung für Ihr Gebäude zu finden.",
-                "upper_text_color": "#ffffff",
-                "lower_bg": "#ffffff",
+                "lower_surface": "white",
                 "lower_headline": "Was Sie beim Fachbetrieb zusätzlich erhalten",
-                "lower_hl_color": "#1c4b42",
                 "lower_leadline": "Der größte Mehrwert liegt in der Sicherheit Ihrer Entscheidung.",
-                "lower_lead_color": "#4daf46",
                 "lower_cols": 3,
-                "lower_text": "Ein qualitätsbewusster Hausbesitzer möchte nicht einfach irgendetwas machen lassen. Er möchte verstehen, was sinnvoll ist, wofür er investiert und warum eine bestimmte Maßnahme empfohlen wird. Genau dafür ist der Fachbetrieb da. Sie müssen die Ursache nicht selbst erraten. Wir setzen auf Lösungen, die zum Gebäude passen.",
-                "lower_text_color": "#494949"
+                "lower_text": "Ein qualitätsbewusster Hausbesitzer möchte nicht einfach irgendetwas machen lassen. Er möchte verstehen, was sinnvoll ist, wofür er investiert und warum eine bestimmte Maßnahme empfohlen wird. Genau dafür ist der Fachbetrieb da. Sie müssen die Ursache nicht selbst erraten. Wir setzen auf Lösungen, die zum Gebäude passen."
             },
 
             # --- INHALTSVERZEICHNIS ---
