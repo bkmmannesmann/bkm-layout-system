@@ -16,6 +16,13 @@
    - 3 Spalten: 174.0mm (3×55.4 + 2×4.3)
    - Spalten-Startpositionen: 18.0mm | 77.7mm | 137.3mm
    
+   Die Messwerte unten sind der Herkunftsnachweis, nicht die geltende Quelle.
+   Verbindlich sind die Variablen: Farben aus design-system/variables.css, das
+   Raster aus dem :root-Block weiter unten. Drei gemessene Toene weichen um
+   einen Rasterschritt vom Corporate Design ab und wurden auf das CD normiert:
+   Stone Grey #484848 -> #494949, Transition Green #277c4b -> #287d4b,
+   Lime Green #8cc63f -> #b4e717.
+
    TYPOGRAFIE-HIERARCHIE (gemessen):
    - Hauptheadline: Unbounded Black, 30pt, Versalien, #4daf46
    - Sektions-Headline: Unbounded Black, 18pt, #287d4b
@@ -33,6 +40,25 @@
    - Fließtext Zeilenabstand: 4.0mm pro Zeile
    
    ============================================================ */
+
+/* === QUELLEN === */
+@import url('../../design-system/variables.css');
+
+/* Broschuerenraster. Bewusst eigene Variablen: die generischen --margin-*
+   und --column-gap in variables.css fuehren 15mm bzw. 5mm und beschreiben
+   nicht den hier vermessenen Broschuerensatzspiegel. */
+:root {
+  --brochure-margin-x:      18.0mm;  /* Satzspiegel links und rechts */
+  --brochure-margin-top:    20.4mm;  /* Oberkante erste Headline */
+  --brochure-col:           55.4mm;  /* eine Spalte */
+  --brochure-gutter:         4.3mm;  /* Spaltenabstand */
+  --brochure-col-2:        115.1mm;  /* 2x55.4 + 1x4.3 */
+  --brochure-col-3:        174.0mm;  /* 3x55.4 + 2x4.3, zugleich Satzspiegelbreite */
+
+  /* In variables.css nicht gefuehrt, siehe docs/BROSCHUERE-LAYOUT.md */
+  --brochure-placeholder-bg: #d8d8d9;  /* Bildplatzhalter */
+  --brochure-rule:           #e0e0e0;  /* Trennlinie Inhaltsverzeichnis */
+}
 
 /* === FONT FACES ===
    Quelle: assets/fonts/ – dieselben Dateien, die design-system/base.css nutzt.
@@ -105,7 +131,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-size: 9pt;
   line-height: 1.42;
-  color: #484848;
+  color: var(--bkm-stone-grey);
 }
 
 .page:last-child {
@@ -115,9 +141,9 @@ html, body {
 /* Content-Bereich mit korrekten Rändern */
 .page__content {
   position: absolute;
-  top: 20.4mm;
-  left: 18.0mm;
-  width: 174.0mm;
+  top: var(--brochure-margin-top);
+  left: var(--brochure-margin-x);
+  width: var(--brochure-col-3);
   height: 258.6mm; /* 297 - 20.4 - 18 */
 }
 
@@ -133,7 +159,7 @@ html, body {
   line-height: 1.13; /* gemessen: 13.3mm Zeilenabstand bei 30pt */
   letter-spacing: 0;
   text-transform: uppercase;
-  color: #4daf46; /* Pure Green – gemessen */
+  color: var(--bkm-pure-green); /* Pure Green – gemessen */
   margin: 0;
 }
 
@@ -145,7 +171,7 @@ html, body {
   line-height: 1.25;
   letter-spacing: 0;
   text-transform: none;
-  color: #287d4b; /* Transition Green – gemessen */
+  color: var(--bkm-transition-green); /* Transition Green – gemessen */
   margin: 0;
 }
 
@@ -156,7 +182,7 @@ html, body {
   font-size: 9pt;
   line-height: 1.4;
   letter-spacing: 0;
-  color: #4daf46; /* Pure Green – gemessen */
+  color: var(--bkm-pure-green); /* Pure Green – gemessen */
   margin: 0;
 }
 
@@ -166,7 +192,7 @@ html, body {
   font-weight: 400;
   font-size: 9pt;
   line-height: 1.42; /* gemessen: 4.0mm / (9pt × 0.353mm) = 1.26, CSS-korrigiert auf 1.42 */
-  color: #484848; /* Stone Grey – gemessen */
+  color: var(--bkm-stone-grey); /* Stone Grey – gemessen */
   text-align: justify;
   hyphens: auto;
   -webkit-hyphens: auto;
@@ -181,7 +207,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #484848;
+  color: var(--bkm-stone-grey);
 }
 
 /* ============================================================
@@ -216,52 +242,52 @@ html, body {
 /* ============================================================
    SPALTEN-SYSTEM (exakt gemessen)
    Spaltenbreite: 55.4mm | Gutter: 4.3mm
-   Startpositionen: 18.0mm | 77.7mm | 137.3mm
+   Startpositionen: var(--brochure-margin-x) | 77.7mm | 137.3mm
    ============================================================ */
 
 /* 3-Spalten mit CSS columns */
 .columns-3 {
   column-count: 3;
-  column-gap: 4.3mm;
-  width: 174.0mm;
+  column-gap: var(--brochure-gutter);
+  width: var(--brochure-col-3);
 }
 
 /* 2-Spalten mit CSS columns */
 .columns-2 {
   column-count: 2;
-  column-gap: 4.3mm;
-  width: 115.1mm; /* 2×55.4 + 1×4.3 */
+  column-gap: var(--brochure-gutter);
+  width: var(--brochure-col-2); /* 2×55.4 + 1×4.3 */
 }
 
 /* 2-Spalten volle Breite (für 3-Spalten-Seiten) */
 .columns-2-wide {
   column-count: 2;
-  column-gap: 4.3mm;
-  width: 174.0mm;
+  column-gap: var(--brochure-gutter);
+  width: var(--brochure-col-3);
 }
 
 /* Flexbox-Spalten (für ungleiche Inhalte) */
 .flex-cols-2 {
   display: flex;
-  gap: 4.3mm;
-  width: 115.1mm;
+  gap: var(--brochure-gutter);
+  width: var(--brochure-col-2);
 }
 
 .flex-cols-3 {
   display: flex;
-  gap: 4.3mm;
-  width: 174.0mm;
+  gap: var(--brochure-gutter);
+  width: var(--brochure-col-3);
 }
 
 .flex-cols-2 > .col,
 .flex-cols-3 > .col {
-  width: 55.4mm;
+  width: var(--brochure-col);
   flex-shrink: 0;
 }
 
 /* Breite Spalte (2 Spalten zusammen) */
 .col-wide {
-  width: 115.1mm;
+  width: var(--brochure-col-2);
   flex-shrink: 0;
 }
 
@@ -272,9 +298,9 @@ html, body {
 
 .module-opener {
   position: absolute;
-  top: 20.4mm;
-  left: 18.0mm;
-  width: 174.0mm;
+  top: var(--brochure-margin-top);
+  left: var(--brochure-margin-x);
+  width: var(--brochure-col-3);
 }
 
 .module-opener .headline-large {
@@ -297,7 +323,7 @@ html, body {
    ============================================================ */
 
 .module-section {
-  width: 174.0mm;
+  width: var(--brochure-col-3);
 }
 
 .module-section .headline-section {
@@ -339,7 +365,7 @@ html, body {
 
 .module-split__image {
   flex: 0 0 50%;
-  background: #d8d8d9;
+  background: var(--brochure-placeholder-bg);
   overflow: hidden;
 }
 
@@ -352,7 +378,7 @@ html, body {
 
 .module-split__text {
   flex: 1;
-  padding: 18.0mm;
+  padding: var(--brochure-margin-x);
 }
 
 .module-split--reversed {
@@ -371,15 +397,15 @@ html, body {
 
 /* ============================================================
    MODUL: KONTRASTSEKTION (dunkler Hintergrund)
-   Gemessen: rgb(72,72,72) = #484848, Höhe variabel
+   Gemessen: rgb(72,72,72) = var(--bkm-stone-grey), Höhe variabel
    ============================================================ */
 
 .module-dark {
   position: absolute;
   width: 210mm;
   left: 0;
-  background-color: #484848;
-  padding: 20.4mm 18.0mm 18.0mm 18.0mm;
+  background-color: var(--bkm-stone-grey);
+  padding: var(--brochure-margin-top) var(--brochure-margin-x) var(--brochure-margin-x) var(--brochure-margin-x);
 }
 
 .module-dark--top {
@@ -398,23 +424,23 @@ html, body {
 }
 
 .module-dark--green {
-  background-color: #277c4b; /* Transition Green gemessen: rgb(39,124,75) */
+  background-color: var(--bkm-transition-green); /* Transition Green gemessen: rgb(39,124,75) */
 }
 
 .module-dark .headline-large {
-  color: #ffffff;
+  color: var(--bkm-white);
 }
 
 .module-dark .headline-section {
-  color: #ffffff;
+  color: var(--bkm-white);
 }
 
 .module-dark .leadline {
-  color: #4daf46;
+  color: var(--bkm-pure-green);
 }
 
 .module-dark .body-text {
-  color: #ffffff;
+  color: var(--bkm-white);
 }
 
 /* ============================================================
@@ -423,7 +449,7 @@ html, body {
    ============================================================ */
 
 .module-quote {
-  background-color: #4daf46; /* Pure Green */
+  background-color: var(--bkm-pure-green); /* Pure Green */
   padding: 10mm 12mm;
   width: 97.0mm; /* Gemessen: X=95.0 bis X=192.0 */
   height: 20.0mm; /* Gemessen */
@@ -432,7 +458,7 @@ html, body {
 }
 
 .module-quote--wide {
-  width: 115.1mm;
+  width: var(--brochure-col-2);
   height: auto;
   padding: 12mm 14mm;
 }
@@ -442,15 +468,15 @@ html, body {
   font-weight: 900;
   font-size: 9pt;
   line-height: 1.4;
-  color: #ffffff;
+  color: var(--bkm-white);
 }
 
 .module-quote--transition-green {
-  background-color: #277c4b;
+  background-color: var(--bkm-transition-green);
 }
 
 .module-quote--dark {
-  background-color: #484848;
+  background-color: var(--bkm-stone-grey);
 }
 
 /* Key Visual mini in Zitat-Box */
@@ -478,7 +504,7 @@ html, body {
   font-weight: 700;
   font-size: 9pt;
   line-height: 1.42;
-  color: #484848;
+  color: var(--bkm-stone-grey);
   margin-bottom: 0;
 }
 
@@ -487,7 +513,7 @@ html, body {
   font-weight: 400;
   font-size: 9pt;
   line-height: 1.42;
-  color: #484848;
+  color: var(--bkm-stone-grey);
 }
 
 /* Vorteil-Block */
@@ -499,7 +525,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #484848;
+  color: var(--bkm-stone-grey);
 }
 
 .module-process__benefit-body {
@@ -507,7 +533,7 @@ html, body {
   font-weight: 400;
   font-size: 9pt;
   line-height: 1.42;
-  color: #484848;
+  color: var(--bkm-stone-grey);
 }
 
 /* ============================================================
@@ -517,9 +543,9 @@ html, body {
 
 .module-toc {
   position: absolute;
-  top: 20.4mm;
-  left: 18.0mm;
-  width: 174.0mm;
+  top: var(--brochure-margin-top);
+  left: var(--brochure-margin-x);
+  width: var(--brochure-col-3);
 }
 
 .module-toc__title {
@@ -527,7 +553,7 @@ html, body {
   font-weight: 900;
   font-size: 18pt;
   line-height: 1.25;
-  color: #287d4b;
+  color: var(--bkm-transition-green);
   margin-bottom: 9.7mm; /* 115px */
 }
 
@@ -543,14 +569,14 @@ html, body {
   justify-content: space-between;
   align-items: baseline;
   padding: 2.5mm 0;
-  border-bottom: 0.3mm solid #287d4b;
+  border-bottom: 0.3mm solid var(--bkm-transition-green);
 }
 
 .module-toc__chapter-title {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #484848;
+  color: var(--bkm-stone-grey);
   flex: 1;
 }
 
@@ -558,7 +584,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #4daf46;
+  color: var(--bkm-pure-green);
   margin-left: 3mm;
   flex-shrink: 0;
 }
@@ -569,14 +595,14 @@ html, body {
   justify-content: space-between;
   align-items: baseline;
   padding: 1.5mm 0 1.5mm 6mm;
-  border-bottom: 0.15mm solid #e0e0e0;
+  border-bottom: 0.15mm solid var(--brochure-rule);
 }
 
 .module-toc__sub-title {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 9pt;
-  color: #484848;
+  color: var(--bkm-stone-grey);
   flex: 1;
 }
 
@@ -584,7 +610,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 9pt;
-  color: #484848;
+  color: var(--bkm-stone-grey);
   margin-left: 3mm;
   flex-shrink: 0;
 }
@@ -639,7 +665,7 @@ html, body {
   font-weight: 700;
   font-size: 16pt;
   line-height: 1.3;
-  color: #1c4b42; /* Deep Green */
+  color: var(--bkm-deep-green); /* Deep Green */
   margin-bottom: 4.3mm; /* 51px */
 }
 
@@ -648,7 +674,7 @@ html, body {
   font-weight: 400;
   font-size: 9pt;
   line-height: 1.42;
-  color: #1c4b42;
+  color: var(--bkm-deep-green);
   margin-bottom: 3.4mm; /* 40px */
 }
 
@@ -657,7 +683,7 @@ html, body {
   font-weight: 700;
   font-size: 9pt;
   line-height: 1.42;
-  color: #4daf46; /* Pure Green */
+  color: var(--bkm-pure-green); /* Pure Green */
 }
 
 /* Kontaktdaten: Position Y=226.0mm, X=147.3mm */
@@ -672,7 +698,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #000000;
+  color: var(--bkm-black);
   margin-bottom: 0;
 }
 
@@ -680,7 +706,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 9pt;
-  color: #000000;
+  color: var(--bkm-black);
   line-height: 1.42;
 }
 
@@ -692,12 +718,12 @@ html, body {
 .backcover-imprint {
   position: absolute;
   top: 271.0mm;
-  left: 18.0mm;
+  left: var(--brochure-margin-x);
   width: 100mm;
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 6pt;
-  color: #000000;
+  color: var(--bkm-black);
   line-height: 1.4;
 }
 
@@ -705,7 +731,7 @@ html, body {
 .backcover-badge {
   position: absolute;
   top: 242.1mm;
-  left: 18.0mm;
+  left: var(--brochure-margin-x);
   height: 8.0mm;
   width: auto;
 }
@@ -715,7 +741,7 @@ html, body {
    ============================================================ */
 
 .image-panel {
-  background: #d8d8d9;
+  background: var(--brochure-placeholder-bg);
   overflow: hidden;
 }
 
@@ -762,21 +788,21 @@ html, body {
 .mt-xxl { margin-top: 28.2mm; }
 
 /* Farbklassen */
-.color-pure-green { color: #4daf46; }
-.color-transition-green { color: #287d4b; }
-.color-deep-green { color: #1c4b42; }
-.color-lime-green { color: #8cc63f; }
-.color-stone-grey { color: #484848; }
-.color-white { color: #ffffff; }
-.color-black { color: #000000; }
+.color-pure-green { color: var(--bkm-pure-green); }
+.color-transition-green { color: var(--bkm-transition-green); }
+.color-deep-green { color: var(--bkm-deep-green); }
+.color-lime-green { color: var(--bkm-lime-green); }
+.color-stone-grey { color: var(--bkm-stone-grey); }
+.color-white { color: var(--bkm-white); }
+.color-black { color: var(--bkm-black); }
 
 /* Hintergrundfarben */
-.bg-pure-green { background-color: #4daf46; }
-.bg-transition-green { background-color: #277c4b; }
-.bg-deep-green { background-color: #1c4b42; }
-.bg-stone-grey { background-color: #484848; }
-.bg-light-grey { background-color: #d8d8d9; }
-.bg-white { background-color: #ffffff; }
+.bg-pure-green { background-color: var(--bkm-pure-green); }
+.bg-transition-green { background-color: var(--bkm-transition-green); }
+.bg-deep-green { background-color: var(--bkm-deep-green); }
+.bg-stone-grey { background-color: var(--bkm-stone-grey); }
+.bg-light-grey { background-color: var(--brochure-placeholder-bg); }
+.bg-white { background-color: var(--bkm-white); }
 
 /* Positionierung */
 .absolute { position: absolute; }
