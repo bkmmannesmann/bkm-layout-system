@@ -15,10 +15,16 @@ Das Template-System arbeitet mit konkreten Seitentypen:
 
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML
+from pypdf import PdfReader
+
+# Schriftfamilien, die im fertigen PDF stehen duerfen. Alles andere heisst,
+# dass WeasyPrint eine Datei nicht gefunden und still ersetzt hat.
+ALLOWED_FONTS = ("Unbounded", "TT-Norms-Pro", "TTNormsPro", "Liberation")
 
 # Pfade
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -26,6 +32,123 @@ TEMPLATES_DIR = PROJECT_ROOT / "templates" / "pages"
 CONTENT_DIR = PROJECT_ROOT / "content"
 OUTPUT_DIR = PROJECT_ROOT / "output" / "pages"
 ASSETS_DIR = PROJECT_ROOT / "assets"
+
+
+
+
+def _letters(text):
+    """Reduziert auf Buchstaben und Ziffern.
+
+    Der Blocksatz bricht Woerter um und setzt Trennstriche; im extrahierten
+    Text stehen dadurch Leerzeichen und Bindestriche an Stellen, die es in
+    der Quelle nicht gibt. Ohne sie ist der Vergleich stabil.
+    """
+    return re.sub(r"[^0-9a-zäöüß]", "", text.lower())
+
+
+def _collect_strings(node, out):
+    """Sammelt alle Textwerte aus der Content-Struktur ein."""
+    if isinstance(node, str):
+        if len(node) > 40:      # Ueberschriften und Kurzfelder sind zu kurz,
+            out.append(node)    # um beim Umbruch verlaesslich zu vergleichen
+    elif isinstance(node, dict):
+        for key, value in node.items():
+            if key in ("image", "badge", "imprint"):
+                continue
+            _collect_strings(value, out)
+    elif isinstance(node, list):
+        for item in node:
+            _collect_strings(item, out)
+    return out
+
+
+def check_output(pdf_path, content_data):
+    """Prueft das erzeugte PDF gegen zwei Fehler, die sonst still durchgehen.
+
+    Erstens die eingebetteten Schriften: verweist ein Stylesheet auf eine
+    Schriftdatei, die es nicht gibt, meldet WeasyPrint das nicht, sondern
+    setzt eine Ersatzschrift. Der Innenteil lief so zeitweise in DejaVu Sans.
+
+    Zweitens die Vollstaendigkeit: laeuft ein Text ueber seinen Bereich
+    hinaus, schneidet ihn overflow:hidden ab. Das PDF sieht heil aus, es
+    fehlt nur der Schluss des Absatzes.
+    """
+    errors = []
+    reader = PdfReader(str(pdf_path))
+
+    fonts = set()
+    for page in reader.pages:
+        resources = page.get("/Resources", {}) or {}
+        for value in (resources.get("/Font", {}) or {}).values():
+            base = str(value.get_object().get("/BaseFont", ""))
+            fonts.add(base.split("+")[-1].lstrip("/"))
+    for font in sorted(fonts):
+        if not any(font.startswith(prefix) for prefix in ALLOWED_FONTS):
+            errors.append(
+                f"Fremdschrift im PDF: {font} - eine Schriftdatei wurde nicht "
+                f"gefunden und still ersetzt"
+            )
+
+    rendered = _letters(" ".join(page.extract_text() or "" for page in reader.pages))
+    for text in _collect_strings(content_data, []):
+        if _letters(text) not in rendered:
+            errors.append(
+                f"Text aus dem Inhalt steht nicht im PDF: "
+                f"...{text.strip()[-60:]!r}"
+            )
+
+    errors.extend(_check_type_area(reader))
+    return errors
+
+
+# Satzspiegel in mm, aus docs/BROSCHUERE-LAYOUT.md. Ausserhalb dieser Grenzen
+# darf keine Grundlinie liegen - dort schneidet der Beschnitt, oder der Text
+# laeuft in die Fusszeile.
+MARGIN_X = 18.0
+PAGE_W = 210.0
+PAGE_H = 297.0
+FOOTER_BASELINE = PAGE_H - MARGIN_X   # 279.0mm, Grundlinie der Seitenzahl
+TOLERANCE = 0.6                       # Rundung der Textmatrix
+
+
+def _check_type_area(reader):
+    """Prueft, dass keine Grundlinie ausserhalb des Satzspiegels liegt.
+
+    Der Vollstaendigkeitsvergleich oben findet abgeschnittenen Text nicht:
+    overflow:hidden beschneidet nur die Darstellung, im Textlayer steht der
+    Absatz weiterhin vollstaendig. Sichtbar wird der Fehler erst an der
+    Position - Text unterhalb der Fusszeilen-Grundlinie oder jenseits der
+    seitlichen Fluchtlinie ist im gedruckten Heft weg oder unleserlich.
+    """
+    errors = []
+    for index, page in enumerate(reader.pages, start=1):
+        outside = []
+
+        def visit(text, cm, tm, font_dict, font_size):
+            if not text.strip():
+                return
+            # Die Textmatrix allein ist nicht die Seitenposition; sie gilt im
+            # Raum, den die aktuelle Transformationsmatrix aufspannt. Beide
+            # multiplizieren, sonst kommen Werte wie x=251mm auf einem
+            # 210mm breiten Blatt heraus.
+            x_pt = tm[4] * cm[0] + tm[5] * cm[2] + cm[4]
+            y_pt = tm[4] * cm[1] + tm[5] * cm[3] + cm[5]
+            x_mm = x_pt / 72 * 25.4
+            y_mm = PAGE_H - y_pt / 72 * 25.4
+            if y_mm > FOOTER_BASELINE + TOLERANCE:
+                outside.append((text.strip()[:40], f"{y_mm:.1f}mm unter der Oberkante"))
+            elif x_mm < MARGIN_X - TOLERANCE or x_mm > PAGE_W - MARGIN_X + TOLERANCE:
+                outside.append((text.strip()[:40], f"x={x_mm:.1f}mm"))
+
+        page.extract_text(visitor_text=visit)
+        for snippet, where in outside[:3]:
+            errors.append(
+                f"Seite {index}: Text ausserhalb des Satzspiegels ({where}): {snippet!r}"
+            )
+        if len(outside) > 3:
+            errors.append(f"Seite {index}: {len(outside) - 3} weitere Stellen")
+
+    return errors
 
 
 def build_brochure(content_data, output_name):
@@ -45,6 +168,14 @@ def build_brochure(content_data, output_name):
         string=html_content,
         base_url=str(TEMPLATES_DIR)
     ).write_pdf(str(output_path))
+
+    errors = check_output(output_path, content_data)
+    if errors:
+        print(f"  [FEHLER] {output_path}")
+        for error in errors:
+            print(f"    - {error}")
+        print("    Die Regeln stehen in docs/BROSCHUERE-LAYOUT.md.")
+        return None
 
     print(f"  [OK] {output_path}")
     return output_path
@@ -193,8 +324,9 @@ def build_demo():
         json.dump(content, f, ensure_ascii=False, indent=2)
 
     print("Generiere Demo-Broschüre (seitentyp-basiert)...")
-    build_brochure(content, "demo-broschuere")
-    print("\nFertig!")
+    result = build_brochure(content, "demo-broschuere")
+    print("\nFertig!" if result else "\nAbgebrochen: die Ausgabepruefung hat Verstoesse gemeldet.")
+    return result
 
 
 def build_from_json(content_name):
@@ -220,18 +352,27 @@ def main():
 
     target = sys.argv[1]
 
+    # Ein Verstoss in der Ausgabepruefung muss sich im Exit-Code zeigen, sonst
+    # laeuft die CI gruen ueber ein fehlerhaftes PDF hinweg.
+    ok = True
     if target == "demo":
-        build_demo()
+        ok = build_demo() is not None
     elif target == "all":
-        build_demo()
+        ok = build_demo() is not None
         if CONTENT_DIR.exists():
             for folder in sorted(CONTENT_DIR.iterdir()):
-                if folder.is_dir() and (folder / "content.json").exists() and folder.name != "demo":
+                if not folder.is_dir() or folder.name == "demo":
+                    continue
+                if folder.name.startswith("tds"):
+                    continue  # Datenblaetter baut build_tds.py
+                if (folder / "content.json").exists():
                     print(f"Generiere: {folder.name}...")
-                    build_from_json(folder.name)
+                    ok = build_from_json(folder.name) is not None and ok
     else:
-        build_from_json(target)
+        ok = build_from_json(target) is not None
+
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

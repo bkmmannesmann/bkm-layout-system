@@ -538,6 +538,16 @@ html, body {
   color: var(--bkm-stone-grey);
 }
 
+/* Titelzeile eines Aufzaehlungseintrags im Seitentyp list. */
+.module-list__title {
+  font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 700;
+  font-size: 9pt;
+  line-height: 1.42;
+  color: var(--bkm-stone-grey);
+  margin: 0 0 1mm 0;
+}
+
 .module-process__benefit-body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
@@ -823,8 +833,11 @@ html, body {
 }
 
 .page__runninghead {
+  /* Bewusst ohne opacity: WeasyPrint legt transparente Elemente in eine
+     eigene Transparenzgruppe, die im Druck rastert statt sauber zu
+     separieren. Der Unterschied zur Seitenzahl liegt im Schnitt - die
+     Ziffer steht Bold, der Kolumnentitel Regular. */
   font-weight: 400;
-  opacity: 0.75;
 }
 
 /* ============================================================

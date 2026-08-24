@@ -269,13 +269,13 @@
     <div style="margin-top: {% if page.quote %}9.7mm{% else %}5.4mm{% endif %}; max-width: var(--brochure-col-2);">
       {% for step in page.steps %}
       <div style="margin-bottom: 4.0mm;">
-        <p style="font-family: 'TT Norms Pro', sans-serif; font-weight: 700; font-size: 9pt; color: var(--bkm-stone-grey); margin: 0;">{{ step.number }}. {{ step.title }}</p>
+        <p class="module-process__title">{{ step.number }}. {{ step.title }}</p>
         <p class="body-text" style="margin: 0;">{{ step.body }}</p>
       </div>
       {% endfor %}
       {% if page.benefit %}
       <div style="margin-top: 5mm;">
-        <p style="font-family: 'TT Norms Pro', sans-serif; font-weight: 700; font-size: 9pt; color: var(--bkm-stone-grey); margin: 0;">{{ page.benefit.title }}</p>
+        <p class="module-process__benefit-title">{{ page.benefit.title }}</p>
         <p class="body-text" style="margin: 0;">{{ page.benefit.body }}</p>
       </div>
       {% endif %}
@@ -298,7 +298,7 @@
     <div style="margin-top: {% if page.leadline %}5.4mm{% else %}4.4mm{% endif %}; max-width: var(--brochure-col-2);">
       {% for item in page.entries %}
       <div style="margin-bottom: 5mm;">
-        <p style="font-family: 'TT Norms Pro', sans-serif; font-weight: 700; font-size: 9pt; color: var(--bkm-stone-grey); margin: 0 0 1mm 0;">{{ item.title }}</p>
+        <p class="module-list__title">{{ item.title }}</p>
         <p class="body-text" style="margin: 0;">{{ item.body }}</p>
       </div>
       {% endfor %}

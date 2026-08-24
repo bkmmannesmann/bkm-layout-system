@@ -1,2 +1,5 @@
 weasyprint>=60.0
 jinja2>=3.1.0
+# Liest das erzeugte PDF fuer die Ausgabepruefung in build_pages.py:
+# eingebettete Schriften, Vollstaendigkeit des Textes, Lage im Satzspiegel.
+pypdf>=4.0.0

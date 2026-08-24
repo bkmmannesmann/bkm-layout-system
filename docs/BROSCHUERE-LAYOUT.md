@@ -60,7 +60,7 @@ der Text gekürzt oder ein Block wandert auf die nächste Seite.
 | Fließtext hervorgehoben | TT Norms Pro Bold | 9pt | Stone Grey | — |
 | CTA-Headline (Rückseite) | TT Norms Pro Bold | 16pt | Deep Green | — |
 | Seitenzahl | TT Norms Pro Bold | 8pt | siehe Fußzeile | Laufweite 0.02em |
-| Kolumnentitel | TT Norms Pro Regular | 8pt | siehe Fußzeile | 75 % Deckkraft |
+| Kolumnentitel | TT Norms Pro Regular | 8pt | siehe Fußzeile | ohne Transparenz, siehe unten |
 | Impressum (Rückseite) | TT Norms Pro Regular | 6pt | Schwarz | — |
 
 Der Fließtext setzt `hyphenate-character: "-"`. Ohne diese Zeile stellt WeasyPrint an jeder
@@ -177,6 +177,12 @@ und Rückseite tragen keine.
 
 Die Farbe richtet sich nach dem letzten Band der Seite: auf farbigem Grund Weiß, auf hellem
 Grund Stone Grey. `folio_color` übersteuert das für Ausnahmen.
+
+Ziffer und Kolumnentitel unterscheiden sich im **Schnitt**, nicht in der Deckkraft: die Ziffer
+steht Bold, der Kolumnentitel Regular. `opacity` ist hier verboten — WeasyPrint legt transparente
+Elemente in eine eigene Transparenzgruppe, die im Druck rastert statt sauber zu separieren. Die
+Ausgabeprüfung kann die Position solcher Elemente außerdem nicht mehr auflösen, weil ihre
+Koordinaten dann im lokalen Raum des XObjects stehen.
 
 ## Bilder
 
