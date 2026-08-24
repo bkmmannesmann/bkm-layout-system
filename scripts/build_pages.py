@@ -26,6 +26,10 @@ from pypdf import PdfReader
 # dass WeasyPrint eine Datei nicht gefunden und still ersetzt hat.
 ALLOWED_FONTS = ("Unbounded", "TT-Norms-Pro", "TTNormsPro", "Liberation")
 
+# Rueckgabewert fuer Ordner, die zu einem anderen Template gehoeren:
+# kein Fehler, aber auch kein gebautes PDF.
+SKIPPED = object()
+
 # Pfade
 PROJECT_ROOT = Path(__file__).parent.parent
 TEMPLATES_DIR = PROJECT_ROOT / "templates" / "pages"
@@ -53,7 +57,8 @@ def _collect_strings(node, out):
             out.append(node)    # um beim Umbruch verlaesslich zu vergleichen
     elif isinstance(node, dict):
         for key, value in node.items():
-            if key in ("image", "badge", "imprint"):
+            # Pfadangaben stehen nicht als Text im PDF.
+            if key in ("image", "badge", "logo", "keyvisual"):
                 continue
             _collect_strings(value, out)
     elif isinstance(node, list):
@@ -90,7 +95,9 @@ def check_output(pdf_path, content_data):
             )
 
     rendered = _letters(" ".join(page.extract_text() or "" for page in reader.pages))
-    for text in _collect_strings(content_data, []):
+    # Nur die Seiten: der Dokumenttitel steht im <title> und damit nicht im
+    # sichtbaren Text, page_number_start ist eine Zahl.
+    for text in _collect_strings(content_data.get("pages", []), []):
         if _letters(text) not in rendered:
             errors.append(
                 f"Text aus dem Inhalt steht nicht im PDF: "
@@ -107,8 +114,15 @@ def check_output(pdf_path, content_data):
 MARGIN_X = 18.0
 PAGE_W = 210.0
 PAGE_H = 297.0
+FOOTER_ZONE = 25.0                    # Fusssteg, siehe --brochure-footer-zone
+CONTENT_BOTTOM = PAGE_H - FOOTER_ZONE # 272.0mm, tiefste Grundlinie fuer Satz
 FOOTER_BASELINE = PAGE_H - MARGIN_X   # 279.0mm, Grundlinie der Seitenzahl
 TOLERANCE = 0.6                       # Rundung der Textmatrix
+FOOTER_TOLERANCE = 1.5                # Spielraum um die Fusszeilen-Grundlinie
+BLEED_SAFE = 285.0                    # Grenze auf Seiten ohne Fusszeile
+# Hauptheadline. Der Layoutvertrag nennt 30pt; im PDF steht die Groesse in
+# CSS-Pixeln, weil WeasyPrint so rechnet - 30 * 96/72 = 40.
+HEADLINE_SIZE = 30.0 * 96 / 72
 
 
 def _check_type_area(reader):
@@ -122,7 +136,8 @@ def _check_type_area(reader):
     """
     errors = []
     for index, page in enumerate(reader.pages, start=1):
-        outside = []
+        lines = []
+        sized = []
 
         def visit(text, cm, tm, font_dict, font_size):
             if not text.strip():
@@ -135,18 +150,47 @@ def _check_type_area(reader):
             y_pt = tm[4] * cm[1] + tm[5] * cm[3] + cm[5]
             x_mm = x_pt / 72 * 25.4
             y_mm = PAGE_H - y_pt / 72 * 25.4
-            if y_mm > FOOTER_BASELINE + TOLERANCE:
-                outside.append((text.strip()[:40], f"{y_mm:.1f}mm unter der Oberkante"))
-            elif x_mm < MARGIN_X - TOLERANCE or x_mm > PAGE_W - MARGIN_X + TOLERANCE:
-                outside.append((text.strip()[:40], f"x={x_mm:.1f}mm"))
+            lines.append((x_mm, y_mm, text.strip()[:40]))
+            # font_size kommt in Textraumeinheiten; die Skalierung der
+            # Textmatrix macht daraus die gesetzte Groesse in pt.
+            sized.append((x_mm, y_mm, font_size * abs(tm[3] or 1), text.strip()[:40]))
 
         page.extract_text(visitor_text=visit)
+
+        # Traegt die Seite eine Fusszeile, gehoert ihr der Fusssteg allein und
+        # der Satz endet bei CONTENT_BOTTOM. Rueckseite und Inhaltsverzeichnis
+        # tragen keine Ziffer; dort ist nur der Beschnitt die Grenze - das
+        # Impressum steht laut Vermessung tiefer als jeder Fusssteg.
+        has_footer = any(abs(y - FOOTER_BASELINE) <= FOOTER_TOLERANCE
+                         for _, y, _ in lines)
+        bottom = CONTENT_BOTTOM if has_footer else BLEED_SAFE
+
+        outside = []
+        for x_mm, y_mm, snippet in lines:
+            in_footer = has_footer and abs(y_mm - FOOTER_BASELINE) <= FOOTER_TOLERANCE
+            if y_mm > bottom + TOLERANCE and not in_footer:
+                outside.append((snippet, f"Grundlinie {y_mm:.1f}mm, "
+                                         f"erlaubt bis {bottom:.0f}mm"))
+            elif x_mm < MARGIN_X - TOLERANCE or x_mm > PAGE_W - MARGIN_X + TOLERANCE:
+                outside.append((snippet, f"x={x_mm:.1f}mm"))
+
         for snippet, where in outside[:3]:
             errors.append(
                 f"Seite {index}: Text ausserhalb des Satzspiegels ({where}): {snippet!r}"
             )
         if len(outside) > 3:
             errors.append(f"Seite {index}: {len(outside) - 3} weitere Stellen")
+
+        # Die Hauptheadline steht in 30pt und darf hoechstens zwei Zeilen
+        # laufen - dieselbe Regel wie auf dem Titelblatt. Drei Zeilen
+        # drueckt den Text darunter aus dem Raster.
+        baselines = {round(y, 1) for x, y, size, _ in sized
+                     if abs(size - HEADLINE_SIZE) < 0.5}
+        if len(baselines) > 2:
+            errors.append(
+                f"Seite {index}: Hauptheadline laeuft {len(baselines)}-zeilig, "
+                f"erlaubt sind hoechstens zwei Zeilen"
+            )
 
     return errors
 
@@ -339,6 +383,12 @@ def build_from_json(content_name):
     with open(content_path, "r", encoding="utf-8") as f:
         content = json.load(f)
 
+    if "pages" not in content:
+        other = (content.get("meta") or {}).get("template")
+        print(f"  [UEBERSPRUNGEN] {content_name}: kein Innenteil-Content"
+              + (f", Template '{other}' baut scripts/build.py" if other else ""))
+        return SKIPPED
+
     return build_brochure(content, content_name)
 
 
@@ -367,7 +417,8 @@ def main():
                     continue  # Datenblaetter baut build_tds.py
                 if (folder / "content.json").exists():
                     print(f"Generiere: {folder.name}...")
-                    ok = build_from_json(folder.name) is not None and ok
+                    result = build_from_json(folder.name)
+                    ok = (result is not None) and ok
     else:
         ok = build_from_json(target) is not None
 

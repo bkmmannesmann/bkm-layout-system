@@ -53,7 +53,7 @@ der Text gekürzt oder ein Block wandert auf die nächste Seite.
 
 | Element | Schrift | Größe | Farbe | Besonderheit |
 |:---|:---|:---|:---|:---|
-| Hauptheadline | Unbounded Black | 30pt | Pure Green | Versalien, Zeilenhöhe 1.13. Seitenöffner. |
+| Hauptheadline | Unbounded Black | 30pt | Pure Green | Versalien, Zeilenhöhe 1.13, **höchstens zwei Zeilen** |
 | Sektions-Headline | Unbounded Black | 18pt | Transition Green | keine Versalien, Zeilenhöhe 1.25 |
 | Leadline | Unbounded Black | 9pt | Pure Green | einzeilige Merksatzzeile über dem Fließtext |
 | Fließtext | TT Norms Pro Regular | 9pt | Stone Grey | Blocksatz, Silbentrennung an, Zeilenhöhe 1.42 |
@@ -62,6 +62,10 @@ der Text gekürzt oder ein Block wandert auf die nächste Seite.
 | Seitenzahl | TT Norms Pro Bold | 8pt | siehe Fußzeile | Laufweite 0.02em |
 | Kolumnentitel | TT Norms Pro Regular | 8pt | siehe Fußzeile | ohne Transparenz, siehe unten |
 | Impressum (Rückseite) | TT Norms Pro Regular | 6pt | Schwarz | — |
+
+Die Hauptheadline läuft **höchstens zwei Zeilen** — dieselbe Regel wie auf dem Titelblatt. Eine
+dritte Zeile drückt alles darunter aus dem Raster. Die Ausgabeprüfung zählt die Grundlinien in
+30pt und bricht ab drei ab.
 
 Der Fließtext setzt `hyphenate-character: "-"`. Ohne diese Zeile stellt WeasyPrint an jeder
 Trennstelle `.notdef` als schwarzes Kästchen dar, weil TT Norms Pro den Trennstrich U+2010 nicht

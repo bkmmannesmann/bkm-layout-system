@@ -1,0 +1,136 @@
+{
+  "title": "BKM Mannesmann AG – Unternehmensbroschüre",
+  "page_number_start": 2,
+  "pages": [
+    {
+      "type": "toc",
+      "no_folio": true,
+      "title": "Inhalt",
+      "two_columns": false,
+      "entries": [
+        { "is_chapter": true,  "title": "Erst verstehen, dann abdichten",              "page": "03" },
+        { "is_chapter": false, "title": "Was wir tun", "page": "03" },
+        { "is_chapter": true,  "title": "Die Verfahren",                                  "page": "04" },
+        { "is_chapter": false, "title": "Sperren, wo Wasser aufsteigt",                   "page": "04" },
+        { "is_chapter": false, "title": "Regulieren, wo Luft zu feucht ist",              "page": "04" },
+        { "is_chapter": true,  "title": "Zwei Produktlinien",                             "page": "05" },
+        { "is_chapter": false, "title": "Home Line und Pro Line",                         "page": "05" },
+        { "is_chapter": true,  "title": "Der Weg zur Sanierung",                          "page": "06" },
+        { "is_chapter": false, "title": "Fünf Schritte",                                  "page": "06" },
+        { "is_chapter": true,  "title": "Zusammenarbeit",                                 "page": "07" },
+        { "is_chapter": false, "title": "Das Fachbetriebsnetz",                           "page": "07" }
+      ]
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Feuchtigkeit verstehen",
+      "upper_surface": "deep",
+      "headline": "ERST VERSTEHEN, DANN ABDICHTEN.",
+      "section_headline": "Was an der Wand sichtbar wird, ist selten die Ursache.",
+      "upper_cols": 3,
+      "upper_text": "Feuchte Wände, abblätternde Farbe, muffige Luft im Keller: Was Eigentümer bemerken, ist das Ergebnis eines Vorgangs, der weiter unten und weiter zurück liegt. Kapillar aufsteigende Feuchtigkeit, seitlich eindringendes Wasser und ein ungünstiges Oberflächenklima sehen an der Oberfläche ähnlich aus, verlangen aber verschiedene Maßnahmen. Wer nur das Schadensbild behandelt, saniert zweimal.",
+
+      "lower_surface": "transition",
+      "lower_headline": "Was wir tun",
+      "lower_leadline": "Systeme für die nachträgliche Abdichtung und die Feuchteregulierung im Bestand.",
+      "lower_cols": 2,
+      "lower_text": "Die BKM Mannesmann AG entwickelt und liefert Produkte für die nachträgliche Bauwerksabdichtung: Injektionsmittel für Horizontal- und Flächensperren im Mauerwerk sowie mineralische Systeme für den Feuchtehaushalt von Innenräumen. Verarbeitet werden sie von Fachbetrieben, die Ursache und Gebäude vorher prüfen. [ANGABE FEHLT: Gründungsjahr, Standorte und Unternehmensgröße – bitte ergänzen.]"
+    },
+
+    {
+      "type": "content",
+      "running_head": "Die Verfahren",
+      "headline_large": "DIE VERFAHREN",
+      "headline_section": "Sperren, wo Wasser aufsteigt",
+      "leadline": "Injektion unterbricht den kapillaren Feuchtetransport im Mauerwerk.",
+      "columns": 3,
+      "col_content": [
+        "Steigt Wasser kapillar in einer Wand auf, wird auf Höhe der Sohle eine Sperrebene hergestellt. Das Injektionsmittel verteilt sich im Porenraum und macht ihn wasserabweisend. Oberhalb der Injektionsebene kann das Mauerwerk austrocknen.",
+        "BKM HZ 250 Pro ist ein rein organisches, gebrauchsfertiges Produkt zur Injektion in mineralisches Mauerwerk, geeignet für eine horizontale wie eine flächige Barriere. Die hohe Selbstverteilung sorgt für eine gleichmäßige Ausbreitung in der Wand.",
+        "BKM HZ-C Creme ist eine hochkonzentrierte Injektionscreme auf Silan-Basis mit WTA-geprüfter Wirksamkeit. Sie ist sofort verarbeitungsfertig, lösemittelfrei und dringt bis in feinste Kapillarporen ein."
+      ],
+      "section2": {
+        "headline": "Regulieren, wo Luft zu feucht ist",
+        "leadline": "Nicht jeder Schaden verlangt eine Sperre.",
+        "columns": 3,
+        "col_content": [
+          "Entsteht Feuchtigkeit an der Oberfläche, weil warme Raumluft auf eine kühle Wand trifft, hilft keine Abdichtung. Hier geht es um den Feuchtehaushalt des Raumes.",
+          "BKM KS ist eine mineralische Kalziumsilikatplatte für Wände und Decken. Kapillaraktiv und diffusionsoffen nimmt sie erhöhte Raumluftfeuchte auf und gibt sie bei günstigeren Bedingungen wieder ab.",
+          "Die hohe Alkalität der Platte unterstützt die Vorbeugung von Schimmelbildung. Für Gipsputze und Gipskartonplatten ist sie nicht geeignet."
+        ]
+      }
+    },
+
+    {
+      "type": "feature",
+      "running_head": "Zwei Produktlinien",
+      "layout": "top-image",
+      "image_height": "110.0mm",
+      "headline": "Zwei Linien, eine Systematik",
+      "leadline": "Home Line für den überschaubaren Fall, Pro Line für die professionelle Anwendung.",
+      "columns": 3,
+      "text": "Die Produkte sind zwei Linien zugeordnet. Die Zuordnung ist fest und wird nicht produktbezogen entschieden: Produkte mit dem Namensbestandteil Novu gehören zur Home Line, alle übrigen zur Pro Line. Novusan ist ein gebrauchsfertiges Injektionsmittel für nachträgliche Horizontal- und Flächensperren, geprüft und WTA-zertifiziert, wirksam bis 95 Prozent Durchfeuchtung. Es kommt ohne aufwändiges Ausschachten aus und wird drucklos mit Injektionsflaschen verarbeitet. [ANGABE FEHLT: Bildmotiv für dieses Band.]",
+      "lower_surface": "stone",
+      "lower_section": {
+        "headline": "Woran ein Fachbetrieb ein passendes System erkennt",
+        "leadline": "Untergrund, Durchfeuchtungsgrad und Zugänglichkeit entscheiden.",
+        "columns": 3,
+        "text": "Die Wahl folgt dem Befund am Gebäude, nicht dem Sortiment. Für Ziegel- und Klinkermauerwerk, Naturstein, Kalksandstein, Porenbeton sowie Gitter- und Hohlkammersteine liegen geprüfte Anwendungen vor. Für WU-Beton ist keines der Injektionsmittel geeignet. Ist eine Außenwand nicht freilegbar oder nur teilunterkellert, fällt die Entscheidung anders aus als bei einer zugänglichen Wand."
+      }
+    },
+
+    {
+      "type": "process",
+      "running_head": "Der Weg zur Sanierung",
+      "headline_large": "DER WEG ZUR SANIERUNG",
+      "headline_section": "Fünf Schritte",
+      "leadline": "Erst prüfen, dann erklären, dann empfehlen.",
+      "steps": [
+        { "number": "1", "title": "Erstgespräch und Bestandsaufnahme",
+          "body": "Der Eigentümer schildert das Schadensbild, der Fachbetrieb verschafft sich einen ersten Überblick über Gebäude und Situation." },
+        { "number": "2", "title": "Prüfung am Gebäude",
+          "body": "Untergrund, Durchfeuchtungsgrad und Zugänglichkeit werden erfasst und die möglichen Ursachen eingegrenzt. Erst danach steht fest, ob abgedichtet oder reguliert wird." },
+        { "number": "3", "title": "Empfehlung mit Begründung",
+          "body": "Der Eigentümer erfährt nicht nur, welche Maßnahme vorgeschlagen wird, sondern worauf die Empfehlung beruht." },
+        { "number": "4", "title": "Fachgerechte Ausführung",
+          "body": "Die Verarbeitung folgt dem technischen Datenblatt des gewählten Produkts. Verarbeitungstemperatur, Bohrlochabstand und Verbrauch stehen dort verbindlich." },
+        { "number": "5", "title": "Austrocknung und Nachsorge",
+          "body": "Nach der Injektion braucht das Mauerwerk Zeit zum Austrocknen. [ANGABE FEHLT: übliche Austrocknungsdauer und Nachsorgeempfehlung – bitte fachlich bestätigen.]" }
+      ]
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Zusammenarbeit",
+      "upper_surface": "stone",
+      "headline": "WIR LIEFERN NICHT NUR MATERIAL.",
+      "section_headline": "Bei Feuchteschäden entscheidet die Ausführung mit.",
+      "upper_cols": 3,
+      "upper_text": "Ein Injektionsmittel wirkt so gut, wie es eingebracht wird. Bohrlochabstand, Neigung, Menge und Untergrundvorbereitung bestimmen, ob eine durchgehende Sperrebene entsteht oder eine mit Lücken. Deshalb geben wir die Produkte nicht ohne die Verfahren aus der Hand: Zu jedem Produkt gehört ein technisches Datenblatt mit verbindlichen Kennwerten.",
+
+      "lower_surface": "sand",
+      "lower_headline": "Das Fachbetriebsnetz",
+      "lower_leadline": "Prüfen. Erklären. Empfehlen. Fachgerecht umsetzen. Vorbeugen.",
+      "lower_cols": 3,
+      "lower_text": "BKM Fachbetriebe arbeiten nach diesem Ablauf. Er sorgt dafür, dass kein Schritt übersprungen wird und dass für den Eigentümer nachvollziehbar bleibt, warum eine bestimmte Maßnahme empfohlen wird. [ANGABE FEHLT: Anzahl der Fachbetriebe, Aufnahmekriterien und Schulungsumfang – bitte ergänzen.]"
+    },
+
+    {
+      "type": "backcover",
+      "no_folio": true,
+      "cta_headline": "Sie haben einen Feuchteschaden und wissen nicht, woran Sie sind?",
+      "cta_body": "Der erste Schritt ist keine Maßnahme, sondern eine Einschätzung am Gebäude. Erst wenn die Ursache eingeordnet ist, lässt sich sagen, ob abgedichtet oder reguliert werden muss – und welches System dafür passt.",
+      "cta_action": "Fragen Sie einen BKM Fachbetrieb in Ihrer Nähe nach einer Einschätzung vor Ort.",
+      "contact": {
+        "company": "BKM Mannesmann AG",
+        "street": "Wideystraße 23",
+        "city": "59174 Kamen (Germany)",
+        "web": "www.bkm-mannesmann.de",
+        "email": "info@bkm-mannesmann.de",
+        "phone": "+49 (0) 2307-99034-0"
+      },
+      "imprint": "BKM Mannesmann AG – All rights reserved."
+    }
+  ]
+}

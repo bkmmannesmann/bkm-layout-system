@@ -234,8 +234,18 @@ def check_content(path: Path) -> list[str]:
     except json.JSONDecodeError as exc:
         return [f"{path.name} ist kein gueltiges JSON: {exc}"]
 
+    # Ein Ordner des Innenteil-Systems fuehrt seine Seiten unter 'pages'.
+    # content/prospekt-fachbetrieb/ nutzt ein eigenes Template mit eigenem
+    # Schema und wird von scripts/build.py gebaut - der gehoert hier nicht
+    # geprueft, aber auch nicht stillschweigend uebergangen.
+    if "pages" not in data:
+        other = (data.get("meta") or {}).get("template")
+        print(f"{path} uebersprungen: kein Innenteil-Content"
+              + (f" (Template '{other}', zustaendig ist scripts/build.py)" if other else ""))
+        raise SystemExit(0)
+
     if not isinstance(data.get("pages"), list) or not data["pages"]:
-        return [f"{path.name}: 'pages' fehlt oder ist leer"]
+        return [f"{path.name}: 'pages' ist leer"]
 
     start = data.get("page_number_start")
     if start is None:

@@ -10,6 +10,7 @@ unabhängig vom Account. Bitte vor der ersten Änderung vollständig lesen.
 | `docs/LAYOUT-CONTRACT.md` | Maße, Typografie, Farben, Icons, Metadaten. Maschinell geprüft. |
 | `docs/REDAKTIONSSTANDARD.md` | Inhalt, Blockreihenfolge, Sprache, Pflichtkennwerte, Marker, Freigabe. |
 | `docs/TDS-WORKFLOW.md` | Ablauf von der Quellinformation bis zum Release-Build. |
+| `docs/BROSCHUERE-LAYOUT.md` | Dasselbe für den Broschüren-Innenteil: Raster, Typografie, Farben, Flächen, Seitentypen. Maschinell geprüft. |
 
 Bei Widerspruch zwischen Code und diesen Dokumenten gewinnen die Dokumente. Wer eine Regel ändern
 will, ändert **erst** das Dokument, im selben Pull Request wie den Code.
@@ -68,6 +69,25 @@ Für einen Release zusätzlich das freigestellte Produkt-PNG unter
 
 ## Was ohne Rückfrage nicht geändert wird
 
-`templates/tds/`, `design-system/`, `components/`, die drei Regeldokumente und
-`scripts/validate_*.py`. Das sind Systemdateien. Inhaltliche Arbeit findet in
+`templates/tds/`, `templates/pages/`, `design-system/`, `components/`, die vier Regeldokumente
+und `scripts/validate_*.py`. Das sind Systemdateien. Inhaltliche Arbeit findet in
 `content/<ordner>/content.json` statt.
+
+## Broschüren
+
+Für den Innenteil gilt `docs/BROSCHUERE-LAYOUT.md` mit denselben Grundsätzen wie beim
+Datenblatt. Zwei davon werden erfahrungsgemäß verletzt:
+
+1. **Keine Farbwerte im Inhalt.** Eine `content.json` wählt eine der sechs benannten Flächen
+   (`deep`, `transition`, `pure`, `stone`, `sand`, `white`). Der Name legt Grundton, Textfarbe,
+   Headline- und Akzentfarbe gemeinsam fest. Felder auf `_bg` oder `_color` weist der Validator ab.
+2. **Fehlende Schriftdateien fallen nicht auf.** Verweist ein Stylesheet auf eine Datei, die es
+   nicht gibt, meldet WeasyPrint das nicht, sondern setzt still eine Ersatzschrift. Genau so lief
+   der Innenteil zeitweise vollständig in DejaVu Sans. `validate_brochure.py` prüft die Pfade,
+   `build_pages.py` liest die eingebetteten Schriften des fertigen PDFs.
+
+```bash
+python3 scripts/validate_brochure.py
+python3 scripts/validate_brochure.py content/<ordner>/content.json
+python3 scripts/build_pages.py <ordner>
+```
