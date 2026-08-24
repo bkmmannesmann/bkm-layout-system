@@ -21,7 +21,10 @@
    Raster aus dem :root-Block weiter unten. Drei gemessene Toene weichen um
    einen Rasterschritt vom Corporate Design ab und wurden auf das CD normiert:
    Stone Grey #484848 -> #494949, Transition Green #277c4b -> #287d4b,
-   Lime Green #8cc63f -> #b4e717.
+   Lime Green #8cc63f -> #b4e717. Der letzte Wert ist in
+   docs/LAYOUT-CONTRACT.md ausdruecklich als verbotener Altwert gefuehrt.
+   Ebenso ersetzt: Bildplatzhalter #d8d8d9 -> #d9d7d3 und Trennlinie
+   #e0e0e0 -> #e3e1dc, beide jetzt aus der Palette.
 
    TYPOGRAFIE-HIERARCHIE (gemessen):
    - Hauptheadline: Unbounded Black, 30pt, Versalien, #4daf46
@@ -55,9 +58,9 @@
   --brochure-col-2:        115.1mm;  /* 2x55.4 + 1x4.3 */
   --brochure-col-3:        174.0mm;  /* 3x55.4 + 2x4.3, zugleich Satzspiegelbreite */
 
-  /* In variables.css nicht gefuehrt, siehe docs/BROSCHUERE-LAYOUT.md */
-  --brochure-placeholder-bg: #d8d8d9;  /* Bildplatzhalter */
-  --brochure-rule:           #e0e0e0;  /* Trennlinie Inhaltsverzeichnis */
+  /* Rollen, nicht Farben: beide zeigen auf die geltende Palette. */
+  --brochure-placeholder-bg: var(--bkm-rule);      /* #d9d7d3, Bildplatzhalter */
+  --brochure-rule:           var(--bkm-hairline);  /* #e3e1dc, Trennlinie Inhaltsverzeichnis */
 }
 
 /* === FONT FACES ===
@@ -619,6 +622,46 @@ html, body {
 .module-toc__list--two-col {
   column-count: 2;
   column-gap: 8.6mm; /* 2× Gutter */
+}
+
+/* ============================================================
+   FUSSZEILE: SEITENZAHL UND KOLUMNENTITEL
+   ============================================================
+   Grundlinie 18mm ueber der Blattunterkante, also derselbe Abstand wie
+   der seitliche Satzspiegelrand. Die Ziffer steht aussen, der
+   Kolumnentitel innen: auf der geraden (linken) Seite Ziffer links, auf
+   der ungeraden (rechten) Seite Ziffer rechts. Die Fusszeile liegt ueber
+   den Farbflaechen der Seitentypen, daher z-index.
+   ============================================================ */
+
+.page__footer {
+  position: absolute;
+  bottom: var(--brochure-margin-x);
+  left: var(--brochure-margin-x);
+  width: var(--brochure-col-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'TT Norms Pro', sans-serif;
+  font-size: 8pt;
+  line-height: 1;
+  z-index: 10;
+}
+
+/* Gerade Seitenzahl = linke Seite im Bund: Ziffer aussen links. */
+.page__footer--verso { flex-direction: row; }
+
+/* Ungerade Seitenzahl = rechte Seite im Bund: Ziffer aussen rechts. */
+.page__footer--recto { flex-direction: row-reverse; }
+
+.page__folio {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.page__runninghead {
+  font-weight: 400;
+  opacity: 0.75;
 }
 
 /* ============================================================

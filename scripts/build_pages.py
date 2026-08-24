@@ -55,11 +55,13 @@ def build_demo():
 
     content = {
         "title": "BKM Fachbetrieb - Demo Broschüre",
+        "page_number_start": 2,
         "pages": [
             # --- SEITE 2: OPENER ---
             {
                 "type": "opener",
-                "upper_bg": "#484848",
+                "running_head": "Ihr Zuhause verdient Schutz",
+                "upper_bg": "#494949",
                 "headline": "IHR ZUHAUSE VERDIENT SCHUTZ.",
                 "headline_color": "#4daf46",
                 "section_headline": "Für Eigentümer, die ihr Haus langfristig schützen wollen.",
@@ -67,7 +69,7 @@ def build_demo():
                 "upper_cols": 3,
                 "upper_text": "Wenn im eigenen Keller Feuchtigkeit auftritt, stehen viele Eigentümer vor einer schwierigen Entscheidung. Was tun? Wen fragen? Und wie erkennt man, ob eine Maßnahme wirklich sinnvoll ist? Hochwertige Materialien sind wichtig. Aber bei Feuchtigkeitsschäden entscheidet nicht allein das Material über das Ergebnis. Entscheidend ist, ob die Ursache richtig eingeordnet, die passende Systemlösung gewählt und die Maßnahme fachgerecht umgesetzt wird.",
                 "upper_text_color": "#ffffff",
-                "lower_bg": "#277c4b",
+                "lower_bg": "#287d4b",
                 "lower_headline": "Was einen BKM Fachbetrieb auszeichnet",
                 "lower_hl_color": "#ffffff",
                 "lower_leadline": "Prüfen. Erklären. Empfehlen. Fachgerecht umsetzen. Vorbeugen.",
@@ -80,6 +82,7 @@ def build_demo():
             # --- SEITE 3: CONTENT (3-Spalten, 2 Sektionen) ---
             {
                 "type": "content",
+                "running_head": "Ursachen verstehen",
                 "headline_section": "Was Sie sehen, ist selten die Ursache",
                 "columns": 3,
                 "col_content": [
@@ -102,6 +105,7 @@ def build_demo():
             # --- SEITE 4: FEATURE (Bild oben + grüner Block unten) ---
             {
                 "type": "feature",
+                "running_head": "Der Sanierungsprozess",
                 "layout": "top-image",
                 "image_height": "131.2mm",
                 "headline": "Der Ablauf einer BKM Fachbetrieb-Sanierung",
@@ -114,12 +118,13 @@ def build_demo():
                     "text": "Bei Feuchtigkeitsschäden reicht eine pauschale Position wie Kellerabdichtung oft nicht aus. Für Eigentümer ist entscheidend, ob nachvollziehbar wird, warum eine bestimmte Maßnahme empfohlen wird. Ein fachlich sauberes Angebot sollte deshalb nicht nur beschreiben, was gemacht wird, sondern auch, worauf diese Empfehlung basiert."
                 },
                 "lower_top": "131.2mm",
-                "lower_bg": "#277c4b"
+                "lower_bg": "#287d4b"
             },
 
             # --- SEITE 5: CONTENT (Große HL + 3-Spalten) ---
             {
                 "type": "content",
+                "running_head": "Der Weg zur richtigen Lösung",
                 "headline_large": "DER WEG ZUR RICHTIGEN LÖSUNG",
                 "headline_section": "Ein klarer Ablauf schafft Sicherheit.",
                 "leadline": "Fünf Schritte für eine nachhaltige Sanierung.",
@@ -134,7 +139,8 @@ def build_demo():
             # --- SEITE 6: OPENER (Dunkel + Hell) ---
             {
                 "type": "opener",
-                "upper_bg": "#484848",
+                "running_head": "Die richtige Entscheidung",
+                "upper_bg": "#494949",
                 "headline": "ERST PRÜFEN DANN RICHTIG ENTSCHEIDEN.",
                 "headline_color": "#4daf46",
                 "section_headline": "Die richtige Lösung beginnt am Gebäude.",
@@ -149,12 +155,13 @@ def build_demo():
                 "lower_lead_color": "#4daf46",
                 "lower_cols": 3,
                 "lower_text": "Ein qualitätsbewusster Hausbesitzer möchte nicht einfach irgendetwas machen lassen. Er möchte verstehen, was sinnvoll ist, wofür er investiert und warum eine bestimmte Maßnahme empfohlen wird. Genau dafür ist der Fachbetrieb da. Sie müssen die Ursache nicht selbst erraten. Wir setzen auf Lösungen, die zum Gebäude passen.",
-                "lower_text_color": "#484848"
+                "lower_text_color": "#494949"
             },
 
             # --- INHALTSVERZEICHNIS ---
             {
                 "type": "toc",
+                "no_folio": True,
                 "title": "Inhalt",
                 "two_columns": False,
                 "entries": [
@@ -175,6 +182,7 @@ def build_demo():
             # --- RÜCKSEITE ---
             {
                 "type": "backcover",
+                "no_folio": True,
                 "cta_headline": "Der sicherste erste Schritt \u2013 Ihre kostenlose Schadensanalyse",
                 "cta_body": "Das größte Risiko bei Feuchtigkeitsschäden ist, nichts zu tun. Jeder Tag des Zögerns kann den Schaden vergrößern und die Kosten in die Höhe treiben. Machen Sie den ersten, sicheren Schritt in eine trockene Zukunft für Ihr Zuhause.",
                 "cta_action": "Fordern Sie jetzt Ihre kostenlose und unverbindliche Schadensanalyse durch einen zertifizierten Fachpartner in Ihrer Nähe an.",

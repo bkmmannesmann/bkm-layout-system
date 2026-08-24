@@ -7,6 +7,32 @@
 </head>
 <body>
 
+{#- ------------------------------------------------------------------
+    FUSSZEILE: SEITENZAHL UND KOLUMNENTITEL
+
+    Die Zaehlung laeuft ueber ALLE Seiten dieses Dokuments, auch ueber
+    solche, die keine Ziffer zeigen - sonst stimmen die Verweise im
+    Inhaltsverzeichnis nicht mehr. page_number_start ist die Nummer der
+    ersten Innenseite; das Titelblatt ist ein eigenes PDF und traegt
+    Seite 1, der Innenteil beginnt daher bei 2.
+
+    Ziffernfarbe: nur der Seitentyp opener fuellt die untere Blatthaelfte
+    bis zum Fuss durch, dort steht die Ziffer weiss. Alle anderen Typen
+    setzen Stone Grey. Ausnahmen ueber folio_color.
+--------------------------------------------------------------------- #}
+{%- macro folio(page, index0, start) -%}
+{%- if not page.no_folio -%}
+{%- set no = start | default(2, true) + index0 -%}
+{%- set on_colour = page.type == 'opener' and page.lower_bg
+                    and page.lower_bg not in ('#ffffff', '#FFFFFF', 'white', 'var(--bkm-white)') -%}
+<div class="page__footer page__footer--{{ 'verso' if no % 2 == 0 else 'recto' }}"
+     style="color: {{ page.folio_color | default('var(--bkm-white)' if on_colour else 'var(--bkm-stone-grey)', true) }};">
+  <span class="page__folio">{{ '%02d' % no }}</span>
+  {%- if page.running_head %}<span class="page__runninghead">{{ page.running_head }}</span>{% endif -%}
+</div>
+{%- endif -%}
+{%- endmacro -%}
+
 {% for page in pages %}
 
 <!-- ============================================================
@@ -16,6 +42,7 @@
      ============================================================ -->
 {% if page.type == 'opener' %}
 <div class="page">
+  {{ folio(page, loop.index0, page_number_start) }}
   <!-- Obere Hälfte -->
   <div style="position: absolute; top: 0; left: 0; width: 210mm; height: 131.2mm; background: {{ page.upper_bg | default('var(--bkm-stone-grey)') }}; padding: var(--brochure-margin-top) var(--brochure-margin-x) 0 var(--brochure-margin-x); overflow: hidden;">
     <h1 class="headline-large" style="color: {{ page.headline_color | default('var(--bkm-pure-green)') }};">{{ page.headline }}</h1>
@@ -52,6 +79,7 @@
      ============================================================ -->
 {% elif page.type == 'content' %}
 <div class="page">
+  {{ folio(page, loop.index0, page_number_start) }}
   <div class="page__content">
     {% if page.headline_large %}
     <h1 class="headline-large">{{ page.headline_large }}</h1>
@@ -133,6 +161,7 @@
      ============================================================ -->
 {% elif page.type == 'feature' %}
 <div class="page">
+  {{ folio(page, loop.index0, page_number_start) }}
   {% if page.layout == 'top-image' %}
   <!-- Bild oben, Text unten -->
   <div style="position: absolute; top: 0; left: 0; width: 210mm; height: {{ page.image_height | default('131.2mm') }}; background: var(--brochure-placeholder-bg); overflow: hidden;">
@@ -205,6 +234,7 @@
      ============================================================ -->
 {% elif page.type == 'process' %}
 <div class="page">
+  {{ folio(page, loop.index0, page_number_start) }}
   <div class="page__content">
     {% if page.headline_large %}
     <h1 class="headline-large">{{ page.headline_large }}</h1>
@@ -258,6 +288,7 @@
      ============================================================ -->
 {% elif page.type == 'list' %}
 <div class="page">
+  {{ folio(page, loop.index0, page_number_start) }}
   <div class="page__content">
     <h2 class="headline-section">{{ page.headline }}</h2>
     {% if page.leadline %}
@@ -283,6 +314,7 @@
      ============================================================ -->
 {% elif page.type == 'toc' %}
 <div class="page">
+  {{ folio(page, loop.index0, page_number_start) }}
   <div class="module-toc">
     <h2 class="module-toc__title">{{ page.title | default('Inhalt') }}</h2>
     <ul class="module-toc__list {% if page.two_columns %}module-toc__list--two-col{% endif %}">
