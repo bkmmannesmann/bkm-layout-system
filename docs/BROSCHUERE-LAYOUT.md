@@ -204,9 +204,19 @@ Fehlt eine Bilddatei, rendert WeasyPrint den Alt-Text in einer Ersatzschrift sta
 PDF sieht das aus wie ein Satzfehler, nicht wie eine fehlende Datei. Bilder liegen unter
 `assets/images/`; der Release-Build bricht ab, wenn eine referenzierte Datei fehlt.
 
-Trägt ein Produktbild den Vermerk „AI GENERATED", bleibt er sichtbar im Bild. Er ist nach
-EU-KI-Verordnung erforderlich und wird nicht wegretuschiert, beschnitten oder überdeckt —
-dieselbe Regel wie beim Datenblatt.
+Trägt ein Bild den Vermerk „AI GENERATED" — bei den gelieferten Motiven unten rechts —,
+bleibt er sichtbar im Bild. Er ist nach EU-KI-Verordnung erforderlich und wird nicht
+wegretuschiert, überdeckt oder **beschnitten** — dieselbe Regel wie beim Datenblatt.
+
+Das Beschneiden ist der Fall, der leicht übersehen wird: `object-fit: cover` auf einem
+Bildkasten, dessen Seitenverhältnis vom Motiv abweicht, schneidet an den Rändern weg —
+und unten rechts liegt genau der Vermerk. Läuft ein Motiv mit Vermerk in einen
+abweichenden Kasten, wird der Kasten angepasst, nicht das Bild.
+
+Die Icons der Broschüre brauchen für diese Pipeline eine Inline-Füllung, weil WeasyPrint
+das Dokument-Stylesheet nicht auf SVG-Kinder anwendet. `scripts/prepare_brochure_icons.py`
+setzt sie; die Begründung steht in
+[`BROSCHUERE-CANVAS.md`](BROSCHUERE-CANVAS.md), Abschnitt „Icons für die Pipeline aufbereiten".
 
 ## Was Content-Ordner nicht dürfen
 

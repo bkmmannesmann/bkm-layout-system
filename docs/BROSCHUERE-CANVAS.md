@@ -190,6 +190,38 @@ nach PDF/X-4 mit dem Farbprofil der Druckerei erfolgt danach — über Ghostscri
 durch die Druckerei selbst. Ein PDF aus der Pipeline ist also noch **kein**
 druckfertiges PDF/X, sondern die Vorstufe dazu.
 
+## Icons für die Pipeline aufbereiten
+
+Im Canvas liegen die Icons als **CSS-Maske** auf einer eingefärbten Fläche — die Datei
+selbst braucht dort keine Füllung, nur ihre Form. Die Pipeline bettet dieselben Dateien
+**inline** ein, und WeasyPrint wendet das Dokument-Stylesheet nicht auf die Kinder eines
+inline eingebetteten SVG an. Ohne Füllung am `svg`-Element druckt der Glyph schwarz.
+
+Jede Datei in `assets/icons/phosphor/bold/` trägt deshalb `style="fill:#b4e717"` am
+`svg`-Element — dieselbe Regel, die `LAYOUT-CONTRACT.md` für die Datenblatt-Icons
+aufstellt. Die Maske im Browser bleibt davon unberührt: sie wertet nur den Alphakanal aus.
+
+```bash
+python3 scripts/prepare_brochure_icons.py          # prüft und meldet
+python3 scripts/prepare_brochure_icons.py --write  # schreibt die Füllung
+```
+
+Das Skript fasst `templates/tds/icons/` nicht an und prüft nach dem Schreiben, dass
+dort nichts verändert wurde.
+
+## Fotos: Kennzeichnung KI-generierter Bilder
+
+Trägt ein Foto den Vermerk **„AI GENERATED"** — bei den gelieferten Motiven unten
+rechts —, bleibt er **sichtbar im Bild**. Er ist nach EU-KI-Verordnung erforderlich.
+
+Nicht wegretuschieren, nicht überdecken und **nicht beschneiden**. Das betrifft besonders
+`object-fit: cover` auf einem Bildkasten, dessen Seitenverhältnis vom Motiv abweicht:
+dort schneidet der Browser stillschweigend an den Rändern weg — und unten rechts liegt
+genau der Vermerk. Wo ein Motiv mit Vermerk in einen abweichenden Kasten läuft, wird der
+Kasten angepasst, nicht das Bild.
+
+Dieselbe Regel gilt im Datenblatt für Produktbilder, siehe `AGENTS.md`, Punkt 7.
+
 ## Icons, die es doppelt gibt
 
 Sechs der Broschüren-Icons sind motivgleich mit Icons aus dem TDS-Set. Sie liegen dort
@@ -203,6 +235,9 @@ unter dem **Blocknamen**, hier unter dem **Motivnamen**:
 | `seal-check` | `templates/tds/icons/vorteile.svg` | `assets/icons/phosphor/bold/seal-check.svg` |
 | `table` | `templates/tds/icons/daten.svg` | `assets/icons/phosphor/bold/table.svg` |
 | `warning` | `templates/tds/icons/hinweise.svg` | `assets/icons/phosphor/bold/warning.svg` |
+
+`house` gehört **nicht** dazu: die Vorlagen referenzieren `house.svg`, das Datenblatt
+nutzt `house-line` (`anwendung.svg`). Das sind zwei verschiedene Phosphor-Motive.
 
 Das ist **kein Fehler**, sondern folgt aus zwei verschiedenen Benennungslogiken: Der
 TDS-Vertrag benennt nach dem Inhaltsblock, damit kein Blatt versehentlich ein anderes
