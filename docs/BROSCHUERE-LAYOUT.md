@@ -42,13 +42,28 @@ seitenweise variiert.
 | `--brochure-margin-x` | `18.0mm` | Die eine senkrechte Fluchtlinie, links wie rechts. Headlines, Fließtext, Fußzeile, Impressum und Badge stehen darauf. Es gibt keine zweite. |
 | `--brochure-margin-top` | `20.4mm` | Oberkante der ersten Headline, zugleich Innenabstand jedes Bandes. |
 | `--brochure-footer-zone` | `25.0mm` | Fußsteg. Kein Satz läuft hinein — er ist für Seitenzahl und Kolumnentitel reserviert. |
-| `--brochure-col` | `55.4mm` | Eine Spalte. |
 | `--brochure-gutter` | `4.3mm` | Spaltenabstand. |
-| `--brochure-col-2` | `115.1mm` | Zwei Spalten: 2×55.4 + 1×4.3. |
-| `--brochure-col-3` | `174.0mm` | Drei Spalten: 3×55.4 + 2×4.3. Zugleich die Satzspiegelbreite. |
 
-Spalten-Startpositionen: `18.0mm | 77.7mm | 137.3mm`. Ein- und zweispaltige Sätze stehen auf
-denselben Kanten, sie erfinden keine eigenen.
+Die Spalten- und Satzbreiten werden **nicht gesetzt, sondern gerechnet**:
+
+| Abgeleitet | Ergibt bei 4,3mm Steg | Rechnung |
+|:---|:---|:---|
+| `--brochure-col-3` | `174,000mm` | `210 − 2 × Achse`, zugleich die Satzspiegelbreite |
+| `--brochure-col` | `55,133mm` | `(174 − 2 × Steg) / 3` |
+| `--brochure-col-2` | `114,567mm` | `2 × Spalte + Steg` |
+
+Vorher standen dort feste Zahlen: `55,4mm` und `174,0mm`. Beide beschreiben dieselbe
+Sache und widersprachen sich — `3 × 55,4 + 2 × 4,3` sind `174,8mm`. Der dreispaltige
+Satz stand dadurch **0,8mm über der rechten Fluchtlinie**, auf jeder Seite. Seit die
+Werte gerechnet werden, geht das Raster per Konstruktion auf, gleich welcher Steg gilt.
+
+**WeasyPrint löst ein `calc()` nicht auf, wenn darin eine Variable steht, die selbst
+ein `calc()` ist** — das Ergebnis wird `0` und die Breite fällt auf `auto`. Jede Größe
+rechnet deshalb direkt aus Achse und Steg, keine baut auf einer anderen abgeleiteten
+auf. Der Ausdruck wiederholt sich dadurch; das ist der Preis dafür, dass er trägt.
+
+Spalten-Startpositionen bei 4,3mm Steg: `18,000 | 77,433 | 136,867mm`. Ein- und
+zweispaltige Sätze stehen auf denselben Kanten, sie erfinden keine eigenen.
 
 Diese Variablen stehen im `:root`-Block von `templates/pages/pages-spec.css` und **nicht** in
 `design-system/variables.css`. Grund: die generischen `--margin-*` und `--column-gap` dort führen
@@ -280,17 +295,23 @@ rechten Rand.** Die Canvas-Rechnung `3 × 55 + 2 × 4,6 = 174,2 mm` liegt mit `0
 deutlich näher; exakt wäre bei `174 mm` Textbreite und `4,6 mm` Steg eine Spalte von
 `54,933 mm`.
 
-Die Ausgabeprüfung in `build_pages.py` meldet den Überstand nicht, weil sie die
-Startposition jeder Zeile prüft und nicht ihr Ende. Diese Lücke wird zusammen mit der
-Maßentscheidung geschlossen — vorher würde sie den Build rot färben, ohne dass entschieden
-ist, welche Werte gelten sollen.
+**Behoben, ohne die Maßfrage vorwegzunehmen.** Spalten- und Satzbreite werden nicht mehr
+gesetzt, sondern aus Achse und Steg gerechnet. Damit geht das Raster mit `4,3mm` Steg
+genauso auf wie mit `4,6mm` — die Entscheidung unten bleibt offen, der Überstand ist weg.
+Die rechte Satzkante liegt jetzt bei `192,00mm`; die verbleibenden `0,26` bis `0,38mm`
+in der Messung sind Glyphenüberhang, nicht Raster.
+
+Die Ausgabeprüfung sah nur, wo eine Zeile **anfängt** — deshalb ist ihr der Überstand
+entgangen. Sie prüft jetzt auch die rechte Kante, mit `0,5mm` Toleranz für den
+Glyphenüberhang. Gegengeprobt: mit den alten Werten meldet sie den Fehler.
 
 ### Stand
 
 Die Differenz ist **nicht aufgelöst**. Beide Systeme bleiben unverändert, bis darüber
-entschieden ist. Nach dem Rechercheergebnis spricht alles dafür, die Pipeline auf die
-Canvas-Maße nachzuziehen: `18 mm` ist ohnehin identisch, `20,4 mm` hat keine Quelle, und
-die Spaltenrechnung der Pipeline ist nachweislich fehlerhaft.
+entschieden ist. Nach dem Rechercheergebnis spricht weiterhin für die Canvas-Maße, dass
+`18 mm` ohnehin identisch ist und `20,4 mm` keine auffindbare Quelle hat. Die fehlerhafte
+Spaltenrechnung ist kein Argument mehr — sie ist behoben, und zwar so, dass beide
+Stegwerte tragen.
 
 
 ## Prüfung

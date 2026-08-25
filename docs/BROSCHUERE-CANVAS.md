@@ -287,17 +287,23 @@ rechten Rand.** Die Canvas-Rechnung `3 × 55 + 2 × 4,6 = 174,2 mm` liegt mit `0
 deutlich näher; exakt wäre bei `174 mm` Textbreite und `4,6 mm` Steg eine Spalte von
 `54,933 mm`.
 
-Die Ausgabeprüfung in `build_pages.py` meldet den Überstand nicht, weil sie die
-Startposition jeder Zeile prüft und nicht ihr Ende. Diese Lücke wird zusammen mit der
-Maßentscheidung geschlossen — vorher würde sie den Build rot färben, ohne dass entschieden
-ist, welche Werte gelten sollen.
+**Behoben, ohne die Maßfrage vorwegzunehmen.** Spalten- und Satzbreite werden nicht mehr
+gesetzt, sondern aus Achse und Steg gerechnet. Damit geht das Raster mit `4,3mm` Steg
+genauso auf wie mit `4,6mm` — die Entscheidung unten bleibt offen, der Überstand ist weg.
+Die rechte Satzkante liegt jetzt bei `192,00mm`; die verbleibenden `0,26` bis `0,38mm`
+in der Messung sind Glyphenüberhang, nicht Raster.
+
+Die Ausgabeprüfung sah nur, wo eine Zeile **anfängt** — deshalb ist ihr der Überstand
+entgangen. Sie prüft jetzt auch die rechte Kante, mit `0,5mm` Toleranz für den
+Glyphenüberhang. Gegengeprobt: mit den alten Werten meldet sie den Fehler.
 
 ### Stand
 
 Die Differenz ist **nicht aufgelöst**. Beide Systeme bleiben unverändert, bis darüber
-entschieden ist. Nach dem Rechercheergebnis spricht alles dafür, die Pipeline auf die
-Canvas-Maße nachzuziehen: `18 mm` ist ohnehin identisch, `20,4 mm` hat keine Quelle, und
-die Spaltenrechnung der Pipeline ist nachweislich fehlerhaft.
+entschieden ist. Nach dem Rechercheergebnis spricht weiterhin für die Canvas-Maße, dass
+`18 mm` ohnehin identisch ist und `20,4 mm` keine auffindbare Quelle hat. Die fehlerhafte
+Spaltenrechnung ist kein Argument mehr — sie ist behoben, und zwar so, dass beide
+Stegwerte tragen.
 
 
 ## Offen

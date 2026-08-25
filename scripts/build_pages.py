@@ -105,6 +105,7 @@ def check_output(pdf_path, content_data):
             )
 
     errors.extend(_check_type_area(reader))
+    errors.extend(_check_right_edge(pdf_path))
     return errors
 
 
@@ -123,6 +124,53 @@ BLEED_SAFE = 285.0                    # Grenze auf Seiten ohne Fusszeile
 # Hauptheadline. Der Layoutvertrag nennt 30pt; im PDF steht die Groesse in
 # CSS-Pixeln, weil WeasyPrint so rechnet - 30 * 96/72 = 40.
 HEADLINE_SIZE = 30.0 * 96 / 72
+BODY_PT = 9.0                         # Fliesstext und Leadline, in Punkt
+# Spielraum fuer den Glyphenueberhang. Die Textbox eines Spans reicht ueber die
+# Satzkante hinaus, weil sie die Vorschubbreite misst und nicht die Schwaerze.
+# Gemessen an beiden Broschueren: bei sauberem Raster enden die Woerter zwischen
+# 192.00 und 192.38mm, beim frueheren 0.8mm-Fehler zwischen 192.26 und 193.12mm.
+# 0.5mm trennt die beiden Faelle; enger gefasst meldet die Pruefung den Ueberhang
+# als Fehler, weiter gefasst laesst sie den Rasterfehler durch.
+EDGE_TOLERANCE = 0.5
+
+
+def _check_right_edge(pdf_path):
+    """Prueft die rechte Satzkante.
+
+    _check_type_area unten sieht nur, wo eine Zeile anfaengt - deshalb ist ihr
+    entgangen, dass die dritte Spalte 0.8mm ueber die rechte Fluchtlinie
+    stand. Dafuer braucht es die Breite jeder Textbox, und die liefert pypdf
+    nicht. pymupdf ist eine reine Pruefabhaengigkeit; fehlt es, wird die
+    Pruefung uebersprungen statt den Build zu blockieren.
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        return []
+
+    errors = []
+    pt_per_mm = 72 / 25.4
+    right = PAGE_W - MARGIN_X
+
+    with pymupdf.open(str(pdf_path)) as doc:
+        for index, page in enumerate(doc, start=1):
+            weitest = None
+            for block in page.get_text("dict")["blocks"]:
+                for line in block.get("lines", []):
+                    for span in line["spans"]:
+                        # Nur Fliesstext und Leadline; Headlines duerfen
+                        # gestalterisch anders stehen.
+                        if abs(span["size"] - BODY_PT) > 0.3:
+                            continue
+                        x1 = span["bbox"][2] / pt_per_mm
+                        if weitest is None or x1 > weitest[0]:
+                            weitest = (x1, span["text"].strip()[:40])
+            if weitest and weitest[0] > right + EDGE_TOLERANCE:
+                errors.append(
+                    f"Seite {index}: Satz endet bei {weitest[0]:.2f}mm, die rechte "
+                    f"Fluchtlinie liegt bei {right:.0f}mm: {weitest[1]!r}"
+                )
+    return errors
 
 
 def _check_type_area(reader):

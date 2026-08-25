@@ -51,13 +51,33 @@
    und --column-gap in variables.css fuehren 15mm bzw. 5mm und beschreiben
    nicht den hier vermessenen Broschuerensatzspiegel. */
 :root {
+  /* --- Eingaben. Nur diese vier Werte werden gesetzt. ------------------- */
   --brochure-margin-x:      18.0mm;  /* Satzspiegel links und rechts */
   --brochure-margin-top:    20.4mm;  /* Oberkante erste Headline */
-  --brochure-col:           55.4mm;  /* eine Spalte */
   --brochure-gutter:         4.3mm;  /* Spaltenabstand */
-  --brochure-col-2:        115.1mm;  /* 2x55.4 + 1x4.3 */
-  --brochure-col-3:        174.0mm;  /* 3x55.4 + 2x4.3, zugleich Satzspiegelbreite */
   --brochure-footer-zone:   25.0mm;  /* Fusssteg: Grundlinie 18mm + Zeile + Luft */
+
+  /* --- Abgeleitet. Nicht von Hand setzen. -------------------------------
+     Spaltenbreite und Satzbreite waren frueher eigene Zahlen: 55.4mm und
+     174.0mm. Beide beschreiben dieselbe Sache, und sie widersprachen sich -
+     3 x 55.4 + 2 x 4.3 sind 174.8mm, nicht 174.0mm. Im Druck stand die
+     dritte Spalte dadurch 0.8mm ueber der rechten Fluchtlinie.
+
+     Jetzt rechnet das Stylesheet. Damit geht das Raster per Konstruktion
+     auf, gleich welcher Steg gilt, und es gibt keine zweite Zahl mehr, die
+     abweichen koennte.
+
+     WeasyPrint loest ein calc() nicht auf, wenn darin eine Variable steht,
+     die selbst ein calc() ist - das Ergebnis wird 0 und die Breite faellt auf
+     auto. Jede Groesse rechnet deshalb direkt aus den beiden Eingaben, keine
+     baut auf einer anderen abgeleiteten auf. Der Ausdruck wiederholt sich
+     dadurch; das ist der Preis dafuer, dass er traegt. */
+  --brochure-col-3: calc(210mm - 2 * var(--brochure-margin-x));
+  --brochure-col:   calc((210mm - 2 * var(--brochure-margin-x)
+                          - 2 * var(--brochure-gutter)) / 3);
+  --brochure-col-2: calc((210mm - 2 * var(--brochure-margin-x)
+                          - 2 * var(--brochure-gutter)) / 3 * 2
+                         + var(--brochure-gutter));
 
   /* Rollen, nicht Farben: beide zeigen auf die geltende Palette. */
   --brochure-placeholder-bg: var(--bkm-rule);      /* #d9d7d3, Bildplatzhalter */

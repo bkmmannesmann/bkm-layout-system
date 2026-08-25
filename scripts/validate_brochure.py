@@ -35,15 +35,32 @@ FONT_DIR = ROOT_DIR / "assets" / "fonts"
 # docs/BROSCHUERE-LAYOUT.md. Wer eine aendert, aendert beide.
 # --------------------------------------------------------------------------
 
+# Eingaben: feste Werte, die von Hand gesetzt werden.
 RASTER = {
     "--brochure-margin-x": "18.0mm",
     "--brochure-margin-top": "20.4mm",
-    "--brochure-footer-zone": "25.0mm",
-    "--brochure-col": "55.4mm",
     "--brochure-gutter": "4.3mm",
-    "--brochure-col-2": "115.1mm",
-    "--brochure-col-3": "174.0mm",
+    "--brochure-footer-zone": "25.0mm",
 }
+
+# Abgeleitete Groessen. Sie duerfen keine eigene Zahl tragen, sondern muessen
+# aus den Eingaben gerechnet werden. Frueher standen hier 55.4mm und 174.0mm
+# nebeneinander und widersprachen sich: 3 x 55.4 + 2 x 4.3 sind 174.8mm. Der
+# Satz stand dadurch 0.8mm ueber der rechten Fluchtlinie. Geprueft wird deshalb
+# die Konstruktion, nicht der Zahlenwert - so geht das Raster auch dann auf,
+# wenn der Steg spaeter ein anderer ist.
+#
+# Jede rechnet direkt aus den Eingaben: WeasyPrint loest ein calc() nicht auf,
+# wenn darin eine Variable steht, die selbst ein calc() ist - das Ergebnis wird
+# 0, die Breite faellt auf auto und der Satz laeuft ueber die volle Blattbreite.
+ABGELEITET = {
+    "--brochure-col-3": ("--brochure-margin-x",),
+    "--brochure-col":   ("--brochure-margin-x", "--brochure-gutter"),
+    "--brochure-col-2": ("--brochure-margin-x", "--brochure-gutter"),
+}
+
+# Eine abgeleitete Groesse darf nicht auf einer anderen abgeleiteten aufbauen.
+VERSCHACHTELUNG_VERBOTEN = set(ABGELEITET)
 
 # Schriftgroessen je Bauteil, in pt.
 TYPO = {
@@ -154,6 +171,30 @@ def check_layout() -> list[str]:
     for name, value in RASTER.items():
         if not re.search(rf"{re.escape(name)}\s*:\s*{re.escape(value)}\s*;", css):
             errors.append(f"Rastervariable {name} ist nicht {value}")
+
+    for name, zutaten in ABGELEITET.items():
+        block = re.search(rf"{re.escape(name)}\s*:\s*([^;]+);", css)
+        if block is None:
+            errors.append(f"Abgeleitete Groesse {name} fehlt")
+            continue
+        ausdruck = block.group(1)
+        if "calc(" not in ausdruck:
+            errors.append(
+                f"{name} traegt eine feste Zahl ({ausdruck.strip()}) statt einer "
+                f"Rechnung - Spalten- und Satzbreite ergeben sich aus Achse und "
+                f"Steg und werden nicht daneben nochmal gesetzt"
+            )
+            continue
+        for zutat in zutaten:
+            if zutat not in ausdruck:
+                errors.append(f"{name} rechnet nicht mit {zutat}")
+        for andere in VERSCHACHTELUNG_VERBOTEN - {name}:
+            if andere in ausdruck:
+                errors.append(
+                    f"{name} rechnet mit {andere}, das selbst ein calc() ist - "
+                    f"WeasyPrint loest das nicht auf, die Breite wird 0 und der "
+                    f"Satz laeuft ueber die volle Blattbreite"
+                )
 
     # --- Typografie --------------------------------------------------------
     for selector, size in TYPO.items():
