@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.1.0",
+  "version": "1.2.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -275,7 +275,8 @@
       "max_surface_colors_per_brochure": 2,
       "sand_white": "Nur als Element, nie als ganze Seitenfläche — im Druck wirkt eine vollflächige Sand-White-Seite schmutzig, am Bildschirm nicht.",
       "deep_green": "Bleibt der AG vorbehalten. Fachbetriebsbroschüren, die an Endkunden des Betriebs gehen, ersetzen Deep Green durch Transition Green.",
-      "accent_on_dark": "Auf allen dunklen Flächen ist der Akzent Lime, nicht Pure Green. Gemessener Kontrast: Pure auf Transition 1,8:1 und damit als 9-pt-Leadline unlesbar, Lime 3,5:1 auf Transition, 6,7:1 auf Deep, 6,2:1 auf Stone."
+      "accent_on_dark": "Auf allen dunklen Flächen ist der Akzent Lime, nicht Pure Green. Gemessener Kontrast: Pure auf Transition 1,8:1 und damit als 9-pt-Leadline unlesbar, Lime 3,5:1 auf Transition, 6,7:1 auf Deep, 6,2:1 auf Stone.",
+      "lime_in_fachbetrieb": "Lime ist im Fachbetrieb-Kontext zugelassen, wo es sinnvoll ist — Entscheidung des Markeninhabers vom 25.08.2026. Die Hauptfarbe der Fachbetriebe bleibt Transition Green. Das weicht bewusst von DESIGN.md im Design-System-Repository ab, das Lime dort an fünf Stellen ausschließt; eine Ausnahme kannte es bereits selbst (STYLE_PRESETS.md lässt Lime für Footer-Bar-Icons zu). Die Abweichung gehört im Design-System nachgezogen, sonst laufen die Repositories auseinander."
     }
   },
   "icons": {
@@ -398,8 +399,8 @@
         "value": "20.4mm",
         "location": "templates/pages/pages-spec.css, --brochure-margin-top"
       },
-      "status": "offen",
-      "detail": "Beide Werte gelten für Innenseiten, die Trennung nach Seitenklassen löst das nicht auf. 26,7 mm stammt aus docs/print-anwendungen.md des Design-System-Repos und wird von templates/brochure/ gesetzt. Für 20,4 mm fand die Herkunftsprüfung keine Quelle: der Wert steht nur in pages-spec.css, das Original-PDF der Vermessung war nie im Repository, der anlegende Commit führt keine Begründung, und 20,4 / 18 ergibt keine Proportion des Formats. Bis zur Entscheidung bleibt templates/pages/ unverändert."
+      "status": "entschieden zugunsten 26.7mm, Pipeline noch nicht nachgezogen",
+      "detail": "Belegt: docs/print-anwendungen.md im Repository bkmmannesmann/bkm-design-system führt Kopfsteg 26,7 mm, Fußsteg 23,5 mm und ein Dreispaltenraster mit 55 mm Spalte und 4,6 mm Steg, Startpositionen 18,0 / 77,6 / 137,2 mm. Für 20,4 mm fand die Herkunftsprüfung keine Quelle. templates/pages/ ist noch nicht nachgezogen — das ändert das Layout bestehender Broschüren und braucht eine eigene Sichtprüfung."
     },
     "interior_gutter": {
       "authoritative": "4.6mm",
@@ -407,8 +408,8 @@
         "value": "4.3mm",
         "location": "templates/pages/pages-spec.css, --brochure-gutter"
       },
-      "status": "offen",
-      "detail": "Hängt an derselben Entscheidung. Die Spaltenbreite wird in beiden Systemen gerechnet, das Raster geht mit beiden Stegwerten auf."
+      "status": "entschieden zugunsten 4.6mm, Pipeline noch nicht nachgezogen",
+      "detail": "Belegt in derselben Quelle wie der Kopfsteg. Die dort genannten Startpositionen 77,6 und 137,2 mm entsprechen einer Spalte von 55,0 mm; 3 × 55,0 + 2 × 4,6 sind 174,2 mm gegen 174 mm Satzbreite. Auch dort ist die Spaltenbreite eine gerundete Angabe — gerechnet ergibt sie 54,933 mm."
     },
     "icon_box_on_light": {
       "authoritative": null,
@@ -419,12 +420,24 @@
         "surfaces.rules.deep_green"
       ]
     },
-    "lime_in_fachbetrieb": {
+    "headline_on_light": {
       "authoritative": null,
       "status": "offen",
-      "detail": "surfaces.rules.accent_on_dark schreibt Lime als Akzent auf allen dunklen Flächen vor, begründet über den gemessenen Kontrast: Pure Green auf Transition Green ergibt 1,8:1 und ist als 9-pt-Leadline unlesbar. DESIGN.md im Repository bkmmannesmann/bkm-design-system verbietet Lime im Fachbetrieb-Kontext dagegen vollständig. Die beiden Regeln schließen einander aus. Nicht geprüft — DESIGN.md liegt in einem Repository, auf das diese Sitzung keinen Zugriff hatte.",
+      "detail": "surfaces.sand und surfaces.white führen Pure Green als Hauptheadline und als Akzent auf hellem Grund. Die Kontrastmatrix des Design-Systems misst dafür 2,79 und stuft es als FAIL ein; DESIGN.md formuliert ausdrücklich: Pure Green und Lime niemals als Text auf hellem Grund. Der Wert stammt aus der Vermessung der bestehenden Broschüre — dort steht die 30-pt-Hauptheadline tatsächlich in Pure Green. Es ist also kein Übertragungsfehler, sondern eine Abweichung des gedruckten Bestands von der eigenen Regel. Nach der Matrix käme für Headlines auf hellem Grund Transition Green (5,09) oder Deep Green (9,84) in Frage; DESIGN.md nennt für den Fachbetrieb-Kontext genau Transition Green für Headlines auf hellen Flächen. Betrifft jede bisher gebaute Broschüre und ist deshalb nicht nebenbei zu ändern.",
       "affects": [
-        "surfaces.rules.accent_on_dark"
+        "surfaces.sand.headline",
+        "surfaces.sand.accent",
+        "surfaces.white.headline",
+        "surfaces.white.accent"
+      ]
+    },
+    "leadline_size_on_transition": {
+      "authoritative": null,
+      "status": "offen",
+      "detail": "surfaces.transition setzt Lime als Akzent. Die Matrix misst Lime auf Transition Green mit 3,49 und lässt es nur für großen Text zu. Die Leadline steht in 9 pt und ist damit kein großer Text. Die Alternative wäre nicht besser: Pure Green auf Transition Green ergibt 1,8:1. Zu entscheiden ist, ob die Leadline auf dieser Fläche größer gesetzt oder die Fläche für Leadlines gemieden wird.",
+      "affects": [
+        "surfaces.transition.accent",
+        "type_scale"
       ]
     }
   },
@@ -463,5 +476,59 @@
       "marks": "crop cross",
       "cmyk": "nachgelagert — WeasyPrint schreibt RGB, die Umwandlung nach PDF/X-4 mit dem Profil der Druckerei erfolgt über Ghostscript oder durch die Druckerei"
     }
+  },
+  "contrast": {
+    "$comment": "Gemessen und gegen WCAG AA geprüft, übernommen aus DESIGN.md des Design-System-Repositories.",
+    "matrix": {
+      "white_on_deep-green": {
+        "ratio": 9.84,
+        "status": "PASS"
+      },
+      "white_on_transition-green": {
+        "ratio": 5.09,
+        "status": "PASS"
+      },
+      "white_on_stone-grey": {
+        "ratio": 9.0,
+        "status": "PASS"
+      },
+      "lime-green_on_deep-green": {
+        "ratio": 6.74,
+        "status": "PASS"
+      },
+      "lime-green_on_stone-grey": {
+        "ratio": 6.17,
+        "status": "PASS"
+      },
+      "lime-green_on_transition-green": {
+        "ratio": 3.49,
+        "status": "PASS, nur großer Text"
+      },
+      "deep-green_on_white": {
+        "ratio": 9.84,
+        "status": "PASS"
+      },
+      "deep-green_on_sand-white": {
+        "ratio": 9.02,
+        "status": "PASS"
+      },
+      "transition-green_on_white": {
+        "ratio": 5.09,
+        "status": "PASS"
+      },
+      "stone-grey_on_white": {
+        "ratio": 9.0,
+        "status": "PASS"
+      },
+      "pure-green_on_white": {
+        "ratio": 2.79,
+        "status": "FAIL, nur dekorativ"
+      },
+      "lime-green_on_white": {
+        "ratio": 1.46,
+        "status": "FAIL, nur dekorativ"
+      }
+    },
+    "key_rule": "Pure Green und Lime Green niemals als Text auf hellem Grund. Sie tragen nur auf dunklem Grund — Deep Green, Stone Grey, mit Einschränkung Transition Green."
   }
 }

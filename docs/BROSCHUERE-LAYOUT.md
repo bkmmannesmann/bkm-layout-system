@@ -289,9 +289,12 @@ Logo und `12 mm` bei rundem Siegel — zwei Werte für zwei Absenderzeichen, nic
 für dieselbe Sache. Das steht seit dieser Fassung getrennt im Vertrag und in `brand.json`
 unter `grid.cover.margin_top_mm`.
 
-**Offen bleibt allein der Innenseiten-Kopfsteg.** `20,4 mm` und `26,7 mm` beziehen sich
-beide auf Innenseiten; die Trennung nach Seitenklassen löst das nicht auf. `brand.json`
-führt `26,7 mm` als verbindlich und die Abweichung der Pipeline unter `open_conflicts`.
+**Der Innenseiten-Kopfsteg ist entschieden.** `docs/print-anwendungen.md` im Repository
+`bkmmannesmann/bkm-design-system` führt Kopfsteg `26,7 mm`, Fußsteg `23,5 mm` und ein
+Dreispaltenraster mit `55 mm` Spalte und `4,6 mm` Steg, Startpositionen
+`18,0 / 77,6 / 137,2 mm`. Für `20,4 mm` fand die Herkunftsprüfung keine Quelle.
+`templates/pages/` ist noch nicht nachgezogen — das ändert bestehende Broschüren und
+braucht eine eigene Sichtprüfung.
 
 **`20,4 mm` ist nicht belegt.** Der Wert steht ausschließlich in `pages-spec.css` und den
 davon abgeleiteten Dateien. Der Dateikopf nennt als Quelle eine Vermessung des Original-PDFs
