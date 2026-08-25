@@ -25,6 +25,11 @@ Heft auf.
 
 Bei Widerspruch zwischen diesem Dokument und dem Code gewinnt das Dokument.
 
+> **Die Zahlen in diesem Dokument stehen verbindlich in [`brand.json`](../brand.json).**
+> Was hier steht, ist die Begründung dazu — warum ein Wert so ist und was passiert,
+> wenn man ihn ändert. Bei Abweichung gewinnt `brand.json`.
+> `scripts/check_brand_drift.py` prüft den Bestand dagegen.
+
 ## Herkunft der Maße
 
 Die Werte stammen aus einer Vermessung der bestehenden Broschüre mit PyMuPDF. Der Messwertblock
@@ -278,6 +283,15 @@ druckfertige PDF/X — wer es als solches weitergibt, liefert RGB in einen CMYK-
 **`18 mm` ist belegt** und in beiden Systemen gleich: `--tds-axis: 18mm` in
 `templates/tds/template.css`, festgeschrieben in `LAYOUT-CONTRACT.md` als „die eine Achse".
 Kein Streitpunkt.
+
+**Der Kopfsteg des Titelblatts ist kein Teil dieses Konflikts.** Dort gelten `18 mm` bei
+Logo und `12 mm` bei rundem Siegel — zwei Werte für zwei Absenderzeichen, nicht zwei Werte
+für dieselbe Sache. Das steht seit dieser Fassung getrennt im Vertrag und in `brand.json`
+unter `grid.cover.margin_top_mm`.
+
+**Offen bleibt allein der Innenseiten-Kopfsteg.** `20,4 mm` und `26,7 mm` beziehen sich
+beide auf Innenseiten; die Trennung nach Seitenklassen löst das nicht auf. `brand.json`
+führt `26,7 mm` als verbindlich und die Abweichung der Pipeline unter `open_conflicts`.
 
 **`20,4 mm` ist nicht belegt.** Der Wert steht ausschließlich in `pages-spec.css` und den
 davon abgeleiteten Dateien. Der Dateikopf nennt als Quelle eine Vermessung des Original-PDFs

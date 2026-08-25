@@ -29,39 +29,126 @@ Ohne Abhaengigkeiten, damit es in jeder Umgebung laeuft.
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
 
 # --------------------------------------------------------------------------
-# Die geltende Palette. Quelle: docs/LAYOUT-CONTRACT.md und
-# design-system/variables.css. Wer hier etwas aendert, aendert beide mit.
+# Die geltende Palette kommt aus brand.json - der einzigen verbindlichen
+# Markenquelle des Repositories. Frueher stand sie hier fest im Code und
+# konnte still von der Dokumentation abweichen; jetzt kann sie das nicht mehr.
 # --------------------------------------------------------------------------
 
+BRAND_PATH = Path(__file__).parent.parent / "brand.json"
+
+
+def lade_marke() -> dict:
+    """Liest brand.json. Ohne sie laeuft nichts - sie ist die Quelle."""
+    if not BRAND_PATH.exists():
+        print(f"brand.json fehlt: {BRAND_PATH}")
+        print("Sie ist die verbindliche Markenquelle; ohne sie kann nicht geprueft werden.")
+        raise SystemExit(2)
+    try:
+        return json.loads(BRAND_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as fehler:
+        print(f"brand.json ist kein gueltiges JSON: {fehler}")
+        raise SystemExit(2)
+
+
+def pruefe_marke(marke: dict) -> list[str]:
+    """Prueft brand.json gegen sich selbst.
+
+    Ohne diesen Schritt haette die Datei ein Loch: wer einen gesperrten Altwert
+    als Palettenfarbe eintraegt, macht ihn damit zur Regel, und die Pruefung
+    meldet ihn nirgends mehr. Die Quelle muss in sich stimmen, sonst prueft sie
+    nur noch sich selbst.
+    """
+    fehler = []
+    gesperrt = {w.lower() for w in marke["forbidden_colors"]["values"]}
+    normiert = {a.lower() for a in marke.get("normalised_colors", {}) if not a.startswith("$")}
+
+    for name, eintrag in marke["colors"].items():
+        if not isinstance(eintrag, dict):
+            continue
+        hexwert = eintrag["hex"].lower()
+        if hexwert in gesperrt:
+            fehler.append(f"colors.{name} traegt {hexwert} - das steht unter forbidden_colors")
+        if hexwert in normiert:
+            fehler.append(f"colors.{name} traegt {hexwert} - das ist ein normierter Altwert")
+
+    for rolle in ("display", "body"):
+        familie = marke["typography"][rolle]
+        for schnitt in familie["weights"]:
+            if str(schnitt) not in familie.get("files", {}):
+                fehler.append(f"typography.{rolle}: Schnitt {schnitt} ist gefuehrt, "
+                              f"aber keine Datei dafuer hinterlegt")
+
+    for name, flaeche in marke["surfaces"].items():
+        if not isinstance(flaeche, dict) or name == "rules":
+            continue
+        for rolle, farbe in flaeche.items():
+            if farbe not in marke["colors"]:
+                fehler.append(f"surfaces.{name}.{rolle} nennt '{farbe}', "
+                              f"das keine Farbe in colors ist")
+    return fehler
+
+
+MARKE = lade_marke()
+
+_selbstpruefung = pruefe_marke(MARKE)
+if _selbstpruefung:
+    print("brand.json widerspricht sich selbst:")
+    for _zeile in _selbstpruefung:
+        print(f"  - {_zeile}")
+    raise SystemExit(2)
+
 PALETTE = {
-    "#1c4b42": "Deep Green",
-    "#287d4b": "Transition Green",
-    "#4daf46": "Pure Green",
-    "#b4e717": "Lime",
-    "#494949": "Stone Grey",
-    "#f6f5f2": "Sand White",
-    "#e3e1dc": "Haarlinie",
-    "#d9d7d3": "Rule",
-    "#f0fad4": "Markerflaeche",
-    "#ffffff": "Weiss",
-    "#000000": "Schwarz",
+    eintrag["hex"].lower(): name.replace("-", " ").title()
+    for name, eintrag in MARKE["colors"].items()
+    if isinstance(eintrag, dict) and "hex" in eintrag
 }
+# Zwei Toene, die brand.json nicht als Rolle fuehrt, im Bestand aber vorkommen:
+# Schwarz und die Markerflaeche des Datenblatts.
+PALETTE.setdefault("#000000", "Schwarz")
+PALETTE.setdefault("#f0fad4", "Markerflaeche")
 
-# Ausdruecklich gesperrt, siehe docs/LAYOUT-CONTRACT.md, Abschnitt Farben.
 FORBIDDEN = {
-    "#009245": "Altwert Gruen",
-    "#006837": "Altwert Dunkelgruen",
-    "#00a99d": "Altwert Tuerkis",
-    "#8cc63f": "Altwert Hellgruen - heute Lime #b4e717",
+    wert.lower(): "gesperrter Altwert"
+    for wert in MARKE["forbidden_colors"]["values"]
 }
 
-# Markenschriften. Alles andere ist entweder ein Fallback oder Drift.
-FONTS_OK = ("unbounded", "tt norms pro", "bkm pdf sans", "liberation sans")
+# Toene, die auf einen Palettenwert normiert wurden und nicht zurueckkommen duerfen.
+NORMALISED = {
+    alt.lower(): neu.lower()
+    for alt, neu in MARKE.get("normalised_colors", {}).items()
+    if not alt.startswith("$")
+}
+
+# Markenschriften aus brand.json, dazu die Fallback-Familie des Druckmodus.
+FONTS_OK = tuple(sorted({
+    MARKE["typography"]["display"]["family"].lower(),
+    MARKE["typography"]["body"]["family"].lower(),
+    MARKE["typography"]["print_fallback"]["family"].lower(),
+    "liberation sans",
+}))
+
+# Erlaubte Schnitte je Familie. Ein Verweis auf einen nicht gefuehrten Schnitt
+# ist Drift: die Datei liegt vielleicht im Repository, eingesetzt wird sie nicht.
+FONT_WEIGHTS = {
+    MARKE["typography"]["display"]["family"].lower(): set(MARKE["typography"]["display"]["weights"]),
+    MARKE["typography"]["body"]["family"].lower(): set(MARKE["typography"]["body"]["weights"]),
+}
+
+# Schriftdateien, die brand.json fuehrt. Ein url() auf eine andere Datei unter
+# assets/fonts/ ist Drift.
+FONT_FILES = set()
+for _familie in ("display", "body"):
+    for _schnitt in MARKE["typography"][_familie].get("files", {}).values():
+        FONT_FILES.update(v for v in _schnitt.values())
+FONT_FILES.add(MARKE["typography"]["print_fallback"]["file"])
+FONT_FILES.update(MARKE["typography"]["print_fallback"].get("files", {}).values())
+
 FONTS_NEUTRAL = ("sans-serif", "serif", "monospace", "inherit", "initial",
                  "system-ui", "ui-sans-serif", "arial", "helvetica")
 
@@ -148,6 +235,11 @@ def check_file(path: Path) -> list[str]:
     for colour in sorted(find_colours(text)):
         if colour in FORBIDDEN:
             findings.append(f"VERBOTEN  {colour}  {FORBIDDEN[colour]}")
+        elif colour in NORMALISED:
+            findings.append(
+                f"NORMIERT  {colour}  wurde auf {NORMALISED[colour]} normiert "
+                f"und darf nicht zurueckkommen"
+            )
         elif colour in PALETTE:
             continue
         else:
@@ -168,7 +260,19 @@ def check_file(path: Path) -> list[str]:
             continue
         if low in FONTS_NEUTRAL or low.startswith("var("):
             continue
+        if low.startswith("courier") and "tds-marker" in text:
+            continue      # in brand.json als Ausnahme gefuehrt, siehe no_monospace
         findings.append(f"SCHRIFT   {family!r} ist keine Markenschrift")
+
+    # Verweise auf Schriftdateien: brand.json fuehrt, welche eingesetzt werden.
+    # Unbounded_400 und _700 liegen im Repository, sind aber nicht zugelassen -
+    # ein url() darauf ist Drift, auch wenn die Datei existiert.
+    for ref in re.findall(r"url\(['\"]?([^'\")]*assets/fonts/[^'\")]+)", text):
+        datei = ref.split("/")[-1]
+        if not any(erlaubt.endswith(datei) for erlaubt in FONT_FILES):
+            findings.append(
+                f"SCHRIFT   {datei} ist in brand.json nicht als Schnitt gefuehrt"
+            )
 
     return findings
 
@@ -206,6 +310,12 @@ def main() -> int:
         for value, name in FORBIDDEN.items():
             print(f"  {value}  {name}")
         print("\nMarkenschriften: " + ", ".join(FONTS_OK))
+        for familie, schnitte in sorted(FONT_WEIGHTS.items()):
+            print(f"  {familie}: nur {', '.join(str(w) for w in sorted(schnitte))}")
+        print("\nZugelassene Schriftdateien:")
+        for datei in sorted(FONT_FILES):
+            print(f"  {datei}")
+        print(f"\nQuelle: brand.json {MARKE['version']}, Stand {MARKE['updated']}")
         return 0
 
     include_docs = "--include-docs" in args

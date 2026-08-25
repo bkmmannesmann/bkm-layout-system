@@ -1,0 +1,450 @@
+{
+  "$comment": [
+    "Die verbindliche Markenquelle dieses Repositories, maschinenlesbar in einem Zugriff.",
+    "Gedacht für externe Werkzeuge — Claude Design, Manus, ChatGPT —, die hier markenkonforme",
+    "Unterlagen erzeugen sollen und nicht vier Dokumente und ein Stylesheet lesen können.",
+    "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
+    "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
+  ],
+  "version": "1.0.0",
+  "updated": "2026-08-25",
+  "owner": "BKM Mannesmann AG",
+  "upstream": {
+    "repository": "bkmmannesmann/bkm-design-system",
+    "revision": "db65c2b9f5ccb3969ba72106d2b10836a3643f1f",
+    "note": "Zentrale Marken- und Icon-Governance. Änderungen dort werden hier über einen eigenen Pull Request nachgezogen, siehe BRAND-SOURCE.md."
+  },
+  "colors": {
+    "$comment": "Nur diese Werte. Jeder andere Farbwert in Layout oder Content ist ein Fehler, ausgenommen Fotos und Fremdlogos.",
+    "deep-green": {
+      "hex": "#1c4b42",
+      "role": "Flächenfarbe der AG, Icon-Kasten auf hellem Grund"
+    },
+    "transition-green": {
+      "hex": "#287d4b",
+      "role": "Flächenfarbe der Fachbetriebe, Icon-Kasten auf dunklem Grund, Sektions-Headline auf hell"
+    },
+    "pure-green": {
+      "hex": "#4daf46",
+      "role": "Akzent, Hauptheadline auf hellem Grund und auf Stone Grey"
+    },
+    "lime-green": {
+      "hex": "#b4e717",
+      "role": "Glyphfarbe aller Icons, Akzent auf dunklen Flächen"
+    },
+    "stone-grey": {
+      "hex": "#494949",
+      "role": "Fließtext auf hellem Grund, Flächenfarbe Pro Line"
+    },
+    "sand-white": {
+      "hex": "#f6f5f2",
+      "role": "Heller Flächenton — nur als Element, nie als ganze Seitenfläche"
+    },
+    "clean-white": {
+      "hex": "#ffffff",
+      "role": "Seitenfläche"
+    },
+    "hairline": {
+      "hex": "#e3e1dc",
+      "role": "Haarlinie, Trennlinien"
+    },
+    "rule": {
+      "hex": "#d9d7d3",
+      "role": "Kräftigere Linie, Bildplatzhalter"
+    }
+  },
+  "forbidden_colors": {
+    "$comment": "Altwerte aus früheren Ständen. Sie werden geprüft und dürfen nicht zurückkommen.",
+    "values": [
+      "#009245",
+      "#006837",
+      "#00a99d",
+      "#8cc63f"
+    ]
+  },
+  "normalised_colors": {
+    "$comment": "Gemessene Töne, die um einen Rasterschritt vom Corporate Design abwichen und darauf normiert wurden.",
+    "#484848": "#494949",
+    "#277c4b": "#287d4b",
+    "#d8d8d9": "#d9d7d3",
+    "#e0e0e0": "#e3e1dc"
+  },
+  "typography": {
+    "$comment": "Zwei Familien, sonst nichts. Keine Monospace: Auszeichnungszeilen laufen in TT Norms Pro Bold, eine halbe Punktgröße über dem Fließtext.",
+    "display": {
+      "family": "Unbounded",
+      "weights": [
+        900
+      ],
+      "files": {
+        "900": {
+          "woff2": "assets/fonts/Unbounded_900.woff2",
+          "ttf": "assets/fonts/Unbounded-Black.ttf"
+        }
+      },
+      "note": "Nur der Black-Schnitt ist zugelassen. Unbounded_400.woff2 und Unbounded_700.woff2 liegen im Repository, werden aber nicht eingesetzt — ein Verweis darauf ist ein Fehler."
+    },
+    "body": {
+      "family": "TT Norms Pro",
+      "weights": [
+        400,
+        700
+      ],
+      "files": {
+        "400": {
+          "woff2": "assets/fonts/TT_Norms_Pro_Compact_Regular.woff2",
+          "ttf": "assets/fonts/TT_Norms_Pro_Regular.ttf"
+        },
+        "700": {
+          "woff2": "assets/fonts/TT_Norms_Pro_Bold.woff2",
+          "ttf": "assets/fonts/TT_Norms_Pro_Bold.ttf"
+        }
+      }
+    },
+    "print_fallback": {
+      "family": "BKM PDF Sans",
+      "file": "assets/fonts/LiberationSans-Regular.ttf",
+      "note": "Nur für gespeicherte TDS-PDFs. Externe Druckpfade ersetzen die vorliegenden TT-Norms-Glyphen teils durch einen Trial-Hinweis. Gilt nicht für Broschüren.",
+      "files": {
+        "400": "assets/fonts/LiberationSans-Regular.ttf",
+        "700": "assets/fonts/LiberationSans-Bold.ttf"
+      }
+    },
+    "no_monospace": {
+      "value": true,
+      "scope": "Broschüren",
+      "reason": "Auszeichnungszeilen mit Tracking laufen in TT Norms Pro Bold, eine halbe Punktgröße über dem Fließtext. Monospace trägt optisch mehr und sah im Satz technisch statt redaktionell aus.",
+      "exception": "templates/tds/template.css setzt für die Marker-Auszeichnung .tds-marker bewusst 'Courier New'. Das ist ein Prüfvermerk im Datenblatt, kein Satzelement, und fällt nicht unter diese Regel."
+    },
+    "hyphenate_character": "-",
+    "hyphenate_note": "TT Norms Pro enthält kein U+2010. Ohne diese Angabe setzt WeasyPrint an jeder Trennstelle .notdef als schwarzes Kästchen."
+  },
+  "grid": {
+    "page": {
+      "width_mm": 210,
+      "height_mm": 297,
+      "format": "DIN A4"
+    },
+    "axis_mm": 18,
+    "axis_note": "Die eine senkrechte Fluchtlinie, außen wie innen. Es gibt keine zweite. Identisch mit --tds-axis im Datenblatt.",
+    "cover": {
+      "$comment": "Titelblätter. Der Kopfsteg hängt am Absenderzeichen.",
+      "margin_top_mm": {
+        "with_logo": 18,
+        "with_seal": 12
+      },
+      "margin_x_mm": 18,
+      "seal_diameter_mm": 28.16,
+      "seal_note": "Das runde Siegel ersetzt das Logo, es steht nicht daneben."
+    },
+    "interior": {
+      "$comment": "Innenseiten.",
+      "margin_top_mm": 26.7,
+      "margin_x_mm": 18,
+      "margin_bottom_mm": 23.5,
+      "text_width_mm": 174,
+      "columns": {
+        "count": 3,
+        "gutter_mm": 4.6
+      },
+      "marginal_column": {
+        "width_mm": 38,
+        "gutter_mm": 6
+      },
+      "column_width_note": "Die Spaltenbreite wird nicht gesetzt, sondern gerechnet: (174 − 2 × Steg) / 3. Bei 4,6 mm Steg sind das 54,933 mm. Zwei nebeneinander gesetzte Zahlen laufen auseinander — genau daran stand der Satz zeitweise 0,8 mm über der rechten Fluchtlinie."
+    }
+  },
+  "cover_geometry": {
+    "$comment": "Titelblatt, pixelgenau. Die krummen Werte sind Absicht, siehe notes.",
+    "hero_graphic": {
+      "width_mm": 210,
+      "height_mm": 125,
+      "sixteen_nine_part_mm": 118.125
+    },
+    "corner_extension": {
+      "size_mm": 10,
+      "top_mm": 117.6
+    },
+    "photo": {
+      "top_mm": 117.46,
+      "width_mm": 210,
+      "height_mm": 179.54,
+      "object_fit": "cover"
+    },
+    "keyvisual": {
+      "width_mm": 42,
+      "top_mm": 102.416,
+      "variant": "dreifarbig"
+    },
+    "logo": {
+      "width_mm": 42
+    },
+    "notes": {
+      "sixteen_nine": "118,125 mm ist echtes 16:9 der Blattbreite: 210 ÷ 16 × 9.",
+      "keyvisual_top": "102,416 mm ist kein gerundeter Wert. Die linke Oberkante des Pure-Green-Chevrons liegt bei 73,33 von 464,8 SVG-Einheiten, bei 42 mm Breite also 15,709 mm unter der Bildoberkante. Nur so trifft sie die Unterkante des 16:9-Bereichs exakt.",
+      "blitzerschutz": "Zwei Überlappungen an der Kante, an der drei Ebenen zusammentreffen: die Eckerweiterung ragt 0,5 mm in die Hero-Fläche, das Foto überlappt sie um 7,54 mm."
+    }
+  },
+  "text_rhythm": {
+    "$comment": "Titelblatt. Alle Werte OPTISCH gemessen, von Versalhöhe zu Grundlinie — nicht von Kastenkante zu Kastenkante.",
+    "logo_bottom_to_headline_cap_mm": 18,
+    "headline_baseline_to_subheadline_cap_mm": 7.87,
+    "subheadline_baseline_to_body_cap_mm": 2.37,
+    "requires": "text-box: trim-both cap alphabetic",
+    "requires_note": "Ohne diese Angabe trägt jeder Abstand den unsichtbaren Vorschub der Schrift mit. Ändert jemand die Schriftgröße, verschiebt sich der sichtbare Abstand — die Zahl im Code bedeutet dann nichts mehr."
+  },
+  "type_scale": {
+    "cover": {
+      "headline": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": 30,
+        "line_height": 1.25,
+        "tracking_em": 0,
+        "uppercase": true,
+        "max_lines": 2
+      },
+      "subheadline": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": 12,
+        "line_height": 1.3,
+        "tracking_em": 0,
+        "uppercase": false
+      },
+      "body": {
+        "font": "body",
+        "weight": 400,
+        "size_pt": 12,
+        "line_height": 1.25,
+        "tracking_em": -0.015,
+        "max_lines": 2
+      }
+    }
+  },
+  "radius": {
+    "value_px": 5,
+    "exception": "Randabfallende Flächen bleiben kantig — ein Radius an der Blattkante wird beim Beschnitt abgeschnitten und wirkt wie ein Fehler.",
+    "deviates_from_tds": true
+  },
+  "surfaces": {
+    "$comment": "Benannte Flächen für den Innenteil. Der Name legt Grund-, Text-, Headline- und Akzentfarbe gemeinsam fest, damit keine Kombination entsteht, die im Druck nicht trägt.",
+    "deep": {
+      "background": "deep-green",
+      "text": "clean-white",
+      "headline": "lime-green",
+      "section_headline": "clean-white",
+      "accent": "lime-green"
+    },
+    "transition": {
+      "background": "transition-green",
+      "text": "clean-white",
+      "headline": "lime-green",
+      "section_headline": "clean-white",
+      "accent": "lime-green"
+    },
+    "pure": {
+      "background": "pure-green",
+      "text": "clean-white",
+      "headline": "deep-green",
+      "section_headline": "clean-white",
+      "accent": "deep-green"
+    },
+    "stone": {
+      "background": "stone-grey",
+      "text": "clean-white",
+      "headline": "pure-green",
+      "section_headline": "clean-white",
+      "accent": "lime-green"
+    },
+    "sand": {
+      "background": "sand-white",
+      "text": "stone-grey",
+      "headline": "pure-green",
+      "section_headline": "transition-green",
+      "accent": "pure-green"
+    },
+    "white": {
+      "background": "clean-white",
+      "text": "stone-grey",
+      "headline": "pure-green",
+      "section_headline": "transition-green",
+      "accent": "pure-green"
+    },
+    "rules": {
+      "max_surface_colors_per_brochure": 2,
+      "sand_white": "Nur als Element, nie als ganze Seitenfläche — im Druck wirkt eine vollflächige Sand-White-Seite schmutzig, am Bildschirm nicht.",
+      "deep_green": "Bleibt der AG vorbehalten. Fachbetriebsbroschüren, die an Endkunden des Betriebs gehen, ersetzen Deep Green durch Transition Green.",
+      "accent_on_dark": "Auf allen dunklen Flächen ist der Akzent Lime, nicht Pure Green. Gemessener Kontrast: Pure auf Transition 1,8:1 und damit als 9-pt-Leadline unlesbar, Lime 3,5:1 auf Transition, 6,7:1 auf Deep, 6,2:1 auf Stone."
+    }
+  },
+  "icons": {
+    "source": "Phosphor Bold",
+    "directory": "assets/icons/phosphor/bold/",
+    "fill_directory": "assets/icons/phosphor/fill/",
+    "license": "assets/icons/phosphor/LICENSE-MIT.txt",
+    "viewbox": "0 0 256 256",
+    "glyph_color": "lime-green",
+    "box_color": {
+      "on_light": "deep-green",
+      "on_dark": "transition-green"
+    },
+    "box_radius_px": 5,
+    "sizes_mm": {
+      "category_opener": {
+        "box": 12,
+        "glyph": 7.5
+      },
+      "inline": {
+        "box": 9.5,
+        "glyph": 6
+      },
+      "contact": {
+        "box": 6.5,
+        "glyph": 3.8
+      }
+    },
+    "no_webfont": "Weder Icon-Webfont noch CDN. Der Build läuft offline, und über Font-Klassen wäre die Strichstärke frei wählbar — so entstehen Blätter mit Regular-Icons.",
+    "canvas_usage": "Im Canvas als CSS-Maske auf einer eingefärbten Fläche. Die Datei braucht dort keine Füllung, nur ihre Form.",
+    "pipeline_usage": "Die WeasyPrint-Pipeline bettet dieselben Dateien inline ein und wendet das Dokument-Stylesheet nicht auf SVG-Kinder an. Dort trägt jede Datei style=\"fill:#b4e717\" am svg-Element. scripts/prepare_brochure_icons.py setzt das.",
+    "open_set": true,
+    "deviates_from_tds": true,
+    "tds_overlap": {
+      "$comment": "Motivgleich mit templates/tds/icons/, dort unter Blocknamen. Nicht zusammenlegen — die TDS-Dateien hängen an einem Geometrie-Hash im Manifest von scripts/validate_layout.py. Ein Motivwechsel im Design-System ist an beiden Stellen nachzuziehen.",
+      "atom.svg": "templates/tds/icons/eigenschaften.svg",
+      "package.svg": "templates/tds/icons/gebinde.svg",
+      "scales.svg": "templates/tds/icons/recht.svg",
+      "seal-check.svg": "templates/tds/icons/vorteile.svg",
+      "table.svg": "templates/tds/icons/daten.svg",
+      "warning.svg": "templates/tds/icons/hinweise.svg"
+    }
+  },
+  "logos": {
+    "$comment": "Immer die Variante mit dem höchsten Kontrast zum Untergrund.",
+    "on_dark": "assets/logos/bkm-logo-white-puregreen.svg",
+    "on_dark_mono": "assets/logos/bkm-logo-white.svg",
+    "on_light": "assets/logos/bkm-logo-stonegrey-puregreen.svg",
+    "on_light_mono": "assets/logos/bkm-logo-black.svg",
+    "width_mm": 42
+  },
+  "keyvisual": {
+    "$comment": "Immer die Bilddatei, nie in Code nachbauen.",
+    "on_light": "assets/keyvisual/keyvisual-on-light.svg",
+    "on_dark": "assets/keyvisual/keyvisual-on-dark.svg",
+    "lime": "assets/keyvisual/keyvisual-lime.svg",
+    "width_mm": 42,
+    "deviates_from_tds": true
+  },
+  "badges": {
+    "home_line": "assets/images/badge-homeline.png",
+    "pro_line": "assets/images/badge-proline.png",
+    "assignment": "Produkte mit dem Namensbestandteil Novu gehören zur Home Line, alle übrigen zur Pro Line. Die Zuordnung ist fest und wird nicht produktbezogen entschieden."
+  },
+  "textures": {
+    "directory": "uploads/",
+    "files": [
+      "uploads/a4-texture-deep-green.jpg",
+      "uploads/a4-texture-deep-green-2.jpg",
+      "uploads/a4-texture-deep-green-3.jpg",
+      "uploads/a4-texture-transition-green.jpg",
+      "uploads/a4-texture-transition-green-2.jpg",
+      "uploads/a4-texture-white-5.jpg"
+    ],
+    "usage": "Als background der Seite setzen, nicht als absolut positioniertes Bild. Ein absolut positioniertes Bild liegt über statisch positioniertem Inhalt, sobald die Seite kein eigener Stacking Context ist — dann verschwinden Blöcke ohne z-index.",
+    "dimming": "Über eine Farbebene abschwächen, nicht über opacity: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)) über der Textur.",
+    "resolution_note": "Im Repository 1240 × 1754 px (150 dpi) als JPEG. Die Originale liegen als PNG mit 2480 × 3508 px (300 dpi) im Projekt und ersetzen diese Dateien vor dem Druck.",
+    "referenced_by_templates": false
+  },
+  "placeholders": {
+    "$comment": "Beispielinhalt. Muss vor jeder Veröffentlichung ersetzt oder entfernt werden.",
+    "images": "Produktbilder in G-Produktseiten.dc.html sind gestreifte Platzhalterflächen.",
+    "prices": "Preise für Mehrfach-Gebinde in G-Produktseiten.dc.html stehen als „auf Anfrage“.",
+    "icons": "C-Navigation.dc.html nutzt Phosphor-Motive als Platzhalter; echte Shop-Kategorie-Icons fehlen.",
+    "legal": "Der Haftungstext in rahmen-glossar ist rechtlich nicht geprüft.",
+    "markers": "Offene Angaben werden im Content als [ANGABE FEHLT: …] oder [ZU PRÜFEN: …] markiert, nicht besser geschrieben."
+  },
+  "ai_generated_images": {
+    "rule": "Trägt ein Bild den Vermerk „AI GENERATED“ — bei den gelieferten Motiven unten rechts —, bleibt er sichtbar. Nach EU-KI-Verordnung erforderlich.",
+    "do_not": [
+      "wegretuschieren",
+      "überdecken",
+      "beschneiden"
+    ],
+    "crop_warning": "object-fit: cover auf einem Bildkasten mit abweichendem Seitenverhältnis schneidet an den Rändern weg — und unten rechts liegt genau der Vermerk. Läuft ein solches Motiv in einen abweichenden Kasten, wird der Kasten angepasst, nicht das Bild."
+  },
+  "deviations_from_tds": {
+    "$comment": "Drei Werte weichen bewusst vom Datenblatt-Vertrag ab. Sie werden nicht angeglichen.",
+    "radius": {
+      "tds": "3px",
+      "brochure": "5px",
+      "reason": "3 px sind auf 20-px-Icon-Kacheln und dichte Datentabellen gerechnet. Bei 34-mm-Bildkästen und ganzseitigen Farbfeldern verschwindet der Radius optisch; 5 px sind die Entsprechung im größeren Maßstab."
+    },
+    "keyvisual": {
+      "tds": "10 % der Blattbreite",
+      "brochure": "42 mm = 20 %",
+      "reason": "Das Titelblatt setzt das Keyvisual als Bildelement, nicht als Randmarke. 42 mm entsprechen der Logobreite und damit einem Fünftel — dieselbe Proportion, in der Logo und Keyvisual zueinander stehen."
+    },
+    "icon_set": {
+      "tds": "genau 9 Dateien",
+      "brochure": "offen",
+      "reason": "Broschüren decken Kategorien, Verfahren und Partnerstufen ab; ein festes Neuner-Set reicht nicht."
+    }
+  },
+  "open_conflicts": {
+    "$comment": "Nicht aufgelöste Widersprüche. Wer hier liest, muss sie kennen.",
+    "interior_margin_top": {
+      "authoritative": "26.7mm",
+      "conflicting": {
+        "value": "20.4mm",
+        "location": "templates/pages/pages-spec.css, --brochure-margin-top"
+      },
+      "status": "offen",
+      "detail": "Beide Werte gelten für Innenseiten, die Trennung nach Seitenklassen löst das nicht auf. 26,7 mm stammt aus docs/print-anwendungen.md des Design-System-Repos und wird von templates/brochure/ gesetzt. Für 20,4 mm fand die Herkunftsprüfung keine Quelle: der Wert steht nur in pages-spec.css, das Original-PDF der Vermessung war nie im Repository, der anlegende Commit führt keine Begründung, und 20,4 / 18 ergibt keine Proportion des Formats. Bis zur Entscheidung bleibt templates/pages/ unverändert."
+    },
+    "interior_gutter": {
+      "authoritative": "4.6mm",
+      "conflicting": {
+        "value": "4.3mm",
+        "location": "templates/pages/pages-spec.css, --brochure-gutter"
+      },
+      "status": "offen",
+      "detail": "Hängt an derselben Entscheidung. Die Spaltenbreite wird in beiden Systemen gerechnet, das Raster geht mit beiden Stegwerten auf."
+    }
+  },
+  "paths": {
+    "brochure_templates": "templates/brochure/",
+    "brochure_pipeline": "templates/pages/",
+    "tds_templates": "templates/tds/",
+    "cover_templates": "templates/cover/",
+    "design_system": "design-system/",
+    "content": "content/",
+    "contracts": {
+      "brochure_canvas": "docs/BROSCHUERE-CANVAS.md",
+      "brochure_pipeline": "docs/BROSCHUERE-LAYOUT.md",
+      "tds": "docs/LAYOUT-CONTRACT.md",
+      "editorial": "docs/REDAKTIONSSTANDARD.md",
+      "assets": "docs/ASSET-MANIFEST.md"
+    },
+    "validators": {
+      "brand_drift": "scripts/check_brand_drift.py",
+      "brochure": "scripts/validate_brochure.py",
+      "tds_layout": "scripts/validate_layout.py",
+      "tds_content": "scripts/validate_tds.py"
+    }
+  },
+  "output_paths": {
+    "$comment": "Zwei Wege, zwei Zwecke.",
+    "canvas": {
+      "how": "Vorlage im Browser öffnen und drucken",
+      "for": "Abstimmung und Freigabe",
+      "not_for": "Druckerei — kein CMYK, keine Beschnittzugabe, Schrifteinbettung browserabhängig"
+    },
+    "pipeline": {
+      "how": "python3 scripts/build_pages.py <ordner>",
+      "for": "Druckvorstufe",
+      "bleed": "3mm",
+      "marks": "crop cross",
+      "cmyk": "nachgelagert — WeasyPrint schreibt RGB, die Umwandlung nach PDF/X-4 mit dem Profil der Druckerei erfolgt über Ghostscript oder durch die Druckerei"
+    }
+  }
+}

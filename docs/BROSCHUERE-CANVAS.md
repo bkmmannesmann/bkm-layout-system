@@ -19,6 +19,11 @@ regelt technische Datenblätter, die aus der Technik heraus über
 eigener Aufgabe: nicht Kennwerte auf drei Seiten, sondern Argumentation, Bildführung
 und Navigation über zwanzig und mehr Seiten.
 
+> **Die Zahlen in diesem Dokument stehen verbindlich in [`brand.json`](../brand.json).**
+> Was hier steht, ist die Begründung dazu — warum ein Wert so ist und was passiert,
+> wenn man ihn ändert. Bei Abweichung gewinnt `brand.json`.
+> `scripts/check_brand_drift.py` prüft den Bestand dagegen.
+
 ## Dateien
 
 30 Vorlagen in acht Gruppen, je eine Datei pro Gruppe. Jede öffnet direkt im Browser.
@@ -41,7 +46,9 @@ und Navigation über zwanzig und mehr Seiten.
 |:---|:---|:---|
 | Seitenformat | `210 × 297 mm` | A4, doppelseitig gesetzt |
 | Achse außen und innen | `18 mm` | Wie TDS: die eine Fluchtlinie |
-| Kopfsteg | `26,7 mm` | Innenseiten |
+| Kopfsteg Innenseiten | `26,7 mm` | — |
+| Kopfsteg Titelblatt mit Logo | `18 mm` | Das Logo steht auf der Achse, der Kopfsteg entspricht ihr. |
+| Kopfsteg Titelblatt mit Siegel | `12 mm` | Das runde Siegel ersetzt das Logo und braucht mehr Luft nach unten, deshalb steht es höher. |
 | Fußsteg | `23,5 mm` | Innenseiten |
 | Textbreite | `174 mm` | 210 − 2 × 18 |
 | Dreispaltig | `55 mm` Spalte, `4,6 mm` Steg | Fließtextseiten |
@@ -270,6 +277,15 @@ zusätzlich der Hash im `ICON_MANIFEST` von `scripts/validate_layout.py`. Die ü
 **`18 mm` ist belegt** und in beiden Systemen gleich: `--tds-axis: 18mm` in
 `templates/tds/template.css`, festgeschrieben in `LAYOUT-CONTRACT.md` als „die eine Achse".
 Kein Streitpunkt.
+
+**Der Kopfsteg des Titelblatts ist kein Teil dieses Konflikts.** Dort gelten `18 mm` bei
+Logo und `12 mm` bei rundem Siegel — zwei Werte für zwei Absenderzeichen, nicht zwei Werte
+für dieselbe Sache. Das steht seit dieser Fassung getrennt im Vertrag und in `brand.json`
+unter `grid.cover.margin_top_mm`.
+
+**Offen bleibt allein der Innenseiten-Kopfsteg.** `20,4 mm` und `26,7 mm` beziehen sich
+beide auf Innenseiten; die Trennung nach Seitenklassen löst das nicht auf. `brand.json`
+führt `26,7 mm` als verbindlich und die Abweichung der Pipeline unter `open_conflicts`.
 
 **`20,4 mm` ist nicht belegt.** Der Wert steht ausschließlich in `pages-spec.css` und den
 davon abgeleiteten Dateien. Der Dateikopf nennt als Quelle eine Vermessung des Original-PDFs
