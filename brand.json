@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.0.0",
+  "version": "1.1.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -181,7 +181,7 @@
     },
     "notes": {
       "sixteen_nine": "118,125 mm ist echtes 16:9 der Blattbreite: 210 ÷ 16 × 9.",
-      "keyvisual_top": "102,416 mm ist kein gerundeter Wert. Die linke Oberkante des Pure-Green-Chevrons liegt bei 73,33 von 464,8 SVG-Einheiten, bei 42 mm Breite also 15,709 mm unter der Bildoberkante. Nur so trifft sie die Unterkante des 16:9-Bereichs exakt.",
+      "keyvisual_top": "102,416 mm ist kein gerundeter Wert und wurde nachgerechnet. Das Keyvisual hat die viewBox 196,06 × 464,8 und ist bei 42 mm Breite 99,570 mm hoch. Die Oberkante des Pure-Green-Chevrons liegt bei 73,33 Einheiten, also 15,709 mm unter der Bildoberkante. 118,125 − 15,709 = 102,4162 mm — nur so trifft die Kante die Unterkante des 16:9-Bereichs. templates/cover/cover-layout.json führt dort 102,3 mm mit der Begründung „1210 px bei 300 dpi“; diese Rechnung ergibt jedoch 102,4467 mm, der notierte Wert liegt also 147 µm neben seiner eigenen Herleitung. Die Korrektur ist für einen eigenen Pull Request vorgesehen, weil sie bestehende Titelblätter ändert.",
       "blitzerschutz": "Zwei Überlappungen an der Kante, an der drei Ebenen zusammentreffen: die Eckerweiterung ragt 0,5 mm in die Hero-Fläche, das Foto überlappt sie um 7,54 mm."
     }
   },
@@ -409,6 +409,23 @@
       },
       "status": "offen",
       "detail": "Hängt an derselben Entscheidung. Die Spaltenbreite wird in beiden Systemen gerechnet, das Raster geht mit beiden Stegwerten auf."
+    },
+    "icon_box_on_light": {
+      "authoritative": null,
+      "status": "offen",
+      "detail": "icons.box_color.on_light nennt Deep Green, surfaces.rules.deep_green sagt aber, Deep Green bleibe der AG vorbehalten und Fachbetriebsbroschüren ersetzten ihn durch Transition Green. Beides zusammen ergibt für eine Fachbetriebsbroschüre keinen zulässigen Kasten auf hellem Grund: Deep Green ist gesperrt, Transition Green ist laut derselben Regel für dunklen Grund vorgesehen. Aufgefallen bei einem Testlauf in Claude Design, das den Kasten daraufhin gar nicht setzte. Zu entscheiden: gilt der Deep-Green-Vorbehalt auch für Icon-Kästen, oder nur für Seiten- und Bandflächen?",
+      "affects": [
+        "icons.box_color.on_light",
+        "surfaces.rules.deep_green"
+      ]
+    },
+    "lime_in_fachbetrieb": {
+      "authoritative": null,
+      "status": "offen",
+      "detail": "surfaces.rules.accent_on_dark schreibt Lime als Akzent auf allen dunklen Flächen vor, begründet über den gemessenen Kontrast: Pure Green auf Transition Green ergibt 1,8:1 und ist als 9-pt-Leadline unlesbar. DESIGN.md im Repository bkmmannesmann/bkm-design-system verbietet Lime im Fachbetrieb-Kontext dagegen vollständig. Die beiden Regeln schließen einander aus. Nicht geprüft — DESIGN.md liegt in einem Repository, auf das diese Sitzung keinen Zugriff hatte.",
+      "affects": [
+        "surfaces.rules.accent_on_dark"
+      ]
     }
   },
   "paths": {
