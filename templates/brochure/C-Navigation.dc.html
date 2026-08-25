@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+html,body{margin:0;padding:0;background:#e9e7e1}
+body{font-family:'TT Norms Pro',system-ui,sans-serif;color:#494949;-webkit-font-smoothing:antialiased}
+a{color:#287d4b;text-decoration:none}
+a:hover{color:#1c4b42;text-decoration:underline}
+</style>
+</helmet>
+
+
+<div style="padding:28px 60px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+<a href="Bibliothek.dc.html" style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:-0.01em;color:#1c4b42;text-decoration:none;margin-right:12px">Bibliothek</a>
+<a href="A-Titelblaetter.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">A · Titelblaetter</a>
+<a href="B-Rahmenseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">B · Rahmenseiten</a>
+<a href="C-Navigation.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#1c4b42;color:#b4e717">C · Navigation</a>
+<a href="D-Textstrecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">D · Textstrecken</a>
+<a href="E-Strecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">E · Strecken</a>
+<a href="F-Verfahren.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">F · Verfahren</a>
+<a href="G-Produktseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">G · Produktseiten</a>
+<a href="H-Fachbetrieb.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">H · Fachbetrieb</a>
+</div>
+
+<section style="padding:60px 60px 120px;display:flex;flex-direction:column;gap:48px">
+
+<div style="max-width:900px;display:flex;flex-direction:column;gap:14px">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">C · Navigation und Leitsystem</div>
+<h1 style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:44px;line-height:1.05;letter-spacing:-0.02em;color:#1c4b42;margin:0">Navigation</h1>
+<p style="margin:0;font-size:17px;line-height:1.6;max-width:70ch">Inhaltsverzeichnis mit Ober- und Unterkategorien, Farbleitsystem und Randregister, Kapitel- und Kategorie-Opener. Für Kataloge und Magazine mit mehr als zwei Ebenen.</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:120px">
+
+<div id="nav-katalog-inhalt" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">nav-katalog-inhalt</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Katalog-Inhalt</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Drei Oberkategorien als Farbfelder, Unterkategorien mit Icon und Seitenzahl. Rechts die Leitsystem-Legende.</span>
+</div>
+
+<div data-screen-label="9a · Inhaltsverzeichnis Produktkatalog" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>Inhalt</span><span>02</span></div>
+<h2 style="margin:11mm 0 8mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42">Das Sortiment</h2>
+
+<div style="display:flex;flex-direction:column;gap:6mm">
+<div style="display:flex;flex-direction:column;gap:0">
+<div style="border-radius:5px 5px 0 0;background:#1c4b42;padding:4mm 5mm;display:flex;align-items:center;gap:4mm">
+<span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#287d4b;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/shield-check.svg') no-repeat center/contain"></span></span>
+<span style="flex:1;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;letter-spacing:-0.01em;color:#fff">Abdichtungssysteme</span>
+<span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:9.5pt;color:#b4e717">04 – 43</span>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 6mm">
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#1c4b42;mask:url('assets/icons/phosphor/bold/squares-four.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Abdichtung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">04</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#1c4b42;mask:url('assets/icons/phosphor/bold/house.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Außenabdichtung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">08</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#1c4b42;mask:url('assets/icons/phosphor/bold/stack.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Bodenabdichtung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">12</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#1c4b42;mask:url('assets/icons/phosphor/bold/drop.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Feuchtraumabdichtung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">16</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#1c4b42;mask:url('assets/icons/phosphor/bold/warehouse.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Flachdachabdichtung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">20</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#1c4b42;mask:url('assets/icons/phosphor/bold/table.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Flächensperre</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">24</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#1c4b42;mask:url('assets/icons/phosphor/bold/flask.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Flüssigkunststoff</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">28</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#1c4b42;mask:url('assets/icons/phosphor/bold/drop-half.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Horizontalsperre</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">32</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#1c4b42;mask:url('assets/icons/phosphor/bold/arrows-out.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Innenabdichtung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">36</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#1c4b42;mask:url('assets/icons/phosphor/bold/tree-structure.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Rissverpressung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">40</span></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:0">
+<div style="border-radius:5px 5px 0 0;background:#287d4b;padding:4mm 5mm;display:flex;align-items:center;gap:4mm">
+<span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/funnel.svg') no-repeat center/contain"></span></span>
+<span style="flex:1;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;letter-spacing:-0.01em;color:#fff">Anstrich und Putz</span>
+<span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:9.5pt;color:#b4e717">44 – 59</span>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 6mm">
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#287d4b;mask:url('assets/icons/phosphor/bold/image.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Anstrich</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">44</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#287d4b;mask:url('assets/icons/phosphor/bold/squares-four.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Bodenbeschichtung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">48</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#287d4b;mask:url('assets/icons/phosphor/bold/atom.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Grundierung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">52</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#287d4b;mask:url('assets/icons/phosphor/bold/package.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Putz und Mörtel</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">56</span></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:0">
+<div style="border-radius:5px 5px 0 0;background:#4daf46;padding:4mm 5mm;display:flex;align-items:center;gap:4mm">
+<span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/seal-check.svg') no-repeat center/contain"></span></span>
+<span style="flex:1;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;letter-spacing:-0.01em;color:#fff">Schutz und Zubehör</span>
+<span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:9.5pt;color:#1c4b42">60 – 79</span>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 6mm">
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#4daf46;mask:url('assets/icons/phosphor/bold/compass.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Fassadenimprägnierung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">60</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#4daf46;mask:url('assets/icons/phosphor/bold/trash.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Reiniger</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">64</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#4daf46;mask:url('assets/icons/phosphor/bold/eye.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Schimmelschutz</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">68</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#4daf46;mask:url('assets/icons/phosphor/bold/scales.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Steinimprägnierung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">72</span></div>
+<div style="display:flex;align-items:center;gap:3.5mm;padding:2.8mm 0;border-bottom:.35mm solid #e3e1dc"><span style="width:5mm;height:5mm;flex:none;background:#4daf46;mask:url('assets/icons/phosphor/bold/gear-six.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#1c4b42">Zubehör</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#8a8a8a">76</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>03</span><span>Leitsystem</span></div>
+<div style="margin-top:11mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.7">Orientierung<br>—<br>Drei Farben<br>Drei Register</div>
+<div style="display:flex;flex-direction:column;gap:5mm">
+<h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:16pt;line-height:1.2;letter-spacing:-0.02em;color:#1c4b42">So findest du dich zurecht</h2>
+<p style="margin:0;font-size:13pt;line-height:1.4;color:#1c4b42">Jede Oberkategorie hat eine Farbe. Sie erscheint im Kolumnentitel, im Register am Außenrand und auf der Produktseite.</p>
+</div>
+</div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.7">Farben</div>
+<div style="display:flex;flex-direction:column;gap:3mm">
+<div style="display:flex;align-items:stretch;gap:0;border-radius:5px;overflow:hidden"><div style="width:26mm;background:#1c4b42;flex:none"></div><div style="flex:1;background:#f6f5f2;padding:4mm 5mm"><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">Abdichtungssysteme</div><div style="font-size:9.5pt;line-height:1.5;color:#494949">Deep Green · Seiten 04 – 43 · 10 Unterkategorien</div></div></div>
+<div style="display:flex;align-items:stretch;gap:0;border-radius:5px;overflow:hidden"><div style="width:26mm;background:#287d4b;flex:none"></div><div style="flex:1;background:#f6f5f2;padding:4mm 5mm"><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">Anstrich und Putz</div><div style="font-size:9.5pt;line-height:1.5;color:#494949">Transition Green · Seiten 44 – 59 · 4 Unterkategorien</div></div></div>
+<div style="display:flex;align-items:stretch;gap:0;border-radius:5px;overflow:hidden"><div style="width:26mm;background:#4daf46;flex:none"></div><div style="flex:1;background:#f6f5f2;padding:4mm 5mm"><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">Schutz und Zubehör</div><div style="font-size:9.5pt;line-height:1.5;color:#494949">Pure Green · Seiten 60 – 79 · 5 Unterkategorien</div></div></div>
+</div>
+</div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.7">Register</div>
+<div style="display:flex;flex-direction:column;gap:4mm">
+<div style="position:relative;height:52mm;border-radius:5px;background:#f6f5f2;overflow:hidden">
+<div style="position:absolute;right:0;top:5mm;width:9mm;height:12mm;background:#1c4b42;border-radius:5px 0 0 5px"></div>
+<div style="position:absolute;right:0;top:19mm;width:9mm;height:12mm;background:#287d4b;border-radius:5px 0 0 5px"></div>
+<div style="position:absolute;right:0;top:33mm;width:9mm;height:12mm;background:#4daf46;border-radius:5px 0 0 5px"></div>
+<div style="position:absolute;left:5mm;top:5mm;font-size:9.5pt;line-height:1.55;color:#494949;max-width:100mm">Das Register liegt 9 mm breit am Außenrand, auf Höhe der Oberkategorie. Beim Durchblättern entsteht ein Daumenindex ohne Stanzung.</div>
+</div>
+<div style="font-size:9.5pt;line-height:1.55;color:#8a8a8a">Randabfallend, deshalb ohne Radius zur Papierkante. Auf linken Seiten spiegelt das Register nach außen.</div>
+</div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:end">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.7">Icons</div>
+<div style="border-radius:5px;background:#1c4b42;padding:6mm;display:flex;flex-direction:column;gap:3mm">
+<div style="display:flex;align-items:center;gap:3mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#287d4b;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/warning.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717">Platzhalter</span></div>
+<div style="font-size:10.5pt;line-height:1.5;color:#fff">Die 19 Kategorie-Icons sind hier mit Phosphor-Glyphen belegt. Sobald das Shop-Set (icon-horizontalsperre, icon-flaechensperre …) im Repo liegt, ersetze ich sie eins zu eins — Größe und Kastenlogik bleiben.</div>
+</div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Inhaltsverzeichnis mit Ober- und Unterkategorien · Leitsystem</div>
+</div>
+
+<div id="nav-kategorie-opener" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">nav-kategorie-opener</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Kategorie-Opener</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Register am Außenrand, Unterkategorie-Übersicht auf dem Opener, gegenüber das Produktraster der Kategorie.</span>
+</div>
+
+<div data-screen-label="9b · Kategorie-Opener Horizontalsperre" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#1c4b42 url('uploads/a4-texture-deep-green.png') center/cover no-repeat;position:relative;overflow:hidden;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-messergebnis-schadensanalyse.webp" alt="" style="position:absolute;left:0;top:118.125mm;width:210mm;height:178.875mm;object-fit:cover;object-position:center;z-index:0;display:block">
+<img loading="lazy" decoding="async" src="assets/keyvisual/keyvisual-lime.svg" alt="" style="position:absolute;right:0;top:9.278mm;width:42mm;height:99.57mm;z-index:0;display:block">
+<div style="position:absolute;left:0;top:60mm;width:9mm;height:12mm;background:#b4e717;z-index:1"></div>
+<div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:6mm">
+<div style="display:flex;align-items:center;gap:4mm">
+<span style="width:12mm;height:12mm;flex:none;border-radius:5px;background:#287d4b;display:flex;align-items:center;justify-content:center"><span style="width:7.5mm;height:7.5mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/drop-half.svg') no-repeat center/contain"></span></span>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717">Abdichtungssysteme</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:rgba(255,255,255,.7)">Kategorie 08 von 19</div></div>
+</div>
+<h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:24pt;line-height:1.15;letter-spacing:-0.03em;color:#fff;max-width:140mm">Horizontalsperre</h2>
+<p style="margin:0;font-size:12pt;line-height:1.45;color:rgba(255,255,255,.82);max-width:130mm">Gegen kapillar aufsteigende Feuchtigkeit. Injektion in eine Bohrreihe, drucklos oder unter Druck — je nach Mauerwerk und Anwendungsweg.</p>
+</div>
+<div style="position:relative;z-index:1;margin-top:auto;display:flex;flex-direction:column;gap:4mm">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:3mm">
+<div style="border-radius:5px;background:rgba(255,255,255,.3);padding:4mm 5mm;display:flex;align-items:center;gap:3.5mm"><span style="width:5mm;height:5mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/caret-right.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#fff">Novusan Injektion</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#b4e717">34</span></div>
+<div style="border-radius:5px;background:rgba(255,255,255,.3);padding:4mm 5mm;display:flex;align-items:center;gap:3.5mm"><span style="width:5mm;height:5mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/caret-right.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#fff">NovuSticks</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#b4e717">36</span></div>
+<div style="border-radius:5px;background:rgba(255,255,255,.3);padding:4mm 5mm;display:flex;align-items:center;gap:3.5mm"><span style="width:5mm;height:5mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/caret-right.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#fff">HZ-C Injektionscreme</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#b4e717">38</span></div>
+<div style="border-radius:5px;background:rgba(255,255,255,.3);padding:4mm 5mm;display:flex;align-items:center;gap:3.5mm"><span style="width:5mm;height:5mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/caret-right.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#fff">Zubehör und Mörtel</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#b4e717">42</span></div>
+</div>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff url('uploads/a4-texture-white-5.png') center/cover no-repeat;position:relative;overflow:hidden;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="position:absolute;right:0;top:60mm;width:9mm;height:12mm;background:#1c4b42"></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid #1c4b42;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42"><span>34</span><span>Abdichtungssysteme · Horizontalsperre</span></div>
+<h3 style="margin:10mm 0 6mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:15pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">Produkte dieser Kategorie</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm"><div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div><div style="display:flex;align-items:center;gap:2.5mm"><span style="width:6.5mm;height:6.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:4mm;height:4mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/house.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46">Home Line</span></div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">Novusan Mauerwerkinjektion</div><div style="font-size:9.5pt;line-height:1.5">Selbstverteilend, wirkt bis 99 % Durchfeuchtung. 5 Flaschen je Meter Wand.</div><div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">19,99 € · 500 ml</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm"><div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div><div style="display:flex;align-items:center;gap:2.5mm"><span style="width:6.5mm;height:6.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:4mm;height:4mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/house.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46">Home Line</span></div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">Novusan Set</div><div style="font-size:9.5pt;line-height:1.5">Komplett für rund 1 m Wand: Flaschen, Mörtel, Schutzausrüstung, Anleitung.</div><div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">131,99 € · 2,5 l</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm"><div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div><div style="display:flex;align-items:center;gap:2.5mm"><span style="width:6.5mm;height:6.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:4mm;height:4mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/house.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46">Home Line</span></div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">NovuSticks</div><div style="font-size:9.5pt;line-height:1.5">Getränkte Faserstäbchen für Fugen, Wandstärken 12 bis 48 cm. Kein Mischen.</div><div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">37,98 € · 10 Stück</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm"><div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div><div style="display:flex;align-items:center;gap:2.5mm"><span style="width:6.5mm;height:6.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:4mm;height:4mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/certificate.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46">Pro Line</span></div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">BKM HZ-C Injektionscreme</div><div style="font-size:9.5pt;line-height:1.5">Silanbasiert, ölfrei, bis 95 % Durchfeuchtung. WTA-geprüft.</div><div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">31,99 € · 600 ml</div></div>
+</div>
+<div style="margin-top:auto;border-radius:5px;background:#1c4b42;padding:5mm;display:flex;align-items:center;gap:4mm">
+<span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#287d4b;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/magnifying-glass.svg') no-repeat center/contain"></span></span>
+<div style="flex:1;font-size:10pt;line-height:1.5;color:#fff">Unsicher, ob die Horizontalsperre allein reicht? Die Anwendungsmatrix auf Seite 30 zeigt, wann eine Flächensperre dazugehört.</div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Kategorie-Opener mit Register · Produktraster</div>
+</div>
+
+<div id="nav-kategorie-opener-anstrich" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #287d4b">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#287d4b;color:#b4e717;padding:6px 12px">nav-kategorie-opener-anstrich</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Opener Anstrich und Putz</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Zweite Oberkategorie, Registermarke und Kolumnentitel in Transition Green. Gleiche Anordnung, andere Farbrolle.</span>
+</div>
+
+<div data-screen-label="Kategorie-Opener Anstrich und Putz" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#287d4b url('uploads/a4-texture-transition-green.png') center/cover no-repeat;position:relative;overflow:hidden;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<img loading="lazy" decoding="async" src="uploads/feuchte-waende-selbst-sanieren.webp" alt="" style="position:absolute;left:0;top:118.125mm;width:210mm;height:178.875mm;object-fit:cover;object-position:center;z-index:0;display:block">
+<img loading="lazy" decoding="async" src="assets/keyvisual/keyvisual-lime.svg" alt="" style="position:absolute;right:0;top:9.278mm;width:42mm;height:99.57mm;z-index:0;display:block">
+<div style="position:absolute;left:0;top:74mm;width:9mm;height:12mm;background:#b4e717;z-index:1"></div>
+<div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:6mm">
+<div style="display:flex;align-items:center;gap:4mm">
+<span style="width:12mm;height:12mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:7.5mm;height:7.5mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/funnel.svg') no-repeat center/contain"></span></span>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717">Anstrich und Putz</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:rgba(255,255,255,.7)">Kategorie 11 von 19</div></div>
+</div>
+<h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:24pt;line-height:1.15;letter-spacing:-0.03em;color:#fff;max-width:140mm">Anstrich und Putz</h2>
+<p style="margin:0;font-size:12pt;line-height:1.45;color:rgba(255,255,255,.82);max-width:130mm">Was nach der Sperre kommt. Sanierputz speichert Salze, Grundierung schafft Haftung, Anstrich und Beschichtung schließen die Fläche ab — diffusionsoffen.</p>
+</div>
+<div style="position:relative;z-index:1;margin-top:auto;display:flex;flex-direction:column;gap:4mm">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:3mm">
+<div style="border-radius:5px;background:rgba(0,0,0,.3);padding:4mm 5mm;display:flex;align-items:center;gap:3.5mm"><span style="width:5mm;height:5mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/caret-right.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#fff">Anstrich</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#b4e717">44</span></div>
+<div style="border-radius:5px;background:rgba(0,0,0,.3);padding:4mm 5mm;display:flex;align-items:center;gap:3.5mm"><span style="width:5mm;height:5mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/caret-right.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#fff">Bodenbeschichtung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#b4e717">48</span></div>
+<div style="border-radius:5px;background:rgba(0,0,0,.3);padding:4mm 5mm;display:flex;align-items:center;gap:3.5mm"><span style="width:5mm;height:5mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/caret-right.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#fff">Grundierung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#b4e717">52</span></div>
+<div style="border-radius:5px;background:rgba(0,0,0,.3);padding:4mm 5mm;display:flex;align-items:center;gap:3.5mm"><span style="width:5mm;height:5mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/caret-right.svg') no-repeat center/contain"></span><span style="flex:1;font-size:10pt;color:#fff">Putz und Mörtel</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#b4e717">56</span></div>
+</div>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;position:relative;overflow:hidden;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="position:absolute;right:0;top:74mm;width:9mm;height:12mm;background:#287d4b"></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid #287d4b;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42"><span>44</span><span>Anstrich und Putz · Sanierputz</span></div>
+<h3 style="margin:10mm 0 6mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:15pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">Produkte dieser Kategorie</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm"><div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div><div style="display:flex;align-items:center;gap:2.5mm"><span style="width:6.5mm;height:6.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:4mm;height:4mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/house.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46">Home Line</span></div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">Sanierputzsystem</div><div style="font-size:9.5pt;line-height:1.5">Hochporös und wasserabweisend. Speichert Salze, lässt Wasserdampf entweichen.</div><div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">Preis auf Anfrage</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm"><div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div><div style="display:flex;align-items:center;gap:2.5mm"><span style="width:6.5mm;height:6.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:4mm;height:4mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/house.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46">Home Line</span></div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">Spritzbewurf</div><div style="font-size:9.5pt;line-height:1.5">Haftbrücke auf dem Mauerwerk, aufgetragen vor dem Grundputz.</div><div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">Preis auf Anfrage</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm"><div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div><div style="display:flex;align-items:center;gap:2.5mm"><span style="width:6.5mm;height:6.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:4mm;height:4mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/house.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46">Home Line</span></div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">BKM FBM Füll- und Bohrlochmörtel</div><div style="font-size:9.5pt;line-height:1.5">Kapillaraktiv, diffusionsoffen, schwindfrei. Belastbar nach 24 Stunden.</div><div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">7,98 €</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm"><div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div><div style="display:flex;align-items:center;gap:2.5mm"><span style="width:6.5mm;height:6.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:4mm;height:4mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/certificate.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46">Pro Line</span></div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">Bodenbeschichtung</div><div style="font-size:9.5pt;line-height:1.5">Für Kellerböden nach abgeschlossener Abdichtung. Fachverarbeitung.</div><div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">Preis auf Anfrage</div></div>
+</div>
+<div style="margin-top:auto;border-radius:5px;background:#287d4b;padding:5mm;display:flex;align-items:center;gap:4mm">
+<span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/warning.svg') no-repeat center/contain"></span></span>
+<div style="flex:1;font-size:10pt;line-height:1.5;color:#fff">Sanierputz kommt nach der Sperre, nicht davor. Und ohne Dampfsperre darunter — der Putz muss atmen können.</div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Zweite Oberkategorie · Transition Green</div>
+</div>
+
+</div>
+</section>
+</x-dc>
+</body>
+</html>

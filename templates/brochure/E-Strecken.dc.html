@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+html,body{margin:0;padding:0;background:#e9e7e1}
+body{font-family:'TT Norms Pro',system-ui,sans-serif;color:#494949;-webkit-font-smoothing:antialiased}
+a{color:#287d4b;text-decoration:none}
+a:hover{color:#1c4b42;text-decoration:underline}
+</style>
+</helmet>
+
+<div style="padding:28px 60px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+<a href="Bibliothek.dc.html" style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:-0.01em;color:#1c4b42;text-decoration:none;margin-right:12px">Bibliothek</a>
+<a href="A-Titelblaetter.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">A · Titelblaetter</a>
+<a href="B-Rahmenseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">B · Rahmenseiten</a>
+<a href="C-Navigation.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">C · Navigation</a>
+<a href="D-Textstrecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">D · Textstrecken</a>
+<a href="E-Strecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#1c4b42;color:#b4e717">E · Strecken</a>
+<a href="F-Verfahren.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">F · Verfahren</a>
+<a href="G-Produktseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">G · Produktseiten</a>
+<a href="H-Fachbetrieb.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">H · Fachbetrieb</a>
+</div>
+
+<section style="padding:60px 60px 120px;display:flex;flex-direction:column;gap:48px">
+
+<div style="max-width:900px;display:flex;flex-direction:column;gap:14px">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">E · Gestaltungsrichtungen</div>
+<h1 style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:44px;line-height:1.05;letter-spacing:-0.02em;color:#1c4b42;margin:0">Komplette Strecken</h1>
+<p style="margin:0;font-size:17px;line-height:1.6;max-width:70ch">Drei durchgestaltete Richtungen über je sechs Doppelseiten — Titel, Vorwort, Inhalt, Kapitel-Opener, Fließtext, Text und Bild, Tabelle, Zitat, Schritt-für-Schritt, Referenz. Als Referenz für Rhythmus und Farbmenge.</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:120px">
+
+<div id="richtung-klartext" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">richtung-klartext</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Klartext</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Strenges 3-Spalten-Raster, sparsame Farbe, technische Ruhe. Satzspiegel 1:1 aus den Print-Richtlinien. Titel = Titelblatt-Variante 1.</span>
+</div>
+
+<div data-screen-label="1a · Titel + Rückseite" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18);position:relative">
+<div style="width:210mm;height:297mm;box-sizing:border-box;padding:26.7mm 18mm 23.5mm;background:#fff;position:relative;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:8mm">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">Kontakt</div>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:15pt;line-height:1.15;color:#1c4b42">BKM.Mannesmann AG</div>
+<div style="font-size:10.5pt;line-height:1.5">Wideystraße 23<br>59174 Kamen<br>Deutschland</div>
+<div style="height:.35mm;background:#e3e1dc;width:55mm"></div>
+<div style="font-size:10.5pt;line-height:1.5">+49 2307 990 340<br>info@bkm-mannesmann.de<br>bkm-mannesmann.de</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6mm">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a">Zwei Wege. Ein Ziel: dauerhaft trockene Wände.</div>
+<div style="border-radius:5px;background:#1c4b42;padding:7mm;display:flex;flex-direction:column;gap:3mm">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:13pt;line-height:1.15;color:#fff">Build. Keep.<br>Maintain.</div>
+<div style="font-size:9.5pt;color:#b4e717">Systemgeber für Feuchtigkeitsschutz im Bestand</div>
+</div>
+<img loading="lazy" decoding="async" src="assets/logos/bkm-logo-stonegrey-puregreen.svg" alt="BKM" style="width:42mm;display:block">
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;position:relative;overflow:hidden">
+<div style="position:absolute;left:0;top:0;width:210mm;height:118.125mm;background:#1c4b42 url('uploads/a4-texture-deep-green-3.png') center top/cover no-repeat"></div>
+<img loading="lazy" decoding="async" src="uploads/druckwasser-abplazender-putz-feuchte-waende.png" alt="" style="position:absolute;left:0;top:118.125mm;width:210mm;height:178.875mm;object-fit:cover;display:block">
+<img loading="lazy" decoding="async" src="assets/logos/bkm-logo-white-puregreen.svg" alt="BKM" style="position:absolute;left:18mm;top:18mm;width:42mm;display:block">
+<h1 style="position:absolute;left:18mm;top:46.16mm;width:132mm;margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:30pt;line-height:1.25;letter-spacing:0;color:#fff">Feuchtigkeit hat Hausverbot</h1>
+<div style="position:absolute;left:18mm;top:80.49mm;width:132mm;font-family:'Unbounded',sans-serif;font-weight:900;font-size:12pt;line-height:1.3;letter-spacing:0;color:#b4e717">Zwei Wege. Ein Ziel: dauerhaft trockene Wände.</div>
+<p style="position:absolute;left:18mm;top:86.84mm;width:120mm;margin:0;font-size:12pt;line-height:1.25;letter-spacing:-0.015em;color:rgba(255,255,255,.82)">Wie du feuchte Wände einordnest, welche Verfahren wann tragen — und wann du selbst sanierst oder besser einen Fachbetrieb beauftragst.</p>
+<div style="position:absolute;right:0;top:117.6mm;width:10mm;height:10mm;background:#1c4b42 url('uploads/a4-texture-deep-green-3.png') right bottom/cover no-repeat"></div>
+<img loading="lazy" decoding="async" src="assets/keyvisual/keyvisual-on-light.svg" alt="" style="position:absolute;right:0;top:102.416mm;width:42mm;height:99.57mm">
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">U4 Rückseite · U1 Titel (Titelblatt-Spezifikation Repo)</div>
+
+<div data-screen-label="1a · Vorwort + Inhaltsverzeichnis" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;padding:26.7mm 18mm 23.5mm;background:#fff;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>Vorwort</span><span>02</span></div>
+<div style="margin-top:12mm;display:flex;flex-direction:column;gap:7mm">
+<h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42;max-width:130mm">Erst verstehen. Dann entscheiden.</h2>
+<div style="display:grid;grid-template-columns:55mm 55mm;gap:4.6mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.55">Feuchtigkeit im Haus ist kein kleines Problem. Sie verändert Räume, greift Substanz an, mindert Wert und nimmt Sicherheit. Und sie stellt Eigentümer vor eine Entscheidung: selbst handeln oder professionelle Hilfe holen.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.55">BKM MANNESMANN steht dafür, dass diese Entscheidung klarer wird. Diese Broschüre führt dich durch beide Wege: selbst sanieren mit der Home Line oder sanieren lassen durch einen zertifizierten BKM-Fachbetrieb.</p>
+</div>
+<div style="height:.35mm;background:#e3e1dc;width:114.6mm"></div>
+<div style="display:flex;flex-direction:column;gap:2mm">
+<div style="font-size:10.5pt;font-weight:700;color:#1c4b42">Michael Salaw</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:9pt;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Vorsitzender des Vorstands</div>
+</div>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;padding:26.7mm 18mm 23.5mm;background:#fff;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>Inhalt</span><span>03</span></div>
+<div style="margin-top:12mm;display:flex;flex-direction:column">
+<div style="display:flex;align-items:baseline;gap:6mm;padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:#4daf46;width:10mm">01</span><span style="flex:1;font-size:12pt;font-weight:700;color:#1c4b42">Feuchtigkeit verstehen</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#494949">04</span></div>
+<div style="display:flex;align-items:baseline;gap:6mm;padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:#4daf46;width:10mm">02</span><span style="flex:1;font-size:12pt;font-weight:700;color:#1c4b42">Orientierung und Entscheidung</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#494949">10</span></div>
+<div style="display:flex;align-items:baseline;gap:6mm;padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:#4daf46;width:10mm">03</span><span style="flex:1;font-size:12pt;font-weight:700;color:#1c4b42">Zwei Wege. Ein Ziel.</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#494949">16</span></div>
+<div style="display:flex;align-items:baseline;gap:6mm;padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:#4daf46;width:10mm">04</span><span style="flex:1;font-size:12pt;font-weight:700;color:#1c4b42">Home Line und Pro Line</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#494949">24</span></div>
+<div style="display:flex;align-items:baseline;gap:6mm;padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:#4daf46;width:10mm">05</span><span style="flex:1;font-size:12pt;font-weight:700;color:#1c4b42">Fachbetriebsnetzwerk</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#494949">30</span></div>
+<div style="display:flex;align-items:baseline;gap:6mm;padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:#4daf46;width:10mm">06</span><span style="flex:1;font-size:12pt;font-weight:700;color:#1c4b42">Kontakt und Service</span><span style="font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#494949">36</span></div>
+<div style="margin-top:10mm;border-radius:5px;background:#b4e717;padding:6mm;max-width:114.6mm">
+<div style="display:flex;align-items:center;gap:2mm;margin-bottom:2mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/arrow-right.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42">Kurzweg</span></div>
+<div style="font-size:11pt;line-height:1.45;color:#1c4b42">Du weißt schon, welchen Weg du gehen willst? Die Line-Matrix auf Seite 18 zeigt, welches System zu welcher Anwendung passt.</div>
+</div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Vorwort · Inhaltsverzeichnis</div>
+
+<div data-screen-label="1a · Kapitel-Opener + Fließtext" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#1c4b42 url('uploads/a4-texture-deep-green.png') center/cover no-repeat;position:relative;overflow:hidden;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column;justify-content:flex-end">
+<img loading="lazy" decoding="async" src="assets/keyvisual/keyvisual-on-dark.svg" alt="" style="position:absolute;right:-10mm;top:40mm;width:70mm;height:166mm;opacity:.5">
+<div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:5mm">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:9.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717">Kapitel 03</div>
+<h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26pt;line-height:1.1;letter-spacing:-0.03em;color:#fff;max-width:130mm">Zwei Wege. Ein Ziel.</h2>
+<p style="margin:0;font-size:11.5pt;line-height:1.5;color:rgba(255,255,255,.82);max-width:100mm">Home Line, Pro Line, Fachbetrieb: Home Line und Pro Line sind keine Qualitätsleiter. Der Unterschied liegt in Anwendung und Werkzeug.</p>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;padding:26.7mm 18mm 23.5mm;background:#fff;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>03 · Zwei Wege. Ein Ziel.</span><span>17</span></div>
+<h3 style="margin:10mm 0 6mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:14pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42;max-width:120mm">Der Weg richtet sich nach dem Schaden</h3>
+<div style="display:grid;grid-template-columns:55mm 55mm 55mm;gap:4.6mm;flex:1;align-content:start">
+<p style="margin:0;font-size:10pt;line-height:1.55">Eine Eigenanwendung ist geeignet, wenn das Schadensbild klar eingrenzbar ist, die Anwendung verständlich und sicher möglich ist und kein komplexer Wasserdruck oder struktureller Schaden vorliegt.</p>
+<p style="margin:0;font-size:10pt;line-height:1.55">Ein zertifizierter BKM-Fachbetrieb ist empfohlen, wenn die Ursache unklar ist, mehrere Schadensbilder auftreten, Schimmel oder starke Durchfeuchtung bestehen oder größere Flächen betroffen sind.</p>
+<p style="margin:0;font-size:10pt;line-height:1.55">Home Line und Pro Line sind keine Stufen von gut zu besser. Der Unterschied liegt in Anwendung, Werkzeug, Erfahrung und Ausführungsweg — nicht im Qualitätsanspruch.</p>
+<div style="grid-column:1 / span 2;margin-top:2mm;border-radius:5px;background:#f6f5f2;padding:5mm">
+<div style="display:flex;align-items:center;gap:2mm;margin-bottom:2mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/drop-half.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">Merksatz</span></div>
+<div style="font-size:11pt;line-height:1.45;color:#1c4b42">Der Weg richtet sich nach Schadensbild, Anspruch und Situation. Das Ziel bleibt gleich.</div>
+</div>
+<p style="margin:0;font-size:10pt;line-height:1.55">Die Home Line ist anwendungsfertig: Schritt-für-Schritt-Anleitung, ohne Spezialausrüstung. Die Pro Line ist für geschulte Verarbeiter mit passendem Spezialwerkzeug angelegt.</p>
+<p style="margin:0;font-size:10pt;line-height:1.55">Im Shop ist diese Logik sichtbar: Produkte sind als „Einfach — Home Line“ oder „Fortgeschritten — Pro Line“ geführt.</p>
+<p style="margin:0;font-size:10pt;line-height:1.55">Novusan, NovuSticks, NovuProtect und NovuShield gehören zur Home Line. BKM HZ-C, BKM VK Pro und BKM FBM zur Pro Line.</p>
+<p style="margin:0;font-size:10pt;line-height:1.55">Wer selbst saniert, arbeitet mit der Home Line. Wer beauftragt, erhält Pro-Line-Verarbeitung durch einen zertifizierten BKM-Fachbetrieb. Zwei Wege, gleiche Qualität.</p>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Kapitel-Opener · Fließtext 3-Spalten</div>
+
+<div data-screen-label="1a · Text+Bild + Tabelle" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;padding:26.7mm 18mm 23.5mm;background:#fff;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>03 · Zwei Wege. Ein Ziel.</span><span>18</span></div>
+<div style="margin-top:10mm;width:174mm;height:110mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#eeece6 6px 12px);display:flex;align-items:flex-end;padding:4mm;box-sizing:border-box">
+<span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.08em;color:#8a8a8a;border-radius:5px;background:#f6f5f2;padding:2mm 3mm;display:none">BILD</span><img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-schadensanalyse-abplatzender-putz.webp" alt="" style="object-position:right bottom;width:174mm;height:110mm;object-fit:cover;display:block;margin:-4mm;border-radius:5px">
+</div>
+<div style="margin-top:3mm;font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a">Home Line: drucklose Mauerwerksinjektion — ohne Spezialgerät.</div>
+<div style="margin-top:8mm;display:grid;grid-template-columns:55mm 55mm 55mm;gap:4.6mm">
+<h3 style="margin:0;grid-column:1;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;line-height:1.2;letter-spacing:-0.02em;color:#1c4b42">Die Line-Logik in der Praxis</h3>
+<p style="margin:0;font-size:10pt;line-height:1.55">Die Line codiert Anwendungssicherheit und Werkzeugbedarf, nicht Stärke oder Gebindegröße.</p>
+<p style="margin:0;font-size:10pt;line-height:1.55">Pro-Line-Anwendungen verlangen Spezialwerkzeug, etwa ein Injektionsgerät oder eine Druckluftspritze mit Lanze.</p>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;padding:26.7mm 18mm 23.5mm;background:#fff;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>03 · Zwei Wege. Ein Ziel.</span><span>19</span></div>
+<h3 style="margin:10mm 0 6mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:14pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">Line-Matrix</h3>
+<div style="display:grid;grid-template-columns:44mm 40mm 30mm 26mm 34mm;font-size:9.5pt;width:174mm">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#fff;border-radius:5px;background:#1c4b42;padding:3mm 2.5mm">Produkt</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#fff;border-radius:5px;background:#1c4b42;padding:3mm 2.5mm">Anwendung</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#fff;border-radius:5px;background:#1c4b42;padding:3mm 2.5mm">Werkzeug</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#fff;border-radius:5px;background:#1c4b42;padding:3mm 2.5mm">Line</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#fff;border-radius:5px;background:#1c4b42;padding:3mm 2.5mm">Bezug</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">Novusan</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc">drucklose Mauerwerksinjektion</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc">ohne Spezialgerät</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Home Line</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Shop</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42;background:#f6f5f2">NovuSticks</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;background:#f6f5f2">Fugenanwendung</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;background:#f6f5f2">ohne Spezialgerät</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;background:#f6f5f2;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Home Line</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;background:#f6f5f2;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Shop</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">NovuProtect</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc">Kondensations- und Schimmelschutz</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc">Pinsel oder Rolle</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Home Line</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Shop</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42;background:#f6f5f2">BKM HZ-C</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;background:#f6f5f2">gerätegestützte Injektion</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;background:#f6f5f2">Injektionsgerät</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;background:#f6f5f2;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Pro Line</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;background:#f6f5f2;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Fachbetrieb</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">BKM FBM</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc">Systemmörtel im Verbund</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc">Spezialwerkzeug</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Pro Line</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Fachbetrieb</div>
+</div>
+<div style="margin-top:4mm;font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a;max-width:174mm">Line-Zuordnung nach Anwendung und Werkzeugbedarf — kein Qualitätsgefälle zwischen Home Line und Pro Line.</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Text + Bild · Tabelle</div>
+
+<div data-screen-label="1a · Schritt-für-Schritt + Referenz" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;padding:26.7mm 18mm 23.5mm;background:linear-gradient(rgba(255,255,255,.8),rgba(255,255,255,.8)),#fff url('uploads/a4-texture-white-5.png') center/cover no-repeat;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>04 · Home Line und Pro Line</span><span>26</span></div>
+<h3 style="margin:10mm 0 7mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:14pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">In vier Schritten zum passenden Weg</h3>
+<div style="display:flex;flex-direction:column;gap:5mm">
+<div style="display:flex;gap:5mm;align-items:flex-start"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:13pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2.5mm 3mm;flex:none">01</div><div style="flex:1"><div style="font-size:11pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Schaden einordnen</div><div style="font-size:10pt;line-height:1.55">Was ist sichtbar? Feuchte Wand, abblätternder Putz, Schimmel oder modriger Geruch — beschreibe das Schadensbild so genau wie möglich.</div></div><img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-schadensanalyse-abplatzender-putz.webp" alt="" style="object-position:right bottom;width:44mm;height:26mm;object-fit:cover;display:block;border-radius:5px"></div>
+<div style="display:flex;gap:5mm;align-items:flex-start"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:13pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2.5mm 3mm;flex:none">02</div><div style="flex:1"><div style="font-size:11pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Ursache prüfen</div><div style="font-size:10pt;line-height:1.55">Ist die Ursache klar eingrenzbar? Bei unklarer Ursache oder mehreren Schadensbildern ist eine professionelle Einschätzung sinnvoll.</div></div><img loading="lazy" decoding="async" src="uploads/magnific_nano-banana-2-halbnah-san_3GXw9NsREY.png" alt="" style="width:44mm;height:26mm;object-fit:cover;display:block;border-radius:5px"></div>
+<div style="display:flex;gap:5mm;align-items:flex-start"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:13pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2.5mm 3mm;flex:none">03</div><div style="flex:1"><div style="font-size:11pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Weg wählen</div><div style="font-size:10pt;line-height:1.55">Home Line für die sichere Eigenanwendung. Pro Line über einen zertifizierten Fachbetrieb, wenn Fachverarbeitung nötig oder gewünscht ist.</div></div><img loading="lazy" decoding="async" src="uploads/trockene-waende-mit-novusan.webp" alt="" style="object-position:right bottom;width:44mm;height:26mm;object-fit:cover;display:block;border-radius:5px"></div>
+<div style="display:flex;gap:5mm;align-items:flex-start"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:13pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2.5mm 3mm;flex:none">04</div><div style="flex:1"><div style="font-size:11pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Ausführen und erhalten</div><div style="font-size:10pt;line-height:1.55">Systemtreu nach Anleitung ausführen oder durch den Fachbetrieb ausführen lassen — und danach dauerhaft geschützt erhalten.</div></div><img loading="lazy" decoding="async" src="uploads/feuchte-waende-selbst-sanieren.webp" alt="" style="width:44mm;height:26mm;object-fit:cover;display:block;border-radius:5px"></div>
+</div>
+<div style="margin-top:auto;border-radius:5px;background:#1c4b42;padding:6mm;display:flex;flex-direction:column;gap:2.5mm">
+<div style="display:flex;align-items:center;gap:2mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#287d4b;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/hammer.svg') no-repeat center/contain"></span></span><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:8pt;letter-spacing:0.06em;text-transform:uppercase;color:#b4e717">Profi-Tipp</span></div>
+<div style="font-size:11pt;line-height:1.45;color:#fff">Bei unklarer Ursache, mehreren Schadensbildern, starker Durchfeuchtung oder großen Flächen: Einschätzung durch einen zertifizierten BKM-Fachbetrieb einholen.</div>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;padding:26.7mm 18mm 23.5mm;background:#fff;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>05 · Fachbetriebsnetzwerk</span><span>31</span></div>
+<div style="margin-top:10mm;width:174mm;height:78mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#eeece6 6px 12px);display:flex;align-items:flex-end;padding:4mm;box-sizing:border-box"><span style="font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a;border-radius:5px;background:#f6f5f2;padding:2mm 3mm;display:none">BILD</span><img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-sanierter-keller-ergebnis.webp" alt="" style="object-position:right bottom;width:174mm;height:78mm;object-fit:cover;display:block;margin:-4mm;border-radius:5px"></div>
+<h3 style="margin:8mm 0 5mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:14pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">Zertifizierte BKM-Fachbetriebe</h3>
+<div style="display:grid;grid-template-columns:55mm 55mm 55mm;gap:4.6mm">
+<div style="display:flex;flex-direction:column;gap:3mm">
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a">Schulung</div><div style="font-size:10pt">BKM-Systemschulung</div></div>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a">Systemtreue</div><div style="font-size:10pt">BKM-Systemlösungen</div></div>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a">Status</div><div style="font-size:10pt">Zertifizierter Partner</div></div>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a">Gebiet</div><div style="font-size:10pt">Gebietsschutz</div></div>
+</div>
+<p style="margin:0;font-size:10pt;line-height:1.55">Fachbetriebe unterscheiden sich nicht darüber, dass „ihr Produkt besser“ ist, sondern darüber, dass sie komplexe Schäden sicherer, schneller und reproduzierbarer umsetzen.</p>
+<p style="margin:0;font-size:10pt;line-height:1.55">BKM stützt das über exklusive Systemlösungen, Schulungen, Herstelleranbindung, Gebietsschutz und den zertifizierten Partnerstatus.</p>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Schritt-für-Schritt + Profi-Tipp · Referenz</div>
+</div>
+
+<div id="richtung-signal" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">richtung-signal</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Signal</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Große Typo-Sprünge, viel Deep-Green-Fläche, asymmetrisches Raster mit Marginalspalte, Bilder über den Bund. Titel = Titelblatt-Variante 2.</span>
+</div>
+
+<div data-screen-label="1b · Titel + Rückseite" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:10mm">
+<img loading="lazy" decoding="async" src="assets/logos/bkm-logo-stonegrey-puregreen.svg" alt="BKM" style="width:52mm;display:block">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:16pt;line-height:1.15;letter-spacing:-0.03em;color:#1c4b42">Build.<br>Keep.<br>Maintain.</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6mm;font-size:10.5pt;line-height:1.5">
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46;margin-bottom:2mm;display:flex;align-items:center;gap:2mm"><span style="width:9mm;height:9mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:5.5mm;height:5.5mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/map-pin.svg') no-repeat center/contain"></span></span>Zentrale</div>BKM.Mannesmann AG<br>Wideystraße 23<br>59174 Kamen<br>Deutschland</div>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46;margin-bottom:2mm;display:flex;align-items:center;gap:2mm"><span style="width:9mm;height:9mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:5.5mm;height:5.5mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/chat-centered-text.svg') no-repeat center/contain"></span></span>Kontakt</div>+49 2307 990 340<br>info@bkm-mannesmann.de<br>bkm-mannesmann.de</div>
+<div style="grid-column:1 / -1;height:.35mm;background:#e3e1dc"></div>
+<div style="grid-column:1 / -1;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a">Fachbetrieb in deiner Region finden — bkm-mannesmann.de/fachbetriebe</div>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;position:relative;overflow:hidden">
+<div style="position:absolute;left:0;top:0;width:210mm;height:118.125mm;background:#1c4b42 url('uploads/a4-texture-deep-green-3.png') center top/cover no-repeat"></div>
+<img loading="lazy" decoding="async" src="uploads/magnific_ultrarealistic-architectu_CHxX15MEEy.png" alt="" style="position:absolute;left:0;top:118.125mm;width:210mm;height:178.875mm;object-fit:cover;display:block">
+<img loading="lazy" decoding="async" src="assets/logos/bkm-logo-white-puregreen.svg" alt="BKM" style="position:absolute;left:18mm;top:18mm;width:42mm;display:block">
+<h1 style="position:absolute;left:18mm;top:46.16mm;width:132mm;margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:30pt;line-height:1.25;letter-spacing:0;color:#fff">Trockene Wände</h1>
+<div style="position:absolute;left:18mm;top:67.26mm;width:132mm;font-family:'Unbounded',sans-serif;font-weight:900;font-size:12pt;line-height:1.3;letter-spacing:0;color:#b4e717">Zwei Wege. Ein Ziel: dauerhaft trockene Wände.</div>
+<p style="position:absolute;left:18mm;top:73.61mm;width:120mm;margin:0;font-size:12pt;line-height:1.25;letter-spacing:-0.015em;color:rgba(255,255,255,.82)">Selbst sanieren. Oder sanieren lassen. Diese Broschüre zeigt beide Wege — von der Diagnose bis zur fertigen Wand.</p>
+<div style="position:absolute;right:0;top:117.6mm;width:10mm;height:10mm;background:#1c4b42 url('uploads/a4-texture-deep-green-3.png') right bottom/cover no-repeat"></div>
+<img loading="lazy" decoding="async" src="assets/keyvisual/keyvisual-on-light.svg" alt="" style="position:absolute;right:0;top:102.416mm;width:42mm;height:99.57mm">
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">U4 Rückseite · U1 Titel (Titelblatt-Spezifikation Repo)</div>
+
+<div data-screen-label="1b · Vorwort + Inhaltsverzeichnis" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column;gap:9mm">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#4daf46">Vorwort</div>
+<h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:24pt;line-height:1.06;letter-spacing:-0.035em;color:#1c4b42">Erst verstehen.<br>Dann entscheiden.</h2>
+<div style="display:grid;grid-template-columns:36mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.6">Marginalie<br>—<br>Orientierung vor Produkt</div>
+<div style="display:flex;flex-direction:column;gap:5mm">
+<p style="margin:0;font-size:13pt;line-height:1.45;color:#1c4b42">Feuchtigkeit verändert Räume, greift Substanz an und mindert Wert. Sie stellt Eigentümer vor eine Entscheidung.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Wir wollen Feuchtigkeit nicht dramatisieren, aber ernst nehmen. Kein Angstverkauf, sondern Orientierung: Was ist sichtbar? Was könnte die Ursache sein? Ist eine Eigenanwendung geeignet? Wann sollte ein Fachbetrieb prüfen?</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Der richtige Weg ist der, der zum Schaden, zum Gebäude und zum Kunden passt. Das Ziel bleibt immer gleich: ein dauerhaft trockenes, geschütztes Zuhause.</p>
+<div style="margin-top:4mm;display:flex;align-items:center;gap:5mm"><div style="width:16mm;height:1mm;background:#b4e717"></div><div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">Michael Salaw</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:9pt;letter-spacing:0.08em;text-transform:uppercase;color:#8a8a8a">Vorsitzender des Vorstands</div></div></div>
+</div>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column;gap:9mm">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#4daf46">Inhalt</div>
+<div style="display:flex;flex-direction:column;gap:0">
+<div style="display:grid;grid-template-columns:18mm 1fr 16mm;gap:4mm;align-items:baseline;padding:5mm 0;border-top:.7mm solid #1c4b42"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:16pt;color:#b4e717;line-height:1">01</span><span><span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;letter-spacing:-0.02em;color:#1c4b42">Feuchtigkeit verstehen</span><br><span style="font-size:9.5pt;color:#8a8a8a">Ursachen, Schadensbilder, Grenzen</span></span><span style="font-family:'TT Norms Pro',sans-serif;font-size:11pt;color:#1c4b42;text-align:right">04</span></div>
+<div style="display:grid;grid-template-columns:18mm 1fr 16mm;gap:4mm;align-items:baseline;padding:5mm 0;border-top:.35mm solid #e3e1dc"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:16pt;color:#b4e717;line-height:1">02</span><span><span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;letter-spacing:-0.02em;color:#1c4b42">Orientierung und Entscheidung</span><br><span style="font-size:9.5pt;color:#8a8a8a">Schadensbild einordnen, Ursache prüfen, Weg wählen</span></span><span style="font-family:'TT Norms Pro',sans-serif;font-size:11pt;color:#1c4b42;text-align:right">10</span></div>
+<div style="display:grid;grid-template-columns:18mm 1fr 16mm;gap:4mm;align-items:baseline;padding:5mm 0;border-top:.35mm solid #e3e1dc"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:16pt;color:#b4e717;line-height:1">03</span><span><span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;letter-spacing:-0.02em;color:#1c4b42">Zwei Wege. Ein Ziel.</span><br><span style="font-size:9.5pt;color:#8a8a8a">Home Line, Pro Line, Fachbetrieb</span></span><span style="font-family:'TT Norms Pro',sans-serif;font-size:11pt;color:#1c4b42;text-align:right">16</span></div>
+<div style="display:grid;grid-template-columns:18mm 1fr 16mm;gap:4mm;align-items:baseline;padding:5mm 0;border-top:.35mm solid #e3e1dc"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:16pt;color:#b4e717;line-height:1">04</span><span><span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;letter-spacing:-0.02em;color:#1c4b42">Home Line und Pro Line</span><br><span style="font-size:9.5pt;color:#8a8a8a">Home Line selbst · Pro Line durch Fachbetrieb</span></span><span style="font-family:'TT Norms Pro',sans-serif;font-size:11pt;color:#1c4b42;text-align:right">24</span></div>
+<div style="display:grid;grid-template-columns:18mm 1fr 16mm;gap:4mm;align-items:baseline;padding:5mm 0;border-top:.35mm solid #e3e1dc"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:16pt;color:#b4e717;line-height:1">05</span><span><span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;letter-spacing:-0.02em;color:#1c4b42">Fachbetriebsnetzwerk</span><br><span style="font-size:9.5pt;color:#8a8a8a">Schulung, Systemtreue, Partnerstatus</span></span><span style="font-family:'TT Norms Pro',sans-serif;font-size:11pt;color:#1c4b42;text-align:right">30</span></div>
+<div style="display:grid;grid-template-columns:18mm 1fr 16mm;gap:4mm;align-items:baseline;padding:5mm 0;border-top:.35mm solid #e3e1dc;border-bottom:.35mm solid #e3e1dc"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:16pt;color:#b4e717;line-height:1">06</span><span><span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;letter-spacing:-0.02em;color:#1c4b42">Kontakt und Service</span><br><span style="font-size:9.5pt;color:#8a8a8a">Beratung, Fachbetriebssuche, Schulungen</span></span><span style="font-family:'TT Norms Pro',sans-serif;font-size:11pt;color:#1c4b42;text-align:right">36</span></div>
+</div>
+<div style="margin-top:auto;width:174mm;height:60mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#eeece6 6px 12px);display:flex;align-items:flex-end;padding:4mm;box-sizing:border-box"><span style="font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a;border-radius:5px;background:#f6f5f2;padding:2mm 3mm;display:none">BILD</span><img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-messergebnis-schadensanalyse.webp" alt="" style="object-position:right bottom;width:174mm;height:60mm;object-fit:cover;display:block;margin:-4mm;border-radius:5px"></div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Vorwort · Inhaltsverzeichnis</div>
+
+<div data-screen-label="1b · Kapitel-Opener + Fließtext" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#b4e717;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column;justify-content:space-between">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:60pt;line-height:1;letter-spacing:-0.05em;color:#1c4b42">03</div>
+<div style="display:flex;flex-direction:column;gap:6mm">
+<h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:28pt;line-height:1.02;letter-spacing:-0.04em;color:#1c4b42">Zwei Wege. Ein Ziel.</h2>
+<div style="height:1mm;background:#1c4b42;width:80mm"></div>
+<p style="margin:0;font-size:12pt;line-height:1.45;color:#1c4b42;max-width:105mm">Home Line und Pro Line sind keine Qualitätsleiter. Der Unterschied liegt in Anwendung, Werkzeug und Ausführungsweg — nicht im Anspruch.</p>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#4daf46"><span>Zwei Wege. Ein Ziel.</span><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:12pt;color:#1c4b42;letter-spacing:0">17</span></div>
+<h3 style="margin:9mm 0 6mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:18pt;line-height:1.08;letter-spacing:-0.03em;color:#1c4b42;max-width:130mm">Der Weg richtet sich nach dem Schaden</h3>
+<div style="display:grid;grid-template-columns:36mm 1fr;gap:6mm;align-items:start;flex:1;align-content:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.6">Zwei Wege<br>Ein Ziel<br>—<br>Home Line<br>Pro Line</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6mm">
+<p style="margin:0;grid-column:1 / -1;font-size:13pt;line-height:1.4;color:#1c4b42">Du musst Feuchtigkeit nicht akzeptieren. Es gibt einen Weg zu einem trockenen, geschützten Zuhause.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Eine Eigenanwendung ist geeignet, wenn das Schadensbild klar eingrenzbar ist und kein komplexer Wasserdruck oder struktureller Schaden vorliegt.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Ein zertifizierter BKM-Fachbetrieb ist empfohlen, wenn die Ursache unklar ist, mehrere Schadensbilder auftreten, Schimmel oder starke Durchfeuchtung bestehen oder größere Flächen betroffen sind.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Home Line und Pro Line sind keine Stufen von gut zu besser. Der Unterschied liegt in Anwendung, Werkzeug und Erfahrung.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Die Home Line ist anwendungsfertig: Schritt-für-Schritt-Anleitung, ohne Spezialausrüstung. Die Pro Line ist für geschulte Verarbeiter mit passendem Spezialwerkzeug angelegt.</p>
+<div style="grid-column:1 / -1;border-radius:5px;background:#1c4b42;padding:6mm;margin-top:2mm"><div style="display:flex;align-items:center;gap:2mm;margin-bottom:2.5mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#287d4b;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/drop-half.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717">Merksatz</span></div><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;line-height:1.25;letter-spacing:-0.02em;color:#fff">Zwei Wege. Ein Ziel.</div></div>
+</div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Kapitel-Opener · Fließtext (asymmetrisch)</div>
+
+<div data-screen-label="1b · Text+Bild über den Bund + Tabelle" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18);position:relative">
+<div style="position:absolute;left:18mm;top:26.7mm;width:384mm;height:120mm;border-radius:5px;background:repeating-linear-gradient(135deg,#dedbd4 0 7px,#e9e6df 7px 14px);z-index:2;display:flex;align-items:flex-end;padding:5mm;box-sizing:border-box"><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.08em;color:#8a8a8a;border-radius:5px;background:#f6f5f2;padding:2mm 3mm;display:none">BILD</span><img loading="lazy" decoding="async" src="uploads/magnific_nano-banana-2-halbnah-san_3GXw9NsREY.png" alt="" style="width:384mm;height:120mm;object-fit:cover;display:block;margin:-5mm;border-radius:5px"></div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="height:120mm;flex:none"></div>
+<div style="margin-top:4mm;font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a">Home Line: drucklose Mauerwerksinjektion — ohne Spezialgerät.</div>
+<h3 style="margin:8mm 0 5mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:16pt;line-height:1.08;letter-spacing:-0.03em;color:#1c4b42">Die Line-Logik in der Praxis</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Die Line codiert Anwendungssicherheit und Werkzeugbedarf, nicht Stärke oder Gebindegröße. Novusan ist auch im größeren Gebinde eine Home-Line-Anwendung.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Pro-Line-Anwendungen verlangen Spezialwerkzeug — etwa ein Injektionsgerät oder eine Druckluftspritze mit Lanze.</p>
+</div>
+<div style="margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#4daf46"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:12pt;color:#1c4b42;letter-spacing:0">18</span><span>Zwei Wege. Ein Ziel.</span></div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="height:120mm;flex:none"></div>
+<h3 style="margin:8mm 0 3mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:16pt;line-height:1.08;letter-spacing:-0.03em;color:#1c4b42">Line-Matrix</h3>
+<div style="display:grid;grid-template-columns:1fr 26mm 26mm;width:174mm;font-size:10pt">
+<div style="padding:3mm 0;border-bottom:.7mm solid #1c4b42;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#1c4b42">Produkt · Anwendung</div>
+<div style="padding:3mm 0;border-bottom:.7mm solid #1c4b42;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#1c4b42;text-align:right">Line</div>
+<div style="padding:3mm 0;border-bottom:.7mm solid #1c4b42;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#1c4b42;text-align:right">Bezug</div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-weight:700;color:#1c4b42">Novusan</span><br><span style="font-size:9pt;color:#8a8a8a">drucklose Mauerwerksinjektion · ohne Spezialgerät</span></div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">Home Line</div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">Shop</div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-weight:700;color:#1c4b42">NovuSticks</span><br><span style="font-size:9pt;color:#8a8a8a">Fugenanwendung · ohne Spezialgerät</span></div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">Home Line</div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">Shop</div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-weight:700;color:#1c4b42">NovuProtect</span><br><span style="font-size:9pt;color:#8a8a8a">Kondensations- und Schimmelschutz · Pinsel oder Rolle</span></div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">Home Line</div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">Shop</div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-weight:700;color:#1c4b42">BKM HZ-C</span><br><span style="font-size:9pt;color:#8a8a8a">gerätegestützte Injektion · Injektionsgerät</span></div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">Pro Line</div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">Fachbetrieb</div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc"><span style="font-weight:700;color:#1c4b42">BKM FBM</span><br><span style="font-size:9pt;color:#8a8a8a">Systemmörtel im Verbund · Spezialwerkzeug</span></div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">Pro Line</div>
+<div style="padding:4mm 0;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">Fachbetrieb</div>
+</div>
+<div style="margin-top:4mm;font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a">Line-Zuordnung nach Anwendung und Werkzeugbedarf.</div>
+<div style="margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#4daf46"><span>Zwei Wege. Ein Ziel.</span><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:12pt;color:#1c4b42;letter-spacing:0">19</span></div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Text + Bild über den Bund · Tabelle</div>
+
+<div data-screen-label="1b · Schritt-für-Schritt + Referenz" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#4daf46">Home Line und Pro Line</div>
+<h3 style="margin:8mm 0 7mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:18pt;line-height:1.08;letter-spacing:-0.03em;color:#1c4b42">In vier Schritten zum passenden Weg</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6mm">
+<div style="display:flex;flex-direction:column;gap:3mm"><img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-schadensanalyse-abplatzender-putz.webp" alt="" style="object-position:right bottom;height:34mm;width:100%;object-fit:cover;display:block;border-radius:5px"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:13pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2.5mm 3mm;align-self:flex-start">01</div><div style="font-size:11pt;font-weight:700;color:#1c4b42">Schaden einordnen</div><div style="font-size:10pt;line-height:1.55">Was ist sichtbar? Feuchte Wand, abblätternder Putz, Schimmel oder Geruch.</div></div>
+<div style="display:flex;flex-direction:column;gap:3mm"><img loading="lazy" decoding="async" src="uploads/magnific_nano-banana-2-halbnah-san_3GXw9NsREY.png" alt="" style="height:34mm;width:100%;object-fit:cover;display:block;border-radius:5px"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:13pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2.5mm 3mm;align-self:flex-start">02</div><div style="font-size:11pt;font-weight:700;color:#1c4b42">Ursache prüfen</div><div style="font-size:10pt;line-height:1.55">Ist die Ursache klar eingrenzbar? Sonst professionell prüfen lassen.</div></div>
+<div style="display:flex;flex-direction:column;gap:3mm"><img loading="lazy" decoding="async" src="uploads/trockene-waende-mit-novusan.webp" alt="" style="object-position:right bottom;height:34mm;width:100%;object-fit:cover;display:block;border-radius:5px"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:13pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2.5mm 3mm;align-self:flex-start">03</div><div style="font-size:11pt;font-weight:700;color:#1c4b42">Weg wählen</div><div style="font-size:10pt;line-height:1.55">Home Line für die Eigenanwendung. Pro Line über einen zertifizierten Fachbetrieb.</div></div>
+<div style="display:flex;flex-direction:column;gap:3mm"><img loading="lazy" decoding="async" src="uploads/feuchte-waende-selbst-sanieren.webp" alt="" style="height:34mm;width:100%;object-fit:cover;display:block;border-radius:5px"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:13pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2.5mm 3mm;align-self:flex-start">04</div><div style="font-size:11pt;font-weight:700;color:#1c4b42">Ausführen</div><div style="font-size:10pt;line-height:1.55">Systemtreu ausführen oder ausführen lassen — und danach dauerhaft geschützt erhalten.</div></div>
+</div>
+<div style="margin-top:auto;border-radius:5px;background:#b4e717;padding:6mm"><div style="display:flex;align-items:center;gap:2mm;margin-bottom:2.5mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/hammer.svg') no-repeat center/contain"></span></span><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:8pt;letter-spacing:0.06em;text-transform:uppercase;color:#1c4b42">Profi-Tipp</span></div><div style="font-size:11pt;line-height:1.45;color:#1c4b42">Bei unklarer Ursache, Schimmel oder großen Flächen: Einschätzung durch einen zertifizierten BKM-Fachbetrieb einholen.</div></div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:0 0 23.5mm;display:flex;flex-direction:column">
+<div style="height:130mm;border-radius:5px;background:repeating-linear-gradient(135deg,#dedbd4 0 7px,#e9e6df 7px 14px);display:flex;align-items:flex-end;padding:5mm;box-sizing:border-box"><span style="font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a;border-radius:5px;background:#f6f5f2;padding:2mm 3mm;display:none">BILD</span><img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-sanierter-keller-ergebnis.webp" alt="" style="object-position:right bottom;width:210mm;height:130mm;object-fit:cover;display:block;margin:-5mm"></div>
+<div style="padding:10mm 18mm 0;display:flex;flex-direction:column;gap:6mm">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#4daf46">Fachbetriebsnetzwerk</div>
+<h3 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:18pt;line-height:1.08;letter-spacing:-0.03em;color:#1c4b42">Zertifizierte<br>BKM-Fachbetriebe</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5mm;padding:5mm 0;border-top:.7mm solid #1c4b42;border-bottom:.35mm solid #e3e1dc">
+<div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:17pt;color:#1c4b42;line-height:1">Build</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;margin-top:1.5mm">Schutz aufbauen</div></div>
+<div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:17pt;color:#1c4b42;line-height:1">Maintain</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;margin-top:1.5mm">dauerhaft erhalten</div></div>
+<div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:17pt;color:#1c4b42;line-height:1">Keep</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;margin-top:1.5mm">Substanz bewahren</div></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Fachbetriebe unterscheiden sich nicht darüber, dass „ihr Produkt besser“ ist, sondern darüber, dass sie komplexe Schäden sicherer, schneller und reproduzierbarer umsetzen.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">BKM stützt das über Systemlösungen, Schulungen, Herstelleranbindung, Gebietsschutz und den zertifizierten Partnerstatus.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Schritt-für-Schritt + Profi-Tipp · Referenz</div>
+</div>
+
+<div id="richtung-system" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">richtung-system</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">System</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Farbfelder als Leitsystem, 4-Spalten-Modul, textgeführt mit wenig Bild. Datenblattnah, für Planer und Fachbetriebe. Titel = Titelblatt-Variante 3.</span>
+</div>
+
+<div data-screen-label="1c · Titel + Rückseite" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column;gap:8mm">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a">Kontakt und Service</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:.35mm solid #e3e1dc">
+<div style="padding:6mm 5mm 6mm 0;border-bottom:.35mm solid #e3e1dc;border-right:.35mm solid #e3e1dc"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:2mm;display:flex;align-items:center;gap:2mm"><span style="width:9mm;height:9mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:5.5mm;height:5.5mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/map-pin.svg') no-repeat center/contain"></span></span>Zentrale</div><div style="font-size:10.5pt;line-height:1.55">BKM.Mannesmann AG<br>Wideystraße 23<br>59174 Kamen<br>Deutschland</div></div>
+<div style="padding:6mm 0 6mm 5mm;border-bottom:.35mm solid #e3e1dc"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:2mm;display:flex;align-items:center;gap:2mm"><span style="width:9mm;height:9mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:5.5mm;height:5.5mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/chat-centered-text.svg') no-repeat center/contain"></span></span>Kontakt</div><div style="font-size:10.5pt;line-height:1.55">+49 2307 990 340<br>info@bkm-mannesmann.de<br>bkm-mannesmann.de</div></div>
+<div style="padding:6mm 5mm 6mm 0;border-bottom:.35mm solid #e3e1dc;border-right:.35mm solid #e3e1dc"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:2mm;display:flex;align-items:center;gap:2mm"><span style="width:9mm;height:9mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:5.5mm;height:5.5mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/house.svg') no-repeat center/contain"></span></span>Home Line</div><div style="font-size:10.5pt;line-height:1.55">Novusan, NovuSticks, NovuProtect, NovuShield — für die sichere Eigenanwendung.</div></div>
+<div style="padding:6mm 0 6mm 5mm;border-bottom:.35mm solid #e3e1dc"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:2mm;display:flex;align-items:center;gap:2mm"><span style="width:9mm;height:9mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:5.5mm;height:5.5mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/certificate.svg') no-repeat center/contain"></span></span>Pro Line</div><div style="font-size:10.5pt;line-height:1.55">Verarbeitung durch zertifizierte BKM-Fachbetriebe.</div></div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2mm">
+<div style="height:22mm;border-radius:5px;background:#4daf46"></div><div style="height:22mm;border-radius:5px;background:#287d4b"></div><div style="height:22mm;border-radius:5px;background:#1c4b42"></div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end">
+<img loading="lazy" decoding="async" src="assets/logos/bkm-logo-stonegrey-puregreen.svg" alt="BKM" style="width:42mm;display:block">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;text-align:right">Ausgabe 01 · 2026</div>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;position:relative;overflow:hidden">
+<div style="position:absolute;left:0;top:0;width:210mm;height:118.125mm;background:#1c4b42 url('uploads/a4-texture-deep-green-3.png') center top/cover no-repeat"></div>
+<img loading="lazy" decoding="async" src="uploads/bkm-fachbetriebs-kunde-sucht-hilfe-beifeuchteschaden.webp" alt="" style="object-position:right bottom;position:absolute;left:0;top:118.125mm;width:210mm;height:178.875mm;object-fit:cover;display:block">
+<h1 style="position:absolute;left:18mm;top:18mm;width:132mm;margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:30pt;line-height:1.25;letter-spacing:0;color:#fff">Feuchtigkeit hat Hausverbot</h1>
+<div style="position:absolute;left:18mm;top:52.33mm;width:132mm;font-family:'Unbounded',sans-serif;font-weight:900;font-size:12pt;line-height:1.3;letter-spacing:0;color:#b4e717">Zwei Wege. Ein Ziel: dauerhaft trockene Wände.</div>
+<p style="position:absolute;left:18mm;top:58.68mm;width:120mm;margin:0;font-size:12pt;line-height:1.25;letter-spacing:-0.015em;color:rgba(255,255,255,.82)">Orientierung, Home Line, Pro Line. Der Überblick für Eigentümer, Planer und Fachbetriebe.</p>
+<img loading="lazy" decoding="async" src="assets/logos/bkm-logo-white-puregreen.svg" alt="BKM" style="position:absolute;left:18mm;top:89.97mm;width:42mm;display:block">
+<div style="position:absolute;right:0;top:117.6mm;width:10mm;height:10mm;background:#1c4b42 url('uploads/a4-texture-deep-green-3.png') right bottom/cover no-repeat"></div>
+<img loading="lazy" decoding="async" src="assets/keyvisual/keyvisual-on-light.svg" alt="" style="position:absolute;right:0;top:102.416mm;width:42mm;height:99.57mm">
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">U4 Rückseite · U1 Titel (Titelblatt-Spezifikation Repo)</div>
+
+<div data-screen-label="1c · Vorwort + Inhaltsverzeichnis" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid #1c4b42;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42"><span>00 · Vorwort</span><span>02</span></div>
+<h2 style="margin:10mm 0 6mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.12;letter-spacing:-0.025em;color:#1c4b42;max-width:120mm">Erst verstehen. Dann entscheiden.</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Feuchtigkeit im Haus verändert Räume, greift Substanz an, mindert Wert und nimmt Sicherheit. Sie stellt Eigentümer vor eine Entscheidung: selbst handeln oder professionelle Hilfe holen.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">BKM MANNESMANN macht diese Entscheidung klarer. Diese Broschüre führt durch beide Wege: selbst sanieren mit der Home Line oder sanieren lassen durch einen zertifizierten BKM-Fachbetrieb.</p>
+</div>
+<div style="margin-top:8mm;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:15pt;color:#1c4b42;line-height:1">01</div><div style="font-size:9.5pt;line-height:1.45;margin-top:2mm;color:#1c4b42">Schaden einordnen</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:15pt;color:#1c4b42;line-height:1">02</div><div style="font-size:9.5pt;line-height:1.45;margin-top:2mm;color:#1c4b42">Ursache prüfen</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:15pt;color:#1c4b42;line-height:1">03</div><div style="font-size:9.5pt;line-height:1.45;margin-top:2mm;color:#1c4b42">Weg wählen</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:15pt;color:#1c4b42;line-height:1">04</div><div style="font-size:9.5pt;line-height:1.45;margin-top:2mm;color:#1c4b42">Ausführen</div></div>
+</div>
+<div style="margin-top:auto;display:flex;align-items:center;gap:5mm;padding-top:6mm;border-top:.35mm solid #e3e1dc"><img loading="lazy" decoding="async" src="uploads/fachbetrieb-partner-standard.webp" alt="" style="width:22mm;height:22mm;object-fit:cover;display:block;border-radius:5px"><div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">Michael Salaw</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:9pt;letter-spacing:0.08em;text-transform:uppercase;color:#8a8a8a">Vorsitzender des Vorstands</div></div></div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid #1c4b42;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42"><span>Inhalt</span><span>03</span></div>
+<div style="margin-top:10mm;display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#1c4b42;padding:6mm;display:flex;flex-direction:column;justify-content:space-between;height:52mm;box-sizing:border-box"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#b4e717">01</div><div><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:11pt;line-height:1.2;color:#fff">Feuchtigkeit verstehen</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:rgba(255,255,255,.7);margin-top:2mm">Seite 04</div></div></div>
+<div style="border-radius:5px;background:#287d4b;padding:6mm;display:flex;flex-direction:column;justify-content:space-between;height:52mm;box-sizing:border-box"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#b4e717">02</div><div><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:11pt;line-height:1.2;color:#fff">Orientierung und Entscheidung</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:rgba(255,255,255,.7);margin-top:2mm">Seite 10</div></div></div>
+<div style="border-radius:5px;background:#4daf46;padding:6mm;display:flex;flex-direction:column;justify-content:space-between;height:52mm;box-sizing:border-box"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#1c4b42">03</div><div><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:11pt;line-height:1.2;color:#fff">Zwei Wege. Ein Ziel.</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:rgba(255,255,255,.85);margin-top:2mm">Seite 16</div></div></div>
+<div style="border-radius:5px;background:#b4e717;padding:6mm;display:flex;flex-direction:column;justify-content:space-between;height:52mm;box-sizing:border-box"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#1c4b42">04</div><div><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:11pt;line-height:1.2;color:#1c4b42">Home Line und Pro Line</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:#1c4b42;margin-top:2mm">Seite 24</div></div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:6mm;display:flex;flex-direction:column;justify-content:space-between;height:52mm;box-sizing:border-box"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#4daf46">05</div><div><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:11pt;line-height:1.2;color:#1c4b42">Fachbetriebsnetzwerk</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:#8a8a8a;margin-top:2mm">Seite 30</div></div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:6mm;display:flex;flex-direction:column;justify-content:space-between;height:52mm;box-sizing:border-box"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#4daf46">06</div><div><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:11pt;line-height:1.2;color:#1c4b42">Kontakt und Service</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9pt;color:#8a8a8a;margin-top:2mm">Seite 36</div></div></div>
+</div>
+<div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.08em;color:#8a8a8a;line-height:1.7">Farbcodierung der Kapitel: Deep Green → Pure Green → Lime.<br>Die Farbe wiederholt sich im Kolumnentitel jeder Innenseite.</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Vorwort · Inhaltsverzeichnis (Farbleitsystem)</div>
+
+<div data-screen-label="1c · Kapitel-Opener + Fließtext" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:0;display:flex;flex-direction:column">
+<div style="background:#4daf46;flex:none;height:170mm;padding:26.7mm 18mm 10mm;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42">Kapitel 03</span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;color:#1c4b42">16</span></div>
+<h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:24pt;line-height:1.1;letter-spacing:-0.03em;color:#fff;max-width:140mm">Zwei Wege. Ein Ziel.</h2>
+</div>
+<div style="padding:10mm 18mm 23.5mm;display:flex;flex-direction:column;gap:6mm;flex:1">
+<p style="margin:0;font-size:12pt;line-height:1.4;color:#1c4b42;max-width:140mm">Home Line und Pro Line sind keine Qualitätsleiter. Der Unterschied liegt in Anwendung und Werkzeug.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2mm;margin-top:auto">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:2mm">3.1</div><div style="font-size:10pt;line-height:1.45;color:#1c4b42">Home Line</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:2mm">3.2</div><div style="font-size:10pt;line-height:1.45;color:#1c4b42">Pro Line</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:2mm">3.3</div><div style="font-size:10pt;line-height:1.45;color:#1c4b42">Fachbetrieb</div></div>
+</div>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid #4daf46;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42"><span>03.1 · Home Line</span><span>17</span></div>
+<h3 style="margin:9mm 0 6mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:15pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">Der Weg richtet sich nach dem Schaden</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Eine Eigenanwendung ist geeignet, wenn das Schadensbild klar eingrenzbar ist, die Anwendung verständlich und sicher möglich ist und kein komplexer Wasserdruck oder struktureller Schaden vorliegt.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Ein zertifizierter BKM-Fachbetrieb ist empfohlen, wenn die Ursache unklar ist, mehrere Schadensbilder auftreten, Schimmel oder starke Durchfeuchtung bestehen oder größere Flächen betroffen sind.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Home Line und Pro Line sind keine Stufen von gut zu besser. Der Unterschied liegt in Anwendung, Werkzeug, Erfahrung und Ausführungsweg — nicht im Qualitätsanspruch.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Die Home Line ist anwendungsfertig: Schritt-für-Schritt-Anleitung, ohne Spezialausrüstung. Die Pro Line ist für geschulte Verarbeiter mit passendem Spezialwerkzeug angelegt.</p>
+</div>
+<div style="margin-top:7mm;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:14pt;color:#1c4b42;line-height:1">4</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;margin-top:2mm">Systeme Home Line</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:14pt;color:#1c4b42;line-height:1">3</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;margin-top:2mm">Systeme Pro Line</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:14pt;color:#1c4b42;line-height:1">0</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;margin-top:2mm">Qualitätsgefälle</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:14pt;color:#1c4b42;line-height:1">2</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;margin-top:2mm">Wege, ein Ziel</div></div>
+</div>
+<div style="margin-top:auto;border-radius:5px;background:#1c4b42;padding:6mm"><div style="display:flex;align-items:center;gap:2mm;margin-bottom:2.5mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#287d4b;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/drop-half.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717">Merksatz</span></div><div style="font-size:11pt;line-height:1.45;color:#fff">Der Weg richtet sich nach Schadensbild, Anspruch und Situation. Das Ziel bleibt gleich.</div></div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Kapitel-Opener (Farbfeld) · Fließtext + Kennzahlen</div>
+
+<div data-screen-label="1c · Text+Bild + Tabelle" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid #4daf46;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42"><span>03.1 · Home Line</span><span>18</span></div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+<div style="height:80mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#f6f5f2 6px 12px);display:flex;align-items:flex-end;padding:4mm;box-sizing:border-box"><span style="font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a;background:#fff;padding:2mm;display:none">BILD</span><img loading="lazy" decoding="async" src="uploads/magnific_nano-banana-2-halbnah-san_3GXw9NsREY.png" alt="" style="width:calc(100% + 8mm);height:80mm;object-fit:cover;display:block;margin:-4mm;border-radius:5px"></div>
+<div style="height:80mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#f6f5f2 6px 12px);display:flex;align-items:flex-end;padding:4mm;box-sizing:border-box"><span style="font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a;background:#fff;padding:2mm;display:none">BILD</span><img loading="lazy" decoding="async" src="uploads/trockene-waende-mit-novusan.webp" alt="" style="object-position:right bottom;width:calc(100% + 8mm);height:80mm;object-fit:cover;display:block;margin:-4mm;border-radius:5px"></div>
+</div>
+<div style="margin-top:3mm;font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a">Home Line: drucklose Anwendung ohne Spezialgerät. Pro Line: gerätegestützte Verarbeitung.</div>
+<h3 style="margin:9mm 0 5mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:15pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">Die Line-Logik in der Praxis</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Die Line codiert Anwendungssicherheit und Werkzeugbedarf, nicht Stärke oder Gebindegröße. Novusan ist auch im größeren Gebinde eine Home-Line-Anwendung.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Pro-Line-Anwendungen verlangen Spezialwerkzeug — etwa ein Injektionsgerät oder eine Druckluftspritze mit Lanze.</p>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid #4daf46;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42"><span>03 · Line-Matrix</span><span>19</span></div>
+<h3 style="margin:9mm 0 6mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:15pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">Line-Matrix</h3>
+<div style="display:grid;grid-template-columns:46mm 42mm 24mm 26mm 30mm;width:174mm;font-size:9.5pt;gap:1mm">
+<div style="border-radius:5px;background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm">Produkt</div>
+<div style="border-radius:5px;background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm">Anwendung</div>
+<div style="border-radius:5px;background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm">Werkzeug</div>
+<div style="border-radius:5px;background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm">Line</div>
+<div style="border-radius:5px;background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm">Bezug</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-weight:700;color:#1c4b42">Novusan</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm">drucklose Mauerwerksinjektion</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm">ohne Spezialgerät</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Home Line</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Shop</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-weight:700;color:#1c4b42">NovuSticks</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm">Fugenanwendung</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm">ohne Spezialgerät</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Home Line</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Shop</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-weight:700;color:#1c4b42">NovuProtect</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm">Kondensations- und Schimmelschutz</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm">Pinsel oder Rolle</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Home Line</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Shop</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-weight:700;color:#1c4b42">BKM HZ-C</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm">gerätegestützte Injektion</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm">Injektionsgerät</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Pro Line</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Fachbetrieb</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-weight:700;color:#1c4b42">BKM FBM</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm">Systemmörtel im Verbund</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm">Spezialwerkzeug</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Pro Line</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:3.5mm 2.5mm;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Fachbetrieb</div>
+</div>
+<div style="margin-top:4mm;font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a">Line-Zuordnung nach Anwendung und Werkzeugbedarf — kein Qualitätsgefälle zwischen Home Line und Pro Line.</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#b4e717;padding:5mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#1c4b42;margin-bottom:2mm">Home Line</div><div style="font-size:10pt;line-height:1.45;color:#1c4b42">Novusan, NovuSticks, NovuProtect, NovuShield — anwendungsfertig, ohne Spezialgerät.</div></div>
+<div style="border-radius:5px;background:#1c4b42;padding:5mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#b4e717;margin-bottom:2mm">Pro Line</div><div style="font-size:10pt;line-height:1.45;color:#fff">BKM HZ-C, BKM VK Pro, BKM FBM — Fachverarbeitung mit Spezialwerkzeug.</div></div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Text + Bild · Tabelle (Farbfeld-Raster)</div>
+
+<div data-screen-label="1c · Schritt-für-Schritt + Referenz" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid #b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42"><span>04 · Home Line und Pro Line</span><span>26</span></div>
+<h3 style="margin:9mm 0 6mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:15pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">In vier Schritten zum passenden Weg</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-schadensanalyse-abplatzender-putz.webp" alt="" style="object-position:right bottom;height:26mm;width:100%;object-fit:cover;display:block;border-radius:5px"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2mm 2.5mm;align-self:flex-start">01</div><div style="font-size:11pt;font-weight:700;color:#1c4b42">Schaden einordnen</div><div style="font-size:9.5pt;line-height:1.5">Was ist sichtbar? Feuchte Wand, abblätternder Putz, Schimmel oder modriger Geruch — beschreibe das Schadensbild so genau wie möglich.</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><img loading="lazy" decoding="async" src="uploads/magnific_nano-banana-2-halbnah-san_3GXw9NsREY.png" alt="" style="height:26mm;width:100%;object-fit:cover;display:block;border-radius:5px"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2mm 2.5mm;align-self:flex-start">02</div><div style="font-size:11pt;font-weight:700;color:#1c4b42">Ursache prüfen</div><div style="font-size:9.5pt;line-height:1.5">Ist die Ursache klar eingrenzbar? Sonst professionell prüfen lassen.</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><img loading="lazy" decoding="async" src="uploads/trockene-waende-mit-novusan.webp" alt="" style="object-position:right bottom;height:26mm;width:100%;object-fit:cover;display:block;border-radius:5px"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2mm 2.5mm;align-self:flex-start">03</div><div style="font-size:11pt;font-weight:700;color:#1c4b42">Weg wählen</div><div style="font-size:9.5pt;line-height:1.5">Home Line für die Eigenanwendung. Pro Line über einen zertifizierten Fachbetrieb.</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><img loading="lazy" decoding="async" src="uploads/feuchte-waende-selbst-sanieren.webp" alt="" style="height:26mm;width:100%;object-fit:cover;display:block;border-radius:5px"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1;color:#b4e717;background:#1c4b42;border-radius:5px;padding:2mm 2.5mm;align-self:flex-start">04</div><div style="font-size:11pt;font-weight:700;color:#1c4b42">Ausführen und erhalten</div><div style="font-size:9.5pt;line-height:1.5">Systemtreu ausführen oder ausführen lassen — und danach dauerhaft geschützt erhalten.</div></div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:22mm 1fr;gap:0"><div style="background:#b4e717;border-radius:5px 0 0 5px"></div><div style="border-radius:5px;background:#1c4b42;padding:6mm"><div style="display:flex;align-items:center;gap:2mm;margin-bottom:2.5mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#287d4b;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/hammer.svg') no-repeat center/contain"></span></span><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:8pt;letter-spacing:0.06em;text-transform:uppercase;color:#b4e717">Profi-Tipp</span></div><div style="font-size:10.5pt;line-height:1.5;color:#fff">Bei unklarer Ursache, mehreren Schadensbildern, starker Durchfeuchtung oder großen Flächen: Einschätzung durch einen zertifizierten BKM-Fachbetrieb einholen.</div></div></div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid #4daf46;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42"><span>05 · Fachbetriebsnetzwerk</span><span>31</span></div>
+<div style="margin-top:9mm;height:72mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#f6f5f2 6px 12px);display:flex;align-items:flex-end;padding:4mm;box-sizing:border-box"><span style="font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a;background:#fff;padding:2mm 3mm;display:none">BILD</span><img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-sanierter-keller-ergebnis.webp" alt="" style="object-position:right bottom;width:calc(100% + 8mm);height:72mm;object-fit:cover;display:block;margin:-4mm;border-radius:5px"></div>
+<h3 style="margin:8mm 0 5mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:15pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">Zertifizierte BKM-Fachbetriebe</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:4mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a">Schulung</div><div style="font-size:9.5pt;margin-top:1.5mm;color:#1c4b42">BKM-Systemschulung</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:4mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a">Systemtreue</div><div style="font-size:9.5pt;margin-top:1.5mm;color:#1c4b42">BKM-Systemlösungen</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:4mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a">Status</div><div style="font-size:9.5pt;margin-top:1.5mm;color:#1c4b42">Zertifizierter Partner</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:4mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a">Gebiet</div><div style="font-size:9.5pt;margin-top:1.5mm;color:#1c4b42">Gebietsschutz</div></div>
+</div>
+<div style="margin-top:6mm;display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Fachbetriebe unterscheiden sich nicht darüber, dass „ihr Produkt besser“ ist, sondern darüber, dass sie komplexe Schäden sicherer, schneller und reproduzierbarer umsetzen.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">BKM stützt das über exklusive Systemlösungen, Schulungen, Herstelleranbindung, Gebietsschutz und den zertifizierten Partnerstatus.</p>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#1c4b42;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:14pt;color:#b4e717;line-height:1">Build</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:2mm">Schutz aufbauen</div></div>
+<div style="border-radius:5px;background:#287d4b;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:14pt;color:#fff;line-height:1">Keep</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:2mm">Substanz bewahren</div></div>
+<div style="border-radius:5px;background:#4daf46;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:14pt;color:#fff;line-height:1">Maintain</div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-top:2mm">dauerhaft erhalten</div></div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Schritt-für-Schritt + Profi-Tipp · Referenz</div>
+</div>
+
+</div>
+</section>
+</x-dc>
+</body>
+</html>

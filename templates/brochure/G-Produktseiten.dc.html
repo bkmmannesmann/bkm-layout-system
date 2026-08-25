@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+html,body{margin:0;padding:0;background:#e9e7e1}
+body{font-family:'TT Norms Pro',system-ui,sans-serif;color:#494949;-webkit-font-smoothing:antialiased}
+a{color:#287d4b;text-decoration:none}
+a:hover{color:#1c4b42;text-decoration:underline}
+</style>
+</helmet>
+
+
+<div style="padding:28px 60px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+<a href="Bibliothek.dc.html" style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:-0.01em;color:#1c4b42;text-decoration:none;margin-right:12px">Bibliothek</a>
+<a href="A-Titelblaetter.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">A · Titelblaetter</a>
+<a href="B-Rahmenseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">B · Rahmenseiten</a>
+<a href="C-Navigation.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">C · Navigation</a>
+<a href="D-Textstrecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">D · Textstrecken</a>
+<a href="E-Strecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">E · Strecken</a>
+<a href="F-Verfahren.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">F · Verfahren</a>
+<a href="G-Produktseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#1c4b42;color:#b4e717">G · Produktseiten</a>
+<a href="H-Fachbetrieb.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">H · Fachbetrieb</a>
+</div>
+
+<section style="padding:60px 60px 120px;display:flex;flex-direction:column;gap:48px">
+
+<div style="max-width:900px;display:flex;flex-direction:column;gap:14px">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">G · Produktkatalog</div>
+<h1 style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:44px;line-height:1.05;letter-spacing:-0.02em;color:#1c4b42;margin:0">Produktseiten</h1>
+<p style="margin:0;font-size:17px;line-height:1.6;max-width:70ch">Produkt-Einzelseite mit Randspalte für Art.-Nr. und Linie, Sortimentsraster mit Preisen, Anwendungsmatrix Schadensbild zu Produkt, Systemseite mit Zubehör und Gefahrenhinweisen.</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:120px">
+
+<div id="produkt-seite" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">produkt-seite</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Produktseite</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Links Produkt und Nutzen, rechts Gebinde, Kennwerte und Anwendung. Randspalte trägt Art.-Nr., Linie und Einsatzbereich.</span>
+</div>
+
+<div data-screen-label="3a · Produkt Novusan" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>Horizontalsperre · Injektion</span><span>24</span></div>
+<div style="margin-top:11mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="display:flex;flex-direction:column;gap:4mm">
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:1.5mm">Art.-Nr.</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:11pt;color:#1c4b42">114137-01</div></div>
+<div style="height:.35mm;background:#e3e1dc"></div>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:1.5mm">Linie</div><div style="font-size:9.5pt;line-height:1.5">Home Line — für die Eigenanwendung freigegeben</div></div>
+<div style="height:.35mm;background:#e3e1dc"></div>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:1.5mm">Einsatzort</div><div style="font-size:9.5pt;line-height:1.5">Kellerwand, Garage, Wohnraum</div></div>
+<div style="height:.35mm;background:#e3e1dc"></div>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:1.5mm">Schadensbild</div><div style="font-size:9.5pt;line-height:1.5">Aufsteigende Feuchtigkeit, seitliche Feuchtigkeit</div></div>
+<div style="height:.35mm;background:#e3e1dc"></div>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:1.5mm">Verarbeitung</div><div style="font-size:9.5pt;line-height:1.5">Injizieren, drucklos</div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6mm">
+<h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42">Novusan Mauerwerkinjektion</h2>
+<p style="margin:0;font-size:13pt;line-height:1.4;color:#1c4b42">Eine hochwirksame Horizontalsperre, die du selbst ins Mauerwerk einbringst — ohne Ausschachten und ohne Spezialgeräte.</p>
+<div style="height:104mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#eeece6 6px 12px);display:flex;align-items:flex-end;padding:4mm;box-sizing:border-box"><span style="font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a;background:#fff;padding:2mm 3mm">PRODUKTBILD · Novusan Flasche 500 ml, freigestellt</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Novusan verteilt sich selbst im Porenraum und wirkt auch in stark durchnässtem Mauerwerk bis 99 Prozent. Es bleibt atmungsaktiv: Neue Feuchtigkeit wird geblockt, bestehende kann entweichen.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Geeignet für alle gängigen mineralischen Mauerwerke, von Ziegel bis Bruchstein. Zum Verschließen der Bohrkanäle gehört der BKM FBM Füll- und Bohrlochmörtel ins System.</p>
+</div>
+</div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:end">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;margin-bottom:1.5mm">Bedarf</div><div style="font-size:9.5pt;line-height:1.5;color:#1c4b42">5 Flaschen = 1 m Wand</div></div>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Zum Produkt gehören eine Schritt-für-Schritt-Anleitung, Ratgeber mit Profi-Tipps und ein Live-Chat-Support rund um die Uhr. Den genauen Bedarf ermittelt der Mengenrechner im Shop.</p>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>25</span><span>Novusan Mauerwerkinjektion</span></div>
+<div style="margin-top:11mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.7">Gebinde<br>—<br>500 ml<br>Flasche</div>
+<div style="display:flex;flex-direction:column;gap:0">
+<h3 style="margin:0 0 5mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:14pt;line-height:1.2;letter-spacing:-0.02em;color:#1c4b42">Gebinde und Bedarf</h3>
+<div style="display:grid;grid-template-columns:1fr 30mm 26mm;font-size:10pt">
+<div style="border-radius:5px 0 0 5px;background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm">Gebinde</div>
+<div style="background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm;text-align:right">Reichweite</div>
+<div style="border-radius:0 5px 5px 0;background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm;text-align:right">Preis</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">1 × 500 ml Flasche</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">0,2 m</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">19,99 €</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">5 × 500 ml</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">1 m</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">auf Anfrage</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">10 × 500 ml</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">2 m</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">auf Anfrage</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">25 × 500 ml</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">5 m</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">auf Anfrage</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">Nachfüllkanister 10 l</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">4 m</div>
+<div style="padding:3.5mm 2.5mm;border-bottom:.35mm solid #e3e1dc;text-align:right;font-family:'TT Norms Pro',sans-serif;font-size:9pt">299,99 €</div>
+</div>
+<div style="margin-top:3mm;font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a">Preise inkl. MwSt., Stand der Ausgabe. Reichweite als Richtwert bei 30 cm Wandstärke.</div>
+</div>
+</div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.7">Anwendung<br>—<br>Drei<br>Schritte</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:12pt;line-height:1;color:#1c4b42">01</div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">Vorbereiten</div><div style="font-size:9.5pt;line-height:1.5">Bohrreihe anzeichnen, Löcher setzen, Bohrmehl ausblasen.</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:12pt;line-height:1;color:#1c4b42">02</div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">Einsetzen</div><div style="font-size:9.5pt;line-height:1.5">Flasche kopfüber ins Bohrloch. Das Material verteilt sich selbst.</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:12pt;line-height:1;color:#1c4b42">03</div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">Verschließen</div><div style="font-size:9.5pt;line-height:1.5">Nach zwei Wochen mit BKM FBM Füll- und Bohrlochmörtel schließen.</div></div>
+</div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:end">
+<img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-messergebnis-schadensanalyse.webp" alt="" style="width:38mm;height:38mm;object-fit:cover;border-radius:5px;display:block">
+<div style="border-radius:5px;background:#1c4b42;padding:6mm;display:flex;flex-direction:column;gap:3mm">
+<div style="display:flex;align-items:center;gap:3mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#287d4b;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/warning.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717">Nicht geeignet</span></div>
+<div style="font-size:10.5pt;line-height:1.5;color:#fff">Für WU-Beton und nicht-mineralische Baustoffe. Bei Hohlkammersteinen ist eine durchgehende Lagerfuge erforderlich.</div>
+</div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Produkt, Gebinde, Anwendung, Grenzen</div>
+</div>
+
+<div id="produkt-sortiment" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">produkt-sortiment</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Sortiment</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Produktraster mit Art.-Nr. und Preis, gegenüber die Anwendungsmatrix Schadensbild → Produkt → Linie.</span>
+</div>
+
+<div data-screen-label="3b · Sortiment und Anwendungsmatrix" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>Sortiment Horizontalsperre</span><span>28</span></div>
+<h2 style="margin:11mm 0 7mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42;max-width:150mm">Das System auf einen Blick</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm">
+<div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#4daf46">114137-01 · Home Line</div>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">Novusan Mauerwerkinjektion</div>
+<div style="font-size:9.5pt;line-height:1.5">Selbstverteilende Injektionsflüssigkeit für die Horizontalsperre. Wirkt bis 99 % Durchfeuchtung.</div>
+<div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">19,99 € · 500 ml</div>
+</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm">
+<div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#4daf46">1014107-01 · Home Line</div>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">Novusan Set</div>
+<div style="font-size:9.5pt;line-height:1.5">Komplett-Set für rund 1 m Wand: 5 Flaschen, Bohrlochmörtel, Schutzausrüstung, Anleitung.</div>
+<div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">131,99 € · 2,5 l</div>
+</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm">
+<div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#4daf46">1413139-01 · Home Line</div>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">NovuSticks</div>
+<div style="font-size:9.5pt;line-height:1.5">Getränkte Faserstäbchen für Mauerwerksfugen, Wandstärken von 12 bis 48 cm. Kein Mischen.</div>
+<div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">37,98 € · 10 Stück</div>
+</div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:3mm">
+<div style="height:34mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#fff 6px 12px)"></div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#4daf46">125137-01 · Pro Line</div>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">BKM HZ-C Injektionscreme</div>
+<div style="font-size:9.5pt;line-height:1.5">Silanbasierte, ölfreie Creme für stark durchfeuchtetes Mauerwerk bis 95 %. WTA-geprüft.</div>
+<div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">31,99 € · 600 ml</div>
+</div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:4mm">
+<div style="border-radius:5px;background:#1c4b42;padding:5mm;display:flex;flex-direction:column;gap:2mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#b4e717">315264-01 · Systemergänzer</div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#fff">BKM FBM Füll- und Bohrlochmörtel</div><div style="font-size:9.5pt;line-height:1.5;color:rgba(255,255,255,.82)">Kapillaraktiv, diffusionsoffen, schwindfrei. Mischverhältnis 0,2–0,3 l Wasser je kg, belastbar nach 24 Stunden.</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#b4e717">7,98 €</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:2mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46">11272-01 · Großmenge</div><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.2;color:#1c4b42">Novusan Nachfüllkanister</div><div style="font-size:9.5pt;line-height:1.5">10 Liter inklusive Dosierhahn zum Befüllen der Leerflaschen — für lange Sperrzonen und große Flächen.</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:10pt;color:#1c4b42">299,99 € · 10 l</div></div>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>29</span><span>Anwendungsmatrix</span></div>
+<h2 style="margin:11mm 0 7mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42;max-width:150mm">Welches Produkt zu welchem Schaden</h2>
+<div style="display:grid;grid-template-columns:1fr 44mm 26mm 30mm;width:174mm;font-size:9.5pt">
+<div style="border-radius:5px 0 0 5px;background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm">Schadensbild</div>
+<div style="background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm">Produkt</div>
+<div style="background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm">Linie</div>
+<div style="border-radius:0 5px 5px 0;background:#1c4b42;color:#b4e717;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;padding:3mm 2.5mm">Verfahren</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">Aufsteigende Feuchtigkeit, Ziegel oder Kalksandstein</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc">Novusan</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Home</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Injizieren</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">Durchgehende Lagerfuge, saubere Fugenreihe</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc">NovuSticks</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Home</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Einsetzen</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">Stark durchfeuchtetes Mauerwerk bis 95 %</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc">BKM HZ-C Injektionscreme</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Pro</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Injizieren</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">Lange Sperrzonen, große Flächen</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc">Novusan Nachfüllkanister</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Home/Pro</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Injizieren</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">Bohrkanäle und Hohlräume verschließen</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc">BKM FBM</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Home/Pro</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Verfüllen</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-weight:700;color:#1c4b42">WU-Beton, nicht-mineralische Baustoffe</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc">kein Injektionsverfahren</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">—</div>
+<div style="padding:4mm 2.5mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-size:8.5pt">Beratung</div>
+</div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:1fr 1fr;gap:4mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><div style="display:flex;align-items:center;gap:3mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/house.svg') no-repeat center/contain"></span></span><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:9pt;letter-spacing:0.04em;text-transform:uppercase;color:#1c4b42">Home Line</span></div><div style="font-size:9.5pt;line-height:1.55">Für die Eigenanwendung freigegeben: klar begrenzter Schaden, zugängliche Wand, überschaubarer Aufwand.</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><div style="display:flex;align-items:center;gap:3mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/certificate.svg') no-repeat center/contain"></span></span><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:9pt;letter-spacing:0.04em;text-transform:uppercase;color:#1c4b42">Pro Line</span></div><div style="font-size:9.5pt;line-height:1.55">Verarbeitung durch zertifizierte BKM-Fachbetriebe. Kein Qualitätsgefälle — der Unterschied liegt im Anwendungsweg.</div></div>
+</div>
+<div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a">Die Matrix ersetzt keine Diagnose. Bei mehreren Ursachen oder unklarem Wandaufbau gilt: erst messen, dann entscheiden.</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Produktraster · Anwendungsmatrix</div>
+</div>
+
+<div id="produkt-system" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">produkt-system</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Systemseite</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Zubehör und Systemergänzer im Raster, gegenüber Grenzen, Gefahren- und Sicherheitshinweise auf Deep Green.</span>
+</div>
+
+<div data-screen-label="3c · System und Sicherheit" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>Zubehör und Systemergänzer</span><span>32</span></div>
+<h2 style="margin:11mm 0 7mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42;max-width:150mm">Was zum System gehört</h2>
+<div style="display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.7">Reihenfolge<br>—<br>Sperre<br>Verfüllen<br>Aufbau</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4mm">
+<div style="display:flex;flex-direction:column;gap:2mm"><div style="height:28mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#f6f5f2 6px 12px)"></div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#4daf46">315264-01</div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">BKM FBM Füll- und Bohrlochmörtel</div><div style="font-size:9.5pt;line-height:1.5">Verschließt Bohrkanäle und Hohlräume kraftschlüssig. Nicht geeignet für Gips- oder Lehmuntergründe.</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#1c4b42">7,98 €</div></div>
+<div style="display:flex;flex-direction:column;gap:2mm"><div style="height:28mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#f6f5f2 6px 12px)"></div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#4daf46">1611138-05</div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">Novusan Leerflasche, 5 Stück</div><div style="font-size:9.5pt;line-height:1.5">Mit Schraubverschlüssen und Auslauftüllen, mehrfach verwendbar. Zum Befüllen aus dem Kanister.</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#1c4b42">11,99 €</div></div>
+<div style="display:flex;flex-direction:column;gap:2mm"><div style="height:28mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#f6f5f2 6px 12px)"></div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#4daf46">21470137-01</div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">BKM OilGrip Handschuhe</div><div style="font-size:9.5pt;line-height:1.5">Nitril-beschichtet, griffig auch bei Nässe. Nicht für Schweißarbeiten oder aggressive Chemikalien.</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#1c4b42">5,00 €</div></div>
+<div style="display:flex;flex-direction:column;gap:2mm"><div style="height:28mm;border-radius:5px;background:repeating-linear-gradient(135deg,#e3e1dc 0 6px,#f6f5f2 6px 12px)"></div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;color:#4daf46">21490137-01</div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42">BKM Einweghandschuhe XL</div><div style="font-size:9.5pt;line-height:1.5">Nitril, latex- und puderfrei, 100 Stück je Box. Für Sanierungs- und Reinigungsarbeiten.</div><div style="font-family:'TT Norms Pro',sans-serif;font-size:9.5pt;color:#1c4b42">33,14 €</div></div>
+</div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:end">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;margin-bottom:1.5mm">Set</div><div style="font-size:9.5pt;line-height:1.5;color:#1c4b42">Alles für 1 m: Novusan Set, 131,99 €</div></div>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Das Novusan Set bündelt fünf Flaschen, ein Kilogramm Bohrlochmörtel mit Mischbehälter, Zollstock, Schutzbrille, Gehörschutz, Handschuhe und die Anleitung — ausreichend für rund einen Meter Wand.</p>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#1c4b42 url('uploads/a4-texture-deep-green-2.png') center/cover no-repeat;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid rgba(255,255,255,.35);font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717"><span>33</span><span>Grenzen und Sicherheit</span></div>
+<h2 style="margin:11mm 0 7mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#fff;max-width:150mm">Wo Eigenanwendung endet</h2>
+<div style="display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,.6);line-height:1.7">Hinweis<br>—<br>Vor der<br>Bestellung<br>prüfen</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.6;color:rgba(255,255,255,.82)">Novusan ist nicht geeignet für WU-Beton und nicht-mineralische Baustoffe. Bei Hohlkammersteinen ist eine durchgehende Lagerfuge erforderlich, sonst versickert das Material im Hohlraum.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6;color:rgba(255,255,255,.82)">Wirken mehrere Ursachen zusammen oder ist der Wandaufbau unklar, gehört die Sanierung in Fachhand. Ein zertifizierter BKM-Fachbetrieb beginnt mit der Messung, nicht mit dem Produkt.</p>
+</div>
+</div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,.6);line-height:1.7">Kennzeichnung<br>—<br>GHS08<br>Gesundheits-<br>gefahr</div>
+<div style="display:flex;flex-direction:column;gap:4mm">
+<div style="border-radius:5px;background:#b4e717;padding:5mm;display:flex;flex-direction:column;gap:2.5mm">
+<div style="display:flex;align-items:center;gap:3mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/warning.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42">Gefahrenhinweis</span></div>
+<div style="font-size:10.5pt;line-height:1.5;color:#1c4b42">H304 — Kann bei Verschlucken und Eindringen in die Atemwege tödlich sein. EUH066 — Wiederholter Kontakt kann zu spröder oder rissiger Haut führen.</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;font-size:9.5pt;line-height:1.6;color:rgba(255,255,255,.82)">
+<div>P101 Ist ärztlicher Rat erforderlich, Verpackung oder Kennzeichnungsetikett bereithalten.<br>P102 Darf nicht in die Hände von Kindern gelangen.<br>P301 + P310 Bei Verschlucken sofort Giftinformationszentrum oder Arzt anrufen.</div>
+<div>P331 Kein Erbrechen herbeiführen.<br>P405 Unter Verschluss aufbewahren.<br>P501 Inhalt und Behälter gemäß den behördlichen Vorschriften entsorgen.</div>
+</div>
+</div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:end">
+<img loading="lazy" decoding="async" src="uploads/fachbetrieb-partner-standard.webp" alt="" style="width:38mm;height:38mm;object-fit:cover;border-radius:5px;display:block">
+<div style="display:flex;flex-direction:column;gap:3mm">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717">Weiterführende Dokumente</div>
+<div style="font-size:10.5pt;line-height:1.55;color:#fff">Technisches Datenblatt, Verarbeitungsanleitung und Bohrtiefentabelle sind eigene Dokumente und liegen dem Produkt bei beziehungsweise stehen auf bkm-mannesmann.de zum Download.</div>
+</div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Zubehör · Grenzen und Gefahrenhinweise</div>
+</div>
+
+</div>
+</section>
+</x-dc>
+</body>
+</html>
