@@ -10,7 +10,8 @@ unabhängig vom Account. Bitte vor der ersten Änderung vollständig lesen.
 | `docs/LAYOUT-CONTRACT.md` | Maße, Typografie, Farben, Icons, Metadaten. Maschinell geprüft. |
 | `docs/REDAKTIONSSTANDARD.md` | Inhalt, Blockreihenfolge, Sprache, Pflichtkennwerte, Marker, Freigabe. |
 | `docs/TDS-WORKFLOW.md` | Ablauf von der Quellinformation bis zum Release-Build. |
-| `docs/BROSCHUERE-LAYOUT.md` | Dasselbe für den Broschüren-Innenteil: Raster, Typografie, Farben, Flächen, Seitentypen. Maschinell geprüft. |
+| `docs/BROSCHUERE-LAYOUT.md` | Broschüren, **Produktionsebene**: wie aus `content/*/content.json` über Jinja und WeasyPrint das Druck-PDF entsteht. Maschinell geprüft. |
+| `docs/BROSCHUERE-CANVAS.md` | Broschüren, **Design- und Abstimmungsebene**: die 30 Seitentypen in `templates/brochure/`, aus denen Layouts freigegeben werden. |
 
 Bei Widerspruch zwischen Code und diesen Dokumenten gewinnen die Dokumente. Wer eine Regel ändern
 will, ändert **erst** das Dokument, im selben Pull Request wie den Code.
@@ -69,7 +70,7 @@ Für einen Release zusätzlich das freigestellte Produkt-PNG unter
 
 ## Was ohne Rückfrage nicht geändert wird
 
-`templates/tds/`, `templates/pages/`, `design-system/`, `components/`, die vier Regeldokumente
+`templates/tds/`, `templates/pages/`, `design-system/`, `components/`, die fünf Regeldokumente
 und `scripts/validate_*.py`. Das sind Systemdateien. Inhaltliche Arbeit findet in
 `content/<ordner>/content.json` statt.
 

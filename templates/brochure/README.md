@@ -4,14 +4,20 @@ A4-Vorlagen für Imagebroschüren, Produktlinien- und Katalogbroschüren,
 Fachbetriebsprospekte und Verarbeitungsanleitungen.
 30 Vorlagen in acht Gruppen. Jede Datei öffnet direkt im Browser.
 
-Verbindlich ist `docs/BROSCHUERE-CONTRACT.md` — Maße, Typografie, Farben,
-Icon- und Texturregeln sowie die begründeten Abweichungen zum TDS-Vertrag.
+Verbindlich ist [`docs/BROSCHUERE-CANVAS.md`](../../docs/BROSCHUERE-CANVAS.md) — Maße,
+Typografie, Farben, Icon- und Texturregeln sowie die begründeten Abweichungen zum
+TDS-Vertrag.
+
+Diese Vorlagen sind die **Design- und Abstimmungsebene**. Druckfertige PDFs entstehen
+über die Pipeline in `templates/pages/`, geregelt in
+[`docs/BROSCHUERE-LAYOUT.md`](../../docs/BROSCHUERE-LAYOUT.md). Ein Layout wandert erst
+dorthin, wenn es hier freigegeben ist.
 
 ## Ablage im Repo
 
 ```
 templates/brochure/            9 .dc.html + support.js
-docs/BROSCHUERE-CONTRACT.md    Layoutvertrag
+docs/BROSCHUERE-CANVAS.md    Layoutvertrag
 assets/                        Logos, Keyvisual, Icons, Schriften
 uploads/                       Hero-Grafiken, Fotos, Texturen
 ```

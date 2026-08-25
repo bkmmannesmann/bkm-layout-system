@@ -1,4 +1,14 @@
-# Layoutvertrag Broschüre
+# Layoutvertrag Broschüre — Produktionspipeline
+
+**Zuständigkeit:** Dieses Dokument regelt die **Produktionsebene** — wie aus
+`content/*/content.json` über Jinja und WeasyPrint ein druckfertiges PDF entsteht.
+Die **Design- und Abstimmungsebene** regelt
+[`BROSCHUERE-CANVAS.md`](BROSCHUERE-CANVAS.md): dort liegen die 30 Seitentypen in
+`templates/brochure/`, aus denen Layouts ausgewählt und freigegeben werden, bevor
+sie hier gebaut werden.
+
+Beide Dokumente stehen nebeneinander; keines gewinnt über das andere. Wo ihre Maße
+auseinanderlaufen, steht das unter „Maßdifferenz zum Canvas".
 
 Regelt die Form des **Innenteils** von Produkt- und Unternehmensbroschüren. Für technische
 Datenblätter gilt stattdessen `LAYOUT-CONTRACT.md`; das Titelblatt regelt der Cover-Abschnitt
@@ -207,6 +217,71 @@ enthält `content.json` und sonst nichts.
 Flächen werden über die Namen aus „Flächen" gewählt, nicht über Farbwerte. Das ist derselbe
 Grundsatz wie beim Datenblatt: der Inhalt bestimmt, *was* auf der Seite steht, das Layoutsystem
 bestimmt, *wie* es aussieht.
+
+## Der Weg zum Druck
+
+Diese Pipeline erzeugt das Druck-PDF. Der Canvas erzeugt Abstimmungs-PDFs über den
+Browser; die gehen nicht in die Druckerei. Die Begründung steht in
+[`BROSCHUERE-CANVAS.md`](BROSCHUERE-CANVAS.md), Abschnitt „Zwei Druckwege".
+
+Für randabfallende Elemente — auf den Titelblättern laufen Hero-Grafik, Keyvisual und
+Foto bis an die Blattkante — setzt der Druck-Build `@page { bleed: 3mm; marks: crop cross; }`.
+Ohne Zugabe ist ein randabfallendes Motiv nicht druckbar.
+
+**Die CMYK-Konvertierung ist nachgelagert.** WeasyPrint schreibt RGB. Die Umwandlung nach
+PDF/X-4 mit dem Farbprofil der Druckerei erfolgt danach, über Ghostscript oder durch die
+Druckerei. Ein PDF aus `scripts/build_pages.py` ist die Vorstufe, **nicht** das
+druckfertige PDF/X — wer es als solches weitergibt, liefert RGB in einen CMYK-Prozess.
+
+## Maßdifferenz zum Canvas
+
+| Wert | Pipeline (`pages-spec.css`) | Canvas (`templates/brochure/`) |
+|:---|:---|:---|
+| Achse außen und innen | `18,0 mm` | `18 mm` — gleich |
+| Textbreite | `174,0 mm` | `174 mm` — gleich |
+| Kopfsteg | `20,4 mm` | `26,7 mm` |
+| Fußsteg | `25,0 mm` | `23,5 mm` |
+| Spaltenbreite | `55,4 mm` | `55 mm` |
+| Spaltensteg | `4,3 mm` | `4,6 mm` |
+| Marginalspalte | gibt es nicht | `38 mm`, Steg `6 mm` |
+| Radius | nicht geregelt | `5 px` |
+| Headline-Zeilenhöhe | `1,13` | `1,25` |
+| Sand White als Seitenfläche | zugelassen (`surface--sand`) | verboten |
+
+### Was die Herkunftsprüfung ergeben hat
+
+**`18 mm` ist belegt** und in beiden Systemen gleich: `--tds-axis: 18mm` in
+`templates/tds/template.css`, festgeschrieben in `LAYOUT-CONTRACT.md` als „die eine Achse".
+Kein Streitpunkt.
+
+**`20,4 mm` ist nicht belegt.** Der Wert steht ausschließlich in `pages-spec.css` und den
+davon abgeleiteten Dateien. Der Dateikopf nennt als Quelle eine Vermessung des Original-PDFs
+mit PyMuPDF — dieses PDF war nie im Repository, weder im Arbeitsbaum noch in der
+Git-Historie. Der anlegende Commit `94b81a8` führt keine Begründung. Eine rechnerische
+Herleitung gibt es nicht: `20,4 / 18 = 1,133` ergibt keine Proportion des Formats.
+Der Canvas-Wert `26,7 mm` stammt aus `docs/print-anwendungen.md` des Design-System-Repos
+und hat damit eine benennbare Quelle.
+
+**Die Spaltenrechnung der Pipeline geht nicht auf.** `3 × 55,4 + 2 × 4,3 = 174,8 mm`,
+deklariert sind `174,0 mm` — eine Differenz von `0,8 mm`. Im erzeugten PDF nachgemessen:
+Die Spalten starten bei `18,0 | 77,7 | 137,4 mm`, die dritte endet also bei `192,8 mm`,
+während der Satzspiegel bei `192,0 mm` endet. **Die dritte Spalte ragt 0,8 mm über den
+rechten Rand.** Die Canvas-Rechnung `3 × 55 + 2 × 4,6 = 174,2 mm` liegt mit `0,2 mm`
+deutlich näher; exakt wäre bei `174 mm` Textbreite und `4,6 mm` Steg eine Spalte von
+`54,933 mm`.
+
+Die Ausgabeprüfung in `build_pages.py` meldet den Überstand nicht, weil sie die
+Startposition jeder Zeile prüft und nicht ihr Ende. Diese Lücke wird zusammen mit der
+Maßentscheidung geschlossen — vorher würde sie den Build rot färben, ohne dass entschieden
+ist, welche Werte gelten sollen.
+
+### Stand
+
+Die Differenz ist **nicht aufgelöst**. Beide Systeme bleiben unverändert, bis darüber
+entschieden ist. Nach dem Rechercheergebnis spricht alles dafür, die Pipeline auf die
+Canvas-Maße nachzuziehen: `18 mm` ist ohnehin identisch, `20,4 mm` hat keine Quelle, und
+die Spaltenrechnung der Pipeline ist nachweislich fehlerhaft.
+
 
 ## Prüfung
 

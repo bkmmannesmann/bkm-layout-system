@@ -1,4 +1,14 @@
-# Layoutvertrag Broschüren
+# Broschüren-Canvas
+
+**Zuständigkeit:** Dieses Dokument regelt die **Design- und Abstimmungsebene** —
+die 30 Seitentypen in `templates/brochure/`, aus denen Layouts ausgewählt und
+freigegeben werden. Die **Produktionsebene** regelt
+[`BROSCHUERE-LAYOUT.md`](BROSCHUERE-LAYOUT.md): dort entstehen aus
+`content/*/content.json` über Jinja und WeasyPrint die druckfertigen PDFs.
+
+Ein Layout wandert erst in die Pipeline, wenn es hier freigegeben ist. Beide
+Dokumente stehen nebeneinander; keines gewinnt über das andere. Wo ihre Maße
+auseinanderlaufen, steht das unter „Maßdifferenz zur Pipeline".
 
 Gilt für A4-Broschüren: Imagebroschüren der BKM MANNESMANN AG, Produktlinien- und
 Katalogbroschüren, Fachbetriebsprospekte und Verarbeitungsanleitungen.
@@ -161,6 +171,99 @@ Drei Werte weichen bewusst ab. Sie werden **nicht** angeglichen:
 
 Übernommen wurden: Achse `18 mm`, Farbwerte, Haarlinie `#e3e1dc`, Phosphor Bold als
 lokale SVGs, Grundschriftgröße ohne seitenbezogene Verkleinerung.
+
+## Zwei Druckwege
+
+| Weg | Womit | Wofür |
+|:---|:---|:---|
+| **Canvas → Browser-PDF** | Vorlage im Browser öffnen, drucken | Abstimmung und Freigabe. Schnell, zeigt sofort das Layout. |
+| **Pipeline → PDF/X** | `scripts/build_pages.py` über WeasyPrint | Druck. Eingebettete Markenschriften, Beschnittzugabe, Passermarken. |
+
+Ein Browser-PDF geht **nicht** in die Druckerei. Ob die Markenschriften eingebettet
+werden, hängt am Browser; Beschnittzugabe und Passermarken kann er nicht setzen. Bei
+unseren Titelblättern laufen Hero-Grafik, Keyvisual und Foto randabfallend — ohne
+Zugabe ist das nicht druckbar. Die Pipeline setzt dafür
+`@page { bleed: 3mm; marks: crop cross; }`.
+
+**Die CMYK-Konvertierung ist nachgelagert.** WeasyPrint schreibt RGB. Die Umwandlung
+nach PDF/X-4 mit dem Farbprofil der Druckerei erfolgt danach — über Ghostscript oder
+durch die Druckerei selbst. Ein PDF aus der Pipeline ist also noch **kein**
+druckfertiges PDF/X, sondern die Vorstufe dazu.
+
+## Icons, die es doppelt gibt
+
+Sechs der Broschüren-Icons sind motivgleich mit Icons aus dem TDS-Set. Sie liegen dort
+unter dem **Blocknamen**, hier unter dem **Motivnamen**:
+
+| Motiv | TDS | Canvas |
+|:---|:---|:---|
+| `atom` | `templates/tds/icons/eigenschaften.svg` | `assets/icons/phosphor/bold/atom.svg` |
+| `package` | `templates/tds/icons/gebinde.svg` | `assets/icons/phosphor/bold/package.svg` |
+| `scales` | `templates/tds/icons/recht.svg` | `assets/icons/phosphor/bold/scales.svg` |
+| `seal-check` | `templates/tds/icons/vorteile.svg` | `assets/icons/phosphor/bold/seal-check.svg` |
+| `table` | `templates/tds/icons/daten.svg` | `assets/icons/phosphor/bold/table.svg` |
+| `warning` | `templates/tds/icons/hinweise.svg` | `assets/icons/phosphor/bold/warning.svg` |
+
+Das ist **kein Fehler**, sondern folgt aus zwei verschiedenen Benennungslogiken: Der
+TDS-Vertrag benennt nach dem Inhaltsblock, damit kein Blatt versehentlich ein anderes
+Symbol bekommt und die neun Dateien über einen Geometrie-Hash festgenagelt sind. Der
+Canvas braucht ein offenes Set über Kategorien, Verfahren und Partnerstufen und benennt
+deshalb nach dem Motiv.
+
+Die Doppelung hat eine Folge, die bekannt sein muss: **Ein Motiv, das sich im zentralen
+Design-System ändert, muss an zwei Stellen nachgezogen werden** — und im TDS-Fall
+zusätzlich der Hash im `ICON_MANIFEST` von `scripts/validate_layout.py`. Die übrigen
+26 Broschüren-Motive gibt es im TDS-Set nicht.
+
+## Maßdifferenz zur Pipeline
+
+| Wert | Pipeline (`pages-spec.css`) | Canvas (`templates/brochure/`) |
+|:---|:---|:---|
+| Achse außen und innen | `18,0 mm` | `18 mm` — gleich |
+| Textbreite | `174,0 mm` | `174 mm` — gleich |
+| Kopfsteg | `20,4 mm` | `26,7 mm` |
+| Fußsteg | `25,0 mm` | `23,5 mm` |
+| Spaltenbreite | `55,4 mm` | `55 mm` |
+| Spaltensteg | `4,3 mm` | `4,6 mm` |
+| Marginalspalte | gibt es nicht | `38 mm`, Steg `6 mm` |
+| Radius | nicht geregelt | `5 px` |
+| Headline-Zeilenhöhe | `1,13` | `1,25` |
+| Sand White als Seitenfläche | zugelassen (`surface--sand`) | verboten |
+
+### Was die Herkunftsprüfung ergeben hat
+
+**`18 mm` ist belegt** und in beiden Systemen gleich: `--tds-axis: 18mm` in
+`templates/tds/template.css`, festgeschrieben in `LAYOUT-CONTRACT.md` als „die eine Achse".
+Kein Streitpunkt.
+
+**`20,4 mm` ist nicht belegt.** Der Wert steht ausschließlich in `pages-spec.css` und den
+davon abgeleiteten Dateien. Der Dateikopf nennt als Quelle eine Vermessung des Original-PDFs
+mit PyMuPDF — dieses PDF war nie im Repository, weder im Arbeitsbaum noch in der
+Git-Historie. Der anlegende Commit `94b81a8` führt keine Begründung. Eine rechnerische
+Herleitung gibt es nicht: `20,4 / 18 = 1,133` ergibt keine Proportion des Formats.
+Der Canvas-Wert `26,7 mm` stammt aus `docs/print-anwendungen.md` des Design-System-Repos
+und hat damit eine benennbare Quelle.
+
+**Die Spaltenrechnung der Pipeline geht nicht auf.** `3 × 55,4 + 2 × 4,3 = 174,8 mm`,
+deklariert sind `174,0 mm` — eine Differenz von `0,8 mm`. Im erzeugten PDF nachgemessen:
+Die Spalten starten bei `18,0 | 77,7 | 137,4 mm`, die dritte endet also bei `192,8 mm`,
+während der Satzspiegel bei `192,0 mm` endet. **Die dritte Spalte ragt 0,8 mm über den
+rechten Rand.** Die Canvas-Rechnung `3 × 55 + 2 × 4,6 = 174,2 mm` liegt mit `0,2 mm`
+deutlich näher; exakt wäre bei `174 mm` Textbreite und `4,6 mm` Steg eine Spalte von
+`54,933 mm`.
+
+Die Ausgabeprüfung in `build_pages.py` meldet den Überstand nicht, weil sie die
+Startposition jeder Zeile prüft und nicht ihr Ende. Diese Lücke wird zusammen mit der
+Maßentscheidung geschlossen — vorher würde sie den Build rot färben, ohne dass entschieden
+ist, welche Werte gelten sollen.
+
+### Stand
+
+Die Differenz ist **nicht aufgelöst**. Beide Systeme bleiben unverändert, bis darüber
+entschieden ist. Nach dem Rechercheergebnis spricht alles dafür, die Pipeline auf die
+Canvas-Maße nachzuziehen: `18 mm` ist ohnehin identisch, `20,4 mm` hat keine Quelle, und
+die Spaltenrechnung der Pipeline ist nachweislich fehlerhaft.
+
 
 ## Offen
 
