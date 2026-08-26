@@ -20,46 +20,47 @@
    
    ============================================================================= */
 
-/* === FONT-FACE DEFINITIONEN === */
+/* === FONT FACES ===
+   Quelle: assets/fonts/ – dieselben Dateien, die design-system/base.css nutzt.
+   Die zuvor referenzierten .woff2-Dateien liegen nicht im Repository; WeasyPrint
+   fiel dadurch stillschweigend auf DejaVu Sans zurueck. Vorhanden sind von
+   Unbounded ausschliesslich der Black-Schnitt und von TT Norms Pro Regular/Bold. */
 
 @font-face {
   font-family: 'Unbounded';
-  src: url('../../assets/fonts/Unbounded_900.woff2') format('woff2');
+  src: url('../../assets/fonts/Unbounded-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
-  font-display: swap;
 }
-
-@font-face {
-  font-family: 'Unbounded';
-  src: url('../../assets/fonts/Unbounded_700.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Unbounded';
-  src: url('../../assets/fonts/Unbounded_400.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 @font-face {
   font-family: 'TT Norms Pro';
-  src: url('../../assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');
+  src: url('../../assets/fonts/TT_Norms_Pro_Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
 }
-
 @font-face {
   font-family: 'TT Norms Pro';
-  src: url('../../assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');
+  src: url('../../assets/fonts/TT_Norms_Pro_Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
+}
+
+/* Umlaut-Absicherung, identisch zu design-system/base.css: Einige externe
+   PDF-/Druck-Renderer ersetzen TT-Norms-Umlaute und ss durch einen
+   Trial-Hinweis. Nur diese acht Glyphen beziehen eine lokale Sans-Serif. */
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../../assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../../assets/fonts/LiberationSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
 }
 
 /* === SEITEN-SETUP (Print/PDF) === */

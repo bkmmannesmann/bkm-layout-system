@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_900.woff2') format('woff2');font-weight:900;font-display:swap}
+
+
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+html,body{margin:0;padding:0;background:#e9e7e1}
+body{font-family:'TT Norms Pro',system-ui,sans-serif;color:#494949;-webkit-font-smoothing:antialiased}
+a{color:#287d4b;text-decoration:none}
+a:hover{color:#1c4b42;text-decoration:underline}
+</style>
+</helmet>
+
+
+<div style="padding:28px 60px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+<a href="Bibliothek.dc.html" style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:-0.01em;color:#1c4b42;text-decoration:none;margin-right:12px">Bibliothek</a>
+<a href="A-Titelblaetter.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">A · Titelblaetter</a>
+<a href="B-Rahmenseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">B · Rahmenseiten</a>
+<a href="C-Navigation.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">C · Navigation</a>
+<a href="D-Textstrecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#1c4b42;color:#b4e717">D · Textstrecken</a>
+<a href="E-Strecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">E · Strecken</a>
+<a href="F-Verfahren.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">F · Verfahren</a>
+<a href="G-Produktseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">G · Produktseiten</a>
+<a href="H-Fachbetrieb.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">H · Fachbetrieb</a>
+</div>
+
+<section style="padding:60px 60px 120px;display:flex;flex-direction:column;gap:48px">
+
+<div style="max-width:900px;display:flex;flex-direction:column;gap:14px">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">D · Editorial und Fließtext</div>
+<h1 style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:44px;line-height:1.05;letter-spacing:-0.02em;color:#1c4b42;margin:0">Textstrecken</h1>
+<p style="margin:0;font-size:17px;line-height:1.6;max-width:70ch">Vier Satzarten für textlastige Doppelseiten. Marginalie als Standard, Kolumne für sehr viel Text, Dialog für Frage-Antwort-Strecken, Argument mit Mikrotext-Fuß.</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:120px">
+
+<div id="text-marginalie" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">text-marginalie</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Marginalie</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Zweispaltiger Lesesatz mit schmaler Randspalte für Definitionen und Kennzahlen. Ein Bild pro Doppelseite, klein.</span>
+</div>
+
+<div data-screen-label="2a · Fließtext mit Marginalspalte" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>01 · Feuchtigkeit verstehen</span><span>08</span></div>
+<h2 style="margin:11mm 0 0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42;max-width:150mm">Warum es so schwer ist, richtig zu entscheiden</h2>
+<p style="margin:7mm 0 0;font-size:13pt;line-height:1.4;color:#1c4b42;max-width:150mm">Eine feuchte Wand ist nur das Symptom. Für eine dauerhafte Lösung muss die Quelle des Problems bestimmt werden.</p>
+<div style="margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="display:flex;flex-direction:column;gap:5mm">
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:1.5mm">Definition</div><div style="font-size:9pt;line-height:1.5">Horizontalsperre — waagerechte Sperrschicht, die kapillar aufsteigende Feuchtigkeit im Mauerwerk unterbricht.</div></div>
+<div style="height:.35mm;background:#e3e1dc"></div>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:1.5mm">Merke</div><div style="font-size:9pt;line-height:1.5">Eine Horizontalsperre bleibt wirkungslos, wenn Wasser gleichzeitig von der Seite eindringt.</div></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Aufsteigende Feuchtigkeit, seitlich eindringendes Wasser, Kondensation oder Risse können an der Wand ähnlich aussehen. Sie verlangen aber unterschiedliche Lösungen. Genau darin liegt die Schwierigkeit: Das Schadensbild allein sagt noch nicht, was zu tun ist.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Ein vorschneller Lösungsansatz führt deshalb selten zum Erfolg. Wird die falsche Ursache behandelt, verschwindet der Fleck vielleicht für eine Saison — die Feuchtigkeit kommt zurück, oft an anderer Stelle und mit größerem Schaden.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Wir beginnen deshalb nicht mit einem Produkt, sondern mit einer Frage: Was muss hier eigentlich besser werden? Erst wenn das Problem verstanden ist, lässt sich der passende Weg bestimmen — und erst dann fällt die Entscheidung über das Verfahren.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Für dich als Eigentümer bedeutet das vor allem: Du musst kein Fachmann werden. Du musst nur wissen, was du an deiner Wand siehst. Beim Rest helfen wir — mit Anleitungen für die Eigenanwendung oder mit einem zertifizierten BKM-Fachbetrieb.</p>
+</div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:end">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;margin-bottom:1.5mm">Nächster Schritt</div><div style="font-size:9.5pt;line-height:1.5;color:#1c4b42">Feuchte-Check, Seite 12</div></div>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Bauwerksabdichtung ist komplex. Sie muss deshalb nicht kompliziert kommuniziert werden: Wer etwas wirklich verstanden hat, kann es verständlich erklären.</p>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>09</span><span>Die drei häufigsten Ursachen</span></div>
+<div style="margin-top:11mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.7">Ursache 01<br>—<br>Kapillar<br>aufsteigend</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<h3 style="margin:0;grid-column:1 / -1;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:13pt;line-height:1.2;letter-spacing:-0.02em;color:#1c4b42">Aufsteigende Feuchtigkeit</h3>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Das Mauerwerk zieht Wasser aus dem Erdreich kapillar nach oben. Typisch ist ein waagerechter Feuchtehorizont im Sockelbereich, oft mit Salzausblühungen und abplatzendem Putz.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Ursache ist meist eine fehlende oder gealterte Sperrschicht. Solange sie nicht wiederhergestellt ist, bleibt jede Arbeit an der Oberfläche vorläufig.</p>
+</div>
+</div>
+<div style="margin-top:9mm;height:.35mm;background:#e3e1dc"></div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.7">Ursache 02<br>—<br>Seitlich<br>eindringend</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<h3 style="margin:0;grid-column:1 / -1;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:13pt;line-height:1.2;letter-spacing:-0.02em;color:#1c4b42">Seitlich eindringendes Wasser</h3>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Wasser aus dem umliegenden Erdreich übt Druck auf die Kellerwände aus, besonders in Hanglagen oder nach starken Regenfällen. Der Schaden zeigt sich dann flächig, nicht als Horizont.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Hier hilft keine Horizontalsperre, sondern eine Flächenabdichtung — von außen, wenn die Wand zugänglich ist, sonst von innen.</p>
+</div>
+</div>
+<div style="margin-top:9mm;height:.35mm;background:#e3e1dc"></div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.7">Ursache 03<br>—<br>Kondensation</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<h3 style="margin:0;grid-column:1 / -1;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:13pt;line-height:1.2;letter-spacing:-0.02em;color:#1c4b42">Kondensationsfeuchte</h3>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Warme, feuchte Raumluft schlägt sich an kühlen Kellerwänden nieder. Es entsteht Kondenswasser und häufig auch Schimmel — ohne dass Wasser von außen eindringt.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Oft wirken mehrere Ursachen zusammen. Deshalb steht die Analyse immer vor dem Produkt.</p>
+</div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:end">
+<img loading="lazy" decoding="async" src="uploads/druckwasser-abplazender-putz-feuchte-waende.jpg" alt="" style="width:38mm;height:38mm;object-fit:cover;border-radius:5px;display:block">
+<div style="font-family:'TT Norms Pro',sans-serif;font-size:8pt;color:#8a8a8a;line-height:1.6">Abb. 2 — Abplatzender Putz und Salzausblühungen bei seitlich eindringendem Wasser.</div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Zweispalter, Marginalspalte, ein Ankerbild</div>
+</div>
+
+<div id="text-kolumne" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">text-kolumne</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Kolumne</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Dichter Dreispalter mit Initialabsatz und Zwischentiteln im Textfluss. Kein Bild, nur ein Zitatblock als Ruhepunkt.</span>
+</div>
+
+<div data-screen-label="2b · Dreispalter mit Zwischentiteln" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid #1c4b42;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#1c4b42"><span>02 · Der BKM-Ansatz</span><span>14</span></div>
+<h2 style="margin:10mm 0 7mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42;max-width:150mm">Erst verstehen. Dann entscheiden.</h2>
+<div style="height:205mm;columns:3;column-gap:4.6mm;column-fill:auto;font-size:9.5pt;line-height:1.62">
+<p style="margin:0 0 4mm">Ein Produkt ist kein Selbstzweck. Am Anfang steht bei uns die Frage, was an einem Gebäude eigentlich besser werden muss — und erst danach die Frage, mit welchem Mittel.</p>
+<p style="margin:0 0 4mm">Diese Reihenfolge klingt selbstverständlich, ist es in der Praxis aber nicht. Wer mit dem Produkt beginnt, findet für jedes Schadensbild eine Begründung. Wer mit dem Schaden beginnt, findet manchmal heraus, dass ein anderes Verfahren besser trägt.</p>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:10.5pt;line-height:1.25;letter-spacing:-0.02em;color:#4daf46;margin:0 0 3mm">Fachwissen soll Sicherheit geben</div>
+<p style="margin:0 0 4mm">Bauwerksabdichtung ist komplex. Sie muss deshalb nicht kompliziert kommuniziert werden. Fachwissen soll keine Distanz schaffen, sondern Sicherheit geben — für Eigentümer genauso wie für Verarbeiter.</p>
+<p style="margin:0 0 4mm">Wer etwas wirklich verstanden hat, kann es verständlich erklären. Das gilt für ein Datenblatt genauso wie für ein Beratungsgespräch am Kellerabgang. Verständlichkeit ist bei uns kein Marketingziel, sondern ein Qualitätsmerkmal.</p>
+<div style="break-inside:avoid;border-radius:5px;background:#1c4b42;padding:5mm;margin:0 0 4mm">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:10.5pt;line-height:1.25;letter-spacing:-0.02em;color:#fff">Du musst Feuchtigkeit nicht akzeptieren.</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;color:#b4e717;margin-top:3mm">Aus dem BKM-Manifest</div>
+</div>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:10.5pt;line-height:1.25;letter-spacing:-0.02em;color:#4daf46;margin:0 0 3mm">Zwei Wege, ein Ziel</div>
+<p style="margin:0 0 4mm">Manche Schäden lassen sich selbst beheben. Andere gehören in die Hand eines Fachbetriebs. Wir bewerten das nicht — wir machen den Unterschied nur transparent, damit du entscheiden kannst.</p>
+<p style="margin:0 0 4mm">Mit der Home Line sanierst du selbst: verständliche Produkte, klare Anwendungsschritte, definierte Grenzen. Mit der Pro Line arbeitet ein zertifizierter BKM-Fachbetrieb — mit Verfahren, die Erfahrung und Werkzeug verlangen.</p>
+<p style="margin:0 0 4mm">Zwischen den beiden Linien gibt es kein Qualitätsgefälle. Sie unterscheiden sich im Anwendungsweg, nicht im Anspruch. Genau das meint der Satz: Zwei Wege. Ein Ziel.</p>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:10.5pt;line-height:1.25;letter-spacing:-0.02em;color:#4daf46;margin:0 0 3mm">Werterhalt statt Neubau</div>
+<p style="margin:0 0 4mm">Bestandsgebäude zu erhalten ist die nachhaltigere Antwort auf viele Bauaufgaben. Wer die Substanz trocken hält, verlängert die Nutzungsdauer eines Hauses um Jahrzehnte.</p>
+<p style="margin:0">Deshalb steht am Ende jeder Sanierung nicht nur eine trockene Wand, sondern ein Gebäude, das seinen Wert behält. Build. Keep. Maintain.</p>
+</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#1c4b42 url('uploads/a4-texture-deep-green.jpg') center/cover no-repeat;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column;position:relative;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.7mm solid rgba(255,255,255,.35);font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717;position:relative;z-index:1"><span>15</span><span>Was das in der Praxis heißt</span></div>
+<div style="position:relative;z-index:1;margin-top:10mm;height:228mm;columns:3;column-gap:4.6mm;column-fill:auto;font-size:9.5pt;line-height:1.62;color:rgba(255,255,255,.82)">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:10.5pt;line-height:1.25;letter-spacing:-0.02em;color:#b4e717;margin:0 0 3mm">Der Weg zum Fachbetrieb</div>
+<p style="margin:0 0 4mm">Ein zertifizierter BKM-Fachbetrieb beginnt mit der Schadensanalyse: Messung des Feuchtegehalts, Beurteilung der Salzbelastung, Prüfung des Wandaufbaus. Erst danach folgt ein Vorschlag.</p>
+<p style="margin:0 0 4mm">Du machst den ersten Schritt, den Rest übernimmt der Betrieb — von der Diagnose über die Ausführung bis zur Abnahme. Fachbetriebe in deiner Region findest du über die Betriebssuche.</p>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:10.5pt;line-height:1.25;letter-spacing:-0.02em;color:#b4e717;margin:0 0 3mm">Der Weg der Eigenanwendung</div>
+<p style="margin:0 0 4mm">Für geeignete Schäden gibt es die Home Line: Produkte, die für die Eigenanwendung freigegeben sind, mit Anleitungen, die jeden Arbeitsschritt in der richtigen Reihenfolge beschreiben.</p>
+<p style="margin:0 0 4mm">Geeignet heißt: klar begrenzter Schaden, zugängliche Wand, überschaubarer Aufwand. Wo diese Bedingungen nicht erfüllt sind, sagen wir das — auch wenn dann kein Produkt verkauft wird.</p>
+<div style="break-inside:avoid;border-radius:5px;background:#b4e717;padding:5mm;margin:0 0 4mm">
+<div style="font-size:9.5pt;line-height:1.5;color:#1c4b42">„Der Schaden war klein genug, es musste kein Fachbetrieb rauskommen, so wie ich erst gedacht hatte."</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.1em;text-transform:uppercase;color:#1c4b42;margin-top:3mm">Vanessa P., Eigentümerin</div>
+</div>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:10.5pt;line-height:1.25;letter-spacing:-0.02em;color:#b4e717;margin:0 0 3mm">Was wir nicht versprechen</div>
+<p style="margin:0 0 4mm">Wir versprechen keine Wunder und keine Abkürzungen. Eine Wand, die jahrzehntelang Feuchtigkeit aufgenommen hat, braucht nach der Sperre Zeit zum Austrocknen — je nach Wandstärke mehrere Monate.</p>
+<p style="margin:0">Diese Zeit ist Teil der Sanierung, nicht ihr Scheitern. Wer sie einplant, bekommt ein Ergebnis, das trägt.</p>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Dreispalter, Zwischentitel im Fluss, bildlos</div>
+</div>
+
+<div id="text-dialog" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">text-dialog</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Dialog</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Frage-Antwort-Strecke, links die Fragen als Ankerspalte, rechts die Antworten. Gut zum Querlesen, sehr textfähig.</span>
+</div>
+
+<div data-screen-label="2c · Frage-Antwort-Strecke" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#4daf46">Häufige Fragen · Feuchte Wände</div>
+<h2 style="margin:8mm 0 0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42;max-width:150mm">Was Eigentümer am häufigsten fragen</h2>
+<div style="margin-top:10mm;display:flex;flex-direction:column">
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;padding:6mm 0;border-top:.35mm solid #e3e1dc">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.25;letter-spacing:-0.02em;color:#1c4b42">Woran erkenne ich aufsteigende Feuchtigkeit?</div>
+<div style="font-size:10pt;line-height:1.6">An einem waagerechten Feuchtehorizont im unteren Wandbereich, meist mit Salzausblühungen und abplatzendem Putz. Die Feuchte nimmt nach oben hin ab und folgt keiner Wasserquelle im Raum.</div>
+</div>
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;padding:6mm 0;border-top:.35mm solid #e3e1dc">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.25;letter-spacing:-0.02em;color:#1c4b42">Reicht es, den Putz zu erneuern?</div>
+<div style="font-size:10pt;line-height:1.6">Nein, wenn die Ursache im Mauerwerk liegt. Ein neuer Putz verdeckt den Schaden für eine Zeit, unterbricht aber nicht den Feuchtetransport. Zuerst die Sperre, dann die Fläche, dann die Oberfläche.</div>
+</div>
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;padding:6mm 0;border-top:.35mm solid #e3e1dc">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.25;letter-spacing:-0.02em;color:#1c4b42">Kann ich selbst sanieren?</div>
+<div style="font-size:10pt;line-height:1.6">Bei klar begrenzten Schäden und zugänglichen Wänden häufig ja — mit Produkten der Home Line und der zugehörigen Anleitung. Bei mehreren Ursachen, großen Flächen oder unklarem Wandaufbau gehört die Arbeit in Fachhand.</div>
+</div>
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;padding:6mm 0;border-top:.35mm solid #e3e1dc">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.25;letter-spacing:-0.02em;color:#1c4b42">Wie lange dauert die Austrocknung?</div>
+<div style="font-size:10pt;line-height:1.6">Nach dem Einbringen der Sperre braucht das Mauerwerk je nach Wandstärke mehrere Monate. Diese Zeit gehört zur Sanierung. Wer den Wandaufbau zu früh schließt, schließt Feuchtigkeit ein.</div>
+</div>
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;padding:6mm 0;border-top:.35mm solid #e3e1dc;border-bottom:.35mm solid #e3e1dc">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.25;letter-spacing:-0.02em;color:#1c4b42">Was kostet eine Einordnung?</div>
+<div style="font-size:10pt;line-height:1.6">Der Feuchte-Check ist kostenlos. Er hilft dir, das Schadensbild einzuordnen und zu entscheiden, ob du selbst sanierst oder einen Fachbetrieb hinzuziehst.</div>
+</div>
+</div>
+<div style="margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>Häufige Fragen</span><span>20</span></div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#4daf46">Häufige Fragen · Fachbetrieb und Verfahren</div>
+<div style="margin-top:10mm;display:flex;flex-direction:column">
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;padding:6mm 0;border-top:.35mm solid #e3e1dc">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.25;letter-spacing:-0.02em;color:#1c4b42">Was macht einen zertifizierten Betrieb aus?</div>
+<div style="font-size:10pt;line-height:1.6">Er ist auf Feuchtigkeitsschutz und Bauwerksabdichtung geschult, arbeitet mit der Pro Line und dokumentiert seine Ausführung. Die Zertifizierung wird regelmäßig erneuert.</div>
+</div>
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;padding:6mm 0;border-top:.35mm solid #e3e1dc">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.25;letter-spacing:-0.02em;color:#1c4b42">Gibt es Qualitätsunterschiede zwischen den Linien?</div>
+<div style="font-size:10pt;line-height:1.6">Nein. Home Line und Pro Line unterscheiden sich im Anwendungsweg, nicht im Anspruch. Die Pro Line setzt Erfahrung, Werkzeug und Ausbildung voraus.</div>
+</div>
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;padding:6mm 0;border-top:.35mm solid #e3e1dc">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.25;letter-spacing:-0.02em;color:#1c4b42">Wie läuft die Zusammenarbeit ab?</div>
+<div style="font-size:10pt;line-height:1.6">Kennenlernen, Schadensanalyse, Beratungsgespräch, Auftragsbestätigung, Ausführung. Du machst den ersten Schritt, alles Weitere koordiniert der Betrieb.</div>
+</div>
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;padding:6mm 0;border-top:.35mm solid #e3e1dc">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.25;letter-spacing:-0.02em;color:#1c4b42">Was ist BKM überhaupt?</div>
+<div style="font-size:10pt;line-height:1.6">Ein Systemgeber für Bauwerksabdichtung und Feuchtigkeitsschutz: Produkte, Verfahren, Schulung und ein Netz zertifizierter Fachbetriebe — mit dem Ziel, Bestandsgebäude dauerhaft zu erhalten.</div>
+</div>
+<div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;padding:6mm 0;border-top:.35mm solid #e3e1dc;border-bottom:.35mm solid #e3e1dc">
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:11pt;line-height:1.25;letter-spacing:-0.02em;color:#1c4b42">Wo finde ich einen Betrieb in meiner Nähe?</div>
+<div style="font-size:10pt;line-height:1.6">Über die Fachbetriebssuche auf bkm-mannesmann.de. Sie listet zertifizierte Betriebe nach Region — inklusive Kontaktmöglichkeit für den ersten Termin.</div>
+</div>
+</div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:62mm 1fr;gap:6mm;align-items:start">
+<img loading="lazy" decoding="async" src="uploads/fachbetrieb-partner-standard.webp" alt="" style="width:62mm;height:44mm;object-fit:cover;border-radius:5px;display:block">
+<div style="border-radius:5px;background:#1c4b42;padding:6mm;display:flex;flex-direction:column;gap:3mm">
+<div style="display:flex;align-items:center;gap:3mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#287d4b;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/map-pin.svg') no-repeat center/contain"></span></span><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717">Nächster Schritt</span></div>
+<div style="font-size:10.5pt;line-height:1.5;color:#fff">Fachbetrieb in deiner Region finden: bkm-mannesmann.de/fachbetriebe</div>
+</div>
+</div>
+<div style="margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>21</span><span>Häufige Fragen</span></div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Frage-Antwort, zwei Ebenen, ein Ankerbild</div>
+</div>
+
+<div id="text-argument" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">text-argument</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Argument</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Marginalie-Satz mit der Mikrotext-Zeile als festes Fußelement jeder Doppelseite. Rechts die Supportbereiche im Modulraster.</span>
+</div>
+
+<div data-screen-label="5b · Dein Handwerk kann mehr + Warum BKM" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>Dein Handwerk kann mehr</span><span>02</span></div>
+<h2 style="margin:11mm 0 0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42;max-width:150mm">Dein Handwerk kann mehr</h2>
+<p style="margin:7mm 0 0;font-size:13pt;line-height:1.4;color:#1c4b42;max-width:150mm">Feuchtigkeitsschäden sind kein seltenes Sonderthema. Für gute Betriebe sind sie ein Geschäftsfeld.</p>
+<div style="margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="display:flex;flex-direction:column;gap:4mm">
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:1.5mm">Typische Fragen</div><div style="font-size:9.5pt;line-height:1.55">Wie komme ich an bessere Aufträge? Wie werde ich sichtbarer in meiner Region?</div></div>
+<div style="height:.35mm;background:#e3e1dc"></div>
+<div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46;margin-bottom:1.5mm">Kurz gesagt</div><div style="font-size:9.5pt;line-height:1.55">Du bringst Handwerk ein. BKM bringt System, Produkte, Schulung und Support ein.</div></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Viele Handwerksbetriebe stehen vor derselben Frage: Wie baue ich ein neues Geschäftsfeld auf, ohne alles allein entwickeln zu müssen? Bauwerksabdichtung kann genau hier ansetzen.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Denn Feuchtigkeit tritt in Kellern, Wänden, Fassaden und Bestandsgebäuden immer wieder auf. Viele Kunden suchen jemanden, der nicht nur ein Produkt nennt, sondern den Schaden versteht.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">Als zertifizierter BKM-Fachbetrieb kannst du dieses Feld professionell besetzen: mit der passenden Lösung für das jeweilige Schadensbild und einer Ausführung, die trägt.</p>
+<p style="margin:0;font-size:10.5pt;line-height:1.6">So entsteht ein Leistungsangebot, das zu deinem Betrieb passt — ohne dass du bei null anfängst. BKM ist dabei kein Franchise: Du bleibst Unternehmer.</p>
+</div>
+</div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<img loading="lazy" decoding="async" src="uploads/bkm-fachbetrieb-messergebnis-schadensanalyse.webp" alt="" style="width:38mm;height:50mm;object-fit:cover;border-radius:5px;display:block">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:10.5pt;line-height:1.2;color:#1c4b42;margin-bottom:2mm">Neue Aufträge</div><div style="font-size:9.5pt;line-height:1.5">Kunden bei einem realen Problem unterstützen, statt austauschbare Standardarbeiten anzubieten.</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:10.5pt;line-height:1.2;color:#1c4b42;margin-bottom:2mm">Klare Spezialisierung</div><div style="font-size:9.5pt;line-height:1.5">Aus Einzelaufträgen ein spezialisiertes Geschäftsfeld entwickeln, das Fachwissen verlangt.</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:10.5pt;line-height:1.2;color:#1c4b42;margin-bottom:2mm">Regionale Sichtbarkeit</div><div style="font-size:9.5pt;line-height:1.5">Als Ansprechpartner für Feuchtigkeitsschutz in deiner Region gefunden werden.</div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:10.5pt;line-height:1.2;color:#1c4b42;margin-bottom:2mm">Zukunftsfähiges Feld</div><div style="font-size:9.5pt;line-height:1.5">Bestandsgebäude werden nicht weniger. Sanierung und Abdichtung werden wichtiger.</div></div>
+</div>
+</div>
+<div style="margin-top:auto;padding-top:6mm;border-top:.35mm solid #e3e1dc;font-family:'Unbounded',sans-serif;font-weight:900;font-size:10pt;line-height:1.3;letter-spacing:-0.02em;color:#4daf46">Dein Betrieb bleibt deiner. Dein Leistungsangebot wird stärker.</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#1c4b42 url('uploads/a4-texture-deep-green-2.jpg') center/cover no-repeat;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column;position:relative;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid rgba(255,255,255,.35);font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717;position:relative;z-index:1"><span>03</span><span>Warum BKM</span></div>
+<h2 style="position:relative;z-index:1;margin:11mm 0 0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#fff;max-width:150mm">Warum BKM</h2>
+<p style="position:relative;z-index:1;margin:7mm 0 0;font-size:12pt;line-height:1.45;color:rgba(255,255,255,.85);max-width:150mm">Hersteller und Systemgeber für Bauwerksabdichtung. Der Fokus liegt nicht auf einzelnen Produkten, sondern auf Systemen, Anwendungen und klaren Ausführungswegen.</p>
+<div style="position:relative;z-index:1;margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,.6);line-height:1.7">Was du<br>bekommst<br>—<br>je nach<br>Partnerstufe</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#287d4b;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/stack.svg') no-repeat center/contain"></span></span><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:10.5pt;line-height:1.2;color:#fff">Produktschulung</div><div style="font-size:9.5pt;line-height:1.5;color:rgba(255,255,255,.85)">Du lernst die Systemlösungen kennen und verstehst, wann welches Produkt eingesetzt wird.</div></div>
+<div style="border-radius:5px;background:#287d4b;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/hammer.svg') no-repeat center/contain"></span></span><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:10.5pt;line-height:1.2;color:#fff">Technischer Support</div><div style="font-size:9.5pt;line-height:1.5;color:rgba(255,255,255,.85)">Unterstützung bei Anwendungen, technischen Fragen und typischen Schadensbildern.</div></div>
+<div style="border-radius:5px;background:#287d4b;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/certificate.svg') no-repeat center/contain"></span></span><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:10.5pt;line-height:1.2;color:#fff">Exklusive Produktwelt</div><div style="font-size:9.5pt;line-height:1.5;color:rgba(255,255,255,.85)">Zugang zu Systemlösungen, die für die professionelle Verarbeitung vorgesehen sind.</div></div>
+<div style="border-radius:5px;background:#287d4b;padding:5mm;display:flex;flex-direction:column;gap:2.5mm"><span style="width:9.5mm;height:9.5mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:6mm;height:6mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/globe.svg') no-repeat center/contain"></span></span><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:10.5pt;line-height:1.2;color:#fff">Marketing und Auftritt</div><div style="font-size:9.5pt;line-height:1.5;color:rgba(255,255,255,.85)">Werbemittel, regionale Sichtbarkeit und je nach Stufe eine eigene Landingpage.</div></div>
+</div>
+</div>
+<div style="margin-top:9mm;display:grid;grid-template-columns:38mm 1fr;gap:6mm;align-items:start">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,.6);line-height:1.7">Kein<br>Franchise</div>
+<p style="margin:0;font-size:10.5pt;line-height:1.6;color:rgba(255,255,255,.85)">BKM ist kein klassisches Franchise-System, bei dem du deine Selbstständigkeit aufgibst. Du führst deinen Betrieb weiter und entscheidest, wie du dein Geschäft entwickelst. BKM liefert Rahmen, Wissen und Systemwelt. In ausgewählten Partnerstufen kann ein Gebietsschutz vereinbart werden.</p>
+</div>
+<div style="margin-top:auto;padding-top:6mm;border-top:.35mm solid rgba(255,255,255,.35);font-family:'Unbounded',sans-serif;font-weight:900;font-size:10pt;line-height:1.3;letter-spacing:-0.02em;color:#b4e717">Selbstständig bleiben. Spezialisierter auftreten. Mit System wachsen.</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Argumentseite · Supportmodule, Mikrotext im Fuß</div>
+</div>
+
+</div>
+</section>
+</x-dc>
+</body>
+</html>

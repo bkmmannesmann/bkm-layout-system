@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_900.woff2') format('woff2');font-weight:900;font-display:swap}
+
+
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+html,body{margin:0;padding:0;background:#e9e7e1}
+body{font-family:'TT Norms Pro',system-ui,sans-serif;color:#494949;-webkit-font-smoothing:antialiased}
+a{color:#287d4b;text-decoration:none}
+a:hover{color:#1c4b42;text-decoration:underline}
+</style>
+</helmet>
+
+<div style="padding:28px 60px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+<a href="Bibliothek.dc.html" style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:-0.01em;color:#1c4b42;text-decoration:none;margin-right:12px">Bibliothek</a>
+<a href="A-Titelblaetter.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">A · Titelblaetter</a>
+<a href="B-Rahmenseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">B · Rahmenseiten</a>
+<a href="C-Navigation.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">C · Navigation</a>
+<a href="D-Textstrecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">D · Textstrecken</a>
+<a href="E-Strecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">E · Strecken</a>
+<a href="F-Verfahren.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">F · Verfahren</a>
+<a href="G-Produktseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#f6f5f2;color:#1c4b42">G · Produktseiten</a>
+<a href="H-Fachbetrieb.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#1c4b42;color:#b4e717">H · Fachbetrieb</a>
+</div>
+
+<section style="padding:60px 60px 120px;display:flex;flex-direction:column;gap:48px">
+
+<div style="max-width:900px;display:flex;flex-direction:column;gap:14px">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">H · Fachbetrieb und Partner</div>
+<h1 style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:44px;line-height:1.05;letter-spacing:-0.02em;color:#1c4b42;margin:0">Fachbetrieb</h1>
+<p style="margin:0;font-size:17px;line-height:1.6;max-width:70ch">Partnerstufen in zwei Darstellungen, Leistungsübersicht zum Ankreuzen und die Kontaktseite mit Freiraum für Betriebsdaten. Für Endkunden-Prospekte wechselt Deep Green auf Transition Green.</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:120px">
+
+<div id="partner-stufen" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#1c4b42;color:#b4e717;padding:6px 12px">partner-stufen</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Partnerstufen</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Bronze, Silber, Gold als Vergleichsraster mit steigender Fläche, gegenüber der Einstieg in sechs Schritten.</span>
+</div>
+
+<div data-screen-label="10b · Partnerstufen und Einstieg" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>Drei Wege in die Partnerschaft</span><span>14</span></div>
+<h2 style="margin:11mm 0 4mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42;max-width:150mm">Starte so, wie es zu deinem Betrieb passt</h2>
+<p style="margin:0 0 8mm;font-size:11pt;line-height:1.6;max-width:150mm">Nicht jeder Betrieb startet gleich. Die Stufen dienen als Orientierung und werden je nach Vereinbarung, Region und Verfügbarkeit ausgestaltet.</p>
+<div style="display:flex;flex-direction:column;gap:4mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:6mm;display:grid;grid-template-columns:34mm 1fr;gap:6mm;align-items:start">
+<div style="display:flex;flex-direction:column;gap:3mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:14pt;line-height:1.15;letter-spacing:-0.02em;color:#1c4b42">Bronze</div><div style="height:2mm;width:14mm;background:#b7b3ab;border-radius:3px"></div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;line-height:1.6">Der Einstieg<br>ins System</div></div>
+<div style="display:flex;flex-direction:column;gap:3mm">
+<div style="font-size:10.5pt;line-height:1.55;color:#1c4b42">Der flexible Einstieg für Betriebe, die BKM-Produkte, Schulung und technischen Support kennenlernen möchten — ohne große Vorleistung.</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm 5mm">
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#4daf46;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;font-weight:700">Zugang zu Schulungen</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#4daf46;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;font-weight:700">Technischer Support</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#4daf46;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;font-weight:700">Produktwissen</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#4daf46;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;font-weight:700">Späterer Ausbau möglich</span></div>
+</div>
+</div>
+</div>
+<div style="border-radius:5px;background:#287d4b;padding:6mm;display:grid;grid-template-columns:34mm 1fr;gap:6mm;align-items:start">
+<div style="display:flex;flex-direction:column;gap:3mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:14pt;line-height:1.15;letter-spacing:-0.02em;color:#fff">Silber</div><div style="height:2mm;width:22mm;background:#b4e717;border-radius:3px"></div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.6">Die regionale<br>Positionierung</div></div>
+<div style="display:flex;flex-direction:column;gap:3mm">
+<div style="font-size:10.5pt;line-height:1.55;color:#fff">Für Betriebe, die sich in ihrer Region klar als BKM-Fachbetrieb positionieren und Bauwerksabdichtung aktiv anbieten wollen.</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm 5mm">
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Fachbetrieb-Positionierung</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Logonutzung</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Marketingmaterialien</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Eigene Landingpage</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Umfangreichere Schulung</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Gebietsschutz nach Vereinbarung</span></div>
+</div>
+</div>
+</div>
+<div style="border-radius:5px;background:#1c4b42;padding:6mm;display:grid;grid-template-columns:34mm 1fr;gap:6mm;align-items:start">
+<div style="display:flex;flex-direction:column;gap:3mm"><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:14pt;line-height:1.15;letter-spacing:-0.02em;color:#fff">Gold</div><div style="height:2mm;width:30mm;background:#b4e717;border-radius:3px"></div><div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.6">Die exklusive<br>Partnerschaft</div></div>
+<div style="display:flex;flex-direction:column;gap:3mm">
+<div style="font-size:10.5pt;line-height:1.55;color:#fff">Für Betriebe, die Bauwerksabdichtung als starkes regionales Geschäftsfeld aufbauen und langfristig mit BKM auftreten wollen.</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm 5mm">
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Premium-Partnerstatus</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Erweiterte Markenverwendung</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Exklusivere Gebietslösung</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Individuelle Landingpage</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Kampagnenplanung</span></div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;flex:none;background:#b4e717;mask:url('assets/icons/phosphor/bold/check.svg') no-repeat center/contain"></span><span style="font-size:9.5pt;color:rgba(255,255,255,.9);font-weight:700">Strategische Begleitung</span></div>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-size:9pt;line-height:1.6;color:#8a8a8a">Kein Franchise: Du bleibst Unternehmer. BKM liefert Rahmen, Wissen und Systemwelt.</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>15</span><span>Wie der Einstieg funktioniert</span></div>
+<h2 style="margin:11mm 0 8mm;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42;max-width:150mm">Vom ersten Gespräch zum ersten Projekt</h2>
+<div style="display:flex;flex-direction:column;gap:0">
+<div style="display:grid;grid-template-columns:18mm 1fr;gap:5mm;padding:4.5mm 0;border-top:.7mm solid #1c4b42"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:15pt;line-height:1;color:#b4e717">01</span><div><div style="font-size:11.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Erstgespräch</div><div style="font-size:10pt;line-height:1.6">Wir sprechen über deinen Betrieb, deine Region und deine Ziele. Dabei geht es nicht um Druck, sondern um Passung.</div></div></div>
+<div style="display:grid;grid-template-columns:18mm 1fr;gap:5mm;padding:4.5mm 0;border-top:.35mm solid #e3e1dc"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:15pt;line-height:1;color:#b4e717">02</span><div><div style="font-size:11.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Partnerstufe wählen</div><div style="font-size:10pt;line-height:1.6">Gemeinsam prüfen wir, ob Bronze, Silber oder Gold passt. Nicht jeder Betrieb braucht sofort die größte Lösung.</div></div></div>
+<div style="display:grid;grid-template-columns:18mm 1fr;gap:5mm;padding:4.5mm 0;border-top:.35mm solid #e3e1dc"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:15pt;line-height:1;color:#b4e717">03</span><div><div style="font-size:11.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Schulung und Technikeinweisung</div><div style="font-size:10pt;line-height:1.6">Du lernst die Systemlösungen kennen und bekommst das technische Wissen für den professionellen Einsatz.</div></div></div>
+<div style="display:grid;grid-template-columns:18mm 1fr;gap:5mm;padding:4.5mm 0;border-top:.35mm solid #e3e1dc"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:15pt;line-height:1;color:#b4e717">04</span><div><div style="font-size:11.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Auftritt und Materialien vorbereiten</div><div style="font-size:10pt;line-height:1.6">Je nach Partnerstufe werden Werbemittel, Webseite und regionale Sichtbarkeit vorbereitet.</div></div></div>
+<div style="display:grid;grid-template-columns:18mm 1fr;gap:5mm;padding:4.5mm 0;border-top:.35mm solid #e3e1dc"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:15pt;line-height:1;color:#b4e717">05</span><div><div style="font-size:11.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Erste Projekte umsetzen</div><div style="font-size:10pt;line-height:1.6">Du startest mit deinem neuen Leistungsfeld und kannst bei technischen Fragen auf BKM zurückgreifen.</div></div></div>
+<div style="display:grid;grid-template-columns:18mm 1fr;gap:5mm;padding:4.5mm 0;border-top:.35mm solid #e3e1dc;border-bottom:.35mm solid #e3e1dc"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:15pt;line-height:1;color:#b4e717">06</span><div><div style="font-size:11.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Geschäftsfeld ausbauen</div><div style="font-size:10pt;line-height:1.6">Mit wachsender Erfahrung wird Bauwerksabdichtung ein fester Bestandteil deines Angebots.</div></div></div>
+</div>
+<div style="margin-top:auto;border-radius:5px;background:#b4e717;padding:6mm;display:flex;align-items:center;gap:5mm">
+<span style="width:11mm;height:11mm;flex:none;border-radius:5px;background:#1c4b42;display:flex;align-items:center;justify-content:center"><span style="width:7mm;height:7mm;background:#b4e717;mask:url('assets/icons/phosphor/bold/handshake.svg') no-repeat center/contain"></span></span>
+<div style="flex:1"><div style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:12pt;line-height:1.2;letter-spacing:-0.02em;color:#1c4b42;margin-bottom:1.5mm">Jetzt Erstgespräch vereinbaren</div><div style="font-size:10pt;line-height:1.5;color:#1c4b42">bkm-mannesmann.de/bkm-partner-netzwerk — Partnerstufe prüfen, Gebietsmöglichkeiten besprechen.</div></div>
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Bronze, Silber, Gold · Einstieg in sechs Schritten</div>
+</div>
+
+<div id="fachbetrieb-leistung" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:14px;font-weight:700;background:#287d4b;color:#b4e717;padding:6px 12px">fachbetrieb-leistung</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:-0.01em;color:#1c4b42">Leistung</span>
+<span style="font-size:15px;color:#8a8a8a;max-width:52ch">Leistungsübersicht als Modulraster zum Ankreuzen, gegenüber die Kontaktseite mit Freiraum für Betriebsdaten und Stempelfeld.</span>
+</div>
+
+<div data-screen-label="6b · Leistungen und Kontakt" style="display:flex;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#fff;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid #e3e1dc;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#8a8a8a"><span>Unsere Leistungen</span><span>06</span></div>
+<h2 style="margin:11mm 0 0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#1c4b42;max-width:150mm">Was wir für dein Gebäude tun</h2>
+<p style="margin:6mm 0 8mm;font-size:10.5pt;line-height:1.6;max-width:150mm">Wir arbeiten mit den Systemlösungen von BKM Mannesmann. Welche Leistungen unser Betrieb anbietet, ist markiert.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;gap:4mm;align-items:flex-start"><span style="width:5mm;height:5mm;flex:none;margin-top:1mm;border-radius:2px;background:#287d4b"></span><div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Horizontalsperre</div><div style="font-size:9.5pt;line-height:1.5">Nachträgliche Sperrschicht gegen kapillar aufsteigende Feuchtigkeit, über Bohrkanäle eingebracht.</div></div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;gap:4mm;align-items:flex-start"><span style="width:5mm;height:5mm;flex:none;margin-top:1mm;border-radius:2px;background:#287d4b"></span><div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Flächensperre</div><div style="font-size:9.5pt;line-height:1.5">Mehrere Bahnen im Schachbrettmuster gegen seitlich eindringende Feuchte, ohne Ausschachtung.</div></div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;gap:4mm;align-items:flex-start"><span style="width:5mm;height:5mm;flex:none;margin-top:1mm;border-radius:2px;background:#287d4b"></span><div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Wand- und Bodenanschluss</div><div style="font-size:9.5pt;line-height:1.5">Abdichtung der Fuge zwischen Bodenplatte und Mauerwerk von innen, druckwasserfest.</div></div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;gap:4mm;align-items:flex-start"><span style="width:5mm;height:5mm;flex:none;margin-top:1mm;border-radius:2px;background:#287d4b"></span><div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Rissverpressung</div><div style="font-size:9.5pt;line-height:1.5">Injektion in Risse und Hohlräume — starr oder elastisch, je nach Bauteil und Belastung.</div></div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;gap:4mm;align-items:flex-start"><span style="width:5mm;height:5mm;flex:none;margin-top:1mm;border-radius:2px;background:#287d4b"></span><div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Sanierputzarbeiten</div><div style="font-size:9.5pt;line-height:1.5">WTA-zertifizierte Systeme für feuchte und salzbelastete Wände, mehrlagig aufgebaut.</div></div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;gap:4mm;align-items:flex-start"><span style="width:5mm;height:5mm;flex:none;margin-top:1mm;border-radius:2px;background:#e3e1dc"></span><div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Mauerwerksverfestigung</div><div style="font-size:9.5pt;line-height:1.5">Stabilisierung poröser oder rissiger Bausubstanz durch Injektion — auch im Denkmalbestand.</div></div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;gap:4mm;align-items:flex-start"><span style="width:5mm;height:5mm;flex:none;margin-top:1mm;border-radius:2px;background:#e3e1dc"></span><div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Fassadenhydrophobierung</div><div style="font-size:9.5pt;line-height:1.5">Wasserabweisender, diffusionsoffener Schutz für mineralische Untergründe außer Gips.</div></div></div>
+<div style="border-radius:5px;background:#f6f5f2;padding:5mm;display:flex;gap:4mm;align-items:flex-start"><span style="width:5mm;height:5mm;flex:none;margin-top:1mm;border-radius:2px;background:#e3e1dc"></span><div><div style="font-size:10.5pt;font-weight:700;color:#1c4b42;margin-bottom:1.5mm">Innenabdichtung</div><div style="font-size:9.5pt;line-height:1.5">Abdichtung erdberührter Wände von innen, wenn die Außenseite nicht zugänglich ist.</div></div></div>
+</div>
+<div style="margin-top:6mm;display:flex;gap:8mm;align-items:center;font-size:9pt;color:#8a8a8a">
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;border-radius:2px;background:#287d4b"></span>Bieten wir an</div>
+<div style="display:flex;align-items:center;gap:2.5mm"><span style="width:4mm;height:4mm;border-radius:2px;background:#e3e1dc"></span>Auf Anfrage über das BKM-Netzwerk</div>
+</div>
+<div style="margin-top:auto;padding-top:6mm;border-top:.35mm solid #e3e1dc;font-family:'Unbounded',sans-serif;font-weight:900;font-size:10pt;line-height:1.3;letter-spacing:-0.02em;color:#287d4b">Ein Ansprechpartner. Vom ersten Messwert bis zur Abnahme.</div>
+</div>
+<div style="width:210mm;height:297mm;box-sizing:border-box;background:#287d4b url('uploads/a4-texture-transition-green-2.jpg') center/cover no-repeat;padding:26.7mm 18mm 23.5mm;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3mm;border-bottom:.35mm solid rgba(255,255,255,.35);font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717"><span>07</span><span>Dein Ansprechpartner</span></div>
+<h2 style="margin:11mm 0 0;font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:19pt;line-height:1.15;letter-spacing:-0.025em;color:#fff;max-width:150mm">Lass uns anfangen</h2>
+<p style="margin:7mm 0 0;font-size:11.5pt;line-height:1.45;color:rgba(255,255,255,.85);max-width:140mm">Der erste Termin kostet dich nichts außer einer Stunde Zeit. Danach weißt du, woher die Feuchtigkeit kommt und was zu tun ist.</p>
+<div style="margin-top:10mm;display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+<div style="border-radius:5px;background:#fff;padding:6mm;display:flex;flex-direction:column;gap:3mm;min-height:52mm">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#4daf46">Dein Fachbetrieb</div>
+<div style="display:flex;flex-direction:column;gap:4mm;margin-top:1mm">
+<div style="height:.35mm;background:#e3e1dc"></div>
+<div style="height:.35mm;background:#e3e1dc"></div>
+<div style="height:.35mm;background:#e3e1dc"></div>
+<div style="height:.35mm;background:#e3e1dc"></div>
+</div>
+<div style="margin-top:auto;font-size:8.5pt;line-height:1.5;color:#8a8a8a">Betriebsname, Anschrift, Telefon, E-Mail</div>
+</div>
+<div style="border-radius:5px;background:#1c4b42;padding:6mm;display:flex;flex-direction:column;gap:3mm;min-height:52mm">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:3mm"><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.12em;text-transform:uppercase;color:#b4e717">Zertifizierung</span><img loading="lazy" decoding="async" src="uploads/signatur-bkm-systempartner-logo.png" alt="Zertifiziert durch BKM Mannesmann" style="width:24mm;height:24mm;display:block"></div>
+<div style="font-size:10.5pt;line-height:1.5;color:#fff">Geschult auf Feuchtigkeitsschutz und Bauwerksabdichtung, arbeitet mit der BKM Pro Line, dokumentiert jede Ausführung. Die Zertifizierung wird regelmäßig erneuert.</div>
+<div style="margin-top:auto;font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,.6)">bkm-mannesmann.de/fachbetriebe</div>
+</div>
+</div>
+<div style="margin-top:auto;display:grid;grid-template-columns:1fr 42mm;gap:6mm;align-items:end">
+<div style="display:flex;flex-direction:column;gap:4mm">
+<div style="width:34mm;height:34mm;border-radius:5px;border:.5mm dashed rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center"><span style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:7pt;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,.7);text-align:center;line-height:1.4">Stempel<br>34 × 34</span></div>
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:10pt;line-height:1.3;letter-spacing:-0.02em;color:#b4e717">Dein Zuhause. Deine Region. Ein Fachbetrieb, der beides kennt.</div>
+</div>
+<img loading="lazy" decoding="async" src="assets/logos/bkm-logo-white-puregreen.svg" alt="BKM" style="width:42mm;display:block">
+</div>
+</div>
+</div>
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;color:#8a8a8a;text-transform:uppercase">Leistungsraster · Kontakt mit Freifeld und Stempel</div>
+</div>
+
+</div>
+</section>
+</x-dc>
+</body>
+</html>

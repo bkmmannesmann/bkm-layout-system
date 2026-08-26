@@ -9,13 +9,28 @@
    - Format: DIN A4 (210mm × 297mm)
    - Seitenrand links: 18.0mm
    - Seitenrand rechts: 17.3mm (≈18mm)
-   - Seitenrand oben: 20.4mm (erste Headline)
-   - Spaltenbreite: 55.4mm
-   - Spaltenabstand (Gutter): 4.3mm
+   - Seitenrand oben: 20.4mm (erste Headline)   [ueberholt, siehe unten]
+   - Spaltenbreite: 55.4mm                      [ueberholt]
+   - Spaltenabstand (Gutter): 4.3mm             [ueberholt]
    - 2 Spalten: 115.1mm (2×55.4 + 1×4.3)
    - 3 Spalten: 174.0mm (3×55.4 + 2×4.3)
    - Spalten-Startpositionen: 18.0mm | 77.7mm | 137.3mm
    
+   Die Messwerte unten sind der Herkunftsnachweis, nicht die geltende Quelle.
+   Verbindlich sind die Variablen: Farben aus design-system/variables.css, das
+   Raster aus dem :root-Block weiter unten. Drei gemessene Toene weichen um
+   einen Rasterschritt vom Corporate Design ab und wurden auf das CD normiert:
+   Kopfsteg, Fusssteg und Spaltensteg sind seit dem 25.08.2026 auf die
+   Werte aus docs/print-anwendungen.md des Design-Systems gezogen:
+   Kopfsteg 26.7mm, Fusssteg 23.5mm, Steg 4.6mm. Fuer die frueheren
+   20.4mm und 4.3mm fand die Herkunftspruefung keine Quelle.
+
+   Stone Grey #484848 -> #494949, Transition Green #277c4b -> #287d4b,
+   Lime Green #8cc63f -> #b4e717. Der letzte Wert ist in
+   docs/LAYOUT-CONTRACT.md ausdruecklich als verbotener Altwert gefuehrt.
+   Ebenso ersetzt: Bildplatzhalter #d8d8d9 -> #d9d7d3 und Trennlinie
+   #e0e0e0 -> #e3e1dc, beide jetzt aus der Palette.
+
    TYPOGRAFIE-HIERARCHIE (gemessen):
    - Hauptheadline: Unbounded Black, 30pt, Versalien, #4daf46
    - Sektions-Headline: Unbounded Black, 18pt, #287d4b
@@ -34,31 +49,87 @@
    
    ============================================================ */
 
-/* === FONT FACES === */
+/* === QUELLEN === */
+@import url('../../design-system/variables.css');
+
+/* Broschuerenraster. Bewusst eigene Variablen: die generischen --margin-*
+   und --column-gap in variables.css fuehren 15mm bzw. 5mm und beschreiben
+   nicht den hier vermessenen Broschuerensatzspiegel. */
+:root {
+  /* --- Eingaben. Nur diese vier Werte werden gesetzt. ------------------- */
+  --brochure-margin-x:      18.0mm;  /* Aussen- und Innenrand */
+  --brochure-margin-top:    26.7mm;  /* Kopfsteg */
+  --brochure-gutter:         4.6mm;  /* Spaltenabstand */
+  --brochure-footer-zone:   23.5mm;  /* Fusssteg */
+
+  /* --- Abgeleitet. Nicht von Hand setzen. -------------------------------
+     Spaltenbreite und Satzbreite waren frueher eigene Zahlen: 55.4mm und
+     174.0mm. Beide beschreiben dieselbe Sache, und sie widersprachen sich -
+     3 x 55.4 + 2 x 4.3 sind 174.8mm, nicht 174.0mm. Im Druck stand die
+     dritte Spalte dadurch 0.8mm ueber der rechten Fluchtlinie.
+
+     Jetzt rechnet das Stylesheet. Damit geht das Raster per Konstruktion
+     auf, gleich welcher Steg gilt, und es gibt keine zweite Zahl mehr, die
+     abweichen koennte.
+
+     WeasyPrint loest ein calc() nicht auf, wenn darin eine Variable steht,
+     die selbst ein calc() ist - das Ergebnis wird 0 und die Breite faellt auf
+     auto. Jede Groesse rechnet deshalb direkt aus den beiden Eingaben, keine
+     baut auf einer anderen abgeleiteten auf. Der Ausdruck wiederholt sich
+     dadurch; das ist der Preis dafuer, dass er traegt. */
+  --brochure-col-3: calc(210mm - 2 * var(--brochure-margin-x));
+  --brochure-col:   calc((210mm - 2 * var(--brochure-margin-x)
+                          - 2 * var(--brochure-gutter)) / 3);
+  --brochure-col-2: calc((210mm - 2 * var(--brochure-margin-x)
+                          - 2 * var(--brochure-gutter)) / 3 * 2
+                         + var(--brochure-gutter));
+
+  /* Rollen, nicht Farben: beide zeigen auf die geltende Palette. */
+  --brochure-placeholder-bg: var(--bkm-rule);      /* #d9d7d3, Bildplatzhalter */
+  --brochure-rule:           var(--bkm-hairline);  /* #e3e1dc, Trennlinie Inhaltsverzeichnis */
+}
+
+/* === FONT FACES ===
+   Quelle: assets/fonts/ – dieselben Dateien, die design-system/base.css nutzt.
+   Die zuvor referenzierten .woff2-Dateien liegen nicht im Repository; WeasyPrint
+   fiel dadurch stillschweigend auf DejaVu Sans zurueck. Vorhanden sind von
+   Unbounded ausschliesslich der Black-Schnitt und von TT Norms Pro Regular/Bold. */
+
 @font-face {
   font-family: 'Unbounded';
-  src: url('../../assets/fonts/Unbounded_900.woff2') format('woff2');
+  src: url('../../assets/fonts/Unbounded-Black.ttf') format('truetype');
   font-weight: 900;
-}
-@font-face {
-  font-family: 'Unbounded';
-  src: url('../../assets/fonts/Unbounded_700.woff2') format('woff2');
-  font-weight: 700;
-}
-@font-face {
-  font-family: 'Unbounded';
-  src: url('../../assets/fonts/Unbounded_400.woff2') format('woff2');
-  font-weight: 400;
+  font-style: normal;
 }
 @font-face {
   font-family: 'TT Norms Pro';
-  src: url('../../assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');
+  src: url('../../assets/fonts/TT_Norms_Pro_Regular.ttf') format('truetype');
   font-weight: 400;
+  font-style: normal;
 }
 @font-face {
   font-family: 'TT Norms Pro';
-  src: url('../../assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');
+  src: url('../../assets/fonts/TT_Norms_Pro_Bold.ttf') format('truetype');
   font-weight: 700;
+  font-style: normal;
+}
+
+/* Umlaut-Absicherung, identisch zu design-system/base.css: Einige externe
+   PDF-/Druck-Renderer ersetzen TT-Norms-Umlaute und ss durch einen
+   Trial-Hinweis. Nur diese acht Glyphen beziehen eine lokale Sans-Serif. */
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../../assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../../assets/fonts/LiberationSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
 }
 
 /* === RESET & BASE === */
@@ -85,11 +156,16 @@ html, body {
   width: 210mm;
   height: 297mm;
   overflow: hidden;
+  /* Spaltenfluss, damit ein Band mit --tail bis zum Blattfuss durchlaeuft.
+     Die absolut gesetzten Kinder (.page__content, .page__footer) bleiben
+     davon unberuehrt. */
+  display: flex;
+  flex-direction: column;
   page-break-after: always;
   font-family: 'TT Norms Pro', sans-serif;
   font-size: 9pt;
   line-height: 1.42;
-  color: #484848;
+  color: var(--bkm-stone-grey);
 }
 
 .page:last-child {
@@ -99,10 +175,10 @@ html, body {
 /* Content-Bereich mit korrekten Rändern */
 .page__content {
   position: absolute;
-  top: 20.4mm;
-  left: 18.0mm;
-  width: 174.0mm;
-  height: 258.6mm; /* 297 - 20.4 - 18 */
+  top: var(--brochure-margin-top);
+  left: var(--brochure-margin-x);
+  width: var(--brochure-col-3);
+  height: calc(297mm - var(--brochure-margin-top) - var(--brochure-footer-zone));
 }
 
 /* ============================================================
@@ -117,7 +193,11 @@ html, body {
   line-height: 1.13; /* gemessen: 13.3mm Zeilenabstand bei 30pt */
   letter-spacing: 0;
   text-transform: uppercase;
-  color: #4daf46; /* Pure Green – gemessen */
+  /* Transition Green statt des gemessenen Pure Green: der Seitengrund ist
+     weiss, und Pure Green misst darauf 2,79 - laut Kontrastmatrix des
+     Design-Systems nur dekorativ zulaessig. Auf farbigen Flaechen setzt
+     die jeweilige .surface--* ihren eigenen Ton. */
+  color: var(--bkm-transition-green);
   margin: 0;
 }
 
@@ -129,7 +209,7 @@ html, body {
   line-height: 1.25;
   letter-spacing: 0;
   text-transform: none;
-  color: #287d4b; /* Transition Green – gemessen */
+  color: var(--bkm-transition-green); /* Transition Green – gemessen */
   margin: 0;
 }
 
@@ -140,7 +220,8 @@ html, body {
   font-size: 9pt;
   line-height: 1.4;
   letter-spacing: 0;
-  color: #4daf46; /* Pure Green – gemessen */
+  /* Wie die Hauptheadline: auf weissem Grund traegt Pure Green nicht. */
+  color: var(--bkm-transition-green);
   margin: 0;
 }
 
@@ -150,10 +231,13 @@ html, body {
   font-weight: 400;
   font-size: 9pt;
   line-height: 1.42; /* gemessen: 4.0mm / (9pt × 0.353mm) = 1.26, CSS-korrigiert auf 1.42 */
-  color: #484848; /* Stone Grey – gemessen */
+  color: var(--bkm-stone-grey); /* Stone Grey – gemessen */
   text-align: justify;
   hyphens: auto;
   -webkit-hyphens: auto;
+  /* TT Norms Pro enthaelt kein U+2010; ohne diese Zeile setzt WeasyPrint
+     an jeder Trennstelle .notdef als schwarzes Kaestchen. */
+  hyphenate-character: "-";
 }
 
 /* Fließtext Bold */
@@ -162,7 +246,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #484848;
+  color: var(--bkm-stone-grey);
 }
 
 /* ============================================================
@@ -197,52 +281,52 @@ html, body {
 /* ============================================================
    SPALTEN-SYSTEM (exakt gemessen)
    Spaltenbreite: 55.4mm | Gutter: 4.3mm
-   Startpositionen: 18.0mm | 77.7mm | 137.3mm
+   Startpositionen: var(--brochure-margin-x) | 77.7mm | 137.3mm
    ============================================================ */
 
 /* 3-Spalten mit CSS columns */
 .columns-3 {
   column-count: 3;
-  column-gap: 4.3mm;
-  width: 174.0mm;
+  column-gap: var(--brochure-gutter);
+  width: var(--brochure-col-3);
 }
 
 /* 2-Spalten mit CSS columns */
 .columns-2 {
   column-count: 2;
-  column-gap: 4.3mm;
-  width: 115.1mm; /* 2×55.4 + 1×4.3 */
+  column-gap: var(--brochure-gutter);
+  width: var(--brochure-col-2); /* 2×55.4 + 1×4.3 */
 }
 
 /* 2-Spalten volle Breite (für 3-Spalten-Seiten) */
 .columns-2-wide {
   column-count: 2;
-  column-gap: 4.3mm;
-  width: 174.0mm;
+  column-gap: var(--brochure-gutter);
+  width: var(--brochure-col-3);
 }
 
 /* Flexbox-Spalten (für ungleiche Inhalte) */
 .flex-cols-2 {
   display: flex;
-  gap: 4.3mm;
-  width: 115.1mm;
+  gap: var(--brochure-gutter);
+  width: var(--brochure-col-2);
 }
 
 .flex-cols-3 {
   display: flex;
-  gap: 4.3mm;
-  width: 174.0mm;
+  gap: var(--brochure-gutter);
+  width: var(--brochure-col-3);
 }
 
 .flex-cols-2 > .col,
 .flex-cols-3 > .col {
-  width: 55.4mm;
+  width: var(--brochure-col);
   flex-shrink: 0;
 }
 
 /* Breite Spalte (2 Spalten zusammen) */
 .col-wide {
-  width: 115.1mm;
+  width: var(--brochure-col-2);
   flex-shrink: 0;
 }
 
@@ -253,9 +337,9 @@ html, body {
 
 .module-opener {
   position: absolute;
-  top: 20.4mm;
-  left: 18.0mm;
-  width: 174.0mm;
+  top: var(--brochure-margin-top);
+  left: var(--brochure-margin-x);
+  width: var(--brochure-col-3);
 }
 
 .module-opener .headline-large {
@@ -278,7 +362,7 @@ html, body {
    ============================================================ */
 
 .module-section {
-  width: 174.0mm;
+  width: var(--brochure-col-3);
 }
 
 .module-section .headline-section {
@@ -320,7 +404,7 @@ html, body {
 
 .module-split__image {
   flex: 0 0 50%;
-  background: #d8d8d9;
+  background: var(--brochure-placeholder-bg);
   overflow: hidden;
 }
 
@@ -333,7 +417,7 @@ html, body {
 
 .module-split__text {
   flex: 1;
-  padding: 18.0mm;
+  padding: var(--brochure-margin-x);
 }
 
 .module-split--reversed {
@@ -352,15 +436,15 @@ html, body {
 
 /* ============================================================
    MODUL: KONTRASTSEKTION (dunkler Hintergrund)
-   Gemessen: rgb(72,72,72) = #484848, Höhe variabel
+   Gemessen: rgb(72,72,72) = var(--bkm-stone-grey), Höhe variabel
    ============================================================ */
 
 .module-dark {
   position: absolute;
   width: 210mm;
   left: 0;
-  background-color: #484848;
-  padding: 20.4mm 18.0mm 18.0mm 18.0mm;
+  background-color: var(--bkm-stone-grey);
+  padding: var(--brochure-margin-top) var(--brochure-margin-x) var(--brochure-margin-x) var(--brochure-margin-x);
 }
 
 .module-dark--top {
@@ -379,23 +463,25 @@ html, body {
 }
 
 .module-dark--green {
-  background-color: #277c4b; /* Transition Green gemessen: rgb(39,124,75) */
+  background-color: var(--bkm-transition-green); /* Transition Green gemessen: rgb(39,124,75) */
 }
 
 .module-dark .headline-large {
-  color: #ffffff;
+  color: var(--bkm-white);
 }
 
 .module-dark .headline-section {
-  color: #ffffff;
+  color: var(--bkm-white);
 }
 
 .module-dark .leadline {
-  color: #4daf46;
+  /* Wie bei den benannten Flaechen: auf dunklem Grund traegt Lime,
+     Pure Green auf Transition Green misst nur 1,8. */
+  color: var(--bkm-lime-green);
 }
 
 .module-dark .body-text {
-  color: #ffffff;
+  color: var(--bkm-white);
 }
 
 /* ============================================================
@@ -404,16 +490,17 @@ html, body {
    ============================================================ */
 
 .module-quote {
-  background-color: #4daf46; /* Pure Green */
+  /* Grund- und Textfarbe kommen aus der Flaechenklasse, nicht von hier. */
   padding: 10mm 12mm;
-  width: 97.0mm; /* Gemessen: X=95.0 bis X=192.0 */
-  height: 20.0mm; /* Gemessen */
+  width: 97.0mm;      /* Gemessen: X=95.0 bis X=192.0 */
+  min-height: 20.0mm; /* Gemessen; waechst mit laengeren Zitaten mit */
+  margin-top: 9.7mm;
   display: flex;
   align-items: center;
 }
 
 .module-quote--wide {
-  width: 115.1mm;
+  width: var(--brochure-col-2);
   height: auto;
   padding: 12mm 14mm;
 }
@@ -423,15 +510,15 @@ html, body {
   font-weight: 900;
   font-size: 9pt;
   line-height: 1.4;
-  color: #ffffff;
+  color: var(--bkm-white);
 }
 
 .module-quote--transition-green {
-  background-color: #277c4b;
+  background-color: var(--bkm-transition-green);
 }
 
 .module-quote--dark {
-  background-color: #484848;
+  background-color: var(--bkm-stone-grey);
 }
 
 /* Key Visual mini in Zitat-Box */
@@ -459,7 +546,7 @@ html, body {
   font-weight: 700;
   font-size: 9pt;
   line-height: 1.42;
-  color: #484848;
+  color: var(--bkm-stone-grey);
   margin-bottom: 0;
 }
 
@@ -468,7 +555,7 @@ html, body {
   font-weight: 400;
   font-size: 9pt;
   line-height: 1.42;
-  color: #484848;
+  color: var(--bkm-stone-grey);
 }
 
 /* Vorteil-Block */
@@ -480,7 +567,17 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #484848;
+  color: var(--bkm-stone-grey);
+}
+
+/* Titelzeile eines Aufzaehlungseintrags im Seitentyp list. */
+.module-list__title {
+  font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 700;
+  font-size: 9pt;
+  line-height: 1.42;
+  color: var(--bkm-stone-grey);
+  margin: 0 0 1mm 0;
 }
 
 .module-process__benefit-body {
@@ -488,7 +585,7 @@ html, body {
   font-weight: 400;
   font-size: 9pt;
   line-height: 1.42;
-  color: #484848;
+  color: var(--bkm-stone-grey);
 }
 
 /* ============================================================
@@ -498,9 +595,9 @@ html, body {
 
 .module-toc {
   position: absolute;
-  top: 20.4mm;
-  left: 18.0mm;
-  width: 174.0mm;
+  top: var(--brochure-margin-top);
+  left: var(--brochure-margin-x);
+  width: var(--brochure-col-3);
 }
 
 .module-toc__title {
@@ -508,7 +605,7 @@ html, body {
   font-weight: 900;
   font-size: 18pt;
   line-height: 1.25;
-  color: #287d4b;
+  color: var(--bkm-transition-green);
   margin-bottom: 9.7mm; /* 115px */
 }
 
@@ -524,14 +621,14 @@ html, body {
   justify-content: space-between;
   align-items: baseline;
   padding: 2.5mm 0;
-  border-bottom: 0.3mm solid #287d4b;
+  border-bottom: 0.3mm solid var(--bkm-transition-green);
 }
 
 .module-toc__chapter-title {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #484848;
+  color: var(--bkm-stone-grey);
   flex: 1;
 }
 
@@ -539,7 +636,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #4daf46;
+  color: var(--bkm-transition-green);  /* auf hellem Grund; Pure Green misst dort 2,79 */
   margin-left: 3mm;
   flex-shrink: 0;
 }
@@ -550,14 +647,14 @@ html, body {
   justify-content: space-between;
   align-items: baseline;
   padding: 1.5mm 0 1.5mm 6mm;
-  border-bottom: 0.15mm solid #e0e0e0;
+  border-bottom: 0.15mm solid var(--brochure-rule);
 }
 
 .module-toc__sub-title {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 9pt;
-  color: #484848;
+  color: var(--bkm-stone-grey);
   flex: 1;
 }
 
@@ -565,7 +662,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 9pt;
-  color: #484848;
+  color: var(--bkm-stone-grey);
   margin-left: 3mm;
   flex-shrink: 0;
 }
@@ -574,6 +671,220 @@ html, body {
 .module-toc__list--two-col {
   column-count: 2;
   column-gap: 8.6mm; /* 2× Gutter */
+}
+
+/* ============================================================
+   SEITENTYP OPENER: BLATTHAELFTEN
+   ============================================================
+   Die Hoehen 131.2mm und 165.8mm stammen aus der Vermessung. Die untere
+   Haelfte laeuft bis zur Blattunterkante durch und haelt den Fusssteg
+   frei, weil die Fusszeile auf ihr steht.
+   ============================================================ */
+
+.opener-half {
+  position: absolute;
+  left: 0;
+  width: 210mm;
+  overflow: hidden;
+  padding: var(--brochure-margin-top) var(--brochure-margin-x) 0 var(--brochure-margin-x);
+}
+
+.opener-half--upper { top: 0;        height: 131.2mm; }
+
+.opener-half--lower {
+  top: 131.2mm;
+  height: 165.8mm;
+  padding-bottom: var(--brochure-footer-zone);
+}
+
+/* ============================================================
+   BENANNTE FLAECHEN
+   ============================================================
+   Eine Flaeche legt Grundton, Textfarbe, Headline- und Akzentfarbe
+   gemeinsam fest. Der Content waehlt einen Namen, nie einen Farbwert -
+   dadurch kann keine Kombination entstehen, die im Druck nicht traegt.
+
+   Der Akzent ist auf allen dunklen Flaechen Lime. Pure Green auf
+   Transition Green ergibt ein Kontrastverhaeltnis von 1.8:1 und ist als
+   9-pt-Leadline nicht lesbar; Lime bringt dort 3.5:1, auf Deep Green
+   6.7:1 und auf Stone Grey 6.2:1.
+
+   Auf hellem Grund tragen Hauptheadline und Akzent Transition Green.
+   Pure Green misst dort 2,79 und ist laut Kontrastmatrix des
+   Design-Systems nur dekorativ zulaessig; die vermessene Bestands-
+   broschuere setzte es trotzdem als Headline. Der Bestand wird auf die
+   Regel gezogen, nicht die Regel auf den Bestand.
+
+   Auf dunklen Flaechen bleibt es beim Ton der Vorlage: Pure Green auf
+   Stone Grey, Lime auf den beiden dunklen Gruentoenen, Deep Green auf
+   Pure Green.
+   ============================================================ */
+
+.surface { color: var(--surface-text); }
+
+.surface .headline-large   { color: var(--surface-hl-large); }
+.surface .headline-section { color: var(--surface-hl-section); }
+.surface .leadline         { color: var(--surface-accent); }
+
+/* Auf dunklen Flaechen steht die Leadline groesser. Lime auf Transition
+   Green misst 3,49 und ist damit nur fuer grossen Text zugelassen; bei
+   9pt waere das verletzt. Auf hellem Grund genuegen 9pt, weil Transition
+   Green dort 5,09 erreicht. */
+.surface--deep .leadline,
+.surface--transition .leadline,
+.surface--pure .leadline,
+.surface--stone .leadline  { font-size: 11pt; }
+.surface .body-text        { color: var(--surface-text); }
+.surface .body-text strong { color: var(--surface-text); }
+.surface .module-quote__text { color: var(--surface-text); }
+
+.surface--deep {
+  background: var(--bkm-deep-green);
+  --surface-text:       var(--bkm-white);
+  --surface-hl-large:   var(--bkm-lime-green);
+  --surface-hl-section: var(--bkm-white);
+  --surface-accent:     var(--bkm-lime-green);
+}
+
+.surface--transition {
+  background: var(--bkm-transition-green);
+  --surface-text:       var(--bkm-white);
+  --surface-hl-large:   var(--bkm-lime-green);
+  --surface-hl-section: var(--bkm-white);
+  --surface-accent:     var(--bkm-lime-green);
+}
+
+.surface--pure {
+  background: var(--bkm-pure-green);
+  --surface-text:       var(--bkm-white);
+  --surface-hl-large:   var(--bkm-deep-green);
+  --surface-hl-section: var(--bkm-white);
+  --surface-accent:     var(--bkm-deep-green);
+}
+
+.surface--stone {
+  background: var(--bkm-stone-grey);
+  --surface-text:       var(--bkm-white);
+  --surface-hl-large:   var(--bkm-pure-green);
+  --surface-hl-section: var(--bkm-white);
+  --surface-accent:     var(--bkm-lime-green);
+}
+
+.surface--sand {
+  background: var(--bkm-sand-white);
+  --surface-text:       var(--bkm-stone-grey);
+  --surface-hl-large:   var(--bkm-transition-green);
+  --surface-hl-section: var(--bkm-transition-green);
+  --surface-accent:     var(--bkm-transition-green);
+}
+
+.surface--white {
+  background: var(--bkm-white);
+  --surface-text:       var(--bkm-stone-grey);
+  --surface-hl-large:   var(--bkm-transition-green);
+  --surface-hl-section: var(--bkm-transition-green);
+  --surface-accent:     var(--bkm-transition-green);
+}
+
+/* Die Fusszeile erbt die Textfarbe ihrer Flaeche. */
+.surface > .page__footer { color: var(--surface-text); }
+
+/* ============================================================
+   SEITENTYP FEATURE: BAENDER IM FLUSS
+   ============================================================
+   Bild- und Textbaender laufen ueber die volle Blattbreite und stehen
+   im normalen Fluss untereinander. Frueher war jedes Band absolut
+   gesetzt und der Unterblock startete auf einer frei gewaehlten
+   Millimeterkante - lag die zu hoch, deckte das Band den Text darueber
+   zu, ohne dass der Build etwas meldete.
+   ============================================================ */
+
+.feature-band {
+  width: 210mm;
+  overflow: hidden;
+}
+
+.feature-band__body {
+  padding: var(--brochure-margin-top) var(--brochure-margin-x);
+}
+
+/* Letztes Band der Seite: laeuft bis zur Blattunterkante durch, damit die
+   Farbflaeche nicht auf halber Hoehe abbricht und die Fusszeile
+   berechenbar auf ihr steht. */
+.feature-band--tail {
+  flex: 1 1 auto;
+  /* Fusssteg freihalten, sonst laeuft der Text in die Seitenzahl. */
+  padding-bottom: var(--brochure-footer-zone);
+}
+
+.feature-band img,
+.feature-split__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.feature-split {
+  display: flex;
+  align-items: flex-start;
+  width: 210mm;
+}
+
+.feature-split--reversed { flex-direction: row-reverse; }
+
+.feature-split__media {
+  flex: none;
+  overflow: hidden;
+  background: var(--brochure-placeholder-bg);
+}
+
+.feature-split__body {
+  flex: 1 1 auto;
+  padding: var(--brochure-margin-top) var(--brochure-margin-x);
+}
+
+/* ============================================================
+   FUSSZEILE: SEITENZAHL UND KOLUMNENTITEL
+   ============================================================
+   Grundlinie 18mm ueber der Blattunterkante, also derselbe Abstand wie
+   der seitliche Satzspiegelrand. Die Ziffer steht aussen, der
+   Kolumnentitel innen: auf der geraden (linken) Seite Ziffer links, auf
+   der ungeraden (rechten) Seite Ziffer rechts. Die Fusszeile liegt ueber
+   den Farbflaechen der Seitentypen, daher z-index.
+   ============================================================ */
+
+.page__footer {
+  position: absolute;
+  bottom: var(--brochure-margin-x);
+  left: var(--brochure-margin-x);
+  width: var(--brochure-col-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'TT Norms Pro', sans-serif;
+  font-size: 8pt;
+  line-height: 1;
+  z-index: 10;
+}
+
+/* Gerade Seitenzahl = linke Seite im Bund: Ziffer aussen links. */
+.page__footer--verso { flex-direction: row; }
+
+/* Ungerade Seitenzahl = rechte Seite im Bund: Ziffer aussen rechts. */
+.page__footer--recto { flex-direction: row-reverse; }
+
+.page__folio {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.page__runninghead {
+  /* Bewusst ohne opacity: WeasyPrint legt transparente Elemente in eine
+     eigene Transparenzgruppe, die im Druck rastert statt sauber zu
+     separieren. Der Unterschied zur Seitenzahl liegt im Schnitt - die
+     Ziffer steht Bold, der Kolumnentitel Regular. */
+  font-weight: 400;
 }
 
 /* ============================================================
@@ -620,7 +931,7 @@ html, body {
   font-weight: 700;
   font-size: 16pt;
   line-height: 1.3;
-  color: #1c4b42; /* Deep Green */
+  color: var(--bkm-deep-green); /* Deep Green */
   margin-bottom: 4.3mm; /* 51px */
 }
 
@@ -629,7 +940,7 @@ html, body {
   font-weight: 400;
   font-size: 9pt;
   line-height: 1.42;
-  color: #1c4b42;
+  color: var(--bkm-deep-green);
   margin-bottom: 3.4mm; /* 40px */
 }
 
@@ -638,7 +949,7 @@ html, body {
   font-weight: 700;
   font-size: 9pt;
   line-height: 1.42;
-  color: #4daf46; /* Pure Green */
+  color: var(--bkm-transition-green); /* Pure Green */
 }
 
 /* Kontaktdaten: Position Y=226.0mm, X=147.3mm */
@@ -653,7 +964,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: #000000;
+  color: var(--bkm-black);
   margin-bottom: 0;
 }
 
@@ -661,7 +972,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 9pt;
-  color: #000000;
+  color: var(--bkm-black);
   line-height: 1.42;
 }
 
@@ -673,12 +984,12 @@ html, body {
 .backcover-imprint {
   position: absolute;
   top: 271.0mm;
-  left: 18.0mm;
+  left: var(--brochure-margin-x);
   width: 100mm;
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 6pt;
-  color: #000000;
+  color: var(--bkm-black);
   line-height: 1.4;
 }
 
@@ -686,7 +997,7 @@ html, body {
 .backcover-badge {
   position: absolute;
   top: 242.1mm;
-  left: 18.0mm;
+  left: var(--brochure-margin-x);
   height: 8.0mm;
   width: auto;
 }
@@ -696,7 +1007,7 @@ html, body {
    ============================================================ */
 
 .image-panel {
-  background: #d8d8d9;
+  background: var(--brochure-placeholder-bg);
   overflow: hidden;
 }
 
@@ -743,21 +1054,21 @@ html, body {
 .mt-xxl { margin-top: 28.2mm; }
 
 /* Farbklassen */
-.color-pure-green { color: #4daf46; }
-.color-transition-green { color: #287d4b; }
-.color-deep-green { color: #1c4b42; }
-.color-lime-green { color: #8cc63f; }
-.color-stone-grey { color: #484848; }
-.color-white { color: #ffffff; }
-.color-black { color: #000000; }
+.color-pure-green { color: var(--bkm-pure-green); }
+.color-transition-green { color: var(--bkm-transition-green); }
+.color-deep-green { color: var(--bkm-deep-green); }
+.color-lime-green { color: var(--bkm-lime-green); }
+.color-stone-grey { color: var(--bkm-stone-grey); }
+.color-white { color: var(--bkm-white); }
+.color-black { color: var(--bkm-black); }
 
 /* Hintergrundfarben */
-.bg-pure-green { background-color: #4daf46; }
-.bg-transition-green { background-color: #277c4b; }
-.bg-deep-green { background-color: #1c4b42; }
-.bg-stone-grey { background-color: #484848; }
-.bg-light-grey { background-color: #d8d8d9; }
-.bg-white { background-color: #ffffff; }
+.bg-pure-green { background-color: var(--bkm-pure-green); }
+.bg-transition-green { background-color: var(--bkm-transition-green); }
+.bg-deep-green { background-color: var(--bkm-deep-green); }
+.bg-stone-grey { background-color: var(--bkm-stone-grey); }
+.bg-light-grey { background-color: var(--brochure-placeholder-bg); }
+.bg-white { background-color: var(--bkm-white); }
 
 /* Positionierung */
 .absolute { position: absolute; }

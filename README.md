@@ -36,7 +36,39 @@ python3 scripts/build_cover.py proline
 python3 scripts/build_cover.py anleitung
 ```
 
-### Prospekt generieren (Innenseiten)
+### Broschüren-Innenteil generieren
+
+Der Innenteil trennt Inhalt, Layout und Prüfung genauso wie das TDS-System. Kopiere für eine
+neue Broschüre einen Ordner aus `content/`, pflege `content.json` und prüfe vor dem Bau:
+
+```bash
+python3 scripts/validate_brochure.py                                    # Layout
+python3 scripts/validate_brochure.py content/broschuere-mannesmann/content.json  # Inhalt
+python3 scripts/build_pages.py broschuere-mannesmann                    # Bau + Ausgabeprüfung
+```
+
+Für alles, was **außerhalb** dieser Templates entsteht und trotzdem im Corporate Design stehen
+soll — Entwürfe aus Claude Design (`.dc.html`), Dateien aus anderen Repositories, exportiertes
+HTML oder SVG — gibt es einen Drift-Prüfer:
+
+```bash
+python3 scripts/check_brand_drift.py --list                  # geltende Palette ausgeben
+python3 scripts/check_brand_drift.py pfad/zur/datei.dc.html  # eine Datei
+python3 scripts/check_brand_drift.py ../anderes-repo         # ein ganzes Verzeichnis
+```
+
+Er meldet gesperrte Altwerte, Töne die einen Palettenwert knapp verfehlen, fremde Farben und
+Schriften außerhalb der Markenschriften. Kommentare und Markdown bleiben außen vor, weil die
+Layoutverträge die Altwerte selbst auflisten.
+
+Der Bau prüft das erzeugte PDF nach: eingebettete Schriften, Vollständigkeit des Textes,
+Lage im Satzspiegel und Zeilenzahl der Hauptheadline. Ein Verstoß schlägt auf den Exit-Code
+durch. Die verbindlichen Regeln stehen in [`docs/BROSCHUERE-LAYOUT.md`](docs/BROSCHUERE-LAYOUT.md).
+
+Als Referenz liegt `content/broschuere-mannesmann/` im Repository — eine Unternehmensbroschüre,
+die alle sieben Seitentypen verwendet. Offene Punkte darin sind mit `[ANGABE FEHLT: …]` markiert.
+
+Die ältere Fassung mit eigenem Template:
 
 ```bash
 python3 scripts/build.py prospekt-fachbetrieb
@@ -199,9 +231,12 @@ Die Schriftdateien liegen in `/assets/fonts/` (woff2-Format):
 
 ## Nächste Schritte (TODO)
 
-- [ ] Innenseiten-Templates (Spalten, Zitat-Box, Produkt-Grid)
-- [ ] Rückseiten-Template
-- [ ] Content-Pipeline für verschiedene Broschüren-Typen
+- [x] Innenseiten-Templates (sieben Seitentypen, siehe `docs/BROSCHUERE-LAYOUT.md`)
+- [x] Rückseiten-Template
+- [x] Content-Pipeline für verschiedene Broschüren-Typen
+- [ ] Bildmotive für die Innenseiten (aktuell greift der graue Platzhalter)
+- [ ] `assets/images/placeholder/hero.jpg` — fehlt, das Titelblatt rendert den Alt-Text
+- [ ] Raster zusammenführen: `variables.css` führt 15mm/5mm, die Broschüre 18mm/4.3mm
 - [ ] CMYK-Konvertierung für Druckproduktion
 
 ## Lizenz

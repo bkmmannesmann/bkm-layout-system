@@ -1,0 +1,63 @@
+name: Broschuere
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  # Layout- und Inhaltspruefung. Laeuft ohne Abhaengigkeiten, deshalb ohne
+  # Installationsschritt - genauso wie die TDS-Pruefung.
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Layoutvertrag pruefen
+        run: python3 scripts/validate_brochure.py
+
+      - name: Inhalte pruefen
+        run: |
+          status=0
+          shopt -s nullglob
+          for file in content/*/content.json; do
+            case "$file" in
+              content/tds*) continue ;;   # Datenblaetter prueft validate_tds.py
+            esac
+            echo "--- $file"
+            python3 scripts/validate_brochure.py "$file" || status=1
+          done
+          exit $status
+
+  # Bau der Demo samt Ausgabepruefung: eingebettete Schriften, Vollstaendigkeit
+  # des Textes und Lage im Satzspiegel lassen sich nur am fertigen PDF pruefen.
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Systembibliotheken fuer WeasyPrint
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz-subset0
+
+      - name: Python-Abhaengigkeiten
+        run: pip install -r requirements.txt
+
+      - name: Demo bauen und Ausgabe pruefen
+        run: python3 scripts/build_pages.py demo
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: broschuere-demo
+          path: output/pages/*.pdf
+          if-no-files-found: warn
