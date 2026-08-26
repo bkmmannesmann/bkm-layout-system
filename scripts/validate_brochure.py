@@ -38,9 +38,9 @@ FONT_DIR = ROOT_DIR / "assets" / "fonts"
 # Eingaben: feste Werte, die von Hand gesetzt werden.
 RASTER = {
     "--brochure-margin-x": "18.0mm",
-    "--brochure-margin-top": "20.4mm",
-    "--brochure-gutter": "4.3mm",
-    "--brochure-footer-zone": "25.0mm",
+    "--brochure-margin-top": "26.7mm",
+    "--brochure-gutter": "4.6mm",
+    "--brochure-footer-zone": "23.5mm",
 }
 
 # Abgeleitete Groessen. Sie duerfen keine eigene Zahl tragen, sondern muessen

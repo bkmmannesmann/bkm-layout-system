@@ -115,7 +115,7 @@ def check_output(pdf_path, content_data):
 MARGIN_X = 18.0
 PAGE_W = 210.0
 PAGE_H = 297.0
-FOOTER_ZONE = 25.0                    # Fusssteg, siehe --brochure-footer-zone
+FOOTER_ZONE = 23.5                    # Fusssteg, siehe --brochure-footer-zone
 CONTENT_BOTTOM = PAGE_H - FOOTER_ZONE # 272.0mm, tiefste Grundlinie fuer Satz
 FOOTER_BASELINE = PAGE_H - MARGIN_X   # 279.0mm, Grundlinie der Seitenzahl
 TOLERANCE = 0.6                       # Rundung der Textmatrix
@@ -324,7 +324,7 @@ def build_demo():
                 "type": "feature",
                 "running_head": "Der Sanierungsprozess",
                 "layout": "top-image",
-                "image_height": "131.2mm",
+                "image_height": "110.0mm",
                 "headline": "Der Ablauf einer BKM Fachbetrieb-Sanierung",
                 "leadline": "Von der Analyse bis zur fertigen Abdichtung.",
                 "columns": 3,

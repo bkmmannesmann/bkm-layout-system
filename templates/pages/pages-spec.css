@@ -9,9 +9,9 @@
    - Format: DIN A4 (210mm × 297mm)
    - Seitenrand links: 18.0mm
    - Seitenrand rechts: 17.3mm (≈18mm)
-   - Seitenrand oben: 20.4mm (erste Headline)
-   - Spaltenbreite: 55.4mm
-   - Spaltenabstand (Gutter): 4.3mm
+   - Seitenrand oben: 20.4mm (erste Headline)   [ueberholt, siehe unten]
+   - Spaltenbreite: 55.4mm                      [ueberholt]
+   - Spaltenabstand (Gutter): 4.3mm             [ueberholt]
    - 2 Spalten: 115.1mm (2×55.4 + 1×4.3)
    - 3 Spalten: 174.0mm (3×55.4 + 2×4.3)
    - Spalten-Startpositionen: 18.0mm | 77.7mm | 137.3mm
@@ -20,6 +20,11 @@
    Verbindlich sind die Variablen: Farben aus design-system/variables.css, das
    Raster aus dem :root-Block weiter unten. Drei gemessene Toene weichen um
    einen Rasterschritt vom Corporate Design ab und wurden auf das CD normiert:
+   Kopfsteg, Fusssteg und Spaltensteg sind seit dem 25.08.2026 auf die
+   Werte aus docs/print-anwendungen.md des Design-Systems gezogen:
+   Kopfsteg 26.7mm, Fusssteg 23.5mm, Steg 4.6mm. Fuer die frueheren
+   20.4mm und 4.3mm fand die Herkunftspruefung keine Quelle.
+
    Stone Grey #484848 -> #494949, Transition Green #277c4b -> #287d4b,
    Lime Green #8cc63f -> #b4e717. Der letzte Wert ist in
    docs/LAYOUT-CONTRACT.md ausdruecklich als verbotener Altwert gefuehrt.
@@ -52,10 +57,10 @@
    nicht den hier vermessenen Broschuerensatzspiegel. */
 :root {
   /* --- Eingaben. Nur diese vier Werte werden gesetzt. ------------------- */
-  --brochure-margin-x:      18.0mm;  /* Satzspiegel links und rechts */
-  --brochure-margin-top:    20.4mm;  /* Oberkante erste Headline */
-  --brochure-gutter:         4.3mm;  /* Spaltenabstand */
-  --brochure-footer-zone:   25.0mm;  /* Fusssteg: Grundlinie 18mm + Zeile + Luft */
+  --brochure-margin-x:      18.0mm;  /* Aussen- und Innenrand */
+  --brochure-margin-top:    26.7mm;  /* Kopfsteg */
+  --brochure-gutter:         4.6mm;  /* Spaltenabstand */
+  --brochure-footer-zone:   23.5mm;  /* Fusssteg */
 
   /* --- Abgeleitet. Nicht von Hand setzen. -------------------------------
      Spaltenbreite und Satzbreite waren frueher eigene Zahlen: 55.4mm und
@@ -173,7 +178,7 @@ html, body {
   top: var(--brochure-margin-top);
   left: var(--brochure-margin-x);
   width: var(--brochure-col-3);
-  height: 258.6mm; /* 297 - 20.4 - 18 */
+  height: calc(297mm - var(--brochure-margin-top) - var(--brochure-footer-zone));
 }
 
 /* ============================================================

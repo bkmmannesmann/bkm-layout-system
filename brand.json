@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.3.0",
+  "version": "1.4.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -138,7 +138,7 @@
       "seal_note": "Das runde Siegel ersetzt das Logo, es steht nicht daneben."
     },
     "interior": {
-      "$comment": "Innenseiten.",
+      "$comment": "Innenseiten. Werte aus docs/print-anwendungen.md des Design-System-Repositories, seit 25.08.2026 auch in templates/pages/ umgesetzt. Die früheren 20,4 mm Kopfsteg und 4,3 mm Steg hatten keine auffindbare Quelle.",
       "margin_top_mm": 26.7,
       "margin_x_mm": 18,
       "margin_bottom_mm": 23.5,
@@ -412,25 +412,7 @@
     }
   },
   "open_conflicts": {
-    "$comment": "Nicht aufgelöste Widersprüche. Wer hier liest, muss sie kennen.",
-    "interior_margin_top": {
-      "authoritative": "26.7mm",
-      "conflicting": {
-        "value": "20.4mm",
-        "location": "templates/pages/pages-spec.css, --brochure-margin-top"
-      },
-      "status": "entschieden zugunsten 26.7mm, Pipeline noch nicht nachgezogen",
-      "detail": "Belegt: docs/print-anwendungen.md im Repository bkmmannesmann/bkm-design-system führt Kopfsteg 26,7 mm, Fußsteg 23,5 mm und ein Dreispaltenraster mit 55 mm Spalte und 4,6 mm Steg, Startpositionen 18,0 / 77,6 / 137,2 mm. Für 20,4 mm fand die Herkunftsprüfung keine Quelle. templates/pages/ ist noch nicht nachgezogen — das ändert das Layout bestehender Broschüren und braucht eine eigene Sichtprüfung."
-    },
-    "interior_gutter": {
-      "authoritative": "4.6mm",
-      "conflicting": {
-        "value": "4.3mm",
-        "location": "templates/pages/pages-spec.css, --brochure-gutter"
-      },
-      "status": "entschieden zugunsten 4.6mm, Pipeline noch nicht nachgezogen",
-      "detail": "Belegt in derselben Quelle wie der Kopfsteg. Die dort genannten Startpositionen 77,6 und 137,2 mm entsprechen einer Spalte von 55,0 mm; 3 × 55,0 + 2 × 4,6 sind 174,2 mm gegen 174 mm Satzbreite. Auch dort ist die Spaltenbreite eine gerundete Angabe — gerechnet ergibt sie 54,933 mm."
-    }
+    "$comment": "Nicht aufgelöste Widersprüche. Wer hier liest, muss sie kennen. Stand 25.08.2026: keine offen — alle fünf sind entschieden und umgesetzt."
   },
   "paths": {
     "brochure_templates": "templates/brochure/",
