@@ -127,8 +127,18 @@ Maximal zwei Flächenfarben je Broschüre.
 
 ## Icons
 
-Deep-Green-Kasten mit `5 px` Radius, Glyph in Lime Green. Auf dunklem Grund wird
-der Kasten Transition Green, damit er sichtbar bleibt.
+Kasten mit `5 px` Radius, Glyph immer in Lime Green. Die Kastenfarbe hängt am Absender
+und am Untergrund:
+
+| | auf hellem Grund | auf dunklem Grund |
+|:---|:---|:---|
+| BKM Mannesmann AG | Deep Green | Transition Green |
+| Fachbetrieb | **Transition Green** | Transition Green |
+
+Im Fachbetrieb-Kontext trägt der Kasten auch auf hellem Grund Transition Green, weil Deep Green
+der AG vorbehalten bleibt. Damit ist der Lime-Glyph über alle Kontexte gleich — bei Pure Green als
+Kasten hätte auch der Glyph wechseln müssen, und aus einer Regel wären zwei geworden.
+Entscheidung vom 25.08.2026.
 
 | Einsatz | Kasten | Glyph |
 |:---|:---|:---|

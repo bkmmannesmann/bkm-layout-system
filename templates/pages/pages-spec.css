@@ -188,7 +188,11 @@ html, body {
   line-height: 1.13; /* gemessen: 13.3mm Zeilenabstand bei 30pt */
   letter-spacing: 0;
   text-transform: uppercase;
-  color: var(--bkm-pure-green); /* Pure Green – gemessen */
+  /* Transition Green statt des gemessenen Pure Green: der Seitengrund ist
+     weiss, und Pure Green misst darauf 2,79 - laut Kontrastmatrix des
+     Design-Systems nur dekorativ zulaessig. Auf farbigen Flaechen setzt
+     die jeweilige .surface--* ihren eigenen Ton. */
+  color: var(--bkm-transition-green);
   margin: 0;
 }
 
@@ -211,7 +215,8 @@ html, body {
   font-size: 9pt;
   line-height: 1.4;
   letter-spacing: 0;
-  color: var(--bkm-pure-green); /* Pure Green – gemessen */
+  /* Wie die Hauptheadline: auf weissem Grund traegt Pure Green nicht. */
+  color: var(--bkm-transition-green);
   margin: 0;
 }
 
@@ -465,7 +470,9 @@ html, body {
 }
 
 .module-dark .leadline {
-  color: var(--bkm-pure-green);
+  /* Wie bei den benannten Flaechen: auf dunklem Grund traegt Lime,
+     Pure Green auf Transition Green misst nur 1,8. */
+  color: var(--bkm-lime-green);
 }
 
 .module-dark .body-text {
@@ -624,7 +631,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: var(--bkm-pure-green);
+  color: var(--bkm-transition-green);  /* auf hellem Grund; Pure Green misst dort 2,79 */
   margin-left: 3mm;
   flex-shrink: 0;
 }
@@ -697,9 +704,15 @@ html, body {
    9-pt-Leadline nicht lesbar; Lime bringt dort 3.5:1, auf Deep Green
    6.7:1 und auf Stone Grey 6.2:1.
 
-   Die Hauptheadline behaelt den Ton der Vorlage: Pure Green auf Stone
-   Grey und auf hellem Grund, Lime auf den beiden dunklen Gruentoenen,
-   Deep Green auf Pure Green.
+   Auf hellem Grund tragen Hauptheadline und Akzent Transition Green.
+   Pure Green misst dort 2,79 und ist laut Kontrastmatrix des
+   Design-Systems nur dekorativ zulaessig; die vermessene Bestands-
+   broschuere setzte es trotzdem als Headline. Der Bestand wird auf die
+   Regel gezogen, nicht die Regel auf den Bestand.
+
+   Auf dunklen Flaechen bleibt es beim Ton der Vorlage: Pure Green auf
+   Stone Grey, Lime auf den beiden dunklen Gruentoenen, Deep Green auf
+   Pure Green.
    ============================================================ */
 
 .surface { color: var(--surface-text); }
@@ -707,6 +720,15 @@ html, body {
 .surface .headline-large   { color: var(--surface-hl-large); }
 .surface .headline-section { color: var(--surface-hl-section); }
 .surface .leadline         { color: var(--surface-accent); }
+
+/* Auf dunklen Flaechen steht die Leadline groesser. Lime auf Transition
+   Green misst 3,49 und ist damit nur fuer grossen Text zugelassen; bei
+   9pt waere das verletzt. Auf hellem Grund genuegen 9pt, weil Transition
+   Green dort 5,09 erreicht. */
+.surface--deep .leadline,
+.surface--transition .leadline,
+.surface--pure .leadline,
+.surface--stone .leadline  { font-size: 11pt; }
 .surface .body-text        { color: var(--surface-text); }
 .surface .body-text strong { color: var(--surface-text); }
 .surface .module-quote__text { color: var(--surface-text); }
@@ -746,17 +768,17 @@ html, body {
 .surface--sand {
   background: var(--bkm-sand-white);
   --surface-text:       var(--bkm-stone-grey);
-  --surface-hl-large:   var(--bkm-pure-green);
+  --surface-hl-large:   var(--bkm-transition-green);
   --surface-hl-section: var(--bkm-transition-green);
-  --surface-accent:     var(--bkm-pure-green);
+  --surface-accent:     var(--bkm-transition-green);
 }
 
 .surface--white {
   background: var(--bkm-white);
   --surface-text:       var(--bkm-stone-grey);
-  --surface-hl-large:   var(--bkm-pure-green);
+  --surface-hl-large:   var(--bkm-transition-green);
   --surface-hl-section: var(--bkm-transition-green);
-  --surface-accent:     var(--bkm-pure-green);
+  --surface-accent:     var(--bkm-transition-green);
 }
 
 /* Die Fusszeile erbt die Textfarbe ihrer Flaeche. */
@@ -922,7 +944,7 @@ html, body {
   font-weight: 700;
   font-size: 9pt;
   line-height: 1.42;
-  color: var(--bkm-pure-green); /* Pure Green */
+  color: var(--bkm-transition-green); /* Pure Green */
 }
 
 /* Kontaktdaten: Position Y=226.0mm, X=147.3mm */

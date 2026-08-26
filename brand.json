@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.2.0",
+  "version": "1.3.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -22,11 +22,11 @@
     },
     "transition-green": {
       "hex": "#287d4b",
-      "role": "Flächenfarbe der Fachbetriebe, Icon-Kasten auf dunklem Grund, Sektions-Headline auf hell"
+      "role": "Hauptfarbe der Fachbetriebe. Flächenfarbe, Icon-Kasten, Hauptheadline und Akzent auf hellem Grund, Sektions-Headline."
     },
     "pure-green": {
       "hex": "#4daf46",
-      "role": "Akzent, Hauptheadline auf hellem Grund und auf Stone Grey"
+      "role": "Identitäts- und Akzentfarbe der Fachbetriebe, Flächenfarbe. Nicht als Text auf hellem Grund — dort misst sie 2,79."
     },
     "lime-green": {
       "hex": "#b4e717",
@@ -220,6 +220,17 @@
         "tracking_em": -0.015,
         "max_lines": 2
       }
+    },
+    "interior": {
+      "leadline": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": {
+          "on_light": 9,
+          "on_dark": 11
+        },
+        "size_note": "Auf dunklen Flächen 11 pt. Lime auf Transition Green misst 3,49 und ist damit nur für großen Text zugelassen; bei 9 pt wäre das verletzt. Auf hellem Grund genügen 9 pt, weil Transition Green dort 5,09 erreicht. Entscheidung des Markeninhabers vom 25.08.2026."
+      }
     }
   },
   "radius": {
@@ -260,23 +271,24 @@
     "sand": {
       "background": "sand-white",
       "text": "stone-grey",
-      "headline": "pure-green",
+      "headline": "transition-green",
       "section_headline": "transition-green",
-      "accent": "pure-green"
+      "accent": "transition-green"
     },
     "white": {
       "background": "clean-white",
       "text": "stone-grey",
-      "headline": "pure-green",
+      "headline": "transition-green",
       "section_headline": "transition-green",
-      "accent": "pure-green"
+      "accent": "transition-green"
     },
     "rules": {
       "max_surface_colors_per_brochure": 2,
       "sand_white": "Nur als Element, nie als ganze Seitenfläche — im Druck wirkt eine vollflächige Sand-White-Seite schmutzig, am Bildschirm nicht.",
       "deep_green": "Bleibt der AG vorbehalten. Fachbetriebsbroschüren, die an Endkunden des Betriebs gehen, ersetzen Deep Green durch Transition Green.",
       "accent_on_dark": "Auf allen dunklen Flächen ist der Akzent Lime, nicht Pure Green. Gemessener Kontrast: Pure auf Transition 1,8:1 und damit als 9-pt-Leadline unlesbar, Lime 3,5:1 auf Transition, 6,7:1 auf Deep, 6,2:1 auf Stone.",
-      "lime_in_fachbetrieb": "Lime ist im Fachbetrieb-Kontext zugelassen, wo es sinnvoll ist — Entscheidung des Markeninhabers vom 25.08.2026. Die Hauptfarbe der Fachbetriebe bleibt Transition Green. Das weicht bewusst von DESIGN.md im Design-System-Repository ab, das Lime dort an fünf Stellen ausschließt; eine Ausnahme kannte es bereits selbst (STYLE_PRESETS.md lässt Lime für Footer-Bar-Icons zu). Die Abweichung gehört im Design-System nachgezogen, sonst laufen die Repositories auseinander."
+      "lime_in_fachbetrieb": "Lime ist im Fachbetrieb-Kontext zugelassen, wo es sinnvoll ist — Entscheidung des Markeninhabers vom 25.08.2026. Die Hauptfarbe der Fachbetriebe bleibt Transition Green. Das weicht bewusst von DESIGN.md im Design-System-Repository ab, das Lime dort an fünf Stellen ausschließt; eine Ausnahme kannte es bereits selbst (STYLE_PRESETS.md lässt Lime für Footer-Bar-Icons zu). Die Abweichung gehört im Design-System nachgezogen, sonst laufen die Repositories auseinander.",
+      "on_light": "Auf hellem Grund tragen Hauptheadline und Akzent Transition Green. Pure Green misst dort 2,79 und ist laut Kontrastmatrix nur dekorativ zulässig; die vermessene Bestandsbroschüre setzte es trotzdem als Headline. Entscheidung des Markeninhabers vom 25.08.2026 — der Bestand wird darauf gezogen, nicht die Regel auf den Bestand."
     }
   },
   "icons": {
@@ -287,8 +299,16 @@
     "viewbox": "0 0 256 256",
     "glyph_color": "lime-green",
     "box_color": {
-      "on_light": "deep-green",
-      "on_dark": "transition-green"
+      "$comment": "Der Kasten hängt am Absender und am Untergrund, der Glyph ist immer Lime.",
+      "ag": {
+        "on_light": "deep-green",
+        "on_dark": "transition-green"
+      },
+      "fachbetrieb": {
+        "on_light": "transition-green",
+        "on_dark": "transition-green"
+      },
+      "note": "Im Fachbetrieb-Kontext trägt der Kasten auch auf hellem Grund Transition Green: Deep Green bleibt der AG vorbehalten. Damit bleibt der Lime-Glyph über alle Kontexte unverändert — bei Pure Green als Kasten hätte auch der Glyph wechseln müssen, und aus einer Regel wären zwei geworden. Entscheidung des Markeninhabers vom 25.08.2026."
     },
     "box_radius_px": 5,
     "sizes_mm": {
@@ -410,35 +430,6 @@
       },
       "status": "entschieden zugunsten 4.6mm, Pipeline noch nicht nachgezogen",
       "detail": "Belegt in derselben Quelle wie der Kopfsteg. Die dort genannten Startpositionen 77,6 und 137,2 mm entsprechen einer Spalte von 55,0 mm; 3 × 55,0 + 2 × 4,6 sind 174,2 mm gegen 174 mm Satzbreite. Auch dort ist die Spaltenbreite eine gerundete Angabe — gerechnet ergibt sie 54,933 mm."
-    },
-    "icon_box_on_light": {
-      "authoritative": null,
-      "status": "offen",
-      "detail": "icons.box_color.on_light nennt Deep Green, surfaces.rules.deep_green sagt aber, Deep Green bleibe der AG vorbehalten und Fachbetriebsbroschüren ersetzten ihn durch Transition Green. Beides zusammen ergibt für eine Fachbetriebsbroschüre keinen zulässigen Kasten auf hellem Grund: Deep Green ist gesperrt, Transition Green ist laut derselben Regel für dunklen Grund vorgesehen. Aufgefallen bei einem Testlauf in Claude Design, das den Kasten daraufhin gar nicht setzte. Zu entscheiden: gilt der Deep-Green-Vorbehalt auch für Icon-Kästen, oder nur für Seiten- und Bandflächen?",
-      "affects": [
-        "icons.box_color.on_light",
-        "surfaces.rules.deep_green"
-      ]
-    },
-    "headline_on_light": {
-      "authoritative": null,
-      "status": "offen",
-      "detail": "surfaces.sand und surfaces.white führen Pure Green als Hauptheadline und als Akzent auf hellem Grund. Die Kontrastmatrix des Design-Systems misst dafür 2,79 und stuft es als FAIL ein; DESIGN.md formuliert ausdrücklich: Pure Green und Lime niemals als Text auf hellem Grund. Der Wert stammt aus der Vermessung der bestehenden Broschüre — dort steht die 30-pt-Hauptheadline tatsächlich in Pure Green. Es ist also kein Übertragungsfehler, sondern eine Abweichung des gedruckten Bestands von der eigenen Regel. Nach der Matrix käme für Headlines auf hellem Grund Transition Green (5,09) oder Deep Green (9,84) in Frage; DESIGN.md nennt für den Fachbetrieb-Kontext genau Transition Green für Headlines auf hellen Flächen. Betrifft jede bisher gebaute Broschüre und ist deshalb nicht nebenbei zu ändern.",
-      "affects": [
-        "surfaces.sand.headline",
-        "surfaces.sand.accent",
-        "surfaces.white.headline",
-        "surfaces.white.accent"
-      ]
-    },
-    "leadline_size_on_transition": {
-      "authoritative": null,
-      "status": "offen",
-      "detail": "surfaces.transition setzt Lime als Akzent. Die Matrix misst Lime auf Transition Green mit 3,49 und lässt es nur für großen Text zu. Die Leadline steht in 9 pt und ist damit kein großer Text. Die Alternative wäre nicht besser: Pure Green auf Transition Green ergibt 1,8:1. Zu entscheiden ist, ob die Leadline auf dieser Fläche größer gesetzt oder die Fläche für Leadlines gemieden wird.",
-      "affects": [
-        "surfaces.transition.accent",
-        "type_scale"
-      ]
     }
   },
   "paths": {

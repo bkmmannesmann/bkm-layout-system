@@ -83,9 +83,9 @@ der Text gekürzt oder ein Block wandert auf die nächste Seite.
 
 | Element | Schrift | Größe | Farbe | Besonderheit |
 |:---|:---|:---|:---|:---|
-| Hauptheadline | Unbounded Black | 30pt | Pure Green | Versalien, Zeilenhöhe 1.13, **höchstens zwei Zeilen** |
+| Hauptheadline | Unbounded Black | 30pt | Transition Green auf hell, siehe Flächen | Versalien, Zeilenhöhe 1.13, **höchstens zwei Zeilen** |
 | Sektions-Headline | Unbounded Black | 18pt | Transition Green | keine Versalien, Zeilenhöhe 1.25 |
-| Leadline | Unbounded Black | 9pt | Pure Green | einzeilige Merksatzzeile über dem Fließtext |
+| Leadline | Unbounded Black | 9pt hell / 11pt dunkel | siehe Flächen | einzeilige Merksatzzeile über dem Fließtext |
 | Fließtext | TT Norms Pro Regular | 9pt | Stone Grey | Blocksatz, Silbentrennung an, Zeilenhöhe 1.42 |
 | Fließtext hervorgehoben | TT Norms Pro Bold | 9pt | Stone Grey | — |
 | CTA-Headline (Rückseite) | TT Norms Pro Bold | 16pt | Deep Green | — |
@@ -158,16 +158,25 @@ die im Druck nicht trägt:
 | `transition` | Transition Green `#287d4b` | Weiß | Lime | Weiß | Lime |
 | `pure` | Pure Green `#4daf46` | Weiß | Deep Green | Weiß | Deep Green |
 | `stone` | Stone Grey `#494949` | Weiß | Pure Green | Weiß | Lime |
-| `sand` | Sand White `#f6f5f2` | Stone Grey | Pure Green | Transition Green | Pure Green |
-| `white` | Weiß `#ffffff` | Stone Grey | Pure Green | Transition Green | Pure Green |
+| `sand` | Sand White `#f6f5f2` | Stone Grey | Transition Green | Transition Green | Transition Green |
+| `white` | Weiß `#ffffff` | Stone Grey | Transition Green | Transition Green | Transition Green |
 
 Der Akzent ist auf allen dunklen Flächen **Lime**, nicht Pure Green. Grund ist der gemessene
 Kontrast: Pure Green auf Transition Green ergibt 1.8:1 und ist als 9-pt-Leadline nicht lesbar.
 Lime bringt auf Transition Green 3.5:1, auf Deep Green 6.7:1 und auf Stone Grey 6.2:1. Das weicht
 bewusst vom Titelblatt-Schema ab, wo die Subheadline in 12pt steht und Pure Green trägt.
 
-Die Hauptheadline behält den Ton der vermessenen Vorlage: Pure Green auf Stone Grey und auf hellem
-Grund, Deep Green auf Pure Green, Lime auf den beiden dunklen Grüntönen.
+**Auf hellem Grund tragen Hauptheadline und Akzent Transition Green.** Pure Green misst dort 2,79
+und ist laut der Kontrastmatrix des Design-Systems nur dekorativ zulässig; die vermessene
+Bestandsbroschüre setzte es trotzdem als Headline. Entscheidung vom 25.08.2026: der Bestand wird
+auf die Regel gezogen, nicht die Regel auf den Bestand.
+
+Auf dunklen Flächen bleibt es beim Ton der Vorlage — Pure Green auf Stone Grey, Deep Green auf
+Pure Green, Lime auf den beiden dunklen Grüntönen.
+
+**Die Leadline steht auf dunklen Flächen in 11pt statt 9pt.** Lime auf Transition Green misst 3,49
+und ist damit nur für großen Text zugelassen; bei 9pt wäre das verletzt. Auf hellem Grund genügen
+9pt, weil Transition Green dort 5,09 erreicht.
 
 Andere Kombinationen sind nicht zugelassen.
 
