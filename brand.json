@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.4.0",
+  "version": "1.5.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -271,16 +271,16 @@
     "sand": {
       "background": "sand-white",
       "text": "stone-grey",
-      "headline": "transition-green",
-      "section_headline": "transition-green",
-      "accent": "transition-green"
+      "headline": "sender:text_on_light",
+      "section_headline": "sender:text_on_light",
+      "accent": "sender:text_on_light"
     },
     "white": {
       "background": "clean-white",
       "text": "stone-grey",
-      "headline": "transition-green",
-      "section_headline": "transition-green",
-      "accent": "transition-green"
+      "headline": "sender:text_on_light",
+      "section_headline": "sender:text_on_light",
+      "accent": "sender:text_on_light"
     },
     "rules": {
       "max_surface_colors_per_brochure": 2,
@@ -288,7 +288,7 @@
       "deep_green": "Bleibt der AG vorbehalten. Fachbetriebsbroschüren, die an Endkunden des Betriebs gehen, ersetzen Deep Green durch Transition Green.",
       "accent_on_dark": "Auf allen dunklen Flächen ist der Akzent Lime, nicht Pure Green. Gemessener Kontrast: Pure auf Transition 1,8:1 und damit als 9-pt-Leadline unlesbar, Lime 3,5:1 auf Transition, 6,7:1 auf Deep, 6,2:1 auf Stone.",
       "lime_in_fachbetrieb": "Lime ist im Fachbetrieb-Kontext zugelassen, wo es sinnvoll ist — Entscheidung des Markeninhabers vom 25.08.2026. Die Hauptfarbe der Fachbetriebe bleibt Transition Green. Das weicht bewusst von DESIGN.md im Design-System-Repository ab, das Lime dort an fünf Stellen ausschließt; eine Ausnahme kannte es bereits selbst (STYLE_PRESETS.md lässt Lime für Footer-Bar-Icons zu). Die Abweichung gehört im Design-System nachgezogen, sonst laufen die Repositories auseinander.",
-      "on_light": "Auf hellem Grund tragen Hauptheadline und Akzent Transition Green. Pure Green misst dort 2,79 und ist laut Kontrastmatrix nur dekorativ zulässig; die vermessene Bestandsbroschüre setzte es trotzdem als Headline. Entscheidung des Markeninhabers vom 25.08.2026 — der Bestand wird darauf gezogen, nicht die Regel auf den Bestand."
+      "on_light": "Auf hellem Grund richten sich Hauptheadline, Sektions-Headline und Akzent nach dem Absender: Deep Green für die AG, Transition Green für Fachbetriebe. Pure Green trägt dort nicht — es misst 2,79 und ist laut Kontrastmatrix nur dekorativ zulässig, obwohl die vermessene Bestandsbroschüre es als Headline setzte."
     }
   },
   "icons": {
@@ -503,5 +503,20 @@
       }
     },
     "key_rule": "Pure Green und Lime Green niemals als Text auf hellem Grund. Sie tragen nur auf dunklem Grund — Deep Green, Stone Grey, mit Einschränkung Transition Green."
+  },
+  "sender_context": {
+    "$comment": "Der Absender bestimmt, welcher Ton auf hellem Grund trägt. Das gilt für Hauptheadline, Sektions-Headline, Akzent und Icon-Kasten gleichermaßen — nicht nur für den Kasten, wie es bis zum 26.08.2026 in dieser Datei stand. Jede Broschüre nennt ihren Absender; ohne Angabe gilt 'ag'.",
+    "ag": {
+      "name": "BKM Mannesmann AG",
+      "primary": "deep-green",
+      "text_on_light": "deep-green",
+      "note": "Deep Green ist die Primärfarbe der AG. Auf Weiß misst sie 9,84, auf Sand White 9,02."
+    },
+    "fachbetrieb": {
+      "name": "BKM Fachbetrieb",
+      "primary": "transition-green",
+      "text_on_light": "transition-green",
+      "note": "Deep Green bleibt der AG vorbehalten. Transition Green misst auf Weiß 5,09. Pure Green ist die Identitätsfarbe der Fachbetriebe, trägt aber auf hellem Grund nicht — 2,79."
+    }
   }
 }

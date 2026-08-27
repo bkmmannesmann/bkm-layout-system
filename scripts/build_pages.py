@@ -278,6 +278,7 @@ def build_demo():
 
     content = {
         "title": "BKM Fachbetrieb - Demo Broschüre",
+        "sender": "fachbetrieb",
         "page_number_start": 2,
         "pages": [
             # --- SEITE 2: OPENER ---

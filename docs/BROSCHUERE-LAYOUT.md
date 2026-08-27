@@ -158,18 +158,31 @@ die im Druck nicht trägt:
 | `transition` | Transition Green `#287d4b` | Weiß | Lime | Weiß | Lime |
 | `pure` | Pure Green `#4daf46` | Weiß | Deep Green | Weiß | Deep Green |
 | `stone` | Stone Grey `#494949` | Weiß | Pure Green | Weiß | Lime |
-| `sand` | Sand White `#f6f5f2` | Stone Grey | Transition Green | Transition Green | Transition Green |
-| `white` | Weiß `#ffffff` | Stone Grey | Transition Green | Transition Green | Transition Green |
+| `sand` | Sand White `#f6f5f2` | Stone Grey | Ton des Absenders | Ton des Absenders | Ton des Absenders |
+| `white` | Weiß `#ffffff` | Stone Grey | Ton des Absenders | Ton des Absenders | Ton des Absenders |
 
 Der Akzent ist auf allen dunklen Flächen **Lime**, nicht Pure Green. Grund ist der gemessene
 Kontrast: Pure Green auf Transition Green ergibt 1.8:1 und ist als 9-pt-Leadline nicht lesbar.
 Lime bringt auf Transition Green 3.5:1, auf Deep Green 6.7:1 und auf Stone Grey 6.2:1. Das weicht
 bewusst vom Titelblatt-Schema ab, wo die Subheadline in 12pt steht und Pure Green trägt.
 
-**Auf hellem Grund tragen Hauptheadline und Akzent Transition Green.** Pure Green misst dort 2,79
-und ist laut der Kontrastmatrix des Design-Systems nur dekorativ zulässig; die vermessene
-Bestandsbroschüre setzte es trotzdem als Headline. Entscheidung vom 25.08.2026: der Bestand wird
-auf die Regel gezogen, nicht die Regel auf den Bestand.
+**Auf hellem Grund hängt der Ton am Absender**, nicht an der Fläche:
+
+| Absender | Hauptheadline, Sektions-Headline, Akzent | Kontrast auf Weiß |
+|:---|:---|:---|
+| BKM Mannesmann AG | **Deep Green** `#1c4b42` | 9,84 |
+| BKM Fachbetrieb | **Transition Green** `#287d4b` | 5,09 |
+
+Deep Green bleibt der AG vorbehalten — eine Fachbetriebsbroschüre kann ihn nicht setzen. Umgekehrt
+wäre es genauso falsch, eine AG-Broschüre in der Fachbetriebsfarbe zu setzen.
+
+Pure Green trägt auf hellem Grund nicht: es misst 2,79 und ist laut der Kontrastmatrix nur
+dekorativ zulässig; die vermessene Bestandsbroschüre setzte es trotzdem als Headline. Entscheidung
+vom 25.08.2026: der Bestand wird auf die Regel gezogen, nicht die Regel auf den Bestand.
+
+Der Content nennt seinen Absender über `"sender": "ag"` oder `"fachbetrieb"`. Ohne Angabe gilt die
+AG — der häufigere Fall und der kontraststärkere Ton, ein vergessener Kontext fällt damit in den
+sichereren Fall.
 
 Auf dunklen Flächen bleibt es beim Ton der Vorlage — Pure Green auf Stone Grey, Deep Green auf
 Pure Green, Lime auf den beiden dunklen Grüntönen.

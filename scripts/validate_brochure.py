@@ -75,6 +75,10 @@ TYPO = {
 # Die sechs benannten Flaechen. Ohne sie kann der Content keine Flaeche waehlen.
 SURFACES = ("deep", "transition", "pure", "stone", "sand", "white")
 
+# Absender. Er bestimmt den Ton auf hellem Grund - Deep Green fuer die AG,
+# Transition Green fuer Fachbetriebe. Ohne Angabe gilt die AG.
+SENDERS = ("ag", "fachbetrieb")
+
 # Aus docs/LAYOUT-CONTRACT.md uebernommen: dieselbe Sperrliste wie beim
 # Datenblatt, damit nicht ueber die Broschuere ein Altwert zurueckkommt.
 FORBIDDEN_COLOURS = ("#009245", "#006837", "#00a99d", "#8cc63f")
@@ -214,6 +218,15 @@ def check_layout() -> list[str]:
         )
 
     # --- Flaechen ----------------------------------------------------------
+    for name in SENDERS:
+        if not re.search(rf"\.sender--{re.escape(name)}\s*\{{", css):
+            errors.append(f"Absenderklasse .sender--{name} fehlt")
+    if not re.search(r":root\s*\{[^}]*--sender-on-light", css, re.DOTALL):
+        errors.append(
+            "--sender-on-light hat keinen Standardwert im :root - ohne ihn bleibt "
+            "die Headline farblos, wenn der Content keinen Absender nennt"
+        )
+
     for name in SURFACES:
         # Auf die oeffnende Klammer pruefen: ohne sie wuerde ".surface--sand"
         # auch in ".surface--sandstein" treffen und eine geloeschte Regel
@@ -287,6 +300,11 @@ def check_content(path: Path) -> list[str]:
 
     if not isinstance(data.get("pages"), list) or not data["pages"]:
         return [f"{path.name}: 'pages' ist leer"]
+
+    absender = data.get("sender")
+    if absender is not None and absender not in SENDERS:
+        errors.append(f"sender={absender!r} ist kein Absender, erlaubt: "
+                      f"{', '.join(SENDERS)}")
 
     start = data.get("page_number_start")
     if start is None:
