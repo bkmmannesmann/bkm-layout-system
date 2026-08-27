@@ -211,6 +211,19 @@ Design-System nachgezogen, sonst laufen die Repositories auseinander.
 
 Maximal zwei Flächenfarben je Broschüre.
 
+## Eine bewusste Ausnahme beim Kontrast
+
+Die Subheadline des Anleitungs-Titelblatts steht in **Pure Green auf Weiß** — Kontrast
+`2,79`, unter der Schwelle `3,0`. Das ist entschieden, nicht übersehen.
+
+Die Alternativen lagen gerendert nebeneinander vor: Transition Green `5,09`, Stone Grey
+`9,00`, Deep Green `9,84`. Pure Green bleibt, weil die Zeile ihren Farbcharakter behalten
+soll und Deep Green sich kaum von der Headline absetzt.
+
+**Die Ausnahme gilt nur für diese eine Zeile.** Fließtext steht in Stone Grey, dort gibt es
+keinen Spielraum. In `brand.json` unter `contrast.accepted_exceptions` steht dasselbe mit
+Datum — wer den Wert später findet, hat nichts entdeckt.
+
 ## Icons
 
 Kasten mit `5 px` Radius, Glyph immer in Lime Green. Die Kastenfarbe hängt am Absender

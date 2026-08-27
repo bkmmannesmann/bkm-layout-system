@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.13.0",
+  "version": "1.14.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -538,14 +538,24 @@
       },
       "pure-green_on_white": {
         "ratio": 2.79,
-        "status": "FAIL, nur dekorativ"
+        "status": "UNTER AA — bewusst so gesetzt, siehe accepted_exceptions"
       },
       "lime-green_on_white": {
         "ratio": 1.46,
         "status": "FAIL, nur dekorativ"
       }
     },
-    "key_rule": "Pure Green und Lime Green niemals als Text auf hellem Grund. Sie tragen nur auf dunklem Grund — Deep Green, Stone Grey, mit Einschränkung Transition Green."
+    "key_rule": "Pure Green und Lime Green niemals als Text auf hellem Grund. Sie tragen nur auf dunklem Grund — Deep Green, Stone Grey, mit Einschränkung Transition Green.",
+    "accepted_exceptions": {
+      "$comment": "Stellen, an denen ein Wert unter WCAG AA liegt und das entschieden wurde. Wer sie findet, hat nichts entdeckt — die Frage ist bereits gestellt und beantwortet.",
+      "pure-green_on_white": {
+        "wo": "Subheadline des Titelblatts der Verarbeitungsanleitung, in templates/brochure/A-Titelblaetter.dc.html und in scripts/build_cover.py (Variante anleitung)",
+        "wert": 2.79,
+        "entschieden": "27.08.2026",
+        "grund": "Die Alternativen lagen vor: Transition Green 5,09, Stone Grey 9,00, Deep Green 9,84. Alle drei wurden gerendert und gegenübergestellt. Pure Green bleibt, weil die Zeile ihren Farbcharakter behalten soll und sich Deep Green kaum von der Headline absetzt.",
+        "gilt_nicht_fuer": "Fließtext. Dort ist Stone Grey vorgeschrieben. Diese Ausnahme betrifft ausschließlich diese eine Subheadline."
+      }
+    }
   },
   "sender_context": {
     "$comment": "Der Absender bestimmt, welcher Ton auf hellem Grund trägt. Das gilt für Hauptheadline, Sektions-Headline, Akzent und Icon-Kasten gleichermaßen — nicht nur für den Kasten, wie es bis zum 26.08.2026 in dieser Datei stand. Jede Broschüre nennt ihren Absender; ohne Angabe gilt 'ag'.",
