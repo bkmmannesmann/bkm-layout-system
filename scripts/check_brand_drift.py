@@ -88,6 +88,20 @@ def pruefe_marke(marke: dict) -> list[str]:
         if not isinstance(flaeche, dict) or name == "rules":
             continue
         for rolle, farbe in flaeche.items():
+            # "sender:..." verweist auf sender_context statt auf eine feste Farbe.
+            if isinstance(farbe, str) and farbe.startswith("sender:"):
+                feld = farbe.split(":", 1)[1]
+                for absender, eintrag in marke["sender_context"].items():
+                    if absender.startswith("$"):
+                        continue
+                    if feld not in eintrag:
+                        fehler.append(f"surfaces.{name}.{rolle} verweist auf "
+                                      f"sender:{feld}, das sender_context.{absender} "
+                                      f"nicht fuehrt")
+                    elif eintrag[feld] not in marke["colors"]:
+                        fehler.append(f"sender_context.{absender}.{feld} nennt "
+                                      f"'{eintrag[feld]}', das keine Farbe in colors ist")
+                continue
             if farbe not in marke["colors"]:
                 fehler.append(f"surfaces.{name}.{rolle} nennt '{farbe}', "
                               f"das keine Farbe in colors ist")

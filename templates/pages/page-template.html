@@ -5,7 +5,9 @@
   <title>{{ title | default('BKM Broschüre') }}</title>
   <link rel="stylesheet" href="pages-spec.css">
 </head>
-<body>
+{#- Der Absender bestimmt den Ton auf hellem Grund: Deep Green fuer die AG,
+    Transition Green fuer Fachbetriebe. Ohne Angabe gilt die AG. -#}
+<body class="sender--{{ sender | default('ag', true) }}">
 
 {#- ------------------------------------------------------------------
     FUSSZEILE: SEITENZAHL UND KOLUMNENTITEL

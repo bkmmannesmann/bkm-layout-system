@@ -125,7 +125,11 @@
 .columns-2 p,
 .columns-3 p {
   text-align: justify;
+  /* U+002D statt U+2010: keine der Markenschriften hat den
+     typografischen Trennstrich, WeasyPrint faellt sonst auf eine
+     Fremdschrift zurueck. */
   hyphens: auto;
+  hyphenate-character: "-";
   -webkit-hyphens: auto;
   font-size: var(--fs-body);
   line-height: var(--lh-body);

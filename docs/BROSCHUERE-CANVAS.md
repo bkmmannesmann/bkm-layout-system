@@ -69,6 +69,26 @@ und Navigation über zwanzig und mehr Seiten.
 | Subheadline | Unbounded 900, `12 pt`, Zeilenhöhe `1,3`, Laufweite `0` |
 | Fließtext | TT Norms Pro 400, `12 pt`, Zeilenhöhe `1,25`, Laufweite `−0,015 em`, max. 2 Zeilen |
 
+### Die Seite braucht eine feste Höhe und absolute Kinder
+
+```css
+.seite   { width: 210mm; height: 297mm; position: relative; overflow: hidden; }
+.element { position: absolute; }
+```
+
+Ohne das stimmen die Maße oben zwar, aber die Seite bricht um. Hero-Grafik und Foto
+**überlappen sich um 7,54 mm**: die Grafik ist `125 mm` hoch, das Foto beginnt schon bei
+`117,46 mm`. Absolut positioniert endet das Foto exakt bei `297 mm`. Stehen beide im Fluss
+untereinander, addieren sie sich auf `304,54 mm` — und das Foto rutscht auf die nächste Seite.
+
+`height: 297mm`, nicht `min-height` und nicht `auto`: eine Seite mit automatischer Höhe wächst
+mit ihrem Inhalt. `overflow: hidden`, damit randabfallende Elemente abgeschnitten statt
+umgebrochen werden.
+
+**Im Vorschaufenster fällt das nicht auf.** Dort gibt es keinen Seitenumbruch, der Container
+scrollt einfach weiter. Sichtbar wird es erst beim Export nach PDF. Wer eine Titelseite baut,
+prüft sie deshalb im PDF, nicht in der Vorschau.
+
 ### Abstände optisch, nicht auf Kastenmaß
 
 Alle drei Textblöcke tragen `text-box: trim-both cap alphabetic`. Die Werte gelten

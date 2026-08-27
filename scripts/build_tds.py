@@ -10,14 +10,19 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
-import subprocess
 import sys
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from pypdf import PdfReader
 from weasyprint import HTML
 
+from pdf_checks import (
+    TDS_SKIP_KEYS,
+    check_completeness,
+    check_fonts,
+    collect_strings,
+)
 from validate_tds import validate_data
 
 ROOT_DIR = Path(__file__).parent.parent.resolve()
@@ -25,18 +30,34 @@ TEMPLATE_DIR = ROOT_DIR / "templates" / "tds"
 OUTPUT_DIR = ROOT_DIR / "output"
 
 
+# Der Inhalt wird ab dieser Laenge gegen das PDF verglichen. Niedrig, weil der
+# Inhalt eines Datenblatts gerade in kurzen Tabellenzeilen steckt - genau die,
+# die beim Beschnitt verschwinden. An allen vorliegenden Datenblaettern gibt es
+# bis hinunter zu dieser Laenge keine Falschmeldung.
+MIN_TEXT_LENGTH = 3
+
+
+def check_output(pdf_path: Path, data: dict, release: bool) -> list[str]:
+    """Prueft das erzeugte PDF auf stille Fehler.
+
+    Die Seitenzahlpruefung unten findet abgeschnittenen Inhalt nicht: die Seiten
+    haben eine feste Hoehe und overflow:hidden, ein zu langer Block erzeugt also
+    keinen Umbruch, sondern verschwindet. Die Seitenzahl bleibt dabei richtig.
+    """
+    reader = PdfReader(str(pdf_path))
+    # Im Release wird der Review-Block nicht gesetzt; seine Texte fehlen dann
+    # zu Recht im PDF.
+    skip = TDS_SKIP_KEYS + ("review",) if release else TDS_SKIP_KEYS
+    strings = collect_strings(data, min_length=MIN_TEXT_LENGTH, skip_keys=skip)
+    return check_fonts(reader) + check_completeness(reader, strings)
+
+
 def page_count(pdf_path: Path) -> int | None:
-    """Liest die Seitenanzahl mit dem vorhandenen Poppler-Werkzeug aus."""
-    result = subprocess.run(
-        ["pdfinfo", str(pdf_path)],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode != 0:
+    """Liest die Seitenanzahl aus dem PDF."""
+    try:
+        return len(PdfReader(str(pdf_path)).pages)
+    except Exception:
         return None
-    match = re.search(r"^Pages:\s+(\d+)$", result.stdout, flags=re.MULTILINE)
-    return int(match.group(1)) if match else None
 
 
 def main() -> int:
@@ -79,6 +100,13 @@ def main() -> int:
     )
     html = environment.get_template("template.html").render(**data)
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(output_path))
+
+    output_errors = check_output(output_path, data, args.release)
+    if output_errors:
+        for error in output_errors:
+            print(f"FEHLER: {error}")
+        print("PDF wurde erzeugt, ist aber nicht freigabefaehig.")
+        return 4
 
     review_pages = 0 if args.release or not data.get("review") else int(data.get("review_page_count", 1))
     expected_pages = int(data["page_count"]) + review_pages

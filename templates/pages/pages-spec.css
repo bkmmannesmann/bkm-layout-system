@@ -193,11 +193,10 @@ html, body {
   line-height: 1.13; /* gemessen: 13.3mm Zeilenabstand bei 30pt */
   letter-spacing: 0;
   text-transform: uppercase;
-  /* Transition Green statt des gemessenen Pure Green: der Seitengrund ist
-     weiss, und Pure Green misst darauf 2,79 - laut Kontrastmatrix des
-     Design-Systems nur dekorativ zulaessig. Auf farbigen Flaechen setzt
-     die jeweilige .surface--* ihren eigenen Ton. */
-  color: var(--bkm-transition-green);
+  /* Der Ton des Absenders: der Seitengrund ist weiss, und Pure Green
+     misst darauf 2,79 - laut Kontrastmatrix nur dekorativ zulaessig.
+     Auf farbigen Flaechen setzt die jeweilige .surface--* ihren Ton. */
+  color: var(--sender-on-light);
   margin: 0;
 }
 
@@ -221,7 +220,7 @@ html, body {
   line-height: 1.4;
   letter-spacing: 0;
   /* Wie die Hauptheadline: auf weissem Grund traegt Pure Green nicht. */
-  color: var(--bkm-transition-green);
+  color: var(--sender-on-light);
   margin: 0;
 }
 
@@ -698,6 +697,25 @@ html, body {
 }
 
 /* ============================================================
+   ABSENDER
+   ============================================================
+   Auf hellem Grund haengt der Ton am Absender, nicht an der Flaeche:
+   Deep Green fuer die AG, Transition Green fuer Fachbetriebe. Deep
+   Green bleibt der AG vorbehalten, deshalb kann eine
+   Fachbetriebsbroschuere ihn nicht verwenden - und umgekehrt waere es
+   falsch, eine AG-Broschuere in der Fachbetriebsfarbe zu setzen.
+
+   Ohne Angabe gilt die AG. Das ist die haeufigere Absenderin und der
+   kontraststaerkere Ton; ein vergessener Kontext faellt damit nicht in
+   eine Regelverletzung, sondern in den sichereren Fall.
+   ============================================================ */
+
+:root { --sender-on-light: var(--bkm-deep-green); }
+
+.sender--ag          { --sender-on-light: var(--bkm-deep-green); }
+.sender--fachbetrieb { --sender-on-light: var(--bkm-transition-green); }
+
+/* ============================================================
    BENANNTE FLAECHEN
    ============================================================
    Eine Flaeche legt Grundton, Textfarbe, Headline- und Akzentfarbe
@@ -709,7 +727,10 @@ html, body {
    9-pt-Leadline nicht lesbar; Lime bringt dort 3.5:1, auf Deep Green
    6.7:1 und auf Stone Grey 6.2:1.
 
-   Auf hellem Grund tragen Hauptheadline und Akzent Transition Green.
+   Auf hellem Grund tragen Hauptheadline, Sektions-Headline und Akzent
+   den Ton des Absenders - siehe .sender--* weiter oben. Fest gesetzt
+   war hier zwischenzeitlich Transition Green; das war fuer
+   Fachbetriebe richtig und fuer die AG falsch.
    Pure Green misst dort 2,79 und ist laut Kontrastmatrix des
    Design-Systems nur dekorativ zulaessig; die vermessene Bestands-
    broschuere setzte es trotzdem als Headline. Der Bestand wird auf die
@@ -773,17 +794,17 @@ html, body {
 .surface--sand {
   background: var(--bkm-sand-white);
   --surface-text:       var(--bkm-stone-grey);
-  --surface-hl-large:   var(--bkm-transition-green);
-  --surface-hl-section: var(--bkm-transition-green);
-  --surface-accent:     var(--bkm-transition-green);
+  --surface-hl-large:   var(--sender-on-light);
+  --surface-hl-section: var(--sender-on-light);
+  --surface-accent:     var(--sender-on-light);
 }
 
 .surface--white {
   background: var(--bkm-white);
   --surface-text:       var(--bkm-stone-grey);
-  --surface-hl-large:   var(--bkm-transition-green);
-  --surface-hl-section: var(--bkm-transition-green);
-  --surface-accent:     var(--bkm-transition-green);
+  --surface-hl-large:   var(--sender-on-light);
+  --surface-hl-section: var(--sender-on-light);
+  --surface-accent:     var(--sender-on-light);
 }
 
 /* Die Fusszeile erbt die Textfarbe ihrer Flaeche. */

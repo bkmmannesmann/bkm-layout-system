@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.4.0",
+  "version": "1.7.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -117,7 +117,20 @@
       "exception": "templates/tds/template.css setzt für die Marker-Auszeichnung .tds-marker bewusst 'Courier New'. Das ist ein Prüfvermerk im Datenblatt, kein Satzelement, und fällt nicht unter diese Regel."
     },
     "hyphenate_character": "-",
-    "hyphenate_note": "TT Norms Pro enthält kein U+2010. Ohne diese Angabe setzt WeasyPrint an jeder Trennstelle .notdef als schwarzes Kästchen."
+    "hyphenate_note": "TT Norms Pro enthält kein U+2010. Ohne diese Angabe setzt WeasyPrint an jeder Trennstelle .notdef als schwarzes Kästchen.",
+    "hyphenation": {
+      "$comment": "Silbentrennung. Gilt fuer jeden Ausgabepfad, Canvas wie Druck.",
+      "hyphenate_character": "-",
+      "codepoint": "U+002D",
+      "why": "Keine der Markenschriften enthaelt U+2010, den typografischen Trennstrich: weder Unbounded noch TT Norms Pro. Wer hyphens:auto setzt, ohne den Trennstrich festzulegen, bekommt ihn aus einer Fremdschrift - WeasyPrint bettet dafuer DejaVu Sans ein, im Browser springt die Ersatzschrift ein. Sichtbar ist das kaum, im Druck-PDF steht aber eine fremde Schrift.",
+      "css": "hyphens: auto; hyphenate-character: \"-\";",
+      "fonts_without_u2010": [
+        "Unbounded (400, 700, 900, Black)",
+        "TT Norms Pro Regular",
+        "TT Norms Pro Bold",
+        "TT Norms Pro Compact Regular"
+      ]
+    }
   },
   "grid": {
     "page": {
@@ -183,6 +196,15 @@
       "sixteen_nine": "118,125 mm ist echtes 16:9 der Blattbreite: 210 ÷ 16 × 9.",
       "keyvisual_top": "102,416 mm ist kein gerundeter Wert und wurde nachgerechnet. Das Keyvisual hat die viewBox 196,06 × 464,8 und ist bei 42 mm Breite 99,570 mm hoch. Die Oberkante des Pure-Green-Chevrons liegt bei 73,33 Einheiten, also 15,709 mm unter der Bildoberkante. 118,125 − 15,709 = 102,4162 mm — nur so trifft die Kante die Unterkante des 16:9-Bereichs. templates/cover/cover-layout.json führt dort 102,3 mm mit der Begründung „1210 px bei 300 dpi“; diese Rechnung ergibt jedoch 102,4467 mm, der notierte Wert liegt also 147 µm neben seiner eigenen Herleitung. Die Korrektur ist für einen eigenen Pull Request vorgesehen, weil sie bestehende Titelblätter ändert.",
       "blitzerschutz": "Zwei Überlappungen an der Kante, an der drei Ebenen zusammentreffen: die Eckerweiterung ragt 0,5 mm in die Hero-Fläche, das Foto überlappt sie um 7,54 mm."
+    },
+    "layout": {
+      "$comment": "Wie die Seite gebaut sein muss, damit die Geometrie oben trägt. Ohne diese Regeln stimmen die Zahlen, aber die Seite bricht um.",
+      "page_container": "width: 210mm; height: 297mm; position: relative; overflow: hidden",
+      "children": "position: absolute — Hero-Grafik, Foto, Keyvisual, Eckerweiterung, Logo und Textblöcke",
+      "why": "Hero-Grafik und Foto überlappen sich um 7,54 mm: die Grafik ist 125 mm hoch, das Foto beginnt schon bei 117,46 mm. Absolut positioniert endet das Foto exakt bei 297 mm. Stehen beide im Fluss untereinander, addieren sie sich auf 304,54 mm — 7,54 mm zu viel, und das Foto rutscht auf die nächste Seite.",
+      "why_it_hides": "Im Vorschaufenster fällt das nicht auf: dort gibt es keinen Seitenumbruch, der Container scrollt einfach weiter. Sichtbar wird es erst beim Export nach PDF. Wer eine Titelseite baut, prüft sie deshalb im PDF, nicht in der Vorschau.",
+      "height_must_be_fixed": "height: 297mm, nicht min-height und nicht auto. Eine Seite mit auto-Höhe wächst mit ihrem Inhalt und bricht dann um.",
+      "overflow_hidden": "Was übersteht, wird abgeschnitten statt umgebrochen. Bei randabfallenden Elementen ist das gewollt — Hero-Grafik, Foto und Keyvisual reichen bis an die Blattkante und teils darüber hinaus."
     }
   },
   "text_rhythm": {
@@ -271,16 +293,16 @@
     "sand": {
       "background": "sand-white",
       "text": "stone-grey",
-      "headline": "transition-green",
-      "section_headline": "transition-green",
-      "accent": "transition-green"
+      "headline": "sender:text_on_light",
+      "section_headline": "sender:text_on_light",
+      "accent": "sender:text_on_light"
     },
     "white": {
       "background": "clean-white",
       "text": "stone-grey",
-      "headline": "transition-green",
-      "section_headline": "transition-green",
-      "accent": "transition-green"
+      "headline": "sender:text_on_light",
+      "section_headline": "sender:text_on_light",
+      "accent": "sender:text_on_light"
     },
     "rules": {
       "max_surface_colors_per_brochure": 2,
@@ -288,7 +310,7 @@
       "deep_green": "Bleibt der AG vorbehalten. Fachbetriebsbroschüren, die an Endkunden des Betriebs gehen, ersetzen Deep Green durch Transition Green.",
       "accent_on_dark": "Auf allen dunklen Flächen ist der Akzent Lime, nicht Pure Green. Gemessener Kontrast: Pure auf Transition 1,8:1 und damit als 9-pt-Leadline unlesbar, Lime 3,5:1 auf Transition, 6,7:1 auf Deep, 6,2:1 auf Stone.",
       "lime_in_fachbetrieb": "Lime ist im Fachbetrieb-Kontext zugelassen, wo es sinnvoll ist — Entscheidung des Markeninhabers vom 25.08.2026. Die Hauptfarbe der Fachbetriebe bleibt Transition Green. Das weicht bewusst von DESIGN.md im Design-System-Repository ab, das Lime dort an fünf Stellen ausschließt; eine Ausnahme kannte es bereits selbst (STYLE_PRESETS.md lässt Lime für Footer-Bar-Icons zu). Die Abweichung gehört im Design-System nachgezogen, sonst laufen die Repositories auseinander.",
-      "on_light": "Auf hellem Grund tragen Hauptheadline und Akzent Transition Green. Pure Green misst dort 2,79 und ist laut Kontrastmatrix nur dekorativ zulässig; die vermessene Bestandsbroschüre setzte es trotzdem als Headline. Entscheidung des Markeninhabers vom 25.08.2026 — der Bestand wird darauf gezogen, nicht die Regel auf den Bestand."
+      "on_light": "Auf hellem Grund richten sich Hauptheadline, Sektions-Headline und Akzent nach dem Absender: Deep Green für die AG, Transition Green für Fachbetriebe. Pure Green trägt dort nicht — es misst 2,79 und ist laut Kontrastmatrix nur dekorativ zulässig, obwohl die vermessene Bestandsbroschüre es als Headline setzte."
     }
   },
   "icons": {
@@ -503,5 +525,20 @@
       }
     },
     "key_rule": "Pure Green und Lime Green niemals als Text auf hellem Grund. Sie tragen nur auf dunklem Grund — Deep Green, Stone Grey, mit Einschränkung Transition Green."
+  },
+  "sender_context": {
+    "$comment": "Der Absender bestimmt, welcher Ton auf hellem Grund trägt. Das gilt für Hauptheadline, Sektions-Headline, Akzent und Icon-Kasten gleichermaßen — nicht nur für den Kasten, wie es bis zum 26.08.2026 in dieser Datei stand. Jede Broschüre nennt ihren Absender; ohne Angabe gilt 'ag'.",
+    "ag": {
+      "name": "BKM Mannesmann AG",
+      "primary": "deep-green",
+      "text_on_light": "deep-green",
+      "note": "Deep Green ist die Primärfarbe der AG. Auf Weiß misst sie 9,84, auf Sand White 9,02."
+    },
+    "fachbetrieb": {
+      "name": "BKM Fachbetrieb",
+      "primary": "transition-green",
+      "text_on_light": "transition-green",
+      "note": "Deep Green bleibt der AG vorbehalten. Transition Green misst auf Weiß 5,09. Pure Green ist die Identitätsfarbe der Fachbetriebe, trägt aber auf hellem Grund nicht — 2,79."
+    }
   }
 }
