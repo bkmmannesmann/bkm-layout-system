@@ -67,11 +67,11 @@ Repository-Wurzelverzeichnis.
 - `uploads/magnific_nano-banana-2-halbnah-san_3GXw9NsREY.jpg`
 - `uploads/magnific_ultrarealistic-architectu_CHxX15MEEy.jpg`
 - `uploads/signatur-bkm-systempartner-logo.png`
-- `uploads/titel-hero-anleitung-d5b6a7aa.png`
-- `uploads/titel-hero-bkm-ag-web.png`
+- `uploads/titel-hero-anleitung.png`
+- `uploads/titel-hero-bkm-ag.png`
 - `uploads/titel-hero-fachbetrieb.png`
-- `uploads/titel-hero-home-line-web.png`
-- `uploads/titel-hero-pro-line-web.png`
+- `uploads/titel-hero-home-line.png`
+- `uploads/titel-hero-pro-line.png`
 - `uploads/trockene-waende-mit-novusan.webp`
 
 ## Neue Assets einpflegen
