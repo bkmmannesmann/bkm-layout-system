@@ -74,6 +74,19 @@ Repository-Wurzelverzeichnis.
 - `uploads/titel-hero-pro-line-web.png`
 - `uploads/trockene-waende-mit-novusan.webp`
 
+## Neue Assets einpflegen
+
+Nicht direkt in die Zielordner hochladen, sondern nach `uploads/_inbox/` — dort
+steht die Anleitung. Danach:
+
+```bash
+python3 scripts/sort_assets.py --write
+```
+
+Das Skript sortiert nach Dateityp und gemessenem Seitenverhältnis ein und lässt
+liegen, was nicht zusammenpasst: ein Titelblatt-Hintergrund im Format 16:9 etwa,
+der bei `118,125 mm` endet und die Eckerweiterung nicht tragen kann.
+
 ## Hinweise
 
 **Texturen** `a4-texture-*.jpg`: im Repository 1240 × 1754 px = 150 dpi, siehe
