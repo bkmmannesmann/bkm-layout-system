@@ -22,9 +22,11 @@ from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML
 from pypdf import PdfReader
 
-# Schriftfamilien, die im fertigen PDF stehen duerfen. Alles andere heisst,
-# dass WeasyPrint eine Datei nicht gefunden und still ersetzt hat.
-ALLOWED_FONTS = ("Unbounded", "TT-Norms-Pro", "TTNormsPro", "Liberation")
+from pdf_checks import check_completeness, check_fonts, collect_strings
+
+# Pfadschluessel des Innenteils. Sie stehen als Pfad im Content und nicht als
+# Text im PDF.
+PAGE_SKIP_KEYS = ("image", "badge", "logo", "keyvisual")
 
 # Rueckgabewert fuer Ordner, die zu einem anderen Template gehoeren:
 # kein Fehler, aber auch kein gebautes PDF.
@@ -40,33 +42,6 @@ ASSETS_DIR = PROJECT_ROOT / "assets"
 
 
 
-def _letters(text):
-    """Reduziert auf Buchstaben und Ziffern.
-
-    Der Blocksatz bricht Woerter um und setzt Trennstriche; im extrahierten
-    Text stehen dadurch Leerzeichen und Bindestriche an Stellen, die es in
-    der Quelle nicht gibt. Ohne sie ist der Vergleich stabil.
-    """
-    return re.sub(r"[^0-9a-zäöüß]", "", text.lower())
-
-
-def _collect_strings(node, out):
-    """Sammelt alle Textwerte aus der Content-Struktur ein."""
-    if isinstance(node, str):
-        if len(node) > 40:      # Ueberschriften und Kurzfelder sind zu kurz,
-            out.append(node)    # um beim Umbruch verlaesslich zu vergleichen
-    elif isinstance(node, dict):
-        for key, value in node.items():
-            # Pfadangaben stehen nicht als Text im PDF.
-            if key in ("image", "badge", "logo", "keyvisual"):
-                continue
-            _collect_strings(value, out)
-    elif isinstance(node, list):
-        for item in node:
-            _collect_strings(item, out)
-    return out
-
-
 def check_output(pdf_path, content_data):
     """Prueft das erzeugte PDF gegen zwei Fehler, die sonst still durchgehen.
 
@@ -78,31 +53,13 @@ def check_output(pdf_path, content_data):
     hinaus, schneidet ihn overflow:hidden ab. Das PDF sieht heil aus, es
     fehlt nur der Schluss des Absatzes.
     """
-    errors = []
     reader = PdfReader(str(pdf_path))
+    errors = check_fonts(reader)
 
-    fonts = set()
-    for page in reader.pages:
-        resources = page.get("/Resources", {}) or {}
-        for value in (resources.get("/Font", {}) or {}).values():
-            base = str(value.get_object().get("/BaseFont", ""))
-            fonts.add(base.split("+")[-1].lstrip("/"))
-    for font in sorted(fonts):
-        if not any(font.startswith(prefix) for prefix in ALLOWED_FONTS):
-            errors.append(
-                f"Fremdschrift im PDF: {font} - eine Schriftdatei wurde nicht "
-                f"gefunden und still ersetzt"
-            )
-
-    rendered = _letters(" ".join(page.extract_text() or "" for page in reader.pages))
     # Nur die Seiten: der Dokumenttitel steht im <title> und damit nicht im
     # sichtbaren Text, page_number_start ist eine Zahl.
-    for text in _collect_strings(content_data.get("pages", []), []):
-        if _letters(text) not in rendered:
-            errors.append(
-                f"Text aus dem Inhalt steht nicht im PDF: "
-                f"...{text.strip()[-60:]!r}"
-            )
+    errors.extend(check_completeness(
+        reader, collect_strings(content_data.get("pages", []), skip_keys=PAGE_SKIP_KEYS)))
 
     errors.extend(_check_type_area(reader))
     errors.extend(_check_right_edge(pdf_path))

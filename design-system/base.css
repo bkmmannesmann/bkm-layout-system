@@ -284,7 +284,11 @@ h3 {
 p {
   margin-bottom: var(--space-sm);
   text-align: justify;
+  /* U+002D statt U+2010: keine der Markenschriften hat den
+     typografischen Trennstrich, WeasyPrint faellt sonst auf eine
+     Fremdschrift zurueck. */
   hyphens: auto;
+  hyphenate-character: "-";
   -webkit-hyphens: auto;
 }
 

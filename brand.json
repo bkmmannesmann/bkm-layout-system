@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.6.0",
+  "version": "1.7.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -117,7 +117,20 @@
       "exception": "templates/tds/template.css setzt für die Marker-Auszeichnung .tds-marker bewusst 'Courier New'. Das ist ein Prüfvermerk im Datenblatt, kein Satzelement, und fällt nicht unter diese Regel."
     },
     "hyphenate_character": "-",
-    "hyphenate_note": "TT Norms Pro enthält kein U+2010. Ohne diese Angabe setzt WeasyPrint an jeder Trennstelle .notdef als schwarzes Kästchen."
+    "hyphenate_note": "TT Norms Pro enthält kein U+2010. Ohne diese Angabe setzt WeasyPrint an jeder Trennstelle .notdef als schwarzes Kästchen.",
+    "hyphenation": {
+      "$comment": "Silbentrennung. Gilt fuer jeden Ausgabepfad, Canvas wie Druck.",
+      "hyphenate_character": "-",
+      "codepoint": "U+002D",
+      "why": "Keine der Markenschriften enthaelt U+2010, den typografischen Trennstrich: weder Unbounded noch TT Norms Pro. Wer hyphens:auto setzt, ohne den Trennstrich festzulegen, bekommt ihn aus einer Fremdschrift - WeasyPrint bettet dafuer DejaVu Sans ein, im Browser springt die Ersatzschrift ein. Sichtbar ist das kaum, im Druck-PDF steht aber eine fremde Schrift.",
+      "css": "hyphens: auto; hyphenate-character: \"-\";",
+      "fonts_without_u2010": [
+        "Unbounded (400, 700, 900, Black)",
+        "TT Norms Pro Regular",
+        "TT Norms Pro Bold",
+        "TT Norms Pro Compact Regular"
+      ]
+    }
   },
   "grid": {
     "page": {
