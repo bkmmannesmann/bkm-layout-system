@@ -50,13 +50,27 @@ Repository-Wurzelverzeichnis.
 - `assets/logos/bkm-logo-white-puregreen.svg`
 - `assets/logos/bkm-logo-white.svg`
 
-## uploads/ (22)
+## uploads/ (36)
 - `uploads/a4-texture-deep-green-2.jpg`
 - `uploads/a4-texture-deep-green-3.jpg`
 - `uploads/a4-texture-deep-green.jpg`
+- `uploads/a4-texture-pure-green-2.jpg`
+- `uploads/a4-texture-pure-green-3.jpg`
+- `uploads/a4-texture-pure-green-4.jpg`
+- `uploads/a4-texture-pure-green-5.jpg`
+- `uploads/a4-texture-pure-green.jpg`
 - `uploads/a4-texture-transition-green-2.jpg`
+- `uploads/a4-texture-transition-green-3.jpg`
+- `uploads/a4-texture-transition-green-4.jpg`
+- `uploads/a4-texture-transition-green-5.jpg`
+- `uploads/a4-texture-transition-green-6.jpg`
 - `uploads/a4-texture-transition-green.jpg`
+- `uploads/a4-texture-white-2.jpg`
+- `uploads/a4-texture-white-3.jpg`
+- `uploads/a4-texture-white-4.jpg`
 - `uploads/a4-texture-white-5.jpg`
+- `uploads/a4-texture-white-6.jpg`
+- `uploads/a4-texture-white.jpg`
 - `uploads/bkm-fachbetrieb-messergebnis-schadensanalyse.webp`
 - `uploads/bkm-fachbetrieb-sanierter-keller-ergebnis.webp`
 - `uploads/bkm-fachbetrieb-schadensanalyse-abplatzender-putz.webp`
@@ -67,12 +81,25 @@ Repository-Wurzelverzeichnis.
 - `uploads/magnific_nano-banana-2-halbnah-san_3GXw9NsREY.jpg`
 - `uploads/magnific_ultrarealistic-architectu_CHxX15MEEy.jpg`
 - `uploads/signatur-bkm-systempartner-logo.png`
-- `uploads/titel-hero-anleitung-d5b6a7aa.png`
-- `uploads/titel-hero-bkm-ag-web.png`
+- `uploads/titel-hero-anleitung.png`
+- `uploads/titel-hero-bkm-ag.png`
 - `uploads/titel-hero-fachbetrieb.png`
-- `uploads/titel-hero-home-line-web.png`
-- `uploads/titel-hero-pro-line-web.png`
+- `uploads/titel-hero-home-line.png`
+- `uploads/titel-hero-pro-line.png`
 - `uploads/trockene-waende-mit-novusan.webp`
+
+## Neue Assets einpflegen
+
+Nicht direkt in die Zielordner hochladen, sondern nach `uploads/_inbox/` — dort
+steht die Anleitung. Danach:
+
+```bash
+python3 scripts/sort_assets.py --write
+```
+
+Das Skript sortiert nach Dateityp und gemessenem Seitenverhältnis ein und lässt
+liegen, was nicht zusammenpasst: ein Titelblatt-Hintergrund im Format 16:9 etwa,
+der bei `118,125 mm` endet und die Eckerweiterung nicht tragen kann.
 
 ## Hinweise
 

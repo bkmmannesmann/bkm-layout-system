@@ -49,12 +49,36 @@ und Navigation über zwanzig und mehr Seiten.
 | Kopfsteg Innenseiten | `26,7 mm` | — |
 | Kopfsteg Titelblatt mit Logo | `18 mm` | Das Logo steht auf der Achse, der Kopfsteg entspricht ihr. |
 | Kopfsteg Titelblatt mit Siegel | `12 mm` | Das runde Siegel ersetzt das Logo und braucht mehr Luft nach unten, deshalb steht es höher. |
-| Fußsteg | `23,5 mm` | Innenseiten |
+| Fußsteg | `23,5 mm` | Innenseiten. Seiten ohne Seitenzahl sind nicht daran gebunden, siehe unten. |
 | Textbreite | `174 mm` | 210 − 2 × 18 |
 | Dreispaltig | `55 mm` Spalte, `4,6 mm` Steg | Fließtextseiten |
 | Marginalspalte | `38 mm`, Steg `6 mm` | Textstrecken, Verfahren, Produktseiten |
 | Radius | `5 px` | Abweichung, siehe unten |
 | Haarlinie | `#e3e1dc` | Wie TDS |
+
+### Ausnahme: Seiten ohne Seitenzahl
+
+Der Fußsteg von `23,5 mm` begrenzt den Satzspiegel nach unten. **Wo die Seitenzahl steht,
+unterscheiden sich die beiden Ebenen:** der Produktionspfad setzt sie über `.page__footer`
+in den Fußsteg (Grundlinie `279 mm`, unterdrückbar über `no_folio`), der Canvas setzt sie in
+den Kolumnentitel am Kopf — eine Zeile mit Rubrik links, Ziffer rechts, Unterlinie. Der
+Fußsteg bleibt im Canvas leer; er hält beide Ebenen auf demselben Satzspiegel.
+
+Eine Seite ohne Seitenzahl — Rückseite (U4) und randabfallende Strecken — ist daran nicht
+gebunden; dort ist nur der Beschnitt die Grenze. `scripts/build_pages.py` prüft solche Seiten
+gegen `BLEED_SAFE = 285 mm` statt gegen die `272 mm` einer Satzseite; die Fallunterscheidung
+steht dort in `_check_type_area`.
+
+Genutzt wird das aktuell an einer Stelle: `B-Rahmenseiten.dc.html`, Seite 10 (U4) steht auf
+`padding: 26.7mm 18mm 18mm`. Der Impressumsblock endet dort bei `279,0 mm`. Der
+Produktionspfad setzt dieselbe Seite über `.backcover-imprint { top: 271.0mm }` — also
+ebenfalls tiefer, als der Fußsteg einer Satzseite zuließe.
+
+Die Ausnahme ist eine **Erlaubnis, kein Gebot**: Seiten ohne Ziffer dürfen auf `23,5 mm`
+stehenbleiben, wenn sie den Raum nicht brauchen — die meisten tun das. Über alle 74
+Seiten-Container hinweg gilt: **alle 44 Seiten mit Ziffer stehen auf `23,5 mm`**, und alle
+drei mit abweichendem Fuß tragen keine. `scripts/validate_brochure.py` prüft genau das; ein
+abweichender Fuß auf einer Seite mit Ziffer wird gemeldet.
 
 ## Titelblatt
 
