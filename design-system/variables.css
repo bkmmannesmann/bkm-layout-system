@@ -24,6 +24,10 @@
   --bkm-hairline: #e3e1dc;            /* Haarlinie, Trennlinien */
   --bkm-rule: #d9d7d3;                /* Kräftigere Linie, Platzhalterflächen */
   --bkm-stone-grey: #494949;          /* Dunkelgrau für Kontrastflächen */
+  /* Zurückgenommener Nebentext: Rubrik im Kolumnentitel, Ausgabe- und
+     Artikelnummer, Bildunterschriften, Fußnoten und Rechtshinweise.
+     Nie Fließtext, nie Headline. Siehe brand.json, muted-grey. */
+  --bkm-muted-grey: #8a8a8a;
   --bkm-grey-50: #808080;             /* RGB: 128, 128, 128 – Mittelgrau */
   --bkm-grey-light: #999999;          /* RGB: 153, 153, 153 – Hellgrau */
   /* Kein Palettenton. Fließtext ist Stone Grey — siehe brand.json.
