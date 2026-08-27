@@ -150,6 +150,28 @@ html, body {
   margin-bottom: 18mm;  /* 18mm Abstand zwischen Logo-Unterkante und Headline */
 }
 
+/* === SIEGEL (nur Fachbetriebe) ===
+   Das runde Systempartner-Siegel ersetzt das BKM-Logo, ohne dass sich sonst
+   etwas verschiebt: das Logo bleibt im Fluss stehen und traegt weiterhin den
+   Abstand zur Headline, wird aber unsichtbar. Das Siegel liegt absolut
+   darueber, auf derselben Mittelhoehe.
+
+   Rechnung: das Logo ist bei 42 mm Breite 10,161 mm hoch (viewBox
+   1054,34 x 255,08), Oberkante 18 mm, Mitte also 23,081 mm. Das Siegel misst
+   28,16 mm, seine Oberkante liegt damit bei 23,081 - 14,08 = 9,001 mm. */
+
+.cover--fachbetriebe .cover__logo { visibility: hidden; }
+
+.cover--fachbetriebe .cover__seal {
+  position: absolute;
+  top: 9.001mm;
+  left: var(--cover-axis, 18mm);
+  width: 28.16mm;
+  height: 28.16mm;
+  z-index: 3;
+  display: block;
+}
+
 /* === HEADLINE ===
    Schrift: Unbounded Black (900), 30pt, Versalien
    Zeilenabstand: 1.25
