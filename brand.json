@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.12.0",
+  "version": "1.13.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -194,7 +194,10 @@
       "variant": "dreifarbig"
     },
     "logo": {
-      "width_mm": 42
+      "width_mm": 42,
+      "seal_top_mm": 9.001,
+      "seal_note": "Das runde Siegel ersetzt das Logo, es steht nicht daneben. Oberkante 9,001 mm — gerechnet, damit es auf derselben Mittelhöhe sitzt wie das Logo der übrigen Varianten: dessen Mitte liegt bei 23,081 mm (18 mm Kopfsteg + 10,161/2), das Siegel mit 28,16 mm Durchmesser also bei 23,081 − 14,08. Nur die Fachbetriebs-Variante trägt es.",
+      "seal_keeps_flow": "Das Logo bleibt im Fluss und wird nur unsichtbar, damit sein Abstand zur Headline erhalten bleibt. Wird es entfernt, rutscht die Headline hoch."
     },
     "notes": {
       "sixteen_nine": "118,125 mm ist echtes 16:9 der Blattbreite: 210 ÷ 16 × 9.",
