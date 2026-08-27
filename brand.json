@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.5.0",
+  "version": "1.6.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -183,6 +183,15 @@
       "sixteen_nine": "118,125 mm ist echtes 16:9 der Blattbreite: 210 ÷ 16 × 9.",
       "keyvisual_top": "102,416 mm ist kein gerundeter Wert und wurde nachgerechnet. Das Keyvisual hat die viewBox 196,06 × 464,8 und ist bei 42 mm Breite 99,570 mm hoch. Die Oberkante des Pure-Green-Chevrons liegt bei 73,33 Einheiten, also 15,709 mm unter der Bildoberkante. 118,125 − 15,709 = 102,4162 mm — nur so trifft die Kante die Unterkante des 16:9-Bereichs. templates/cover/cover-layout.json führt dort 102,3 mm mit der Begründung „1210 px bei 300 dpi“; diese Rechnung ergibt jedoch 102,4467 mm, der notierte Wert liegt also 147 µm neben seiner eigenen Herleitung. Die Korrektur ist für einen eigenen Pull Request vorgesehen, weil sie bestehende Titelblätter ändert.",
       "blitzerschutz": "Zwei Überlappungen an der Kante, an der drei Ebenen zusammentreffen: die Eckerweiterung ragt 0,5 mm in die Hero-Fläche, das Foto überlappt sie um 7,54 mm."
+    },
+    "layout": {
+      "$comment": "Wie die Seite gebaut sein muss, damit die Geometrie oben trägt. Ohne diese Regeln stimmen die Zahlen, aber die Seite bricht um.",
+      "page_container": "width: 210mm; height: 297mm; position: relative; overflow: hidden",
+      "children": "position: absolute — Hero-Grafik, Foto, Keyvisual, Eckerweiterung, Logo und Textblöcke",
+      "why": "Hero-Grafik und Foto überlappen sich um 7,54 mm: die Grafik ist 125 mm hoch, das Foto beginnt schon bei 117,46 mm. Absolut positioniert endet das Foto exakt bei 297 mm. Stehen beide im Fluss untereinander, addieren sie sich auf 304,54 mm — 7,54 mm zu viel, und das Foto rutscht auf die nächste Seite.",
+      "why_it_hides": "Im Vorschaufenster fällt das nicht auf: dort gibt es keinen Seitenumbruch, der Container scrollt einfach weiter. Sichtbar wird es erst beim Export nach PDF. Wer eine Titelseite baut, prüft sie deshalb im PDF, nicht in der Vorschau.",
+      "height_must_be_fixed": "height: 297mm, nicht min-height und nicht auto. Eine Seite mit auto-Höhe wächst mit ihrem Inhalt und bricht dann um.",
+      "overflow_hidden": "Was übersteht, wird abgeschnitten statt umgebrochen. Bei randabfallenden Elementen ist das gewollt — Hero-Grafik, Foto und Keyvisual reichen bis an die Blattkante und teils darüber hinaus."
     }
   },
   "text_rhythm": {
