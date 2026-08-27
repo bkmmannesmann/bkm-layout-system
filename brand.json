@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.8.0",
+  "version": "1.9.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -411,13 +411,20 @@
     "markers": "Offene Angaben werden im Content als [ANGABE FEHLT: …] oder [ZU PRÜFEN: …] markiert, nicht besser geschrieben."
   },
   "ai_generated_images": {
-    "rule": "Trägt ein Bild den Vermerk „AI GENERATED“ — bei den gelieferten Motiven unten rechts —, bleibt er sichtbar. Nach EU-KI-Verordnung erforderlich.",
+    "rule": "Ein KI-generiertes Motiv trägt den Vermerk „AI GENERATED“ als kleines Symbol im Bild selbst — nicht als Bildunterschrift, nicht als Text im Layout. Nach EU-KI-Verordnung erforderlich.",
+    "no_collective_notice": "Eine Sammelangabe im Impressum ersetzt den Vermerk am Bild nicht. Beides zugleich ist zulässig, der Vermerk am Bild bleibt Pflicht.",
+    "position": "Eine Ecke des Bildes, oben oder unten, links oder rechts. Welche, entscheidet sich am einzelnen Motiv — es gibt keine feste Ecke.",
     "do_not": [
       "wegretuschieren",
       "überdecken",
       "beschneiden"
     ],
-    "crop_warning": "object-fit: cover auf einem Bildkasten mit abweichendem Seitenverhältnis schneidet an den Rändern weg — und unten rechts liegt genau der Vermerk. Läuft ein solches Motiv in einen abweichenden Kasten, wird der Kasten angepasst, nicht das Bild."
+    "cropping": {
+      "$comment": "Entschieden am 27.08.2026. Ersetzt die frühere Regel, wonach der Bildkasten angepasst wurde.",
+      "rule": "Die Bildkomposition hat Vorrang. Ein Motiv wird **nicht** in ein abweichendes Format gepresst, nur damit der Vermerk sichtbar bleibt — weder durch Anpassen des Kastens noch durch Verzicht auf den Beschnitt.",
+      "instead": "Wer ein Motiv platziert, prüft, welche Ecken der Beschnitt übriglässt, und setzt den Vermerk dorthin. Reicht keine Ecke, wird das Motiv neu ausgerichtet — der Bildausschnitt wandert, nicht der Kasten.",
+      "check": "scripts/check_export.py meldet zu jedem beschnittenen Bild, welche Ecken sichtbar bleiben und welche verdeckt sind. Es ist ein Hinweis, kein Verstoß: die Entscheidung liegt bei der Bildredaktion."
+    }
   },
   "deviations_from_tds": {
     "$comment": "Drei Werte weichen bewusst vom Datenblatt-Vertrag ab. Sie werden nicht angeglichen.",

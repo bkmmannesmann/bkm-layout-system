@@ -305,14 +305,37 @@ dort nichts verändert wurde.
 
 ## Fotos: Kennzeichnung KI-generierter Bilder
 
-Trägt ein Foto den Vermerk **„AI GENERATED"** — bei den gelieferten Motiven unten
-rechts —, bleibt er **sichtbar im Bild**. Er ist nach EU-KI-Verordnung erforderlich.
+Ein KI-generiertes Motiv trägt den Vermerk **„AI GENERATED"** als kleines Symbol
+**im Bild selbst** — nicht als Bildunterschrift, nicht als Text im Layout. Nach
+EU-KI-Verordnung erforderlich.
 
-Nicht wegretuschieren, nicht überdecken und **nicht beschneiden**. Das betrifft besonders
-`object-fit: cover` auf einem Bildkasten, dessen Seitenverhältnis vom Motiv abweicht:
-dort schneidet der Browser stillschweigend an den Rändern weg — und unten rechts liegt
-genau der Vermerk. Wo ein Motiv mit Vermerk in einen abweichenden Kasten läuft, wird der
-Kasten angepasst, nicht das Bild.
+**Eine Sammelangabe im Impressum ersetzt ihn nicht.** Beides zugleich ist zulässig, der
+Vermerk am Bild bleibt Pflicht. Nicht wegretuschieren, nicht überdecken, nicht
+beschneiden.
+
+In welcher Ecke er sitzt, entscheidet sich am einzelnen Motiv — oben oder unten, links
+oder rechts. Eine feste Ecke gibt es nicht.
+
+### Beschnitt: das Motiv gewinnt
+
+`object-fit: cover` auf einem Kasten mit abweichendem Seitenverhältnis schneidet an den
+Rändern weg. **Die Bildkomposition hat dennoch Vorrang.** Ein Motiv wird nicht in ein
+anderes Format gepresst, nur damit der Vermerk sichtbar bleibt — weder durch Anpassen des
+Kastens noch durch Verzicht auf den Beschnitt.
+
+Stattdessen: prüfen, welche Ecken der Beschnitt übriglässt, und den Vermerk dorthin
+setzen. Reicht keine Ecke, wird das Motiv **neu ausgerichtet** — der Bildausschnitt
+wandert, nicht der Kasten.
+
+`scripts/check_export.py` meldet zu jedem beschnittenen Bild, welche Ecken sichtbar
+bleiben und welche verdeckt sind, etwa:
+
+```
+Seite 10: Bild beschnitten (links 4 mm). Für den KI-Vermerk nutzbar:
+          oben rechts, unten rechts — verdeckt: oben links, unten links.
+```
+
+Das ist ein **Hinweis, kein Verstoß**: die Entscheidung liegt bei der Bildredaktion.
 
 Dieselbe Regel gilt im Datenblatt für Produktbilder, siehe `AGENTS.md`, Punkt 7.
 

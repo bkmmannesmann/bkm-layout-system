@@ -203,15 +203,29 @@ def pruefe(pfad: Path, brand: dict) -> tuple[list[str], list[str]]:
                 hinweise.append(
                     f"Seite {i}: Bild {info['width']}x{info['height']} px auf "
                     f"{b:.0f}x{h:.0f} mm = {dpi:.0f} dpi")
-            ueber = [(-x0, "links"), (x1 - blatt_b, "rechts"),
-                     (-y0, "oben"), (y1 - blatt_h, "unten")]
-            weg = [(round(v, 1), s) for v, s in ueber if v > 0.5]
-            if weg:
-                anteil = sum(v for v, _ in weg) / (b + h) * 100
+            # Welcher Teil des Bildes bleibt sichtbar? Der KI-Vermerk steckt im
+            # Bild selbst; welche Ecke ihn tragen kann, haengt an dieser Lage.
+            # Das Bild wird dafuer nicht ins Format gepresst - es wird
+            # ausgerichtet oder der Vermerk woanders gesetzt.
+            weg_l, weg_r = max(0.0, -x0), max(0.0, x1 - blatt_b)
+            weg_o, weg_u = max(0.0, -y0), max(0.0, y1 - blatt_h)
+            if max(weg_l, weg_r, weg_o, weg_u) > 0.5:
+                ecken = []
+                for name, dx, dy in (("oben links", weg_l, weg_o),
+                                     ("oben rechts", weg_r, weg_o),
+                                     ("unten links", weg_l, weg_u),
+                                     ("unten rechts", weg_r, weg_u)):
+                    ecken.append((name, dx <= 0.5 and dy <= 0.5))
+                sichtbar = [n for n, ok in ecken if ok]
+                verloren = [n for n, ok in ecken if not ok]
+                kanten = ", ".join(
+                    f"{s} {v:.0f} mm" for v, s in
+                    ((weg_l, "links"), (weg_r, "rechts"), (weg_o, "oben"), (weg_u, "unten"))
+                    if v > 0.5)
                 hinweise.append(
-                    f"Seite {i}: Bild ragt ueber die Blattkante hinaus "
-                    f"({', '.join(f'{s} {v:.0f} mm' for v, s in weg)}). Traegt es "
-                    f"einen KI-Vermerk in der Ecke, wird der abgeschnitten.")
+                    f"Seite {i}: Bild beschnitten ({kanten}). Fuer den KI-Vermerk "
+                    f"nutzbar: {', '.join(sichtbar) if sichtbar else 'keine Ecke'}"
+                    f"{' — verdeckt: ' + ', '.join(verloren) if verloren else ''}.")
 
     # --- KI-Vermerk --------------------------------------------------------
     volltext = " ".join(seite.get_text() for seite in doc).lower()
