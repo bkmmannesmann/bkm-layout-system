@@ -246,14 +246,17 @@ Fehlt eine Bilddatei, rendert WeasyPrint den Alt-Text in einer Ersatzschrift sta
 PDF sieht das aus wie ein Satzfehler, nicht wie eine fehlende Datei. Bilder liegen unter
 `assets/images/`; der Release-Build bricht ab, wenn eine referenzierte Datei fehlt.
 
-Trägt ein Bild den Vermerk „AI GENERATED" — bei den gelieferten Motiven unten rechts —,
-bleibt er sichtbar im Bild. Er ist nach EU-KI-Verordnung erforderlich und wird nicht
-wegretuschiert, überdeckt oder **beschnitten** — dieselbe Regel wie beim Datenblatt.
+Ein KI-generiertes Bild trägt den Vermerk „AI GENERATED" als kleines Symbol im Bild
+selbst, nicht als Bildunterschrift. Nach EU-KI-Verordnung erforderlich; eine Sammelangabe
+im Impressum ersetzt ihn nicht. Nicht wegretuschieren, überdecken oder beschneiden —
+dieselbe Regel wie beim Datenblatt.
 
-Das Beschneiden ist der Fall, der leicht übersehen wird: `object-fit: cover` auf einem
-Bildkasten, dessen Seitenverhältnis vom Motiv abweicht, schneidet an den Rändern weg —
-und unten rechts liegt genau der Vermerk. Läuft ein Motiv mit Vermerk in einen
-abweichenden Kasten, wird der Kasten angepasst, nicht das Bild.
+Beim Beschnitt gewinnt jedoch das Motiv: `object-fit: cover` auf einem abweichenden
+Kasten schneidet an den Rändern weg, und ein Motiv wird deswegen **nicht** ins Format
+gepresst. Wer platziert, prüft, welche Ecken übrigbleiben, und setzt den Vermerk dorthin;
+reicht keine, wird der Bildausschnitt neu ausgerichtet. Die Regel steht vollständig in
+`brand.json` unter `ai_generated_images.cropping`, die Prüfung in
+`scripts/check_export.py`.
 
 Die Icons der Broschüre brauchen für diese Pipeline eine Inline-Füllung, weil WeasyPrint
 das Dokument-Stylesheet nicht auf SVG-Kinder anwendet. `scripts/prepare_brochure_icons.py`
@@ -297,6 +300,19 @@ Beim Umstellen fiel auf, dass die `feature`-Seite der Demo mit einer Bildhöhe v
 engeren Raster nicht mehr aufgeht — der Satz lief 19 mm über den Fußsteg. Die Ausgabeprüfung hat
 das gemeldet, die Bildhöhe steht jetzt auf `110 mm`. Wer eine bestehende Broschüre auf dieses
 Raster zieht, prüft die `feature`-Seiten zuerst.
+
+## Paginierung
+
+Titel und Rückseite zählen nicht mit. `templates/pages/` trägt kein Titelblatt — das Cover
+baut `build_cover.py` als eigenes Dokument —, deshalb ist **`page_number_start` gleich 1**
+und meint die erste Seite in `pages[]`. Eine Seite mit `no_folio: true` zeigt keine Ziffer,
+zählt aber mit.
+
+Der Wert stand früher auf `2`, weil das Cover als Seite 1 mitgezählt wurde. Dadurch war die
+ganze Folge um eins versetzt. `validate_brochure.py` prüft ihn jetzt.
+
+Ändert sich die Zählung, wandern die Verweise im Inhaltsverzeichnis mit — die
+Inhaltsprüfung meldet Verweise, die auf keine bezifferte Seite zeigen.
 
 ## Prüfung
 

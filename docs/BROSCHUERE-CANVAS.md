@@ -143,6 +143,23 @@ Der TDS löst dasselbe Problem über `.tds-band` mit `margin-top: -10px`. Beide 
 sind gültig; der Broschüren-Weg ist nötig, weil das Hero eine Grafikdatei ist und
 kein CSS-Balken.
 
+## Paginierung
+
+**Titel und Rückseite zählen nicht mit.** Die erste Seite danach trägt die Ziffer `1` —
+auch dann, wenn sie keine anzeigt.
+
+Eine Seite darf ihre Ziffer unterdrücken: Editorial, Inhaltsverzeichnis, Rückseite. Sie
+**zählt trotzdem mit**, die Folge läuft danach ohne Sprung weiter. Liegt das Titelblatt im
+selben Dokument, steht auf Blatt `N` damit immer die Ziffer `N−1`.
+
+Genau daran ist ein Fehler aufgefallen: Blatt 3 trug die `03` statt der `02`, weil das
+Titelblatt mitgezählt wurde. Der Versatz zog sich durch das ganze Dokument.
+
+`scripts/check_export.py` rechnet das nach und meldet den Versatz einmal, nicht auf jeder
+Seite — er zieht sich ohnehin durch.
+
+Ändert sich die Zählung, **wandern die Verweise im Inhaltsverzeichnis mit**.
+
 ## Farbflächen
 
 | Rolle | Hex |
@@ -239,6 +256,33 @@ Drei Werte weichen bewusst ab. Sie werden **nicht** angeglichen:
 Übernommen wurden: Achse `18 mm`, Farbwerte, Haarlinie `#e3e1dc`, Phosphor Bold als
 lokale SVGs, Grundschriftgröße ohne seitenbezogene Verkleinerung.
 
+## Export prüfen
+
+Jeder Export aus dem Canvas lässt sich gegen `brand.json` prüfen:
+
+```bash
+python3 scripts/check_export.py <datei.pdf>
+```
+
+Geprüft werden Schriften, Blattmaß, Satzspiegel gegen Kopf- und Fußsteg, Textfarben
+gegen die Palette, Bildauflösung und Bildbeschnitt.
+
+**Der Anlass war ein Fehler, den fünf Runden lang niemand bemerkt hat.** In einem Export
+standen rund 4.000 von 4.200 Textstellen in `.SF NS`, der Systemschrift von macOS, statt
+in TT Norms Pro — eine `font-family` in der `<doc-page>`-Hülle hatte die Body-Regel
+überschrieben. Die Headlines waren korrekt, das PDF sah heil aus. Chrome kann San
+Francisco nicht regulär einbetten und legt sie als **Type3** ab; daran ist es messbar.
+
+Die Prüfung meldet zwei Klassen getrennt:
+
+- **Verstöße** — Fremdschrift, falsches Blattmaß, Satz außerhalb des Satzspiegels,
+  Farbe nicht in der Palette. Exitcode 1.
+- **Hinweise** — niedrige Bildauflösung, Bilder über die Blattkante hinaus, Blattmaß
+  minimal knapp. Sie brauchen ein Urteil, keinen Reflex.
+
+Seiten ohne Seitenzahl werden gegen `285 mm` geprüft statt gegen `273,5` — dieselbe
+Ausnahme wie oben, derselbe Wert wie `BLEED_SAFE` in `build_pages.py`.
+
 ## Zwei Druckwege
 
 | Weg | Womit | Wofür |
@@ -278,14 +322,37 @@ dort nichts verändert wurde.
 
 ## Fotos: Kennzeichnung KI-generierter Bilder
 
-Trägt ein Foto den Vermerk **„AI GENERATED"** — bei den gelieferten Motiven unten
-rechts —, bleibt er **sichtbar im Bild**. Er ist nach EU-KI-Verordnung erforderlich.
+Ein KI-generiertes Motiv trägt den Vermerk **„AI GENERATED"** als kleines Symbol
+**im Bild selbst** — nicht als Bildunterschrift, nicht als Text im Layout. Nach
+EU-KI-Verordnung erforderlich.
 
-Nicht wegretuschieren, nicht überdecken und **nicht beschneiden**. Das betrifft besonders
-`object-fit: cover` auf einem Bildkasten, dessen Seitenverhältnis vom Motiv abweicht:
-dort schneidet der Browser stillschweigend an den Rändern weg — und unten rechts liegt
-genau der Vermerk. Wo ein Motiv mit Vermerk in einen abweichenden Kasten läuft, wird der
-Kasten angepasst, nicht das Bild.
+**Eine Sammelangabe im Impressum ersetzt ihn nicht.** Beides zugleich ist zulässig, der
+Vermerk am Bild bleibt Pflicht. Nicht wegretuschieren, nicht überdecken, nicht
+beschneiden.
+
+In welcher Ecke er sitzt, entscheidet sich am einzelnen Motiv — oben oder unten, links
+oder rechts. Eine feste Ecke gibt es nicht.
+
+### Beschnitt: das Motiv gewinnt
+
+`object-fit: cover` auf einem Kasten mit abweichendem Seitenverhältnis schneidet an den
+Rändern weg. **Die Bildkomposition hat dennoch Vorrang.** Ein Motiv wird nicht in ein
+anderes Format gepresst, nur damit der Vermerk sichtbar bleibt — weder durch Anpassen des
+Kastens noch durch Verzicht auf den Beschnitt.
+
+Stattdessen: prüfen, welche Ecken der Beschnitt übriglässt, und den Vermerk dorthin
+setzen. Reicht keine Ecke, wird das Motiv **neu ausgerichtet** — der Bildausschnitt
+wandert, nicht der Kasten.
+
+`scripts/check_export.py` meldet zu jedem beschnittenen Bild, welche Ecken sichtbar
+bleiben und welche verdeckt sind, etwa:
+
+```
+Seite 10: Bild beschnitten (links 4 mm). Für den KI-Vermerk nutzbar:
+          oben rechts, unten rechts — verdeckt: oben links, unten links.
+```
+
+Das ist ein **Hinweis, kein Verstoß**: die Entscheidung liegt bei der Bildredaktion.
 
 Dieselbe Regel gilt im Datenblatt für Produktbilder, siehe `AGENTS.md`, Punkt 7.
 

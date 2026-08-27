@@ -1,7 +1,7 @@
 {
   "title": "BKM Mannesmann AG – Unternehmensbroschüre",
   "sender": "ag",
-  "page_number_start": 2,
+  "page_number_start": 1,
   "pages": [
     {
       "type": "toc",
@@ -9,17 +9,17 @@
       "title": "Inhalt",
       "two_columns": false,
       "entries": [
-        { "is_chapter": true,  "title": "Erst verstehen, dann abdichten",              "page": "03" },
-        { "is_chapter": false, "title": "Was wir tun", "page": "03" },
-        { "is_chapter": true,  "title": "Die Verfahren",                                  "page": "04" },
-        { "is_chapter": false, "title": "Sperren, wo Wasser aufsteigt",                   "page": "04" },
-        { "is_chapter": false, "title": "Regulieren, wo Luft zu feucht ist",              "page": "04" },
-        { "is_chapter": true,  "title": "Zwei Produktlinien",                             "page": "05" },
-        { "is_chapter": false, "title": "Home Line und Pro Line",                         "page": "05" },
-        { "is_chapter": true,  "title": "Der Weg zur Sanierung",                          "page": "06" },
-        { "is_chapter": false, "title": "Fünf Schritte",                                  "page": "06" },
-        { "is_chapter": true,  "title": "Zusammenarbeit",                                 "page": "07" },
-        { "is_chapter": false, "title": "Das Fachbetriebsnetz",                           "page": "07" }
+        { "is_chapter": true,  "title": "Erst verstehen, dann abdichten",              "page": "02" },
+        { "is_chapter": false, "title": "Was wir tun", "page": "02" },
+        { "is_chapter": true,  "title": "Die Verfahren",                                  "page": "03" },
+        { "is_chapter": false, "title": "Sperren, wo Wasser aufsteigt",                   "page": "03" },
+        { "is_chapter": false, "title": "Regulieren, wo Luft zu feucht ist",              "page": "03" },
+        { "is_chapter": true,  "title": "Zwei Produktlinien",                             "page": "04" },
+        { "is_chapter": false, "title": "Home Line und Pro Line",                         "page": "04" },
+        { "is_chapter": true,  "title": "Der Weg zur Sanierung",                          "page": "05" },
+        { "is_chapter": false, "title": "Fünf Schritte",                                  "page": "05" },
+        { "is_chapter": true,  "title": "Zusammenarbeit",                                 "page": "06" },
+        { "is_chapter": false, "title": "Das Fachbetriebsnetz",                           "page": "06" }
       ]
     },
 
