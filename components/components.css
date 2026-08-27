@@ -269,7 +269,7 @@
   font-family: var(--font-body);
   font-size: var(--fs-body-lg);
   font-weight: var(--fw-bold);
-  color: var(--bkm-black);
+  color: var(--bkm-stone-grey);
   margin-bottom: var(--space-xs);
 }
 
@@ -277,7 +277,7 @@
   font-family: var(--font-body);
   font-size: var(--fs-body);
   font-weight: var(--fw-regular);
-  color: var(--bkm-black);
+  color: var(--bkm-stone-grey);
 }
 
 /* ──────────────────────────────────────────────────────────

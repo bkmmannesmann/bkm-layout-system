@@ -240,7 +240,12 @@ body {
   font-weight: var(--fw-regular);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  color: var(--bkm-black);
+  /* Fliesstext auf hellem Grund ist Stone Grey, siehe brand.json. Hier stand
+     --bkm-black: reines Schwarz, das die Palette nicht fuehrt. Wirksam wurde es
+     ueberall dort, wo ein Element seine Farbe nicht selbst setzt und erbt - so
+     liefen Anschrift und Impressum der Rueckseite in Schwarz, bis es jemand
+     gemessen hat. */
+  color: var(--bkm-stone-grey);
   background: var(--bkm-white);
 }
 
