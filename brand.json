@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.7.0",
+  "version": "1.8.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -35,6 +35,10 @@
     "stone-grey": {
       "hex": "#494949",
       "role": "Fließtext auf hellem Grund, Flächenfarbe Pro Line"
+    },
+    "muted-grey": {
+      "hex": "#8a8a8a",
+      "role": "Zurückgenommener Nebentext: Rubrik im Kolumnentitel, Ausgabe- und Artikelnummer, Bildunterschriften, Fußnoten und Rechtshinweise, Seitenzahlen im Inhaltsverzeichnis, Platzhalter-Beschriftungen. Nie Fließtext, nie Headline."
     },
     "sand-white": {
       "hex": "#f6f5f2",

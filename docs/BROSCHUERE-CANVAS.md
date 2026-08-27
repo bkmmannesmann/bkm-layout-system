@@ -239,6 +239,33 @@ Drei Werte weichen bewusst ab. Sie werden **nicht** angeglichen:
 Übernommen wurden: Achse `18 mm`, Farbwerte, Haarlinie `#e3e1dc`, Phosphor Bold als
 lokale SVGs, Grundschriftgröße ohne seitenbezogene Verkleinerung.
 
+## Export prüfen
+
+Jeder Export aus dem Canvas lässt sich gegen `brand.json` prüfen:
+
+```bash
+python3 scripts/check_export.py <datei.pdf>
+```
+
+Geprüft werden Schriften, Blattmaß, Satzspiegel gegen Kopf- und Fußsteg, Textfarben
+gegen die Palette, Bildauflösung und Bildbeschnitt.
+
+**Der Anlass war ein Fehler, den fünf Runden lang niemand bemerkt hat.** In einem Export
+standen rund 4.000 von 4.200 Textstellen in `.SF NS`, der Systemschrift von macOS, statt
+in TT Norms Pro — eine `font-family` in der `<doc-page>`-Hülle hatte die Body-Regel
+überschrieben. Die Headlines waren korrekt, das PDF sah heil aus. Chrome kann San
+Francisco nicht regulär einbetten und legt sie als **Type3** ab; daran ist es messbar.
+
+Die Prüfung meldet zwei Klassen getrennt:
+
+- **Verstöße** — Fremdschrift, falsches Blattmaß, Satz außerhalb des Satzspiegels,
+  Farbe nicht in der Palette. Exitcode 1.
+- **Hinweise** — niedrige Bildauflösung, Bilder über die Blattkante hinaus, Blattmaß
+  minimal knapp. Sie brauchen ein Urteil, keinen Reflex.
+
+Seiten ohne Seitenzahl werden gegen `285 mm` geprüft statt gegen `273,5` — dieselbe
+Ausnahme wie oben, derselbe Wert wie `BLEED_SAFE` in `build_pages.py`.
+
 ## Zwei Druckwege
 
 | Weg | Womit | Wofür |
