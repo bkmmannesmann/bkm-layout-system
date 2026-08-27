@@ -325,7 +325,7 @@ html, body {
 /* --- VERARBEITUNGSANLEITUNG (Weiß) --- */
 .cover--anleitung .cover__color-box {
   background-color: #ffffff;
-  border-bottom: 1px solid #e8e6e1;
+  border-bottom: 1px solid var(--bkm-hairline, #e3e1dc);  /* Palettenton, vorher #e8e6e1 */
 }
 .cover--anleitung .cover__headline { color: #494949; }
 .cover--anleitung .cover__subheadline { color: #4daf46; }
