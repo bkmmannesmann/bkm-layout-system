@@ -51,9 +51,6 @@ VARIANTS = {
         "color_box_name": "Deep Green",
         "logo_file": "bkm-logo-white-puregreen.svg",
         "keyvisual_file": "keyvisual-on-light.png",
-        "headline_color": "#ffffff",
-        "subheadline_color": "#b4e717",
-        "intro_color": "#ffffff",
     },
     "fachbetriebe": {
         "variant_class": "cover--fachbetriebe",
@@ -61,10 +58,7 @@ VARIANTS = {
         "color_box_bg": "#287d4b",
         "color_box_name": "Transition Green",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-light.png",
-        "headline_color": "#ffffff",
-        "subheadline_color": "#b4e717",  # Pure Green
-        "intro_color": "#ffffff",
+        "keyvisual_file": "keyvisual-on-light.png",  # Pure Green
         "text_shadow": True,  # Leichter Schatten
     },
     "homeline": {
@@ -74,9 +68,6 @@ VARIANTS = {
         "color_box_name": "Pure Green",
         "logo_file": "bkm-logo-white.svg",
         "keyvisual_file": "keyvisual-on-light.png",
-        "headline_color": "#ffffff",
-        "subheadline_color": "#1c4b42",
-        "intro_color": "#ffffff",
     },
     "proline": {
         "variant_class": "cover--proline",
@@ -84,10 +75,7 @@ VARIANTS = {
         "color_box_bg": "#494949",
         "color_box_name": "Stone Grey",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-light.png",
-        "headline_color": "#ffffff",
-        "subheadline_color": "#4daf46",  # Pure Green
-        "intro_color": "#ffffff",
+        "keyvisual_file": "keyvisual-on-light.png",  # Pure Green
     },
     "anleitung": {
         "variant_class": "cover--anleitung",
@@ -96,12 +84,19 @@ VARIANTS = {
         "color_box_name": "Weiß",
         "logo_file": "bkm-logo-stonegrey-puregreen.svg",
         "keyvisual_file": "keyvisual-on-light.png",
-        "headline_color": "#494949",
-        "subheadline_color": "#4daf46",
-        "intro_color": "#494949",
     },
 }
 
+
+# Jede Variante traegt ihre eigene Hero-Grafik. Dieselben Dateien nutzt der
+# Canvas in templates/brochure/A-Titelblaetter.dc.html.
+HERO_GRAPHIC = {
+    "mannesmann": "bkm-ag",
+    "fachbetriebe": "fachbetrieb",
+    "homeline": "home-line",
+    "proline": "pro-line",
+    "anleitung": "anleitung",
+}
 
 def build_cover(variant_key: str, content: dict):
     """Generiert ein Cover-PDF für eine bestimmte Variante."""
@@ -138,6 +133,12 @@ def build_cover(variant_key: str, content: dict):
         # Nur die Fachbetriebe-Variante traegt das runde Systempartner-Siegel.
         # Es ersetzt optisch das Logo; das Logo bleibt im Fluss und unsichtbar,
         # damit der Abstand zur Headline unveraendert bleibt.
+        # Die Hero-Grafik ersetzt den frueheren flachen Farbkasten; sie traegt
+        # die Eckerweiterung im Alphakanal. Eine je Variante.
+        "hero_graphic_path": f"../../uploads/titel-hero-{HERO_GRAPHIC[variant_key]}.png",
+        # Nur die helle Anleitungs-Grafik braucht eine Haarlinie an der
+        # 16:9-Kante, sonst setzt sie sich kaum vom Foto darunter ab.
+        "hairline": variant_key == "anleitung",
         "seal_path": ("../../uploads/signatur-bkm-systempartner-logo.png"
                       if variant_key == "fachbetriebe" else ""),
         "badge_path": badge_path,
@@ -164,12 +165,13 @@ def build_cover(variant_key: str, content: dict):
       }
 """
     
+    # Die Textfarben stehen ausschliesslich in cover-spec.css, in den
+    # .cover--<variante>-Regeln. Hier standen sie ein zweites Mal und wurden
+    # still ueberstimmt: .cover--homeline .cover__subheadline hat die
+    # Spezifitaet 0-2-0, die hier eingespeiste Regel nur 0-1-0. Wer den Wert
+    # in diesem Skript aenderte, sah im PDF keine Wirkung.
     color_overrides = f"""
     <style>
-      .cover__color-box {{ background-color: {variant['color_box_bg']}; }}
-      .cover__headline {{ color: {variant['headline_color']}; }}
-      .cover__subheadline {{ color: {variant['subheadline_color']}; }}
-      .cover__intro {{ color: {variant['intro_color']}; }}
       {shadow_css}
     </style>
     """

@@ -69,7 +69,12 @@
          - 8×8mm Erweiterung: rechts unten, bündig an Unterkante
          Zusammen eine einzige L-förmige Fläche.
          Farbe: Je nach Variante -->
-    <div class="cover__color-box"></div>
+    <!-- HERO-GRAFIK (z-index: 2)
+         210 x 125 mm. Die PNG bringt die Eckerweiterung mit: unterhalb der
+         16:9-Kante bei 118,125 mm ist nur der rechte Zipfel deckend, der Rest
+         durchsichtig. Frueher war das ein flacher Farbkasten plus ::after. -->
+    <img class="cover__hero-graphic" src="{{ hero_graphic_path }}" alt="">
+    {% if hairline %}<div class="cover__hairline"></div>{% endif %}
 
     <!-- TEXT-CONTENT CONTAINER (Flow-Layout)
          Position: X=18mm Y=18mm (Padding im Container)
