@@ -50,7 +50,7 @@ Repository-Wurzelverzeichnis.
 - `assets/logos/bkm-logo-white-puregreen.svg`
 - `assets/logos/bkm-logo-white.svg`
 
-## uploads/ (36)
+## uploads/ (37)
 - `uploads/a4-texture-deep-green-2.jpg`
 - `uploads/a4-texture-deep-green-3.jpg`
 - `uploads/a4-texture-deep-green.jpg`
@@ -75,6 +75,7 @@ Repository-Wurzelverzeichnis.
 - `uploads/bkm-fachbetrieb-sanierter-keller-ergebnis.webp`
 - `uploads/bkm-fachbetrieb-schadensanalyse-abplatzender-putz.webp`
 - `uploads/bkm-fachbetriebs-kunde-sucht-hilfe-beifeuchteschaden.webp`
+- `uploads/cover-hero-standard.jpg`
 - `uploads/druckwasser-abplazender-putz-feuchte-waende.jpg`
 - `uploads/fachbetrieb-partner-standard.webp`
 - `uploads/feuchte-waende-selbst-sanieren.webp`
