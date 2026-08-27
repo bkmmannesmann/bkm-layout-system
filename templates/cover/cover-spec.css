@@ -131,7 +131,7 @@ html, body {
   top: 0;
   left: 0;
   width: 210mm;
-  height: 118.1mm;
+  height: 118.125mm;  /* wie der Farbkasten, echtes 16:9 */
   padding: 18mm 18mm 0 18mm;  /* 18mm von oben und links */
   z-index: 10;
   display: flex;
