@@ -85,7 +85,7 @@ abweichender Fuß auf einer Seite mit Ziffer wird gemeldet.
 | Element | Wert |
 |:---|:---|
 | Hero-Grafik | `210 × 125 mm` — 118,125 mm für den 16:9-Teil, darunter 6,875 mm Eckerweiterung unten rechts |
-| Keyvisual | `42 mm` breit, rechts angeschnitten, `top: 102,416 mm`, dreifarbig |
+| Keyvisual | `42 mm` breit, rechts angeschnitten, `top: 102,416 mm`, **`keyvisual-on-light.svg`** (dreifarbig) |
 | Foto | ab `117,46 mm` bis Seitenunterkante, `210 × 179,54 mm`, `object-fit: cover` |
 | Logo | `42 mm`, Kopfsteg `18 mm` |
 | Siegel (Fachbetriebs-Titel) | `28,16 mm` rund, Kopfsteg `12 mm`, ersetzt das Logo |
@@ -131,6 +131,12 @@ bedeutet dann nichts mehr. Optisch gemessen ist `18 mm` im Code `18 mm` auf dem 
 `102,416 mm` ist kein gerundeter Wert. Die linke Oberkante des Pure-Green-Chevrons
 liegt bei 73,33 von 464,8 SVG-Einheiten, bei 42 mm Breite also 15,709 mm unter der
 Bildoberkante. Nur bei `102,416 mm` trifft sie die Unterkante des 16:9-Bereichs exakt.
+
+**Damit hängt die Fassung an der Position.** Auf dem Titelblatt gilt immer
+`keyvisual-on-light.svg`, die dreifarbige — die weiße Fassung hat keinen
+Pure-Green-Chevron, und die Zahl verliert ihre Begründung. `on-dark` gehört auf
+durchgehend dunkle Flächen wie die Rückseite, `lime` ist Akzentfarbe.
+`scripts/validate_brochure.py` prüft das für `A-Titelblaetter.dc.html`.
 
 ### Blitzerschutz
 

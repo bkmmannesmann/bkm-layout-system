@@ -183,6 +183,33 @@ def check_canvas_footers() -> list[str]:
     return errors
 
 
+
+# Das Titelblatt fuehrt immer die dreifarbige Fassung. Die Position 102,416 mm
+# ist so gerechnet, dass die linke Oberkante des Pure-Green-Chevrons die
+# Unterkante des 16:9-Bereichs trifft - die weisse Fassung hat diesen Chevron
+# nicht, und die Zahl verliert ihre Begruendung.
+TITELBLATT = "A-Titelblaetter.dc.html"
+KEYVISUAL_TITEL = "keyvisual-on-light"
+KEYVISUAL_REF = re.compile(r"keyvisual/(keyvisual-[a-z-]+)\.svg")
+
+
+def check_keyvisual() -> list[str]:
+    """Auf dem Titelblatt ist nur die dreifarbige Fassung zulaessig."""
+    errors = []
+    datei = CANVAS_DIR / TITELBLATT
+    if not datei.is_file():
+        return errors
+    from collections import Counter
+    gefunden = Counter(KEYVISUAL_REF.findall(datei.read_text(encoding="utf-8")))
+    for name, anzahl in sorted(gefunden.items()):
+        if name != KEYVISUAL_TITEL:
+            errors.append(
+                f"{TITELBLATT}: {anzahl}x {name}.svg. Auf dem Titelblatt gilt "
+                f"{KEYVISUAL_TITEL}.svg, die dreifarbige Fassung - siehe "
+                f"brand.json, keyvisual.which_variant.")
+    return errors
+
+
 def check_layout() -> list[str]:
     errors: list[str] = []
 
@@ -349,6 +376,7 @@ def check_layout() -> list[str]:
 
     # --- Canvas-Ebene ------------------------------------------------------
     errors.extend(check_canvas_footers())
+    errors.extend(check_keyvisual())
 
     return errors
 

@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.10.0",
+  "version": "1.11.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -380,6 +380,12 @@
     "on_dark": "assets/keyvisual/keyvisual-on-dark.svg",
     "lime": "assets/keyvisual/keyvisual-lime.svg",
     "width_mm": 42,
+    "which_variant": {
+      "$comment": "Die Fassung richtet sich nach dem Grund, auf dem das Keyvisual liegt.",
+      "cover_page": "Titelblatt: immer on_light, die dreifarbige Fassung. Keine Ausnahme. Die Position 102,416 mm ist so gerechnet, dass die linke Oberkante des Pure-Green-Chevrons die Unterkante des 16:9-Bereichs trifft — bei der weißen Fassung gibt es diesen Chevron nicht, und die Zahl verliert ihre Begründung.",
+      "dark_surface": "on_dark auf durchgehend dunklen Flächen, etwa der Rückseite.",
+      "accent": "lime als Akzent, etwa in der Navigation."
+    },
     "deviates_from_tds": true
   },
   "badges": {
