@@ -227,7 +227,9 @@ html, body {
 
 .cover__badge {
   position: absolute;
-  top: 110.75mm;    /* 118.1mm - (14.7mm / 2) = vertikal zentriert auf Farbkasten-Unterkante */
+  /* Vertikal zentriert auf der Farbkasten-Unterkante: 118,125 - 14,742/2 = 110,754.
+     Die Badge-Hoehe folgt aus 61 mm Breite bei 720 x 174 px. */
+  top: 110.75mm;
   left: 0;          /* Linksbündig am Seitenrand (schräger Ansatz ragt über Rand) */
   width: 61mm;      /* 720px bei 300dpi */
   height: auto;
