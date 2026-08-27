@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.9.0",
+  "version": "1.10.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -551,5 +551,14 @@
       "text_on_light": "transition-green",
       "note": "Deep Green bleibt der AG vorbehalten. Transition Green misst auf Weiß 5,09. Pure Green ist die Identitätsfarbe der Fachbetriebe, trägt aber auf hellem Grund nicht — 2,79."
     }
+  },
+  "pagination": {
+    "$comment": "Entschieden am 27.08.2026.",
+    "rule": "Titel und Rückseite werden nicht mitgezählt.",
+    "first_counted": "Die erste Seite nach dem Titel trägt die Ziffer 1 — auch dann, wenn sie keine anzeigt.",
+    "silent_pages": "Eine Seite darf ihre Ziffer unterdrücken (Editorial, Inhaltsverzeichnis, Rückseite). Sie zählt trotzdem mit, die Folge läuft danach ohne Sprung weiter.",
+    "formula": "Liegt das Titelblatt im selben Dokument, steht auf Blatt N die Ziffer N−1. scripts/check_export.py prüft das an Canvas-Exporten.",
+    "production": "templates/pages/ trägt kein Titelblatt — das Cover ist ein eigenes Dokument. Dort ist page_number_start deshalb 1 und meint die erste Seite in pages[]. validate_brochure.py prüft den Wert.",
+    "toc_follows": "Ändert sich die Zählung, wandern die Verweise im Inhaltsverzeichnis mit. validate_brochure.py meldet Verweise, die auf keine bezifferte Seite zeigen."
   }
 }

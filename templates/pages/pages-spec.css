@@ -985,7 +985,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 700;
   font-size: 9pt;
-  color: var(--bkm-black);
+  color: var(--bkm-stone-grey);
   margin-bottom: 0;
 }
 
@@ -993,7 +993,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 9pt;
-  color: var(--bkm-black);
+  color: var(--bkm-stone-grey);
   line-height: 1.42;
 }
 
@@ -1010,7 +1010,7 @@ html, body {
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 6pt;
-  color: var(--bkm-black);
+  color: var(--bkm-stone-grey);
   line-height: 1.4;
 }
 

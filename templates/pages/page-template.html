@@ -24,7 +24,9 @@
 --------------------------------------------------------------------- #}
 {%- macro folio(page, index0, start) -%}
 {%- if not page.no_folio -%}
-{%- set no = start | default(2, true) + index0 -%}
+{#- Titel und Rueckseite zaehlen nicht mit. Die erste Seite in pages[] ist
+    damit Ziffer 1, auch wenn sie ueber no_folio keine traegt. -#}
+{%- set no = start | default(1, true) + index0 -%}
 {#- Die Fusszeile erbt ihre Farbe von der Flaeche, auf der sie steht: bei
     opener von der unteren Blatthaelfte, bei feature vom letzten Band. Beide
     tragen die Fusszeile als Kind, deshalb greift .surface > .page__footer.

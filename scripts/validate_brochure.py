@@ -383,14 +383,21 @@ def check_content(path: Path) -> list[str]:
         errors.append(f"sender={absender!r} ist kein Absender, erlaubt: "
                       f"{', '.join(SENDERS)}")
 
+    # Titel und Rueckseite zaehlen nicht mit. Die erste Seite in pages[] traegt
+    # damit die Ziffer 1, auch wenn sie ueber no_folio keine anzeigt. Stand hier
+    # frueher 2, weil das Cover als Seite 1 mitgezaehlt wurde - dadurch war die
+    # ganze Folge um eins versetzt und die dritte Seite trug die 03 statt der 02.
     start = data.get("page_number_start")
     if start is None:
         errors.append(
-            "page_number_start fehlt - ohne den Startwert beginnt die Zaehlung "
-            "bei 2, was nur stimmt, wenn das Titelblatt genau eine Seite hat"
+            "page_number_start fehlt - erwartet 1. Titel und Rueckseite zaehlen "
+            "nicht mit, die erste Seite in pages[] ist Ziffer 1"
         )
-    elif not isinstance(start, int) or start < 1:
-        errors.append(f"page_number_start ist {start!r}, erwartet eine Zahl ab 1")
+    elif start != 1:
+        errors.append(
+            f"page_number_start ist {start!r}, erwartet 1. Titel und Rueckseite "
+            f"zaehlen nicht mit; ein hoeherer Startwert versetzt die ganze Folge"
+        )
 
     # Kein Farbwert und keine Positionsangabe im Inhalt.
     raw = path.read_text(encoding="utf-8")

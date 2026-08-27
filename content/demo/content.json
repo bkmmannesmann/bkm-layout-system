@@ -1,7 +1,7 @@
 {
   "title": "BKM Fachbetrieb - Demo Broschüre",
   "sender": "fachbetrieb",
-  "page_number_start": 2,
+  "page_number_start": 1,
   "pages": [
     {
       "type": "opener",
@@ -90,57 +90,57 @@
         {
           "is_chapter": true,
           "title": "Ihr Zuhause verdient Schutz",
-          "page": "02"
+          "page": "01"
         },
         {
           "is_chapter": false,
           "title": "Was einen BKM Fachbetrieb auszeichnet",
-          "page": "02"
+          "page": "01"
         },
         {
           "is_chapter": true,
           "title": "Ursachen verstehen",
-          "page": "03"
+          "page": "02"
         },
         {
           "is_chapter": false,
           "title": "Was Sie sehen, ist selten die Ursache",
-          "page": "03"
+          "page": "02"
         },
         {
           "is_chapter": false,
           "title": "Warum spezialisierte Fachbetriebe anders arbeiten",
-          "page": "03"
+          "page": "02"
         },
         {
           "is_chapter": true,
           "title": "Der Sanierungsprozess",
-          "page": "04"
+          "page": "03"
         },
         {
           "is_chapter": false,
           "title": "Ablauf einer BKM Fachbetrieb-Sanierung",
-          "page": "04"
+          "page": "03"
         },
         {
           "is_chapter": false,
           "title": "Woran Sie ein sauberes Angebot erkennen",
-          "page": "04"
+          "page": "03"
         },
         {
           "is_chapter": true,
           "title": "Die richtige Entscheidung",
-          "page": "05"
+          "page": "04"
         },
         {
           "is_chapter": false,
           "title": "Erst prüfen, dann entscheiden",
-          "page": "06"
+          "page": "05"
         },
         {
           "is_chapter": false,
           "title": "Was Sie zusätzlich erhalten",
-          "page": "06"
+          "page": "05"
         }
       ]
     },

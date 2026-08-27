@@ -143,6 +143,23 @@ Der TDS löst dasselbe Problem über `.tds-band` mit `margin-top: -10px`. Beide 
 sind gültig; der Broschüren-Weg ist nötig, weil das Hero eine Grafikdatei ist und
 kein CSS-Balken.
 
+## Paginierung
+
+**Titel und Rückseite zählen nicht mit.** Die erste Seite danach trägt die Ziffer `1` —
+auch dann, wenn sie keine anzeigt.
+
+Eine Seite darf ihre Ziffer unterdrücken: Editorial, Inhaltsverzeichnis, Rückseite. Sie
+**zählt trotzdem mit**, die Folge läuft danach ohne Sprung weiter. Liegt das Titelblatt im
+selben Dokument, steht auf Blatt `N` damit immer die Ziffer `N−1`.
+
+Genau daran ist ein Fehler aufgefallen: Blatt 3 trug die `03` statt der `02`, weil das
+Titelblatt mitgezählt wurde. Der Versatz zog sich durch das ganze Dokument.
+
+`scripts/check_export.py` rechnet das nach und meldet den Versatz einmal, nicht auf jeder
+Seite — er zieht sich ohnehin durch.
+
+Ändert sich die Zählung, **wandern die Verweise im Inhaltsverzeichnis mit**.
+
 ## Farbflächen
 
 | Rolle | Hex |

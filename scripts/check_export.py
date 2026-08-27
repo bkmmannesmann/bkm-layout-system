@@ -65,9 +65,14 @@ def hat_folio(seite) -> str | None:
     """Die Seitenzahl aus dem Kolumnentitel, falls die Seite eine traegt.
 
     Der Canvas setzt sie oben - eine Zeile mit Rubrik und Ziffer, auf Recto
-    rechts, auf Verso links. Der Produktionspfad setzt sie dagegen in den
-    Fusssteg. Gesucht wird deshalb im oberen Bereich; eine Ziffer weiter unten
-    ist ein Verweis im Inhaltsverzeichnis oder eine Telefonnummer.
+    rechts, auf Verso links. Gesucht wird deshalb nur im oberen Bereich; eine
+    Ziffer weiter unten ist ein Verweis im Inhaltsverzeichnis oder eine
+    Telefonnummer.
+
+    Der Produktionspfad setzt die Ziffer dagegen in den Fusssteg. Dieses Skript
+    prueft Canvas-Exporte; fuer den Innenteil aus build_pages.py findet es
+    deshalb keine Ziffer und laesst die Paginierung ungeprueft. Dort deckt
+    validate_brochure.py den Fall ueber page_number_start ab.
     """
     for span in spans(seite):
         text = span["text"].strip()
@@ -173,6 +178,31 @@ def pruefe(pfad: Path, brand: dict) -> tuple[list[str], list[str]]:
             fehler.append(
                 f"Seite {i}: Grundlinie {tiefste[0]:.2f} mm, erlaubt bis {grenze:.1f} "
                 f"({wo}, Seitenzahl: {folio or 'keine'}): {tiefste[1]!r}")
+
+    # --- Paginierung -------------------------------------------------------
+    # Titel und Rueckseite zaehlen nicht mit. Das erste Blatt nach dem Titel
+    # traegt damit Ziffer 1, und auf Blatt N steht N-1 - auch dann, wenn eine
+    # der vorderen Seiten ihre Ziffer ueber no_folio unterdrueckt. Genau hier
+    # lag der Fehler: das Titelblatt wurde mitgezaehlt, deshalb stand auf
+    # Blatt 3 die 03 statt der 02.
+    folios = [(i, hat_folio(seite)) for i, seite in enumerate(doc, 1)]
+    beziffert = [(i, f) for i, f in folios if f]
+    for blatt, ziffer in beziffert:
+        soll = blatt - 1
+        if int(ziffer) != soll:
+            fehler.append(
+                f"Seite {blatt} traegt die Ziffer {ziffer}, erwartet {soll:02d}. "
+                f"Titel und Rueckseite zaehlen nicht mit, deshalb ist die Ziffer "
+                f"immer die Blattnummer minus eins.")
+            break        # ein Versatz zieht sich durch, eine Meldung genuegt
+    if beziffert:
+        luecken = [b for b, _ in beziffert]
+        fehlend = [b for b in range(min(luecken), max(luecken) + 1) if b not in luecken]
+        if fehlend:
+            hinweise.append(
+                f"Ohne Ziffer zwischen den bezifferten Seiten: Blatt "
+                f"{', '.join(map(str, fehlend))}. Zulaessig, wenn sie still "
+                f"mitzaehlen - dann muss die Folge danach weiterlaufen.")
 
     # --- Farben ------------------------------------------------------------
     gesehen = {}

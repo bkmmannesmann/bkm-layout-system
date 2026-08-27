@@ -301,6 +301,19 @@ engeren Raster nicht mehr aufgeht — der Satz lief 19 mm über den Fußsteg. Di
 das gemeldet, die Bildhöhe steht jetzt auf `110 mm`. Wer eine bestehende Broschüre auf dieses
 Raster zieht, prüft die `feature`-Seiten zuerst.
 
+## Paginierung
+
+Titel und Rückseite zählen nicht mit. `templates/pages/` trägt kein Titelblatt — das Cover
+baut `build_cover.py` als eigenes Dokument —, deshalb ist **`page_number_start` gleich 1**
+und meint die erste Seite in `pages[]`. Eine Seite mit `no_folio: true` zeigt keine Ziffer,
+zählt aber mit.
+
+Der Wert stand früher auf `2`, weil das Cover als Seite 1 mitgezählt wurde. Dadurch war die
+ganze Folge um eins versetzt. `validate_brochure.py` prüft ihn jetzt.
+
+Ändert sich die Zählung, wandern die Verweise im Inhaltsverzeichnis mit — die
+Inhaltsprüfung meldet Verweise, die auf keine bezifferte Seite zeigen.
+
 ## Prüfung
 
 ```bash
