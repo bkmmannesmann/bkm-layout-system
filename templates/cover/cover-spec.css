@@ -91,35 +91,38 @@ html, body {
   page-break-after: always;
 }
 
-/* === L-FÖRMIGE FARBFLÄCHE ===
-   Visuell eine zusammenhängende Fläche, technisch zwei Elemente:
-     - Hauptkasten: 210mm × 118.125mm (16:9, vollflächig oben)
-     - Erweiterung: 10mm × 10mm, Oberkante 117.6mm — sie überlappt den
-       Hauptkasten um 0.525mm nach oben (Blitzerschutz, siehe brand.json)
-   Beide haben die gleiche Hintergrundfarbe → wirken als eine Fläche. */
+/* === HERO-GRAFIK ===
+   210 x 125 mm, oben buendig. Sie ersetzt den frueheren flachen Farbkasten
+   samt seiner ::after-Eckerweiterung: die PNG traegt beides schon.
 
-.cover__color-box {
+   Unterhalb der 16:9-Kante bei 118,125 mm ist nur der rechte Zipfel deckend
+   (10,75 mm breit, bis 125 mm), der Rest durchsichtig - das ist der
+   Blitzerschutz aus brand.json, in der Datei statt in CSS.
+
+   Damit nutzen Cover-Vorlage und Canvas dieselbe Grafik. Vorher war die
+   Flaeche hier flach und deutlich heller als die Textur, weshalb dieselbe
+   Textfarbe auf beiden Wegen verschiedene Kontraste ergab. */
+
+.cover__hero-graphic {
   position: absolute;
   top: 0;
   left: 0;
   width: 210mm;
-  height: 118.125mm;  /* echtes 16:9: 210 / 16 * 9 */
+  height: 125mm;
   z-index: 2;
+  display: block;
 }
 
-/* Eckerweiterung rechts unten (gleiche Farbe = eine Fläche).
-   10 x 10 mm mit Oberkante bei 117,6 mm - sie ragt damit 0,525 mm in die
-   Hero-Fläche hinein. Das ist der Blitzerschutz aus brand.json: an der Kante,
-   an der Farbfläche und Foto zusammentreffen, wird überlappt, nicht gestoßen.
-   Der bottom-Wert folgt daraus: 117,6 + 10 - 118,125 = 9,475 mm. */
-.cover__color-box::after {
-  content: '';
+/* Haarlinie an der 16:9-Kante, nur wo die Grafik hell ist und sich sonst
+   kaum vom Foto darunter absetzt. */
+.cover__hairline {
   position: absolute;
-  bottom: -9.475mm;
-  right: 0;         /* Rechts bündig */
-  width: 10mm;
-  height: 10mm;
-  background: inherit;  /* Erbt die Hintergrundfarbe vom Eltern-Element */
+  top: 118.125mm;
+  left: 0;
+  width: 210mm;
+  height: 0.25mm;
+  background: var(--bkm-hairline, #e3e1dc);
+  z-index: 2;
 }
 
 /* === TEXT-CONTENT CONTAINER ===
@@ -316,42 +319,28 @@ html, body {
    ============================================================================= */
 
 /* --- BKM MANNESMANN AG (Deep Green) --- */
-.cover--mannesmann .cover__color-box {
-  background-color: #1c4b42;
-}
 .cover--mannesmann .cover__headline { color: #ffffff; }
 .cover--mannesmann .cover__subheadline { color: #b4e717; }
 .cover--mannesmann .cover__intro { color: #ffffff; }
 
 /* --- FACHBETRIEBE (Transition Green) --- */
-.cover--fachbetriebe .cover__color-box {
-  background-color: #287d4b;
-}
 .cover--fachbetriebe .cover__headline { color: #ffffff; }
 .cover--fachbetriebe .cover__subheadline { color: #b4e717; }
 .cover--fachbetriebe .cover__intro { color: #ffffff; }
 
 /* --- BKM HOME LINE (Pure Green) --- */
-.cover--homeline .cover__color-box {
-  background-color: #4daf46;
-}
 .cover--homeline .cover__headline { color: #ffffff; }
-.cover--homeline .cover__subheadline { color: #1c4b42; }
+.cover--homeline .cover__subheadline { color: #b4e717; }  /* Lime: die
+   texturierte Hero-Grafik ist dunkler als die frueher flache Flaeche.
+   Deep Green kaeme dort nur auf 2,02, Lime auf 3,34. */
 .cover--homeline .cover__intro { color: #ffffff; }
 
 /* --- BKM PRO LINE (Stone Grey) --- */
-.cover--proline .cover__color-box {
-  background-color: #494949;
-}
 .cover--proline .cover__headline { color: #ffffff; }
 .cover--proline .cover__subheadline { color: #b4e717; }
 .cover--proline .cover__intro { color: #ffffff; }
 
 /* --- VERARBEITUNGSANLEITUNG (Weiß) --- */
-.cover--anleitung .cover__color-box {
-  background-color: #ffffff;
-  border-bottom: 1px solid var(--bkm-hairline, #e3e1dc);  /* Palettenton, vorher #e8e6e1 */
-}
 .cover--anleitung .cover__headline { color: #494949; }
 .cover--anleitung .cover__subheadline { color: #4daf46; }
 .cover--anleitung .cover__intro { color: #494949; }

@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.14.0",
+  "version": "1.15.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -538,7 +538,7 @@
       },
       "pure-green_on_white": {
         "ratio": 2.79,
-        "status": "UNTER AA — bewusst so gesetzt, siehe accepted_exceptions"
+        "status": "UNTER AA — galt fuer die frühere flache Fläche, siehe accepted_exceptions"
       },
       "lime-green_on_white": {
         "ratio": 1.46,
@@ -553,7 +553,9 @@
         "wert": 2.79,
         "entschieden": "27.08.2026",
         "grund": "Die Alternativen lagen vor: Transition Green 5,09, Stone Grey 9,00, Deep Green 9,84. Alle drei wurden gerendert und gegenübergestellt. Pure Green bleibt, weil die Zeile ihren Farbcharakter behalten soll und sich Deep Green kaum von der Headline absetzt.",
-        "gilt_nicht_fuer": "Fließtext. Dort ist Stone Grey vorgeschrieben. Diese Ausnahme betrifft ausschließlich diese eine Subheadline."
+        "gilt_nicht_fuer": "Fließtext. Dort ist Stone Grey vorgeschrieben. Diese Ausnahme betrifft ausschließlich diese eine Subheadline.",
+        "wert_auf_textur": 2.4,
+        "nachtrag": "Seit die Cover-Vorlage die texturierte Hero-Grafik nutzt statt einer flachen Fläche, liegt der gemessene Wert bei 2,36–2,45 statt 2,79 — die Textur ist mit rund #e5e5e5 etwas dunkler als reines Weiß. An der Entscheidung ändert das nichts, an der Zahl schon."
       }
     }
   },
