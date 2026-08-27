@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.11.0",
+  "version": "1.12.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -198,8 +198,9 @@
     },
     "notes": {
       "sixteen_nine": "118,125 mm ist echtes 16:9 der Blattbreite: 210 ÷ 16 × 9.",
-      "keyvisual_top": "102,416 mm ist kein gerundeter Wert und wurde nachgerechnet. Das Keyvisual hat die viewBox 196,06 × 464,8 und ist bei 42 mm Breite 99,570 mm hoch. Die Oberkante des Pure-Green-Chevrons liegt bei 73,33 Einheiten, also 15,709 mm unter der Bildoberkante. 118,125 − 15,709 = 102,4162 mm — nur so trifft die Kante die Unterkante des 16:9-Bereichs. templates/cover/cover-layout.json führt dort 102,3 mm mit der Begründung „1210 px bei 300 dpi“; diese Rechnung ergibt jedoch 102,4467 mm, der notierte Wert liegt also 147 µm neben seiner eigenen Herleitung. Die Korrektur ist für einen eigenen Pull Request vorgesehen, weil sie bestehende Titelblätter ändert.",
-      "blitzerschutz": "Zwei Überlappungen an der Kante, an der drei Ebenen zusammentreffen: die Eckerweiterung ragt 0,5 mm in die Hero-Fläche, das Foto überlappt sie um 7,54 mm."
+      "keyvisual_top": "102,416 mm ist kein gerundeter Wert und wurde nachgerechnet. Das Keyvisual hat die viewBox 196,06 × 464,8 und ist bei 42 mm Breite 99,570 mm hoch. Die Oberkante des Pure-Green-Chevrons liegt bei 73,33 Einheiten, also 15,709 mm unter der Bildoberkante. 118,125 − 15,709 = 102,4162 mm — nur so trifft die Kante die Unterkante des 16:9-Bereichs. templates/cover/cover-layout.json führt dort 102,3 mm mit der Begründung „1210 px bei 300 dpi“; diese Rechnung ergibt jedoch 102,4467 mm, der notierte Wert liegt also 147 µm neben seiner eigenen Herleitung. Am 27.08.2026 in templates/cover/ umgesetzt. Die Chevron-Kante stößt damit ohne Überlappung an die 16:9-Kante — vorher überlappte sie um 0,091 mm. Der hergeleitete Wert wurde der Sicherheitsmarge vorgezogen; wer die Kante im Druck als Blitzer sieht, findet hier den Grund.",
+      "blitzerschutz": "Zwei Überlappungen an der Kante, an der drei Ebenen zusammentreffen: die Eckerweiterung ragt 0,5 mm in die Hero-Fläche, das Foto überlappt sie um 7,54 mm.",
+      "eckerweiterung": "10 × 10 mm mit Oberkante 117,6 mm, seit 27.08.2026 auch in templates/cover/cover-spec.css. Der bottom-Wert folgt aus der Kastenhöhe: 117,6 + 10 − 118,125 = 9,475 mm. Nachgemessen im PDF bei 1200 dpi: Unterkante 127,59, linke Kante 199,99 — beides auf Pixelbreite genau, und die Fläche ist von 114 bis 127,58 mm durchgehend deckend."
     },
     "layout": {
       "$comment": "Wie die Seite gebaut sein muss, damit die Geometrie oben trägt. Ohne diese Regeln stimmen die Zahlen, aber die Seite bricht um.",
