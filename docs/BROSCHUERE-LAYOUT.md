@@ -91,7 +91,8 @@ der Text gekürzt oder ein Block wandert auf die nächste Seite.
 | CTA-Headline (Rückseite) | TT Norms Pro Bold | 16pt | Deep Green | — |
 | Seitenzahl | TT Norms Pro Bold | 8pt | siehe Fußzeile | Laufweite 0.02em |
 | Kolumnentitel | TT Norms Pro Regular | 8pt | siehe Fußzeile | ohne Transparenz, siehe unten |
-| Impressum (Rückseite) | TT Norms Pro Regular | 6pt | Schwarz | — |
+| Anschrift (Rückseite) | TT Norms Pro Regular/Bold | 9pt | Stone Grey | — |
+| Impressum (Rückseite) | TT Norms Pro Regular | 6pt | Stone Grey | — |
 
 Die Hauptheadline läuft **höchstens zwei Zeilen** — dieselbe Regel wie auf dem Titelblatt. Eine
 dritte Zeile drückt alles darunter aus dem Raster. Die Ausgabeprüfung zählt die Grundlinien in

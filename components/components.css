@@ -269,7 +269,7 @@
   font-family: var(--font-body);
   font-size: var(--fs-body-lg);
   font-weight: var(--fw-bold);
-  color: var(--bkm-black);
+  color: var(--bkm-stone-grey);
   margin-bottom: var(--space-xs);
 }
 
@@ -277,7 +277,7 @@
   font-family: var(--font-body);
   font-size: var(--fs-body);
   font-weight: var(--fw-regular);
-  color: var(--bkm-black);
+  color: var(--bkm-stone-grey);
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -327,7 +327,9 @@
 
 .footer__copyright {
   font-size: var(--fs-small);
-  color: var(--bkm-grey-50);
+  /* Rechtshinweis, zurueckgenommen - dafuer gibt es muted-grey. --bkm-grey-50
+     ist #808080 und steht in keiner Palette. */
+  color: var(--bkm-muted-grey);
   margin-top: var(--space-lg);
 }
 
