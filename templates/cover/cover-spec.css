@@ -4,7 +4,7 @@
    
    GRUNDPRINZIP:
    Das DIN-A4-Titelblatt besteht aus einem vollflächigen 16:9-Farbkasten
-   im oberen Bereich (Höhe: 210/16*9 = 118.1mm) und einem Hero-Bild darunter.
+   im oberen Bereich (Höhe: 210/16*9 = 118.125mm) und einem Hero-Bild darunter.
    
    RASTER:
    - 2 Spalten (je 105mm)
@@ -93,8 +93,9 @@ html, body {
 
 /* === L-FÖRMIGE FARBFLÄCHE ===
    Visuell eine zusammenhängende Fläche, technisch zwei Elemente:
-   - Hauptkasten: 210mm × 118.1mm (16:9, vollflächig oben)
-   - Erweiterung: 8mm × 8mm (rechts unten, bündig anliegend)
+     - Hauptkasten: 210mm × 118.125mm (16:9, vollflächig oben)
+     - Erweiterung: 10mm × 10mm, Oberkante 117.6mm — sie überlappt den
+       Hauptkasten um 0.525mm nach oben (Blitzerschutz, siehe brand.json)
    Beide haben die gleiche Hintergrundfarbe → wirken als eine Fläche. */
 
 .cover__color-box {
@@ -219,10 +220,10 @@ html, body {
 }
 
 /* === PRODUKT-BADGE (nur Home Line + Pro Line) ===
-   Position: Linksbündig (left=18mm), vertikal zentriert auf Unterkante Farbkasten
-   Das Badge sitzt mittig auf der Linie Y=118.1mm
-   (top = 118.1mm - halbe Badge-Höhe = 118.1mm - 7.35mm = 110.75mm)
-   Größe: 61mm × 14.7mm
+   Position: left=0 (der schräge Ansatz ragt bewusst über den Seitenrand),
+   vertikal zentriert auf der Unterkante des Farbkastens bei Y=118.125mm
+   (top = 118.125mm - 14.742mm/2 = 110.754mm, gesetzt sind 110.75mm)
+   Größe: 61mm × 14.742mm (720 × 174 px)
    Ebene: z-index 4 (vor Key Visual und Farbkasten) */
 
 .cover__badge {
