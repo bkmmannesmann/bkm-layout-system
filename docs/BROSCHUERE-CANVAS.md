@@ -58,11 +58,16 @@ und Navigation über zwanzig und mehr Seiten.
 
 ### Ausnahme: Seiten ohne Seitenzahl
 
-Der Fußsteg von `23,5 mm` ist für Seitenzahl und Kolumnentitel reserviert. Eine Seite, die
-keine trägt — Rückseite (U4) und Inhaltsverzeichnis —, ist daran nicht gebunden; dort ist
-nur der Beschnitt die Grenze. `scripts/build_pages.py` prüft solche Seiten gegen
-`BLEED_SAFE = 285 mm` statt gegen die `272 mm` einer Satzseite; die Fallunterscheidung steht
-dort in `_check_type_area`.
+Der Fußsteg von `23,5 mm` begrenzt den Satzspiegel nach unten. **Wo die Seitenzahl steht,
+unterscheiden sich die beiden Ebenen:** der Produktionspfad setzt sie über `.page__footer`
+in den Fußsteg (Grundlinie `279 mm`, unterdrückbar über `no_folio`), der Canvas setzt sie in
+den Kolumnentitel am Kopf — eine Zeile mit Rubrik links, Ziffer rechts, Unterlinie. Der
+Fußsteg bleibt im Canvas leer; er hält beide Ebenen auf demselben Satzspiegel.
+
+Eine Seite ohne Seitenzahl — Rückseite (U4) und randabfallende Strecken — ist daran nicht
+gebunden; dort ist nur der Beschnitt die Grenze. `scripts/build_pages.py` prüft solche Seiten
+gegen `BLEED_SAFE = 285 mm` statt gegen die `272 mm` einer Satzseite; die Fallunterscheidung
+steht dort in `_check_type_area`.
 
 Genutzt wird das aktuell an einer Stelle: `B-Rahmenseiten.dc.html`, Seite 10 (U4) steht auf
 `padding: 26.7mm 18mm 18mm`. Der Impressumsblock endet dort bei `279,0 mm`. Der
@@ -70,9 +75,10 @@ Produktionspfad setzt dieselbe Seite über `.backcover-imprint { top: 271.0mm }`
 ebenfalls tiefer, als der Fußsteg einer Satzseite zuließe.
 
 Die Ausnahme ist eine **Erlaubnis, kein Gebot**: Seiten ohne Ziffer dürfen auf `23,5 mm`
-stehenbleiben, wenn sie den Raum nicht brauchen. In `B-Rahmenseiten.dc.html` tun das die
-Seiten 1, 3, 9 und 13. Ein Fußsteg von `18 mm` auf einer Seite **mit** Seitenzahl ist dagegen
-ein Fehler — dort läuft der Satz in die Ziffer.
+stehenbleiben, wenn sie den Raum nicht brauchen — die meisten tun das. Über alle 74
+Seiten-Container hinweg gilt: **alle 44 Seiten mit Ziffer stehen auf `23,5 mm`**, und alle
+drei mit abweichendem Fuß tragen keine. `scripts/validate_brochure.py` prüft genau das; ein
+abweichender Fuß auf einer Seite mit Ziffer wird gemeldet.
 
 ## Titelblatt
 

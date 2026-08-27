@@ -28,6 +28,7 @@ ROOT_DIR = Path(__file__).parent.parent.resolve()
 CSS_PATH = ROOT_DIR / "templates" / "pages" / "pages-spec.css"
 HTML_PATH = ROOT_DIR / "templates" / "pages" / "page-template.html"
 VARIABLES_PATH = ROOT_DIR / "design-system" / "variables.css"
+CANVAS_DIR = ROOT_DIR / "templates" / "brochure"
 FONT_DIR = ROOT_DIR / "assets" / "fonts"
 
 # --------------------------------------------------------------------------
@@ -108,6 +109,79 @@ def strip_jinja_comments(text: str) -> str:
 # --------------------------------------------------------------------------
 # Layoutpruefung
 # --------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------
+# Canvas-Ebene: Fusssteg gegen Seitenzahl
+# --------------------------------------------------------------------------
+
+# Der Fusssteg jeder Satzseite. Siehe docs/BROSCHUERE-CANVAS.md, Abschnitt
+# "Ausnahme: Seiten ohne Seitenzahl".
+CANVAS_FOOT = "23.5mm"
+
+# Ein Seiten-Container im Canvas-Export.
+CANVAS_PAGE = re.compile(r'<div style="width:210mm;height:297mm;[^"]*"')
+CANVAS_PADDING = re.compile(r"padding:([^;\"]+)")
+# Der Kolumnentitel: eine Flexzeile mit Rubrik links und Ziffer rechts. Anders
+# als im Produktionspfad, der die Ziffer ueber .page__footer in den Fusssteg
+# setzt, steht sie im Canvas am Kopf.
+CANVAS_RUNNING_HEAD = re.compile(
+    r'<div style="[^"]*justify-content:space-between[^"]*">(.{0,400}?)</div>', re.S)
+CANVAS_FOLIO = re.compile(r"<span[^>]*>\s*(\d{1,3})\s*</span>")
+
+
+def canvas_pages(text: str):
+    """Zerlegt einen Canvas-Export in seine Seiten-Container."""
+    starts = [m.start() for m in CANVAS_PAGE.finditer(text)] + [len(text)]
+    for i in range(len(starts) - 1):
+        yield i + 1, text[starts[i]:starts[i + 1]]
+
+
+def canvas_folio(block: str) -> str | None:
+    """Die Seitenzahl aus dem Kolumnentitel, falls die Seite eine traegt.
+
+    Gesucht wird nur im oberen Viertel des Containers: eine Ziffer weiter unten
+    ist ein Verweis im Inhaltsverzeichnis, keine Seitenzahl.
+    """
+    kopf = block[:max(1, len(block) // 4)]
+    for zeile in CANVAS_RUNNING_HEAD.finditer(kopf):
+        treffer = CANVAS_FOLIO.search(zeile.group(1))
+        if treffer:
+            return treffer.group(1)
+    return None
+
+
+def check_canvas_footers() -> list[str]:
+    """Ein abweichender Fusssteg ist nur ohne Seitenzahl erlaubt.
+
+    Der Fusssteg haelt beide Ebenen auf demselben Satzspiegel; im
+    Produktionspfad steht die Ziffer darin. Eine Seite ohne Ziffer - Rueckseite
+    und randabfallende Strecken - ist daran nicht gebunden. Umgekehrt heisst
+    ein abweichender Fuss auf einer Seite mit Ziffer, dass jemand den Wert
+    verschrieben hat.
+    """
+    errors = []
+    if not CANVAS_DIR.is_dir():
+        return errors
+    for datei in sorted(CANVAS_DIR.glob("*.dc.html")):
+        text = datei.read_text(encoding="utf-8")
+        for nummer, block in canvas_pages(text):
+            padding = CANVAS_PADDING.search(block[:400])
+            if padding is None:          # Seite bringt ihre Geometrie selbst mit
+                continue
+            teile = padding.group(1).split()
+            fuss = teile[2] if len(teile) >= 3 else teile[-1]
+            if fuss == CANVAS_FOOT:
+                continue
+            folio = canvas_folio(block)
+            if folio is not None:
+                errors.append(
+                    f"{datei.name} Seite {nummer}: Fusssteg {fuss} statt "
+                    f"{CANVAS_FOOT}, die Seite traegt aber die Seitenzahl "
+                    f"{folio} - dort gilt der Fusssteg"
+                )
+    return errors
+
 
 def check_layout() -> list[str]:
     errors: list[str] = []
@@ -273,6 +347,9 @@ def check_layout() -> list[str]:
     if "'%02d' % no" not in html_raw:
         errors.append("Seitenzahl ist nicht zweistellig formatiert")
 
+    # --- Canvas-Ebene ------------------------------------------------------
+    errors.extend(check_canvas_footers())
+
     return errors
 
 
@@ -411,7 +488,8 @@ def main() -> int:
         print(f"{label}: {len(errors)} Verstoss(e)\n")
         for error in errors:
             print(f"  - {error}")
-        print(f"\nDie Regeln stehen in docs/BROSCHUERE-LAYOUT.md.")
+        print("\nDie Regeln stehen in docs/BROSCHUERE-LAYOUT.md "
+              "(Produktion) und docs/BROSCHUERE-CANVAS.md (Canvas).")
         return 1
 
     print(f"{label} bestanden.")
