@@ -5,12 +5,10 @@
     "format": "DIN A4",
     "language": "de"
   },
-
   "global": {
     "logo_path": "../../assets/logos/bkm-logo-white.svg",
     "logo_bkm": "../../assets/logos/bkm-logo-black.svg",
-    "logo_proline": "../../assets/images/logos/proline-logo.svg",
-    "logo_wta": "../../assets/images/logos/wta-logo.svg",
+    "logo_proline": "../../assets/images/badge-proline.png",
     "company_name": "BKM Mauertrocknungs GmbH",
     "company_address": "Wideystraße 23",
     "company_city": "59174 Kamen (Germany)",
@@ -19,7 +17,6 @@
     "company_phone": "+49 (0) 2307-99034-0",
     "copyright": "Ausgegeben am 06/2026 · All rights reserved. Reproduction only with our permission. Diese Version ist urheberrechtlich geschützt und darf nicht vervielfältigt werden."
   },
-
   "page1_cover": {
     "cover_title": "IHR ZUHAUSE IN SICHEREN HÄNDEN",
     "cover_subtitle": "Feuchte Wände · Ihr Keller wird unbrauchbar?",
@@ -27,7 +24,6 @@
     "cover_image": "../../uploads/cover-hero-standard.jpg",
     "cover_image_alt": "BKM Fachbetrieb berät Kunden vor ihrem Haus"
   },
-
   "page2_intro": {
     "page2_title": "IHR ZUHAUSE VERDIENT KLARHEIT",
     "page2_subtitle": "Für Eigentümer, die ihr Haus langfristig schützen möchten",
@@ -35,16 +31,15 @@
     "page2_text_col2": "Die eigentliche Ursache liegt jedoch häufig tiefer: im Mauerwerk, an einer Abdichtung, an einem Anschluss, in einer Fuge, an einem Riss oder in der Bauweise des Gebäudes. Gerade bei älteren Einfamilienhäusern ist deshalb eine sorgfältige Einschätzung entscheidend. Denn nicht jede feuchte Wand braucht dieselbe Maßnahme.",
     "page2_text_col3": "Ihr BKM Fachbetrieb prüft das Schadensbild, erklärt die möglichen Ursachen und empfiehlt eine Lösung, die zu Ihrem Gebäude passt. Die Ausführung erfolgt durch geschulte und zertifizierte Fachbetriebe mit professionellen BKM Proline Systemen.",
     "page2_quote": "Für Eigentümer, die ihr Haus nicht nur reparieren, sondern langfristig schützen möchten.",
-    "page2_image": "../../assets/images/placeholder/symptom-wand.jpg",
+    "page2_image": "../../uploads/druckwasser-abplazender-putz-feuchte-waende.jpg",
     "page2_image_alt": "Feuchte Kellerwand mit sichtbaren Symptomen",
     "page2_lower_title": "Was Sie sehen, ist oft nur ein Symptom",
     "page2_lower_subtitle": "Sichtbare Schäden sind selten die ganze Wahrheit.",
     "page2_lower_text_col1": "Viele Eigentümer bemerken das Problem zuerst im Alltag. Der Keller riecht muffig. Kartons werden klamm. Putz löst sich von der Wand. Farbe blättert ab. In einer Ecke bildet sich Schimmel. Der Raum, der eigentlich als Lager, Werkstatt, Technikraum oder Wohnreserve gedacht war, fühlt sich plötzlich nicht mehr zuverlässig nutzbar an.",
     "page2_lower_text_col2": "Wer nur die sichtbaren Folgen behandelt, ohne die Ursache zu verstehen, riskiert, dass der Schaden zurückkehrt. Ein BKM Fachbetrieb betrachtet deshalb nicht nur die Oberfläche. Er betrachtet das gesamte Schadensbild. Denn erst wenn klar ist, wodurch die Feuchtigkeit entsteht, lässt sich entscheiden, welche Maßnahme wirklich sinnvoll ist."
   },
-
   "page3_causes": {
-    "page3_image_top": "../../assets/images/placeholder/ursachen-bild.jpg",
+    "page3_image_top": "../../uploads/bkm-fachbetrieb-schadensanalyse-abplatzender-putz.webp",
     "page3_title": "Nicht jede feuchte Wand braucht dieselbe Lösung",
     "page3_subtitle": "Ähnliche Symptome. Unterschiedliche Ursachen.",
     "page3_text_col1": "Viele Feuchtigkeitsschäden sehen auf den ersten Blick ähnlich aus. Die Ursachen können jedoch sehr unterschiedlich sein. In manchen Fällen steigt Feuchtigkeit aus dem Erdreich kapillar durch das Mauerwerk nach oben. In anderen Fällen dringt Wasser seitlich über erdberührte Bauteile ein.",
@@ -79,24 +74,22 @@
       }
     ]
   },
-
   "page4_sanierung": {
     "page4_title": "Warum eine fachgerechte Sanierung mehr ist als Material",
     "page4_subtitle": "Entscheidend ist nicht nur, womit saniert wird.",
     "page4_text_col1": "Hochwertige Materialien sind wichtig. Aber bei Feuchtigkeitsschäden entscheidet nicht allein das Material über das Ergebnis. Entscheidend ist, ob die Ursache richtig eingeordnet, die passende Systemlösung gewählt und die Maßnahme fachgerecht umgesetzt wird.",
     "page4_text_col2": "Genau hier liegt der Unterschied zwischen einer reinen Einzelmaßnahme und einer professionell begleiteten Sanierung. Ein zertifizierter Fachbetrieb arbeitet mit professionellen BKM Pro Line Systemen und bringt die entscheidende Leistung hinzu: Erfahrung, geschulte Anwendung, fachkundige Einschätzung, saubere Ausführung und einen nachvollziehbaren Sanierungsprozess.",
-    "page4_image": "../../assets/images/placeholder/sanierung-arbeit.jpg",
+    "page4_image": "../../uploads/feuchte-waende-selbst-sanieren.webp",
     "page4_lower_title": "Warum spezialisierte BKM Fachbetriebe anders arbeiten",
     "page4_lower_subtitle": "Feuchteschäden sind keine Standardbaustelle.",
     "page4_lower_text_col1": "Bei Feuchtigkeitsschäden reicht es nicht, einfach irgendeine Maßnahme anzubieten. Entscheidend ist, ob diese Maßnahme zur Ursache, zum Schadensbild und zum Gebäude passt.",
     "page4_lower_text_col2": "Ein spezialisierter BKM Fachbetrieb arbeitet deshalb systematisch. Er betrachtet nicht nur den sichtbaren Schaden, sondern das gesamte Umfeld: Wandbereiche, Feuchteverlauf, mögliche Eintrittsstellen, Nutzung der Räume, bauliche Zusammenhänge und die Anforderungen des Eigentümers.",
     "page4_lower_text_col3": "Ziel ist nicht, möglichst viele Arbeiten zu verkaufen. Ziel ist, eine sinnvolle, nachvollziehbare Lösung für ihr Zuhause zu finden. Das unterscheidet einen spezialisierten Fachbetrieb von einer rein handwerklichen Einzelleistung."
   },
-
   "page5_prozess": {
     "page5_title": "DER WEG ZUR RICHTIGEN LÖSUNG",
     "page5_subtitle": "Ein klarer Ablauf schafft Sicherheit.",
-    "page5_image": "../../assets/images/placeholder/beratung.jpg",
+    "page5_image": "../../uploads/bkm-fachbetriebs-kunde-sucht-hilfe-beifeuchteschaden.webp",
     "page5_intro_text": "Viele Eigentümer wünschen sich vor allem eines: einen verständlichen Weg von der ersten Beobachtung bis zur passenden Sanierung. Die Zusammenarbeit mit einem BKM Fachbetrieb folgt deshalb einem klaren Prinzip:",
     "page5_quote": "Prüfen. Erklären. Empfehlen. Fachgerecht umsetzen. Vorbeugen.",
     "page5_steps": [
@@ -118,13 +111,12 @@
     ],
     "page5_lower_title": "Woran Sie ein fachlich sauberes Angebot erkennen",
     "page5_lower_subtitle": "Ein gutes Angebot erklärt die Entscheidung.",
-    "page5_lower_text_col1": "Bei Feuchtigkeitssch\u00e4den reicht eine pauschale Position wie 'Kellerabdichtung' oft nicht aus. F\u00fcr Eigent\u00fcmer ist entscheidend, ob nachvollziehbar wird, warum eine bestimmte Ma\u00dfnahme empfohlen wird.",
+    "page5_lower_text_col1": "Bei Feuchtigkeitsschäden reicht eine pauschale Position wie 'Kellerabdichtung' oft nicht aus. Für Eigentümer ist entscheidend, ob nachvollziehbar wird, warum eine bestimmte Maßnahme empfohlen wird.",
     "page5_lower_text_col2": "Ein fachlich sauberes Angebot sollte deshalb nicht nur beschreiben, was gemacht wird, sondern auch, worauf diese Empfehlung basiert. Dazu gehört eine klare Einordnung des Schadensbildes.",
     "page5_lower_text_col3": "Ihr Fachbetrieb systematisch prüft, Feuchte- oder Wasserbelastung auf das Gebäude einwirkt. Fachleute sprechen hier von Wassereinwirkungsklassen."
   },
-
   "page6_vorteile": {
-    "page6_image_top": "../../assets/images/placeholder/pruefung.jpg",
+    "page6_image_top": "../../uploads/bkm-fachbetrieb-messergebnis-schadensanalyse.webp",
     "page6_title": "ERST PRÜFEN DANN RICHTIG ENTSCHEIDEN.",
     "page6_subtitle": "Die richtige Lösung beginnt am Gebäude.",
     "page6_text_col1": "Feuchtigkeit am Haus sollte nicht ignoriert werden. Gleichzeitig ist vorschnelles Handeln selten der beste Weg. Der sinnvollste erste Schritt ist eine fachkundige Einschätzung.",
@@ -135,12 +127,11 @@
     "page6_lower_text_col1": "Ein qualitätsbewusster Hausbesitzer möchte nicht einfach 'irgendetwas machen lassen'. Er möchte verstehen, was sinnvoll ist, wofür er investiert und warum eine bestimmte Maßnahme empfohlen wird.",
     "page6_lower_text_col2": "Wir setzen auf Lösungen, die zum Gebäude passen und die technischen Regeln ernst nehmen. Das bedeutet keine pauschalen Standardangebote, sondern ein Sanierungskonzept, das sich an der tatsächlichen Wasserbeanspruchung und den geltenden Richtlinien orientiert.",
     "page6_lower_text_col3": "Für erdberührte Bauteile ist die DIN 18533 der zentrale Maßstab für Planung, Auswahl und Ausführung der Abdichtung. Sie definiert die relevanten Wassereinwirkungsklassen und schafft damit die Grundlage für eine normgerechte Sanierung.",
-    "page6_image_bottom": "../../assets/images/placeholder/ergebnis.jpg",
+    "page6_image_bottom": "../../uploads/bkm-fachbetrieb-sanierter-keller-ergebnis.webp",
     "page6_quote": "Ihr Zuhause in sicheren Händen."
   },
-
   "page7_backcover": {
-    "page7_image": "../../assets/images/placeholder/handshake.jpg",
+    "page7_image": "../../uploads/fachbetrieb-partner-standard.webp",
     "page7_title": "Der sicherste erste Schritt – Ihre kostenlose Schadensanalyse",
     "page7_text": "Das größte Risiko bei Feuchtigkeitsschäden ist, nichts zu tun. Jeder Tag des Zögerns kann den Schaden vergrößern und die Kosten in die Höhe treiben. Machen Sie den ersten, sicheren Schritt in eine trockene Zukunft für Ihr Zuhause.",
     "page7_cta": "Fordern Sie jetzt Ihre kostenlose und unverbindliche Schadensanalyse durch einen zertifizierten Fachpartner in Ihrer Nähe an."
