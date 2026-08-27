@@ -150,8 +150,8 @@
       "position": {
         "horizontal": "Rechte Außenkante bündig mit rechtem Seitenrand (X_right = 210mm)",
         "vertical_rule": "Linke obere Pure-Green-Außenkante auf Flucht der Unterkante des 16:9-Farbkastens",
-        "y_top_mm": 102.3,
-        "y_top_px_300dpi": 1210,
+        "y_top_mm": 102.416,
+        "y_top_mm_herleitung": "Chevron-Oberkante 15,709 mm unter der Bildoberkante, trifft damit die 16:9-Kante bei 118,125 mm",
         "note": "Das Key Visual ragt ca. 15.8mm über die Farbkasten-Unterkante hinaus nach oben in den Farbkasten hinein"
       },
       "size": {
@@ -262,7 +262,7 @@
       { "element": "Subheadline Oberkante", "y_mm": 80.5, "rule": "30pt (10.6mm) Abstand unter Headline Zeile 2" },
       { "element": "Subheadline Unterkante", "y_mm": 84.7, "rule": "12pt Zeichenhöhe" },
       { "element": "Fließtext Oberkante", "y_mm": 89.0, "rule": "Abstand unter Subheadline (ca. 4mm)" },
-      { "element": "Key Visual Oberkante", "y_mm": 102.3, "rule": "1210px bei 300dpi" },
+      { "element": "Key Visual Oberkante", "y_mm": 102.416, "rule": "Chevron-Oberkante trifft die 16:9-Kante bei 118,125 mm" },
       { "element": "16:9-Farbkasten Unterkante", "y_mm": 118.1, "rule": "210/16*9 = 118.1mm" },
       { "element": "Hero-Bild Oberkante", "y_mm": 118.1, "rule": "Direkt unter Farbkasten" },
       { "element": "Seitenunterkante", "y_mm": 297.0 }

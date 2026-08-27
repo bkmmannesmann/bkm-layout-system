@@ -102,18 +102,22 @@ html, body {
   top: 0;
   left: 0;
   width: 210mm;
-  height: 118.1mm;  /* 16:9 Verhältnis zur Breite */
+  height: 118.125mm;  /* echtes 16:9: 210 / 16 * 9 */
   z-index: 2;
 }
 
-/* 8mm-Erweiterung rechts unten (gleiche Farbe = eine Fläche) */
+/* Eckerweiterung rechts unten (gleiche Farbe = eine Fläche).
+   10 x 10 mm mit Oberkante bei 117,6 mm - sie ragt damit 0,525 mm in die
+   Hero-Fläche hinein. Das ist der Blitzerschutz aus brand.json: an der Kante,
+   an der Farbfläche und Foto zusammentreffen, wird überlappt, nicht gestoßen.
+   Der bottom-Wert folgt daraus: 117,6 + 10 - 118,125 = 9,475 mm. */
 .cover__color-box::after {
   content: '';
   position: absolute;
-  bottom: -8mm;     /* Direkt unter dem Hauptkasten */
+  bottom: -9.475mm;
   right: 0;         /* Rechts bündig */
-  width: 8mm;
-  height: 8mm;
+  width: 10mm;
+  height: 10mm;
   background: inherit;  /* Erbt die Hintergrundfarbe vom Eltern-Element */
 }
 
@@ -246,7 +250,13 @@ html, body {
 
 .cover__keyvisual {
   position: absolute;
-  top: 102.3mm;   /* 1210px bei 300dpi */
+  /* 102,416 mm ist nachgerechnet, nicht gerundet: die Chevron-Oberkante liegt
+     15,709 mm unter der Bildoberkante, damit trifft sie die 16:9-Kante bei
+     118,125 mm exakt. Die frühere Angabe 102,3 berief sich auf "1210 px bei
+     300 dpi" - das ergibt jedoch 102,447 mm, der Wert lag also neben seiner
+     eigenen Herleitung. Die Kante stößt damit ohne Überlappung; entschieden
+     am 27.08.2026 zugunsten des hergeleiteten Werts. */
+  top: 102.416mm;
   right: 0;       /* Bündig rechts */
   width: 42mm;    /* 1/5 von 210mm */
   height: auto;
