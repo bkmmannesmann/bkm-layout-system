@@ -63,7 +63,7 @@ VARIANTS = {
         "logo_file": "bkm-logo-white-puregreen.svg",
         "keyvisual_file": "keyvisual-on-light.png",
         "headline_color": "#ffffff",
-        "subheadline_color": "#4daf46",  # Pure Green
+        "subheadline_color": "#b4e717",  # Pure Green
         "intro_color": "#ffffff",
         "text_shadow": True,  # Leichter Schatten
     },
@@ -135,6 +135,11 @@ def build_cover(variant_key: str, content: dict):
         "variant_class": variant["variant_class"],
         "logo_path": logo_path,
         "keyvisual_path": keyvisual_path,
+        # Nur die Fachbetriebe-Variante traegt das runde Systempartner-Siegel.
+        # Es ersetzt optisch das Logo; das Logo bleibt im Fluss und unsichtbar,
+        # damit der Abstand zur Headline unveraendert bleibt.
+        "seal_path": ("../../uploads/signatur-bkm-systempartner-logo.png"
+                      if variant_key == "fachbetriebe" else ""),
         "badge_path": badge_path,
         "badge_alt": badge_alt,
         "headline": content.get("headline", "HEADLINE HIER\nZWEITE ZEILE"),

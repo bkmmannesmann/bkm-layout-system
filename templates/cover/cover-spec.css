@@ -4,7 +4,7 @@
    
    GRUNDPRINZIP:
    Das DIN-A4-Titelblatt besteht aus einem vollflächigen 16:9-Farbkasten
-   im oberen Bereich (Höhe: 210/16*9 = 118.1mm) und einem Hero-Bild darunter.
+   im oberen Bereich (Höhe: 210/16*9 = 118.125mm) und einem Hero-Bild darunter.
    
    RASTER:
    - 2 Spalten (je 105mm)
@@ -93,8 +93,9 @@ html, body {
 
 /* === L-FÖRMIGE FARBFLÄCHE ===
    Visuell eine zusammenhängende Fläche, technisch zwei Elemente:
-   - Hauptkasten: 210mm × 118.1mm (16:9, vollflächig oben)
-   - Erweiterung: 8mm × 8mm (rechts unten, bündig anliegend)
+     - Hauptkasten: 210mm × 118.125mm (16:9, vollflächig oben)
+     - Erweiterung: 10mm × 10mm, Oberkante 117.6mm — sie überlappt den
+       Hauptkasten um 0.525mm nach oben (Blitzerschutz, siehe brand.json)
    Beide haben die gleiche Hintergrundfarbe → wirken als eine Fläche. */
 
 .cover__color-box {
@@ -131,7 +132,7 @@ html, body {
   top: 0;
   left: 0;
   width: 210mm;
-  height: 118.1mm;
+  height: 118.125mm;  /* wie der Farbkasten, echtes 16:9 */
   padding: 18mm 18mm 0 18mm;  /* 18mm von oben und links */
   z-index: 10;
   display: flex;
@@ -147,6 +148,28 @@ html, body {
   width: 42mm;    /* 1/5 von 210mm */
   height: auto;
   margin-bottom: 18mm;  /* 18mm Abstand zwischen Logo-Unterkante und Headline */
+}
+
+/* === SIEGEL (nur Fachbetriebe) ===
+   Das runde Systempartner-Siegel ersetzt das BKM-Logo, ohne dass sich sonst
+   etwas verschiebt: das Logo bleibt im Fluss stehen und traegt weiterhin den
+   Abstand zur Headline, wird aber unsichtbar. Das Siegel liegt absolut
+   darueber, auf derselben Mittelhoehe.
+
+   Rechnung: das Logo ist bei 42 mm Breite 10,161 mm hoch (viewBox
+   1054,34 x 255,08), Oberkante 18 mm, Mitte also 23,081 mm. Das Siegel misst
+   28,16 mm, seine Oberkante liegt damit bei 23,081 - 14,08 = 9,001 mm. */
+
+.cover--fachbetriebe .cover__logo { visibility: hidden; }
+
+.cover--fachbetriebe .cover__seal {
+  position: absolute;
+  top: 9.001mm;
+  left: var(--cover-axis, 18mm);
+  width: 28.16mm;
+  height: 28.16mm;
+  z-index: 3;
+  display: block;
 }
 
 /* === HEADLINE ===
@@ -219,15 +242,17 @@ html, body {
 }
 
 /* === PRODUKT-BADGE (nur Home Line + Pro Line) ===
-   Position: Linksbündig (left=18mm), vertikal zentriert auf Unterkante Farbkasten
-   Das Badge sitzt mittig auf der Linie Y=118.1mm
-   (top = 118.1mm - halbe Badge-Höhe = 118.1mm - 7.35mm = 110.75mm)
-   Größe: 61mm × 14.7mm
+   Position: left=0 (der schräge Ansatz ragt bewusst über den Seitenrand),
+   vertikal zentriert auf der Unterkante des Farbkastens bei Y=118.125mm
+   (top = 118.125mm - 14.742mm/2 = 110.754mm, gesetzt sind 110.75mm)
+   Größe: 61mm × 14.742mm (720 × 174 px)
    Ebene: z-index 4 (vor Key Visual und Farbkasten) */
 
 .cover__badge {
   position: absolute;
-  top: 110.75mm;    /* 118.1mm - (14.7mm / 2) = vertikal zentriert auf Farbkasten-Unterkante */
+  /* Vertikal zentriert auf der Farbkasten-Unterkante: 118,125 - 14,742/2 = 110,754.
+     Die Badge-Hoehe folgt aus 61 mm Breite bei 720 x 174 px. */
+  top: 110.75mm;
   left: 0;          /* Linksbündig am Seitenrand (schräger Ansatz ragt über Rand) */
   width: 61mm;      /* 720px bei 300dpi */
   height: auto;
@@ -325,7 +350,7 @@ html, body {
 /* --- VERARBEITUNGSANLEITUNG (Weiß) --- */
 .cover--anleitung .cover__color-box {
   background-color: #ffffff;
-  border-bottom: 1px solid #e8e6e1;
+  border-bottom: 1px solid var(--bkm-hairline, #e3e1dc);  /* Palettenton, vorher #e8e6e1 */
 }
 .cover--anleitung .cover__headline { color: #494949; }
 .cover--anleitung .cover__subheadline { color: #4daf46; }

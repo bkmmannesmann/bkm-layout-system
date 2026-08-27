@@ -48,7 +48,7 @@ und Navigation über zwanzig und mehr Seiten.
 | Achse außen und innen | `18 mm` | Wie TDS: die eine Fluchtlinie |
 | Kopfsteg Innenseiten | `26,7 mm` | — |
 | Kopfsteg Titelblatt mit Logo | `18 mm` | Das Logo steht auf der Achse, der Kopfsteg entspricht ihr. |
-| Kopfsteg Titelblatt mit Siegel | `12 mm` | Das runde Siegel ersetzt das Logo und braucht mehr Luft nach unten, deshalb steht es höher. |
+| Kopfsteg Titelblatt mit Siegel | `9,001 mm` | Gerechnet, nicht gesetzt: das Siegel sitzt auf derselben Mittelhöhe wie das Logo der übrigen Varianten. Siehe unten. |
 | Fußsteg | `23,5 mm` | Innenseiten. Seiten ohne Seitenzahl sind nicht daran gebunden, siehe unten. |
 | Textbreite | `174 mm` | 210 − 2 × 18 |
 | Dreispaltig | `55 mm` Spalte, `4,6 mm` Steg | Fließtextseiten |
@@ -88,7 +88,7 @@ abweichender Fuß auf einer Seite mit Ziffer wird gemeldet.
 | Keyvisual | `42 mm` breit, rechts angeschnitten, `top: 102,416 mm`, **`keyvisual-on-light.svg`** (dreifarbig) |
 | Foto | ab `117,46 mm` bis Seitenunterkante, `210 × 179,54 mm`, `object-fit: cover` |
 | Logo | `42 mm`, Kopfsteg `18 mm` |
-| Siegel (Fachbetriebs-Titel) | `28,16 mm` rund, Kopfsteg `12 mm`, ersetzt das Logo |
+| Siegel (Fachbetriebs-Titel) | `28,16 mm` rund, Oberkante `9,001 mm`, ersetzt das Logo |
 | Headline | Unbounded 900, `30 pt`, Zeilenhöhe `1,25`, Laufweite `0` |
 | Subheadline | Unbounded 900, `12 pt`, Zeilenhöhe `1,3`, Laufweite `0` |
 | Fließtext | TT Norms Pro 400, `12 pt`, Zeilenhöhe `1,25`, Laufweite `−0,015 em`, max. 2 Zeilen |
@@ -137,6 +137,25 @@ Bildoberkante. Nur bei `102,416 mm` trifft sie die Unterkante des 16:9-Bereichs 
 Pure-Green-Chevron, und die Zahl verliert ihre Begründung. `on-dark` gehört auf
 durchgehend dunkle Flächen wie die Rückseite, `lime` ist Akzentfarbe.
 `scripts/validate_brochure.py` prüft das für `A-Titelblaetter.dc.html`.
+
+### Siegelhöhe
+
+`9,001 mm` ist gerechnet: Das Siegel sitzt auf **derselben Mittelhöhe** wie das BKM-Logo
+der übrigen Varianten. Das Logo ist bei `42 mm` Breite `10,161 mm` hoch (viewBox
+`1054,34 × 255,08`) und beginnt beim Kopfsteg `18 mm` — seine Mitte liegt damit bei
+`23,081 mm`. Das Siegel misst `28,16 mm`; bei gleicher Mitte ergibt sich
+`23,081 − 14,08 = 9,001 mm`.
+
+Vorher stand hier `12 mm` ohne Herleitung. Das lag `3 mm` tiefer und setzte die Mitten
+gegeneinander.
+
+**Damit sich sonst nichts verschiebt**, bleibt das Logo im Fluss stehen und wird nur
+unsichtbar — es trägt weiterhin seinen Abstand zur Headline. Wird es entfernt, rutscht
+die Headline hoch. In `templates/cover/cover-spec.css` steht das als
+`.cover--fachbetriebe .cover__logo { visibility: hidden }`.
+
+Nachgemessen im erzeugten PDF: Siegel von `y 9,00` bis `37,16 mm`, Mitte `23,081`; die
+oberste Textgrundlinie liegt in beiden Varianten bei `56,74 mm`.
 
 ### Blitzerschutz
 
@@ -191,6 +210,19 @@ ausschließt; eine Ausnahme kannte es bereits selbst. Die Abweichung gehört im
 Design-System nachgezogen, sonst laufen die Repositories auseinander.
 
 Maximal zwei Flächenfarben je Broschüre.
+
+## Eine bewusste Ausnahme beim Kontrast
+
+Die Subheadline des Anleitungs-Titelblatts steht in **Pure Green auf Weiß** — Kontrast
+`2,79`, unter der Schwelle `3,0`. Das ist entschieden, nicht übersehen.
+
+Die Alternativen lagen gerendert nebeneinander vor: Transition Green `5,09`, Stone Grey
+`9,00`, Deep Green `9,84`. Pure Green bleibt, weil die Zeile ihren Farbcharakter behalten
+soll und Deep Green sich kaum von der Headline absetzt.
+
+**Die Ausnahme gilt nur für diese eine Zeile.** Fließtext steht in Stone Grey, dort gibt es
+keinen Spielraum. In `brand.json` unter `contrast.accepted_exceptions` steht dasselbe mit
+Datum — wer den Wert später findet, hat nichts entdeckt.
 
 ## Icons
 

@@ -85,6 +85,13 @@
            src="{{ logo_path }}" 
            alt="BKM Mannesmann">
 
+      <!-- SIEGEL (nur Fachbetriebe): rund, ersetzt optisch das Logo.
+           Das Logo darueber bleibt im Fluss, damit der Abstand zur Headline
+           unveraendert bleibt. -->
+      {% if seal_path %}
+      <img class="cover__seal" src="{{ seal_path }}" alt="BKM Systempartner">
+      {% endif %}
+
       <!-- HEADLINE
            Schrift: Unbounded Black (900), 30pt, Versalien
            Abstand oben: 18mm (unter Logo)
