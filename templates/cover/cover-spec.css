@@ -113,18 +113,6 @@ html, body {
   display: block;
 }
 
-/* Haarlinie an der 16:9-Kante, nur wo die Grafik hell ist und sich sonst
-   kaum vom Foto darunter absetzt. */
-.cover__hairline {
-  position: absolute;
-  top: 118.125mm;
-  left: 0;
-  width: 210mm;
-  height: 0.25mm;
-  background: var(--bkm-hairline, #e3e1dc);
-  z-index: 2;
-}
-
 /* === TEXT-CONTENT CONTAINER ===
    Flow-Layout: Elemente fließen vertikal mit definierten Abständen.
    Subheadline und Fließtext passen sich an die tatsächliche Textlänge an
