@@ -389,10 +389,11 @@ def build_from_json(content_name):
     with open(content_path, "r", encoding="utf-8") as f:
         content = json.load(f)
 
+    # Die Datenblatt-Ordner fuehren keine 'pages' - fuer sie ist build_tds.py
+    # zustaendig.
     if "pages" not in content:
-        other = (content.get("meta") or {}).get("template")
-        print(f"  [UEBERSPRUNGEN] {content_name}: kein Innenteil-Content"
-              + (f", Template '{other}' baut scripts/build.py" if other else ""))
+        print(f"  [UEBERSPRUNGEN] {content_name}: kein Innenteil-Content "
+              f"(Datenblatt? dann build_tds.py)")
         return SKIPPED
 
     return build_brochure(content, content_name)

@@ -68,12 +68,6 @@ durch. Die verbindlichen Regeln stehen in [`docs/BROSCHUERE-LAYOUT.md`](docs/BRO
 Als Referenz liegt `content/broschuere-mannesmann/` im Repository — eine Unternehmensbroschüre,
 die alle sieben Seitentypen verwendet. Offene Punkte darin sind mit `[ANGABE FEHLT: …]` markiert.
 
-Die ältere Fassung mit eigenem Template:
-
-```bash
-python3 scripts/build.py prospekt-fachbetrieb
-```
-
 ### Technisches Datenblatt erstellen
 
 Das TDS-System trennt Produktinhalt, Markenlayout und Freigabeprüfung. Kopiere für einen neuen Entwurf eine passende Referenz aus `content/tds*/`, pflege die bestätigten Produktdaten in `content.json` und führe anschließend die Entwurfsprüfung aus:
@@ -122,7 +116,6 @@ bkm-layout-system/
 │   │   ├── cover.html            ← HTML-Template mit Jinja2
 │   │   ├── cover-spec.css        ← Exakte Layout-Spezifikation
 │   │   └── cover-layout.json     ← Maschinenlesbare Maße
-│   ├── prospekt-fachbetrieb/
 │   │   ├── template.html
 │   │   └── template.css
 │   └── tds/                      ← Technische Datenblätter
@@ -130,7 +123,6 @@ bkm-layout-system/
 │       ├── template.css
 │       └── icons/
 ├── content/
-│   ├── prospekt-fachbetrieb/
 │   └── tds-*/                    ← Ein Produktordner pro TDS
 ├── docs/
 │   ├── REDAKTIONSSTANDARD.md
@@ -139,9 +131,7 @@ bkm-layout-system/
 │   └── tds-content.schema.json
 ├── scripts/
 │   ├── build_cover.py            ← Cover-Builder (5 Varianten)
-│   ├── build.py                  ← Prospekt-Builder
 │   ├── build_tds.py              ← TDS-Builder mit Seitenzahlprüfung
-│   ├── validate_json.py
 │   └── validate_tds.py           ← TDS-Validierung und Release-Sperren
 ├── output/                       ← Generierte PDFs (gitignored)
 │   └── covers/
