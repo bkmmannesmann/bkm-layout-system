@@ -23,6 +23,8 @@ import json
 import os
 import sys
 from pathlib import Path
+
+ROOT_DIR = Path(__file__).parent.parent.resolve()
 from jinja2 import Environment, FileSystemLoader
 
 # Projekt-Root ermitteln
@@ -111,7 +113,11 @@ def build_cover(variant_key: str, content: dict):
     template = env.get_template("cover.html")
     
     # Asset-Pfade relativ zum Template
-    logo_path = f"../../assets/images/logos/{variant['logo_file']}"
+    # assets/logos/ traegt die schlanken Fassungen: gleiche viewBox, gleiche
+    # zwoelf Pfade, byteweise identische Pfaddaten - aber 9 KB statt 517 KB.
+    # Der Unterschied war ein metadata-Block mit Illustrators
+    # Bearbeitungsspur, fuer die Darstellung wirkungslos.
+    logo_path = f"../../assets/logos/{variant['logo_file']}"
     keyvisual_path = f"../../assets/images/{variant['keyvisual_file']}"
     
     # Badge-Pfad (nur für Home Line und Pro Line Produktbroschüren)
@@ -134,7 +140,7 @@ def build_cover(variant_key: str, content: dict):
         "headline": content.get("headline", "HEADLINE HIER\nZWEITE ZEILE"),
         "subheadline": content.get("subheadline", "Subheadline hier"),
         "intro_text": content.get("intro_text", "Einleitungstext hier."),
-        "hero_image_path": content.get("hero_image_path", "../../assets/images/placeholder/hero.jpg"),
+        "hero_image_path": content.get("hero_image_path", "../../uploads/cover-hero-standard.jpg"),
         "hero_image_alt": content.get("hero_image_alt", "Hero-Bild"),
         "title": content.get("title", f"BKM Cover – {variant['label']}"),
     }
@@ -184,7 +190,48 @@ def build_cover(variant_key: str, content: dict):
         print(f"  ✗ PDF-Fehler: {e}")
     
     print(f"  ✓ HTML: {html_path}")
+
+    fehler = check_output(html_content, pdf_path if "pdf_path" in dir() else None)
+    if fehler:
+        for f in fehler:
+            print(f"  ✗ {f}")
+        return None
+
     return html_path
+
+
+def check_output(html_content, pdf_path):
+    """Prueft das erzeugte Cover auf zwei stille Fehler.
+
+    Erstens tote Bildverweise. Findet WeasyPrint eine Datei nicht, bricht es
+    nicht ab, sondern setzt den Alt-Text an ihre Stelle - in einer
+    Serifenschrift, die es selbst mitbringt. Genau so liefen alle fuenf Cover
+    monatelang: die Vorgabe zeigte auf assets/images/placeholder/hero.jpg,
+    einen Ordner, den es nie gab.
+
+    Zweitens die Schriften. Verweist ein Stylesheet auf eine Schriftdatei, die
+    fehlt, wird still ersetzt. Dasselbe Muster.
+
+    Die Pfade werden hier geprueft, nicht per Textsuche im Quelltext: sie
+    entstehen zur Laufzeit aus variant['logo_file'], eine Suche nach dem
+    woertlichen Pfad findet sie nicht.
+    """
+    import re
+    fehler = []
+
+    for ref in sorted(set(re.findall(r'src="\.\./\.\./([^"]+)"', html_content))):
+        if not (ROOT_DIR / ref).is_file():
+            fehler.append(f"Bildverweis zeigt ins Leere: {ref}")
+
+    if pdf_path and pdf_path.is_file():
+        try:
+            from pdf_checks import check_fonts
+            from pypdf import PdfReader
+            fehler.extend(check_fonts(PdfReader(str(pdf_path))))
+        except ImportError:
+            pass
+
+    return fehler
 
 
 def main():
