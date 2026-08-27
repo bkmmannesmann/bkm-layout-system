@@ -50,13 +50,27 @@ Repository-Wurzelverzeichnis.
 - `assets/logos/bkm-logo-white-puregreen.svg`
 - `assets/logos/bkm-logo-white.svg`
 
-## uploads/ (22)
+## uploads/ (36)
 - `uploads/a4-texture-deep-green-2.jpg`
 - `uploads/a4-texture-deep-green-3.jpg`
 - `uploads/a4-texture-deep-green.jpg`
+- `uploads/a4-texture-pure-green-2.jpg`
+- `uploads/a4-texture-pure-green-3.jpg`
+- `uploads/a4-texture-pure-green-4.jpg`
+- `uploads/a4-texture-pure-green-5.jpg`
+- `uploads/a4-texture-pure-green.jpg`
 - `uploads/a4-texture-transition-green-2.jpg`
+- `uploads/a4-texture-transition-green-3.jpg`
+- `uploads/a4-texture-transition-green-4.jpg`
+- `uploads/a4-texture-transition-green-5.jpg`
+- `uploads/a4-texture-transition-green-6.jpg`
 - `uploads/a4-texture-transition-green.jpg`
+- `uploads/a4-texture-white-2.jpg`
+- `uploads/a4-texture-white-3.jpg`
+- `uploads/a4-texture-white-4.jpg`
 - `uploads/a4-texture-white-5.jpg`
+- `uploads/a4-texture-white-6.jpg`
+- `uploads/a4-texture-white.jpg`
 - `uploads/bkm-fachbetrieb-messergebnis-schadensanalyse.webp`
 - `uploads/bkm-fachbetrieb-sanierter-keller-ergebnis.webp`
 - `uploads/bkm-fachbetrieb-schadensanalyse-abplatzender-putz.webp`
