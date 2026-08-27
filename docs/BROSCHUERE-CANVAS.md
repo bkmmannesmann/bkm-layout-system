@@ -49,12 +49,30 @@ und Navigation über zwanzig und mehr Seiten.
 | Kopfsteg Innenseiten | `26,7 mm` | — |
 | Kopfsteg Titelblatt mit Logo | `18 mm` | Das Logo steht auf der Achse, der Kopfsteg entspricht ihr. |
 | Kopfsteg Titelblatt mit Siegel | `12 mm` | Das runde Siegel ersetzt das Logo und braucht mehr Luft nach unten, deshalb steht es höher. |
-| Fußsteg | `23,5 mm` | Innenseiten |
+| Fußsteg | `23,5 mm` | Innenseiten. Seiten ohne Seitenzahl sind nicht daran gebunden, siehe unten. |
 | Textbreite | `174 mm` | 210 − 2 × 18 |
 | Dreispaltig | `55 mm` Spalte, `4,6 mm` Steg | Fließtextseiten |
 | Marginalspalte | `38 mm`, Steg `6 mm` | Textstrecken, Verfahren, Produktseiten |
 | Radius | `5 px` | Abweichung, siehe unten |
 | Haarlinie | `#e3e1dc` | Wie TDS |
+
+### Ausnahme: Seiten ohne Seitenzahl
+
+Der Fußsteg von `23,5 mm` ist für Seitenzahl und Kolumnentitel reserviert. Eine Seite, die
+keine trägt — Rückseite (U4) und Inhaltsverzeichnis —, ist daran nicht gebunden; dort ist
+nur der Beschnitt die Grenze. `scripts/build_pages.py` prüft solche Seiten gegen
+`BLEED_SAFE = 285 mm` statt gegen die `272 mm` einer Satzseite; die Fallunterscheidung steht
+dort in `_check_type_area`.
+
+Genutzt wird das aktuell an einer Stelle: `B-Rahmenseiten.dc.html`, Seite 10 (U4) steht auf
+`padding: 26.7mm 18mm 18mm`. Der Impressumsblock endet dort bei `279,0 mm`. Der
+Produktionspfad setzt dieselbe Seite über `.backcover-imprint { top: 271.0mm }` — also
+ebenfalls tiefer, als der Fußsteg einer Satzseite zuließe.
+
+Die Ausnahme ist eine **Erlaubnis, kein Gebot**: Seiten ohne Ziffer dürfen auf `23,5 mm`
+stehenbleiben, wenn sie den Raum nicht brauchen. In `B-Rahmenseiten.dc.html` tun das die
+Seiten 1, 3, 9 und 13. Ein Fußsteg von `18 mm` auf einer Seite **mit** Seitenzahl ist dagegen
+ein Fehler — dort läuft der Satz in die Ziffer.
 
 ## Titelblatt
 
