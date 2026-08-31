@@ -1,5 +1,5 @@
 {
-  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_Novusan_DE, ausgegeben am 18.08.2026.",
+  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_Novusan_DE, ausgegeben am 18.08.2026. Der Klebeband-Hinweis im Abschnitt „Bohren“ und die Einschränkung zu Hohlkammersteinen stehen im Wortlaut der Vorlage. Die Verbrauchsangaben sind als Tabelle gesetzt statt als Formelzeilen.",
   "title": "Novusan – Verarbeitungsanleitung",
   "product_name": "Novusan",
   "product_line": "HOME LINE",
@@ -29,7 +29,7 @@
           "Kalksandstein",
           "Porenbeton",
           "Stampfbeton",
-          "Gitter- und Hohlkammersteine"
+          "Gitter- und Hohlkammersteine — nur bei durchgehender dichter Mörtelfuge"
         ],
         "unsuitable": [
           "WU-Beton"
@@ -44,7 +44,7 @@
         {
           "icon": "drop",
           "claim": "Exakt kalkulierbar",
-          "detail": "Fünf Flaschen Novusan ergeben einen Meter Horizontalsperre"
+          "detail": "5 Flaschen Novusan = 1 m Horizontalsperre"
         },
         {
           "icon": "shield-check",
@@ -63,7 +63,7 @@
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
           "Zollstock",
           "Wasserwaage",
@@ -90,37 +90,32 @@
       "sections": [
         {
           "title": "Verbrauch planen",
-          "icon": "drop",
+          "icon": "table",
           "body": "Falls du keinen Bauplan zur Hand hast, kannst du die Wandstärke an einem Fenster oder einer Tür nachmessen.",
-          "formulas": [
-            {
-              "rule": "Wandstärken bis 50 cm · Horizontalsperre: 5 Flaschen je Meter"
-            },
-            {
-              "rule": "Wandstärken bis 50 cm · Flächensperre: 20 Flaschen je Quadratmeter"
-            },
-            {
-              "rule": "Wandstärken über 50 cm · Horizontalsperre: 10 Flaschen je Meter"
-            },
-            {
-              "rule": "Wandstärken über 50 cm · Flächensperre: 40 Flaschen je Quadratmeter"
-            }
-          ]
+          "table": {
+            "columns": [
+              "Wandstärke",
+              "Horizontalsperre",
+              "Flächensperre"
+            ],
+            "rows": [
+              [
+                "bis 50 cm",
+                "5 Flaschen je Meter",
+                "20 Flaschen je m²"
+              ],
+              [
+                "über 50 cm",
+                "10 Flaschen je Meter",
+                "40 Flaschen je m²"
+              ]
+            ]
+          }
         },
         {
           "title": "Untergrund",
           "icon": "stack",
           "body": "Der Untergrund muss mineralisch und saugfähig sein. Bei Hohlkammersteinen ist vor Arbeitsbeginn sicherzustellen, dass eine durchgehende Mörtelfuge vorhanden ist. Bei Natursteinmauerwerk ohne homogenes Fugenbild müssen die Bohrungen so gesetzt werden, dass auf halber Mauerwerksstärke eine Mörtelfuge oder ein Hohlraum getroffen wird."
-        }
-      ],
-      "figures": [
-        {
-          "caption": "Bohrlochmuster Horizontalsperre",
-          "image_needed": "Zeichnung: Bohrlochmuster Horizontalsperre mit Maßketten 20 cm, 10 cm Eckabstand, 5–15 cm über dem Boden"
-        },
-        {
-          "caption": "Bohrlochmuster Flächensperre",
-          "image_needed": "Zeichnung: Bohrlochmuster Flächensperre, Reihen im Abstand 25 cm, seitlich um 10 cm versetzt"
         }
       ]
     },
@@ -146,6 +141,14 @@
       ],
       "figures": [
         {
+          "caption": "Bohrlochmuster Horizontalsperre",
+          "image_needed": "Zeichnung: Bohrlochmuster Horizontalsperre mit Maßketten 20 cm, 10 cm Eckabstand, 5–15 cm über dem Boden"
+        },
+        {
+          "caption": "Bohrlochmuster Flächensperre",
+          "image_needed": "Zeichnung: Bohrlochmuster Flächensperre, Reihen im Abstand 25 cm, seitlich um 10 cm versetzt"
+        },
+        {
           "caption": "Versetzte Bohrlochreihen",
           "image_needed": "Zeichnung: zweite Reihe 12–15 cm höher, seitlich versetzt"
         }
@@ -158,7 +161,7 @@
         {
           "title": "Bohren",
           "icon": "target",
-          "body": "Bohre die Löcher mit einem 14-mm-Bohrer in einem Winkel von 45° schräg nach unten, bis zum Beginn des hinteren Drittels der Wand. Da die Bohrung schräg verläuft, ist die Strecke entlang des Bohrers länger als das horizontale Maß in der Wand. Nach dem Bohren müssen die Bohrlöcher sauber und staubfrei sein; entferne den Bohrstaub vollständig durch Aussaugen oder mit ölfreier Druckluft.",
+          "body": "Bohre die Löcher mit einem 14-mm-Bohrer in einem Winkel von 45° schräg nach unten, bis zum Beginn des hinteren Drittels der Wand. Da die Bohrung schräg verläuft, ist die Strecke entlang des Bohrers länger als das horizontale Maß in der Wand. Markiere die erforderliche Bohrlänge vor dem Bohren mit einem Stück Klebeband direkt am Bohrer — im genannten Beispiel bei 34 cm. So lässt sich die Tiefe beim Bohren kontrollieren und zu tiefes Bohren vermeiden. Nach dem Bohren müssen die Bohrlöcher sauber und staubfrei sein; entferne den Bohrstaub vollständig durch Aussaugen oder mit ölfreier Druckluft.",
           "formulas": [
             {
               "rule": "Bei 36 cm Wandstärke im 45°-Winkel 34 cm tief bohren",
@@ -184,7 +187,7 @@
       ],
       "figures": [
         {
-          "caption": "Bohrung im 45° Winkel",
+          "caption": "Bohrung im 45°-Winkel",
           "image_needed": "Foto oder Schnitt: Bohrung im 45-Grad-Winkel, Klebeband als Tiefenmarkierung am Bohrer"
         },
         {

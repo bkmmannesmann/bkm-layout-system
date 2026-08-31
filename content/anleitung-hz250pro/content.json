@@ -1,5 +1,5 @@
 {
-  "$comment": "Inhalt wörtlich übernommen aus der freigegebenen Fassung VA_BKM_HZ250_Pro_DE, ausgegeben am 18.08.2026. Struktur und Rubrikenfolge abgelesen an sieben freigegebenen Anleitungen. Abweichung zur Bestandsfassung: Farben, Schriftschnitte und Satzspiegel folgen brand.json, nicht dem alten Artwork - siehe docs/ANLEITUNG-LAYOUT.md.",
+  "$comment": "Inhalt wörtlich übernommen aus der freigegebenen Fassung VA_BKM_HZ250_Pro_DE, ausgegeben am 18.08.2026. Struktur und Rubrikenfolge abgelesen an sieben freigegebenen Anleitungen. Abweichung zur Bestandsfassung: Farben, Schriftschnitte und Satzspiegel folgen brand.json, nicht dem alten Artwork - siehe docs/ANLEITUNG-LAYOUT.md. Subheadline des Titels gegenüber der Vorlage gekürzt (Zwei-Zeilen-Grenze), das Verfahren „Injektion“ bleibt darin. Auf Blatt 5 eine Abbildung ergänzt, die die Vorlage dort führt.",
   "title": "BKM HZ 250 Pro – Verarbeitungsanleitung",
   "product_name": "BKM HZ 250 Pro",
   "product_line": "PRO LINE",
@@ -11,7 +11,7 @@
   "cover": {
     "$comment": "Titelblatt, gebaut ueber templates/cover/, Variante anleitung. Wortlaut nach der freigegebenen Fassung VA_BKM_HZ250_Pro_DE, die Subheadline gekuerzt: der dortige Wortlaut lief drei Zeilen, erlaubt sind zwei (type_scale.cover.subheadline.max_lines). Gemessen liegt die Grenze bei rund 70 Zeichen - 68 passen, 82 nicht.",
     "headline": "VERARBEITUNGS-<br>ANLEITUNG",
-    "subheadline": "Gegen aufsteigende Feuchtigkeit und Querdurchfeuchtung im Mauerwerk.",
+    "subheadline": "Zur Injektion in mineralisches Mauerwerk gegen Feuchtigkeit.",
     "intro_text": "BKM HZ 250 Pro – Dauerhafte Kapillarsperre für die professionelle Anwendung.",
     "hero_image_alt": "BKM HZ 250 Pro Verarbeitungsanleitung"
   },
@@ -65,7 +65,7 @@
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
           "Zollstock",
           "Wasserwaage",
@@ -129,7 +129,7 @@
           "image_needed": "Foto: Messen der Wandstärke am Mauerwerk, Zollstock angelegt"
         },
         {
-          "caption": "Geeignetes Mauerwerk",
+          "caption": "Ziegel, Naturstein und Hohlkammerstein im Vergleich",
           "image_needed": "Foto oder Schnitt: Ziegel, Naturstein und Hohlkammerstein nebeneinander"
         }
       ]
@@ -204,7 +204,7 @@
         },
         {
           "title": "Alternative Verarbeitung",
-          "icon": "stack",
+          "icon": "hammer",
           "body": "Bei wenig saugenden Untergründen oder bei zu geringer Materialaufnahme des Mauerwerks über Niederdruckinjektion ist eine Verarbeitung mit geeigneten Injektionsflaschen möglich, zum Beispiel bei Naturstein oder Kalksandstein. Die Bohrlochabstände bleiben dabei unverändert."
         },
         {
@@ -215,12 +215,16 @@
       ],
       "figures": [
         {
-          "caption": "Bohrung im 45° Winkel",
+          "caption": "Bohrung im 45°-Winkel",
           "image_needed": "Foto oder Schnitt: Bohrung im 45-Grad-Winkel"
         },
         {
           "caption": "Einsatz der Injektionslanzen",
           "image_needed": "Foto: gesetzte Injektionslanzen an der Wand"
+        },
+        {
+          "caption": "Bohrlöcher verschließen",
+          "image_needed": "Foto: Verschließen des Bohrlochs mit BKM FBM nach dem Entfernen der Lanze"
         }
       ],
       "tip": {

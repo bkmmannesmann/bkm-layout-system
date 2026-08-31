@@ -45,6 +45,17 @@
   {% if a.title %}<h2 class="anl-abschnitt__title">{{ a.title }}</h2>{% endif %}
   {% if a.body %}<p class="anl-text">{{ a.body }}</p>{% endif %}
   {{ bullets(a.bullets) }}
+  {#- Echte Tabelle. Die Vorlagen stellen Verbrauchsangaben zweispaltig
+      gegenueber - bei NovuSticks wird daraus auf einen Blick sichtbar,
+      dass ein Stick auf 3 cm Mauerwerk kommt. Als vier Saetze
+      untereinander geht das verloren. -#}
+  {% if a.table %}
+  <table class="anl-table">
+    {% if a.table.columns %}<thead><tr>{% for c in a.table.columns %}<th>{{ c }}</th>{% endfor %}</tr></thead>{% endif %}
+    <tbody>{% for row in a.table['rows'] %}<tr>{% for zelle in row %}<td>{{ zelle }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+  </table>
+  {% if a.table.note %}<p class="anl-text anl-text--klein">{{ a.table.note }}</p>{% endif %}
+  {% endif %}
   {% for f in a.formulas | default([]) %}
   <div class="anl-formel">
     <div class="anl-formel__satz">{{ f.rule }}</div>
@@ -84,6 +95,11 @@
     {% if page.scope %}
     <h2 class="anl-abschnitt__title">{{ ic(page.scope.icon, 'contact') }}<span>{{ page.scope.title }}</span></h2>
     <p class="anl-text">{{ page.scope.body }}</p>
+    {#- Zwei Spalten nur, wenn es auch zwei Listen gibt. Fehlt die
+        Ausschlussliste - SP Express fuehrt keine -, stand die rechte
+        Haelfte leer und riss ein Loch von 85 mm in die Seite. Dann laeuft
+        die Eignungsliste ueber die volle Breite, zweispaltig gesetzt. -#}
+    {% if page.scope.unsuitable %}
     <div class="anl-zwei">
       <div>
         {% if page.scope.suitable %}
@@ -92,12 +108,14 @@
         {% endif %}
       </div>
       <div>
-        {% if page.scope.unsuitable %}
         <p class="anl-text anl-text--label">{{ ic('warning', 'contact') }}<span>Nicht geeignet für</span></p>
         {{ bullets(page.scope.unsuitable, 'anl-bullets--nackt') }}
-        {% endif %}
       </div>
     </div>
+    {% elif page.scope.suitable %}
+    <p class="anl-text anl-text--label">{{ ic('check-circle', 'contact') }}<span>Geeignet für</span></p>
+    {{ bullets(page.scope.suitable, 'anl-bullets--nackt anl-bullets--zwei') }}
+    {% endif %}
     {% endif %}
 
     {% if page.workplace %}

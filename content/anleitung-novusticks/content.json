@@ -1,5 +1,5 @@
 {
-  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_NovuSticks_DE, ausgegeben am 19.08.2026.",
+  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_NovuSticks_DE, ausgegeben am 19.08.2026. ERGÄNZUNG: Der Schreibfehler der Vorlage „Staubsauber“ ist zu „Staubsauger“ berichtigt. Die Verbrauchsangaben stehen als Tabelle, wie in der Vorlage, nicht als Sätze.",
   "title": "NovuSticks – Verarbeitungsanleitung",
   "product_name": "NovuSticks",
   "product_line": "HOME LINE",
@@ -10,7 +10,7 @@
   "page_total": 6,
   "cover": {
     "headline": "VERARBEITUNGS-<br>ANLEITUNG",
-    "subheadline": "Für nachträgliche Horizontalsperren gegen aufsteigende Feuchte.",
+    "subheadline": "Für nachträgliche Horizontalsperren gegen aufsteigende Feuchtigkeit.",
     "intro_text": "NovuSticks – Wasserabweisende Faserstäbchen.",
     "hero_image_alt": "NovuSticks Verarbeitungsanleitung"
   },
@@ -61,7 +61,7 @@
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
           "Zollstock",
           "Wasserwaage",
@@ -90,35 +90,44 @@
       "sections": [
         {
           "title": "Verbrauch planen",
-          "icon": "drop",
+          "icon": "table",
           "body": "Plane den Materialbedarf anhand der Mauerwerksstärke. Falls du keinen Bauplan zur Hand hast, kannst du die Wandstärke an einem Fenster oder einer Tür nachmessen. Wir empfehlen, auch die angrenzenden Eckbereiche mit jeweils einer zusätzlichen Bohrung zu versehen; berücksichtige diese bei der Berechnung des Gesamtverbrauchs.",
-          "bullets": [
-            "12 cm Mauerwerksstärke: 4 Sticks je laufendem Meter",
-            "24 cm Mauerwerksstärke: 8 Sticks je laufendem Meter",
-            "36 cm Mauerwerksstärke: 12 Sticks je laufendem Meter",
-            "48 cm Mauerwerksstärke: 16 Sticks je laufendem Meter"
-          ],
           "formulas": [
             {
               "rule": "Bohrlochabstand 12 cm · Bohrlochtiefe = Mauerwerksstärke − 5 cm",
               "example": "Bei 24 cm Mauerwerksstärke bohrst du 19 cm tief"
             }
-          ]
+          ],
+          "table": {
+            "columns": [
+              "Mauerwerksstärke",
+              "Verbrauch je laufendem Meter"
+            ],
+            "rows": [
+              [
+                "12 cm",
+                "4 Sticks"
+              ],
+              [
+                "24 cm",
+                "8 Sticks"
+              ],
+              [
+                "36 cm",
+                "12 Sticks"
+              ],
+              [
+                "48 cm",
+                "16 Sticks"
+              ]
+            ],
+            "note": "Ein Stick kommt auf rund 3 cm Mauerwerk."
+          }
         },
         {
           "title": "Untergrund",
           "icon": "stack",
           "body": "Die Lagerfuge muss zugänglich, durchgehend und ausreichend fest sein. Sie darf nicht stark ausgebrochen, hohl liegend oder durch lose Bestandteile unterbrochen sein."
-        }
-      ],
-      "figures": [
-        {
-          "caption": "Bohrreihe in der Lagerfuge markieren",
-          "image_needed": "Foto: Anzeichnen der Bohrpunkte im Abstand von 12 cm entlang der Lagerfuge"
-        },
-        {
-          "caption": "Waagerechte Bohrungen herstellen",
-          "image_needed": "Foto: waagerechtes Bohren in die Lagerfuge, Klebeband als Tiefenmarkierung"
         }
       ]
     },
@@ -143,6 +152,14 @@
         }
       ],
       "figures": [
+        {
+          "caption": "Bohrreihe in der Lagerfuge markieren",
+          "image_needed": "Foto: Anzeichnen der Bohrpunkte im Abstand von 12 cm entlang der Lagerfuge"
+        },
+        {
+          "caption": "Waagerecht in die Lagerfuge bohren",
+          "image_needed": "Foto: waagerechtes Bohren in die Lagerfuge, Klebeband als Tiefenmarkierung"
+        },
         {
           "caption": "Bohrlöcher aussaugen",
           "image_needed": "Foto: Absaugen des Bohrmehls aus den Bohrlöchern"

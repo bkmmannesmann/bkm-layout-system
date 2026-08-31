@@ -1,5 +1,5 @@
 {
-  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_BKM_RD_ReparaturDicht_DE, ausgegeben am 18.08.2026.",
+  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_BKM_RD_ReparaturDicht_DE, ausgegeben am 18.08.2026. ERGÄNZUNGEN, von der Anwendungstechnik zu bestätigen: Holzrührstab, breiter Pinsel und Vlies stehen in der Vorlage im Fließtext, nicht im Werkzeugkasten. Die Überschrift „Kritische Stellen“ ist neu — der Verarbeitungsabsatz der Vorlage ist geteilt, weil Vlies und Zweitauftrag ein eigener Vorgang sind.",
   "title": "BKM RD ReparaturDicht – Verarbeitungsanleitung",
   "product_name": "BKM RD ReparaturDicht",
   "product_line": "PRO LINE",
@@ -49,7 +49,7 @@
           "detail": "Behält seine Funktion auch bei Sonne, Regen, Frost und starken Temperaturschwankungen"
         },
         {
-          "icon": "target",
+          "icon": "check-circle",
           "claim": "Ohne Primer sofort einsetzbar",
           "detail": "Anwendung ohne Grundierung spart Zeit und vereinfacht die Verarbeitung"
         }
@@ -66,7 +66,7 @@
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
           "Rolle",
           "Breiter Pinsel oder Flächenstreicher",
@@ -92,7 +92,7 @@
         {
           "title": "Verbrauch planen",
           "icon": "drop",
-          "body": "Ermittle vor Beginn die benötigte Menge für deine Reparaturarbeiten. Raue, strukturierte und stark saugende Untergründe können den Verbrauch erhöhen. Zur Vermeidung von Materialengpässen den Bedarf nicht zu knapp kalkulieren.",
+          "body": "Ermittle vor Beginn die benötigte Menge für deine Reparaturarbeiten; sie liegt je nach Untergrund und Auftragsstärke bei 0,5 bis 1,0 Liter pro Quadratmeter. Raue, strukturierte und stark saugende Untergründe können den Verbrauch erhöhen. Zur Vermeidung von Materialengpässen den Bedarf nicht zu knapp kalkulieren.",
           "formulas": [
             {
               "rule": "0,5 bis 1,0 Liter je Quadratmeter",
@@ -110,10 +110,6 @@
         {
           "caption": "Untergrund reinigen",
           "image_needed": "Foto: Reinigen und Anschleifen der Reparaturstelle"
-        },
-        {
-          "caption": "Bereich abkleben",
-          "image_needed": "Foto: Abgeklebter Dichtbereich mit sauberer Kante"
         }
       ]
     },
@@ -145,6 +141,10 @@
         {
           "caption": "Vlies einbetten",
           "image_needed": "Foto: Einbetten des Vlieses in die frische erste Schicht"
+        },
+        {
+          "caption": "Bereich abkleben",
+          "image_needed": "Foto: Abgeklebter Dichtbereich mit sauberer Kante"
         }
       ],
       "tip": {

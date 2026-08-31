@@ -531,6 +531,49 @@
 .anl-formel__satz { font-weight: 700; color: var(--bkm-deep-green); }
 .anl-formel__beispiel { color: var(--bkm-muted-grey); }
 
+/* === TABELLEN ========================================================== */
+
+/* Die Vorlagen stellen Verbrauchsangaben zweispaltig gegenueber. Bei
+   NovuSticks wird daraus auf einen Blick sichtbar, dass ein Stick auf
+   3 cm Mauerwerk kommt; als vier Saetze untereinander geht das verloren.
+   Der Datenvertrag kannte bis 31.08.2026 nur bullets und formulas - das
+   war die Luecke dahinter. */
+.anl-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 2.5mm;
+}
+.anl-table th,
+.anl-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 1.8mm 3mm 1.8mm 0;
+  border-bottom: 0.25mm solid var(--bkm-hairline);
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.4;
+  color: var(--bkm-stone-grey);
+}
+.anl-table th {
+  font-weight: 700;
+  color: var(--bkm-deep-green);
+  border-bottom-width: 0.4mm;
+  border-bottom-color: var(--bkm-rule);
+}
+.anl-table td:last-child,
+.anl-table th:last-child { padding-right: 0; font-variant-numeric: tabular-nums; }
+.anl-text--klein { font-size: 8.5pt; color: var(--bkm-muted-grey); }
+
+/* Zum Umbruch in Ueberschriften: text-wrap:pretty stand hier und hat
+   nichts bewirkt - WeasyPrint 69 kennt die Eigenschaft nicht, am
+   31.08.2026 am gebauten PDF nachgemessen. Der einzige wirklich
+   schlechte Umbruch war "FÜR DIE ANWENDUNG BRAUCHST / DU", ein
+   Zweibuchstaben-Rest auf eigener Zeile. Er ist im Content geloest: ein
+   geschuetztes Leerzeichen bindet die letzten beiden Woerter. Das ist
+   keine Aenderung am freigegebenen Wortlaut, sondern eine Bindung.
+   Zweiwort-Umbrueche wie "VERBRAUCH / PLANEN" bleiben - die sind
+   richtig. */
+
 /* === ABBILDUNGEN ======================================================= */
 
 /* Untereinander in der rechten Spalte, nicht nebeneinander: bei 84,7 mm

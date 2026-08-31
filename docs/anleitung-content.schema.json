@@ -313,6 +313,37 @@
                     }
                   }
                 }
+              },
+              "table": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "rows"
+                ],
+                "description": "Echte Tabelle. Die Vorlagen stellen Verbrauchsangaben zweispaltig gegenüber; als Sätze untereinander geht der Zusammenhang verloren. Icon dafür ist table, nicht drop - ein Tropfen über einer Stückzahltabelle behauptet etwas Falsches über das Produkt.",
+                "properties": {
+                  "columns": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 4
+                  },
+                  "rows": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 12,
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
@@ -398,8 +429,81 @@
         },
         "sections": {
           "type": "array",
+          "minItems": 1,
+          "maxItems": 7,
           "items": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "minLength": 4
+              },
+              "icon": {
+                "$ref": "#/$defs/icon"
+              },
+              "body": {
+                "type": "string"
+              },
+              "bullets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "formulas": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "rule"
+                  ],
+                  "properties": {
+                    "rule": {
+                      "type": "string"
+                    },
+                    "example": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "table": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "rows"
+                ],
+                "description": "Echte Tabelle. Die Vorlagen stellen Verbrauchsangaben zweispaltig gegenüber; als Sätze untereinander geht der Zusammenhang verloren. Icon dafür ist table, nicht drop - ein Tropfen über einer Stückzahltabelle behauptet etwas Falsches über das Produkt.",
+                "properties": {
+                  "columns": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 4
+                  },
+                  "rows": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 12,
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
         },
         "issued": {

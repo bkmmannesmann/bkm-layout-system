@@ -1,5 +1,5 @@
 {
-  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_BKM_HZC_Creme_DE, ausgegeben am 18.08.2026. Struktur nach docs/anleitung-content.schema.json.",
+  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_BKM_HZC_Creme_DE, ausgegeben am 18.08.2026. Struktur nach docs/anleitung-content.schema.json. Der Abschnitt „Injizieren“ steht auf dem Folgeblatt, damit der Schnitt Vorbereitung von Ausführung trennt.",
   "title": "BKM HZ-C – Verarbeitungsanleitung",
   "product_name": "BKM HZ-C",
   "product_line": "PRO LINE",
@@ -61,7 +61,7 @@
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
           "Zollstock",
           "Wasserwaage",
@@ -101,11 +101,6 @@
           "title": "Bohren",
           "icon": "target",
           "body": "Bringe die Bohrlöcher waagerecht in die unterste Lagerfuge des Mauerwerks ein. Zeichne dafür die Löcher mit einer Wasserwaage im Abstand von 10 cm ein. Die Bohrtiefe ist die gemessene Wandstärke abzüglich 5 cm, um ein Durchbohren zu verhindern. Anschließend müssen alle Bohrlöcher staubfrei sein. Benutze dafür einen Staubsauger oder blase sie mit ölfreier Druckluft aus."
-        },
-        {
-          "title": "Injizieren",
-          "icon": "drop",
-          "body": "Die BKM HZ-C Creme ist gebrauchsfertig und wird direkt in die vorbereiteten Bohrlöcher injiziert. Eine Verarbeitung kann manuell mit einer 1-K-Injektionspistole für 600-ml-Schlauchbeutel oder im Niederdruckverfahren mit geeigneter Pumpentechnik erfolgen. Führe die Injektionslanze bis zum Ende des Bohrlochs ein. Während du das Material einbringst, ziehst du die Lanze langsam zurück. So füllst du das Bohrloch vollständig und gleichmäßig, und es entstehen keine Hohlräume oder Luftblasen."
         }
       ],
       "figures": [
@@ -114,7 +109,7 @@
           "image_needed": "Foto: Anzeichnen der Bohrlochreihe in der untersten Lagerfuge, Wasserwaage angelegt"
         },
         {
-          "caption": "Injektionslanze setzen",
+          "caption": "Lanze bis zum Bohrlochende einführen",
           "image_needed": "Foto: Injektionspistole mit Lanze im Bohrloch, Lanze bis zum Ende eingeführt"
         }
       ]
@@ -123,6 +118,11 @@
       "type": "anleitung",
       "running_head": "BKM HZ-C",
       "sections": [
+        {
+          "title": "Injizieren",
+          "icon": "drop",
+          "body": "Die BKM HZ-C Creme ist gebrauchsfertig und wird direkt in die vorbereiteten Bohrlöcher injiziert. Eine Verarbeitung kann manuell mit einer 1-K-Injektionspistole für 600-ml-Schlauchbeutel oder im Niederdruckverfahren mit geeigneter Pumpentechnik erfolgen. Führe die Injektionslanze bis zum Ende des Bohrlochs ein. Während du das Material einbringst, ziehst du die Lanze langsam zurück. So füllst du das Bohrloch vollständig und gleichmäßig, und es entstehen keine Hohlräume oder Luftblasen."
+        },
         {
           "title": "Verschließen",
           "icon": "check-circle",

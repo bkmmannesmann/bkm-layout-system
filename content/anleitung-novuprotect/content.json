@@ -1,5 +1,5 @@
 {
-  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_NovuProtect_DE, ausgegeben am 18.08.2026.",
+  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_NovuProtect_DE, ausgegeben am 18.08.2026. ERGÄNZUNG, von der Anwendungstechnik zu bestätigen: Der NovuProtect Vorreiniger steht in der Vorlage im Fließtext, nicht im Werkzeugkasten.",
   "title": "NovuProtect – Verarbeitungsanleitung",
   "product_name": "NovuProtect",
   "product_line": "HOME LINE",
@@ -62,7 +62,7 @@
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
           "Farbrolle",
           "Pinsel",
@@ -90,7 +90,7 @@
         {
           "title": "Verbrauch planen",
           "icon": "drop",
-          "body": "Für einen wirksamen Schutz ist eine ausreichende Schichtdicke entscheidend.",
+          "body": "Plane den Materialbedarf mit 300 bis 600 g/m² je Auftragsschicht, insgesamt 600 bis 1200 g/m² in mindestens zwei Arbeitsgängen. Für einen wirksamen Schutz ist eine ausreichende Schichtdicke entscheidend.",
           "formulas": [
             {
               "rule": "300 bis 600 g/m² je Auftragsschicht"

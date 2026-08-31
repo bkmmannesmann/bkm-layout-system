@@ -188,11 +188,21 @@ dafür gilt `type_scale.cover`.
 Von oben nach unten — erst wofür, dann wie, dann womit:
 
 1. Rubrik **Vorteile**, darunter die Vorteile über die volle Satzbreite.
+   **Das ist eine Entscheidung, keine Ablesung.** In allen sieben Vorlagen
+   steht der Anwendungsbereich links oben und wird zuerst gelesen, die
+   Rubrik VORTEILE sitzt darunter. Wir drehen das: Der Prüfbericht vom
+   31.08.2026 hat die Stelle zu Recht beanstandet, weil hier bis dahin
+   „abgelesen" stand, während die Herleitung dieses Vertrags sonst
+   ausdrücklich Ablesung ist. Entscheidung des Markeninhabers, die Folge
+   beizubehalten.
 2. Absatz — die beiden Rubriken sind zwei Kapitel auf einem Blatt, nicht
    zwei Überschriften hintereinander.
 3. Rubrik **Vorbereitung**.
 4. **Anwendungsbereich** über die ganze Breite, darunter *Geeignet für*
-   links und *Nicht geeignet für* rechts.
+   links und *Nicht geeignet für* rechts. **Fehlt die Ausschlussliste,
+   läuft die Eignungsliste über die volle Breite**, zweispaltig gesetzt.
+   SP Express führt keine — vorher stand die rechte Hälfte leer und riss
+   ein Loch von rund 85 mm in die Seite.
 5. **Arbeitsplatz vorbereiten** über die ganze Breite.
 6. **Für die Anwendung brauchst du** links, **Für deine eigene Sicherheit**
    rechts.
@@ -254,6 +264,29 @@ die Struktur, nicht das Erscheinungsbild:
 - **Paginierung.** `page_total` gegen den Umfang.
 - **Offene Angaben.** `[ANGABE FEHLT: …]` und `[ZU PRÜFEN: …]` sind im
   Entwurf zulässig und blockieren `--release`.
+
+## Tabellen
+
+Abschnitte dürfen eine echte Tabelle führen (`table` mit `columns`, `rows`
+und optionaler `note`). Die Vorlagen stellen Verbrauchsangaben zweispaltig
+gegenüber; bei NovuSticks wird daraus auf einen Blick sichtbar, dass ein
+Stick auf rund 3 cm Mauerwerk kommt. Als vier Sätze untereinander geht das
+verloren. Der Datenvertrag kannte bis 31.08.2026 nur `bullets` und
+`formulas` — das war die Lücke dahinter, benannt im Prüfbericht.
+
+Das Icon dafür ist `table`, nicht `drop`: Ein Tropfen über einer
+Stückzahltabelle behauptet etwas Falsches über das Produkt. `drop` bleibt
+den flüssigen Produkten vorbehalten.
+
+## Umbruch in Überschriften
+
+`text-wrap: pretty` kennt WeasyPrint 69 nicht — am gebauten PDF geprüft,
+es bewirkt nichts. Zweiwort-Umbrüche wie *VERBRAUCH / PLANEN* sind
+richtig und bleiben. Der eine schlechte Fall war *FÜR DIE ANWENDUNG
+BRAUCHST / DU*, ein Zweibuchstaben-Rest auf eigener Zeile. Er ist im
+Content gelöst: Ein geschütztes Leerzeichen (U+00A0) bindet die letzten
+beiden Wörter. Das ist keine Änderung am freigegebenen Wortlaut, sondern
+eine Bindung.
 
 ## Bildformat
 
