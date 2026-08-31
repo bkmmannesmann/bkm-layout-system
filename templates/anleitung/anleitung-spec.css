@@ -89,6 +89,31 @@
   overflow: hidden;
 }
 
+/* === KEYVISUAL AUF DER LETZTEN SEITE ==================================== */
+
+/* Dieselbe Lage wie auf dem Titelblatt: 42 mm breit, rechts randabfallend,
+   Oberkante 102,416 mm. Die Zahl ist so gerechnet, dass die linke
+   Oberkante des Pure-Green-Chevrons die Unterkante des 16:9-Bereichs
+   trifft - siehe keyvisual.which_variant in brand.json. Sie hier neu zu
+   waehlen hiesse, dieselbe Marke an zwei verschiedenen Hoehen zu fuehren.
+
+   Die dreifarbige Fassung, weil die Seite weiss ist. Gesetzt wird die
+   schlanke Datei aus assets/keyvisual/ - dieselbe, die Cover und Canvas
+   benutzen.
+
+   Die Nacharbeitsseite traegt wenig Text; er endet bei 64,5 mm und
+   beruehrt das Zeichen nicht. Waechst er, schiebt er sich darueber -
+   deshalb steht es auf z-index 0, unter dem Satz. */
+.anl-keyvisual {
+  position: absolute;
+  top: 102.416mm;
+  right: 0;
+  width: 42mm;
+  height: 99.57mm;
+  z-index: 0;
+  display: block;
+}
+
 /* === FUSSZEILE ========================================================== */
 
 .anl-foot {

@@ -171,6 +171,9 @@
 {# ---- LETZTE SEITE: NACHARBEIT ---------------------------------------- #}
 {% elif page.type == 'nacharbeit' %}
 <section class="anl-page">
+  {#- Das Keyvisual an derselben Stelle wie auf dem Titelblatt. Die
+      Nacharbeitsseite traegt wenig Text und stuende sonst leer da. -#}
+  <img class="anl-keyvisual" src="../../assets/keyvisual/keyvisual-on-light.svg" alt="">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Nacharbeit</h1>
     {% if page.headline %}<h2 class="anl-abschnitt__title">{{ page.headline }}</h2>{% endif %}

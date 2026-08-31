@@ -50,7 +50,7 @@ VARIANTS = {
         "color_box_bg": "#1c4b42",
         "color_box_name": "Deep Green",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-light.png",
+        "keyvisual_file": "keyvisual-on-light.svg",
     },
     "fachbetriebe": {
         "variant_class": "cover--fachbetriebe",
@@ -58,7 +58,7 @@ VARIANTS = {
         "color_box_bg": "#287d4b",
         "color_box_name": "Transition Green",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-light.png",  # Pure Green
+        "keyvisual_file": "keyvisual-on-light.svg",  # Pure Green
         "text_shadow": True,  # Leichter Schatten
     },
     "homeline": {
@@ -67,7 +67,7 @@ VARIANTS = {
         "color_box_bg": "#4daf46",
         "color_box_name": "Pure Green",
         "logo_file": "bkm-logo-white.svg",
-        "keyvisual_file": "keyvisual-on-light.png",
+        "keyvisual_file": "keyvisual-on-light.svg",
     },
     "proline": {
         "variant_class": "cover--proline",
@@ -75,7 +75,7 @@ VARIANTS = {
         "color_box_bg": "#494949",
         "color_box_name": "Stone Grey",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-light.png",  # Pure Green
+        "keyvisual_file": "keyvisual-on-light.svg",  # Pure Green
     },
     "anleitung": {
         "variant_class": "cover--anleitung",
@@ -87,7 +87,7 @@ VARIANTS = {
         # helle Untergruende: logos.on_light in brand.json. Die
         # Stone-Grey-Fassung ist unter logos.retired gefuehrt.
         "logo_file": "bkm-logo-deepgreen-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-light.png",
+        "keyvisual_file": "keyvisual-on-light.svg",
     },
 }
 
@@ -117,7 +117,14 @@ def build_cover(variant_key: str, content: dict):
     # Der Unterschied war ein metadata-Block mit Illustrators
     # Bearbeitungsspur, fuer die Darstellung wirkungslos.
     logo_path = f"../../assets/logos/{variant['logo_file']}"
-    keyvisual_path = f"../../assets/images/{variant['keyvisual_file']}"
+    # assets/keyvisual/, nicht assets/images/. Es gab drei Dateien fuer
+    # dasselbe Zeichen: die schlanke SVG hier (649 Bytes, saubere Polygone,
+    # in brand.json als keyvisual.on_light gefuehrt und im Canvas gesetzt),
+    # eine 384-KB-Illustrator-SVG unter assets/images/ und die PNG, die das
+    # Cover bis 31.08.2026 benutzte. Cover und Canvas liefen damit auf
+    # zwei verschiedene Dateien - dasselbe Muster wie zuvor bei der
+    # Hero-Grafik und der Fotolage.
+    keyvisual_path = f"../../assets/keyvisual/{variant['keyvisual_file']}"
     
     # Badge-Pfad (nur für Home Line und Pro Line Produktbroschüren)
     badge_path = ""

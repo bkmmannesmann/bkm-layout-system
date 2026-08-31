@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.21.0",
+  "version": "1.22.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -472,7 +472,14 @@
       "dark_surface": "on_dark auf durchgehend dunklen Flächen, etwa der Rückseite.",
       "accent": "lime als Akzent, etwa in der Navigation."
     },
-    "deviates_from_tds": true
+    "deviates_from_tds": true,
+    "duplicates": {
+      "$comment": "Es lagen drei Dateien fuer dasselbe Zeichen im Bestand. Aufgeraeumt am 31.08.2026: gesetzt wird ausschliesslich assets/keyvisual/.",
+      "assets/images/keyvisual-on-light.png": "56 KB. Das Cover setzte sie bis 31.08.2026, waehrend der Canvas die SVG fuehrte - dasselbe Muster wie zuvor bei der Hero-Grafik und der Fotolage. Die vier Datenblaetter setzen sie weiter; deren Umstellung ist nicht entschieden.",
+      "assets/images/keyvisual-on-light.svg": "384 KB, Illustrator-Export mit demselben viewBox. Von nichts referenziert.",
+      "assets/images/keyvisual-on-dark.png und .svg": "Ebenso, ungenutzt."
+    },
+    "also_on": "Letzte Seite der Verarbeitungsanleitung, an derselben Stelle wie auf dem Titelblatt - 42 mm ab 102,416 mm, rechts randabfallend. Die Seite traegt wenig Text und stuende sonst leer. Die Hoehe wird dort nicht neu gewaehlt: dieselbe Marke an zwei Hoehen zu fuehren waere der Anfang einer zweiten Wahrheit."
   },
   "badges": {
     "home_line": "assets/images/badge-homeline.png",
