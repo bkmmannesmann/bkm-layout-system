@@ -120,6 +120,23 @@ Deep Green, gerundet, Ziffer in Lime Green, 6,5 mm. Vorher war es eine
 Ziffer mit Punkt — dieselbe Information, aber ohne Bezug zur Formensprache
 der Seite.
 
+Der Kasten braucht `align-self: start`. Ohne das dehnt er sich im Raster
+auf die Höhe der Zeile: bei einzeiligen Schritten blieb er quadratisch, bei
+zweizeiligen wurde er rechteckig, und dieselbe Liste zeigte zwei Formen.
+Die gesetzte Höhe allein genügt dafür nicht.
+
+## Aufbau der Vorbereitungsseite
+
+Von oben nach unten:
+
+1. Rubrik **Vorteile**, darunter die Vorteile über die volle Satzbreite.
+2. Absatz — die beiden Rubriken sind zwei Kapitel auf einem Blatt, nicht
+   zwei Überschriften hintereinander.
+3. Rubrik **Vorbereitung**. Der **Anwendungsbereich** eröffnet sie, mit
+   *Geeignet für* und *Nicht geeignet für*: erst wofür, dann wie. Rechts
+   daneben **Arbeitsplatz vorbereiten**.
+4. **Werkzeug** und **Sicherheit** nebeneinander.
+
 Die Dateien werden **inline eingebettet**, nicht als `<img>`: WeasyPrint
 wendet das Dokument-Stylesheet nicht auf SVG-Kinder an, und ohne Füllung am
 `svg`-Element druckt der Glyph schwarz. Jede Datei trägt sie selbst, gesetzt

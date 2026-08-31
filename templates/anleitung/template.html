@@ -59,8 +59,8 @@
     <h1 class="anl-rubrik">Vorteile</h1>
 
     {#- Die Vorteile stehen ueber die volle Satzbreite direkt unter ihrer
-        Rubrik, nicht in einer Spalte daneben: sie sind die Aussage der
-        Seite, und eine Aussage steht nicht am Rand. -#}
+        Rubrik: sie sind die Aussage der Seite, und eine Aussage steht
+        nicht am Rand. -#}
     {% for v in page.advantages | default([]) %}
     <div class="anl-vorteil">
       {{ ic(v.icon | default('seal-check'), 'inline') }}
@@ -71,42 +71,38 @@
     </div>
     {% endfor %}
 
-    {% if page.scope %}
-    <h2 class="anl-abschnitt__title">{{ ic(page.scope.icon, 'contact') }}<span>{{ page.scope.title }}</span></h2>
-    <p class="anl-text">{{ page.scope.body }}</p>
+    <h1 class="anl-rubrik anl-rubrik--zweit">Vorbereitung</h1>
+
+    {#- Der Anwendungsbereich eroeffnet die Vorbereitung - erst wofuer,
+        dann wie. Rechts daneben die Handlungsschritte. -#}
     <div class="anl-zwei">
       <div>
+        {% if page.scope %}
+        <h2 class="anl-abschnitt__title">{{ ic(page.scope.icon, 'contact') }}<span>{{ page.scope.title }}</span></h2>
+        <p class="anl-text">{{ page.scope.body }}</p>
         {% if page.scope.suitable %}
         <p class="anl-text anl-text--label">{{ ic('check-circle', 'contact') }}<span>Geeignet für</span></p>
         {{ bullets(page.scope.suitable, 'anl-bullets--nackt') }}
         {% endif %}
-      </div>
-      <div>
         {% if page.scope.unsuitable %}
         <p class="anl-text anl-text--label">{{ ic('warning', 'contact') }}<span>Nicht geeignet für</span></p>
         {{ bullets(page.scope.unsuitable, 'anl-bullets--nackt') }}
         {% endif %}
+        {% endif %}
+      </div>
+      <div>
+        {% if page.workplace %}
+        <h2 class="anl-abschnitt__title">{{ ic(page.workplace.icon, 'contact') }}<span>{{ page.workplace.title }}</span></h2>
+        <ol class="anl-numbered">{% for s in page.workplace.steps %}<li><span>{{ s }}</span></li>{% endfor %}</ol>
+        {% endif %}
       </div>
     </div>
-    {% endif %}
-
-    <h1 class="anl-rubrik anl-rubrik--zweit">Vorbereitung</h1>
-
-    {#- Die Handlungsschritte laufen wie die der Nacharbeit ueber die volle
-        Satzbreite. -#}
-    {% if page.workplace %}
-    <h2 class="anl-abschnitt__title">{{ ic(page.workplace.icon, 'contact') }}<span>{{ page.workplace.title }}</span></h2>
-    <ol class="anl-numbered anl-numbered--breit">{% for s in page.workplace.steps %}<li><span>{{ s }}</span></li>{% endfor %}</ol>
-    {% endif %}
 
     <div class="anl-zwei">
       <div>
         {% if page.tools %}
         <div class="anl-kasten">
           <p class="anl-kasten__title">{{ ic("hammer", "contact") }}<span>{{ page.tools.title }}</span></p>
-          {#- Zweispaltig: zehn kurze Eintraege untereinander machten den Kasten
-              so hoch, dass die letzte Zeile - Einschraubadapter + 17 mm Nuss -
-              vom Blatt fiel. -#}
           {{ bullets(page.tools['items'], 'anl-bullets--nackt anl-bullets--zwei') }}
         </div>
         {% endif %}

@@ -190,7 +190,9 @@
   letter-spacing: -0.02em;
   color: var(--bkm-deep-green);
 }
-.anl-rubrik--zweit { margin-top: 7.5mm; }
+/* Absatz zwischen den Rubriken: Vorteile und Vorbereitung sind zwei
+   Kapitel auf einem Blatt, nicht zwei Ueberschriften hintereinander. */
+.anl-rubrik--zweit { margin-top: 11mm; }
 
 /* === ZWEISPALTIGE VORBEREITUNGSSEITE =================================== */
 
@@ -264,6 +266,11 @@
    Information, aber ohne Bezug zur Formensprache der Seite. */
 .anl-numbered li::before {
   content: counter(anl);
+  /* Ohne align-self dehnt sich der Kasten auf die Hoehe der Zeile: bei
+     einzeiligen Schritten blieb er quadratisch, bei zweizeiligen wurde er
+     rechteckig, und dieselbe Liste zeigte zwei Formen. Die gesetzte Hoehe
+     allein genuegt im Raster nicht. */
+  align-self: start;
   display: flex;
   align-items: center;
   justify-content: center;
