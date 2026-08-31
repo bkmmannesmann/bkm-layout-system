@@ -3,3 +3,8 @@ jinja2>=3.1.0
 # Liest das erzeugte PDF fuer die Ausgabepruefung in build_pages.py:
 # eingebettete Schriften, Vollstaendigkeit des Textes, Lage im Satzspiegel.
 pypdf>=4.0.0
+
+# Misst im erzeugten Titelblatt-PDF nach, wo Hero-Grafik und Foto sitzen
+# (check_fotolage in build_cover.py). Fehlt das Paket, faengt der ImportError
+# ab und die Pruefung meldet stillschweigend nichts - deshalb steht es hier.
+pymupdf>=1.24.0

@@ -55,6 +55,13 @@ jobs:
       - name: Demo bauen und Ausgabe pruefen
         run: python3 scripts/build_pages.py demo
 
+      # Baut alle fuenf Titel und misst im PDF nach, ob Hero-Grafik und Foto
+      # dort sitzen, wo cover_geometry in brand.json es vorschreibt. Die CSS
+      # wiederholt diese Zahlen; ohne Messung faellt eine Abweichung nicht
+      # auf, weil beide Fassungen fuer sich sauber aussehen.
+      - name: Titelblaetter bauen und Geometrie pruefen
+        run: python3 scripts/build_cover.py
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
