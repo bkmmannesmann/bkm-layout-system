@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.25.0",
+  "version": "1.26.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -713,7 +713,7 @@
     "authoring": {
       "$comment": "Kollegen liefern Text und Bilder, daraus entsteht die Anleitung. Der Text braucht keine Struktur mitzubringen: die Rubrikenfolge steht fest und wird nicht je Produkt neu entschieden.",
       "input": "Formloser Text, der die vier Rubriken abdeckt, plus Bilder im Format 16:9, hoechstens vier je Anleitungsseite.",
-      "start": "Von einer freigegebenen Referenz kopieren, nicht von einer leeren Vorlage: content/anleitung-hz250pro/.",
+      "start": "Von einer freigegebenen Referenz kopieren, nicht von einer leeren Vorlage. Sieben stehen bereit: hz250pro, hzc, sp-express, rd, novusan, novusticks, novuprotect. Die strukturell naechste nehmen - die Tabelle in docs/ANLEITUNG-WORKFLOW.md nennt, wofuer jede passt.",
       "limits": {
         "subheadline_zeichen": 70,
         "vorteile": "2 bis 4",

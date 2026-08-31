@@ -12,6 +12,11 @@ stand.
 
 Ergebnis: templates/brochure/I-Anleitung.dc.html
 
+Immer dieselbe Datei: die Canvas-Gruppe ist eine Arbeitsflaeche fuer ein
+Dokument, nicht ein Archiv fuer alle sieben. Wer eine andere Anleitung
+darauf legt, ueberschreibt die vorherige - das ist gewollt, denn was
+bleiben soll, gehoert ohnehin in den Content zurueck.
+
 Die Pfade werden dabei von ../../ auf die Wurzel umgestellt: die
 Canvas-Dateien liegen in templates/brochure/, verweisen aber auf assets/
 und uploads/ ohne Praefix - Claude Design loest sie aus der Repo-Wurzel

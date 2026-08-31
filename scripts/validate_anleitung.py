@@ -25,10 +25,12 @@ ROOT_DIR = Path(__file__).parent.parent.resolve()
 TEMPLATE_DIR = ROOT_DIR / "templates" / "anleitung"
 ICON_DIR = TEMPLATE_DIR / "icons"
 
-PFLICHT = ("title", "product_name", "product_line", "product_image",
-           "line_badge", "document_rubrik", "issued", "page_number_start",
-           "page_total", "pages")
-LINIEN = {"PRO LINE": "badge-proline.png", "HOME LINE": "badge-homeline.png"}
+PFLICHT = ("title", "product_name", "product_line", "document_rubrik",
+           "issued", "page_number_start", "page_total", "pages")
+# product_image und line_badge standen hier bis 31.08.2026 als Pflicht,
+# wurden aber weder im Innenteil noch im Titelblatt gesetzt. Ein Kollege
+# haette sie liefern muessen, ohne dass sie irgendwo erscheinen.
+LINIEN = ("PRO LINE", "HOME LINE")
 DATUM = re.compile(r"^\d{2}\.\d{2}\.\d{4}$")
 
 # Gemessen am 31.08.2026: 68 Zeichen laufen zwei Zeilen, 82 laufen drei.
@@ -53,11 +55,15 @@ def pruefe(daten):
     if daten["product_line"] not in LINIEN:
         fehler.append(f"product_line ist {daten['product_line']!r}, "
                       f"zugelassen sind {' und '.join(LINIEN)}.")
-    elif LINIEN[daten["product_line"]] not in daten["line_badge"]:
+    # Produkte mit dem Namensbestandteil Novu gehoeren zur Home Line, alle
+    # uebrigen zur Pro Line. Die Zuordnung ist fest, siehe
+    # badges.assignment in brand.json.
+    erwartet = "HOME LINE" if "novu" in daten["product_name"].lower() else "PRO LINE"
+    if daten["product_line"] != erwartet:
         fehler.append(
-            f"line_badge passt nicht zu product_line: {daten['product_line']} "
-            f"braucht {LINIEN[daten['product_line']]}. Die Zuordnung ist fest, "
-            f"siehe badges.assignment in brand.json.")
+            f"product_line ist {daten['product_line']}, erwartet {erwartet}: "
+            f"Produkte mit dem Namensbestandteil Novu gehoeren zur Home Line, "
+            f"alle uebrigen zur Pro Line.")
     if not DATUM.match(str(daten["issued"])):
         fehler.append(f"issued ist {daten['issued']!r}, erwartet TT.MM.JJJJ.")
 
@@ -184,7 +190,7 @@ def pruefe_verweise(daten):
                             fehler.append(
                                 f"Icon gibt es nicht: {w}.svg fehlt in "
                                 f"templates/anleitung/icons/")
-                elif k in ("image", "product_image", "line_badge") and isinstance(w, str):
+                elif k == "image" and isinstance(w, str):
                     if w and w not in gesehen:
                         gesehen.add(w)
                         if not (TEMPLATE_DIR / w).resolve().is_file():

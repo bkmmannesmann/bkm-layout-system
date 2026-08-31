@@ -36,8 +36,17 @@ Der Produkt-Slug wird kleingeschrieben und nutzt Bindestriche:
 ## Der Weg
 
 **1. Von einer freigegebenen Referenz kopieren**, nicht von einer leeren
-Vorlage. Derzeit gibt es eine: `content/anleitung-hz250pro/` — Pro Line,
-Injektionsverfahren, mit Verbrauchsformeln und Bohrlochmustern.
+Vorlage. Sieben stehen bereit — nimm die strukturell nächste:
+
+| Ordner | Produkt | Linie | Passt für |
+|---|---|---|---|
+| `anleitung-hz250pro` | BKM HZ 250 Pro | Pro | Injektion mit Verbrauchsformeln und Bohrlochmustern |
+| `anleitung-hzc` | BKM HZ-C | Pro | Injektionscreme, kurzer Ablauf |
+| `anleitung-sp-express` | BKM SP Express | Pro | Systemaufbau in Lagen mit Verbrauch je Lage |
+| `anleitung-rd` | BKM RD ReparaturDicht | Pro | Streichbare Beschichtung |
+| `anleitung-novusan` | Novusan | Home | Injektion mit Flaschen, zwei Sperrarten |
+| `anleitung-novusticks` | NovuSticks | Home | Feststoff, Verbrauchstabelle |
+| `anleitung-novuprotect` | NovuProtect | Home | Beschichtung in zwei Aufträgen |
 
 ```bash
 cp -R content/anleitung-hz250pro content/anleitung-neues-produkt

@@ -5,136 +5,312 @@
   "description": "Struktur einer content.json unter content/anleitung-<produkt-slug>/. Produktbezogen, für Pro Line wie Home Line. Die Rubrikenfolge Vorteile, Vorbereitung, Anleitung, Nacharbeit ist an sieben freigegebenen Fassungen abgelesen und nicht verhandelbar. Layoutregeln stehen in docs/ANLEITUNG-LAYOUT.md, Markenwerte in brand.json.",
   "type": "object",
   "required": [
-    "title", "product_name", "product_line", "product_image", "line_badge",
-    "document_rubrik", "issued", "page_number_start", "page_total", "pages"
+    "title",
+    "product_name",
+    "product_line",
+    "document_rubrik",
+    "issued",
+    "page_number_start",
+    "page_total",
+    "pages"
   ],
   "additionalProperties": false,
   "properties": {
-    "$comment": { "type": "string" },
-    "title": { "type": "string", "minLength": 5,
-      "description": "Dokumenttitel, erscheint nur im PDF-Kopf: '<Produkt> – Verarbeitungsanleitung'." },
-    "product_name": { "type": "string", "minLength": 3 },
-    "product_line": { "enum": ["PRO LINE", "HOME LINE"],
-      "description": "Produkte mit dem Namensbestandteil Novu gehören zur Home Line, alle übrigen zur Pro Line. Die Zuordnung ist fest, siehe badges.assignment in brand.json." },
-    "product_image": { "$ref": "#/$defs/asset" },
-    "line_badge": { "enum": [
-        "../../assets/images/badge-proline.png",
-        "../../assets/images/badge-homeline.png" ] },
-    "document_rubrik": { "const": "Verarbeitungsanleitung" },
-    "issued": { "$ref": "#/$defs/datum" },
-    "source_pdf": { "type": "string",
-      "description": "Name der freigegebenen Vorlage, aus der der Wortlaut stammt. Leer lassen, wenn es keine gibt." },
-    "page_number_start": { "const": 2,
-      "description": "Das Titelblatt ist Blatt 1 und zählt mit; der Innenteil beginnt bei 2." },
-    "page_total": { "type": "integer", "minimum": 4, "maximum": 9,
-      "description": "Titelblatt plus Anzahl der Einträge in pages. Wird beim Bau nachgerechnet." },
-    "cover": { "$ref": "#/$defs/cover" },
+    "$comment": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Dokumenttitel, erscheint nur im PDF-Kopf: '<Produkt> – Verarbeitungsanleitung'."
+    },
+    "product_name": {
+      "type": "string",
+      "minLength": 3
+    },
+    "product_line": {
+      "enum": [
+        "PRO LINE",
+        "HOME LINE"
+      ],
+      "description": "Produkte mit dem Namensbestandteil Novu gehören zur Home Line, alle übrigen zur Pro Line. Die Zuordnung ist fest, siehe badges.assignment in brand.json. Reine Angabe zum Produkt; sie erzeugt kein Bild. product_image und line_badge standen bis 31.08.2026 als Pflichtfelder hier, wurden aber weder im Innenteil noch im Titelblatt gesetzt."
+    },
+    "document_rubrik": {
+      "const": "Verarbeitungsanleitung"
+    },
+    "issued": {
+      "$ref": "#/$defs/datum"
+    },
+    "source_pdf": {
+      "type": "string",
+      "description": "Name der freigegebenen Vorlage, aus der der Wortlaut stammt. Leer lassen, wenn es keine gibt."
+    },
+    "page_number_start": {
+      "const": 2,
+      "description": "Das Titelblatt ist Blatt 1 und zählt mit; der Innenteil beginnt bei 2."
+    },
+    "page_total": {
+      "type": "integer",
+      "minimum": 4,
+      "maximum": 9,
+      "description": "Titelblatt plus Anzahl der Einträge in pages. Wird beim Bau nachgerechnet."
+    },
+    "cover": {
+      "$ref": "#/$defs/cover"
+    },
     "pages": {
-      "type": "array", "minItems": 3, "maxItems": 8,
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 8,
       "description": "Erst genau eine vorbereitung, dann eine bis vier anleitung, zuletzt genau eine nacharbeit.",
-      "items": { "oneOf": [
-        { "$ref": "#/$defs/seite_vorbereitung" },
-        { "$ref": "#/$defs/seite_anleitung" },
-        { "$ref": "#/$defs/seite_nacharbeit" } ] }
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/seite_vorbereitung"
+          },
+          {
+            "$ref": "#/$defs/seite_anleitung"
+          },
+          {
+            "$ref": "#/$defs/seite_nacharbeit"
+          }
+        ]
+      }
     }
   },
   "$defs": {
-    "asset": { "type": "string", "pattern": "^\\.\\./\\.\\./(assets|uploads)/.+\\.(png|jpg|svg|webp)$",
-      "description": "Pfad relativ zu templates/anleitung/. Die Datei muss vorliegen; check_bildverweise prüft das am Dateisystem." },
-    "datum": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "icon": { "type": "string", "pattern": "^[a-z-]+$",
-      "description": "Dateiname ohne Pfad und Endung aus templates/anleitung/icons/. Ein Tippfehler ließe den Kasten still leer; check_bildverweise meldet ihn." },
+    "asset": {
+      "type": "string",
+      "pattern": "^\\.\\./\\.\\./(assets|uploads)/.+\\.(png|jpg|svg|webp)$",
+      "description": "Pfad relativ zu templates/anleitung/. Die Datei muss vorliegen; check_bildverweise prüft das am Dateisystem."
+    },
+    "datum": {
+      "type": "string",
+      "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+    },
+    "icon": {
+      "type": "string",
+      "pattern": "^[a-z-]+$",
+      "description": "Dateiname ohne Pfad und Endung aus templates/anleitung/icons/. Ein Tippfehler ließe den Kasten still leer; check_bildverweise meldet ihn."
+    },
     "cover": {
-      "type": "object", "additionalProperties": false,
-      "required": ["headline", "subheadline", "intro_text"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "headline",
+        "subheadline",
+        "intro_text"
+      ],
       "description": "Titelblatt. Gebaut über templates/cover/, Variante anleitung, und im selben PDF. Fehlt der Block, entsteht nur der Innenteil.",
       "properties": {
-        "$comment": { "type": "string" },
-        "headline": { "const": "VERARBEITUNGS-<br>ANLEITUNG" },
-        "subheadline": { "type": "string", "maxLength": 70,
-          "description": "Höchstens zwei Zeilen. Gemessen liegt die Grenze bei rund 70 Zeichen: 68 passen, 82 nicht. check_subheadline misst es am fertigen PDF und blockiert den Zusammenbau." },
-        "intro_text": { "type": "string", "minLength": 10,
-          "description": "Produkt und Kurzbeschreibung, wie in den freigegebenen Fassungen." },
-        "hero_image_alt": { "type": "string" }
+        "$comment": {
+          "type": "string"
+        },
+        "headline": {
+          "const": "VERARBEITUNGS-<br>ANLEITUNG"
+        },
+        "subheadline": {
+          "type": "string",
+          "maxLength": 70,
+          "description": "Höchstens zwei Zeilen. Gemessen liegt die Grenze bei rund 70 Zeichen: 68 passen, 82 nicht. check_subheadline misst es am fertigen PDF und blockiert den Zusammenbau."
+        },
+        "intro_text": {
+          "type": "string",
+          "minLength": 10,
+          "description": "Produkt und Kurzbeschreibung, wie in den freigegebenen Fassungen."
+        },
+        "hero_image_alt": {
+          "type": "string"
+        }
       }
     },
     "seite_vorbereitung": {
-      "type": "object", "additionalProperties": false,
-      "required": ["type", "scope", "advantages", "workplace", "tools", "safety"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "scope",
+        "advantages",
+        "workplace",
+        "tools",
+        "safety"
+      ],
       "description": "Blatt 2. Trägt die Rubriken Vorteile und Vorbereitung.",
       "properties": {
-        "type": { "const": "vorbereitung" },
-        "running_head": { "type": "string" },
+        "type": {
+          "const": "vorbereitung"
+        },
+        "running_head": {
+          "type": "string"
+        },
         "scope": {
-          "type": "object", "additionalProperties": false,
-          "required": ["title", "body"],
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "body"
+          ],
           "properties": {
-            "title": { "const": "Anwendungsbereich" },
-            "icon": { "$ref": "#/$defs/icon" },
-            "body": { "type": "string", "minLength": 40 },
-            "suitable": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
-            "unsuitable": { "type": "array", "items": { "type": "string" } }
+            "title": {
+              "const": "Anwendungsbereich"
+            },
+            "icon": {
+              "$ref": "#/$defs/icon"
+            },
+            "body": {
+              "type": "string",
+              "minLength": 40
+            },
+            "suitable": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "unsuitable": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         },
         "advantages": {
-          "type": "array", "minItems": 2, "maxItems": 4,
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
           "description": "Behauptung und Begründung. Mehr als vier passen nicht auf das Blatt.",
           "items": {
-            "type": "object", "additionalProperties": false,
-            "required": ["claim"],
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim"
+            ],
             "properties": {
-              "icon": { "$ref": "#/$defs/icon" },
-              "claim": { "type": "string", "minLength": 10 },
-              "detail": { "type": "string" }
+              "icon": {
+                "$ref": "#/$defs/icon"
+              },
+              "claim": {
+                "type": "string",
+                "minLength": 10
+              },
+              "detail": {
+                "type": "string"
+              }
             }
           }
         },
         "workplace": {
-          "type": "object", "additionalProperties": false,
-          "required": ["title", "steps"],
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "steps"
+          ],
           "properties": {
-            "title": { "type": "string" },
-            "icon": { "$ref": "#/$defs/icon" },
-            "steps": { "type": "array", "items": { "type": "string" }, "minItems": 2, "maxItems": 6 }
+            "title": {
+              "type": "string"
+            },
+            "icon": {
+              "$ref": "#/$defs/icon"
+            },
+            "steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 2,
+              "maxItems": 6
+            }
           }
         },
-        "tools": { "$ref": "#/$defs/kasten" },
-        "safety": { "$ref": "#/$defs/kasten" }
+        "tools": {
+          "$ref": "#/$defs/kasten"
+        },
+        "safety": {
+          "$ref": "#/$defs/kasten"
+        }
       }
     },
     "kasten": {
-      "type": "object", "additionalProperties": false,
-      "required": ["title", "items"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "items"
+      ],
       "properties": {
-        "title": { "type": "string" },
-        "items": { "type": "array", "items": { "type": "string" }, "minItems": 1, "maxItems": 12 }
+        "title": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 12
+        }
       }
     },
     "seite_anleitung": {
-      "type": "object", "additionalProperties": false,
-      "required": ["type", "sections"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "sections"
+      ],
       "description": "Blatt 3 bis n−1. Rubrik Anleitung. Die letzte trägt den Profi-Tipp.",
       "properties": {
-        "type": { "const": "anleitung" },
-        "running_head": { "type": "string" },
+        "type": {
+          "const": "anleitung"
+        },
+        "running_head": {
+          "type": "string"
+        },
         "sections": {
-          "type": "array", "minItems": 1, "maxItems": 7,
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 7,
           "items": {
-            "type": "object", "additionalProperties": false,
-            "required": ["title"],
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title"
+            ],
             "properties": {
-              "title": { "type": "string", "minLength": 4 },
-              "icon": { "$ref": "#/$defs/icon" },
-              "body": { "type": "string" },
-              "bullets": { "type": "array", "items": { "type": "string" } },
+              "title": {
+                "type": "string",
+                "minLength": 4
+              },
+              "icon": {
+                "$ref": "#/$defs/icon"
+              },
+              "body": {
+                "type": "string"
+              },
+              "bullets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "formulas": {
                 "type": "array",
                 "items": {
-                  "type": "object", "additionalProperties": false,
-                  "required": ["rule"],
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "rule"
+                  ],
                   "properties": {
-                    "rule": { "type": "string" },
-                    "example": { "type": "string" }
+                    "rule": {
+                      "type": "string"
+                    },
+                    "example": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -142,43 +318,97 @@
           }
         },
         "figures": {
-          "type": "array", "maxItems": 4,
+          "type": "array",
+          "maxItems": 4,
           "description": "Rechte Spalte, Format 16:9. Mehr als vier passen nicht; check_abbildungen meldet die fünfte.",
           "items": {
-            "type": "object", "additionalProperties": false,
-            "required": ["caption"],
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "caption"
+            ],
             "properties": {
-              "caption": { "type": "string", "minLength": 4 },
-              "image": { "$ref": "#/$defs/asset" },
-              "image_needed": { "type": "string",
-                "description": "Beschreibt das fehlende Motiv. Steht als beschriftete Fläche auf der Seite, statt einen toten Bildverweis zu setzen. Bei einem 16:9-Motiv angeben, welche Ecken den Vermerk AI GENERATED tragen." }
+              "caption": {
+                "type": "string",
+                "minLength": 4
+              },
+              "image": {
+                "$ref": "#/$defs/asset"
+              },
+              "image_needed": {
+                "type": "string",
+                "description": "Beschreibt das fehlende Motiv. Steht als beschriftete Fläche auf der Seite, statt einen toten Bildverweis zu setzen. Bei einem 16:9-Motiv angeben, welche Ecken den Vermerk AI GENERATED tragen."
+              }
             }
           }
         },
         "tip": {
-          "type": "object", "additionalProperties": false,
-          "required": ["body"],
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "body"
+          ],
           "properties": {
-            "title": { "type": "string", "default": "Profi Tipp" },
-            "body": { "type": "string", "minLength": 20 }
+            "title": {
+              "type": "string",
+              "default": "Profi Tipp"
+            },
+            "body": {
+              "type": "string",
+              "minLength": 20
+            }
           }
         }
       }
     },
     "seite_nacharbeit": {
-      "type": "object", "additionalProperties": false,
-      "required": ["type", "headline", "steps", "issued", "copyright"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "headline",
+        "steps",
+        "issued",
+        "copyright"
+      ],
       "description": "Letztes Blatt. Rubrik Nacharbeit, dazu Ausgabedatum und Impressum.",
       "properties": {
-        "type": { "const": "nacharbeit" },
-        "running_head": { "type": "string" },
-        "headline": { "type": "string" },
-        "icon": { "$ref": "#/$defs/icon" },
-        "leadline": { "type": "string" },
-        "steps": { "type": "array", "items": { "type": "string" }, "minItems": 2, "maxItems": 8 },
-        "sections": { "type": "array", "items": { "type": "object" } },
-        "issued": { "$ref": "#/$defs/datum" },
-        "copyright": { "type": "string", "minLength": 40 }
+        "type": {
+          "const": "nacharbeit"
+        },
+        "running_head": {
+          "type": "string"
+        },
+        "headline": {
+          "type": "string"
+        },
+        "icon": {
+          "$ref": "#/$defs/icon"
+        },
+        "leadline": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 8
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "issued": {
+          "$ref": "#/$defs/datum"
+        },
+        "copyright": {
+          "type": "string",
+          "minLength": 40
+        }
       }
     }
   }

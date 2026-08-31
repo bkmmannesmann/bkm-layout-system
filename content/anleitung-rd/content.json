@@ -1,0 +1,170 @@
+{
+  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_BKM_RD_ReparaturDicht_DE, ausgegeben am 18.08.2026.",
+  "title": "BKM RD ReparaturDicht – Verarbeitungsanleitung",
+  "product_name": "BKM RD ReparaturDicht",
+  "product_line": "PRO LINE",
+  "document_rubrik": "Verarbeitungsanleitung",
+  "issued": "18.08.2026",
+  "source_pdf": "VA_BKM_RD_ReparaturDicht_DE",
+  "page_number_start": 2,
+  "page_total": 5,
+  "cover": {
+    "headline": "VERARBEITUNGS-<br>ANLEITUNG",
+    "subheadline": "Die streichbare Sofortlösung für Detailreparaturen am Dach.",
+    "intro_text": "BKM RD ReparaturDicht – Dauerelastische Reparaturmasse. Sicher abdichten, in einem Zug.",
+    "hero_image_alt": "BKM RD ReparaturDicht Verarbeitungsanleitung"
+  },
+  "pages": [
+    {
+      "type": "vorbereitung",
+      "running_head": "BKM RD ReparaturDicht",
+      "scope": {
+        "title": "Anwendungsbereich",
+        "icon": "table",
+        "body": "Zur Ausbesserung und Reparatur von Dächern, Garagendächern, Carports, Gartenhäusern sowie Neben- und Wirtschaftsgebäuden.",
+        "suitable": [
+          "Beton",
+          "Dachpappe",
+          "Bitumen",
+          "Schweißbahnen",
+          "Ziegel",
+          "Holz",
+          "Metall und diverse Kunststoffe",
+          "Dachrinnen"
+        ],
+        "unsuitable": [
+          "Styropor und Styrodur",
+          "Frischer Beton"
+        ]
+      },
+      "advantages": [
+        {
+          "icon": "shield-check",
+          "claim": "Dichtet Beschädigungen sicher ab",
+          "detail": "Verschließt Risse und Fehlstellen dauerhaft und verhindert das Eindringen von Wasser und Schmutz"
+        },
+        {
+          "icon": "drop",
+          "claim": "Witterungs- und UV-beständig",
+          "detail": "Behält seine Funktion auch bei Sonne, Regen, Frost und starken Temperaturschwankungen"
+        },
+        {
+          "icon": "target",
+          "claim": "Ohne Primer sofort einsetzbar",
+          "detail": "Anwendung ohne Grundierung spart Zeit und vereinfacht die Verarbeitung"
+        }
+      ],
+      "workplace": {
+        "title": "Arbeitsplatz vorbereiten",
+        "icon": "clipboard-text",
+        "steps": [
+          "Angrenzende Bauteile und Flächen sorgfältig abdecken und schützen.",
+          "Untergrund auf Festigkeit prüfen, lose oder schadhafte Bereiche entfernen.",
+          "Oberfläche gründlich reinigen und von Staub, Schmutz, Fett und Öl befreien.",
+          "Glatte Untergründe wie Beton anschleifen, Metalle und Kunststoffe entfetten.",
+          "Der Untergrund muss trocken sein."
+        ]
+      },
+      "tools": {
+        "title": "Für die Anwendung brauchst du",
+        "items": [
+          "Rolle",
+          "Breiter Pinsel oder Flächenstreicher",
+          "Holzrührstab",
+          "Vlies für kritische Stellen",
+          "Abdeckmaterial",
+          "Verdünnung zur Werkzeugreinigung"
+        ]
+      },
+      "safety": {
+        "title": "Für deine eigene Sicherheit",
+        "items": [
+          "Schutzbrille",
+          "Schutzhandschuhe",
+          "Schutzkleidung"
+        ]
+      }
+    },
+    {
+      "type": "anleitung",
+      "running_head": "BKM RD ReparaturDicht",
+      "sections": [
+        {
+          "title": "Verbrauch planen",
+          "icon": "drop",
+          "body": "Ermittle vor Beginn die benötigte Menge für deine Reparaturarbeiten. Raue, strukturierte und stark saugende Untergründe können den Verbrauch erhöhen. Zur Vermeidung von Materialengpässen den Bedarf nicht zu knapp kalkulieren.",
+          "formulas": [
+            {
+              "rule": "0,5 bis 1,0 Liter je Quadratmeter",
+              "example": "Je nach Untergrund und Auftragsstärke"
+            }
+          ]
+        },
+        {
+          "title": "Untergrund",
+          "icon": "stack",
+          "body": "Die Untergrundvorbehandlung ist entscheidend für die sichere Haftung. Metalle und Kunststoffe müssen vorab entfettet werden, Betonoberflächen sollten geschliffen werden. Alle Untergründe müssen frei von Verunreinigungen wie Laub und Moos sein."
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Untergrund reinigen",
+          "image_needed": "Foto: Reinigen und Anschleifen der Reparaturstelle"
+        },
+        {
+          "caption": "Bereich abkleben",
+          "image_needed": "Foto: Abgeklebter Dichtbereich mit sauberer Kante"
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "BKM RD ReparaturDicht",
+      "sections": [
+        {
+          "title": "Verarbeitung",
+          "icon": "hammer",
+          "body": "BKM RD ReparaturDicht ist gebrauchsfertig und darf nicht verdünnt werden. Rühre das Material vor der Verarbeitung im Gebinde kurz auf; dafür kannst du einen Holzrührstab verwenden. Trage das Produkt gleichmäßig mit einem breiten Pinsel, einer Rolle oder einem geeigneten Flächenstreicher auf. Dabei wird es satt und vollflächig auf den gereinigten und vorbereiteten Untergrund aufgetragen, bis eine geschlossene, porenfreie Beschichtung entsteht."
+        },
+        {
+          "title": "Kritische Stellen",
+          "icon": "shield-check",
+          "body": "An Übergängen, Nähten, Rissen oder Materialwechseln empfiehlt es sich, ein Vlies in die noch frische erste Beschichtung einzubetten und anschließend mit einer zweiten Schicht nass in nass zu überarbeiten. Bei höheren Beanspruchungen oder zur Erhöhung der Schichtstärke kannst du nach vollständiger Durchtrocknung, also nach etwa 14 Tagen, einen zweiten Auftrag ausführen."
+        },
+        {
+          "title": "Hinweise",
+          "icon": "warning",
+          "body": "Die Verarbeitung darf nur bei trockenem Wetter und Temperaturen zwischen +5 °C und +40 °C erfolgen. Die Zeit bis zur Hautbildung ist abhängig von den Umgebungsbedingungen und liegt bei ca. 45 bis 60 Minuten. Bei Hautbildung an der Oberfläche den weiteren Auftrag erst nach ca. 14 Tagen ausführen. Während der Aushärtung ist die Fläche vor Regen, Staunässe und Verschmutzung zu schützen. Die Aushärtung erfolgt durch Verdunstung und beträgt ca. 1 bis 2 mm pro Tag, abhängig von Temperatur, Schichtdicke und Luftfeuchtigkeit."
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Vollflächig auftragen",
+          "image_needed": "Foto: Auftrag mit der Rolle, geschlossene Beschichtung"
+        },
+        {
+          "caption": "Vlies einbetten",
+          "image_needed": "Foto: Einbetten des Vlieses in die frische erste Schicht"
+        }
+      ],
+      "tip": {
+        "title": "Profi Tipp",
+        "body": "Dichtbereich abkleben. Spart Material und schafft saubere Kanten."
+      }
+    },
+    {
+      "type": "nacharbeit",
+      "running_head": "BKM RD ReparaturDicht",
+      "headline": "Abschluss und Reinigung",
+      "icon": "check-circle",
+      "steps": [
+        "Werkzeuge nur mit Verdünnung reinigen.",
+        "Abdeckmaterial vor vollständiger Trocknung entfernen.",
+        "Produktreste und leere Gebinde fachgerecht entsorgen.",
+        "Gebinde gut verschlossen sowie kühl und trocken lagern."
+      ],
+      "issued": "18.08.2026",
+      "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
+    }
+  ]
+}
