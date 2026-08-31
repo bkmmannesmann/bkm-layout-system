@@ -34,14 +34,17 @@
       },
       "advantages": [
         {
+          "icon": "target",
           "claim": "Präzise kalkulierbar – effizient im Einsatz",
           "detail": "Exakt planbarer Verbrauch"
         },
         {
+          "icon": "shield-check",
           "claim": "Angenehmeres Arbeiten im Innenbereich",
           "detail": "VOC-freies Material für eine verarbeitungsfreundliche Anwendung"
         },
         {
+          "icon": "drop",
           "claim": "Kraftvolle Sperrschicht ohne Porenverschluss",
           "detail": "Zuverlässige Feuchtebarriere ohne Verstopfen der Kapillarporen"
         }
@@ -126,10 +129,39 @@
           "body": "Zeichne zuerst mit einer Wasserwaage und einem Bleistift die gewünschte Sperrhöhe an. Lege dann eine Bohrlochreihe in dieser Höhe fest. Die Bohrlöcher sind je nach Mauerwerksart im jeweiligen Abstand in einem Winkel von ca. 45° in das Mauerwerk zu bohren. Bei Mauerwerksecken setze eine Bohrung direkt in die Ecke. Die erste Bohrung aus der Ecke wird zu beiden Seiten mit 10 cm Abstand angeordnet. Bei Wandstärken über 60 cm muss in der Ecke eine zweite Bohrung um 5 cm nach oben versetzt erfolgen."
         },
         {
+          "title": "Verarbeitung · Flächensperre",
+          "icon": "hammer",
+          "body": "Führe bei einer Flächensperre das Bohrlochmuster der Horizontalsperre nach oben schachbrettartig versetzt fort. Der vertikale Abstand beträgt hierbei 25 cm. Die letzte Bohrlochreihe endet min. 15 cm über Oberkante Gelände."
+        },
+        {
           "title": "Partielle Flächensperre",
           "icon": "hammer",
           "body": "Wenn nur ein Teilbereich betroffen ist, lege die Sperre zu allen Seiten bis ca. 50 cm über die letzte erkennbare Schadensstelle hinaus an."
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Bohrlochmuster Horizontalsperre bei 25 cm Bohrlochabstand",
+          "image_needed": "Zeichnung Bohrlochmuster Horizontalsperre, 25 cm, mit Maßkette"
         },
+        {
+          "caption": "Bohrlochmuster Horizontalsperre bei 12,5 cm Bohrlochabstand",
+          "image_needed": "Zeichnung Bohrlochmuster Horizontalsperre, 12,5 cm, mit Maßkette"
+        },
+        {
+          "caption": "Bohrlochmuster Flächensperre bei 25 cm Bohrlochabstand",
+          "image_needed": "Zeichnung Bohrlochmuster Flächensperre, 25 cm, schachbrettartig versetzt, mit Maßkette"
+        },
+        {
+          "caption": "Bohrlochmuster Flächensperre bei 12,5 cm Bohrlochabstand",
+          "image_needed": "Zeichnung Bohrlochmuster Flächensperre, 12,5 cm, schachbrettartig versetzt, mit Maßkette"
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "BKM HZ 250 Pro",
+      "sections": [
         {
           "title": "Bohren",
           "icon": "target",
@@ -144,35 +176,6 @@
           "title": "Injektionslanzen setzen",
           "icon": "hammer",
           "body": "Setze die Injektionslanzen mit einem Akkuschrauber sowie dem passenden Einschraubadapter und einer geeigneten Nuss in die Bohrlöcher ein. Schraube die Lanzen vorsichtig mit geringem Drehmoment ein und fixiere sie sicher im Bohrloch."
-        }
-      ],
-      "figures": [
-        {
-          "caption": "Bohrlochmuster Horizontalsperre bei 25 cm Bohrlochabstand",
-          "image_needed": "Zeichnung Bohrlochmuster Horizontalsperre, 25 cm, mit Maßkette"
-        },
-        {
-          "caption": "Bohrlochmuster Horizontalsperre bei 12,5 cm Bohrlochabstand",
-          "image_needed": "Zeichnung Bohrlochmuster Horizontalsperre, 12,5 cm, mit Maßkette"
-        },
-        {
-          "caption": "Bohrung im 45° Winkel",
-          "image_needed": "Foto oder Schnitt: Bohrung im 45-Grad-Winkel"
-        },
-        {
-          "caption": "Einsatz der Injektionslanzen",
-          "image_needed": "Foto: gesetzte Injektionslanzen an der Wand"
-        }
-      ]
-    },
-    {
-      "type": "anleitung",
-      "running_head": "BKM HZ 250 Pro",
-      "sections": [
-        {
-          "title": "Verarbeitung · Flächensperre",
-          "icon": "hammer",
-          "body": "Führe bei einer Flächensperre das Bohrlochmuster der Horizontalsperre nach oben schachbrettartig versetzt fort. Der vertikale Abstand beträgt hierbei 25 cm. Die letzte Bohrlochreihe endet min. 15 cm über Oberkante Gelände."
         },
         {
           "title": "Injizieren",
@@ -195,20 +198,20 @@
           "body": "Für die Verarbeitung nach WTA-Richtlinie ist für horizontale Kapillarsperren ein maximaler Bohrlochabstand von 12,5 cm einzuhalten. Flächensperren fallen nicht unter diese Richtlinie. Materialbedingte Farbvertiefungen in vorhandenem Altputz infolge der Injektion sind systembedingt und stellen keinen Mangel dar. Während der Austrocknung des Mauerwerks bis zum Erreichen der Ausgleichsfeuchte können durch den Feuchtetransport an die Oberfläche Salzausblühungen entstehen."
         }
       ],
+      "figures": [
+        {
+          "caption": "Bohrung im 45° Winkel",
+          "image_needed": "Foto oder Schnitt: Bohrung im 45-Grad-Winkel"
+        },
+        {
+          "caption": "Einsatz der Injektionslanzen",
+          "image_needed": "Foto: gesetzte Injektionslanzen an der Wand"
+        }
+      ],
       "tip": {
         "title": "Profi Tipp",
         "body": "Ein Tuch an der Schiebekupplung schützt den Arbeitsbereich vor ungewollten Spritzern."
-      },
-      "figures": [
-        {
-          "caption": "Bohrlochmuster Flächensperre bei 25 cm Bohrlochabstand",
-          "image_needed": "Zeichnung Bohrlochmuster Flächensperre, 25 cm, schachbrettartig versetzt, mit Maßkette"
-        },
-        {
-          "caption": "Bohrlochmuster Flächensperre bei 12,5 cm Bohrlochabstand",
-          "image_needed": "Zeichnung Bohrlochmuster Flächensperre, 12,5 cm, schachbrettartig versetzt, mit Maßkette"
-        }
-      ]
+      }
     },
     {
       "type": "nacharbeit",

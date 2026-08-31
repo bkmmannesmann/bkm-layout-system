@@ -93,14 +93,32 @@ Auf dunklem Grund — im Profi-Tipp — trägt der Kasten Transition Green,
 damit Deep nicht auf Deep steht. Der Glyph bleibt Lime; das ist eine Regel,
 kein Sonderfall.
 
-**Überschriften tragen keine Icons.** Weder die Rubriken noch die
-Abschnittstitel. Ein Icon an jeder der vierzehn Zwischenüberschriften war
-Rauschen; die Rubrik trägt ihr Gewicht über Größe und Farbe. Geblieben sind
-drei funktionale Stellen: Werkzeug, Sicherheit, Profi-Tipp.
+**Die Rubriken tragen kein Icon.** Vorteile, Vorbereitung, Anleitung und
+Nacharbeit tragen ihr Gewicht über Größe und Farbe. Alles darunter trägt
+eines.
 
 | Stelle | Größe | Quelle |
 |---|---|---|
-| Werkzeug, Sicherheit, Profi-Tipp | Kasten 6,5 mm, Glyph 3,8 mm | `icons.sizes_mm.contact` |
+| Vorteil | Kasten 9,5 mm, Glyph 6 mm | `icons.sizes_mm.inline` |
+| Subheadline, Kasten, Labelzeile, Profi-Tipp | Kasten 6,5 mm, Glyph 3,8 mm | `icons.sizes_mm.contact` |
+
+Beim Vorteil steht der Kasten **neben beiden Zeilen** und trifft ihre Höhe:
+Behauptung 9,5 pt auf 1,35 und Begründung 8,5 pt auf 1,4 ergeben zusammen
+rund 9,5 mm — genau das Maß der Stufe `inline`.
+
+## Aufzählungen
+
+Der gesetzte Punkt trägt nur dort, wo eine Liste als Aufzählung gelesen
+werden muss. In den Untergrundlisten sowie in Werkzeug und Sicherheit ist
+er weggelassen (`anl-bullets--nackt`): die Zeilen sind kurz und stehen
+ohnehin untereinander. Angekündigt wird die Liste stattdessen über eine
+Labelzeile mit Icon — `check-circle` vor *Geeignet für*, `warning` vor
+*Nicht geeignet für*.
+
+**Nummerierte Handlungsschritte** stehen im selben Kasten wie ein Icon:
+Deep Green, gerundet, Ziffer in Lime Green, 6,5 mm. Vorher war es eine
+Ziffer mit Punkt — dieselbe Information, aber ohne Bezug zur Formensprache
+der Seite.
 
 Die Dateien werden **inline eingebettet**, nicht als `<img>`: WeasyPrint
 wendet das Dokument-Stylesheet nicht auf SVG-Kinder an, und ohne Füllung am

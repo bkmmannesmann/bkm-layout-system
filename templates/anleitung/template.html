@@ -38,7 +38,7 @@
 
 {%- macro abschnitt(a) -%}
 <div class="anl-abschnitt">
-  {% if a.title %}<h2 class="anl-abschnitt__title">{{ a.title }}</h2>{% endif %}
+  {% if a.title %}<h2 class="anl-abschnitt__title">{{ ic(a.icon, 'contact') }}<span>{{ a.title }}</span></h2>{% endif %}
   {% if a.body %}<p class="anl-text">{{ a.body }}</p>{% endif %}
   {{ bullets(a.bullets) }}
   {% for f in a.formulas | default([]) %}
@@ -63,25 +63,28 @@
         Seite, und eine Aussage steht nicht am Rand. -#}
     {% for v in page.advantages | default([]) %}
     <div class="anl-vorteil">
-      <p class="anl-vorteil__claim">{{ v.claim }}</p>
-      {% if v.detail %}<p class="anl-vorteil__detail">{{ v.detail }}</p>{% endif %}
+      {{ ic(v.icon | default('seal-check'), 'inline') }}
+      <div class="anl-vorteil__text">
+        <p class="anl-vorteil__claim">{{ v.claim }}</p>
+        {% if v.detail %}<p class="anl-vorteil__detail">{{ v.detail }}</p>{% endif %}
+      </div>
     </div>
     {% endfor %}
 
     {% if page.scope %}
-    <h2 class="anl-abschnitt__title">{{ page.scope.title }}</h2>
+    <h2 class="anl-abschnitt__title">{{ ic(page.scope.icon, 'contact') }}<span>{{ page.scope.title }}</span></h2>
     <p class="anl-text">{{ page.scope.body }}</p>
     <div class="anl-zwei">
       <div>
         {% if page.scope.suitable %}
-        <p class="anl-text anl-text--label">Geeignet für:</p>
-        {{ bullets(page.scope.suitable) }}
+        <p class="anl-text anl-text--label">{{ ic('check-circle', 'contact') }}<span>Geeignet für</span></p>
+        {{ bullets(page.scope.suitable, 'anl-bullets--nackt') }}
         {% endif %}
       </div>
       <div>
         {% if page.scope.unsuitable %}
-        <p class="anl-text anl-text--label">Nicht geeignet für:</p>
-        {{ bullets(page.scope.unsuitable, 'anl-bullets--negativ') }}
+        <p class="anl-text anl-text--label">{{ ic('warning', 'contact') }}<span>Nicht geeignet für</span></p>
+        {{ bullets(page.scope.unsuitable, 'anl-bullets--nackt') }}
         {% endif %}
       </div>
     </div>
@@ -92,7 +95,7 @@
     {#- Die Handlungsschritte laufen wie die der Nacharbeit ueber die volle
         Satzbreite. -#}
     {% if page.workplace %}
-    <h2 class="anl-abschnitt__title">{{ page.workplace.title }}</h2>
+    <h2 class="anl-abschnitt__title">{{ ic(page.workplace.icon, 'contact') }}<span>{{ page.workplace.title }}</span></h2>
     <ol class="anl-numbered anl-numbered--breit">{% for s in page.workplace.steps %}<li><span>{{ s }}</span></li>{% endfor %}</ol>
     {% endif %}
 
@@ -100,16 +103,19 @@
       <div>
         {% if page.tools %}
         <div class="anl-kasten">
-          <p class="anl-kasten__title">{{ ic("hammer") }}<span>{{ page.tools.title }}</span></p>
-          {{ bullets(page.tools['items']) }}
+          <p class="anl-kasten__title">{{ ic("hammer", "contact") }}<span>{{ page.tools.title }}</span></p>
+          {#- Zweispaltig: zehn kurze Eintraege untereinander machten den Kasten
+              so hoch, dass die letzte Zeile - Einschraubadapter + 17 mm Nuss -
+              vom Blatt fiel. -#}
+          {{ bullets(page.tools['items'], 'anl-bullets--nackt anl-bullets--zwei') }}
         </div>
         {% endif %}
       </div>
       <div>
         {% if page.safety %}
         <div class="anl-kasten">
-          <p class="anl-kasten__title">{{ ic("shield-check") }}<span>{{ page.safety.title }}</span></p>
-          {{ bullets(page.safety['items']) }}
+          <p class="anl-kasten__title">{{ ic("shield-check", "contact") }}<span>{{ page.safety.title }}</span></p>
+          {{ bullets(page.safety['items'], 'anl-bullets--nackt') }}
         </div>
         {% endif %}
       </div>
@@ -139,14 +145,19 @@
           {% endfor %}
         </div>
         {% endif %}
+        {#- Der Profi-Tipp steht in der rechten Spalte unter den
+            Abbildungen, nicht ueber die volle Breite darunter: dort lief
+            er unter den Satzspiegel, waehrend die rechte Spalte 135 mm
+            frei hatte. Neben den Abbildungen steht er ausserdem bei dem,
+            worauf er sich bezieht. -#}
+        {% if page.tip %}
+        <div class="anl-tipp">
+          <p class="anl-tipp__title">{{ ic("target", "contact") }}<span>{{ page.tip.title | default('Profi Tipp') }}</span></p>
+          <p class="anl-tipp__body">{{ page.tip.body }}</p>
+        </div>
+        {% endif %}
       </div>
     </div>
-    {% if page.tip %}
-    <div class="anl-tipp">
-      <p class="anl-tipp__title">{{ ic("target") }}<span>{{ page.tip.title | default('Profi Tipp') }}</span></p>
-      <p class="anl-tipp__body">{{ page.tip.body }}</p>
-    </div>
-    {% endif %}
   </div>
   {{ fuss(page, loop.index0) }}
 </section>
@@ -156,7 +167,7 @@
 <section class="anl-page">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Nacharbeit</h1>
-    {% if page.headline %}<h2 class="anl-abschnitt__title">{{ page.headline }}</h2>{% endif %}
+    {% if page.headline %}<h2 class="anl-abschnitt__title">{{ ic(page.icon, 'contact') }}<span>{{ page.headline }}</span></h2>{% endif %}
     {% if page.leadline %}<p class="anl-text">{{ page.leadline }}</p>{% endif %}
     {% if page.steps %}<ol class="anl-numbered">{% for s in page.steps %}<li><span>{{ s }}</span></li>{% endfor %}</ol>{% endif %}
     {% for a in page.sections | default([]) %}{{ abschnitt(a) }}{% endfor %}
