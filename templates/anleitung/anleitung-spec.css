@@ -186,7 +186,11 @@
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
   text-transform: uppercase;
-  font-size: 22pt;
+  /* 18pt, nicht 22. Bei 22 gegen 10 pt Subheadline war der Sprung mit
+     Faktor 2,2 zu gross; die Rubrik bleibt auch bei 18 die groesste
+     Marke auf der Seite. Verbindlich steht der Wert in brand.json unter
+     type_scale.anleitung, hier ist er nur wiederholt. */
+  font-size: 18pt;
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--bkm-deep-green);
@@ -238,11 +242,19 @@
 .anl-bullets--nackt li { padding-left: 0; }
 .anl-bullets--nackt li::before { content: none; }
 
-/* Nummerierte Handlungsschritte. Die Ziffer steht in einer eigenen Spalte,
-   damit mehrzeilige Schritte nicht unter die Ziffer laufen. */
-.anl-numbered { margin: 0 0 4mm; padding: 0; list-style: none; counter-reset: anl; }
-/* Ueber die volle Satzbreite gesetzt, wie die Schritte der Nacharbeit. */
-.anl-numbered--breit { margin-bottom: 5mm; }
+/* Handlungsschritte. Ohne Ziffer und ohne Punkt: die Reihenfolge steht
+   im Text ("Lege zuerst fest", "Trage vor dem Aufbringen auf"), und eine
+   zweite Ordnung daneben traegt nichts. Der Kasten mit der Ziffer stand
+   hier bis 31.08.2026; er ist entfernt, nicht nur ungenutzt. */
+.anl-schritte { margin: 0 0 4mm; padding: 0; list-style: none; }
+.anl-schritte li {
+  padding: 0 0 2.4mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.45;
+  color: var(--bkm-stone-grey);
+}
+.anl-schritte--breit { margin-bottom: 5mm; }
 .anl-text--label {
   display: flex;
   align-items: center;
@@ -250,44 +262,6 @@
   margin-bottom: 2mm;
   font-weight: 700;
   color: var(--bkm-deep-green);
-}
-.anl-numbered li {
-  counter-increment: anl;
-  display: grid;
-  grid-template-columns: 6.5mm 1fr;
-  gap: 0 3.5mm;
-  padding: 0 0 2.8mm;
-  font-family: 'TT Norms Pro', Arial, sans-serif;
-  font-size: 9pt;
-  line-height: 1.45;
-  color: var(--bkm-stone-grey);
-}
-/* Die Ziffer steht im selben Kasten wie ein Icon: Deep Green, gerundet,
-   Ziffer in Lime. Vorher war es eine Ziffer mit Punkt - dieselbe
-   Information, aber ohne Bezug zur Formensprache der Seite. */
-.anl-numbered li::before {
-  content: counter(anl);
-  /* Ohne align-self dehnt sich der Kasten auf die Hoehe der Zeile: bei
-     einzeiligen Schritten blieb er quadratisch, bei zweizeiligen wurde er
-     rechteckig, und dieselbe Liste zeigte zwei Formen. Die gesetzte Hoehe
-     allein genuegt im Raster nicht. */
-  align-self: start;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 6.5mm;
-  height: 6.5mm;
-  background: var(--bkm-deep-green);
-  border-radius: var(--anl-radius);
-  font-family: 'TT Norms Pro', Arial, sans-serif;
-  font-weight: 700;
-  /* 12pt, nicht 9. Bei 9pt war die Ziffer 2,16 mm hoch in einem 6,4-mm-
-     Kasten - ein Drittel der Flaeche, sie wirkte darin verloren. Mittig
-     sass sie schon: nachgemessen 0,13 mm Versatz. Zu klein war sie. */
-  font-size: 12pt;
-  line-height: 1;
-  color: var(--bkm-lime-green);
-  font-variant-numeric: tabular-nums;
 }
 
 /* === VORTEILE ========================================================== */

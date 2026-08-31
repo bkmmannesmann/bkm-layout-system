@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.17.0",
+  "version": "1.18.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -276,6 +276,67 @@
         },
         "size_note": "Auf dunklen Flächen 11 pt. Lime auf Transition Green misst 3,49 und ist damit nur für großen Text zugelassen; bei 9 pt wäre das verletzt. Auf hellem Grund genügen 9 pt, weil Transition Green dort 5,09 erreicht. Entscheidung des Markeninhabers vom 25.08.2026."
       }
+    },
+    "anleitung": {
+      "$comment": "Verarbeitungsanleitung, Innenteil. Bis 31.08.2026 stand keine Stufe fuer diesen Dokumenttyp im Vertrag - die Groessen lagen nur in templates/anleitung/anleitung-spec.css und waren damit bei jedem neuen Produkt frei waehlbar. Rubrik auf 18 pt entschieden vom Markeninhaber am 31.08.2026; bei 22 gegen 10 pt war der Sprung mit Faktor 2,2 zu gross.",
+      "rubrik": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": 18,
+        "line_height": 1.05,
+        "tracking_em": -0.02,
+        "uppercase": true,
+        "note": "Vorteile, Vorbereitung, Anleitung, Nacharbeit. Traegt kein Icon."
+      },
+      "subheadline": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": 10,
+        "line_height": 1.2,
+        "tracking_em": -0.015,
+        "uppercase": true,
+        "note": "Abschnittstitel. Traegt ein Icon nur auf der Vorbereitungsseite."
+      },
+      "tipp_titel": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": 9.5,
+        "uppercase": true,
+        "colour": "lime-green",
+        "note": "Profi-Tipp, auf Deep Green."
+      },
+      "kasten_titel": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": 9,
+        "uppercase": true,
+        "colour": "deep-green",
+        "note": "Werkzeug und Sicherheit. Die kleinste zugelassene Display-Stufe."
+      },
+      "body": {
+        "font": "body",
+        "weight": 400,
+        "size_pt": 9.5,
+        "line_height": 1.5,
+        "colour": "stone-grey"
+      },
+      "weitere_stufen": {
+        "vorteil_claim": "9,5 pt TT Norms Bold, deep-green",
+        "vorteil_detail": "8,5 pt TT Norms, deep-green",
+        "schritt": "9 pt TT Norms, stone-grey; Ziffer 12 pt Bold, lime-green im Deep-Green-Kasten",
+        "formel": "9 pt TT Norms Bold, deep-green; Beispielzeile muted-grey",
+        "kastenliste": "8,5 pt TT Norms, stone-grey",
+        "bildunterschrift": "8 pt TT Norms, muted-grey",
+        "folio": "9 pt TT Norms Bold, deep-green",
+        "impressum": "7 pt TT Norms, muted-grey"
+      },
+      "display_sizes_pt": [
+        18,
+        10,
+        9.5,
+        9
+      ],
+      "display_sizes_note": "Abschliessend. Jede andere Groesse in Unbounded ist im Innenteil der Anleitung ein Fehler; check_typoskala in scripts/build_anleitung.py misst es am fertigen PDF nach."
     }
   },
   "radius": {

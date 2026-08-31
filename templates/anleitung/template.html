@@ -97,7 +97,7 @@
       <div>
         {% if page.workplace %}
         <h2 class="anl-abschnitt__title">{{ ic(page.workplace.icon, 'contact') }}<span>{{ page.workplace.title }}</span></h2>
-        <ol class="anl-numbered">{% for s in page.workplace.steps %}<li><span>{{ s }}</span></li>{% endfor %}</ol>
+        <ul class="anl-schritte">{% for s in page.workplace.steps %}<li>{{ s }}</li>{% endfor %}</ul>
         {% endif %}
       </div>
     </div>
@@ -169,7 +169,7 @@
     <h1 class="anl-rubrik">Nacharbeit</h1>
     {% if page.headline %}<h2 class="anl-abschnitt__title">{{ page.headline }}</h2>{% endif %}
     {% if page.leadline %}<p class="anl-text">{{ page.leadline }}</p>{% endif %}
-    {% if page.steps %}<ol class="anl-numbered">{% for s in page.steps %}<li><span>{{ s }}</span></li>{% endfor %}</ol>{% endif %}
+    {% if page.steps %}<ul class="anl-schritte">{% for s in page.steps %}<li>{{ s }}</li>{% endfor %}</ul>{% endif %}
     {% for a in page.sections | default([]) %}{{ abschnitt(a) }}{% endfor %}
   </div>
   <div class="anl-impressum">

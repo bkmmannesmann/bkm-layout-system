@@ -139,15 +139,27 @@ ohnehin untereinander. Angekündigt wird die Liste stattdessen über eine
 Labelzeile mit Icon — `check-circle` vor *Geeignet für*, `warning` vor
 *Nicht geeignet für*.
 
-**Nummerierte Handlungsschritte** stehen im selben Kasten wie ein Icon:
-Deep Green, gerundet, Ziffer in Lime Green, 6,5 mm. Vorher war es eine
-Ziffer mit Punkt — dieselbe Information, aber ohne Bezug zur Formensprache
-der Seite.
+**Handlungsschritte tragen weder Ziffer noch Punkt.** Die Reihenfolge steht
+im Text — „Lege zuerst fest", „Trage vor dem Aufbringen auf" —, und eine
+zweite Ordnung daneben trägt nichts. Gilt für *Arbeitsplatz vorbereiten*
+wie für *Abschluss und Reinigung*.
 
-Der Kasten braucht `align-self: start`. Ohne das dehnt er sich im Raster
-auf die Höhe der Zeile: bei einzeiligen Schritten blieb er quadratisch, bei
-zweizeiligen wurde er rechteckig, und dieselbe Liste zeigte zwei Formen.
-Die gesetzte Höhe allein genügt dafür nicht.
+## Typografische Stufen
+
+Verbindlich in `brand.json` unter `type_scale.anleitung`. Nur Unbounded ist
+dort abschließend geregelt — die Brotschrift trägt zu viele berechtigte
+Abstufungen, die Auszeichnungsschrift nicht.
+
+| Stufe | Größe |
+|---|---|
+| Rubrik | 18 pt |
+| Subheadline | 10 pt |
+| Profi-Tipp | 9,5 pt |
+| Kastentitel | 9 pt |
+
+`check_typoskala()` misst das am fertigen PDF nach. Jede andere Größe in
+Unbounded ist im Innenteil ein Fehler. Das Titelblatt bleibt außen vor;
+dafür gilt `type_scale.cover`.
 
 ## Aufbau der Vorbereitungsseite
 

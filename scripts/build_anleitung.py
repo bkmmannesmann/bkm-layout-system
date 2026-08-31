@@ -82,7 +82,49 @@ def check_output(pdf_path, content):
     fehler.extend(check_bildverweise(content))
     fehler.extend(check_paginierung(content))
     fehler.extend(check_abbildungen(content))
+    fehler.extend(check_typoskala(pdf_path))
     return fehler
+
+
+def check_typoskala(pdf_path):
+    """Misst die Display-Groessen im fertigen PDF gegen brand.json.
+
+    Die Stufen standen bis 31.08.2026 nur in der CSS und waren damit bei
+    jedem neuen Produkt frei waehlbar - eine Vorgabe, die niemand prueft,
+    ist keine. Geprueft wird nur Unbounded: die Brotschrift traegt zu
+    viele berechtigte Abstufungen, die Auszeichnungsschrift nicht.
+
+    Das Titelblatt bleibt aussen vor; fuer das gilt type_scale.cover.
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        return []
+
+    skala = json.loads((ROOT := PROJECT_ROOT / "brand.json").read_text(encoding="utf-8"))
+    skala = skala.get("type_scale", {}).get("anleitung", {})
+    erlaubt = skala.get("display_sizes_pt")
+    if not erlaubt:
+        return []
+
+    gefunden = {}
+    with pymupdf.open(str(pdf_path)) as doc:
+        for nummer, seite in enumerate(doc):
+            if nummer == 0:            # Titelblatt, eigene Skala
+                continue
+            for block in seite.get_text("dict")["blocks"]:
+                for zeile in block.get("lines", []):
+                    for teil in zeile["spans"]:
+                        if "Unbounded" not in teil["font"] or not teil["text"].strip():
+                            continue
+                        groesse = round(teil["size"], 1)
+                        if groesse not in erlaubt:
+                            gefunden.setdefault(groesse, teil["text"].strip()[:34])
+
+    return [f"Unbekannte Display-Groesse {g} pt bei {t!r} - zugelassen sind "
+            f"{', '.join(str(x) for x in erlaubt)} pt laut "
+            f"type_scale.anleitung in brand.json"
+            for g, t in sorted(gefunden.items())]
 
 
 # Eine Abbildung braucht in der rechten Spalte 46 mm Bildhoehe, rund 4 mm
