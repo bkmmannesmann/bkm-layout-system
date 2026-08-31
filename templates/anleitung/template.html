@@ -77,30 +77,33 @@
 
     <h1 class="anl-rubrik anl-rubrik--zweit">Vorbereitung</h1>
 
-    {#- Der Anwendungsbereich eroeffnet die Vorbereitung - erst wofuer,
-        dann wie. Rechts daneben die Handlungsschritte. -#}
+    {#- Aufbau: Anwendungsbereich ueber die ganze Breite, darunter die
+        beiden Untergrundlisten nebeneinander. Dann Arbeitsplatz
+        vorbereiten wieder ueber die ganze Breite, darunter Werkzeug und
+        Sicherheit nebeneinander. Erst wofuer, dann wie, dann womit. -#}
+    {% if page.scope %}
+    <h2 class="anl-abschnitt__title">{{ ic(page.scope.icon, 'contact') }}<span>{{ page.scope.title }}</span></h2>
+    <p class="anl-text">{{ page.scope.body }}</p>
     <div class="anl-zwei">
       <div>
-        {% if page.scope %}
-        <h2 class="anl-abschnitt__title">{{ ic(page.scope.icon, 'contact') }}<span>{{ page.scope.title }}</span></h2>
-        <p class="anl-text">{{ page.scope.body }}</p>
         {% if page.scope.suitable %}
         <p class="anl-text anl-text--label">{{ ic('check-circle', 'contact') }}<span>Geeignet für</span></p>
         {{ bullets(page.scope.suitable, 'anl-bullets--nackt') }}
         {% endif %}
+      </div>
+      <div>
         {% if page.scope.unsuitable %}
         <p class="anl-text anl-text--label">{{ ic('warning', 'contact') }}<span>Nicht geeignet für</span></p>
         {{ bullets(page.scope.unsuitable, 'anl-bullets--nackt') }}
         {% endif %}
-        {% endif %}
-      </div>
-      <div>
-        {% if page.workplace %}
-        <h2 class="anl-abschnitt__title">{{ ic(page.workplace.icon, 'contact') }}<span>{{ page.workplace.title }}</span></h2>
-        <ul class="anl-schritte">{% for s in page.workplace.steps %}<li>{{ s }}</li>{% endfor %}</ul>
-        {% endif %}
       </div>
     </div>
+    {% endif %}
+
+    {% if page.workplace %}
+    <h2 class="anl-abschnitt__title">{{ ic(page.workplace.icon, 'contact') }}<span>{{ page.workplace.title }}</span></h2>
+    <ul class="anl-schritte anl-schritte--breit">{% for s in page.workplace.steps %}<li>{{ s }}</li>{% endfor %}</ul>
+    {% endif %}
 
     <div class="anl-zwei">
       <div>
@@ -112,8 +115,11 @@
         {% endif %}
       </div>
       <div>
+        {#- Sicherheit auf der Flaeche "deep" aus brand.json: Grund Deep
+            Green, Text Clean White, Titel Lime. Die eine Stelle auf der
+            Seite, die sich nicht ueberlesen laesst. -#}
         {% if page.safety %}
-        <div class="anl-kasten">
+        <div class="anl-kasten anl-kasten--deep">
           <p class="anl-kasten__title">{{ ic("shield-check", "contact") }}<span>{{ page.safety.title }}</span></p>
           {{ bullets(page.safety['items'], 'anl-bullets--nackt') }}
         </div>

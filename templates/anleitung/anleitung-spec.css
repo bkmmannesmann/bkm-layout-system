@@ -173,6 +173,34 @@
   hyphenate-character: "-";
 }
 
+/* === AUSZEICHNUNGEN LINKSBUENDIG ======================================= */
+
+/* design-system/base.css setzt text-align:justify und hyphens:auto fuer
+   das ganze Dokument. Fuer den Fliesstext ist das richtig; jede kurze
+   Zeile in einer 84,7-mm-Spalte wird dadurch aber auseinandergezogen und
+   getrennt - aus "FUER DEINE EIGENE SICHERHEIT" wurde ein gestreckter
+   Zweizeiler mit "SICHER-HEIT". Ueberschriften, Labelzeilen und
+   Bildunterschriften stehen deshalb linksbuendig und ungetrennt.
+   Die gemeinsame Datei bleibt unberuehrt: Datenblatt und Broschuere
+   haengen daran. */
+.anl-rubrik,
+.anl-abschnitt__title,
+.anl-kasten__title,
+.anl-tipp__title,
+.anl-vorteil__claim,
+.anl-vorteil__detail,
+.anl-text--label,
+.anl-fig__cap,
+.anl-ph__label,
+.anl-foot,
+.anl-bullets li,
+.anl-table th,
+.anl-formel {
+  text-align: left;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
 /* === RUBRIK ============================================================ */
 
 /* Vier Rubriken, in dieser Folge: VORTEILE, VORBEREITUNG, ANLEITUNG,
@@ -330,6 +358,17 @@
   color: var(--bkm-deep-green);
 }
 .anl-kasten--breit { margin-top: 1mm; }
+
+/* Die benannte Flaeche "deep" aus brand.json: Grund Deep Green, Text
+   Clean White, Titel Lime Green. Nicht selbst zusammengestellt - der
+   Name legt alle vier Werte gemeinsam fest, damit keine Kombination
+   entsteht, die im Druck nicht traegt. Der Iconkasten wechselt darauf
+   auf Transition Green, sonst stuende Deep auf Deep; der Glyph bleibt
+   Lime. */
+.anl-kasten--deep { background: var(--bkm-deep-green); }
+.anl-kasten--deep .anl-kasten__title { color: var(--bkm-lime-green); }
+.anl-kasten--deep .anl-bullets li { color: var(--bkm-white); }
+.anl-kasten--deep .anl-ic { background: var(--bkm-transition-green); }
 .anl-bullets--zwei { column-count: 2; column-gap: 4mm; }
 .anl-bullets--zwei li { break-inside: avoid; }
 .anl-bullets--drei { column-count: 3; column-gap: var(--anl-gutter); }

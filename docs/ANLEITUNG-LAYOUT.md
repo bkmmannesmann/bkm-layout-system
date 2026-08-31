@@ -163,15 +163,36 @@ dafür gilt `type_scale.cover`.
 
 ## Aufbau der Vorbereitungsseite
 
-Von oben nach unten:
+Von oben nach unten — erst wofür, dann wie, dann womit:
 
 1. Rubrik **Vorteile**, darunter die Vorteile über die volle Satzbreite.
 2. Absatz — die beiden Rubriken sind zwei Kapitel auf einem Blatt, nicht
    zwei Überschriften hintereinander.
-3. Rubrik **Vorbereitung**. Der **Anwendungsbereich** eröffnet sie, mit
-   *Geeignet für* und *Nicht geeignet für*: erst wofür, dann wie. Rechts
-   daneben **Arbeitsplatz vorbereiten**.
-4. **Werkzeug** und **Sicherheit** nebeneinander.
+3. Rubrik **Vorbereitung**.
+4. **Anwendungsbereich** über die ganze Breite, darunter *Geeignet für*
+   links und *Nicht geeignet für* rechts.
+5. **Arbeitsplatz vorbereiten** über die ganze Breite.
+6. **Für die Anwendung brauchst du** links, **Für deine eigene Sicherheit**
+   rechts.
+
+Der Sicherheitskasten steht auf der benannten Fläche `deep` aus
+`brand.json`: Grund Deep Green, Text Clean White, Titel Lime Green. Nicht
+selbst zusammengestellt — der Name legt alle Werte gemeinsam fest, damit
+keine Kombination entsteht, die im Druck nicht trägt. Der Icon-Kasten
+wechselt darauf auf Transition Green, sonst stünde Deep auf Deep; der Glyph
+bleibt Lime.
+
+## Blocksatz nur im Fließtext
+
+`design-system/base.css` setzt `text-align: justify` und `hyphens: auto`
+für das ganze Dokument. Für den Fließtext ist das richtig. Jede kurze Zeile
+in einer 84,7-mm-Spalte wird dadurch aber auseinandergezogen und getrennt —
+aus *FÜR DEINE EIGENE SICHERHEIT* wurde ein gestreckter Zweizeiler mit
+*SICHER-HEIT*.
+
+Überschriften, Labelzeilen, Bildunterschriften, Tabellenköpfe und
+Listeneinträge stehen deshalb linksbündig und ungetrennt. Die gemeinsame
+Datei bleibt unberührt: Datenblatt und Broschüre hängen daran.
 
 Die Dateien werden **inline eingebettet**, nicht als `<img>`: WeasyPrint
 wendet das Dokument-Stylesheet nicht auf SVG-Kinder an, und ohne Füllung am
