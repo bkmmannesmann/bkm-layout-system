@@ -1148,9 +1148,7 @@ section:first-of-type {
 }
 .anl-schritte--breit { margin-bottom: 5mm; }
 .anl-text--label {
-  display: flex;
-  align-items: center;
-  gap: 3mm;
+  display: flow-root;
   margin-bottom: 2mm;
   font-weight: 700;
   color: var(--bkm-deep-green);
@@ -1209,9 +1207,7 @@ section:first-of-type {
   margin: 0 0 3.4mm;
 }
 .anl-kasten__title {
-  display: flex;
-  align-items: center;
-  gap: 3mm;
+  display: flow-root;
   margin: 0 0 2.5mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
@@ -1253,9 +1249,7 @@ section:first-of-type {
   margin: 1mm 0 0;
 }
 .anl-tipp__title {
-  display: flex;
-  align-items: center;
-  gap: 3mm;
+  display: flow-root;
   margin: 0 0 1.5mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
@@ -1294,6 +1288,24 @@ section:first-of-type {
   border-radius: var(--anl-radius);
 }
 .anl-ic svg { display: block; }
+
+/* In den Titelzeilen schwimmt der Kasten links, statt Flex-Element zu
+   sein. Grund: als Flex-Container bekam die Ueberschrift daneben in
+   WeasyPrint die Breite ihres laengsten Wortes - "ARBEITSPLATZ
+   VORBEREITEN" riss bei 61,6 mm, obwohl 174 mm zur Verfuegung standen.
+   Am gebauten PDF nachgemessen am 31.08.2026.
+
+   Nur in den Titeln: in .anl-vorteil ist .anl-ic ein Rasterfeld und
+   bleibt ein Block, sonst rutschen die drei Vorteils-Icons zu einem
+   Balken zusammen. Der Titel steht auf flow-root, damit der Float ihn
+   nicht verlaesst und die erste Listenzeile darunter einrueckt. */
+.anl-abschnitt__title > .anl-ic,
+.anl-kasten__title > .anl-ic,
+.anl-tipp__title > .anl-ic,
+.anl-text--label > .anl-ic {
+  float: left;
+  margin-right: 2.6mm;
+}
 /* Die Rubriken tragen kein Icon - sie tragen ihr Gewicht ueber Groesse
    und Farbe. Die Subheadlines tragen eines, ebenso die Vorteile, die
    Kaesten und die Labelzeilen.
@@ -1332,9 +1344,7 @@ section:first-of-type {
    getrennt worden. Wer das aufmacht, muss den Umfang nachmessen. */
 .anl-abschnitt { margin: 0 0 3.5mm; }
 .anl-abschnitt__title {
-  display: flex;
-  align-items: center;
-  gap: 3mm;
+  display: flow-root;
   margin: 0 0 1.5mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
