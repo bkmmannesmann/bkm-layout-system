@@ -73,7 +73,7 @@
         ]
       },
       "safety": {
-        "title": "Deine Sicherheit",
+        "title": "Für deine eigene Sicherheit",
         "items": [
           "Schutzbrille",
           "Schutzhandschuhe",
@@ -87,7 +87,7 @@
       "running_head": "BKM SP Express",
       "sections": [
         {
-          "title": "Systemaufbau",
+          "title": "Druckwasserhaltende Innenabdichtung",
           "icon": "stack",
           "body": "Die Innenabdichtung besteht aus drei Bauteilen: der Horizontalsperre, der Harzinjektion am Boden-Wandanschluss und der Dichtkehle. Der Systemaufbau erfolgt darüber in fünf Lagen über drei Tage. Für den Boden-Wandanschluss ist die ergänzende Ausführungsrichtlinie „Dichtkehle Boden-Wandanschluss“ zu beachten.",
           "bullets": [
@@ -166,7 +166,7 @@
       "running_head": "BKM SP Express",
       "sections": [
         {
-          "title": "Verbrauch planen",
+          "title": "Verbrauch und Schichtdicken planen",
           "icon": "table",
           "body": "Der BKM SP Express liegt bei etwa 9 kg pro Quadratmeter und pro Zentimeter Schichtdicke. Bei einer empfohlenen Schichtdicke von 25 mm ergibt ein Sack eine Fläche von ca. 1,1 m². Da der tatsächliche Verbrauch stark vom Untergrund, der Saugfähigkeit und der Applikationsmethode abhängt, lohnt sich eine kleine Probefläche, um die Menge genau einschätzen zu können.",
           "formulas": [

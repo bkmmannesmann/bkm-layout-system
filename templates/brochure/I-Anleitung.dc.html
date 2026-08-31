@@ -1104,70 +1104,40 @@ section:first-of-type {
 
 /* === LISTEN ============================================================ */
 
-/* Ohne Punkt. Der gesetzte Punkt in Transition Green stand bis
-   31.08.2026 vor jeder Aufzaehlung; er traegt nichts, die Zeilen stehen
-   ohnehin untereinander. Angekuendigt werden Listen ueber die Labelzeile
-   mit ihrem Icon. Damit entfaellt auch der Modifier --nackt: es gibt
-   keine zweite Form mehr, von der man ihn unterscheiden muesste. */
 .anl-bullets { margin: 0 0 4mm; padding: 0; list-style: none; }
 .anl-bullets li {
-  padding: 0 0 1.4mm;
+  position: relative;
+  padding: 0 0 1.4mm 5mm;
   font-family: 'TT Norms Pro', Arial, sans-serif;
   font-size: 9pt;
   line-height: 1.45;
   color: var(--bkm-stone-grey);
 }
-.anl-bullets--negativ li { color: var(--bkm-stone-grey); }
-
-.anl-bullets--zwei { column-count: 2; column-gap: 4mm; }
-.anl-bullets--zwei li { break-inside: avoid; }
-.anl-bullets--drei { column-count: 3; column-gap: var(--anl-gutter); }
-.anl-bullets--drei li { break-inside: avoid; }
-.anl-kasten .anl-bullets li { font-size: 8.5pt; padding-bottom: 0.9mm; }
-.anl-kasten .anl-bullets { margin-bottom: 0; }
-
-/* Labelzeile vor einer Liste. Ankuendigung statt Punkt. */
-.anl-text--label {
-  margin-bottom: 2mm;
-  font-weight: 700;
-  color: var(--bkm-deep-green);
+/* Ein gesetzter Punkt, kein Zeichen aus der Schrift: ueber ein Bullet aus
+   dem Zeichensatz kommt sonst eine Ersatzschrift ins PDF. */
+.anl-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0.6mm;
+  top: 1.75mm;
+  width: 1.5mm;
+  height: 1.5mm;
+  border-radius: 50%;
+  background: var(--bkm-transition-green);
 }
+.anl-bullets--negativ li::before { background: var(--bkm-muted-grey); }
 
-/* === VORTEILE ========================================================== */
+/* Ohne Punkt. In den Untergrundlisten und in Werkzeug und Sicherheit
+   traegt der Punkt nichts: die Zeilen sind kurz und stehen ohnehin
+   untereinander. Die Aufzaehlung wird stattdessen ueber die Labelzeile
+   mit ihrem Icon angekuendigt. */
+.anl-bullets--nackt li { padding-left: 0; }
+.anl-bullets--nackt li::before { content: none; }
 
-/* Ueber die volle Satzbreite, direkt unter der Rubrik: die Vorteile sind
-   die Aussage der Seite, und eine Aussage steht nicht am Rand. Ohne
-   Trennstrich - drei Aussagen mit Icon stehen fuer sich. */
-.anl-vorteil {
-  display: grid;
-  grid-template-columns: 9.5mm 1fr;
-  gap: 0 3.5mm;
-  align-items: center;
-  margin: 0 0 3.4mm;
-}
-.anl-vorteil:last-of-type { margin-bottom: 6mm; }
-.anl-vorteil__text { grid-column: 2; }
-.anl-vorteil__claim {
-  margin: 0;
-  font-family: 'TT Norms Pro', Arial, sans-serif;
-  font-weight: 700;
-  font-size: 9.5pt;
-  line-height: 1.35;
-  color: var(--bkm-deep-green);
-}
-/* Deep Green, mager. Muted Grey ist die Farbe fuer Beiwerk - die
-   Begruendung eines Vorteils ist keins. */
-.anl-vorteil__detail {
-  margin: 0.4mm 0 0;
-  font-family: 'TT Norms Pro', Arial, sans-serif;
-  font-size: 8.5pt;
-  line-height: 1.4;
-  color: var(--bkm-deep-green);
-}
-
-/* === HANDLUNGSSCHRITTE ================================================= */
-
-/* Ohne Ziffer und ohne Punkt: die Reihenfolge steht im Text. */
+/* Handlungsschritte. Ohne Ziffer und ohne Punkt: die Reihenfolge steht
+   im Text ("Lege zuerst fest", "Trage vor dem Aufbringen auf"), und eine
+   zweite Ordnung daneben traegt nichts. Der Kasten mit der Ziffer stand
+   hier bis 31.08.2026; er ist entfernt, nicht nur ungenutzt. */
 .anl-schritte { margin: 0 0 4mm; padding: 0; list-style: none; }
 .anl-schritte li {
   padding: 0 0 2.4mm;
@@ -1177,11 +1147,61 @@ section:first-of-type {
   color: var(--bkm-stone-grey);
 }
 .anl-schritte--breit { margin-bottom: 5mm; }
+.anl-text--label {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  margin-bottom: 2mm;
+  font-weight: 700;
+  color: var(--bkm-deep-green);
+}
+
+/* === VORTEILE ========================================================== */
+
+/* Behauptung fett, Begruendung darunter mager - das Muster aus dem
+   Bestand. Der Vorteil traegt die Aussage, die Zeile darunter belegt sie. */
+/* Ueber die volle Satzbreite, direkt unter der Rubrik. Die Haarlinie
+   trennt die drei Aussagen, ohne sie einzukasteln. */
+.anl-vorteil {
+  display: grid;
+  grid-template-columns: 9.5mm 1fr;
+  gap: 0 3.5mm;
+  align-items: center;
+  /* Ohne Trennstrich. Drei Aussagen mit Icon stehen fuer sich; die Linie
+     dazwischen war eine Ordnung, die der Inhalt nicht braucht. */
+  margin: 0 0 3.4mm;
+}
+/* Der Kasten steht neben beiden Zeilen und trifft ihre Hoehe: Behauptung
+   9,5pt auf 1,35 und Begruendung 8,5pt auf 1,4 ergeben zusammen rund
+   9,5 mm - genau das Mass der Stufe inline. */
+.anl-vorteil__text { grid-column: 2; }
+.anl-vorteil:last-of-type { margin-bottom: 6mm; }
+.anl-vorteil__claim {
+  margin: 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 9.5pt;
+  line-height: 1.35;
+  color: var(--bkm-deep-green);
+}
+.anl-vorteil__detail {
+  margin: 0.4mm 0 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.4;
+  /* Deep Green, mager. Vorher Muted Grey - das ist die Farbe fuer Beiwerk
+     (Bildunterschriften, Fussnoten, Folio), und die Begruendung eines
+     Vorteils ist kein Beiwerk. Sie steht eine Stufe unter der Behauptung:
+     dieselbe Farbe, geringeres Gewicht. */
+  color: var(--bkm-deep-green);
+}
 
 /* === WERKZEUG UND SICHERHEIT =========================================== */
 
-/* Eng gesetzt, mit Absicht: mit 5 mm Innenabstand fielen die letzten
-   beiden Sicherheitsangaben vom Blatt. */
+/* Eng gesetzt, mit Absicht: in der ersten Fassung standen hier 5 mm
+   Innenabstand, und die letzten beiden Sicherheitsangaben - Gehoerschutz
+   und Staubmaske - fielen vom Blatt. Die Seite sah heil aus. Wer diese
+   Werte wieder aufmacht, muss den Umfang von S.2 nachmessen. */
 .anl-kasten {
   background: var(--bkm-sand-white);
   border-radius: var(--anl-radius);
@@ -1189,6 +1209,9 @@ section:first-of-type {
   margin: 0 0 3.4mm;
 }
 .anl-kasten__title {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
   margin: 0 0 2.5mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
@@ -1201,12 +1224,22 @@ section:first-of-type {
 .anl-kasten--breit { margin-top: 1mm; }
 
 /* Die benannte Flaeche "deep" aus brand.json: Grund Deep Green, Text
-   Clean White, Titel Lime Green. Der Iconkasten wechselt darauf auf
-   Transition Green, sonst stuende Deep auf Deep; der Glyph bleibt Lime. */
+   Clean White, Titel Lime Green. Nicht selbst zusammengestellt - der
+   Name legt alle vier Werte gemeinsam fest, damit keine Kombination
+   entsteht, die im Druck nicht traegt. Der Iconkasten wechselt darauf
+   auf Transition Green, sonst stuende Deep auf Deep; der Glyph bleibt
+   Lime. */
 .anl-kasten--deep { background: var(--bkm-deep-green); }
 .anl-kasten--deep .anl-kasten__title { color: var(--bkm-lime-green); }
 .anl-kasten--deep .anl-bullets li { color: var(--bkm-white); }
 .anl-kasten--deep .anl-ic { background: var(--bkm-transition-green); }
+.anl-bullets--zwei { column-count: 2; column-gap: 4mm; }
+.anl-bullets--zwei li { break-inside: avoid; }
+.anl-bullets--drei { column-count: 3; column-gap: var(--anl-gutter); }
+.anl-bullets--drei li { break-inside: avoid; }
+.anl-kasten .anl-bullets li { font-size: 8.5pt; padding-bottom: 0.9mm; }
+.anl-kasten .anl-bullets { margin-bottom: 0; }
+.anl-kasten .anl-bullets li::before { top: 1.55mm; }
 
 /* === PROFI TIPP ======================================================== */
 
@@ -1220,6 +1253,9 @@ section:first-of-type {
   margin: 1mm 0 0;
 }
 .anl-tipp__title {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
   margin: 0 0 1.5mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
@@ -1249,15 +1285,9 @@ section:first-of-type {
    jede Datei ihre Fuellung selbst (scripts/prepare_brochure_icons.py).
    Ein Icon-Webfont kommt nicht in Frage - ueber Font-Klassen waere die
    Strichstaerke frei waehlbar. */
-/* inline-flex, nicht flex: die Ueberschrift daneben bleibt dadurch ein
-   Block und bricht erst an der Spaltenkante um. Als Flex-Container
-   schrumpfte sie auf ihre kleinste Breite - das laengste Wort - und
-   "VERBRAUCH PLANEN" riss bei 49 mm in einer 85-mm-Spalte. Am gebauten
-   PDF nachgemessen am 31.08.2026. */
 .anl-ic {
-  display: inline-flex;
-  vertical-align: -1.6mm;
-  margin-right: 2.2mm;
+  flex: 0 0 auto;
+  display: flex;
   align-items: center;
   justify-content: center;
   background: var(--bkm-deep-green);
@@ -1302,6 +1332,9 @@ section:first-of-type {
    getrennt worden. Wer das aufmacht, muss den Umfang nachmessen. */
 .anl-abschnitt { margin: 0 0 3.5mm; }
 .anl-abschnitt__title {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
   margin: 0 0 1.5mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
@@ -1501,7 +1534,7 @@ section:first-of-type {
          Breite: 210mm, Höhe: 297mm
          Fit: cover -->
     <div class="cover__hero">
-      <img src="uploads/cover-hero-standard.jpg" alt="BKM Verarbeitungsanleitung">
+      <img src="uploads/cover-hero-standard.jpg" alt="BKM SP Express Verarbeitungsanleitung">
     </div>
 
     <!-- L-FÖRMIGE FARBFLÄCHE (z-index: 2)
@@ -1546,14 +1579,14 @@ section:first-of-type {
            Abstand oben: 10.6mm (= 30pt Zeichenhöhe)
            Ein- oder zweizeilig je nach Textlänge (KEIN künstlicher Umbruch)
            Farbe: Variabel (Lime Green / Deep Green / Pure Green) -->
-      <p class="cover__subheadline">Schritt für Schritt zum Ergebnis</p>
+      <p class="cover__subheadline">Für die schnelle Sanierung feuchte- und salzgeschädigter Wände.</p>
 
       <!-- FLIESSTEXT
            Schrift: TT Norms Pro Regular (400), 12pt
            Abstand oben: Immer gleich nah an Subheadline (6mm)
            Ein- bis dreizeilig je nach Textlänge
            Max-Breite: 107mm -->
-      <p class="cover__intro">Detaillierte Anweisungen für die fachgerechte Verarbeitung unserer Produkte.</p>
+      <p class="cover__intro">BKM SP Express – Mineralischer, reaktiv abbindender Sanierputz.</p>
 
     </div>
 
@@ -1624,12 +1657,12 @@ section:first-of-type {
       <div>
         
         <p class="anl-text anl-text--label"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M176.49,95.51a12,12,0,0,1,0,17l-56,56a12,12,0,0,1-17,0l-24-24a12,12,0,1,1,17-17L112,143l47.51-47.52A12,12,0,0,1,176.49,95.51ZM236,128A108,108,0,1,1,128,20,108.12,108.12,0,0,1,236,128Zm-24,0a84,84,0,1,0-84,84A84.09,84.09,0,0,0,212,128Z"></path></svg></span><span>Geeignet für</span></p>
-        <ul class="anl-bullets "><li>Ziegel- und Klinkermauerwerk</li><li>Naturstein- und Bruchsteinmauerwerk</li><li>Sandsteinmauerwerk</li><li>Kalksandstein und Porenbeton</li><li>Gitter- und Hohlkammersteine</li><li>Stampfbeton</li></ul>
+        <ul class="anl-bullets anl-bullets--nackt"><li>Ziegel- und Klinkermauerwerk</li><li>Naturstein- und Bruchsteinmauerwerk</li><li>Sandsteinmauerwerk</li><li>Kalksandstein und Porenbeton</li><li>Gitter- und Hohlkammersteine</li><li>Stampfbeton</li></ul>
         
       </div>
       <div>
         <p class="anl-text anl-text--label"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M240.26,186.1,152.81,34.23h0a28.74,28.74,0,0,0-49.62,0L15.74,186.1a27.45,27.45,0,0,0,0,27.71A28.31,28.31,0,0,0,40.55,228h174.9a28.31,28.31,0,0,0,24.79-14.19A27.45,27.45,0,0,0,240.26,186.1Zm-20.8,15.7a4.46,4.46,0,0,1-4,2.2H40.55a4.46,4.46,0,0,1-4-2.2,3.56,3.56,0,0,1,0-3.73L124,46.2a4.77,4.77,0,0,1,8,0l87.44,151.87A3.56,3.56,0,0,1,219.46,201.8ZM116,136V104a12,12,0,0,1,24,0v32a12,12,0,0,1-24,0Zm28,40a16,16,0,1,1-16-16A16,16,0,0,1,144,176Z"></path></svg></span><span>Nicht geeignet für</span></p>
-        <ul class="anl-bullets "><li>Flächige Abdichtungen in Hohlkammersteinmauerwerk ohne intakte Lagerfugen und gedeckelte Hohlkammern</li><li>WU-Beton</li><li>Dämmstoffgefülltes Mauerwerk</li></ul>
+        <ul class="anl-bullets anl-bullets--nackt"><li>Flächige Abdichtungen in Hohlkammersteinmauerwerk ohne intakte Lagerfugen und gedeckelte Hohlkammern</li><li>WU-Beton</li><li>Dämmstoffgefülltes Mauerwerk</li></ul>
       </div>
     </div>
     
@@ -1645,14 +1678,14 @@ section:first-of-type {
         
         <div class="anl-kasten">
           <p class="anl-kasten__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M250.18,105.17,186.71,41.25a100.11,100.11,0,0,0-141.43,0l-.13.14L31.37,55.61a12,12,0,1,0,17.24,16.7L62.32,58.16A75.68,75.68,0,0,1,77.49,46.43L119,88,25.85,181.16a20,20,0,0,0,0,28.29l20.69,20.69a20,20,0,0,0,28.28,0L168,137l1.51,1.51h0l23.65,23.66a20,20,0,0,0,28.29,0l28.69-28.7A20,20,0,0,0,250.18,105.17ZM60.68,210.34l-15-15L108,133l15,15ZM140,131l-15-15,19.51-19.51a12,12,0,0,0,0-17L102.24,37.24a75.94,75.94,0,0,1,67.47,20.95l31.44,31.67L178,113l-1.51-1.51a12,12,0,0,0-17,0Zm67.32,11.31L195,130l23.09-23.09,12.3,12.39Z"></path></svg></span><span>Für die Anwendung brauchst du</span></p>
-          <ul class="anl-bullets anl-bullets--zwei"><li>Zollstock</li><li>Wasserwaage</li><li>Akkuschrauber</li><li>Bohrmaschine</li><li>Bohrer Ø 14 mm</li><li>Bleistift</li><li>Injektionsflaschen</li><li>Injektionslanzen</li><li>BKM Profi-Press</li><li>Einschraubadapter + 17 mm Nuss</li></ul>
+          <ul class="anl-bullets anl-bullets--nackt anl-bullets--zwei"><li>Zollstock</li><li>Wasserwaage</li><li>Akkuschrauber</li><li>Bohrmaschine</li><li>Bohrer Ø 14 mm</li><li>Bleistift</li><li>Injektionsflaschen</li><li>Injektionslanzen</li><li>BKM Profi-Press</li><li>Einschraubadapter + 17 mm Nuss</li></ul>
         </div>
         
       </div>
       <div>
         <div class="anl-kasten anl-kasten--deep">
-          <p class="anl-kasten__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M208,36H48A20,20,0,0,0,28,56V114.8c0,92.36,78.1,123,93.76,128.18a19.6,19.6,0,0,0,12.48,0C149.9,237.78,228,207.16,228,114.8V56A20,20,0,0,0,208,36Zm-4,78.8c0,73.56-60.53,99.53-76,105-15.47-5.42-76-31.39-76-104.95V60H204ZM79.51,144.49a12,12,0,1,1,17-17L112,143l47.51-47.51a12,12,0,0,1,17,17l-56,56a12,12,0,0,1-17,0Z"></path></svg></span><span>Deine Sicherheit</span></p>
-          <ul class="anl-bullets "><li>Schutzbrille</li><li>Schutzhandschuhe</li><li>Schutzkleidung</li><li>Gehörschutz</li><li>Staubmaske</li></ul>
+          <p class="anl-kasten__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M208,36H48A20,20,0,0,0,28,56V114.8c0,92.36,78.1,123,93.76,128.18a19.6,19.6,0,0,0,12.48,0C149.9,237.78,228,207.16,228,114.8V56A20,20,0,0,0,208,36Zm-4,78.8c0,73.56-60.53,99.53-76,105-15.47-5.42-76-31.39-76-104.95V60H204ZM79.51,144.49a12,12,0,1,1,17-17L112,143l47.51-47.51a12,12,0,0,1,17,17l-56,56a12,12,0,0,1-17,0Z"></path></svg></span><span>Für deine eigene Sicherheit</span></p>
+          <ul class="anl-bullets anl-bullets--nackt"><li>Schutzbrille</li><li>Schutzhandschuhe</li><li>Schutzkleidung</li><li>Gehörschutz</li><li>Staubmaske</li></ul>
         </div>
         
       </div>
@@ -1747,11 +1780,11 @@ section:first-of-type {
     <h1 class="anl-rubrik">Anleitung</h1>
     <div class="anl-zwei">
       <div>
-        <div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Horizontalsperre</h2>
+        <div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verarbeitung · Horizontalsperre</h2>
   <p class="anl-text">Zeichne zuerst mit einer Wasserwaage und einem Bleistift die gewünschte Sperrhöhe an. Lege dann eine Bohrlochreihe in dieser Höhe fest. Die Bohrlöcher sind je nach Mauerwerksart im jeweiligen Abstand in einem Winkel von ca. 45° in das Mauerwerk zu bohren. Bei Mauerwerksecken setze eine Bohrung direkt in die Ecke. Die erste Bohrung aus der Ecke wird zu beiden Seiten mit 10 cm Abstand angeordnet. Bei Wandstärken über 60 cm muss in der Ecke eine zweite Bohrung um 5 cm nach oben versetzt erfolgen.</p>
   
   
-</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Flächensperre</h2>
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verarbeitung · Flächensperre</h2>
   <p class="anl-text">Führe bei einer Flächensperre das Bohrlochmuster der Horizontalsperre nach oben schachbrettartig versetzt fort. Der vertikale Abstand beträgt hierbei 25 cm. Die letzte Bohrlochreihe endet min. 15 cm über Oberkante Gelände.</p>
   
   
@@ -1827,7 +1860,7 @@ section:first-of-type {
   <p class="anl-text">Injiziere anschließend BKM HZ 250 Pro mit der BKM Profi-Press über die Injektionslanzen in das Mauerwerk. Kontrolliere die Materialmenge über den elektronischen Durchlaufzähler.</p>
   
   
-</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Löcher verschließen</h2>
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Bohrlöcher verschließen</h2>
   <p class="anl-text">Verschließe die Bohrlöcher direkt nach der Injektion bzw. nach dem Entfernen der Lanzen mit BKM FBM.</p>
   
   

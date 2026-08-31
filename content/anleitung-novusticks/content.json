@@ -76,7 +76,7 @@
         ]
       },
       "safety": {
-        "title": "Deine Sicherheit",
+        "title": "Für deine eigene Sicherheit",
         "items": [
           "Schutzbrille",
           "Schutzhandschuhe",
@@ -175,7 +175,7 @@
       "running_head": "NovuSticks",
       "sections": [
         {
-          "title": "Löcher verschließen",
+          "title": "Bohrlöcher verschließen",
           "icon": "check-circle",
           "body": "Verschließe die Bohrlöcher direkt nach dem Einsetzen der NovuSticks mit BKM FBM Füll- und Bohrlochmörtel, damit der Wirkstoff nicht aus der Wand in den Raum verdunstet oder mit der umgebenden Luftfeuchtigkeit reagiert."
         },

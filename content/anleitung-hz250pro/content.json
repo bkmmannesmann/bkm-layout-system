@@ -80,7 +80,7 @@
         ]
       },
       "safety": {
-        "title": "Deine Sicherheit",
+        "title": "Für deine eigene Sicherheit",
         "items": [
           "Schutzbrille",
           "Schutzhandschuhe",
@@ -139,12 +139,12 @@
       "running_head": "BKM HZ 250 Pro",
       "sections": [
         {
-          "title": "Horizontalsperre",
+          "title": "Verarbeitung · Horizontalsperre",
           "icon": "hammer",
           "body": "Zeichne zuerst mit einer Wasserwaage und einem Bleistift die gewünschte Sperrhöhe an. Lege dann eine Bohrlochreihe in dieser Höhe fest. Die Bohrlöcher sind je nach Mauerwerksart im jeweiligen Abstand in einem Winkel von ca. 45° in das Mauerwerk zu bohren. Bei Mauerwerksecken setze eine Bohrung direkt in die Ecke. Die erste Bohrung aus der Ecke wird zu beiden Seiten mit 10 cm Abstand angeordnet. Bei Wandstärken über 60 cm muss in der Ecke eine zweite Bohrung um 5 cm nach oben versetzt erfolgen."
         },
         {
-          "title": "Flächensperre",
+          "title": "Verarbeitung · Flächensperre",
           "icon": "hammer",
           "body": "Führe bei einer Flächensperre das Bohrlochmuster der Horizontalsperre nach oben schachbrettartig versetzt fort. Der vertikale Abstand beträgt hierbei 25 cm. Die letzte Bohrlochreihe endet min. 15 cm über Oberkante Gelände."
         },
@@ -198,7 +198,7 @@
           "body": "Injiziere anschließend BKM HZ 250 Pro mit der BKM Profi-Press über die Injektionslanzen in das Mauerwerk. Kontrolliere die Materialmenge über den elektronischen Durchlaufzähler."
         },
         {
-          "title": "Löcher verschließen",
+          "title": "Bohrlöcher verschließen",
           "icon": "check-circle",
           "body": "Verschließe die Bohrlöcher direkt nach der Injektion bzw. nach dem Entfernen der Lanzen mit BKM FBM."
         },

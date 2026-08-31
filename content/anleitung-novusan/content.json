@@ -76,7 +76,7 @@
         ]
       },
       "safety": {
-        "title": "Deine Sicherheit",
+        "title": "Für deine eigene Sicherheit",
         "items": [
           "Schutzbrille",
           "Schutzhandschuhe",
@@ -217,7 +217,7 @@
       ],
       "sections": [
         {
-          "title": "Nach der Injektion",
+          "title": "Was passiert nach der Injektion?",
           "icon": "warning",
           "body": "Nach der Injektion können vorübergehend dunklere Stellen oder Farbvertiefungen sichtbar werden. Diese wirken optisch wie Feuchtigkeit, sind jedoch ein normales Zeichen der Produktverteilung im Mauerwerk und keine neue Durchfeuchtung. Im weiteren Verlauf können Salzausblühungen auftreten, da vorhandene Feuchtigkeit aus dem Mauerwerk verdrängt wird und über die Oberfläche verdunstet. Geschädigte oder stark salzbelastete Putze sollten entfernt und durch ein geeignetes Sanierungssystem ersetzt werden.",
           "bullets": [

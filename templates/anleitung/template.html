@@ -104,17 +104,17 @@
       <div>
         {% if page.scope.suitable %}
         <p class="anl-text anl-text--label">{{ ic('check-circle', 'contact') }}<span>Geeignet für</span></p>
-        {{ bullets(page.scope.suitable) }}
+        {{ bullets(page.scope.suitable, 'anl-bullets--nackt') }}
         {% endif %}
       </div>
       <div>
         <p class="anl-text anl-text--label">{{ ic('warning', 'contact') }}<span>Nicht geeignet für</span></p>
-        {{ bullets(page.scope.unsuitable) }}
+        {{ bullets(page.scope.unsuitable, 'anl-bullets--nackt') }}
       </div>
     </div>
     {% elif page.scope.suitable %}
     <p class="anl-text anl-text--label">{{ ic('check-circle', 'contact') }}<span>Geeignet für</span></p>
-    {{ bullets(page.scope.suitable, 'anl-bullets--zwei') }}
+    {{ bullets(page.scope.suitable, 'anl-bullets--nackt anl-bullets--zwei') }}
     {% endif %}
     {% endif %}
 
@@ -128,7 +128,7 @@
         {% if page.tools %}
         <div class="anl-kasten">
           <p class="anl-kasten__title">{{ ic("hammer", "contact") }}<span>{{ page.tools.title }}</span></p>
-          {{ bullets(page.tools['items'], 'anl-bullets--zwei') }}
+          {{ bullets(page.tools['items'], 'anl-bullets--nackt anl-bullets--zwei') }}
         </div>
         {% endif %}
       </div>
@@ -139,7 +139,7 @@
         {% if page.safety %}
         <div class="anl-kasten anl-kasten--deep">
           <p class="anl-kasten__title">{{ ic("shield-check", "contact") }}<span>{{ page.safety.title }}</span></p>
-          {{ bullets(page.safety['items']) }}
+          {{ bullets(page.safety['items'], 'anl-bullets--nackt') }}
         </div>
         {% endif %}
       </div>
