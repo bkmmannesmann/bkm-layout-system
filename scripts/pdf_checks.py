@@ -43,6 +43,11 @@ def letters(text: str) -> str:
     Text stehen dadurch Leerzeichen und Bindestriche an Stellen, die es in
     der Quelle nicht gibt. Ohne sie ist der Vergleich stabil.
 
+    Markup faellt weg. Eine Headline im Content kann einen Umbruch tragen -
+    "VERARBEITUNGS-<br>ANLEITUNG" auf dem Titelblatt. Im PDF steht dort
+    kein "br"; ohne diese Zeile meldet die Pruefung eine heil gesetzte
+    Zeile als fehlenden Text.
+
     ß wird zu ss. Deutscher Versalsatz loest das ß auf: aus "Bohrlöcher
     verschließen" wird ueber text-transform:uppercase ein "BOHRLÖCHER
     VERSCHLIESSEN", und im PDF steht das doppelte s. Ohne diese Zeile
@@ -50,7 +55,8 @@ def letters(text: str) -> str:
     fehlenden Text - aufgefallen an den Abschnittstiteln der
     Verarbeitungsanleitung.
     """
-    return re.sub(r"[^0-9a-zäöü]", "", text.lower().replace("ß", "ss"))
+    ohne_markup = re.sub(r"<[^>]+>", "", text)
+    return re.sub(r"[^0-9a-zäöü]", "", ohne_markup.lower().replace("ß", "ss"))
 
 
 def collect_strings(node, out=None, *, min_length=40, skip_keys=PATH_KEYS):

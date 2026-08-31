@@ -17,7 +17,7 @@ dieselbe Folge, unabhängig von Produkt und Linie.
 
 | Blatt | Inhalt |
 |---|---|
-| 1 | Titelblatt. Eigenes Dokument (`scripts/build_cover.py`, Variante `anleitung`), zählt aber mit. |
+| 1 | Titelblatt. Gebaut über `templates/cover/`, Variante `anleitung`, und im selben PDF. |
 | 2 | Rubriken **Vorteile** und **Vorbereitung**: Anwendungsbereich, Vorteile, Arbeitsplatz, Werkzeug, Sicherheit. |
 | 3 … n−1 | Rubrik **Anleitung**. Ein bis vier Seiten, je nach Umfang. Die letzte trägt den Profi-Tipp. |
 | n | Rubrik **Nacharbeit** mit Impressum und Ausgabedatum. |
@@ -37,6 +37,30 @@ Zwei Dinge laufen über die ganze Satzbreite, nicht in einer Spalte:
 Zweispaltig bleiben nur die Stellen, an denen zwei Dinge nebeneinander
 gehören: geeignete gegen nicht geeignete Untergründe, Werkzeug gegen
 Sicherheit, Text gegen Abbildung.
+
+## Titelblatt
+
+Das Titelblatt liegt im selben PDF wie der Innenteil — so wie in allen
+sieben freigegebenen Fassungen. Es entsteht trotzdem nicht in
+`templates/anleitung/`, sondern über den Cover-Bauweg: Dieselbe Vorlage
+trägt die Titel der Broschüren, und zwei Wege zu derselben Seite laufen
+auseinander. Belegt am Titelfoto, das monatelang auf beiden Wegen einen
+anderen Ausschnitt zeigte.
+
+Der Wortlaut kommt aus dem `cover`-Block der Anleitung, nicht aus den
+Vorgaben in `build_cover.py`: Die stehen dort produktneutral („Schritt für
+Schritt zum Ergebnis"), die freigegebenen Anleitungen nennen auf dem Titel
+ihr Produkt.
+
+```json
+"cover": {
+  "headline":    "VERARBEITUNGS-<br>ANLEITUNG",
+  "subheadline": "Zur Injektion in mineralisches Mauerwerk …",
+  "intro_text":  "BKM HZ 250 Pro – Dauerhafte Kapillarsperre …"
+}
+```
+
+Fehlt der Block, entsteht nur der Innenteil, und der Bau sagt das.
 
 ## Seitenzählung
 

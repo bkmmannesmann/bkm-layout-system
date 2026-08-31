@@ -108,7 +108,8 @@
 .anl-foot__folio {
   font-weight: 700;
   font-size: 9pt;
-  color: var(--bkm-stone-grey);
+  /* Deep Green. Die Ziffer gehoert zur Marke, nicht zum Beiwerk. */
+  color: var(--bkm-deep-green);
   font-variant-numeric: tabular-nums;
 }
 .anl-foot__rubrik { letter-spacing: 0.06em; text-transform: uppercase; }
@@ -280,7 +281,10 @@
   border-radius: var(--anl-radius);
   font-family: 'TT Norms Pro', Arial, sans-serif;
   font-weight: 700;
-  font-size: 9pt;
+  /* 12pt, nicht 9. Bei 9pt war die Ziffer 2,16 mm hoch in einem 6,4-mm-
+     Kasten - ein Drittel der Flaeche, sie wirkte darin verloren. Mittig
+     sass sie schon: nachgemessen 0,13 mm Versatz. Zu klein war sie. */
+  font-size: 12pt;
   line-height: 1;
   color: var(--bkm-lime-green);
   font-variant-numeric: tabular-nums;
@@ -297,15 +301,15 @@
   grid-template-columns: 9.5mm 1fr;
   gap: 0 3.5mm;
   align-items: center;
-  padding: 0 0 2mm;
-  margin: 0 0 2mm;
-  border-bottom: 0.25mm solid var(--bkm-hairline);
+  /* Ohne Trennstrich. Drei Aussagen mit Icon stehen fuer sich; die Linie
+     dazwischen war eine Ordnung, die der Inhalt nicht braucht. */
+  margin: 0 0 3.4mm;
 }
 /* Der Kasten steht neben beiden Zeilen und trifft ihre Hoehe: Behauptung
    9,5pt auf 1,35 und Begruendung 8,5pt auf 1,4 ergeben zusammen rund
    9,5 mm - genau das Mass der Stufe inline. */
 .anl-vorteil__text { grid-column: 2; }
-.anl-vorteil:last-of-type { border-bottom: 0; margin-bottom: 5mm; }
+.anl-vorteil:last-of-type { margin-bottom: 6mm; }
 .anl-vorteil__claim {
   margin: 0;
   font-family: 'TT Norms Pro', Arial, sans-serif;
@@ -319,7 +323,11 @@
   font-family: 'TT Norms Pro', Arial, sans-serif;
   font-size: 8.5pt;
   line-height: 1.4;
-  color: var(--bkm-muted-grey);
+  /* Deep Green, mager. Vorher Muted Grey - das ist die Farbe fuer Beiwerk
+     (Bildunterschriften, Fussnoten, Folio), und die Begruendung eines
+     Vorteils ist kein Beiwerk. Sie steht eine Stufe unter der Behauptung:
+     dieselbe Farbe, geringeres Gewicht. */
+  color: var(--bkm-deep-green);
 }
 
 /* === WERKZEUG UND SICHERHEIT =========================================== */

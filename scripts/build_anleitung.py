@@ -34,6 +34,10 @@ OUTPUT_DIR = PROJECT_ROOT / "output" / "anleitung"
 SKIP_KEYS = (
     "image", "icon", "product_image", "line_badge", "logo", "keyvisual",
     "type", "product_line", "number",
+    # Traegt keinen Lesetext: $comment erklaert die Datei, hero_image_alt
+    # steht als Alt-Text am Titelfoto und erscheint nur, wenn das Bild
+    # fehlt - dann meldet check_bildverweise es ohnehin.
+    "$comment", "hero_image_alt",
 )
 
 
@@ -59,17 +63,21 @@ def check_output(pdf_path, content):
     # Zeichen, "Gehörschutz" elf. Mit der Voreinstellung fiel die komplette
     # PSA-Liste vom Blatt, ohne dass die Pruefung etwas meldete. Das
     # Datenblatt prueft aus demselben Grund ab 3.
+    zu_pruefen = list(content.get("pages", []))
+    if content.get("cover"):
+        zu_pruefen.append(content["cover"])
     fehler.extend(check_completeness(
-        reader, collect_strings(content.get("pages", []),
-                                min_length=3, skip_keys=SKIP_KEYS)))
+        reader, collect_strings(zu_pruefen, min_length=3, skip_keys=SKIP_KEYS)))
 
-    soll = seiten_soll(content)
+    # Das Titelblatt liegt im selben PDF und zaehlt mit, sofern es gebaut
+    # wurde. Ohne cover-Block enthaelt die Datei nur den Innenteil.
+    soll = seiten_soll(content) + (1 if content.get("cover") else 0)
     ist = len(reader.pages)
     if ist != soll:
         fehler.append(
-            f"Das PDF hat {ist} Seiten, content.json beschreibt {soll}. "
-            f"Ein Bereich fasst seinen Inhalt nicht - siehe .anl-page__body, "
-            f"dort steht overflow:hidden.")
+            f"Das PDF hat {ist} Seiten, erwartet sind {soll}. "
+            f"Faellt eine Seite aus, fasst ein Bereich seinen Inhalt nicht - "
+            f"siehe .anl-page__body, dort steht overflow:hidden.")
 
     fehler.extend(check_bildverweise(content))
     fehler.extend(check_paginierung(content))
@@ -192,6 +200,45 @@ def check_offene_angaben(content):
     return treffer
 
 
+def baue_titelblatt(content):
+    """Baut das Titelblatt der Anleitung ueber den Cover-Bauweg.
+
+    Das Titelblatt ist Blatt 1 des Dokuments - so steht es in allen sieben
+    freigegebenen Fassungen, deren zweites Blatt 2/n traegt. Es entsteht
+    trotzdem nicht hier, sondern in templates/cover/: dieselbe Vorlage
+    traegt die Titel der Broschueren, und zwei Wege zu derselben Seite
+    laufen auseinander. Belegt am Titelfoto, das monatelang auf beiden
+    Wegen einen anderen Ausschnitt zeigte.
+
+    Der Inhalt kommt aus dem cover-Block der Anleitung, nicht aus den
+    Vorgaben in build_cover.py: die stehen dort produktneutral
+    ("Schritt fuer Schritt zum Ergebnis"), die freigegebenen Anleitungen
+    nennen auf dem Titel ihr Produkt.
+    """
+    sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+    import build_cover
+
+    titel = dict(content.get("cover") or {})
+    if not titel:
+        return None
+    titel.setdefault("title", content.get("title", ""))
+    ergebnis = build_cover.build_cover("anleitung", titel)
+    if ergebnis is None:
+        return None
+    return build_cover.OUTPUT_DIR / "cover_anleitung.pdf"
+
+
+def fuege_zusammen(titel_pdf, innen_pdf, ziel):
+    """Legt Titelblatt und Innenteil in eine Datei."""
+    from pypdf import PdfWriter
+
+    w = PdfWriter()
+    for teil in (titel_pdf, innen_pdf):
+        w.append(str(teil))
+    with open(ziel, "wb") as f:
+        w.write(f)
+
+
 def baue(content_path, release=False):
     from jinja2 import Environment, FileSystemLoader
     from weasyprint import HTML
@@ -205,9 +252,18 @@ def baue(content_path, release=False):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     name = Path(content_path).parent.name
     html_path = OUTPUT_DIR / f"{name}.html"
+    innen_pdf = OUTPUT_DIR / f"{name}-innenteil.pdf"
     pdf_path = OUTPUT_DIR / f"{name}.pdf"
     html_path.write_text(html, encoding="utf-8")
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(pdf_path))
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(innen_pdf))
+
+    titel_pdf = baue_titelblatt(content)
+    if titel_pdf and titel_pdf.is_file():
+        fuege_zusammen(titel_pdf, innen_pdf, pdf_path)
+        print(f"  Titelblatt und Innenteil zusammengefuehrt")
+    else:
+        innen_pdf.replace(pdf_path)
+        print(f"  Ohne Titelblatt: kein cover-Block in content.json")
 
     print(f"  HTML: {html_path}")
     print(f"  PDF:  {pdf_path}")

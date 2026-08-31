@@ -10,6 +10,13 @@
   "source_pdf": "VA_BKM_HZ250_Pro_DE",
   "page_number_start": 2,
   "page_total": 6,
+  "cover": {
+    "$comment": "Titelblatt, gebaut ueber templates/cover/, Variante anleitung. Wortlaut aus der freigegebenen Fassung VA_BKM_HZ250_Pro_DE.",
+    "headline": "VERARBEITUNGS-<br>ANLEITUNG",
+    "subheadline": "Zur Injektion in mineralisches Mauerwerk gegen aufsteigende Feuchtigkeit und Querdurchfeuchtung.",
+    "intro_text": "BKM HZ 250 Pro – Dauerhafte Kapillarsperre für die professionelle Anwendung.",
+    "hero_image_alt": "BKM HZ 250 Pro Verarbeitungsanleitung"
+  },
   "pages": [
     {
       "type": "vorbereitung",
