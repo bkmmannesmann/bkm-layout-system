@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>
+@font-face{font-family:'Unbounded';src:url('assets/fonts/Unbounded_900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+html,body{margin:0;padding:0;background:#e9e7e1}
+body{font-family:'TT Norms Pro',system-ui,sans-serif;color:#494949;-webkit-font-smoothing:antialiased}
+a{color:#287d4b;text-decoration:none}
+a:hover{color:#1c4b42;text-decoration:underline}
+
+/* Erzeugt aus templates/anleitung/. Nicht hier aendern - die Datei wird
+   von scripts/build_anleitung_canvas.py neu geschrieben. */
+/* ============================================================
+   BKM MANNESMANN – DESIGN SYSTEM VARIABLEN
+   ============================================================
+   Zentrale Definition aller Corporate Design Parameter.
+   Diese Datei wird von allen Templates und Komponenten importiert.
+   ============================================================ */
+
+:root {
+  /* ──────────────────────────────────────────────────────────
+     FARBEN – BKM Farbpalette
+     ────────────────────────────────────────────────────────── */
+
+  /* Primärfarben */
+  --bkm-pure-green: #4daf46;          /* BKM Home Line und Subheadline-Akzent */
+  --bkm-deep-green: #1c4b42;          /* BKM Mannesmann Hintergrund */
+  --bkm-transition-green: #287d4b;    /* Fachbetriebe-Akzent */
+
+  /* Sekundärfarben – Grüntöne */
+  --bkm-lime-green: #b4e717;          /* Lime Green für Kontrast- und Akzentflächen */
+  --bkm-light-green: #7AC943;         /* RGB: 122, 201, 67 – Leuchtendes Grün */
+
+  /* Neutralfarben */
+  --bkm-sand-white: #f6f5f2;          /* Heller Flächenton der Marke */
+  --bkm-hairline: #e3e1dc;            /* Haarlinie, Trennlinien */
+  --bkm-rule: #d9d7d3;                /* Kräftigere Linie, Platzhalterflächen */
+  --bkm-stone-grey: #494949;          /* Dunkelgrau für Kontrastflächen */
+  /* Zurückgenommener Nebentext: Rubrik im Kolumnentitel, Ausgabe- und
+     Artikelnummer, Bildunterschriften, Fußnoten und Rechtshinweise.
+     Nie Fließtext, nie Headline. Siehe brand.json, muted-grey. */
+  --bkm-muted-grey: #8a8a8a;
+  --bkm-grey-50: #808080;             /* RGB: 128, 128, 128 – Mittelgrau */
+  --bkm-grey-light: #999999;          /* RGB: 153, 153, 153 – Hellgrau */
+  /* Kein Palettenton. Fließtext ist Stone Grey — siehe brand.json.
+     Bleibt nur, weil templates/prospekt-fachbetrieb/ (Altbestand) darauf
+     verweist. Für neue Regeln nicht verwenden. */
+  --bkm-black: #000000;
+  --bkm-white: #FFFFFF;               /* Hintergrund */
+  --bkm-paper: #FFFFFF;               /* Papierweiß */
+
+  /* Akzentfarben (aus InDesign-Swatches) */
+  --bkm-gold-dark: #755224;           /* RGB: 117, 76, 36 */
+  --bkm-gold-medium: #8C6239;         /* RGB: 140, 98, 57 */
+  --bkm-gold-light: #998675;          /* RGB: 153, 134, 117 */
+  --bkm-silver-dark: #666666;         /* RGB: 102, 102, 102 */
+  --bkm-silver-medium: #808080;       /* RGB: 128, 128, 128 */
+  --bkm-silver-light: #999999;        /* RGB: 153, 153, 153 */
+
+  /* ──────────────────────────────────────────────────────────
+     TYPOGRAFIE
+     ────────────────────────────────────────────────────────── */
+
+  /* Schriftfamilien */
+  --font-display: 'Unbounded', sans-serif;       /* Headlines / Display */
+  --font-body: 'TT Norms Pro', sans-serif;       /* Fließtext / UI */
+  --font-fallback: 'Arial', 'Helvetica Neue', sans-serif;
+
+  /* Schriftgrößen – Skala */
+  --fs-display-xl: 42pt;    /* Hauptheadline Cover */
+  --fs-display-lg: 32pt;    /* Kapitel-Headlines */
+  --fs-display-md: 24pt;    /* Seiten-Headlines */
+  --fs-subheadline: 16pt;   /* Grüne Subheadlines */
+  --fs-body: 9pt;           /* Fließtext */
+  --fs-body-lg: 10pt;       /* Fließtext größer */
+  --fs-caption: 8pt;        /* Bildunterschriften */
+  --fs-small: 7pt;          /* Fußnoten, Copyright */
+
+  /* Zeilenhöhen */
+  --lh-display: 1.1;
+  --lh-subheadline: 1.3;
+  --lh-body: 1.5;
+
+  /* Schriftgewichte */
+  --fw-black: 900;
+  --fw-extrabold: 800;
+  --fw-bold: 700;
+  --fw-demibold: 600;
+  --fw-medium: 500;
+  --fw-regular: 400;
+  --fw-light: 300;
+
+  /* ──────────────────────────────────────────────────────────
+     ABSTÄNDE & RASTER
+     ────────────────────────────────────────────────────────── */
+
+  /* Seitenformat DIN A4 */
+  --page-width: 210mm;
+  --page-height: 297mm;
+
+  /* Ränder */
+  --margin-top: 15mm;
+  --margin-bottom: 15mm;
+  --margin-left: 15mm;
+  --margin-right: 15mm;
+
+  /* Beschnitt (Bleed) */
+  --bleed: 3mm;
+
+  /* Spalten */
+  --column-gap: 5mm;
+  --columns-2: 2;
+  --columns-3: 3;
+
+  /* Abstände */
+  --space-xs: 2mm;
+  --space-sm: 4mm;
+  --space-md: 8mm;
+  --space-lg: 12mm;
+  --space-xl: 20mm;
+  --space-xxl: 30mm;
+
+  /* ──────────────────────────────────────────────────────────
+     KOMPONENTEN-SPEZIFISCH
+     ────────────────────────────────────────────────────────── */
+
+  /* Zitat-Box */
+  --quote-box-bg: var(--bkm-pure-green);
+  --quote-box-text: var(--bkm-white);
+  --quote-box-radius: 6mm;
+  --quote-box-padding: 6mm;
+
+  /* Bild-Platzhalter */
+  --placeholder-bg: var(--bkm-stone-grey);
+
+  /* Kontrastflächen (dunkler Hintergrund) */
+  --dark-section-bg: var(--bkm-stone-grey);
+  --dark-section-text: var(--bkm-white);
+}
+
+/* ============================================================
+   BKM MANNESMANN – BASIS-STYLESHEET
+   ============================================================
+   Grundlegende Typografie, Reset und Paged Media Definitionen.
+   ============================================================ */
+
+
+
+/* ──────────────────────────────────────────────────────────
+   FONT-FACE DEFINITIONEN
+   ────────────────────────────────────────────────────────── */
+
+/* Unbounded – Display-Schrift für Headlines */
+@font-face {
+  font-family: 'Unbounded';
+  src: url('assets/fonts/Unbounded-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TT Norms Pro – Fließtext-Schrift */
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('assets/fonts/TT_Norms_Pro_Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+
+
+
+
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('assets/fonts/TT_Norms_Pro_Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+
+
+/* Kompatibilitäts-Fallback: Einige externe PDF-/Druck-Renderer ersetzen
+   TT-Norms-Umlaute und ß durch einen Trial-Hinweis. Nur diese acht Glyphen
+   beziehen daher eine lokale Sans-Serif-Schrift; alle anderen Zeichen bleiben
+   unverändert TT Norms Pro. Erst nach bestätigtem Austausch der Vollversionen
+   entfernen. */
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('assets/fonts/LiberationSans-Bold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('assets/fonts/LiberationSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
+}
+
+/* PDF-Sicherheitsfamilie: Gespeicherte PDFs dürfen keine TT-Norms-Pro-Glyphen
+   enthalten, weil die vorliegenden Dateien in externen PDF-Druckpfaden einen
+   Trial-Hinweis ausgeben können. Liberation Sans liegt lokal im Repository und
+   wird für den gesamten Druckmodus eingebettet; die Bildschirmansicht behält
+   unverändert TT Norms Pro. */
+@font-face {
+  font-family: 'BKM PDF Sans';
+  src: url('assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BKM PDF Sans';
+  src: url('assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BKM PDF Sans';
+  src: url('assets/fonts/LiberationSans-Regular.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BKM PDF Sans';
+  src: url('assets/fonts/LiberationSans-Bold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BKM PDF Sans';
+  src: url('assets/fonts/LiberationSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@media print {
+  :root { --font-body: 'BKM PDF Sans'; }
+}
+
+/* ──────────────────────────────────────────────────────────
+   PAGED MEDIA – Seitendefinitionen für Print
+   ────────────────────────────────────────────────────────── */
+
+@page {
+  size: A4 portrait;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+
+  @bottom-center {
+    content: none;
+  }
+}
+
+@page :first {
+  margin: 0;
+}
+
+@page :blank {
+  @bottom-center {
+    content: none;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────
+   RESET & GRUNDLAGEN
+   ────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10pt;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  /* Fliesstext auf hellem Grund ist Stone Grey, siehe brand.json. Hier stand
+     --bkm-black: reines Schwarz, das die Palette nicht fuehrt. Wirksam wurde es
+     ueberall dort, wo ein Element seine Farbe nicht selbst setzt und erbt - so
+     liefen Anschrift und Impressum der Rueckseite in Schwarz, bis es jemand
+     gemessen hat. */
+  color: var(--bkm-stone-grey);
+  background: var(--bkm-white);
+}
+
+/* ──────────────────────────────────────────────────────────
+   TYPOGRAFIE – Globale Stile
+   ────────────────────────────────────────────────────────── */
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--bkm-pure-green);
+  line-height: var(--lh-display);
+  font-weight: var(--fw-black);
+}
+
+h1 {
+  font-size: var(--fs-display-xl);
+  margin-bottom: var(--space-md);
+}
+
+h2 {
+  font-size: var(--fs-display-lg);
+  margin-bottom: var(--space-sm);
+}
+
+h3 {
+  font-size: var(--fs-display-md);
+  margin-bottom: var(--space-sm);
+}
+
+/* Subheadlines – grün, kursiv/bold */
+.subheadline {
+  font-family: var(--font-body);
+  font-size: var(--fs-subheadline);
+  font-weight: var(--fw-bold);
+  font-style: italic;
+  color: var(--bkm-pure-green);
+  line-height: var(--lh-subheadline);
+  margin-bottom: var(--space-md);
+}
+
+p {
+  margin-bottom: var(--space-sm);
+  text-align: justify;
+  /* U+002D statt U+2010: keine der Markenschriften hat den
+     typografischen Trennstrich, WeasyPrint faellt sonst auf eine
+     Fremdschrift zurueck. */
+  hyphens: auto;
+  hyphenate-character: "-";
+  -webkit-hyphens: auto;
+}
+
+strong {
+  font-weight: var(--fw-bold);
+}
+
+/* ──────────────────────────────────────────────────────────
+   SEITENUMBRUCH-STEUERUNG
+   ────────────────────────────────────────────────────────── */
+
+.page-break {
+  page-break-after: always;
+  break-after: page;
+}
+
+.no-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+section {
+  page-break-before: always;
+  break-before: page;
+}
+
+section:first-of-type {
+  page-break-before: auto;
+  break-before: auto;
+}
+
+/* ============================================================
+   BKM MANNESMANN – LAYOUT-KOMPONENTEN
+   ============================================================
+   Wiederverwendbare Bausteine für alle BKM Print-Dokumente.
+   ============================================================ */
+
+/* ──────────────────────────────────────────────────────────
+   COVER-SEITE
+   ────────────────────────────────────────────────────────── */
+
+.cover {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  page-break-after: always;
+}
+
+.cover__header {
+  background-color: var(--bkm-deep-green);
+  padding: 15mm 15mm 20mm 15mm;
+  position: relative;
+  z-index: 2;
+}
+
+.cover__logo {
+  width: 80mm;
+  margin-bottom: var(--space-lg);
+}
+
+.cover__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-xl);
+  font-weight: var(--fw-black);
+  color: var(--bkm-white);
+  line-height: var(--lh-display);
+  margin-bottom: var(--space-md);
+}
+
+.cover__subtitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-subheadline);
+  font-weight: var(--fw-bold);
+  font-style: italic;
+  color: var(--bkm-lime-green);
+  margin-bottom: var(--space-sm);
+}
+
+.cover__intro {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  color: var(--bkm-white);
+  max-width: 130mm;
+}
+
+.cover__hero {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 150mm;
+  overflow: hidden;
+}
+
+.cover__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Chevron-Grafik (Markenzeichen) */
+.cover__chevrons {
+  position: absolute;
+  right: 10mm;
+  bottom: 20mm;
+  z-index: 3;
+}
+
+.cover__chevrons svg {
+  width: 60mm;
+  height: auto;
+}
+
+/* ──────────────────────────────────────────────────────────
+   HEADLINE-BLOCK
+   ────────────────────────────────────────────────────────── */
+
+.headline-block {
+  margin-bottom: var(--space-lg);
+}
+
+.headline-block__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-lg);
+  font-weight: var(--fw-black);
+  color: var(--bkm-pure-green);
+  line-height: var(--lh-display);
+  margin-bottom: var(--space-xs);
+}
+
+.headline-block__subtitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-subheadline);
+  font-weight: var(--fw-bold);
+  font-style: italic;
+  color: var(--bkm-pure-green);
+  line-height: var(--lh-subheadline);
+}
+
+/* ──────────────────────────────────────────────────────────
+   SPALTEN-LAYOUTS
+   ────────────────────────────────────────────────────────── */
+
+.columns-2 {
+  column-count: 2;
+  column-gap: var(--column-gap);
+}
+
+.columns-3 {
+  column-count: 3;
+  column-gap: var(--column-gap);
+}
+
+.columns-2 p,
+.columns-3 p {
+  text-align: justify;
+  /* U+002D statt U+2010: keine der Markenschriften hat den
+     typografischen Trennstrich, WeasyPrint faellt sonst auf eine
+     Fremdschrift zurueck. */
+  hyphens: auto;
+  hyphenate-character: "-";
+  -webkit-hyphens: auto;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+/* Grid-basiertes 2-Spalten-Layout (asymmetrisch) */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.grid-2--wide-left {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-lg);
+}
+
+.grid-2--wide-right {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-lg);
+}
+
+/* ──────────────────────────────────────────────────────────
+   ZITAT-/CALLOUT-BOX
+   ────────────────────────────────────────────────────────── */
+
+.quote-box {
+  background-color: var(--quote-box-bg);
+  color: var(--quote-box-text);
+  border-radius: var(--quote-box-radius);
+  padding: var(--quote-box-padding);
+  position: relative;
+  page-break-inside: avoid;
+}
+
+.quote-box::before {
+  content: "\201C\201C";  /* Anführungszeichen */
+  font-family: var(--font-display);
+  font-size: 36pt;
+  color: rgba(255, 255, 255, 0.4);
+  position: absolute;
+  top: 3mm;
+  left: 6mm;
+  line-height: 1;
+}
+
+.quote-box__text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  font-style: italic;
+  color: var(--bkm-white);
+  line-height: var(--lh-subheadline);
+  position: relative;
+  z-index: 1;
+}
+
+/* ──────────────────────────────────────────────────────────
+   BILD-PLATZHALTER
+   ────────────────────────────────────────────────────────── */
+
+.image-block {
+  width: 100%;
+  overflow: hidden;
+  page-break-inside: avoid;
+}
+
+.image-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-block--placeholder {
+  background-color: var(--placeholder-bg);
+  min-height: 60mm;
+}
+
+.image-block--rounded {
+  border-radius: 4mm;
+}
+
+/* ──────────────────────────────────────────────────────────
+   DUNKLE KONTRASTFLÄCHE
+   ────────────────────────────────────────────────────────── */
+
+.dark-section {
+  background-color: var(--dark-section-bg);
+  color: var(--dark-section-text);
+  padding: var(--space-lg);
+}
+
+.dark-section h2,
+.dark-section h3 {
+  color: var(--bkm-white);
+}
+
+.dark-section .headline-block__title {
+  color: var(--bkm-white);
+}
+
+.dark-section .headline-block__subtitle {
+  color: var(--bkm-lime-green);
+}
+
+.dark-section p {
+  color: var(--bkm-white);
+}
+
+/* ──────────────────────────────────────────────────────────
+   PROZESS-LISTE (Nummerierte Schritte)
+   ────────────────────────────────────────────────────────── */
+
+.process-list {
+  list-style: none;
+  padding: 0;
+}
+
+.process-list__item {
+  margin-bottom: var(--space-md);
+  page-break-inside: avoid;
+}
+
+.process-list__number {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  color: var(--bkm-pure-green);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.process-list__title {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  color: var(--bkm-stone-grey);
+  margin-bottom: var(--space-xs);
+}
+
+.process-list__description {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  color: var(--bkm-stone-grey);
+}
+
+/* ──────────────────────────────────────────────────────────
+   CTA-BEREICH (Call to Action)
+   ────────────────────────────────────────────────────────── */
+
+.cta-text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  color: var(--bkm-pure-green);
+  margin-top: var(--space-md);
+}
+
+/* ──────────────────────────────────────────────────────────
+   FOOTER / KONTAKT-BEREICH
+   ────────────────────────────────────────────────────────── */
+
+.footer {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+}
+
+.footer__logos {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.footer__logos img {
+  height: 10mm;
+  width: auto;
+}
+
+.footer__contact {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.footer__contact strong {
+  font-weight: var(--fw-bold);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.footer__copyright {
+  font-size: var(--fs-small);
+  /* Rechtshinweis, zurueckgenommen - dafuer gibt es muted-grey. --bkm-grey-50
+     ist #808080 und steht in keiner Palette. */
+  color: var(--bkm-muted-grey);
+  margin-top: var(--space-lg);
+}
+
+/* ──────────────────────────────────────────────────────────
+   INFO-BLOCK (Ursachen-Übersicht etc.)
+   ────────────────────────────────────────────────────────── */
+
+.info-block {
+  margin-bottom: var(--space-md);
+  page-break-inside: avoid;
+}
+
+.info-block__title {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  color: var(--bkm-pure-green);
+  margin-bottom: var(--space-xs);
+}
+
+.info-block__text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+}
+
+/* ──────────────────────────────────────────────────────────
+   CONTENT-SEITE (Standard-Inhaltsseite)
+   ────────────────────────────────────────────────────────── */
+
+.content-page {
+  padding: 0;
+}
+
+.content-page__upper {
+  margin-bottom: var(--space-xl);
+}
+
+.content-page__lower {
+  margin-top: var(--space-xl);
+}
+
+/* Halbe Seite mit Bild + Text nebeneinander */
+.split-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 130mm;
+}
+
+.split-section--image-left .split-section__image {
+  order: 1;
+}
+
+.split-section--image-left .split-section__content {
+  order: 2;
+  padding-left: var(--space-lg);
+}
+
+.split-section--image-right .split-section__image {
+  order: 2;
+}
+
+.split-section--image-right .split-section__content {
+  order: 1;
+  padding-right: var(--space-lg);
+}
+
+.split-section__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.split-section__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* =========================================================================
+   BKM Verarbeitungsanleitung — Innenteil
+   =========================================================================
+
+   Ein eigenstaendiges Dokument, produktbezogen, fuer Pro Line und Home Line.
+   Das Titelblatt ist ein eigenes Dokument (scripts/build_cover.py, Variante
+   "anleitung"); dieser Innenteil traegt keines. Die erste Seite in pages[]
+   traegt darum die Ziffer 1 - dieselbe Regel wie templates/pages/, siehe
+   pagination.production in brand.json.
+
+   Alle Maße stammen aus grid.interior in brand.json und werden hier nicht
+   neu entschieden:
+     Kopfsteg   26,7 mm      Fußsteg    23,5 mm
+     Achse      18   mm      Satzbreite 174  mm
+   Die Spaltenbreite wird gerechnet, nicht gesetzt - zwei nebeneinander
+   notierte Zahlen laufen auseinander (column_width_note in brand.json).
+
+   Farben und Schriften kommen ausschliesslich aus
+   design-system/variables.css. Ein Hexwert in dieser Datei ist ein Fehler,
+   ausgenommen Fotos und Fremdlogos.
+   ========================================================================= */
+
+@page {
+  size: 210mm 297mm;
+  margin: 0;
+}
+
+:root {
+  /* Die Achse ist markenweit und nicht verhandelbar: 18 mm, aussen wie
+     innen, siehe grid.axis_mm in brand.json.
+
+     Kopf- und Fussteg sind es nicht. 26,7 und 23,5 mm sind Broschueren-
+     masse; sie existieren dort, weil Kolumnentitel und Folio in den Steg
+     laufen. Ein technisches Dokument hat beides nicht. Das Datenblatt,
+     der naechste Verwandte dieses Dokuments, setzt aus demselben Grund
+     von 6,0 bis 291,4 mm - gemessen an output/tds-hz250pro.pdf. Die
+     freigegebenen Verarbeitungsanleitungen laufen von 12,6 bis 290,2 mm.
+
+     Hier: 18 mm Kopfsteg, damit der Satz auf der Achse beginnt, und
+     20 mm Fussteg fuer Seitenzahl und Impressum. Ergibt 259 mm Satzhoehe
+     statt 246,8 - ohne diese 12 mm braeuchte dieselbe Anleitung eine
+     Seite mehr. */
+  /* radius.value_px in brand.json: 5. Gilt fuer jede Flaeche, die nicht
+     randabfallend ist - dort bliebe sie kantig, weil der Beschnitt einen
+     Radius an der Blattkante abschneidet und er wie ein Fehler wirkt.
+     Diese Datei setzte bis 31.08.2026 ueberall eckig. */
+  --anl-radius: 5px;
+  --anl-axis: 18mm;
+  --anl-top: 18mm;
+  --anl-bottom: 20mm;
+  --anl-width: 174mm;
+  --anl-gutter: 4.6mm;
+  /* (174 − 2 × 4,6) / 3 — gerechnet, siehe Kopf */
+  --anl-col: calc((var(--anl-width) - 2 * var(--anl-gutter)) / 3);
+  /* Die Spalte des zweispaltigen Satzes: (174 − 4,6) / 2 = 84,7 mm. */
+  --anl-col2: calc((var(--anl-width) - var(--anl-gutter)) / 2);
+  /* Bildhoehe im Format 16:9, aus der Spaltenbreite gerechnet.
+     aspect-ratio waere der richtige Weg, aber WeasyPrint 69 kennt die
+     Eigenschaft nicht - das Element wird damit gar nicht gezeichnet,
+     nachgemessen am 31.08.2026. Der Prozentwert padding-top loest hier
+     nicht gegen die Breite auf. Bleibt calc: eine Quelle, die Hoehe
+     rechnet mit, wenn sich die Spalte aendert. */
+  --anl-fig-h: calc(var(--anl-col2) * 9 / 16);
+}
+
+/* === SEITE ============================================================== */
+
+.anl-page {
+  /* Keine Brotschrift im Bestand fuehrt U+2010. Ohne diese Zeile setzt
+     WeasyPrint jeden automatischen Trennstrich - und jeden Umbruch an
+     einem weichen Trennzeichen U+00AD - aus einer Ersatzschrift. Steht
+     hier auf der Seite, damit es fuer jedes Element darin gilt und nicht
+     nur fuer die, an die jemand gedacht hat. */
+  hyphenate-character: "-";
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: var(--bkm-white);
+  page-break-after: always;
+  break-after: page;
+}
+.anl-page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.anl-page__body {
+  position: absolute;
+  top: var(--anl-top);
+  left: var(--anl-axis);
+  width: var(--anl-width);
+  /* Die Hoehe wird gesetzt, nicht dem Fluss ueberlassen: laeuft Inhalt
+     ueber, schiebt er sonst die Fusszeile aus dem Blatt und WeasyPrint
+     schneidet still ab. Mit fester Hoehe und overflow:hidden faellt es
+     im Vollstaendigkeitstest von pdf_checks.py auf. */
+  height: calc(297mm - var(--anl-top) - var(--anl-bottom));
+  overflow: hidden;
+}
+
+/* === KEYVISUAL AUF DER LETZTEN SEITE ==================================== */
+
+/* Dieselbe Lage wie auf dem Titelblatt: 42 mm breit, rechts randabfallend,
+   Oberkante 102,416 mm. Die Zahl ist so gerechnet, dass die linke
+   Oberkante des Pure-Green-Chevrons die Unterkante des 16:9-Bereichs
+   trifft - siehe keyvisual.which_variant in brand.json. Sie hier neu zu
+   waehlen hiesse, dieselbe Marke an zwei verschiedenen Hoehen zu fuehren.
+
+   Die dreifarbige Fassung, weil die Seite weiss ist. Gesetzt wird die
+   schlanke Datei aus assets/keyvisual/ - dieselbe, die Cover und Canvas
+   benutzen.
+
+   Die Nacharbeitsseite traegt wenig Text; er endet bei 64,5 mm und
+   beruehrt das Zeichen nicht. Waechst er, schiebt er sich darueber -
+   deshalb steht es auf z-index 0, unter dem Satz. */
+.anl-keyvisual {
+  position: absolute;
+  top: 102.416mm;
+  right: 0;
+  width: 42mm;
+  height: 99.57mm;
+  z-index: 0;
+  display: block;
+}
+
+/* === FUSSZEILE ========================================================== */
+
+.anl-foot {
+  position: absolute;
+  left: var(--anl-axis);
+  right: var(--anl-axis);
+  bottom: 12mm;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 7.5pt;
+  line-height: 1.2;
+  color: var(--bkm-muted-grey);
+}
+.anl-foot--verso { flex-direction: row-reverse; }
+.anl-foot__folio {
+  font-weight: 700;
+  font-size: 9pt;
+  /* Deep Green. Die Ziffer gehoert zur Marke, nicht zum Beiwerk. */
+  color: var(--bkm-deep-green);
+  font-variant-numeric: tabular-nums;
+}
+.anl-foot__rubrik { letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* === KOPFZEILE ========================================================== */
+
+.anl-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 2.5mm;
+  border-bottom: 0.25mm solid var(--bkm-rule);
+  margin-bottom: 7mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bkm-muted-grey);
+}
+
+/* === UEBERSCHRIFTEN ===================================================== */
+
+.anl-h1 {
+  margin: 0 0 3mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 26pt;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--bkm-deep-green);
+}
+.anl-h2 {
+  margin: 0 0 2.5mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 12pt;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--bkm-deep-green);
+}
+.anl-lead {
+  margin: 0 0 6mm;
+  max-width: 140mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 10.5pt;
+  line-height: 1.4;
+  color: var(--bkm-stone-grey);
+}
+.anl-text {
+  margin: 0 0 2.4mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.5;
+  color: var(--bkm-stone-grey);
+  hyphens: auto;
+  /* Keine Brotschrift im Bestand fuehrt U+2010. Ohne diese Zeile setzt
+     WeasyPrint den Trennstrich aus einer Ersatzschrift. */
+  hyphenate-character: "-";
+}
+
+/* === AUSZEICHNUNGEN LINKSBUENDIG ======================================= */
+
+/* design-system/base.css setzt text-align:justify und hyphens:auto fuer
+   das ganze Dokument. Fuer den Fliesstext ist das richtig; jede kurze
+   Zeile in einer 84,7-mm-Spalte wird dadurch aber auseinandergezogen und
+   getrennt - aus "FUER DEINE EIGENE SICHERHEIT" wurde ein gestreckter
+   Zweizeiler mit "SICHER-HEIT". Ueberschriften, Labelzeilen und
+   Bildunterschriften stehen deshalb linksbuendig und ungetrennt.
+   Die gemeinsame Datei bleibt unberuehrt: Datenblatt und Broschuere
+   haengen daran. */
+.anl-rubrik,
+.anl-abschnitt__title,
+.anl-kasten__title,
+.anl-tipp__title,
+.anl-vorteil__claim,
+.anl-vorteil__detail,
+.anl-text--label,
+.anl-fig__cap,
+.anl-ph__label,
+.anl-foot,
+.anl-bullets li,
+.anl-table th,
+.anl-formel {
+  text-align: left;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+/* === RUBRIK ============================================================ */
+
+/* Vier Rubriken, in dieser Folge: VORTEILE, VORBEREITUNG, ANLEITUNG,
+   NACHARBEIT. Abgelesen an sieben freigegebenen Anleitungen (HZ 250 Pro,
+   HZC Creme, SP Express, RD ReparaturDicht, Novusan, NovuSticks,
+   NovuProtect) - dort einheitlich, unabhaengig von Produkt und Linie.
+   Die Bestandsvorlagen setzen sie in 25pt auf x=15mm; hier steht sie auf
+   der Achse 18mm, weil brand.json nur diese eine Fluchtlinie kennt. */
+.anl-rubrik {
+  margin: 0 0 4.5mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  /* 18pt, nicht 22. Bei 22 gegen 10 pt Subheadline war der Sprung mit
+     Faktor 2,2 zu gross; die Rubrik bleibt auch bei 18 die groesste
+     Marke auf der Seite. Verbindlich steht der Wert in brand.json unter
+     type_scale.anleitung, hier ist er nur wiederholt. */
+  font-size: 18pt;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--bkm-deep-green);
+}
+/* Absatz zwischen den Rubriken: Vorteile und Vorbereitung sind zwei
+   Kapitel auf einem Blatt, nicht zwei Ueberschriften hintereinander. */
+.anl-rubrik--zweit { margin-top: 11mm; }
+
+/* === ZWEISPALTIGE VORBEREITUNGSSEITE =================================== */
+
+/* Links der Anwendungsbereich, rechts Werkzeug und Sicherheit - so steht
+   es in allen sieben Bestandsanleitungen. */
+.anl-split {
+  display: grid;
+  grid-template-columns: 1fr 62mm;
+  gap: 8mm;
+  align-items: start;
+}
+
+/* === LISTEN ============================================================ */
+
+.anl-bullets { margin: 0 0 4mm; padding: 0; list-style: none; }
+.anl-bullets li {
+  position: relative;
+  padding: 0 0 1.4mm 5mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.45;
+  color: var(--bkm-stone-grey);
+}
+/* Ein gesetzter Punkt, kein Zeichen aus der Schrift: ueber ein Bullet aus
+   dem Zeichensatz kommt sonst eine Ersatzschrift ins PDF. */
+.anl-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0.6mm;
+  top: 1.75mm;
+  width: 1.5mm;
+  height: 1.5mm;
+  border-radius: 50%;
+  background: var(--bkm-transition-green);
+}
+.anl-bullets--negativ li::before { background: var(--bkm-muted-grey); }
+
+/* Ohne Punkt. In den Untergrundlisten und in Werkzeug und Sicherheit
+   traegt der Punkt nichts: die Zeilen sind kurz und stehen ohnehin
+   untereinander. Die Aufzaehlung wird stattdessen ueber die Labelzeile
+   mit ihrem Icon angekuendigt. */
+.anl-bullets--nackt li { padding-left: 0; }
+.anl-bullets--nackt li::before { content: none; }
+
+/* Handlungsschritte. Ohne Ziffer und ohne Punkt: die Reihenfolge steht
+   im Text ("Lege zuerst fest", "Trage vor dem Aufbringen auf"), und eine
+   zweite Ordnung daneben traegt nichts. Der Kasten mit der Ziffer stand
+   hier bis 31.08.2026; er ist entfernt, nicht nur ungenutzt. */
+.anl-schritte { margin: 0 0 4mm; padding: 0; list-style: none; }
+.anl-schritte li {
+  padding: 0 0 2.4mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.45;
+  color: var(--bkm-stone-grey);
+}
+.anl-schritte--breit { margin-bottom: 5mm; }
+.anl-text--label {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  margin-bottom: 2mm;
+  font-weight: 700;
+  color: var(--bkm-deep-green);
+}
+
+/* === VORTEILE ========================================================== */
+
+/* Behauptung fett, Begruendung darunter mager - das Muster aus dem
+   Bestand. Der Vorteil traegt die Aussage, die Zeile darunter belegt sie. */
+/* Ueber die volle Satzbreite, direkt unter der Rubrik. Die Haarlinie
+   trennt die drei Aussagen, ohne sie einzukasteln. */
+.anl-vorteil {
+  display: grid;
+  grid-template-columns: 9.5mm 1fr;
+  gap: 0 3.5mm;
+  align-items: center;
+  /* Ohne Trennstrich. Drei Aussagen mit Icon stehen fuer sich; die Linie
+     dazwischen war eine Ordnung, die der Inhalt nicht braucht. */
+  margin: 0 0 3.4mm;
+}
+/* Der Kasten steht neben beiden Zeilen und trifft ihre Hoehe: Behauptung
+   9,5pt auf 1,35 und Begruendung 8,5pt auf 1,4 ergeben zusammen rund
+   9,5 mm - genau das Mass der Stufe inline. */
+.anl-vorteil__text { grid-column: 2; }
+.anl-vorteil:last-of-type { margin-bottom: 6mm; }
+.anl-vorteil__claim {
+  margin: 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 9.5pt;
+  line-height: 1.35;
+  color: var(--bkm-deep-green);
+}
+.anl-vorteil__detail {
+  margin: 0.4mm 0 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.4;
+  /* Deep Green, mager. Vorher Muted Grey - das ist die Farbe fuer Beiwerk
+     (Bildunterschriften, Fussnoten, Folio), und die Begruendung eines
+     Vorteils ist kein Beiwerk. Sie steht eine Stufe unter der Behauptung:
+     dieselbe Farbe, geringeres Gewicht. */
+  color: var(--bkm-deep-green);
+}
+
+/* === WERKZEUG UND SICHERHEIT =========================================== */
+
+/* Eng gesetzt, mit Absicht: in der ersten Fassung standen hier 5 mm
+   Innenabstand, und die letzten beiden Sicherheitsangaben - Gehoerschutz
+   und Staubmaske - fielen vom Blatt. Die Seite sah heil aus. Wer diese
+   Werte wieder aufmacht, muss den Umfang von S.2 nachmessen. */
+.anl-kasten {
+  background: var(--bkm-sand-white);
+  border-radius: var(--anl-radius);
+  padding: 3.4mm 4mm;
+  margin: 0 0 3.4mm;
+}
+.anl-kasten__title {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  margin: 0 0 2.5mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 9pt;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--bkm-deep-green);
+}
+.anl-kasten--breit { margin-top: 1mm; }
+
+/* Die benannte Flaeche "deep" aus brand.json: Grund Deep Green, Text
+   Clean White, Titel Lime Green. Nicht selbst zusammengestellt - der
+   Name legt alle vier Werte gemeinsam fest, damit keine Kombination
+   entsteht, die im Druck nicht traegt. Der Iconkasten wechselt darauf
+   auf Transition Green, sonst stuende Deep auf Deep; der Glyph bleibt
+   Lime. */
+.anl-kasten--deep { background: var(--bkm-deep-green); }
+.anl-kasten--deep .anl-kasten__title { color: var(--bkm-lime-green); }
+.anl-kasten--deep .anl-bullets li { color: var(--bkm-white); }
+.anl-kasten--deep .anl-ic { background: var(--bkm-transition-green); }
+.anl-bullets--zwei { column-count: 2; column-gap: 4mm; }
+.anl-bullets--zwei li { break-inside: avoid; }
+.anl-bullets--drei { column-count: 3; column-gap: var(--anl-gutter); }
+.anl-bullets--drei li { break-inside: avoid; }
+.anl-kasten .anl-bullets li { font-size: 8.5pt; padding-bottom: 0.9mm; }
+.anl-kasten .anl-bullets { margin-bottom: 0; }
+.anl-kasten .anl-bullets li::before { top: 1.55mm; }
+
+/* === PROFI TIPP ======================================================== */
+
+/* Im Bestand in #afca13 gesetzt. Das ist nicht Lime Green - hier steht
+   der Palettenwert. Die Flaeche traegt den Tipp, nicht der Farbton
+   allein: die Anleitung wird auf der Baustelle oft schwarzweiss kopiert. */
+.anl-tipp {
+  background: var(--bkm-deep-green);
+  border-radius: var(--anl-radius);
+  padding: 4mm 4.5mm;
+  margin: 1mm 0 0;
+}
+.anl-tipp__title {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  margin: 0 0 1.5mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 9.5pt;
+  letter-spacing: 0.02em;
+  color: var(--bkm-lime-green);
+}
+.anl-tipp__body {
+  margin: 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.45;
+  color: var(--bkm-white);
+}
+
+/* === ICONS ============================================================= */
+
+/* Phosphor Bold, Glyph in Lime auf einem Kasten. Der Glyph ist immer Lime,
+   der Kasten haengt am Absender: die Anleitung ist ein Dokument der AG,
+   also Deep Green auf hellem Grund (sender_context.ag in brand.json).
+   Groessen aus icons.sizes_mm - category_opener 12/7,5 mm fuer die
+   Rubriken, inline 9,5/6 mm fuer die Kaesten daneben.
+
+   Die Dateien werden inline eingebettet, nicht als <img>: WeasyPrint
+   wendet das Dokument-Stylesheet nicht auf SVG-Kinder an, deshalb traegt
+   jede Datei ihre Fuellung selbst (scripts/prepare_brochure_icons.py).
+   Ein Icon-Webfont kommt nicht in Frage - ueber Font-Klassen waere die
+   Strichstaerke frei waehlbar. */
+.anl-ic {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bkm-deep-green);
+  border-radius: var(--anl-radius);
+}
+.anl-ic svg { display: block; }
+/* Die Rubriken tragen kein Icon - sie tragen ihr Gewicht ueber Groesse
+   und Farbe. Die Subheadlines tragen eines, ebenso die Vorteile, die
+   Kaesten und die Labelzeilen.
+
+   Zwei benannte Stufen aus icons.sizes_mm, keine erfundenen Zahlen:
+   contact 6,5 / 3,8 mm fuer Zeilen, inline 9,5 / 6 mm fuer den Vorteil -
+   dort steht der Kasten neben zwei Zeilen und muss ihre Hoehe treffen. */
+.anl-ic--contact { width: 6.5mm; height: 6.5mm; }
+.anl-ic--contact svg { width: 3.8mm; height: 3.8mm; }
+.anl-ic--inline { width: 9.5mm; height: 9.5mm; }
+.anl-ic--inline svg { width: 6mm; height: 6mm; }
+
+/* Auf dunklem Grund traegt der Kasten Transition Green, sonst steht Deep
+   auf Deep. Der Glyph bleibt Lime - eine Regel, kein Sonderfall. */
+.anl-tipp .anl-ic { background: var(--bkm-transition-green); }
+
+/* === ZWEISPALTIGER SATZ AUF DEN ANLEITUNGSSEITEN ======================= */
+
+/* Die freigegebenen Fassungen setzen den Text in einer 86-mm-Spalte ab
+   x=15mm und stellen Abbildungen rechts ab x=110mm daneben. Ueber die
+   volle Satzbreite von 174 mm gelaufen ergaeben sich bei 9pt mehr als 110
+   Zeichen je Zeile - lesbar sind 45 bis 75. Hier zwei gleiche Spalten auf
+   dem Raster aus brand.json: (174 − 4,6) / 2 = 84,7 mm, also fast genau
+   das Mass der Vorlage. */
+.anl-zwei {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--anl-gutter);
+  align-items: start;
+}
+
+/* === ABSCHNITTE DER ANLEITUNGSSEITEN =================================== */
+
+/* Eng gesetzt: mit 5 mm passten die Hinweise und der Profi-Tipp nicht
+   mehr auf ihre Seite, und die Abbildungen waeren von ihrem Abschnitt
+   getrennt worden. Wer das aufmacht, muss den Umfang nachmessen. */
+.anl-abschnitt { margin: 0 0 3.5mm; }
+.anl-abschnitt__title {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  margin: 0 0 1.5mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 10pt;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--bkm-deep-green);
+}
+
+/* Rechenwege stehen abgesetzt, nicht im Fliesstext: auf der Baustelle
+   wird die Formel gesucht, nicht gelesen. */
+.anl-formel {
+  margin: 1.6mm 0;
+  padding: 2.6mm 3.5mm;
+  background: var(--bkm-sand-white);
+  border-radius: var(--anl-radius);
+  border-left: 1mm solid var(--bkm-transition-green);
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.5;
+  color: var(--bkm-stone-grey);
+}
+.anl-formel__satz { font-weight: 700; color: var(--bkm-deep-green); }
+.anl-formel__beispiel { color: var(--bkm-muted-grey); }
+
+/* === ABBILDUNGEN ======================================================= */
+
+/* Untereinander in der rechten Spalte, nicht nebeneinander: bei 84,7 mm
+   Spaltenbreite waeren zwei Abbildungen je 40 mm breit und die Maßketten
+   der Bohrlochmuster nicht mehr lesbar. */
+.anl-figs { margin: 0 0 5mm; }
+.anl-fig { margin: 0 0 5mm; }
+/* 16:9, nicht eine feste Hoehe in Millimetern. Das Format ist gesetzt,
+   die Hoehe rechnet sich aus der Spaltenbreite: bei 84,7 mm sind das
+   47,64 mm. Aendert sich die Spalte, bleibt das Format. Eine gesetzte
+   Hoehe waere die zweite Zahl neben der Breite, und zwei Zahlen laufen
+   auseinander. Gilt fuer Bilder wie fuer Platzhalter. */
+.anl-fig__img {
+  width: 100%;
+  height: var(--anl-fig-h);
+  object-fit: cover;
+  display: block;
+  background: var(--bkm-grey-light);
+  border-radius: var(--anl-radius);
+}
+.anl-fig__cap {
+  margin: 2mm 0 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 8pt;
+  line-height: 1.35;
+  color: var(--bkm-muted-grey);
+}
+
+/* === NACHARBEIT UND IMPRESSUM ========================================== */
+
+.anl-impressum {
+  position: absolute;
+  left: var(--anl-axis);
+  right: var(--anl-axis);
+  bottom: 17mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 7pt;
+  line-height: 1.4;
+  color: var(--bkm-muted-grey);
+}
+.anl-impressum__datum { font-weight: 700; color: var(--bkm-stone-grey); }
+
+/* === PLATZHALTERFLAECHEN ================================================ */
+
+/* Fehlt ein Motiv, steht hier eine gestreifte Flaeche mit Beschriftung -
+   kein toter Bildverweis. Findet WeasyPrint eine Datei nicht, setzt es
+   still den Alt-Text in einer Serifenschrift an ihre Stelle; auf einer
+   Anleitung faellt das erst im Druck auf. Die Streifen sind aus einem
+   Verlauf gebaut, nicht aus einer Bilddatei, damit der Platzhalter selbst
+   nichts nachladen muss. Muster und Regel: placeholders in brand.json. */
+.anl-ph {
+  display: flex;
+  align-items: flex-end;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--bkm-grey-light) 0, var(--bkm-grey-light) 2.4mm,
+    var(--bkm-white) 2.4mm, var(--bkm-white) 4.8mm);
+  border: 0.25mm solid var(--bkm-rule);
+  border-radius: var(--anl-radius);
+}
+.anl-ph__label {
+  margin: 0;
+  padding: 2mm 2.5mm;
+  background: var(--bkm-white);
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 7.5pt;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  /* Keine Versalien: text-transform macht aus "Maßkette" ein "MASSKETTE",
+     und der Vollstaendigkeitstest in build_anleitung.py vergleicht gegen
+     den Text aus content.json - am ss scheitert der Abgleich, und eine
+     heile Seite wird als fehlender Text gemeldet. */
+  color: var(--bkm-muted-grey);
+}
+
+/* === OFFENE ANGABEN ===================================================== */
+
+/* Fehlende Angaben werden sichtbar gemacht, nicht weggelassen. Dieselbe
+   Regel wie im Datenblatt: ein Entwurf darf Luecken haben, sie duerfen
+   nur nicht stillschweigend verschwinden. */
+.anl-offen {
+  background: var(--bkm-sand-white);
+  border-radius: var(--anl-radius);
+  outline: 0.3mm dashed var(--bkm-pure-green);
+  padding: 0 1mm;
+  font-weight: 700;
+  color: var(--bkm-deep-green);
+}
+
+</style>
+</helmet>
+
+<div style="padding:28px 60px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+<a href="Bibliothek.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">Bibliothek</a>
+<a href="A-Titelblaetter.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">A · Titelblätter</a>
+<a href="B-Rahmenseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">B · Rahmenseiten</a>
+<a href="C-Navigation.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">C · Navigation</a>
+<a href="D-Textstrecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">D · Textstrecken</a>
+<a href="E-Strecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">E · Strecken</a>
+<a href="F-Verfahren.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">F · Verfahren</a>
+<a href="G-Produktseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">G · Produktseiten</a>
+<a href="H-Fachbetrieb.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">H · Fachbetrieb</a>
+<a href="I-Anleitung.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#1c4b42;color:#b4e717">I · Anleitung</a>
+</div>
+
+<section style="padding:60px 60px 120px;display:flex;flex-direction:column;gap:48px">
+
+<div style="max-width:900px;display:flex;flex-direction:column;gap:14px">
+<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">I · Anleitung</div>
+<h1 style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:44px;line-height:1.05;letter-spacing:-0.02em;color:#1c4b42;margin:0">Verarbeitungsanleitung BKM HZ 250 Pro</h1>
+<p style="margin:0;font-size:17px;line-height:1.6;max-width:70ch">Erzeugt aus content/anleitung-hz250pro/content.json. Aenderungen gehoeren in den Content oder in templates/anleitung/, nicht in diese Datei — sie wird von scripts/build_anleitung_canvas.py neu geschrieben.</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:60px">
+
+<div id="anleitung-titel" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-titel</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Titelblatt</span>
+<span style="font-size:14px;color:#8a8a8a">Weiß</span>
+</div>
+<div data-screen-label="Titelblatt" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+
+
+    <!-- HERO-BILD (UNTERSTE EBENE, z-index: 1)
+         Position: Y=0 (vollflächig hinter allem)
+         Breite: 210mm, Höhe: 297mm
+         Fit: cover -->
+    <div class="cover__hero">
+      <img src="uploads/cover-hero-standard.jpg" alt="BKM HZ 250 Pro Verarbeitungsanleitung">
+    </div>
+
+    <!-- L-FÖRMIGE FARBFLÄCHE (z-index: 2)
+         Besteht aus:
+         - 16:9 Farbkasten: 210mm × 118.1mm (vollflächig oben)
+         - 8×8mm Erweiterung: rechts unten, bündig an Unterkante
+         Zusammen eine einzige L-förmige Fläche.
+         Farbe: Je nach Variante -->
+    <!-- HERO-GRAFIK (z-index: 2)
+         210 x 125 mm. Die PNG bringt die Eckerweiterung mit: unterhalb der
+         16:9-Kante bei 118,125 mm ist nur der rechte Zipfel deckend, der Rest
+         durchsichtig. Frueher war das ein flacher Farbkasten plus ::after. -->
+    <img class="cover__hero-graphic" src="uploads/titel-hero-anleitung.png" alt="">
+
+    <!-- TEXT-CONTENT CONTAINER (Flow-Layout)
+         Position: X=18mm Y=18mm (Padding im Container)
+         Die Textelemente fließen vertikal mit definierten Abständen.
+         Subheadline und Fließtext sind NICHT fest positioniert –
+         sie passen sich an die tatsächliche Textlänge an. -->
+    <div class="cover__content">
+
+      <!-- LOGO
+           Breite: 42mm (1/5 der Formatbreite)
+           Variante: Abhängig vom Hintergrund (Kontrast-Regel) -->
+      <img class="cover__logo" 
+           src="assets/logos/bkm-logo-deepgreen-puregreen.svg" 
+           alt="BKM Mannesmann">
+
+      <!-- SIEGEL (nur Fachbetriebe): rund, ersetzt optisch das Logo.
+           Das Logo darueber bleibt im Fluss, damit der Abstand zur Headline
+           unveraendert bleibt. -->
+      
+
+      <!-- HEADLINE
+           Schrift: Unbounded Black (900), 30pt, Versalien
+           Abstand oben: 18mm (unter Logo)
+           Regel: IMMER 2-zeilig, Zeile 1 kürzer als Zeile 2 -->
+      <h1 class="cover__headline">VERARBEITUNGS-<br>ANLEITUNG</h1>
+
+      <!-- SUBHEADLINE
+           Schrift: Unbounded Black (900), 12pt, keine Versalien
+           Abstand oben: 10.6mm (= 30pt Zeichenhöhe)
+           Ein- oder zweizeilig je nach Textlänge (KEIN künstlicher Umbruch)
+           Farbe: Variabel (Lime Green / Deep Green / Pure Green) -->
+      <p class="cover__subheadline">Gegen aufsteigende Feuchtigkeit und Querdurchfeuchtung im Mauerwerk.</p>
+
+      <!-- FLIESSTEXT
+           Schrift: TT Norms Pro Regular (400), 12pt
+           Abstand oben: Immer gleich nah an Subheadline (6mm)
+           Ein- bis dreizeilig je nach Textlänge
+           Max-Breite: 107mm -->
+      <p class="cover__intro">BKM HZ 250 Pro – Dauerhafte Kapillarsperre für die professionelle Anwendung.</p>
+
+    </div>
+
+    <!-- KEY VISUAL
+         WICHTIG: Vorgerenderte Bilddatei! NICHT in Code nachbauen!
+         Position: Rechts bündig (right=0), Oberkante Y=102.3mm
+         Breite: 42mm (1/5 der Formatbreite)
+         Variante: on-dark (auf farbigem BG) / on-light (auf weißem BG) -->
+    <!-- PRODUKT-BADGE (nur bei Home Line und Pro Line Produktbroschüren)
+         Position: Linksbündig (18mm), vertikal zentriert auf Unterkante Farbkasten (Y=118.1mm)
+         Größe: 61mm × 14.7mm
+         Home Line: Silber/Grau
+         Pro Line: Gold
+         Wird als vorgerenderte Bilddatei platziert -->
+    
+
+    <!-- KEY VISUAL
+         WICHTIG: Vorgerenderte Bilddatei! NICHT in Code nachbauen!
+         Position: Rechts bündig (right=0), Oberkante Y=102.3mm
+         Breite: 42mm (1/5 der Formatbreite) -->
+    <img class="cover__keyvisual" 
+         src="assets/keyvisual/keyvisual-on-light.svg" 
+         alt="BKM Key Visual">
+
+  
+</div>
+</div>
+
+<div id="anleitung-vorbereitung" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-vorbereitung</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Vorteile · Vorbereitung</span>
+<span style="font-size:14px;color:#8a8a8a">Weiß</span>
+</div>
+<div data-screen-label="Vorteile · Vorbereitung" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<section class="anl-page">
+  <div class="anl-page__body">
+    <h1 class="anl-rubrik">Vorteile</h1>
+    <div class="anl-vorteil">
+      <span class="anl-ic anl-ic--inline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M229.26,90.4a108,108,0,0,1-177.63,114A108,108,0,0,1,195.41,43.63l20.1-20.11a12,12,0,0,1,17,17l-96,96a12,12,0,1,1-17-17l24-24a36,36,0,1,0,19.76,39.65,12,12,0,0,1,23.53,4.74,60,60,0,1,1-25.73-62L178.3,60.74a84,84,0,1,0,28.46,38,12,12,0,1,1,22.5-8.35Z"></path></svg></span>
+      <div class="anl-vorteil__text">
+        <p class="anl-vorteil__claim">Präzise kalkulierbar – effizient im Einsatz</p>
+        <p class="anl-vorteil__detail">Exakt planbarer Verbrauch</p>
+      </div>
+    </div>
+    
+    <div class="anl-vorteil">
+      <span class="anl-ic anl-ic--inline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M208,36H48A20,20,0,0,0,28,56V114.8c0,92.36,78.1,123,93.76,128.18a19.6,19.6,0,0,0,12.48,0C149.9,237.78,228,207.16,228,114.8V56A20,20,0,0,0,208,36Zm-4,78.8c0,73.56-60.53,99.53-76,105-15.47-5.42-76-31.39-76-104.95V60H204ZM79.51,144.49a12,12,0,1,1,17-17L112,143l47.51-47.51a12,12,0,0,1,17,17l-56,56a12,12,0,0,1-17,0Z"></path></svg></span>
+      <div class="anl-vorteil__text">
+        <p class="anl-vorteil__claim">Angenehmeres Arbeiten im Innenbereich</p>
+        <p class="anl-vorteil__detail">VOC-freies Material für eine verarbeitungsfreundliche Anwendung</p>
+      </div>
+    </div>
+    
+    <div class="anl-vorteil">
+      <span class="anl-ic anl-ic--inline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M134.88,6.17a12,12,0,0,0-13.76,0,259,259,0,0,0-42.18,39C50.85,77.43,36,111.62,36,144a92,92,0,0,0,184,0C220,66.64,138.36,8.6,134.88,6.17ZM128,212a68.07,68.07,0,0,1-68-68c0-33.31,20-63.37,36.7-82.71A249.35,249.35,0,0,1,128,31.11a249.35,249.35,0,0,1,31.3,30.18C176,80.63,196,110.69,196,144A68.07,68.07,0,0,1,128,212Zm49.62-52.4a52,52,0,0,1-34,34,12.2,12.2,0,0,1-3.6.55,12,12,0,0,1-3.6-23.45,28,28,0,0,0,18.32-18.32,12,12,0,0,1,22.9,7.2Z"></path></svg></span>
+      <div class="anl-vorteil__text">
+        <p class="anl-vorteil__claim">Kraftvolle Sperrschicht ohne Porenverschluss</p>
+        <p class="anl-vorteil__detail">Zuverlässige Feuchtebarriere ohne Verstopfen der Kapillarporen</p>
+      </div>
+    </div>
+    
+
+    <h1 class="anl-rubrik anl-rubrik--zweit">Vorbereitung</h1>
+    <h2 class="anl-abschnitt__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M224,44H32A12,12,0,0,0,20,56V192a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V56A12,12,0,0,0,224,44ZM44,116H76v24H44Zm56,0H212v24H100ZM212,68V92H44V68ZM44,164H76v24H44Zm56,24V164H212v24Z"></path></svg></span><span>Anwendungsbereich</span></h2>
+    <p class="anl-text">BKM HZ 250 Pro dient zur Erstellung horizontaler oder flächiger Injektionsbarrieren gegen aufsteigende Feuchtigkeit und Querdurchfeuchtung in mineralischem Mauerwerk. Es unterbricht die kapillare Feuchtigkeitsaufnahme bei fehlender oder defekter Horizontalsperre und ermöglicht bei nicht ausschachtbaren Bereichen eine vollflächige Sperre von innen.</p>
+    <div class="anl-zwei">
+      <div>
+        
+        <p class="anl-text anl-text--label"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M176.49,95.51a12,12,0,0,1,0,17l-56,56a12,12,0,0,1-17,0l-24-24a12,12,0,1,1,17-17L112,143l47.51-47.52A12,12,0,0,1,176.49,95.51ZM236,128A108,108,0,1,1,128,20,108.12,108.12,0,0,1,236,128Zm-24,0a84,84,0,1,0-84,84A84.09,84.09,0,0,0,212,128Z"></path></svg></span><span>Geeignet für</span></p>
+        <ul class="anl-bullets anl-bullets--nackt"><li>Ziegel- und Klinkermauerwerk</li><li>Naturstein- und Bruchsteinmauerwerk</li><li>Sandsteinmauerwerk</li><li>Kalksandstein und Porenbeton</li><li>Gitter- und Hohlkammersteine</li><li>Stampfbeton</li></ul>
+        
+      </div>
+      <div>
+        
+        <p class="anl-text anl-text--label"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M240.26,186.1,152.81,34.23h0a28.74,28.74,0,0,0-49.62,0L15.74,186.1a27.45,27.45,0,0,0,0,27.71A28.31,28.31,0,0,0,40.55,228h174.9a28.31,28.31,0,0,0,24.79-14.19A27.45,27.45,0,0,0,240.26,186.1Zm-20.8,15.7a4.46,4.46,0,0,1-4,2.2H40.55a4.46,4.46,0,0,1-4-2.2,3.56,3.56,0,0,1,0-3.73L124,46.2a4.77,4.77,0,0,1,8,0l87.44,151.87A3.56,3.56,0,0,1,219.46,201.8ZM116,136V104a12,12,0,0,1,24,0v32a12,12,0,0,1-24,0Zm28,40a16,16,0,1,1-16-16A16,16,0,0,1,144,176Z"></path></svg></span><span>Nicht geeignet für</span></p>
+        <ul class="anl-bullets anl-bullets--nackt"><li>Flächige Abdichtungen in Hohlkammersteinmauerwerk ohne intakte Lagerfugen und gedeckelte Hohlkammern</li><li>WU-Beton</li><li>Dämmstoffgefülltes Mauerwerk</li></ul>
+        
+      </div>
+    </div>
+    
+
+    
+    <h2 class="anl-abschnitt__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M172,156a12,12,0,0,1-12,12H96a12,12,0,0,1,0-24h64A12,12,0,0,1,172,156Zm-12-52H96a12,12,0,0,0,0,24h64a12,12,0,0,0,0-24Zm60-56V216a20,20,0,0,1-20,20H56a20,20,0,0,1-20-20V48A20,20,0,0,1,56,28H90.53a51.88,51.88,0,0,1,74.94,0H200A20,20,0,0,1,220,48ZM128,36a28,28,0,0,0-27.71,24h55.42A28,28,0,0,0,128,36Zm68,16H178.59A52.13,52.13,0,0,1,180,64v8a12,12,0,0,1-12,12H88A12,12,0,0,1,76,72V64a52.13,52.13,0,0,1,1.41-12H60V212H196Z"></path></svg></span><span>Arbeitsplatz vorbereiten</span></h2>
+    <ul class="anl-schritte anl-schritte--breit"><li>Lege die gewünschte Sperrhöhe fest. Bei Horizontalsperren liegt diese ca. 5–15 cm über Oberkante Fußboden oder mindestens 15 cm über dem Erdreich.</li><li>Prüfe den Untergrund (Leitungen, Mauerwerksart) und ermittle die Wandstärke.</li><li>Prüfe bei Hohlkammersteinmauerwerk vor Beginn, ob durchgehende und intakte Lagerfugen oder gedeckelte Hohlkammersteine vorliegen.</li><li>Decke nicht zu behandelnde Flächen sorgfältig ab.</li></ul>
+    
+
+    <div class="anl-zwei">
+      <div>
+        
+        <div class="anl-kasten">
+          <p class="anl-kasten__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M250.18,105.17,186.71,41.25a100.11,100.11,0,0,0-141.43,0l-.13.14L31.37,55.61a12,12,0,1,0,17.24,16.7L62.32,58.16A75.68,75.68,0,0,1,77.49,46.43L119,88,25.85,181.16a20,20,0,0,0,0,28.29l20.69,20.69a20,20,0,0,0,28.28,0L168,137l1.51,1.51h0l23.65,23.66a20,20,0,0,0,28.29,0l28.69-28.7A20,20,0,0,0,250.18,105.17ZM60.68,210.34l-15-15L108,133l15,15ZM140,131l-15-15,19.51-19.51a12,12,0,0,0,0-17L102.24,37.24a75.94,75.94,0,0,1,67.47,20.95l31.44,31.67L178,113l-1.51-1.51a12,12,0,0,0-17,0Zm67.32,11.31L195,130l23.09-23.09,12.3,12.39Z"></path></svg></span><span>Für die Anwendung brauchst du</span></p>
+          <ul class="anl-bullets anl-bullets--nackt anl-bullets--zwei"><li>Zollstock</li><li>Wasserwaage</li><li>Akkuschrauber</li><li>Bohrmaschine</li><li>Bohrer Ø 14 mm</li><li>Bleistift</li><li>Injektionsflaschen</li><li>Injektionslanzen</li><li>BKM Profi-Press</li><li>Einschraubadapter + 17 mm Nuss</li></ul>
+        </div>
+        
+      </div>
+      <div>
+        <div class="anl-kasten anl-kasten--deep">
+          <p class="anl-kasten__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M208,36H48A20,20,0,0,0,28,56V114.8c0,92.36,78.1,123,93.76,128.18a19.6,19.6,0,0,0,12.48,0C149.9,237.78,228,207.16,228,114.8V56A20,20,0,0,0,208,36Zm-4,78.8c0,73.56-60.53,99.53-76,105-15.47-5.42-76-31.39-76-104.95V60H204ZM79.51,144.49a12,12,0,1,1,17-17L112,143l47.51-47.51a12,12,0,0,1,17,17l-56,56a12,12,0,0,1-17,0Z"></path></svg></span><span>Für deine eigene Sicherheit</span></p>
+          <ul class="anl-bullets anl-bullets--nackt"><li>Schutzbrille</li><li>Schutzhandschuhe</li><li>Schutzkleidung</li><li>Gehörschutz</li><li>Staubmaske</li></ul>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <footer class="anl-foot anl-foot--verso">
+  <span class="anl-foot__folio">2/6</span>
+  <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
+</footer>
+</section>
+</div>
+</div>
+
+<div id="anleitung-anleitung-1" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-anleitung-1</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Anleitung 1</span>
+<span style="font-size:14px;color:#8a8a8a">Weiß</span>
+</div>
+<div data-screen-label="Anleitung 1" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<section class="anl-page">
+  <div class="anl-page__body">
+    <h1 class="anl-rubrik">Anleitung</h1>
+    <div class="anl-zwei">
+      <div>
+        <div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verbrauch planen</h2>
+  <p class="anl-text">Je nach Mauerwerk gelten unterschiedliche Bohrlochabstände. Verwende bei normalem mineralischem Mauerwerk einen Bohrlochabstand von 25 cm und bei Beton, Natur- und Bruchstein, Kalksandstein und Porenbeton einen Bohrlochabstand von 12,5 cm. Der empfohlene Bohrlochabstand nach WTA-Vorgabe ist 12,5 cm. Der Bohrlochabstand muss so gewählt werden, dass mindestens eine Bohrung pro Stein erfolgt.</p>
+  
+  
+  <div class="anl-formel">
+    <div class="anl-formel__satz">Bei 25 cm Bohrlochabstand · Horizontalsperre: 14 × Wandstärke in cm = Verbrauch in ml je Bohrloch</div>
+    <div class="anl-formel__beispiel">Beispiel bei 30 cm Wandstärke: 14 × 30 = 420 ml je Bohrloch</div>
+  </div>
+  
+  <div class="anl-formel">
+    <div class="anl-formel__satz">Bei 25 cm Bohrlochabstand · Flächensperre: 10 × Wandstärke in cm = Verbrauch in ml je Bohrloch</div>
+    <div class="anl-formel__beispiel">Beispiel bei 30 cm Wandstärke: 10 × 30 = 300 ml je Bohrloch</div>
+  </div>
+  
+  <div class="anl-formel">
+    <div class="anl-formel__satz">Bei 12,5 cm Bohrlochabstand · Horizontalsperre: 7 × Wandstärke in cm = Verbrauch in ml je Bohrloch</div>
+    <div class="anl-formel__beispiel">Beispiel bei 30 cm Wandstärke: 7 × 30 = 210 ml je Bohrloch</div>
+  </div>
+  
+  <div class="anl-formel">
+    <div class="anl-formel__satz">Bei 12,5 cm Bohrlochabstand · Flächensperre: 5 × Wandstärke in cm = Verbrauch in ml je Bohrloch</div>
+    <div class="anl-formel__beispiel">Beispiel bei 30 cm Wandstärke: 5 × 30 = 150 ml je Bohrloch</div>
+  </div>
+  
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Untergrund</h2>
+  <p class="anl-text">Der Untergrund muss mineralisch sein. Setze bei einem Natursteinmauerwerk die Bohrung so in den Stein, dass auf halber Mauerwerksstärke eine Lagerfuge oder ein Hohlraum getroffen wird. Bei Gitter- und Hohlkammersteinen erfolgt die Injektion im oberen Drittel des Steins mit dem Ziel, das Material im Hohlraum anzureichern. Die weitere Verteilung erfolgt über das Fugenmaterial. Hohlräume oder Kammern müssen vor der Injektion nicht mit Suspensionen verfüllt werden.</p>
+  
+  
+</div>
+      </div>
+      <div>
+        
+        <div class="anl-figs">
+          
+          <figure class="anl-fig">
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto: Messen der Wandstärke am Mauerwerk, Zollstock angelegt</p></div>
+            <figcaption class="anl-fig__cap">Wandstärke ermitteln</figcaption>
+          </figure>
+          
+          <figure class="anl-fig">
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto oder Schnitt: Ziegel, Naturstein und Hohlkammerstein nebeneinander</p></div>
+            <figcaption class="anl-fig__cap">Geeignetes Mauerwerk</figcaption>
+          </figure>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <footer class="anl-foot anl-foot--recto">
+  <span class="anl-foot__folio">3/6</span>
+  <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
+</footer>
+</section>
+</div>
+</div>
+
+<div id="anleitung-anleitung-2" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-anleitung-2</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Anleitung 2</span>
+<span style="font-size:14px;color:#8a8a8a">Weiß</span>
+</div>
+<div data-screen-label="Anleitung 2" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<section class="anl-page">
+  <div class="anl-page__body">
+    <h1 class="anl-rubrik">Anleitung</h1>
+    <div class="anl-zwei">
+      <div>
+        <div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verarbeitung · Horizontalsperre</h2>
+  <p class="anl-text">Zeichne zuerst mit einer Wasserwaage und einem Bleistift die gewünschte Sperrhöhe an. Lege dann eine Bohrlochreihe in dieser Höhe fest. Die Bohrlöcher sind je nach Mauerwerksart im jeweiligen Abstand in einem Winkel von ca. 45° in das Mauerwerk zu bohren. Bei Mauerwerksecken setze eine Bohrung direkt in die Ecke. Die erste Bohrung aus der Ecke wird zu beiden Seiten mit 10 cm Abstand angeordnet. Bei Wandstärken über 60 cm muss in der Ecke eine zweite Bohrung um 5 cm nach oben versetzt erfolgen.</p>
+  
+  
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verarbeitung · Flächensperre</h2>
+  <p class="anl-text">Führe bei einer Flächensperre das Bohrlochmuster der Horizontalsperre nach oben schachbrettartig versetzt fort. Der vertikale Abstand beträgt hierbei 25 cm. Die letzte Bohrlochreihe endet min. 15 cm über Oberkante Gelände.</p>
+  
+  
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Partielle Flächensperre</h2>
+  <p class="anl-text">Wenn nur ein Teilbereich betroffen ist, lege die Sperre zu allen Seiten bis ca. 50 cm über die letzte erkennbare Schadensstelle hinaus an.</p>
+  
+  
+</div>
+      </div>
+      <div>
+        
+        <div class="anl-figs">
+          
+          <figure class="anl-fig">
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung Bohrlochmuster Horizontalsperre, 25 cm, mit Maßkette</p></div>
+            <figcaption class="anl-fig__cap">Bohrlochmuster Horizontalsperre bei 25 cm Bohrlochabstand</figcaption>
+          </figure>
+          
+          <figure class="anl-fig">
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung Bohrlochmuster Horizontalsperre, 12,5 cm, mit Maßkette</p></div>
+            <figcaption class="anl-fig__cap">Bohrlochmuster Horizontalsperre bei 12,5 cm Bohrlochabstand</figcaption>
+          </figure>
+          
+          <figure class="anl-fig">
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung Bohrlochmuster Flächensperre, 25 cm, schachbrettartig versetzt, mit Maßkette</p></div>
+            <figcaption class="anl-fig__cap">Bohrlochmuster Flächensperre bei 25 cm Bohrlochabstand</figcaption>
+          </figure>
+          
+          <figure class="anl-fig">
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung Bohrlochmuster Flächensperre, 12,5 cm, schachbrettartig versetzt, mit Maßkette</p></div>
+            <figcaption class="anl-fig__cap">Bohrlochmuster Flächensperre bei 12,5 cm Bohrlochabstand</figcaption>
+          </figure>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <footer class="anl-foot anl-foot--verso">
+  <span class="anl-foot__folio">4/6</span>
+  <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
+</footer>
+</section>
+</div>
+</div>
+
+<div id="anleitung-anleitung-3" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-anleitung-3</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Anleitung 3</span>
+<span style="font-size:14px;color:#8a8a8a">Weiß</span>
+</div>
+<div data-screen-label="Anleitung 3" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<section class="anl-page">
+  <div class="anl-page__body">
+    <h1 class="anl-rubrik">Anleitung</h1>
+    <div class="anl-zwei">
+      <div>
+        <div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Bohren</h2>
+  <p class="anl-text">Stimme die Bohrlochtiefe auf die Wandstärke ab. Bei Wandstärken bis 60 cm beträgt die Bohrlochtiefe die halbe Wandstärke. Bei Wandstärken über 60 cm ist die Bohrlochtiefe so zu wählen, dass diese im hinteren Drittel des Mauerwerkquerschnitts endet. Durch die Bohrung im 45°-Winkel verlängert sich der tatsächliche Bohrweg auf etwa das 1,41-Fache der gewünschten Eindringtiefe, da die Bohrung schräg in das Mauerwerk verläuft.</p>
+  
+  
+  <div class="anl-formel">
+    <div class="anl-formel__satz">Bohrweg = gewünschte Eindringtiefe × 1,41</div>
+    
+  </div>
+  
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Injektionslanzen setzen</h2>
+  <p class="anl-text">Setze die Injektionslanzen mit einem Akkuschrauber sowie dem passenden Einschraubadapter und einer geeigneten Nuss in die Bohrlöcher ein. Schraube die Lanzen vorsichtig mit geringem Drehmoment ein und fixiere sie sicher im Bohrloch.</p>
+  
+  
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Injizieren</h2>
+  <p class="anl-text">Injiziere anschließend BKM HZ 250 Pro mit der BKM Profi-Press über die Injektionslanzen in das Mauerwerk. Kontrolliere die Materialmenge über den elektronischen Durchlaufzähler.</p>
+  
+  
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Bohrlöcher verschließen</h2>
+  <p class="anl-text">Verschließe die Bohrlöcher direkt nach der Injektion bzw. nach dem Entfernen der Lanzen mit BKM FBM.</p>
+  
+  
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Alternative Verarbeitung</h2>
+  <p class="anl-text">Bei wenig saugenden Untergründen oder bei zu geringer Materialaufnahme des Mauerwerks über Niederdruckinjektion ist eine Verarbeitung mit geeigneten Injektionsflaschen möglich, zum Beispiel bei Naturstein oder Kalksandstein. Die Bohrlochabstände bleiben dabei unverändert.</p>
+  
+  
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Hinweise</h2>
+  <p class="anl-text">Für die Verarbeitung nach WTA-Richtlinie ist für horizontale Kapillarsperren ein maximaler Bohrlochabstand von 12,5 cm einzuhalten. Flächensperren fallen nicht unter diese Richtlinie. Materialbedingte Farbvertiefungen in vorhandenem Altputz infolge der Injektion sind systembedingt und stellen keinen Mangel dar. Während der Austrocknung des Mauerwerks bis zum Erreichen der Ausgleichsfeuchte können durch den Feuchtetransport an die Oberfläche Salzausblühungen entstehen.</p>
+  
+  
+</div>
+      </div>
+      <div>
+        
+        <div class="anl-figs">
+          
+          <figure class="anl-fig">
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto oder Schnitt: Bohrung im 45-Grad-Winkel</p></div>
+            <figcaption class="anl-fig__cap">Bohrung im 45° Winkel</figcaption>
+          </figure>
+          
+          <figure class="anl-fig">
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto: gesetzte Injektionslanzen an der Wand</p></div>
+            <figcaption class="anl-fig__cap">Einsatz der Injektionslanzen</figcaption>
+          </figure>
+          
+        </div>
+        
+        <div class="anl-tipp">
+          <p class="anl-tipp__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M229.26,90.4a108,108,0,0,1-177.63,114A108,108,0,0,1,195.41,43.63l20.1-20.11a12,12,0,0,1,17,17l-96,96a12,12,0,1,1-17-17l24-24a36,36,0,1,0,19.76,39.65,12,12,0,0,1,23.53,4.74,60,60,0,1,1-25.73-62L178.3,60.74a84,84,0,1,0,28.46,38,12,12,0,1,1,22.5-8.35Z"></path></svg></span><span>Profi Tipp</span></p>
+          <p class="anl-tipp__body">Ein Tuch an der Schiebekupplung schützt den Arbeitsbereich vor ungewollten Spritzern.</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <footer class="anl-foot anl-foot--recto">
+  <span class="anl-foot__folio">5/6</span>
+  <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
+</footer>
+</section>
+</div>
+</div>
+
+<div id="anleitung-nacharbeit" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
+<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-nacharbeit</span>
+<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Nacharbeit</span>
+<span style="font-size:14px;color:#8a8a8a">Weiß</span>
+</div>
+<div data-screen-label="Nacharbeit" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<section class="anl-page"><img class="anl-keyvisual" src="assets/keyvisual/keyvisual-on-light.svg" alt="">
+  <div class="anl-page__body">
+    <h1 class="anl-rubrik">Nacharbeit</h1>
+    <h2 class="anl-abschnitt__title">Abschluss und Reinigung</h2>
+    
+    <ul class="anl-schritte"><li>Entferne nach der Injektion alte Putze und Anstriche.</li><li>Trage vor dem späteren Aufbringen von Putzen oder Anstrichen BKM MHG als sichere Haftbrücke auf.</li><li>Schließe angebrochene Gebinde sofort wieder und schütze sie vor Kontakt mit Luft und Wasser.</li><li>Lagere Restmaterial frostfrei.</li></ul>
+    
+  </div>
+  <div class="anl-impressum">
+    <span class="anl-impressum__datum">Ausgegeben am 18.08.2026</span><br>
+    Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.
+  </div>
+  <footer class="anl-foot anl-foot--verso">
+  <span class="anl-foot__folio">6/6</span>
+  <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
+</footer>
+</section>
+</div>
+</div>
+
+</div>
+</section>
+</x-dc>
+</body>
+</html>

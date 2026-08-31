@@ -2,7 +2,18 @@
 
 A4-Vorlagen für Imagebroschüren, Produktlinien- und Katalogbroschüren,
 Fachbetriebsprospekte und Verarbeitungsanleitungen.
-30 Vorlagen in acht Gruppen. Jede Datei öffnet direkt im Browser.
+36 Vorlagen in neun Gruppen. Jede Datei öffnet direkt im Browser.
+
+`I-Anleitung.dc.html` wird **erzeugt**, nicht von Hand geschrieben:
+`python3 scripts/build_anleitung_canvas.py content/anleitung-<produkt>/content.json`.
+Sie stammt aus derselben `content.json` wie das PDF — Canvas und
+Produktion sind sonst zwei Wege zu demselben Blatt, und die laufen
+auseinander. In diesem Projekt ist das dreimal passiert: bei der
+Hero-Grafik, bei der Fotolage und beim Keyvisual.
+
+Wer darin gestaltet, gestaltet an einem Entwurf. Was bleiben soll,
+gehört zurück in `content/anleitung-<produkt>/content.json` oder in
+`templates/anleitung/` — sonst ist es beim nächsten Erzeugen weg.
 
 Verbindlich ist [`docs/BROSCHUERE-CANVAS.md`](../../docs/BROSCHUERE-CANVAS.md) — Maße,
 Typografie, Farben, Icon- und Texturregeln sowie die begründeten Abweichungen zum
@@ -37,6 +48,7 @@ verlinkt sie.
 | `F-Verfahren.dc.html` | Verfahren | 2 |
 | `G-Produktseiten.dc.html` | Produktseiten | 3 |
 | `H-Fachbetrieb.dc.html` | Fachbetrieb | 2 |
+| `I-Anleitung.dc.html` | Anleitung | 6 |
 
 ## Eine Broschüre bauen
 

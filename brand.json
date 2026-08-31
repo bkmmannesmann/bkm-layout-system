@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.24.0",
+  "version": "1.25.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -706,7 +706,9 @@
       "contract": "docs/ANLEITUNG-LAYOUT.md",
       "schema": "docs/anleitung-content.schema.json",
       "validate": "scripts/validate_anleitung.py",
-      "workflow": "docs/ANLEITUNG-WORKFLOW.md"
+      "workflow": "docs/ANLEITUNG-WORKFLOW.md",
+      "canvas": "templates/brochure/I-Anleitung.dc.html",
+      "canvas_build": "scripts/build_anleitung_canvas.py"
     },
     "authoring": {
       "$comment": "Kollegen liefern Text und Bilder, daraus entsteht die Anleitung. Der Text braucht keine Struktur mitzubringen: die Rubrikenfolge steht fest und wird nicht je Produkt neu entschieden.",
@@ -720,6 +722,12 @@
         "kastenliste_eintraege": 12,
         "note": "Gemessen, nicht gesetzt: ergibt sich aus 259 mm Satzhoehe und 84,7 mm Spaltenbreite. Wer sie ueberschreitet, bekommt keinen Fehler im Layout, sondern abgeschnittenen Text."
       }
+    },
+    "canvas": {
+      "$comment": "Die Canvas-Fassung wird erzeugt, nicht von Hand geschrieben - aus derselben content.json wie das PDF. Canvas und Produktion sind sonst zwei Wege zu demselben Blatt. In diesem Projekt ist das dreimal passiert: Hero-Grafik, Fotolage, Keyvisual.",
+      "rebuild": "python3 scripts/build_anleitung_canvas.py content/anleitung-<produkt>/content.json",
+      "edits": "Wer darin gestaltet, gestaltet an einem Entwurf. Was bleiben soll, gehoert zurueck in den Content oder in templates/anleitung/ - sonst ist es beim naechsten Erzeugen weg.",
+      "fontfaces": "Beim Erzeugen werden @font-face-Bloecke verworfen, deren Datei fehlt. design-system/base.css deklariert zwoelf solcher Schnitte - Unbounded Regular bis ExtraBold, TT Norms Light, Medium, DemiBold, Kursive. Im PDF folgenlos, im Canvas nicht: dort bietet ein deklarierter Schnitt sich zur Auswahl an, und genau so ist in die Bestandsanleitungen Unbounded SemiBold geraten."
     }
   }
 }
