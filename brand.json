@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.23.0",
+  "version": "1.24.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -703,7 +703,23 @@
       "template": "templates/anleitung/",
       "content": "content/anleitung-<produkt-slug>/content.json",
       "build": "scripts/build_anleitung.py",
-      "contract": "docs/ANLEITUNG-LAYOUT.md"
+      "contract": "docs/ANLEITUNG-LAYOUT.md",
+      "schema": "docs/anleitung-content.schema.json",
+      "validate": "scripts/validate_anleitung.py",
+      "workflow": "docs/ANLEITUNG-WORKFLOW.md"
+    },
+    "authoring": {
+      "$comment": "Kollegen liefern Text und Bilder, daraus entsteht die Anleitung. Der Text braucht keine Struktur mitzubringen: die Rubrikenfolge steht fest und wird nicht je Produkt neu entschieden.",
+      "input": "Formloser Text, der die vier Rubriken abdeckt, plus Bilder im Format 16:9, hoechstens vier je Anleitungsseite.",
+      "start": "Von einer freigegebenen Referenz kopieren, nicht von einer leeren Vorlage: content/anleitung-hz250pro/.",
+      "limits": {
+        "subheadline_zeichen": 70,
+        "vorteile": "2 bis 4",
+        "abbildungen_je_seite": 4,
+        "anleitungsseiten": "1 bis 4",
+        "kastenliste_eintraege": 12,
+        "note": "Gemessen, nicht gesetzt: ergibt sich aus 259 mm Satzhoehe und 84,7 mm Spaltenbreite. Wer sie ueberschreitet, bekommt keinen Fehler im Layout, sondern abgeschnittenen Text."
+      }
     }
   }
 }

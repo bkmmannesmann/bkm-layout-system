@@ -65,8 +65,10 @@ jobs:
       # Baut die Referenz-Verarbeitungsanleitung und prueft das Ergebnis:
       # Schriften, Vollstaendigkeit ab 3 Zeichen, Seitenzahl, Bildverweise
       # und die Paginierung gegen den Umfang. Siehe docs/ANLEITUNG-LAYOUT.md.
-      - name: Verarbeitungsanleitung bauen und pruefen
-        run: python3 scripts/build_anleitung.py content/anleitung-hz250pro/content.json
+      - name: Verarbeitungsanleitung pruefen und bauen
+        run: |
+          python3 scripts/validate_anleitung.py content/anleitung-hz250pro/content.json
+          python3 scripts/build_anleitung.py    content/anleitung-hz250pro/content.json
 
       - uses: actions/upload-artifact@v4
         if: always()
