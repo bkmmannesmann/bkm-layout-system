@@ -127,10 +127,11 @@ def check_typoskala(pdf_path):
             for g, t in sorted(gefunden.items())]
 
 
-# Eine Abbildung braucht in der rechten Spalte 46 mm Bildhoehe, rund 4 mm
-# Unterschrift und 5 mm Abstand. Bei 259 mm Satzhoehe abzueglich der
-# Rubrik bleiben rund 245 mm - also vier Abbildungen. Die fuenfte wird von
-# overflow:hidden abgeschnitten; die Seite sieht heil aus.
+# Eine Abbildung im Format 16:9 ist in der 84,7-mm-Spalte 47,64 mm hoch,
+# dazu rund 4 mm Unterschrift und 5 mm Abstand - zusammen 56,6 mm. Bei
+# 259 mm Satzhoehe abzueglich der Rubrik bleiben rund 245 mm, also vier
+# Abbildungen. Die fuenfte wird von overflow:hidden abgeschnitten; die
+# Seite sieht dabei heil aus.
 ABB_JE_SEITE = 4
 
 

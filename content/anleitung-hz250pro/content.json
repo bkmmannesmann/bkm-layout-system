@@ -124,6 +124,16 @@
           "icon": "stack",
           "body": "Der Untergrund muss mineralisch sein. Setze bei einem Natursteinmauerwerk die Bohrung so in den Stein, dass auf halber Mauerwerksstärke eine Lagerfuge oder ein Hohlraum getroffen wird. Bei Gitter- und Hohlkammersteinen erfolgt die Injektion im oberen Drittel des Steins mit dem Ziel, das Material im Hohlraum anzureichern. Die weitere Verteilung erfolgt über das Fugenmaterial. Hohlräume oder Kammern müssen vor der Injektion nicht mit Suspensionen verfüllt werden."
         }
+      ],
+      "figures": [
+        {
+          "caption": "Wandstärke ermitteln",
+          "image_needed": "Foto: Messen der Wandstärke am Mauerwerk, Zollstock angelegt"
+        },
+        {
+          "caption": "Geeignetes Mauerwerk",
+          "image_needed": "Foto oder Schnitt: Ziegel, Naturstein und Hohlkammerstein nebeneinander"
+        }
       ]
     },
     {

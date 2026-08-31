@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.22.0",
+  "version": "1.23.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -507,7 +507,10 @@
     "prices": "Preise für Mehrfach-Gebinde in G-Produktseiten.dc.html stehen als „auf Anfrage“.",
     "icons": "C-Navigation.dc.html nutzt Phosphor-Motive als Platzhalter; echte Shop-Kategorie-Icons fehlen.",
     "legal": "Der Haftungstext in rahmen-glossar ist rechtlich nicht geprüft.",
-    "markers": "Offene Angaben werden im Content als [ANGABE FEHLT: …] oder [ZU PRÜFEN: …] markiert, nicht besser geschrieben."
+    "markers": "Offene Angaben werden im Content als [ANGABE FEHLT: …] oder [ZU PRÜFEN: …] markiert, nicht besser geschrieben.",
+    "format": "16:9",
+    "format_note": "Alle Bildplatzhaltern im Innenteil stehen im Format 16:9. Die Hoehe wird aus der Spaltenbreite gerechnet, nicht gesetzt: in der 84,7-mm-Spalte sind das 47,64 mm. aspect-ratio waere der richtige Weg, aber WeasyPrint 69 kennt die Eigenschaft nicht - das Element wird damit gar nicht gezeichnet, nachgemessen am 31.08.2026; padding-top in Prozent loest dort nicht gegen die Breite auf. Bleibt calc. Eine gesetzte Hoehe waere die zweite Zahl neben der Breite, und zwei Zahlen laufen auseinander.",
+    "format_scope": "Gilt fuer den Innenteil. Das Titelblatt ist davon nicht beruehrt: dort traegt das Foto den Rahmen 210 x 179,54 mm, siehe cover_geometry."
   },
   "ai_generated_images": {
     "rule": "Ein KI-generiertes Motiv trägt den Vermerk „AI GENERATED“ als kleines Symbol im Bild selbst — nicht als Bildunterschrift, nicht als Text im Layout. Nach EU-KI-Verordnung erforderlich.",

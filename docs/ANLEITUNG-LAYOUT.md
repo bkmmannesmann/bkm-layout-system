@@ -255,6 +255,27 @@ die Struktur, nicht das Erscheinungsbild:
 - **Offene Angaben.** `[ANGABE FEHLT: …]` und `[ZU PRÜFEN: …]` sind im
   Entwurf zulässig und blockieren `--release`.
 
+## Bildformat
+
+Alle Abbildungen und Platzhalter stehen im Format **16:9**. Die Höhe wird
+aus der Spaltenbreite gerechnet, nicht gesetzt — in der 84,7-mm-Spalte sind
+das 47,64 mm:
+
+```css
+--anl-col2:  calc((var(--anl-width) - var(--anl-gutter)) / 2);
+--anl-fig-h: calc(var(--anl-col2) * 9 / 16);
+```
+
+`aspect-ratio` wäre der richtige Weg, aber **WeasyPrint 69 kennt die
+Eigenschaft nicht** — das Element wird damit gar nicht gezeichnet, am
+31.08.2026 nachgemessen. `padding-top` in Prozent löst dort nicht gegen die
+Breite auf. Bleibt `calc`. Eine gesetzte Höhe wäre die zweite Zahl neben
+der Breite, und zwei Zahlen laufen auseinander.
+
+Höchstens **vier Abbildungen je Seite**: 47,64 mm Bild plus rund 4 mm
+Unterschrift und 5 mm Abstand ergeben 56,6 mm; bei 245 mm nutzbarer
+Spaltenhöhe passen vier. `check_abbildungen()` meldet die fünfte.
+
 ## Fehlende Motive
 
 Ein fehlendes Bild wird **nicht weggelassen**, sondern als gestreifte

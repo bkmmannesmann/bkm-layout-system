@@ -52,6 +52,15 @@
   --anl-gutter: 4.6mm;
   /* (174 − 2 × 4,6) / 3 — gerechnet, siehe Kopf */
   --anl-col: calc((var(--anl-width) - 2 * var(--anl-gutter)) / 3);
+  /* Die Spalte des zweispaltigen Satzes: (174 − 4,6) / 2 = 84,7 mm. */
+  --anl-col2: calc((var(--anl-width) - var(--anl-gutter)) / 2);
+  /* Bildhoehe im Format 16:9, aus der Spaltenbreite gerechnet.
+     aspect-ratio waere der richtige Weg, aber WeasyPrint 69 kennt die
+     Eigenschaft nicht - das Element wird damit gar nicht gezeichnet,
+     nachgemessen am 31.08.2026. Der Prozentwert padding-top loest hier
+     nicht gegen die Breite auf. Bleibt calc: eine Quelle, die Hoehe
+     rechnet mit, wenn sich die Spalte aendert. */
+  --anl-fig-h: calc(var(--anl-col2) * 9 / 16);
 }
 
 /* === SEITE ============================================================== */
@@ -529,8 +538,19 @@
    der Bohrlochmuster nicht mehr lesbar. */
 .anl-figs { margin: 0 0 5mm; }
 .anl-fig { margin: 0 0 5mm; }
-.anl-fig__img { width: 100%; height: 46mm; object-fit: contain; display: block;
-  background: var(--bkm-grey-light); border-radius: var(--anl-radius); }
+/* 16:9, nicht eine feste Hoehe in Millimetern. Das Format ist gesetzt,
+   die Hoehe rechnet sich aus der Spaltenbreite: bei 84,7 mm sind das
+   47,64 mm. Aendert sich die Spalte, bleibt das Format. Eine gesetzte
+   Hoehe waere die zweite Zahl neben der Breite, und zwei Zahlen laufen
+   auseinander. Gilt fuer Bilder wie fuer Platzhalter. */
+.anl-fig__img {
+  width: 100%;
+  height: var(--anl-fig-h);
+  object-fit: cover;
+  display: block;
+  background: var(--bkm-grey-light);
+  border-radius: var(--anl-radius);
+}
 .anl-fig__cap {
   margin: 2mm 0 0;
   font-family: 'TT Norms Pro', Arial, sans-serif;
@@ -586,8 +606,6 @@
      heile Seite wird als fehlender Text gemeldet. */
   color: var(--bkm-muted-grey);
 }
-.anl-strip__img.anl-ph { height: 52mm; }
-.anl-step__img.anl-ph { height: 34mm; }
 
 /* === OFFENE ANGABEN ===================================================== */
 
