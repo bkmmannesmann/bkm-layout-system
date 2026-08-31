@@ -25,6 +25,19 @@ dieselbe Folge, unabhängig von Produkt und Linie.
 Der Seitentyp im Content heißt `vorbereitung`, `anleitung` oder
 `nacharbeit`. Andere Werte werden nicht gesetzt.
 
+## Satz über die volle Breite
+
+Zwei Dinge laufen über die ganze Satzbreite, nicht in einer Spalte:
+
+- **Die Vorteile**, direkt unter ihrer Rubrik. Sie sind die Aussage der
+  Seite, und eine Aussage steht nicht am Rand.
+- **Die nummerierten Handlungsschritte** — Arbeitsplatz vorbereiten wie
+  Abschluss und Reinigung. Beide Listen folgen derselben Form.
+
+Zweispaltig bleiben nur die Stellen, an denen zwei Dinge nebeneinander
+gehören: geeignete gegen nicht geeignete Untergründe, Werkzeug gegen
+Sicherheit, Text gegen Abbildung.
+
 ## Seitenzählung
 
 Anders als die Broschüre: **das Titelblatt zählt mit.** Die sieben
@@ -80,10 +93,14 @@ Auf dunklem Grund — im Profi-Tipp — trägt der Kasten Transition Green,
 damit Deep nicht auf Deep steht. Der Glyph bleibt Lime; das ist eine Regel,
 kein Sonderfall.
 
+**Überschriften tragen keine Icons.** Weder die Rubriken noch die
+Abschnittstitel. Ein Icon an jeder der vierzehn Zwischenüberschriften war
+Rauschen; die Rubrik trägt ihr Gewicht über Größe und Farbe. Geblieben sind
+drei funktionale Stellen: Werkzeug, Sicherheit, Profi-Tipp.
+
 | Stelle | Größe | Quelle |
 |---|---|---|
-| Rubrik | Kasten 12 mm, Glyph 7,5 mm | `icons.sizes_mm.category_opener` |
-| Abschnitt, Kasten | Kasten 9,5 mm, Glyph 6 mm | `icons.sizes_mm.inline` |
+| Werkzeug, Sicherheit, Profi-Tipp | Kasten 6,5 mm, Glyph 3,8 mm | `icons.sizes_mm.contact` |
 
 Die Dateien werden **inline eingebettet**, nicht als `<img>`: WeasyPrint
 wendet das Dokument-Stylesheet nicht auf SVG-Kinder an, und ohne Füllung am

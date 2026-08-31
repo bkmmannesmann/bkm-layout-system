@@ -181,10 +181,7 @@
    Die Bestandsvorlagen setzen sie in 25pt auf x=15mm; hier steht sie auf
    der Achse 18mm, weil brand.json nur diese eine Fluchtlinie kennt. */
 .anl-rubrik {
-  display: flex;
-  align-items: center;
-  gap: 4mm;
-  margin: 0 0 6mm;
+  margin: 0 0 4.5mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
   text-transform: uppercase;
@@ -234,6 +231,9 @@
 /* Nummerierte Handlungsschritte. Die Ziffer steht in einer eigenen Spalte,
    damit mehrzeilige Schritte nicht unter die Ziffer laufen. */
 .anl-numbered { margin: 0 0 4mm; padding: 0; list-style: none; counter-reset: anl; }
+/* Ueber die volle Satzbreite gesetzt, wie die Schritte der Nacharbeit. */
+.anl-numbered--breit { margin-bottom: 5mm; }
+.anl-text--label { margin-bottom: 1.5mm; font-weight: 700; color: var(--bkm-deep-green); }
 .anl-numbered li {
   counter-increment: anl;
   display: grid;
@@ -256,7 +256,14 @@
 
 /* Behauptung fett, Begruendung darunter mager - das Muster aus dem
    Bestand. Der Vorteil traegt die Aussage, die Zeile darunter belegt sie. */
-.anl-vorteil { margin: 0 0 3.4mm; }
+/* Ueber die volle Satzbreite, direkt unter der Rubrik. Die Haarlinie
+   trennt die drei Aussagen, ohne sie einzukasteln. */
+.anl-vorteil {
+  padding: 0 0 2.6mm;
+  margin: 0 0 2.6mm;
+  border-bottom: 0.25mm solid var(--bkm-hairline);
+}
+.anl-vorteil:last-of-type { border-bottom: 0; margin-bottom: 5mm; }
 .anl-vorteil__claim {
   margin: 0;
   font-family: 'TT Norms Pro', Arial, sans-serif;
@@ -358,10 +365,16 @@
   border-radius: var(--anl-radius);
 }
 .anl-ic svg { display: block; }
-.anl-ic--rubrik { width: 12mm; height: 12mm; }
-.anl-ic--rubrik svg { width: 7.5mm; height: 7.5mm; }
-.anl-ic--inline { width: 9.5mm; height: 9.5mm; }
-.anl-ic--inline svg { width: 6mm; height: 6mm; }
+/* Ueberschriften tragen keine Icons - weder die Rubriken noch die
+   Abschnittstitel. Ein Icon an jeder der vierzehn Zwischenueberschriften
+   war Rauschen; die Rubrik traegt ihr Gewicht ueber Groesse und Farbe.
+   Geblieben sind die drei funktionalen Stellen: Werkzeug, Sicherheit,
+   Profi-Tipp.
+
+   Groesse ist die Stufe "contact" aus icons.sizes_mm, 6,5 / 3,8 mm - die
+   kleinere der beiden benannten. Keine erfundene Zahl. */
+.anl-ic--inline { width: 6.5mm; height: 6.5mm; }
+.anl-ic--inline svg { width: 3.8mm; height: 3.8mm; }
 
 /* Auf dunklem Grund traegt der Kasten Transition Green, sonst steht Deep
    auf Deep. Der Glyph bleibt Lime - eine Regel, kein Sonderfall. */
@@ -386,9 +399,6 @@
 
 .anl-abschnitt { margin: 0 0 5mm; }
 .anl-abschnitt__title {
-  display: flex;
-  align-items: center;
-  gap: 2.6mm;
   margin: 0 0 1.6mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
