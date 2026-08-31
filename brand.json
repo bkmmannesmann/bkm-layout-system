@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.20.0",
+  "version": "1.21.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -452,12 +452,13 @@
     "$comment": "Immer die Variante mit dem höchsten Kontrast zum Untergrund.",
     "on_dark": "assets/logos/bkm-logo-white-puregreen.svg",
     "on_dark_mono": "assets/logos/bkm-logo-white.svg",
-    "on_light": "assets/logos/bkm-logo-stonegrey-puregreen.svg",
-    "on_light_ag": "assets/logos/bkm-logo-deepgreen-puregreen.svg",
-    "on_light_ag_note": "Deep Green statt Stone Grey, das M bleibt Pure Green. Fuer Dokumente, die als Absender die AG fuehren und auf hellem Grund stehen - derzeit das Titelblatt der Verarbeitungsanleitung. Folgt sender_context.ag.text_on_light, das fuer Headline, Sektions-Headline, Akzent und Iconkasten ohnehin Deep Green vorschreibt; das Logo war die letzte Stelle, an der dort noch Stone Grey stand. Byteidentisch zur Stone-Grey-Fassung bis auf die elf Farbwerte. Entschieden am 31.08.2026.",
-    "on_light_open": "logos.on_light zeigt weiter auf die Stone-Grey-Fassung. Sie steht an acht Stellen im Canvas: A-Titelblaetter Zeile 140 und 208, B-Rahmenseiten 169 und 467, E-Strecken 69, 245 und 417. Ob die ebenfalls auf Deep Green wechseln, ist nicht entschieden.",
+    "on_light": "assets/logos/bkm-logo-deepgreen-puregreen.svg",
+    "on_light_note": "Deep Green mit Pure-Green-M. Dieselbe Kombination wie im technischen Datenblatt, an dessen Pixeln geprueft: #1c4b42 und #4daf46. Bis 31.08.2026 stand hier bkm-logo-stonegrey-puregreen.svg; Stone Grey war die letzte Stelle, an der die AG auf hellem Grund nicht ihre eigene Farbe trug - sender_context.ag.text_on_light schreibt Deep Green fuer Headline, Sektions-Headline, Akzent und Iconkasten ohnehin vor. Umgestellt an allen elf Fundstellen, darunter acht im Canvas. Entscheidung des Markeninhabers vom 31.08.2026.",
     "on_light_mono": "assets/logos/bkm-logo-black.svg",
-    "width_mm": 42
+    "width_mm": 42,
+    "retired": {
+      "bkm-logo-stonegrey-puregreen.svg": "Abgeloest am 31.08.2026 durch bkm-logo-deepgreen-puregreen.svg. Die Datei bleibt im Bestand, wird aber nicht mehr gesetzt. Ein Verweis darauf ist ein Fehler; check_logos in scripts/validate_brochure.py meldet ihn."
+    }
   },
   "keyvisual": {
     "$comment": "Immer die Bilddatei, nie in Code nachbauen.",

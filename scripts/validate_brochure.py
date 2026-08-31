@@ -210,6 +210,43 @@ def check_keyvisual() -> list[str]:
     return errors
 
 
+def check_logos() -> list[str]:
+    """Prueft, dass kein abgeloestes Logo mehr gesetzt wird.
+
+    logos.retired in brand.json fuehrt Dateien, die im Bestand bleiben,
+    aber nicht mehr verwendet werden duerfen. Die Stone-Grey-Fassung stand
+    bis 31.08.2026 an elf Stellen; ohne diese Pruefung waere sie beim
+    naechsten Kopieren einer Vorlage zurueckgekommen, und niemand haette
+    es gesehen - beide Fassungen sehen fuer sich sauber aus.
+
+    Geprueft wird das ganze Repository, nicht nur der Canvas: der Fehler
+    kann genauso in einer Produktionsvorlage oder in einer Contentdatei
+    stehen.
+    """
+    import json as _json
+
+    vertrag = _json.loads((ROOT_DIR / "brand.json").read_text(encoding="utf-8"))
+    abgeloest = vertrag.get("logos", {}).get("retired", {})
+    if not abgeloest:
+        return []
+
+    errors: list[str] = []
+    endungen = (".py", ".css", ".html", ".json", ".md")
+    for pfad in sorted(ROOT_DIR.rglob("*")):
+        if pfad.suffix not in endungen or not pfad.is_file():
+            continue
+        teile = pfad.relative_to(ROOT_DIR).parts
+        if teile[0] in ("output", ".git", "assets"):
+            continue
+        text = pfad.read_text(encoding="utf-8", errors="ignore")
+        for datei, grund in abgeloest.items():
+            if datei in text and pfad.name not in ("brand.json", "ASSET-MANIFEST.md"):
+                errors.append(
+                    f"{pfad.relative_to(ROOT_DIR)}: verweist auf {datei}. "
+                    f"{grund.split('.')[0]}.")
+    return errors
+
+
 def check_layout() -> list[str]:
     errors: list[str] = []
 
@@ -514,7 +551,7 @@ def main() -> int:
         errors = check_content(target)
         label = f"Inhaltspruefung {target}"
     else:
-        errors = check_layout()
+        errors = check_layout() + check_logos()
         label = "Layoutpruefung Broschuere"
 
     if errors:

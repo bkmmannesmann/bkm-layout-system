@@ -82,11 +82,10 @@ VARIANTS = {
         "label": "Verarbeitungsanleitung",
         "color_box_bg": "#ffffff",
         "color_box_name": "Weiß",
-        # Deep Green statt Stone Grey. Die Verarbeitungsanleitung ist ein
-        # Dokument der AG, und deren Farbe auf hellem Grund ist Deep Green
-        # (sender_context.ag.text_on_light). Eigene Datei, nicht der
-        # gemeinsame Bestand: logos.on_light in brand.json zeigt weiter auf
-        # die Stone-Grey-Fassung, die im Canvas an acht Stellen steht.
+        # Deep Green mit Pure-Green-M, dieselbe Kombination wie im
+        # technischen Datenblatt. Seit 31.08.2026 ist das der Standard fuer
+        # helle Untergruende: logos.on_light in brand.json. Die
+        # Stone-Grey-Fassung ist unter logos.retired gefuehrt.
         "logo_file": "bkm-logo-deepgreen-puregreen.svg",
         "keyvisual_file": "keyvisual-on-light.png",
     },
