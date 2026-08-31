@@ -16,6 +16,7 @@
       "running_head": "BKM HZ 250 Pro",
       "scope": {
         "title": "Anwendungsbereich",
+        "icon": "table",
         "body": "BKM HZ 250 Pro dient zur Erstellung horizontaler oder flächiger Injektionsbarrieren gegen aufsteigende Feuchtigkeit und Querdurchfeuchtung in mineralischem Mauerwerk. Es unterbricht die kapillare Feuchtigkeitsaufnahme bei fehlender oder defekter Horizontalsperre und ermöglicht bei nicht ausschachtbaren Bereichen eine vollflächige Sperre von innen.",
         "suitable": [
           "Ziegel- und Klinkermauerwerk",
@@ -47,6 +48,7 @@
       ],
       "workplace": {
         "title": "Arbeitsplatz vorbereiten",
+        "icon": "clipboard-text",
         "steps": [
           "Lege die gewünschte Sperrhöhe fest. Bei Horizontalsperren liegt diese ca. 5–15 cm über Oberkante Fußboden oder mindestens 15 cm über dem Erdreich.",
           "Prüfe den Untergrund (Leitungen, Mauerwerksart) und ermittle die Wandstärke.",
@@ -86,6 +88,7 @@
       "sections": [
         {
           "title": "Verbrauch planen",
+          "icon": "drop",
           "body": "Je nach Mauerwerk gelten unterschiedliche Bohrlochabstände. Verwende bei normalem mineralischem Mauerwerk einen Bohrlochabstand von 25 cm und bei Beton, Natur- und Bruchstein, Kalksandstein und Porenbeton einen Bohrlochabstand von 12,5 cm. Der empfohlene Bohrlochabstand nach WTA-Vorgabe ist 12,5 cm. Der Bohrlochabstand muss so gewählt werden, dass mindestens eine Bohrung pro Stein erfolgt.",
           "formulas": [
             {
@@ -108,6 +111,7 @@
         },
         {
           "title": "Untergrund",
+          "icon": "stack",
           "body": "Der Untergrund muss mineralisch sein. Setze bei einem Natursteinmauerwerk die Bohrung so in den Stein, dass auf halber Mauerwerksstärke eine Lagerfuge oder ein Hohlraum getroffen wird. Bei Gitter- und Hohlkammersteinen erfolgt die Injektion im oberen Drittel des Steins mit dem Ziel, das Material im Hohlraum anzureichern. Die weitere Verteilung erfolgt über das Fugenmaterial. Hohlräume oder Kammern müssen vor der Injektion nicht mit Suspensionen verfüllt werden."
         }
       ]
@@ -118,14 +122,17 @@
       "sections": [
         {
           "title": "Verarbeitung · Horizontalsperre",
+          "icon": "hammer",
           "body": "Zeichne zuerst mit einer Wasserwaage und einem Bleistift die gewünschte Sperrhöhe an. Lege dann eine Bohrlochreihe in dieser Höhe fest. Die Bohrlöcher sind je nach Mauerwerksart im jeweiligen Abstand in einem Winkel von ca. 45° in das Mauerwerk zu bohren. Bei Mauerwerksecken setze eine Bohrung direkt in die Ecke. Die erste Bohrung aus der Ecke wird zu beiden Seiten mit 10 cm Abstand angeordnet. Bei Wandstärken über 60 cm muss in der Ecke eine zweite Bohrung um 5 cm nach oben versetzt erfolgen."
         },
         {
           "title": "Partielle Flächensperre",
+          "icon": "hammer",
           "body": "Wenn nur ein Teilbereich betroffen ist, lege die Sperre zu allen Seiten bis ca. 50 cm über die letzte erkennbare Schadensstelle hinaus an."
         },
         {
           "title": "Bohren",
+          "icon": "target",
           "body": "Stimme die Bohrlochtiefe auf die Wandstärke ab. Bei Wandstärken bis 60 cm beträgt die Bohrlochtiefe die halbe Wandstärke. Bei Wandstärken über 60 cm ist die Bohrlochtiefe so zu wählen, dass diese im hinteren Drittel des Mauerwerkquerschnitts endet. Durch die Bohrung im 45°-Winkel verlängert sich der tatsächliche Bohrweg auf etwa das 1,41-Fache der gewünschten Eindringtiefe, da die Bohrung schräg in das Mauerwerk verläuft.",
           "formulas": [
             {
@@ -135,6 +142,7 @@
         },
         {
           "title": "Injektionslanzen setzen",
+          "icon": "hammer",
           "body": "Setze die Injektionslanzen mit einem Akkuschrauber sowie dem passenden Einschraubadapter und einer geeigneten Nuss in die Bohrlöcher ein. Schraube die Lanzen vorsichtig mit geringem Drehmoment ein und fixiere sie sicher im Bohrloch."
         }
       ],
@@ -163,22 +171,27 @@
       "sections": [
         {
           "title": "Verarbeitung · Flächensperre",
+          "icon": "hammer",
           "body": "Führe bei einer Flächensperre das Bohrlochmuster der Horizontalsperre nach oben schachbrettartig versetzt fort. Der vertikale Abstand beträgt hierbei 25 cm. Die letzte Bohrlochreihe endet min. 15 cm über Oberkante Gelände."
         },
         {
           "title": "Injizieren",
+          "icon": "drop",
           "body": "Injiziere anschließend BKM HZ 250 Pro mit der BKM Profi-Press über die Injektionslanzen in das Mauerwerk. Kontrolliere die Materialmenge über den elektronischen Durchlaufzähler."
         },
         {
           "title": "Bohrlöcher verschließen",
+          "icon": "check-circle",
           "body": "Verschließe die Bohrlöcher direkt nach der Injektion bzw. nach dem Entfernen der Lanzen mit BKM FBM."
         },
         {
           "title": "Alternative Verarbeitung",
+          "icon": "stack",
           "body": "Bei wenig saugenden Untergründen oder bei zu geringer Materialaufnahme des Mauerwerks über Niederdruckinjektion ist eine Verarbeitung mit geeigneten Injektionsflaschen möglich, zum Beispiel bei Naturstein oder Kalksandstein. Die Bohrlochabstände bleiben dabei unverändert."
         },
         {
           "title": "Hinweise",
+          "icon": "warning",
           "body": "Für die Verarbeitung nach WTA-Richtlinie ist für horizontale Kapillarsperren ein maximaler Bohrlochabstand von 12,5 cm einzuhalten. Flächensperren fallen nicht unter diese Richtlinie. Materialbedingte Farbvertiefungen in vorhandenem Altputz infolge der Injektion sind systembedingt und stellen keinen Mangel dar. Während der Austrocknung des Mauerwerks bis zum Erreichen der Ausgleichsfeuchte können durch den Feuchtetransport an die Oberfläche Salzausblühungen entstehen."
         }
       ],
@@ -201,6 +214,7 @@
       "type": "nacharbeit",
       "running_head": "BKM HZ 250 Pro",
       "headline": "Abschluss und Reinigung",
+      "icon": "check-circle",
       "steps": [
         "Entferne nach der Injektion alte Putze und Anstriche.",
         "Trage vor dem späteren Aufbringen von Putzen oder Anstrichen BKM MHG als sichere Haftbrücke auf.",

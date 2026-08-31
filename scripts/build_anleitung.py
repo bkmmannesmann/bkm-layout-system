@@ -142,8 +142,18 @@ def check_bildverweise(content):
     def geh(knoten):
         if isinstance(knoten, dict):
             for schluessel, wert in knoten.items():
-                if schluessel in ("image", "icon", "product_image", "line_badge",
-                                  "logo", "keyvisual") and isinstance(wert, str):
+                if schluessel == "icon" and isinstance(wert, str) and wert:
+                    # icon traegt keinen Pfad, sondern einen Namen. Das
+                    # Template bindet ihn mit 'ignore missing' ein - ein
+                    # Tippfehler laesst den Kasten still leer.
+                    if wert not in gesehen:
+                        gesehen.add(wert)
+                        if not (TEMPLATE_DIR / "icons" / f"{wert}.svg").is_file():
+                            fehler.append(
+                                f"Icon gibt es nicht: {wert}.svg fehlt in "
+                                f"templates/anleitung/icons/")
+                elif schluessel in ("image", "product_image", "line_badge",
+                                    "logo", "keyvisual") and isinstance(wert, str):
                     if wert and wert not in gesehen:
                         gesehen.add(wert)
                         pfad = (TEMPLATE_DIR / wert).resolve()

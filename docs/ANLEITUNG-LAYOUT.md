@@ -63,6 +63,39 @@ Vorlagen setzen den Text in einer 86-mm-Spalte und stellen Abbildungen
 rechts daneben. Über die volle Satzbreite gelaufen ergäben sich bei 9 pt
 mehr als 110 Zeichen je Zeile; lesbar sind 45 bis 75.
 
+## Icons und Radius
+
+Beides kommt aus `brand.json`, nicht aus dieser Vorlage.
+
+**Radius** `radius.value_px` = 5, auf jeder Fläche, die nicht randabfallend
+ist. Randabfallende Flächen bleiben kantig — ein Radius an der Blattkante
+wird beim Beschnitt abgeschnitten und wirkt wie ein Fehler. Der Innenteil
+setzte bis 31.08.2026 überall eckig; das war ein Übertragungsfehler, keine
+Entscheidung.
+
+**Icons** Phosphor Bold aus `templates/anleitung/icons/`, Glyph immer Lime
+Green. Der Kasten hängt am Absender: Die Verarbeitungsanleitung ist ein
+Dokument der AG, also Deep Green auf hellem Grund (`sender_context.ag`).
+Auf dunklem Grund — im Profi-Tipp — trägt der Kasten Transition Green,
+damit Deep nicht auf Deep steht. Der Glyph bleibt Lime; das ist eine Regel,
+kein Sonderfall.
+
+| Stelle | Größe | Quelle |
+|---|---|---|
+| Rubrik | Kasten 12 mm, Glyph 7,5 mm | `icons.sizes_mm.category_opener` |
+| Abschnitt, Kasten | Kasten 9,5 mm, Glyph 6 mm | `icons.sizes_mm.inline` |
+
+Die Dateien werden **inline eingebettet**, nicht als `<img>`: WeasyPrint
+wendet das Dokument-Stylesheet nicht auf SVG-Kinder an, und ohne Füllung am
+`svg`-Element druckt der Glyph schwarz. Jede Datei trägt sie selbst, gesetzt
+von `scripts/prepare_brochure_icons.py`. Ein Icon-Webfont kommt nicht in
+Frage — über Font-Klassen wäre die Strichstärke frei wählbar.
+
+Das Motiv steht im Content als `icon` neben dem Titel, ohne Pfad und ohne
+Endung. Das Template bindet es mit `ignore missing` ein — ein Tippfehler
+ließe den Kasten still leer, deshalb prüft `check_bildverweise()`, ob die
+Datei existiert.
+
 ## Bewusste Abweichungen von den Bestandsfassungen
 
 Die sieben PDFs stammen aus der Zeit vor dem Markensystem. Übernommen wurde
