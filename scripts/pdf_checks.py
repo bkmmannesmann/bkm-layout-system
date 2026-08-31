@@ -42,8 +42,15 @@ def letters(text: str) -> str:
     Der Blocksatz bricht Woerter um und setzt Trennstriche; im extrahierten
     Text stehen dadurch Leerzeichen und Bindestriche an Stellen, die es in
     der Quelle nicht gibt. Ohne sie ist der Vergleich stabil.
+
+    ß wird zu ss. Deutscher Versalsatz loest das ß auf: aus "Bohrlöcher
+    verschließen" wird ueber text-transform:uppercase ein "BOHRLÖCHER
+    VERSCHLIESSEN", und im PDF steht das doppelte s. Ohne diese Zeile
+    meldet die Vollstaendigkeitspruefung heil gesetzte Ueberschriften als
+    fehlenden Text - aufgefallen an den Abschnittstiteln der
+    Verarbeitungsanleitung.
     """
-    return re.sub(r"[^0-9a-zäöüß]", "", text.lower())
+    return re.sub(r"[^0-9a-zäöü]", "", text.lower().replace("ß", "ss"))
 
 
 def collect_strings(node, out=None, *, min_length=40, skip_keys=PATH_KEYS):
