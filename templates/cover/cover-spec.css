@@ -213,19 +213,34 @@ html, body {
    Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
 
 .cover__intro {
-  max-width: 120mm;   /* Breite wie im Original-PDF, passend fuer 2 Zeilen */
-  
+  /* Volle Satzbreite ab der Achse: 192 − 18 = 174 mm. Mit 120 mm brach
+     der Fliesstext auf jedem der sieben Titel in zwei Zeilen, obwohl der
+     laengste (RD) einzeilig 169 mm braucht und der kuerzeste (NovuSticks)
+     90. Die zweite Zeile war ein Umbruch aus Platzmangel, nicht aus
+     Inhalt. Das Keyvisual beginnt bei y 102,42 mm; einzeilig endet der
+     Block darueber, es gibt keine Ueberschneidung - am PDF nachgemessen
+     am 31.08.2026. type_scale.cover.body.max_lines bleibt 2. */
+  max-width: 174mm;
+  /* align-self, sonst schrumpft der Absatz. .cover__content ist ein
+     Flex-Container in Spaltenrichtung mit align-items:flex-start; jedes
+     Kind bekommt dadurch nur seine Inhaltsbreite. Der Fliesstext brach
+     deshalb bei 141 mm um, obwohl 174 zur Verfuegung stehen - auf jedem
+     der sieben Titel eine zweite Zeile aus Platzmangel, nicht aus
+     Inhalt. Dieselbe Falle wie bei den Subheadlines im Innenteil. */
+  align-self: stretch;
+
   font-family: 'TT Norms Pro', sans-serif;
   font-weight: 400;
   font-size: 12pt;
   line-height: 1.25;
   letter-spacing: -0.015em;
-  
-  /* HARTE BEGRENZUNG: Maximal 2 Zeilen, Rest wird abgeschnitten */
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+
+  /* Hier stand eine "harte Begrenzung" auf zwei Zeilen ueber
+     -webkit-line-clamp. Sie bewirkte nichts: WeasyPrint kennt die
+     Eigenschaft nicht, am 31.08.2026 durch Entfernen nachgewiesen - das
+     Ergebnis blieb identisch. Die Grenze steht als
+     type_scale.cover.body.max_lines in brand.json und wird von
+     check_fliesstext in scripts/build_cover.py am fertigen PDF gemessen. */
   
   color: #ffffff;
   margin: 0;

@@ -83,6 +83,44 @@ def check_output(pdf_path, content):
     fehler.extend(check_paginierung(content))
     fehler.extend(check_abbildungen(content))
     fehler.extend(check_typoskala(pdf_path))
+    fehler.extend(check_subheadlines(pdf_path))
+    return fehler
+
+
+def check_subheadlines(pdf_path):
+    """Prueft, dass keine Subheadline im Innenteil zweizeilig laeuft.
+
+    Sie sind kurz genug - die laengste braucht 73 mm in einer 84,7-mm-
+    Spalte. Zweizeilig wurden sie durch ein Flex-Schrumpfen: die
+    Ueberschrift stand auf display:flex, und ein Flex-Element zieht sich
+    auf seine kleinste Breite zusammen, also auf das laengste Wort. So
+    riss "VERBRAUCH PLANEN" bei 49 mm. Behoben, indem der Iconkasten
+    inline gesetzt wird und die Ueberschrift ein Block bleibt.
+
+    Ohne diese Pruefung kaeme der Fehler beim naechsten display:flex
+    zurueck, und niemand saehe es - zwei Zeilen sehen fuer sich sauber aus.
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        return []
+
+    fehler = []
+    with pymupdf.open(str(pdf_path)) as doc:
+        for nummer, seite in enumerate(doc):
+            if nummer == 0:            # Titelblatt, eigene Regel
+                continue
+            for block in seite.get_text("dict")["blocks"]:
+                zeilen = [z for z in block.get("lines", [])
+                          if any("Unbounded" in t["font"] and 8.5 <= t["size"] <= 11
+                                 for t in z["spans"])]
+                if len(zeilen) >= 2:
+                    text = " ".join("".join(t["text"] for t in z["spans"]).strip()
+                                    for z in zeilen)
+                    fehler.append(
+                        f"Subheadline auf Seite {nummer + 1} laeuft "
+                        f"{len(zeilen)} Zeilen: {text[:46]!r}. Sie muss "
+                        f"einzeilig stehen.")
     return fehler
 
 

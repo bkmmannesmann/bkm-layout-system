@@ -274,40 +274,70 @@
 
 /* === LISTEN ============================================================ */
 
+/* Ohne Punkt. Der gesetzte Punkt in Transition Green stand bis
+   31.08.2026 vor jeder Aufzaehlung; er traegt nichts, die Zeilen stehen
+   ohnehin untereinander. Angekuendigt werden Listen ueber die Labelzeile
+   mit ihrem Icon. Damit entfaellt auch der Modifier --nackt: es gibt
+   keine zweite Form mehr, von der man ihn unterscheiden muesste. */
 .anl-bullets { margin: 0 0 4mm; padding: 0; list-style: none; }
 .anl-bullets li {
-  position: relative;
-  padding: 0 0 1.4mm 5mm;
+  padding: 0 0 1.4mm;
   font-family: 'TT Norms Pro', Arial, sans-serif;
   font-size: 9pt;
   line-height: 1.45;
   color: var(--bkm-stone-grey);
 }
-/* Ein gesetzter Punkt, kein Zeichen aus der Schrift: ueber ein Bullet aus
-   dem Zeichensatz kommt sonst eine Ersatzschrift ins PDF. */
-.anl-bullets li::before {
-  content: "";
-  position: absolute;
-  left: 0.6mm;
-  top: 1.75mm;
-  width: 1.5mm;
-  height: 1.5mm;
-  border-radius: 50%;
-  background: var(--bkm-transition-green);
+.anl-bullets--negativ li { color: var(--bkm-stone-grey); }
+
+.anl-bullets--zwei { column-count: 2; column-gap: 4mm; }
+.anl-bullets--zwei li { break-inside: avoid; }
+.anl-bullets--drei { column-count: 3; column-gap: var(--anl-gutter); }
+.anl-bullets--drei li { break-inside: avoid; }
+.anl-kasten .anl-bullets li { font-size: 8.5pt; padding-bottom: 0.9mm; }
+.anl-kasten .anl-bullets { margin-bottom: 0; }
+
+/* Labelzeile vor einer Liste. Ankuendigung statt Punkt. */
+.anl-text--label {
+  margin-bottom: 2mm;
+  font-weight: 700;
+  color: var(--bkm-deep-green);
 }
-.anl-bullets--negativ li::before { background: var(--bkm-muted-grey); }
 
-/* Ohne Punkt. In den Untergrundlisten und in Werkzeug und Sicherheit
-   traegt der Punkt nichts: die Zeilen sind kurz und stehen ohnehin
-   untereinander. Die Aufzaehlung wird stattdessen ueber die Labelzeile
-   mit ihrem Icon angekuendigt. */
-.anl-bullets--nackt li { padding-left: 0; }
-.anl-bullets--nackt li::before { content: none; }
+/* === VORTEILE ========================================================== */
 
-/* Handlungsschritte. Ohne Ziffer und ohne Punkt: die Reihenfolge steht
-   im Text ("Lege zuerst fest", "Trage vor dem Aufbringen auf"), und eine
-   zweite Ordnung daneben traegt nichts. Der Kasten mit der Ziffer stand
-   hier bis 31.08.2026; er ist entfernt, nicht nur ungenutzt. */
+/* Ueber die volle Satzbreite, direkt unter der Rubrik: die Vorteile sind
+   die Aussage der Seite, und eine Aussage steht nicht am Rand. Ohne
+   Trennstrich - drei Aussagen mit Icon stehen fuer sich. */
+.anl-vorteil {
+  display: grid;
+  grid-template-columns: 9.5mm 1fr;
+  gap: 0 3.5mm;
+  align-items: center;
+  margin: 0 0 3.4mm;
+}
+.anl-vorteil:last-of-type { margin-bottom: 6mm; }
+.anl-vorteil__text { grid-column: 2; }
+.anl-vorteil__claim {
+  margin: 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 9.5pt;
+  line-height: 1.35;
+  color: var(--bkm-deep-green);
+}
+/* Deep Green, mager. Muted Grey ist die Farbe fuer Beiwerk - die
+   Begruendung eines Vorteils ist keins. */
+.anl-vorteil__detail {
+  margin: 0.4mm 0 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.4;
+  color: var(--bkm-deep-green);
+}
+
+/* === HANDLUNGSSCHRITTE ================================================= */
+
+/* Ohne Ziffer und ohne Punkt: die Reihenfolge steht im Text. */
 .anl-schritte { margin: 0 0 4mm; padding: 0; list-style: none; }
 .anl-schritte li {
   padding: 0 0 2.4mm;
@@ -317,61 +347,11 @@
   color: var(--bkm-stone-grey);
 }
 .anl-schritte--breit { margin-bottom: 5mm; }
-.anl-text--label {
-  display: flex;
-  align-items: center;
-  gap: 3mm;
-  margin-bottom: 2mm;
-  font-weight: 700;
-  color: var(--bkm-deep-green);
-}
-
-/* === VORTEILE ========================================================== */
-
-/* Behauptung fett, Begruendung darunter mager - das Muster aus dem
-   Bestand. Der Vorteil traegt die Aussage, die Zeile darunter belegt sie. */
-/* Ueber die volle Satzbreite, direkt unter der Rubrik. Die Haarlinie
-   trennt die drei Aussagen, ohne sie einzukasteln. */
-.anl-vorteil {
-  display: grid;
-  grid-template-columns: 9.5mm 1fr;
-  gap: 0 3.5mm;
-  align-items: center;
-  /* Ohne Trennstrich. Drei Aussagen mit Icon stehen fuer sich; die Linie
-     dazwischen war eine Ordnung, die der Inhalt nicht braucht. */
-  margin: 0 0 3.4mm;
-}
-/* Der Kasten steht neben beiden Zeilen und trifft ihre Hoehe: Behauptung
-   9,5pt auf 1,35 und Begruendung 8,5pt auf 1,4 ergeben zusammen rund
-   9,5 mm - genau das Mass der Stufe inline. */
-.anl-vorteil__text { grid-column: 2; }
-.anl-vorteil:last-of-type { margin-bottom: 6mm; }
-.anl-vorteil__claim {
-  margin: 0;
-  font-family: 'TT Norms Pro', Arial, sans-serif;
-  font-weight: 700;
-  font-size: 9.5pt;
-  line-height: 1.35;
-  color: var(--bkm-deep-green);
-}
-.anl-vorteil__detail {
-  margin: 0.4mm 0 0;
-  font-family: 'TT Norms Pro', Arial, sans-serif;
-  font-size: 8.5pt;
-  line-height: 1.4;
-  /* Deep Green, mager. Vorher Muted Grey - das ist die Farbe fuer Beiwerk
-     (Bildunterschriften, Fussnoten, Folio), und die Begruendung eines
-     Vorteils ist kein Beiwerk. Sie steht eine Stufe unter der Behauptung:
-     dieselbe Farbe, geringeres Gewicht. */
-  color: var(--bkm-deep-green);
-}
 
 /* === WERKZEUG UND SICHERHEIT =========================================== */
 
-/* Eng gesetzt, mit Absicht: in der ersten Fassung standen hier 5 mm
-   Innenabstand, und die letzten beiden Sicherheitsangaben - Gehoerschutz
-   und Staubmaske - fielen vom Blatt. Die Seite sah heil aus. Wer diese
-   Werte wieder aufmacht, muss den Umfang von S.2 nachmessen. */
+/* Eng gesetzt, mit Absicht: mit 5 mm Innenabstand fielen die letzten
+   beiden Sicherheitsangaben vom Blatt. */
 .anl-kasten {
   background: var(--bkm-sand-white);
   border-radius: var(--anl-radius);
@@ -379,9 +359,6 @@
   margin: 0 0 3.4mm;
 }
 .anl-kasten__title {
-  display: flex;
-  align-items: center;
-  gap: 3mm;
   margin: 0 0 2.5mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
@@ -394,22 +371,12 @@
 .anl-kasten--breit { margin-top: 1mm; }
 
 /* Die benannte Flaeche "deep" aus brand.json: Grund Deep Green, Text
-   Clean White, Titel Lime Green. Nicht selbst zusammengestellt - der
-   Name legt alle vier Werte gemeinsam fest, damit keine Kombination
-   entsteht, die im Druck nicht traegt. Der Iconkasten wechselt darauf
-   auf Transition Green, sonst stuende Deep auf Deep; der Glyph bleibt
-   Lime. */
+   Clean White, Titel Lime Green. Der Iconkasten wechselt darauf auf
+   Transition Green, sonst stuende Deep auf Deep; der Glyph bleibt Lime. */
 .anl-kasten--deep { background: var(--bkm-deep-green); }
 .anl-kasten--deep .anl-kasten__title { color: var(--bkm-lime-green); }
 .anl-kasten--deep .anl-bullets li { color: var(--bkm-white); }
 .anl-kasten--deep .anl-ic { background: var(--bkm-transition-green); }
-.anl-bullets--zwei { column-count: 2; column-gap: 4mm; }
-.anl-bullets--zwei li { break-inside: avoid; }
-.anl-bullets--drei { column-count: 3; column-gap: var(--anl-gutter); }
-.anl-bullets--drei li { break-inside: avoid; }
-.anl-kasten .anl-bullets li { font-size: 8.5pt; padding-bottom: 0.9mm; }
-.anl-kasten .anl-bullets { margin-bottom: 0; }
-.anl-kasten .anl-bullets li::before { top: 1.55mm; }
 
 /* === PROFI TIPP ======================================================== */
 
@@ -423,9 +390,6 @@
   margin: 1mm 0 0;
 }
 .anl-tipp__title {
-  display: flex;
-  align-items: center;
-  gap: 3mm;
   margin: 0 0 1.5mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;
@@ -455,9 +419,15 @@
    jede Datei ihre Fuellung selbst (scripts/prepare_brochure_icons.py).
    Ein Icon-Webfont kommt nicht in Frage - ueber Font-Klassen waere die
    Strichstaerke frei waehlbar. */
+/* inline-flex, nicht flex: die Ueberschrift daneben bleibt dadurch ein
+   Block und bricht erst an der Spaltenkante um. Als Flex-Container
+   schrumpfte sie auf ihre kleinste Breite - das laengste Wort - und
+   "VERBRAUCH PLANEN" riss bei 49 mm in einer 85-mm-Spalte. Am gebauten
+   PDF nachgemessen am 31.08.2026. */
 .anl-ic {
-  flex: 0 0 auto;
-  display: flex;
+  display: inline-flex;
+  vertical-align: -1.6mm;
+  margin-right: 2.2mm;
   align-items: center;
   justify-content: center;
   background: var(--bkm-deep-green);
@@ -502,9 +472,6 @@
    getrennt worden. Wer das aufmacht, muss den Umfang nachmessen. */
 .anl-abschnitt { margin: 0 0 3.5mm; }
 .anl-abschnitt__title {
-  display: flex;
-  align-items: center;
-  gap: 3mm;
   margin: 0 0 1.5mm;
   font-family: 'Unbounded', sans-serif;
   font-weight: 900;

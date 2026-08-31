@@ -278,6 +278,35 @@ Das Icon dafür ist `table`, nicht `drop`: Ein Tropfen über einer
 Stückzahltabelle behauptet etwas Falsches über das Produkt. `drop` bleibt
 den flüssigen Produkten vorbehalten.
 
+## Subheadlines stehen einzeilig
+
+Keine Subheadline im Innenteil läuft über zwei Zeilen. Sie sind kurz genug
+— die längste braucht 73 mm in einer 84,7-mm-Spalte.
+
+Zweizeilig wurden sie durch eine **Flex-Falle**: Die Überschrift stand auf
+`display: flex`, und ein Flex-Element zieht sich auf seine kleinste Breite
+zusammen, also auf das längste Wort. So riss *VERBRAUCH PLANEN* bei 49 mm
+in einer 85-mm-Spalte. Behoben, indem der Icon-Kasten `inline-flex` ist und
+die Überschrift ein Block bleibt.
+
+Dieselbe Falle saß auf dem Titelblatt: `.cover__content` ist ein
+Flex-Container mit `align-items: flex-start`, und der Fließtext brach
+deshalb bei 141 mm um, obwohl 174 mm zur Verfügung stehen — auf jedem der
+sieben Titel eine zweite Zeile aus Platzmangel, nicht aus Inhalt. Behoben
+mit `align-self: stretch`.
+
+`check_subheadlines()` und `check_fliesstext()` messen beides am fertigen
+PDF. Ohne sie käme der Fehler beim nächsten `display: flex` zurück, und
+niemand sähe es — zwei Zeilen sehen für sich sauber aus.
+
+## Aufzählungen ohne Punkt
+
+Listen tragen **keinen** gesetzten Punkt. Der Punkt in Transition Green
+stand bis 31.08.2026 vor jeder Aufzählung; er trägt nichts, die Zeilen
+stehen ohnehin untereinander. Angekündigt werden Listen über die
+Labelzeile mit ihrem Icon. Damit entfällt auch der Modifier `--nackt`: Es
+gibt keine zweite Form mehr, von der man ihn unterscheiden müsste.
+
 ## Umbruch in Überschriften
 
 `text-wrap: pretty` kennt WeasyPrint 69 nicht — am gebauten PDF geprüft,

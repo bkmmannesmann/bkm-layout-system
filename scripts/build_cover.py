@@ -255,8 +255,47 @@ def check_output(html_content, pdf_path):
             pass
         fehler.extend(check_fotolage(pdf_path))
         fehler.extend(check_subheadline(pdf_path))
+        fehler.extend(check_fliesstext(pdf_path))
 
     return fehler
+
+
+def check_fliesstext(pdf_path):
+    """Prueft, dass der Fliesstext hoechstens zwei Zeilen laeuft.
+
+    type_scale.cover.body.max_lines in brand.json. Die Regel stand bis
+    31.08.2026 als -webkit-line-clamp in der CSS und bewirkte nichts -
+    WeasyPrint kennt die Eigenschaft nicht. Eine Begrenzung, die niemand
+    misst, ist keine.
+
+    Erkannt wird der Fliesstext an 12 pt in TT Norms; die Subheadline
+    steht in derselben Groesse in Unbounded.
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        return []
+
+    vertrag = json.loads((ROOT_DIR / "brand.json").read_text(encoding="utf-8"))
+    body = vertrag.get("type_scale", {}).get("cover", {}).get("body", {})
+    grenze, soll_pt = body.get("max_lines"), body.get("size_pt")
+    if not grenze or not soll_pt:
+        return []
+
+    zeilen = []
+    with pymupdf.open(str(pdf_path)) as doc:
+        for block in doc[0].get_text("dict")["blocks"]:
+            for zeile in block.get("lines", []):
+                for teil in zeile["spans"]:
+                    if (abs(teil["size"] - soll_pt) < 0.3
+                            and "Unbounded" not in teil["font"]):
+                        zeilen.append("".join(x["text"] for x in zeile["spans"]).strip())
+                        break
+
+    if len(zeilen) <= grenze:
+        return []
+    return [f"Fliesstext laeuft {len(zeilen)} Zeilen, erlaubt sind {grenze} "
+            f"(type_scale.cover.body.max_lines): {zeilen[0][:44]!r} ..."]
 
 
 def check_subheadline(pdf_path):
