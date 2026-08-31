@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.16.0",
+  "version": "1.26.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -169,6 +169,19 @@
         "gutter_mm": 6
       },
       "column_width_note": "Die Spaltenbreite wird nicht gesetzt, sondern gerechnet: (174 − 2 × Steg) / 3. Bei 4,6 mm Steg sind das 54,933 mm. Zwei nebeneinander gesetzte Zahlen laufen auseinander — genau daran stand der Satz zeitweise 0,8 mm über der rechten Fluchtlinie."
+    },
+    "anleitung": {
+      "$comment": "Verarbeitungsanleitung. Eigener Satzspiegel, siehe why. Struktur und Rubrikenfolge abgelesen an sieben freigegebenen Fassungen: HZ 250 Pro, HZC Creme, SP Express, RD ReparaturDicht, Novusan, NovuSticks, NovuProtect.",
+      "margin_top_mm": 18,
+      "margin_x_mm": 18,
+      "margin_bottom_mm": 20,
+      "text_width_mm": 174,
+      "columns": {
+        "count": 2,
+        "gutter_mm": 4.6
+      },
+      "why": "Kopf- und Fussteg weichen von grid.interior ab. 26,7 und 23,5 mm sind Broschuerenmasse; sie existieren dort, weil Kolumnentitel und Folio in den Steg laufen. Ein technisches Dokument hat beides nicht. Das Datenblatt setzt aus demselben Grund von 6,0 bis 291,4 mm, die Bestandsanleitungen von 12,6 bis 290,2 mm. Ohne die Abweichung braeuchte dieselbe Anleitung eine Seite mehr.",
+      "why_two_columns": "Abgelesen, nicht entworfen: die Vorlagen setzen den Text in einer 86-mm-Spalte und stellen Abbildungen rechts daneben. Ueber die volle Satzbreite ergaeben sich bei 9 pt mehr als 110 Zeichen je Zeile; lesbar sind 45 bis 75. (174 − 4,6) / 2 = 84,7 mm."
     }
   },
   "cover_geometry": {
@@ -242,7 +255,9 @@
         "size_pt": 12,
         "line_height": 1.3,
         "tracking_em": 0,
-        "uppercase": false
+        "uppercase": false,
+        "max_lines": 2,
+        "max_lines_note": "Nie drei Zeilen oder mehr. Headline und Body tragen dieselbe Grenze. Wird sie gerissen, ist der Text zu kuerzen - nicht die Spalte zu verbreitern oder die Groesse zu senken. check_subheadline in scripts/build_cover.py misst es am fertigen PDF nach; die Subheadline ist dort an 12 pt in Unbounded erkennbar, der Fliesstext steht in derselben Groesse in TT Norms. Entschieden am 31.08.2026."
       },
       "body": {
         "font": "body",
@@ -263,6 +278,67 @@
         },
         "size_note": "Auf dunklen Flächen 11 pt. Lime auf Transition Green misst 3,49 und ist damit nur für großen Text zugelassen; bei 9 pt wäre das verletzt. Auf hellem Grund genügen 9 pt, weil Transition Green dort 5,09 erreicht. Entscheidung des Markeninhabers vom 25.08.2026."
       }
+    },
+    "anleitung": {
+      "$comment": "Verarbeitungsanleitung, Innenteil. Bis 31.08.2026 stand keine Stufe fuer diesen Dokumenttyp im Vertrag - die Groessen lagen nur in templates/anleitung/anleitung-spec.css und waren damit bei jedem neuen Produkt frei waehlbar. Rubrik auf 18 pt entschieden vom Markeninhaber am 31.08.2026; bei 22 gegen 10 pt war der Sprung mit Faktor 2,2 zu gross.",
+      "rubrik": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": 18,
+        "line_height": 1.05,
+        "tracking_em": -0.02,
+        "uppercase": true,
+        "note": "Vorteile, Vorbereitung, Anleitung, Nacharbeit. Traegt kein Icon."
+      },
+      "subheadline": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": 10,
+        "line_height": 1.2,
+        "tracking_em": -0.015,
+        "uppercase": true,
+        "note": "Abschnittstitel. Traegt ein Icon nur auf der Vorbereitungsseite."
+      },
+      "tipp_titel": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": 9.5,
+        "uppercase": true,
+        "colour": "lime-green",
+        "note": "Profi-Tipp, auf Deep Green."
+      },
+      "kasten_titel": {
+        "font": "display",
+        "weight": 900,
+        "size_pt": 9,
+        "uppercase": true,
+        "colour": "deep-green",
+        "note": "Werkzeug und Sicherheit. Die kleinste zugelassene Display-Stufe."
+      },
+      "body": {
+        "font": "body",
+        "weight": 400,
+        "size_pt": 9.5,
+        "line_height": 1.5,
+        "colour": "stone-grey"
+      },
+      "weitere_stufen": {
+        "vorteil_claim": "9,5 pt TT Norms Bold, deep-green",
+        "vorteil_detail": "8,5 pt TT Norms, deep-green",
+        "schritt": "9 pt TT Norms, stone-grey; Ziffer 12 pt Bold, lime-green im Deep-Green-Kasten",
+        "formel": "9 pt TT Norms Bold, deep-green; Beispielzeile muted-grey",
+        "kastenliste": "8,5 pt TT Norms, stone-grey",
+        "bildunterschrift": "8 pt TT Norms, muted-grey",
+        "folio": "9 pt TT Norms Bold, deep-green",
+        "impressum": "7 pt TT Norms, muted-grey"
+      },
+      "display_sizes_pt": [
+        18,
+        10,
+        9.5,
+        9
+      ],
+      "display_sizes_note": "Abschliessend. Jede andere Groesse in Unbounded ist im Innenteil der Anleitung ein Fehler; check_typoskala in scripts/build_anleitung.py misst es am fertigen PDF nach."
     }
   },
   "radius": {
@@ -376,9 +452,13 @@
     "$comment": "Immer die Variante mit dem höchsten Kontrast zum Untergrund.",
     "on_dark": "assets/logos/bkm-logo-white-puregreen.svg",
     "on_dark_mono": "assets/logos/bkm-logo-white.svg",
-    "on_light": "assets/logos/bkm-logo-stonegrey-puregreen.svg",
+    "on_light": "assets/logos/bkm-logo-deepgreen-puregreen.svg",
+    "on_light_note": "Deep Green mit Pure-Green-M. Dieselbe Kombination wie im technischen Datenblatt, an dessen Pixeln geprueft: #1c4b42 und #4daf46. Bis 31.08.2026 stand hier bkm-logo-stonegrey-puregreen.svg; Stone Grey war die letzte Stelle, an der die AG auf hellem Grund nicht ihre eigene Farbe trug - sender_context.ag.text_on_light schreibt Deep Green fuer Headline, Sektions-Headline, Akzent und Iconkasten ohnehin vor. Umgestellt an allen elf Fundstellen, darunter acht im Canvas. Entscheidung des Markeninhabers vom 31.08.2026.",
     "on_light_mono": "assets/logos/bkm-logo-black.svg",
-    "width_mm": 42
+    "width_mm": 42,
+    "retired": {
+      "bkm-logo-stonegrey-puregreen.svg": "Abgeloest am 31.08.2026 durch bkm-logo-deepgreen-puregreen.svg. Die Datei bleibt im Bestand, wird aber nicht mehr gesetzt. Ein Verweis darauf ist ein Fehler; check_logos in scripts/validate_brochure.py meldet ihn."
+    }
   },
   "keyvisual": {
     "$comment": "Immer die Bilddatei, nie in Code nachbauen.",
@@ -392,7 +472,14 @@
       "dark_surface": "on_dark auf durchgehend dunklen Flächen, etwa der Rückseite.",
       "accent": "lime als Akzent, etwa in der Navigation."
     },
-    "deviates_from_tds": true
+    "deviates_from_tds": true,
+    "duplicates": {
+      "$comment": "Es lagen drei Dateien fuer dasselbe Zeichen im Bestand. Aufgeraeumt am 31.08.2026: gesetzt wird ausschliesslich assets/keyvisual/.",
+      "assets/images/keyvisual-on-light.png": "56 KB. Das Cover setzte sie bis 31.08.2026, waehrend der Canvas die SVG fuehrte - dasselbe Muster wie zuvor bei der Hero-Grafik und der Fotolage. Die vier Datenblaetter setzen sie weiter; deren Umstellung ist nicht entschieden.",
+      "assets/images/keyvisual-on-light.svg": "384 KB, Illustrator-Export mit demselben viewBox. Von nichts referenziert.",
+      "assets/images/keyvisual-on-dark.png und .svg": "Ebenso, ungenutzt."
+    },
+    "also_on": "Letzte Seite der Verarbeitungsanleitung, an derselben Stelle wie auf dem Titelblatt - 42 mm ab 102,416 mm, rechts randabfallend. Die Seite traegt wenig Text und stuende sonst leer. Die Hoehe wird dort nicht neu gewaehlt: dieselbe Marke an zwei Hoehen zu fuehren waere der Anfang einer zweiten Wahrheit."
   },
   "badges": {
     "home_line": "assets/images/badge-homeline.png",
@@ -420,7 +507,10 @@
     "prices": "Preise für Mehrfach-Gebinde in G-Produktseiten.dc.html stehen als „auf Anfrage“.",
     "icons": "C-Navigation.dc.html nutzt Phosphor-Motive als Platzhalter; echte Shop-Kategorie-Icons fehlen.",
     "legal": "Der Haftungstext in rahmen-glossar ist rechtlich nicht geprüft.",
-    "markers": "Offene Angaben werden im Content als [ANGABE FEHLT: …] oder [ZU PRÜFEN: …] markiert, nicht besser geschrieben."
+    "markers": "Offene Angaben werden im Content als [ANGABE FEHLT: …] oder [ZU PRÜFEN: …] markiert, nicht besser geschrieben.",
+    "format": "16:9",
+    "format_note": "Alle Bildplatzhaltern im Innenteil stehen im Format 16:9. Die Hoehe wird aus der Spaltenbreite gerechnet, nicht gesetzt: in der 84,7-mm-Spalte sind das 47,64 mm. aspect-ratio waere der richtige Weg, aber WeasyPrint 69 kennt die Eigenschaft nicht - das Element wird damit gar nicht gezeichnet, nachgemessen am 31.08.2026; padding-top in Prozent loest dort nicht gegen die Breite auf. Bleibt calc. Eine gesetzte Hoehe waere die zweite Zahl neben der Breite, und zwei Zahlen laufen auseinander.",
+    "format_scope": "Gilt fuer den Innenteil. Das Titelblatt ist davon nicht beruehrt: dort traegt das Foto den Rahmen 210 x 179,54 mm, siehe cover_geometry."
   },
   "ai_generated_images": {
     "rule": "Ein KI-generiertes Motiv trägt den Vermerk „AI GENERATED“ als kleines Symbol im Bild selbst — nicht als Bildunterschrift, nicht als Text im Layout. Nach EU-KI-Verordnung erforderlich.",
@@ -584,5 +674,60 @@
     "formula": "Liegt das Titelblatt im selben Dokument, steht auf Blatt N die Ziffer N−1. scripts/check_export.py prüft das an Canvas-Exporten.",
     "production": "templates/pages/ trägt kein Titelblatt — das Cover ist ein eigenes Dokument. Dort ist page_number_start deshalb 1 und meint die erste Seite in pages[]. validate_brochure.py prüft den Wert.",
     "toc_follows": "Ändert sich die Zählung, wandern die Verweise im Inhaltsverzeichnis mit. validate_brochure.py meldet Verweise, die auf keine bezifferte Seite zeigen."
+  },
+  "anleitung": {
+    "$comment": "Produktbezogen, fuer Pro Line wie Home Line. Eigenstaendiges Dokument. Ersetzt weder das technische Datenblatt noch das Sicherheitsdatenblatt - beide bleiben verbindliche Quelle.",
+    "rubriken": [
+      "Vorteile",
+      "Vorbereitung",
+      "Anleitung",
+      "Nacharbeit"
+    ],
+    "rubriken_note": "Feste Folge, in allen sieben freigegebenen Fassungen gleich, unabhaengig von Produkt und Linie. Die letzte Anleitungsseite traegt den Profi-Tipp.",
+    "page_types": [
+      "vorbereitung",
+      "anleitung",
+      "nacharbeit"
+    ],
+    "pagination": "Das Titelblatt zaehlt mit: das zweite Blatt traegt 2/n. Darum page_number_start = 2 und page_total = 1 + Anzahl der Innenseiten. Anders als templates/pages/, wo das Cover nicht mitzaehlt.",
+    "legacy_deviations": {
+      "$comment": "Die sieben Bestandsfassungen stammen aus der Zeit vor dem Markensystem. Uebernommen wurde die Struktur, nicht das Erscheinungsbild. Gemessen am 31.08.2026.",
+      "rubrik_colour": "#054f42 im Bestand, hier deep-green #1c4b42",
+      "tip_colour": "#afca13 im Bestand, hier lime-green #b4e717",
+      "headline_colour": "#484848 im Bestand, hier stone-grey #494949",
+      "font_weight": "Unbounded SemiBold im Bestand; zugelassen ist nur Black",
+      "foreign_font": "Myriad Pro an vier Stellen im Bestand",
+      "axis": "15,0 mm im Bestand, hier 18 mm"
+    },
+    "paths": {
+      "template": "templates/anleitung/",
+      "content": "content/anleitung-<produkt-slug>/content.json",
+      "build": "scripts/build_anleitung.py",
+      "contract": "docs/ANLEITUNG-LAYOUT.md",
+      "schema": "docs/anleitung-content.schema.json",
+      "validate": "scripts/validate_anleitung.py",
+      "workflow": "docs/ANLEITUNG-WORKFLOW.md",
+      "canvas": "templates/brochure/I-Anleitung.dc.html",
+      "canvas_build": "scripts/build_anleitung_canvas.py"
+    },
+    "authoring": {
+      "$comment": "Kollegen liefern Text und Bilder, daraus entsteht die Anleitung. Der Text braucht keine Struktur mitzubringen: die Rubrikenfolge steht fest und wird nicht je Produkt neu entschieden.",
+      "input": "Formloser Text, der die vier Rubriken abdeckt, plus Bilder im Format 16:9, hoechstens vier je Anleitungsseite.",
+      "start": "Von einer freigegebenen Referenz kopieren, nicht von einer leeren Vorlage. Sieben stehen bereit: hz250pro, hzc, sp-express, rd, novusan, novusticks, novuprotect. Die strukturell naechste nehmen - die Tabelle in docs/ANLEITUNG-WORKFLOW.md nennt, wofuer jede passt.",
+      "limits": {
+        "subheadline_zeichen": 70,
+        "vorteile": "2 bis 4",
+        "abbildungen_je_seite": 4,
+        "anleitungsseiten": "1 bis 4",
+        "kastenliste_eintraege": 12,
+        "note": "Gemessen, nicht gesetzt: ergibt sich aus 259 mm Satzhoehe und 84,7 mm Spaltenbreite. Wer sie ueberschreitet, bekommt keinen Fehler im Layout, sondern abgeschnittenen Text."
+      }
+    },
+    "canvas": {
+      "$comment": "Die Canvas-Fassung wird erzeugt, nicht von Hand geschrieben - aus derselben content.json wie das PDF. Canvas und Produktion sind sonst zwei Wege zu demselben Blatt. In diesem Projekt ist das dreimal passiert: Hero-Grafik, Fotolage, Keyvisual.",
+      "rebuild": "python3 scripts/build_anleitung_canvas.py content/anleitung-<produkt>/content.json",
+      "edits": "Wer darin gestaltet, gestaltet an einem Entwurf. Was bleiben soll, gehoert zurueck in den Content oder in templates/anleitung/ - sonst ist es beim naechsten Erzeugen weg.",
+      "fontfaces": "Beim Erzeugen werden @font-face-Bloecke verworfen, deren Datei fehlt. design-system/base.css deklariert zwoelf solcher Schnitte - Unbounded Regular bis ExtraBold, TT Norms Light, Medium, DemiBold, Kursive. Im PDF folgenlos, im Canvas nicht: dort bietet ein deklarierter Schnitt sich zur Auswahl an, und genau so ist in die Bestandsanleitungen Unbounded SemiBold geraten."
+    }
   }
 }

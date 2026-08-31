@@ -1,0 +1,214 @@
+{
+  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_NovuSticks_DE, ausgegeben am 19.08.2026. ERGÄNZUNG: Der Schreibfehler der Vorlage „Staubsauber“ ist zu „Staubsauger“ berichtigt. Die Verbrauchsangaben stehen als Tabelle, wie in der Vorlage, nicht als Sätze.",
+  "title": "NovuSticks – Verarbeitungsanleitung",
+  "product_name": "NovuSticks",
+  "product_line": "HOME LINE",
+  "document_rubrik": "Verarbeitungsanleitung",
+  "issued": "19.08.2026",
+  "source_pdf": "VA_NovuSticks_DE",
+  "page_number_start": 2,
+  "page_total": 6,
+  "cover": {
+    "headline": "VERARBEITUNGS-<br>ANLEITUNG",
+    "subheadline": "Für nachträgliche Horizontalsperren gegen aufsteigende Feuchtigkeit.",
+    "intro_text": "NovuSticks – Wasserabweisende Faserstäbchen.",
+    "hero_image_alt": "NovuSticks Verarbeitungsanleitung"
+  },
+  "pages": [
+    {
+      "type": "vorbereitung",
+      "running_head": "NovuSticks",
+      "scope": {
+        "title": "Anwendungsbereich",
+        "icon": "table",
+        "body": "NovuSticks werden zur nachträglichen Herstellung einer Horizontalsperre in feuchtem mineralischem Mauerwerk eingesetzt. Voraussetzung ist eine zugängliche, durchgehende und ausreichend feste Lagerfuge. Die Verarbeitung ist je nach Bauteilsituation von innen oder außen möglich.",
+        "suitable": [
+          "Ziegelmauerwerk",
+          "Kalksandsteinmauerwerk",
+          "Betonsteinmauerwerk",
+          "Natursteinmauerwerk mit durchgehender Lagerfuge"
+        ],
+        "unsuitable": [
+          "Betonbauteile und Mauerwerk ohne durchgehende Lagerfuge"
+        ]
+      },
+      "advantages": [
+        {
+          "icon": "shield-check",
+          "claim": "Saubere Anwendung",
+          "detail": "Feste, mit wasserabweisendem Wirkstoff getränkte Stäbchenform"
+        },
+        {
+          "icon": "drop",
+          "claim": "Planbarer Verbrauch",
+          "detail": "Der Materialbedarf lässt sich passend zur Mauerwerksstärke berechnen"
+        },
+        {
+          "icon": "target",
+          "claim": "Direkt einsatzbereit",
+          "detail": "Gebrauchsfertig und ohne Injektionsgerät zu verarbeiten"
+        }
+      ],
+      "workplace": {
+        "title": "Arbeitsplatz vorbereiten",
+        "icon": "clipboard-text",
+        "steps": [
+          "Decke angrenzende Bauteile und Oberflächen ab.",
+          "Ermittle die unterste erreichbare, durchgehende Lagerfuge.",
+          "Prüfe die Lagerfuge auf Festigkeit, Hohlstellen und größere Ausbrüche.",
+          "Prüfe den Arbeitsbereich vor dem Bohren auf Leitungen und Rohre.",
+          "Lege Material, Werkzeuge und Schutzmaterial bereit."
+        ]
+      },
+      "tools": {
+        "title": "Für die Anwendung brauchst du",
+        "items": [
+          "Zollstock",
+          "Wasserwaage",
+          "Bleistift",
+          "Bohrmaschine",
+          "Bohrer Ø 12 mm",
+          "Staubsauger",
+          "Spachtel",
+          "Cuttermesser oder Schere",
+          "Abdeckmaterial",
+          "BKM FBM zum Verschließen der Bohrlöcher"
+        ]
+      },
+      "safety": {
+        "title": "Für deine eigene<br>Sicherheit",
+        "items": [
+          "Schutzbrille",
+          "Schutzhandschuhe",
+          "Gehörschutz"
+        ]
+      }
+    },
+    {
+      "type": "anleitung",
+      "running_head": "NovuSticks",
+      "sections": [
+        {
+          "title": "Verbrauch planen",
+          "icon": "table",
+          "body": "Plane den Materialbedarf anhand der Mauerwerksstärke. Falls du keinen Bauplan zur Hand hast, kannst du die Wandstärke an einem Fenster oder einer Tür nachmessen. Wir empfehlen, auch die angrenzenden Eckbereiche mit jeweils einer zusätzlichen Bohrung zu versehen; berücksichtige diese bei der Berechnung des Gesamtverbrauchs.",
+          "formulas": [
+            {
+              "rule": "Bohrlochabstand 12 cm · Bohrlochtiefe = Mauerwerksstärke − 5 cm",
+              "example": "Bei 24 cm Mauerwerksstärke bohrst du 19 cm tief"
+            }
+          ],
+          "table": {
+            "columns": [
+              "Mauerwerksstärke",
+              "Verbrauch je laufendem Meter"
+            ],
+            "rows": [
+              [
+                "12 cm",
+                "4 Sticks"
+              ],
+              [
+                "24 cm",
+                "8 Sticks"
+              ],
+              [
+                "36 cm",
+                "12 Sticks"
+              ],
+              [
+                "48 cm",
+                "16 Sticks"
+              ]
+            ],
+            "note": "Ein Stick kommt auf rund 3 cm Mauerwerk."
+          }
+        },
+        {
+          "title": "Untergrund",
+          "icon": "stack",
+          "body": "Die Lagerfuge muss zugänglich, durchgehend und ausreichend fest sein. Sie darf nicht stark ausgebrochen, hohl liegend oder durch lose Bestandteile unterbrochen sein."
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "NovuSticks",
+      "sections": [
+        {
+          "title": "Bohrreihe markieren",
+          "icon": "target",
+          "body": "Markiere die Bohrpunkte im Abstand von 12 cm entlang der untersten erreichbaren Lagerfuge."
+        },
+        {
+          "title": "Bohren",
+          "icon": "target",
+          "body": "Bohre die Löcher mit einem 12-mm-Bohrer waagerecht in die Lagerfuge. Die Bohrtiefe beträgt die Wandstärke abzüglich 5 cm, um nicht in das Erdreich zu gelangen. Reduziere den Bohrdruck etwa 4 cm vor dem Ende des Bohrlochs. Entferne anschließend Bohrmehl und lose Bestandteile vollständig aus den Bohrlöchern mithilfe eines Staubsaugers."
+        },
+        {
+          "title": "NovuSticks einsetzen",
+          "icon": "hammer",
+          "body": "Die 18 cm langen Faserstäbchen werden nacheinander vollständig in das Bohrloch eingeschoben, bis die erforderliche Bohrlochtiefe ausgefüllt ist. Setze dafür zunächst ein komplettes Stäbchen ein. Das zweite Stäbchen wird bei Bedarf mit einer Schere oder einem Cuttermesser auf die passende Länge gekürzt. Positioniere das letzte Stäbchen so, dass es ca. 1 cm hinter der Mauerwerksoberfläche endet — so bleibt ausreichend Platz, um die Öffnung anschließend fachgerecht mit Mörtel zu verschließen. Das abgeschnittene Reststück kann für das nächste Bohrloch verwendet werden."
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Bohrreihe in der Lagerfuge markieren",
+          "image_needed": "Foto: Anzeichnen der Bohrpunkte im Abstand von 12 cm entlang der Lagerfuge"
+        },
+        {
+          "caption": "Waagerecht in die Lagerfuge bohren",
+          "image_needed": "Foto: waagerechtes Bohren in die Lagerfuge, Klebeband als Tiefenmarkierung"
+        },
+        {
+          "caption": "Bohrlöcher aussaugen",
+          "image_needed": "Foto: Absaugen des Bohrmehls aus den Bohrlöchern"
+        },
+        {
+          "caption": "NovuSticks einsetzen",
+          "image_needed": "Foto: Einschieben der Faserstäbchen in das Bohrloch"
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "NovuSticks",
+      "sections": [
+        {
+          "title": "Bohrlöcher verschließen",
+          "icon": "check-circle",
+          "body": "Verschließe die Bohrlöcher direkt nach dem Einsetzen der NovuSticks mit BKM FBM Füll- und Bohrlochmörtel, damit der Wirkstoff nicht aus der Wand in den Raum verdunstet oder mit der umgebenden Luftfeuchtigkeit reagiert."
+        },
+        {
+          "title": "Hinweise",
+          "icon": "warning",
+          "body": "Stark geschädigte, hohl liegende oder nicht zusammenhängende Lagerfugen können die gleichmäßige Verteilung des Wirkstoffs beeinträchtigen. NovuSticks sind ausschließlich für Horizontalsperren geeignet; verwende sie nicht zur Herstellung einer Flächensperre."
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Bohrlöcher verschließen",
+          "image_needed": "Foto: Verschließen der Bohrlöcher mit BKM FBM"
+        }
+      ],
+      "tip": {
+        "title": "Profi Tipp",
+        "body": "Markiere die Bohrtiefe am Bohrer mit Klebeband."
+      }
+    },
+    {
+      "type": "nacharbeit",
+      "running_head": "NovuSticks",
+      "headline": "Abschluss und Reinigung",
+      "icon": "check-circle",
+      "steps": [
+        "Prüfe, ob alle Bohrlöcher vollständig verschlossen sind.",
+        "Reinige die verwendeten Werkzeuge unmittelbar nach Gebrauch.",
+        "Entferne Abdeckmaterial und reinige den Arbeitsbereich.",
+        "Entsorge Produktreste und Verpackungen nach den örtlichen Vorschriften."
+      ],
+      "issued": "19.08.2026",
+      "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
+    }
+  ]
+}

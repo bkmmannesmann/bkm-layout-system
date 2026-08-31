@@ -50,7 +50,7 @@ VARIANTS = {
         "color_box_bg": "#1c4b42",
         "color_box_name": "Deep Green",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-light.png",
+        "keyvisual_file": "keyvisual-on-light.svg",
     },
     "fachbetriebe": {
         "variant_class": "cover--fachbetriebe",
@@ -58,7 +58,7 @@ VARIANTS = {
         "color_box_bg": "#287d4b",
         "color_box_name": "Transition Green",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-light.png",  # Pure Green
+        "keyvisual_file": "keyvisual-on-light.svg",  # Pure Green
         "text_shadow": True,  # Leichter Schatten
     },
     "homeline": {
@@ -67,7 +67,7 @@ VARIANTS = {
         "color_box_bg": "#4daf46",
         "color_box_name": "Pure Green",
         "logo_file": "bkm-logo-white.svg",
-        "keyvisual_file": "keyvisual-on-light.png",
+        "keyvisual_file": "keyvisual-on-light.svg",
     },
     "proline": {
         "variant_class": "cover--proline",
@@ -75,15 +75,19 @@ VARIANTS = {
         "color_box_bg": "#494949",
         "color_box_name": "Stone Grey",
         "logo_file": "bkm-logo-white-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-light.png",  # Pure Green
+        "keyvisual_file": "keyvisual-on-light.svg",  # Pure Green
     },
     "anleitung": {
         "variant_class": "cover--anleitung",
         "label": "Verarbeitungsanleitung",
         "color_box_bg": "#ffffff",
         "color_box_name": "Weiß",
-        "logo_file": "bkm-logo-stonegrey-puregreen.svg",
-        "keyvisual_file": "keyvisual-on-light.png",
+        # Deep Green mit Pure-Green-M, dieselbe Kombination wie im
+        # technischen Datenblatt. Seit 31.08.2026 ist das der Standard fuer
+        # helle Untergruende: logos.on_light in brand.json. Die
+        # Stone-Grey-Fassung ist unter logos.retired gefuehrt.
+        "logo_file": "bkm-logo-deepgreen-puregreen.svg",
+        "keyvisual_file": "keyvisual-on-light.svg",
     },
 }
 
@@ -113,7 +117,14 @@ def build_cover(variant_key: str, content: dict):
     # Der Unterschied war ein metadata-Block mit Illustrators
     # Bearbeitungsspur, fuer die Darstellung wirkungslos.
     logo_path = f"../../assets/logos/{variant['logo_file']}"
-    keyvisual_path = f"../../assets/images/{variant['keyvisual_file']}"
+    # assets/keyvisual/, nicht assets/images/. Es gab drei Dateien fuer
+    # dasselbe Zeichen: die schlanke SVG hier (649 Bytes, saubere Polygone,
+    # in brand.json als keyvisual.on_light gefuehrt und im Canvas gesetzt),
+    # eine 384-KB-Illustrator-SVG unter assets/images/ und die PNG, die das
+    # Cover bis 31.08.2026 benutzte. Cover und Canvas liefen damit auf
+    # zwei verschiedene Dateien - dasselbe Muster wie zuvor bei der
+    # Hero-Grafik und der Fotolage.
+    keyvisual_path = f"../../assets/keyvisual/{variant['keyvisual_file']}"
     
     # Badge-Pfad (nur für Home Line und Pro Line Produktbroschüren)
     badge_path = ""
@@ -243,8 +254,54 @@ def check_output(html_content, pdf_path):
         except ImportError:
             pass
         fehler.extend(check_fotolage(pdf_path))
+        fehler.extend(check_subheadline(pdf_path))
 
     return fehler
+
+
+def check_subheadline(pdf_path):
+    """Prueft, dass die Subheadline hoechstens zwei Zeilen laeuft.
+
+    type_scale.cover.subheadline.max_lines in brand.json. Drei Zeilen
+    drueckten den Textblock nach unten und liefen bei der
+    Verarbeitungsanleitung in die Hero-Kante.
+
+    Erkannt wird sie an 12 pt in Unbounded: der Fliesstext darunter steht
+    in derselben Groesse, aber in TT Norms. Ueber die Farbe ginge es
+    nicht - die wechselt je Variante.
+
+    Wird die Grenze gerissen, ist der Text zu kuerzen. Nicht die Spalte
+    zu verbreitern und nicht die Groesse zu senken: beides steht im
+    Vertrag.
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        return []
+
+    vertrag = json.loads((ROOT_DIR / "brand.json").read_text(encoding="utf-8"))
+    grenze = (vertrag.get("type_scale", {}).get("cover", {})
+              .get("subheadline", {}).get("max_lines"))
+    soll_pt = (vertrag.get("type_scale", {}).get("cover", {})
+               .get("subheadline", {}).get("size_pt"))
+    if not grenze or not soll_pt:
+        return []
+
+    zeilen = []
+    with pymupdf.open(str(pdf_path)) as doc:
+        for block in doc[0].get_text("dict")["blocks"]:
+            for zeile in block.get("lines", []):
+                for teil in zeile["spans"]:
+                    if (abs(teil["size"] - soll_pt) < 0.3
+                            and "Unbounded" in teil["font"]):
+                        zeilen.append("".join(x["text"] for x in zeile["spans"]).strip())
+                        break
+
+    if len(zeilen) <= grenze:
+        return []
+    return [f"Subheadline laeuft {len(zeilen)} Zeilen, erlaubt sind {grenze} "
+            f"(type_scale.cover.subheadline.max_lines). Text kuerzen, nicht "
+            f"die Spalte verbreitern: {zeilen[0][:44]!r} ..."]
 
 
 def check_fotolage(pdf_path):

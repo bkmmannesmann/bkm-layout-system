@@ -20,16 +20,25 @@ jobs:
       - name: Layoutvertrag pruefen
         run: python3 scripts/validate_brochure.py
 
+      # Jede Contentdatei geht an ihren eigenen Pruefer. Vorher lief hier
+      # eine Schleife, die alles ausser content/tds* an validate_brochure.py
+      # gab - als die Verarbeitungsanleitungen dazukamen, wurden sie gegen
+      # den Broschuerenvertrag geprueft und fielen mit "unbekannter Typ
+      # 'vorbereitung'" durch. Wer eine neue Familie anlegt, traegt sie
+      # hier ein; faellt sie durchs Raster, laeuft sie in den
+      # Broschuerenpruefer und scheitert laut. Das ist gewollt.
       - name: Inhalte pruefen
         run: |
           status=0
           shopt -s nullglob
           for file in content/*/content.json; do
             case "$file" in
-              content/tds*) continue ;;   # Datenblaetter prueft validate_tds.py
+              content/tds-*)       pruefer=scripts/validate_tds.py ;;
+              content/anleitung-*) pruefer=scripts/validate_anleitung.py ;;
+              *)                   pruefer=scripts/validate_brochure.py ;;
             esac
-            echo "--- $file"
-            python3 scripts/validate_brochure.py "$file" || status=1
+            echo "--- $file  ($pruefer)"
+            python3 "$pruefer" "$file" || status=1
           done
           exit $status
 
@@ -61,6 +70,17 @@ jobs:
       # auf, weil beide Fassungen fuer sich sauber aussehen.
       - name: Titelblaetter bauen und Geometrie pruefen
         run: python3 scripts/build_cover.py
+
+      # Baut die Referenz-Verarbeitungsanleitung und prueft das Ergebnis:
+      # Schriften, Vollstaendigkeit ab 3 Zeichen, Seitenzahl, Bildverweise
+      # und die Paginierung gegen den Umfang. Siehe docs/ANLEITUNG-LAYOUT.md.
+      # Nur bauen - den Inhalt hat der check-Auftrag bereits geprueft.
+      - name: Verarbeitungsanleitungen bauen
+        run: |
+          for d in content/anleitung-*/; do
+            echo "--- $d"
+            python3 scripts/build_anleitung.py "$d/content.json"
+          done
 
       - uses: actions/upload-artifact@v4
         if: always()

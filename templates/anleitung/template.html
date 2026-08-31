@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="../../design-system/variables.css">
+  <link rel="stylesheet" href="../../design-system/base.css">
+  <link rel="stylesheet" href="../../components/components.css">
+  <link rel="stylesheet" href="anleitung-spec.css">
+</head>
+<body>
+
+{#- Seitenzahl als n/gesamt, das Titelblatt mitgezaehlt. Anders als in der
+    Broschuere: die sieben freigegebenen Anleitungen tragen auf dem zweiten
+    Blatt 2/5 beziehungsweise 2/4, das Titelblatt ist also Blatt 1. Der
+    Innenteil beginnt darum bei page_number_start = 2 und muss page_total
+    kennen. -#}
+{%- macro fuss(page, index0) -%}
+{%- set no = index0 + page_number_start -%}
+<footer class="anl-foot anl-foot--{{ 'verso' if no % 2 == 0 else 'recto' }}">
+  <span class="anl-foot__folio">{{ no }}/{{ page_total }}</span>
+  <span class="anl-foot__rubrik">{{ page.running_head | default(document_rubrik) }}</span>
+</footer>
+{%- endmacro -%}
+
+{#- Icon-Kasten. Die Datei wird inline eingebettet, nicht als <img>:
+    WeasyPrint wendet das Dokument-Stylesheet nicht auf SVG-Kinder an, und
+    ohne Fuellung am svg-Element druckt der Glyph schwarz. Jede Datei in
+    templates/anleitung/icons/ traegt sie selbst; gesetzt von
+    scripts/prepare_brochure_icons.py. -#}
+{%- macro ic(name, groesse='inline') -%}
+{%- if name %}<span class="anl-ic anl-ic--{{ groesse }}">{% include 'icons/' ~ name ~ '.svg' ignore missing %}</span>{% endif -%}
+{%- endmacro -%}
+
+{%- macro bullets(items, klasse='') -%}
+{%- if items %}<ul class="anl-bullets {{ klasse }}">{% for i in items %}<li>{{ i }}</li>{% endfor %}</ul>{% endif -%}
+{%- endmacro -%}
+
+{%- macro abschnitt(a) -%}
+<div class="anl-abschnitt">
+  {#- Ohne Icon. Auf den Anleitungsseiten folgen bis zu sechs Abschnitte
+      aufeinander; ein Icon an jedem war Unruhe, nicht Orientierung. Die
+      Icons stehen dort, wo sie unterscheiden: auf der Vorbereitungsseite,
+      an den Labelzeilen, an den Kaesten und am Profi-Tipp. -#}
+  {% if a.title %}<h2 class="anl-abschnitt__title">{{ a.title }}</h2>{% endif %}
+  {% if a.body %}<p class="anl-text">{{ a.body }}</p>{% endif %}
+  {{ bullets(a.bullets) }}
+  {#- Echte Tabelle. Die Vorlagen stellen Verbrauchsangaben zweispaltig
+      gegenueber - bei NovuSticks wird daraus auf einen Blick sichtbar,
+      dass ein Stick auf 3 cm Mauerwerk kommt. Als vier Saetze
+      untereinander geht das verloren. -#}
+  {% if a.table %}
+  <table class="anl-table">
+    {% if a.table.columns %}<thead><tr>{% for c in a.table.columns %}<th>{{ c }}</th>{% endfor %}</tr></thead>{% endif %}
+    <tbody>{% for row in a.table['rows'] %}<tr>{% for zelle in row %}<td>{{ zelle }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+  </table>
+  {% if a.table.note %}<p class="anl-text anl-text--klein">{{ a.table.note }}</p>{% endif %}
+  {% endif %}
+  {% for f in a.formulas | default([]) %}
+  <div class="anl-formel">
+    <div class="anl-formel__satz">{{ f.rule }}</div>
+    {% if f.example %}<div class="anl-formel__beispiel">{{ f.example }}</div>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{%- endmacro -%}
+
+{% for page in pages %}
+
+{# ---- SEITE 2: VORTEILE UND VORBEREITUNG ------------------------------ #}
+{% if page.type == 'vorbereitung' %}
+<section class="anl-page">
+  <div class="anl-page__body">
+    <h1 class="anl-rubrik">Vorteile</h1>
+
+    {#- Die Vorteile stehen ueber die volle Satzbreite direkt unter ihrer
+        Rubrik: sie sind die Aussage der Seite, und eine Aussage steht
+        nicht am Rand. -#}
+    {% for v in page.advantages | default([]) %}
+    <div class="anl-vorteil">
+      {{ ic(v.icon | default('seal-check'), 'inline') }}
+      <div class="anl-vorteil__text">
+        <p class="anl-vorteil__claim">{{ v.claim }}</p>
+        {% if v.detail %}<p class="anl-vorteil__detail">{{ v.detail }}</p>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+
+    <h1 class="anl-rubrik anl-rubrik--zweit">Vorbereitung</h1>
+
+    {#- Aufbau: Anwendungsbereich ueber die ganze Breite, darunter die
+        beiden Untergrundlisten nebeneinander. Dann Arbeitsplatz
+        vorbereiten wieder ueber die ganze Breite, darunter Werkzeug und
+        Sicherheit nebeneinander. Erst wofuer, dann wie, dann womit. -#}
+    {% if page.scope %}
+    <h2 class="anl-abschnitt__title">{{ ic(page.scope.icon, 'contact') }}<span>{{ page.scope.title }}</span></h2>
+    <p class="anl-text">{{ page.scope.body }}</p>
+    {#- Zwei Spalten nur, wenn es auch zwei Listen gibt. Fehlt die
+        Ausschlussliste - SP Express fuehrt keine -, stand die rechte
+        Haelfte leer und riss ein Loch von 85 mm in die Seite. Dann laeuft
+        die Eignungsliste ueber die volle Breite, zweispaltig gesetzt. -#}
+    {% if page.scope.unsuitable %}
+    <div class="anl-zwei">
+      <div>
+        {% if page.scope.suitable %}
+        <p class="anl-text anl-text--label">{{ ic('check-circle', 'contact') }}<span>Geeignet für</span></p>
+        {{ bullets(page.scope.suitable, 'anl-bullets--nackt') }}
+        {% endif %}
+      </div>
+      <div>
+        <p class="anl-text anl-text--label">{{ ic('warning', 'contact') }}<span>Nicht geeignet für</span></p>
+        {{ bullets(page.scope.unsuitable, 'anl-bullets--nackt') }}
+      </div>
+    </div>
+    {% elif page.scope.suitable %}
+    <p class="anl-text anl-text--label">{{ ic('check-circle', 'contact') }}<span>Geeignet für</span></p>
+    {{ bullets(page.scope.suitable, 'anl-bullets--nackt anl-bullets--zwei') }}
+    {% endif %}
+    {% endif %}
+
+    {% if page.workplace %}
+    <h2 class="anl-abschnitt__title">{{ ic(page.workplace.icon, 'contact') }}<span>{{ page.workplace.title }}</span></h2>
+    <ul class="anl-schritte anl-schritte--breit">{% for s in page.workplace.steps %}<li>{{ s }}</li>{% endfor %}</ul>
+    {% endif %}
+
+    <div class="anl-zwei">
+      <div>
+        {% if page.tools %}
+        <div class="anl-kasten">
+          <p class="anl-kasten__title">{{ ic("hammer", "contact") }}<span>{{ page.tools.title }}</span></p>
+          {{ bullets(page.tools['items'], 'anl-bullets--nackt anl-bullets--zwei') }}
+        </div>
+        {% endif %}
+      </div>
+      <div>
+        {#- Sicherheit auf der Flaeche "deep" aus brand.json: Grund Deep
+            Green, Text Clean White, Titel Lime. Die eine Stelle auf der
+            Seite, die sich nicht ueberlesen laesst. -#}
+        {% if page.safety %}
+        <div class="anl-kasten anl-kasten--deep">
+          <p class="anl-kasten__title">{{ ic("shield-check", "contact") }}<span>{{ page.safety.title }}</span></p>
+          {{ bullets(page.safety['items'], 'anl-bullets--nackt') }}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {{ fuss(page, loop.index0) }}
+</section>
+
+{# ---- ANLEITUNGSSEITEN ------------------------------------------------ #}
+{% elif page.type == 'anleitung' %}
+<section class="anl-page">
+  <div class="anl-page__body">
+    <h1 class="anl-rubrik">Anleitung</h1>
+    <div class="anl-zwei">
+      <div>
+        {% for a in page.sections | default([]) %}{{ abschnitt(a) }}{% endfor %}
+      </div>
+      <div>
+        {% if page.figures %}
+        <div class="anl-figs">
+          {% for g in page.figures %}
+          <figure class="anl-fig">
+            {% if g.image %}<img class="anl-fig__img" src="{{ g.image }}" alt="{{ g.caption }}">
+            {%- else %}<div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: {{ g.image_needed | default(g.caption) }}</p></div>{% endif %}
+            <figcaption class="anl-fig__cap">{{ g.caption }}</figcaption>
+          </figure>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {#- Der Profi-Tipp steht in der rechten Spalte unter den
+            Abbildungen, nicht ueber die volle Breite darunter: dort lief
+            er unter den Satzspiegel, waehrend die rechte Spalte 135 mm
+            frei hatte. Neben den Abbildungen steht er ausserdem bei dem,
+            worauf er sich bezieht. -#}
+        {% if page.tip %}
+        <div class="anl-tipp">
+          <p class="anl-tipp__title">{{ ic("target", "contact") }}<span>{{ page.tip.title | default('Profi Tipp') }}</span></p>
+          <p class="anl-tipp__body">{{ page.tip.body }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {{ fuss(page, loop.index0) }}
+</section>
+
+{# ---- LETZTE SEITE: NACHARBEIT ---------------------------------------- #}
+{% elif page.type == 'nacharbeit' %}
+<section class="anl-page">
+  {#- Das Keyvisual an derselben Stelle wie auf dem Titelblatt. Die
+      Nacharbeitsseite traegt wenig Text und stuende sonst leer da. -#}
+  <img class="anl-keyvisual" src="../../assets/keyvisual/keyvisual-on-light.svg" alt="">
+  <div class="anl-page__body">
+    <h1 class="anl-rubrik">Nacharbeit</h1>
+    {% if page.headline %}<h2 class="anl-abschnitt__title">{{ page.headline }}</h2>{% endif %}
+    {% if page.leadline %}<p class="anl-text">{{ page.leadline }}</p>{% endif %}
+    {% if page.steps %}<ul class="anl-schritte">{% for s in page.steps %}<li>{{ s }}</li>{% endfor %}</ul>{% endif %}
+    {% for a in page.sections | default([]) %}{{ abschnitt(a) }}{% endfor %}
+  </div>
+  <div class="anl-impressum">
+    <span class="anl-impressum__datum">Ausgegeben am {{ page.issued }}</span><br>
+    {{ page.copyright }}
+  </div>
+  {{ fuss(page, loop.index0) }}
+</section>
+
+{% endif %}
+{% endfor %}
+
+</body>
+</html>

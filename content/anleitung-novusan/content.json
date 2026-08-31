@@ -1,0 +1,234 @@
+{
+  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_Novusan_DE, ausgegeben am 18.08.2026. Der Klebeband-Hinweis im Abschnitt „Bohren“ und die Einschränkung zu Hohlkammersteinen stehen im Wortlaut der Vorlage. Die Verbrauchsangaben sind als Tabelle gesetzt statt als Formelzeilen.",
+  "title": "Novusan – Verarbeitungsanleitung",
+  "product_name": "Novusan",
+  "product_line": "HOME LINE",
+  "document_rubrik": "Verarbeitungsanleitung",
+  "issued": "18.08.2026",
+  "source_pdf": "VA_Novusan_DE",
+  "page_number_start": 2,
+  "page_total": 6,
+  "cover": {
+    "headline": "VERARBEITUNGS-<br>ANLEITUNG",
+    "subheadline": "Für Horizontal- und Flächensperren in mineralischem Mauerwerk.",
+    "intro_text": "Novusan – Imprägnierende Mauerwerksinjektion.",
+    "hero_image_alt": "Novusan Verarbeitungsanleitung"
+  },
+  "pages": [
+    {
+      "type": "vorbereitung",
+      "running_head": "Novusan",
+      "scope": {
+        "title": "Anwendungsbereich",
+        "icon": "table",
+        "body": "Novusan dient der nachträglichen Erstellung von Horizontalsperren gegen kapillar aufsteigende Feuchtigkeit sowie von flächigen Sperren gegen seitlich eindringende Feuchtigkeit. Es ist für mineralisches Mauerwerk vorgesehen und besonders für teilunterkellerte Bereiche sowie überbaute Außenwände geeignet, bei denen ein Ausschachten von außen nicht möglich ist. Bei Gitter- und Hohlkammersteinen ist eine Flächensperre nur möglich, wenn die einzelnen Steinreihen vollständig durch eine durchgehende dichte Mörtelfuge unterbrochen sind.",
+        "suitable": [
+          "Ziegel- und Klinkermauerwerk",
+          "Naturstein- und Bruchsteinmauerwerk",
+          "Sandstein",
+          "Kalksandstein",
+          "Porenbeton",
+          "Stampfbeton",
+          "Gitter- und Hohlkammersteine — nur bei durchgehender dichter Mörtelfuge"
+        ],
+        "unsuitable": [
+          "WU-Beton"
+        ]
+      },
+      "advantages": [
+        {
+          "icon": "target",
+          "claim": "Abdichten ohne Ausschachten",
+          "detail": "Kein Bagger, kein Dreck, keine große Baustelle"
+        },
+        {
+          "icon": "drop",
+          "claim": "Exakt kalkulierbar",
+          "detail": "5 Flaschen Novusan = 1 m Horizontalsperre"
+        },
+        {
+          "icon": "shield-check",
+          "claim": "Für alle gängigen Mauerwerke außer WU-Beton",
+          "detail": "Wirksam bis 99,9 % Durchfeuchtung"
+        }
+      ],
+      "workplace": {
+        "title": "Arbeitsplatz vorbereiten",
+        "icon": "clipboard-text",
+        "steps": [
+          "Angrenzende Bauteile und Oberflächen sorgfältig abdecken und vor Produktkontakt schützen.",
+          "Prüfe bei Hohlkammersteinen vor Beginn, ob eine durchgehende dichte Mörtelfuge vorhanden ist.",
+          "Überprüfe vor dem Bohren, ob Leitungen oder Rohre im Arbeitsbereich vorhanden sind.",
+          "Prüfe, ob du eine Horizontalsperre gegen aufsteigende Feuchtigkeit oder eine Flächensperre gegen Querdurchfeuchtung benötigst."
+        ]
+      },
+      "tools": {
+        "title": "Für die Anwendung brauchst du",
+        "items": [
+          "Zollstock",
+          "Wasserwaage",
+          "Bleistift",
+          "Bohrmaschine",
+          "Bohrer Ø 14 mm",
+          "Staubsauger",
+          "Injektionsflaschen 500 ml",
+          "BKM FBM zum Verschließen der Bohrlöcher"
+        ]
+      },
+      "safety": {
+        "title": "Für deine eigene<br>Sicherheit",
+        "items": [
+          "Schutzbrille",
+          "Schutzhandschuhe",
+          "Schutzkleidung"
+        ]
+      }
+    },
+    {
+      "type": "anleitung",
+      "running_head": "Novusan",
+      "sections": [
+        {
+          "title": "Verbrauch planen",
+          "icon": "table",
+          "body": "Falls du keinen Bauplan zur Hand hast, kannst du die Wandstärke an einem Fenster oder einer Tür nachmessen.",
+          "table": {
+            "columns": [
+              "Wandstärke",
+              "Horizontalsperre",
+              "Flächensperre"
+            ],
+            "rows": [
+              [
+                "bis 50 cm",
+                "5 Flaschen je Meter",
+                "20 Flaschen je m²"
+              ],
+              [
+                "über 50 cm",
+                "10 Flaschen je Meter",
+                "40 Flaschen je m²"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Untergrund",
+          "icon": "stack",
+          "body": "Der Untergrund muss mineralisch und saugfähig sein. Bei Hohlkammersteinen ist vor Arbeitsbeginn sicherzustellen, dass eine durchgehende Mörtelfuge vorhanden ist. Bei Natursteinmauerwerk ohne homogenes Fugenbild müssen die Bohrungen so gesetzt werden, dass auf halber Mauerwerksstärke eine Mörtelfuge oder ein Hohlraum getroffen wird."
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "Novusan",
+      "sections": [
+        {
+          "title": "Horizontalsperre",
+          "icon": "hammer",
+          "body": "Bis 50 cm Wandstärke reicht eine Bohrlochreihe. Die Bohrlöcher werden ca. 5 bis 15 cm vom Boden und im seitlichen Abstand von 20 cm angezeichnet. Setze die erste Bohrung direkt in die Ecke und die zweite mit 10 cm Abstand zur Ecke, dann fährst du mit je 20 cm Abständen fort. Ist die Wand dicker als 50 cm, wird eine zweite Bohrlochreihe darüber angezeichnet; sie liegt 12 bis 15 cm höher. Die Bohrlöcher der oberen Reihe sitzen nicht direkt über den unteren, sondern jeweils mittig zwischen zwei unteren Bohrlöchern."
+        },
+        {
+          "title": "Flächensperre",
+          "icon": "hammer",
+          "body": "Markiere zuerst die unterste Bohrlochreihe wie bei der Horizontalsperre. Bis 50 cm Wandstärke werden die weiteren Reihen jeweils im Abstand von 25 cm nach oben angezeichnet, die Bohrlöcher in jeder Reihe haben 20 cm Abstand. Sitzen mehrere Reihen übereinander, werden die Bohrlöcher der oberen Reihe um 10 cm versetzt markiert, also jeweils mittig zwischen die der unteren. Ist die Wand dicker als 50 cm, beträgt der Abstand nach oben nur noch 12,5 cm statt 25 cm."
+        },
+        {
+          "title": "Partielle Flächensperre",
+          "icon": "hammer",
+          "body": "Wenn nur ein kleiner Teilbereich betroffen ist, kann die Flächensperre auch partiell erstellt werden. Dafür solltest du das Bohrlochmuster bis ca. 50 cm über die letzte erkennbare Schadensstelle hinaus anzeichnen."
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Bohrlochmuster Horizontalsperre",
+          "image_needed": "Zeichnung: Bohrlochmuster Horizontalsperre mit Maßketten 20 cm, 10 cm Eckabstand, 5–15 cm über dem Boden"
+        },
+        {
+          "caption": "Bohrlochmuster Flächensperre",
+          "image_needed": "Zeichnung: Bohrlochmuster Flächensperre, Reihen im Abstand 25 cm, seitlich um 10 cm versetzt"
+        },
+        {
+          "caption": "Versetzte Bohrlochreihen",
+          "image_needed": "Zeichnung: zweite Reihe 12–15 cm höher, seitlich versetzt"
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "Novusan",
+      "sections": [
+        {
+          "title": "Bohren",
+          "icon": "target",
+          "body": "Bohre die Löcher mit einem 14-mm-Bohrer in einem Winkel von 45° schräg nach unten, bis zum Beginn des hinteren Drittels der Wand. Da die Bohrung schräg verläuft, ist die Strecke entlang des Bohrers länger als das horizontale Maß in der Wand. Markiere die erforderliche Bohrlänge vor dem Bohren mit einem Stück Klebeband direkt am Bohrer — im genannten Beispiel bei 34 cm. So lässt sich die Tiefe beim Bohren kontrollieren und zu tiefes Bohren vermeiden. Nach dem Bohren müssen die Bohrlöcher sauber und staubfrei sein; entferne den Bohrstaub vollständig durch Aussaugen oder mit ölfreier Druckluft.",
+          "formulas": [
+            {
+              "rule": "Bei 36 cm Wandstärke im 45°-Winkel 34 cm tief bohren",
+              "example": "So endet die Bohrung bei 24 cm der Wandstärke"
+            }
+          ]
+        },
+        {
+          "title": "Injizieren",
+          "icon": "drop",
+          "body": "Für jedes Bohrloch verwendest du eine Flasche mit 500 ml. Die Injektionsflaschen bleiben im Bohrloch, bis sie leer sind oder die Wand kein Material mehr aufnimmt. Bei Porenbeton und Kalksandstein kann das Einlaufen länger dauern; die Flaschen verbleiben, bis sie restentleert sind oder nach zwei bis drei Wochen kein Material mehr in die Wand läuft. Entleeren sich die Flaschen sehr schnell, wurde wahrscheinlich ein Hohlraum getroffen und das Produkt verteilt sich weiter in der Wand — hier brauchst du nichts weiter zu tun. Die Verarbeitungstemperatur muss mindestens 5 °C betragen."
+        },
+        {
+          "title": "Löcher verschließen",
+          "icon": "check-circle",
+          "body": "Entferne die Injektionsflaschen, sobald sie entleert sind oder die Wand kein Material mehr aufnimmt. Danach verschließt du die Bohrlöcher ca. 2 cm tief mit dem BKM FBM Füll- und Bohrlochmörtel."
+        },
+        {
+          "title": "Hinweise",
+          "icon": "warning",
+          "body": "Bei Gitter- und Hohlkammersteinen bohrst du im oberen Bereich des Steins, damit sich das Material im Hohlraum verteilen kann. Achte darauf, die Mörtelfuge unter der Steinreihe nicht anzubohren. Wie schnell die Wand trocknet, hängt davon ab, wie feucht sie ist und wie gut der Raum gelüftet wird. Trocknungsgeräte darfst du erst nach drei Wochen einsetzen. Beschädigte Putze und Anstriche entfernst du nach der Injektion und ersetzt sie durch geeignete, diffusionsoffene Systeme."
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Bohrung im 45°-Winkel",
+          "image_needed": "Foto oder Schnitt: Bohrung im 45-Grad-Winkel, Klebeband als Tiefenmarkierung am Bohrer"
+        },
+        {
+          "caption": "Einsatz der Injektionsflaschen",
+          "image_needed": "Foto: gesetzte Injektionsflaschen in der Bohrlochreihe"
+        },
+        {
+          "caption": "Bohrlöcher verschließen",
+          "image_needed": "Foto: Verschließen der Bohrlöcher mit BKM FBM"
+        }
+      ],
+      "tip": {
+        "title": "Profi Tipp",
+        "body": "Prüfe die Wand vor dem Bohren auf Rohre und Leitungen."
+      }
+    },
+    {
+      "type": "nacharbeit",
+      "running_head": "Novusan",
+      "headline": "Abschluss und Reinigung",
+      "icon": "check-circle",
+      "steps": [
+        "Entferne nach der erfolgreichen Injektion geschädigte Putze.",
+        "Ersetze die entfernten Bereiche durch geeignete Putzsysteme.",
+        "Entsorge Produktreste und Verpackungen gemäß den örtlichen Vorschriften.",
+        "Gebinde gut verschlossen sowie kühl und trocken lagern."
+      ],
+      "sections": [
+        {
+          "title": "Was passiert nach der Injektion?",
+          "icon": "warning",
+          "body": "Nach der Injektion können vorübergehend dunklere Stellen oder Farbvertiefungen sichtbar werden. Diese wirken optisch wie Feuchtigkeit, sind jedoch ein normales Zeichen der Produktverteilung im Mauerwerk und keine neue Durchfeuchtung. Im weiteren Verlauf können Salzausblühungen auftreten, da vorhandene Feuchtigkeit aus dem Mauerwerk verdrängt wird und über die Oberfläche verdunstet. Geschädigte oder stark salzbelastete Putze sollten entfernt und durch ein geeignetes Sanierungssystem ersetzt werden.",
+          "bullets": [
+            "BKM MHG MultiHaftGrund",
+            "BKM HS Hohlkehlen- und Sperrputz",
+            "BKM SF Silikatfarbe"
+          ]
+        }
+      ],
+      "issued": "18.08.2026",
+      "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
+    }
+  ]
+}

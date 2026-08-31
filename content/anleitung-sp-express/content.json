@@ -1,0 +1,236 @@
+{
+  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_BKM_SP_Express_DE, ausgegeben am 18.08.2026. Seite 3 der Vorlage ist eine Systemzeichnung des fünflagigen Aufbaus; die Lagen stehen hier als Abschnitte, die Zeichnung selbst ist als Motiv angefordert. Seite 3 der Vorlage ist eine Systemzeichnung; die fünf Lagen stehen hier als Abschnitte auf einem Blatt, die drei Bauteile (Horizontalsperre, Harzinjektion Boden-Wandanschluss, Dichtkehle) als Vorspann. Die Zeichnung selbst ist als Motiv angefordert.",
+  "title": "BKM SP Express – Verarbeitungsanleitung",
+  "product_name": "BKM SP Express",
+  "product_line": "PRO LINE",
+  "document_rubrik": "Verarbeitungsanleitung",
+  "issued": "18.08.2026",
+  "source_pdf": "VA_BKM_SP_Express_DE",
+  "page_number_start": 2,
+  "page_total": 6,
+  "cover": {
+    "headline": "VERARBEITUNGS-<br>ANLEITUNG",
+    "subheadline": "Für die schnelle Sanierung feuchte- und salzgeschädigter Wände.",
+    "intro_text": "BKM SP Express – Mineralischer, reaktiv abbindender Sanierputz.",
+    "hero_image_alt": "BKM SP Express Verarbeitungsanleitung"
+  },
+  "pages": [
+    {
+      "type": "vorbereitung",
+      "running_head": "BKM SP Express",
+      "scope": {
+        "title": "Anwendungsbereich",
+        "icon": "table",
+        "body": "Der BKM SP Express ist ein mineralischer, reaktiv abbindender, WTA-zertifizierter Sanierputz zur Sanierung von feuchten und salzgeschädigten Wandflächen.",
+        "suitable": [
+          "Feuchte- und salzbelastete Wände",
+          "Keller",
+          "Sockelbereiche",
+          "Wohn- und Nutzräume",
+          "Sanierungen unter Zeitdruck",
+          "Historische Bauten"
+        ]
+      },
+      "advantages": [
+        {
+          "icon": "target",
+          "claim": "Schnell, reaktiv und absolut zuverlässig",
+          "detail": "Die schnelle Reaktivabbindung beschleunigt den Arbeitsablauf, Flächen lassen sich zügig weiterbearbeiten"
+        },
+        {
+          "icon": "drop",
+          "claim": "Perfekt für feuchte und salzbelastete Wände",
+          "detail": "Speichert schädliche Salze, bleibt diffusionsoffen und trägt zu dauerhaft trockenen Wandoberflächen bei"
+        },
+        {
+          "icon": "stack",
+          "claim": "Hohe Schichtstärken in einem Durchgang",
+          "detail": "Auftragstärken bis 25 mm pro Lage ermöglichen eine wirtschaftliche Verarbeitung"
+        }
+      ],
+      "workplace": {
+        "title": "Arbeitsplatz vorbereiten",
+        "icon": "clipboard-text",
+        "steps": [
+          "Angrenzende Bereiche schützen und benötigte Werkzeuge bereitlegen.",
+          "Alte, lose oder salzbelastete Putze vollständig entfernen.",
+          "Untergrund von Staub, Schmutz, Anstrichen und haftmindernden Rückständen befreien und porenoffen vorbereiten.",
+          "Fugen, Ausbrüche und Schäden schließen und den Untergrund für einen gleichmäßigen Putzauftrag angleichen.",
+          "BKM VM Vorspritzmörtel als Haftbrücke auftragen. Vor dem BKM SP Express den Untergrund vornässen."
+        ]
+      },
+      "tools": {
+        "title": "Für die Anwendung brauchst du",
+        "items": [
+          "Rührwerk 500–700 U/min",
+          "Rührpaddel",
+          "Mischeimer",
+          "Wasser",
+          "Maurerkelle",
+          "Putzkelle",
+          "Kartätsche",
+          "Gitterrabot"
+        ]
+      },
+      "safety": {
+        "title": "Für deine eigene<br>Sicherheit",
+        "items": [
+          "Schutzbrille",
+          "Schutzhandschuhe",
+          "Schutzkleidung",
+          "Staubmaske"
+        ]
+      }
+    },
+    {
+      "type": "anleitung",
+      "running_head": "BKM SP Express",
+      "sections": [
+        {
+          "title": "Druckwasserhaltende Innenabdichtung",
+          "icon": "stack",
+          "body": "Die Innenabdichtung besteht aus drei Bauteilen: der Horizontalsperre, der Harzinjektion am Boden-Wandanschluss und der Dichtkehle. Der Systemaufbau erfolgt darüber in fünf Lagen über drei Tage. Für den Boden-Wandanschluss ist die ergänzende Ausführungsrichtlinie „Dichtkehle Boden-Wandanschluss“ zu beachten.",
+          "bullets": [
+            "1. Tag: Grundierung, Vorabdichtung",
+            "2. Tag: Abdichtungsebene, Haftvermittler",
+            "3. Tag: Oberputz"
+          ]
+        },
+        {
+          "title": "Grundierung",
+          "icon": "drop",
+          "body": "BKM MHG MultiHaftGrund.",
+          "bullets": [
+            "Auftrag 1× unverdünnt",
+            "Verbrauch je nach Untergrund ca. 0,5 l/m²",
+            "Trockenzeit mindestens 30 Minuten"
+          ]
+        },
+        {
+          "title": "Vorabdichtung",
+          "icon": "shield-check",
+          "body": "BKM HS Hohlkehlen- und Sperrmörtel.",
+          "bullets": [
+            "Auftrag 1× flächig mit einer Mindestschichtstärke von 1 cm, als Dichtkehle mit einer Schenkellänge von 3 × 3 cm",
+            "Verbrauch ca. 15 kg/m² Wandfläche bzw. 3 kg/m als Dichtkehle",
+            "Trockenzeit mindestens 4 bis 6 Stunden"
+          ]
+        },
+        {
+          "title": "Abdichtungsebene",
+          "icon": "shield-check",
+          "body": "BKM HDS-2K HybridDichtSchlämme, zweikomponentig.",
+          "bullets": [
+            "Auftrag 2× mit einer Gesamtdicke von 3 mm, pro Auftrag 1,5 mm Nassschichtdicke",
+            "Verbrauch pro Lage ca. 1,5 kg/m², Gesamtverbrauch ca. 3 kg/m²",
+            "Trockenzeit ca. 2 bis 4 Stunden zwischen den Lagen"
+          ]
+        },
+        {
+          "title": "Haftvermittler",
+          "icon": "stack",
+          "body": "BKM VM VorspritzMörtel.",
+          "bullets": [
+            "Auftrag volldeckend, frisch in frisch, auf die noch feuchte Kratzspachtelung BKM HDS-2K",
+            "Verbrauch ca. 3 kg/m²",
+            "Trockenzeit ca. 12 Stunden, über Nacht"
+          ]
+        },
+        {
+          "title": "Oberputz",
+          "icon": "hammer",
+          "body": "BKM SP SanierPutz Express.",
+          "bullets": [
+            "Auftrag 1× mit einer Mindestschichtdicke von 2 cm",
+            "Verbrauch ca. 18 kg/m²"
+          ]
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Systemaufbau der druckwasserhaltenden Innenabdichtung",
+          "image_needed": "Zeichnung: Schnitt durch Boden-Wandanschluss mit den fünf nummerierten Lagen und den Tagesangaben"
+        },
+        {
+          "caption": "Dichtkehle am Boden-Wandanschluss",
+          "image_needed": "Zeichnung oder Foto: Dichtkehle mit Schenkellänge 3 × 3 cm"
+        },
+        {
+          "caption": "HybridDichtSchlämme auftragen, zweite Lage",
+          "image_needed": "Foto: Auftrag der HybridDichtSchlämme, zweite Lage"
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "BKM SP Express",
+      "sections": [
+        {
+          "title": "Verbrauch und Schichtdicken planen",
+          "icon": "table",
+          "body": "Der BKM SP Express liegt bei etwa 9 kg pro Quadratmeter und pro Zentimeter Schichtdicke. Bei einer empfohlenen Schichtdicke von 25 mm ergibt ein Sack eine Fläche von ca. 1,1 m². Da der tatsächliche Verbrauch stark vom Untergrund, der Saugfähigkeit und der Applikationsmethode abhängt, lohnt sich eine kleine Probefläche, um die Menge genau einschätzen zu können.",
+          "formulas": [
+            {
+              "rule": "9 kg/m² je Zentimeter Schichtdicke",
+              "example": "Bei 25 mm ergibt ein 25-kg-Sack ca. 1,1 m²"
+            }
+          ]
+        },
+        {
+          "title": "Anmischen",
+          "icon": "drop",
+          "body": "Für das Anmischen gibst du 7,0 bis 7,5 Liter Wasser pro 25-kg-Sack in einen sauberen Mischeimer und streue den trockenen Mörtel langsam ein. Anschließend mischst du den Sanierputz für etwa drei Minuten, bis eine homogene, spachtelfähige Masse entsteht. Nach kurzer Ruhezeit rührst du das Material nochmals kurz homogen auf, um die Reaktivkomponenten optimal zu aktivieren."
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Sanierputz anmischen",
+          "image_needed": "Foto: Einstreuen des Mörtels in den Mischeimer, Rührwerk im Einsatz"
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "BKM SP Express",
+      "sections": [
+        {
+          "title": "Verarbeitung",
+          "icon": "hammer",
+          "body": "Der frisch angemischte Putz wird direkt auf die zuvor erstellte Haftbrücke aufgezogen. Die reaktive Abbindung ermöglicht eine schnelle Oberflächenbearbeitung. Je nach Applikationsmethode kannst du den Putz bis zu 25 mm pro Arbeitsgang auftragen. Für stärkere Schichtaufbauten arbeitest du mehrlagig, wobei jede Lage zunächst ansteifen sollte und waagerecht aufgeraut wird, bevor die nächste folgt. Die letzte Lage sollte mit einem Gitterrabot egalisiert werden. Das schafft auch eine porenoffene Oberfläche."
+        },
+        {
+          "title": "Weiterverarbeitung",
+          "icon": "check-circle",
+          "body": "Nach ausreichender Erhärtung kannst du die Fläche weiterbearbeiten oder beschichten. Eine zweite Lage Putz kann nach 24 Stunden aufgetragen werden, wobei die erste Schicht zuvor mit einem Gitterrabot aufzurauen ist. Der BKM FP Feinputz oder eine diffusionsoffene Beschichtung mit der BKM SF Silikatfarbe können ebenfalls nach 24 Stunden erfolgen."
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Putz aufziehen",
+          "image_needed": "Foto: Auftrag des Sanierputzes mit der Putzkelle"
+        },
+        {
+          "caption": "Mit dem Gitterrabot egalisieren",
+          "image_needed": "Foto: Egalisieren der letzten Lage mit dem Gitterrabot"
+        }
+      ],
+      "tip": {
+        "title": "Profi Tipp",
+        "body": "Verwende eine Putzschiene und arbeite mit der Schichtstärkenkelle für die richtige Schichtdicke."
+      }
+    },
+    {
+      "type": "nacharbeit",
+      "running_head": "BKM SP Express",
+      "headline": "Abschluss und Reinigung",
+      "icon": "check-circle",
+      "steps": [
+        "Die frische Putzfläche unbedingt vor zu schneller Austrocknung schützen, etwa vor Sonne, Zugluft oder starker Heizung.",
+        "Werkzeuge direkt nach der Verarbeitung gründlich mit sauberem Wasser reinigen.",
+        "Produktreste und Verpackungen gemäß den örtlichen Vorschriften entsorgen und lagern."
+      ],
+      "issued": "18.08.2026",
+      "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
+    }
+  ]
+}

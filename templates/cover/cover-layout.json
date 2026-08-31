@@ -56,7 +56,7 @@
         "on_transition_green": "bkm-logo-white-puregreen.svg (Weiß + Pure Green M)",
         "on_stone_grey": "bkm-logo-white-puregreen.svg (Weiß + Pure Green M)",
         "on_pure_green": "bkm-logo-white.svg (komplett Weiß, da Pure Green M verschwinden würde)",
-        "on_white": "bkm-logo-stonegrey-puregreen.svg (Stone Grey + Pure Green M)"
+        "on_white": "bkm-logo-deepgreen-puregreen.svg (Stone Grey + Pure Green M)"
       },
       "critical_rule": "Immer die Variante mit höchstem Kontrast zum Hintergrund wählen."
     },
@@ -240,7 +240,7 @@
       "label": "Verarbeitungsanleitung",
       "color_box_bg": "#ffffff",
       "color_box_bg_name": "Weiß",
-      "logo_file": "bkm-logo-stonegrey-puregreen.svg",
+      "logo_file": "bkm-logo-deepgreen-puregreen.svg",
       "keyvisual_file": "keyvisual-on-light.svg",
       "headline_color": "#494949",
       "subheadline_color": "#4daf46",

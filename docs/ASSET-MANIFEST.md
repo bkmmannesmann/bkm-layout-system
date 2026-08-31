@@ -46,7 +46,8 @@ Repository-Wurzelverzeichnis.
 - `assets/keyvisual/keyvisual-lime.svg`
 - `assets/keyvisual/keyvisual-on-dark.svg`
 - `assets/keyvisual/keyvisual-on-light.svg`
-- `assets/logos/bkm-logo-stonegrey-puregreen.svg`
+- `assets/logos/bkm-logo-deepgreen-puregreen.svg` — Standard auf hellem Grund (`logos.on_light`), Deep Green mit Pure-Green-M wie im technischen Datenblatt
+- `assets/logos/bkm-logo-stonegrey-puregreen.svg` — **abgelöst am 31.08.2026**, bleibt im Bestand, wird nicht mehr gesetzt (`logos.retired`)
 - `assets/logos/bkm-logo-white-puregreen.svg`
 - `assets/logos/bkm-logo-white.svg`
 

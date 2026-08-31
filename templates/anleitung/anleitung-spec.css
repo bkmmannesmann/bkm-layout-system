@@ -1,0 +1,675 @@
+/* =========================================================================
+   BKM Verarbeitungsanleitung — Innenteil
+   =========================================================================
+
+   Ein eigenstaendiges Dokument, produktbezogen, fuer Pro Line und Home Line.
+   Das Titelblatt ist ein eigenes Dokument (scripts/build_cover.py, Variante
+   "anleitung"); dieser Innenteil traegt keines. Die erste Seite in pages[]
+   traegt darum die Ziffer 1 - dieselbe Regel wie templates/pages/, siehe
+   pagination.production in brand.json.
+
+   Alle Maße stammen aus grid.interior in brand.json und werden hier nicht
+   neu entschieden:
+     Kopfsteg   26,7 mm      Fußsteg    23,5 mm
+     Achse      18   mm      Satzbreite 174  mm
+   Die Spaltenbreite wird gerechnet, nicht gesetzt - zwei nebeneinander
+   notierte Zahlen laufen auseinander (column_width_note in brand.json).
+
+   Farben und Schriften kommen ausschliesslich aus
+   design-system/variables.css. Ein Hexwert in dieser Datei ist ein Fehler,
+   ausgenommen Fotos und Fremdlogos.
+   ========================================================================= */
+
+@page {
+  size: 210mm 297mm;
+  margin: 0;
+}
+
+:root {
+  /* Die Achse ist markenweit und nicht verhandelbar: 18 mm, aussen wie
+     innen, siehe grid.axis_mm in brand.json.
+
+     Kopf- und Fussteg sind es nicht. 26,7 und 23,5 mm sind Broschueren-
+     masse; sie existieren dort, weil Kolumnentitel und Folio in den Steg
+     laufen. Ein technisches Dokument hat beides nicht. Das Datenblatt,
+     der naechste Verwandte dieses Dokuments, setzt aus demselben Grund
+     von 6,0 bis 291,4 mm - gemessen an output/tds-hz250pro.pdf. Die
+     freigegebenen Verarbeitungsanleitungen laufen von 12,6 bis 290,2 mm.
+
+     Hier: 18 mm Kopfsteg, damit der Satz auf der Achse beginnt, und
+     20 mm Fussteg fuer Seitenzahl und Impressum. Ergibt 259 mm Satzhoehe
+     statt 246,8 - ohne diese 12 mm braeuchte dieselbe Anleitung eine
+     Seite mehr. */
+  /* radius.value_px in brand.json: 5. Gilt fuer jede Flaeche, die nicht
+     randabfallend ist - dort bliebe sie kantig, weil der Beschnitt einen
+     Radius an der Blattkante abschneidet und er wie ein Fehler wirkt.
+     Diese Datei setzte bis 31.08.2026 ueberall eckig. */
+  --anl-radius: 5px;
+  --anl-axis: 18mm;
+  --anl-top: 18mm;
+  --anl-bottom: 20mm;
+  --anl-width: 174mm;
+  --anl-gutter: 4.6mm;
+  /* (174 − 2 × 4,6) / 3 — gerechnet, siehe Kopf */
+  --anl-col: calc((var(--anl-width) - 2 * var(--anl-gutter)) / 3);
+  /* Die Spalte des zweispaltigen Satzes: (174 − 4,6) / 2 = 84,7 mm. */
+  --anl-col2: calc((var(--anl-width) - var(--anl-gutter)) / 2);
+  /* Bildhoehe im Format 16:9, aus der Spaltenbreite gerechnet.
+     aspect-ratio waere der richtige Weg, aber WeasyPrint 69 kennt die
+     Eigenschaft nicht - das Element wird damit gar nicht gezeichnet,
+     nachgemessen am 31.08.2026. Der Prozentwert padding-top loest hier
+     nicht gegen die Breite auf. Bleibt calc: eine Quelle, die Hoehe
+     rechnet mit, wenn sich die Spalte aendert. */
+  --anl-fig-h: calc(var(--anl-col2) * 9 / 16);
+}
+
+/* === SEITE ============================================================== */
+
+.anl-page {
+  /* Keine Brotschrift im Bestand fuehrt U+2010. Ohne diese Zeile setzt
+     WeasyPrint jeden automatischen Trennstrich - und jeden Umbruch an
+     einem weichen Trennzeichen U+00AD - aus einer Ersatzschrift. Steht
+     hier auf der Seite, damit es fuer jedes Element darin gilt und nicht
+     nur fuer die, an die jemand gedacht hat. */
+  hyphenate-character: "-";
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: var(--bkm-white);
+  page-break-after: always;
+  break-after: page;
+}
+.anl-page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.anl-page__body {
+  position: absolute;
+  top: var(--anl-top);
+  left: var(--anl-axis);
+  width: var(--anl-width);
+  /* Die Hoehe wird gesetzt, nicht dem Fluss ueberlassen: laeuft Inhalt
+     ueber, schiebt er sonst die Fusszeile aus dem Blatt und WeasyPrint
+     schneidet still ab. Mit fester Hoehe und overflow:hidden faellt es
+     im Vollstaendigkeitstest von pdf_checks.py auf. */
+  height: calc(297mm - var(--anl-top) - var(--anl-bottom));
+  overflow: hidden;
+}
+
+/* === KEYVISUAL AUF DER LETZTEN SEITE ==================================== */
+
+/* Dieselbe Lage wie auf dem Titelblatt: 42 mm breit, rechts randabfallend,
+   Oberkante 102,416 mm. Die Zahl ist so gerechnet, dass die linke
+   Oberkante des Pure-Green-Chevrons die Unterkante des 16:9-Bereichs
+   trifft - siehe keyvisual.which_variant in brand.json. Sie hier neu zu
+   waehlen hiesse, dieselbe Marke an zwei verschiedenen Hoehen zu fuehren.
+
+   Die dreifarbige Fassung, weil die Seite weiss ist. Gesetzt wird die
+   schlanke Datei aus assets/keyvisual/ - dieselbe, die Cover und Canvas
+   benutzen.
+
+   Die Nacharbeitsseite traegt wenig Text; er endet bei 64,5 mm und
+   beruehrt das Zeichen nicht. Waechst er, schiebt er sich darueber -
+   deshalb steht es auf z-index 0, unter dem Satz. */
+.anl-keyvisual {
+  position: absolute;
+  top: 102.416mm;
+  right: 0;
+  width: 42mm;
+  height: 99.57mm;
+  z-index: 0;
+  display: block;
+}
+
+/* === FUSSZEILE ========================================================== */
+
+.anl-foot {
+  position: absolute;
+  left: var(--anl-axis);
+  right: var(--anl-axis);
+  bottom: 12mm;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 7.5pt;
+  line-height: 1.2;
+  color: var(--bkm-muted-grey);
+}
+.anl-foot--verso { flex-direction: row-reverse; }
+.anl-foot__folio {
+  font-weight: 700;
+  font-size: 9pt;
+  /* Deep Green. Die Ziffer gehoert zur Marke, nicht zum Beiwerk. */
+  color: var(--bkm-deep-green);
+  font-variant-numeric: tabular-nums;
+}
+.anl-foot__rubrik { letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* === KOPFZEILE ========================================================== */
+
+.anl-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 2.5mm;
+  border-bottom: 0.25mm solid var(--bkm-rule);
+  margin-bottom: 7mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bkm-muted-grey);
+}
+
+/* === UEBERSCHRIFTEN ===================================================== */
+
+.anl-h1 {
+  margin: 0 0 3mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 26pt;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--bkm-deep-green);
+}
+.anl-h2 {
+  margin: 0 0 2.5mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 12pt;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--bkm-deep-green);
+}
+.anl-lead {
+  margin: 0 0 6mm;
+  max-width: 140mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 10.5pt;
+  line-height: 1.4;
+  color: var(--bkm-stone-grey);
+}
+.anl-text {
+  margin: 0 0 2.4mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.5;
+  color: var(--bkm-stone-grey);
+  hyphens: auto;
+  /* Keine Brotschrift im Bestand fuehrt U+2010. Ohne diese Zeile setzt
+     WeasyPrint den Trennstrich aus einer Ersatzschrift. */
+  hyphenate-character: "-";
+}
+
+/* === AUSZEICHNUNGEN LINKSBUENDIG ======================================= */
+
+/* design-system/base.css setzt text-align:justify und hyphens:auto fuer
+   das ganze Dokument. Fuer den Fliesstext ist das richtig; jede kurze
+   Zeile in einer 84,7-mm-Spalte wird dadurch aber auseinandergezogen und
+   getrennt - aus "FUER DEINE EIGENE SICHERHEIT" wurde ein gestreckter
+   Zweizeiler mit "SICHER-HEIT". Ueberschriften, Labelzeilen und
+   Bildunterschriften stehen deshalb linksbuendig und ungetrennt.
+   Die gemeinsame Datei bleibt unberuehrt: Datenblatt und Broschuere
+   haengen daran. */
+.anl-rubrik,
+.anl-abschnitt__title,
+.anl-kasten__title,
+.anl-tipp__title,
+.anl-vorteil__claim,
+.anl-vorteil__detail,
+.anl-text--label,
+.anl-fig__cap,
+.anl-ph__label,
+.anl-foot,
+.anl-bullets li,
+.anl-table th,
+.anl-formel {
+  text-align: left;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+/* === RUBRIK ============================================================ */
+
+/* Vier Rubriken, in dieser Folge: VORTEILE, VORBEREITUNG, ANLEITUNG,
+   NACHARBEIT. Abgelesen an sieben freigegebenen Anleitungen (HZ 250 Pro,
+   HZC Creme, SP Express, RD ReparaturDicht, Novusan, NovuSticks,
+   NovuProtect) - dort einheitlich, unabhaengig von Produkt und Linie.
+   Die Bestandsvorlagen setzen sie in 25pt auf x=15mm; hier steht sie auf
+   der Achse 18mm, weil brand.json nur diese eine Fluchtlinie kennt. */
+.anl-rubrik {
+  margin: 0 0 4.5mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  /* 18pt, nicht 22. Bei 22 gegen 10 pt Subheadline war der Sprung mit
+     Faktor 2,2 zu gross; die Rubrik bleibt auch bei 18 die groesste
+     Marke auf der Seite. Verbindlich steht der Wert in brand.json unter
+     type_scale.anleitung, hier ist er nur wiederholt. */
+  font-size: 18pt;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--bkm-deep-green);
+}
+/* Absatz zwischen den Rubriken: Vorteile und Vorbereitung sind zwei
+   Kapitel auf einem Blatt, nicht zwei Ueberschriften hintereinander. */
+.anl-rubrik--zweit { margin-top: 11mm; }
+
+/* === ZWEISPALTIGE VORBEREITUNGSSEITE =================================== */
+
+/* Links der Anwendungsbereich, rechts Werkzeug und Sicherheit - so steht
+   es in allen sieben Bestandsanleitungen. */
+.anl-split {
+  display: grid;
+  grid-template-columns: 1fr 62mm;
+  gap: 8mm;
+  align-items: start;
+}
+
+/* === LISTEN ============================================================ */
+
+.anl-bullets { margin: 0 0 4mm; padding: 0; list-style: none; }
+.anl-bullets li {
+  position: relative;
+  padding: 0 0 1.4mm 5mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.45;
+  color: var(--bkm-stone-grey);
+}
+/* Ein gesetzter Punkt, kein Zeichen aus der Schrift: ueber ein Bullet aus
+   dem Zeichensatz kommt sonst eine Ersatzschrift ins PDF. */
+.anl-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0.6mm;
+  top: 1.75mm;
+  width: 1.5mm;
+  height: 1.5mm;
+  border-radius: 50%;
+  background: var(--bkm-transition-green);
+}
+.anl-bullets--negativ li::before { background: var(--bkm-muted-grey); }
+
+/* Ohne Punkt. In den Untergrundlisten und in Werkzeug und Sicherheit
+   traegt der Punkt nichts: die Zeilen sind kurz und stehen ohnehin
+   untereinander. Die Aufzaehlung wird stattdessen ueber die Labelzeile
+   mit ihrem Icon angekuendigt. */
+.anl-bullets--nackt li { padding-left: 0; }
+.anl-bullets--nackt li::before { content: none; }
+
+/* Handlungsschritte. Ohne Ziffer und ohne Punkt: die Reihenfolge steht
+   im Text ("Lege zuerst fest", "Trage vor dem Aufbringen auf"), und eine
+   zweite Ordnung daneben traegt nichts. Der Kasten mit der Ziffer stand
+   hier bis 31.08.2026; er ist entfernt, nicht nur ungenutzt. */
+.anl-schritte { margin: 0 0 4mm; padding: 0; list-style: none; }
+.anl-schritte li {
+  padding: 0 0 2.4mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.45;
+  color: var(--bkm-stone-grey);
+}
+.anl-schritte--breit { margin-bottom: 5mm; }
+.anl-text--label {
+  display: flow-root;
+  margin-bottom: 2mm;
+  font-weight: 700;
+  color: var(--bkm-deep-green);
+}
+
+/* === VORTEILE ========================================================== */
+
+/* Behauptung fett, Begruendung darunter mager - das Muster aus dem
+   Bestand. Der Vorteil traegt die Aussage, die Zeile darunter belegt sie. */
+/* Ueber die volle Satzbreite, direkt unter der Rubrik. Die Haarlinie
+   trennt die drei Aussagen, ohne sie einzukasteln. */
+.anl-vorteil {
+  display: grid;
+  grid-template-columns: 9.5mm 1fr;
+  gap: 0 3.5mm;
+  align-items: center;
+  /* Ohne Trennstrich. Drei Aussagen mit Icon stehen fuer sich; die Linie
+     dazwischen war eine Ordnung, die der Inhalt nicht braucht. */
+  margin: 0 0 3.4mm;
+}
+/* Der Kasten steht neben beiden Zeilen und trifft ihre Hoehe: Behauptung
+   9,5pt auf 1,35 und Begruendung 8,5pt auf 1,4 ergeben zusammen rund
+   9,5 mm - genau das Mass der Stufe inline. */
+.anl-vorteil__text { grid-column: 2; }
+.anl-vorteil:last-of-type { margin-bottom: 6mm; }
+.anl-vorteil__claim {
+  margin: 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 9.5pt;
+  line-height: 1.35;
+  color: var(--bkm-deep-green);
+}
+.anl-vorteil__detail {
+  margin: 0.4mm 0 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.4;
+  /* Deep Green, mager. Vorher Muted Grey - das ist die Farbe fuer Beiwerk
+     (Bildunterschriften, Fussnoten, Folio), und die Begruendung eines
+     Vorteils ist kein Beiwerk. Sie steht eine Stufe unter der Behauptung:
+     dieselbe Farbe, geringeres Gewicht. */
+  color: var(--bkm-deep-green);
+}
+
+/* === WERKZEUG UND SICHERHEIT =========================================== */
+
+/* Eng gesetzt, mit Absicht: in der ersten Fassung standen hier 5 mm
+   Innenabstand, und die letzten beiden Sicherheitsangaben - Gehoerschutz
+   und Staubmaske - fielen vom Blatt. Die Seite sah heil aus. Wer diese
+   Werte wieder aufmacht, muss den Umfang von S.2 nachmessen. */
+.anl-kasten {
+  background: var(--bkm-sand-white);
+  border-radius: var(--anl-radius);
+  padding: 3.4mm 4mm;
+  margin: 0 0 3.4mm;
+}
+.anl-kasten__title {
+  display: flow-root;
+  margin: 0 0 2.5mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 9pt;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--bkm-deep-green);
+}
+.anl-kasten--breit { margin-top: 1mm; }
+
+/* Die benannte Flaeche "deep" aus brand.json: Grund Deep Green, Text
+   Clean White, Titel Lime Green. Nicht selbst zusammengestellt - der
+   Name legt alle vier Werte gemeinsam fest, damit keine Kombination
+   entsteht, die im Druck nicht traegt. Der Iconkasten wechselt darauf
+   auf Transition Green, sonst stuende Deep auf Deep; der Glyph bleibt
+   Lime. */
+.anl-kasten--deep { background: var(--bkm-deep-green); }
+.anl-kasten--deep .anl-kasten__title { color: var(--bkm-lime-green); }
+.anl-kasten--deep .anl-bullets li { color: var(--bkm-white); }
+.anl-kasten--deep .anl-ic { background: var(--bkm-transition-green); }
+.anl-bullets--zwei { column-count: 2; column-gap: 4mm; }
+.anl-bullets--zwei li { break-inside: avoid; }
+.anl-bullets--drei { column-count: 3; column-gap: var(--anl-gutter); }
+.anl-bullets--drei li { break-inside: avoid; }
+.anl-kasten .anl-bullets li { font-size: 8.5pt; padding-bottom: 0.9mm; }
+.anl-kasten .anl-bullets { margin-bottom: 0; }
+.anl-kasten .anl-bullets li::before { top: 1.55mm; }
+
+/* === PROFI TIPP ======================================================== */
+
+/* Im Bestand in #afca13 gesetzt. Das ist nicht Lime Green - hier steht
+   der Palettenwert. Die Flaeche traegt den Tipp, nicht der Farbton
+   allein: die Anleitung wird auf der Baustelle oft schwarzweiss kopiert. */
+.anl-tipp {
+  background: var(--bkm-deep-green);
+  border-radius: var(--anl-radius);
+  padding: 4mm 4.5mm;
+  margin: 1mm 0 0;
+}
+.anl-tipp__title {
+  display: flow-root;
+  margin: 0 0 1.5mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 9.5pt;
+  letter-spacing: 0.02em;
+  color: var(--bkm-lime-green);
+}
+.anl-tipp__body {
+  margin: 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.45;
+  color: var(--bkm-white);
+}
+
+/* === ICONS ============================================================= */
+
+/* Phosphor Bold, Glyph in Lime auf einem Kasten. Der Glyph ist immer Lime,
+   der Kasten haengt am Absender: die Anleitung ist ein Dokument der AG,
+   also Deep Green auf hellem Grund (sender_context.ag in brand.json).
+   Groessen aus icons.sizes_mm - category_opener 12/7,5 mm fuer die
+   Rubriken, inline 9,5/6 mm fuer die Kaesten daneben.
+
+   Die Dateien werden inline eingebettet, nicht als <img>: WeasyPrint
+   wendet das Dokument-Stylesheet nicht auf SVG-Kinder an, deshalb traegt
+   jede Datei ihre Fuellung selbst (scripts/prepare_brochure_icons.py).
+   Ein Icon-Webfont kommt nicht in Frage - ueber Font-Klassen waere die
+   Strichstaerke frei waehlbar. */
+.anl-ic {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bkm-deep-green);
+  border-radius: var(--anl-radius);
+}
+.anl-ic svg { display: block; }
+
+/* In den Titelzeilen schwimmt der Kasten links, statt Flex-Element zu
+   sein. Grund: als Flex-Container bekam die Ueberschrift daneben in
+   WeasyPrint die Breite ihres laengsten Wortes - "ARBEITSPLATZ
+   VORBEREITEN" riss bei 61,6 mm, obwohl 174 mm zur Verfuegung standen.
+   Am gebauten PDF nachgemessen am 31.08.2026.
+
+   Nur in den Titeln: in .anl-vorteil ist .anl-ic ein Rasterfeld und
+   bleibt ein Block, sonst rutschen die drei Vorteils-Icons zu einem
+   Balken zusammen. Der Titel steht auf flow-root, damit der Float ihn
+   nicht verlaesst und die erste Listenzeile darunter einrueckt. */
+.anl-abschnitt__title > .anl-ic,
+.anl-kasten__title > .anl-ic,
+.anl-tipp__title > .anl-ic,
+.anl-text--label > .anl-ic {
+  float: left;
+  margin-right: 2.6mm;
+}
+/* Die Rubriken tragen kein Icon - sie tragen ihr Gewicht ueber Groesse
+   und Farbe. Die Subheadlines tragen eines, ebenso die Vorteile, die
+   Kaesten und die Labelzeilen.
+
+   Zwei benannte Stufen aus icons.sizes_mm, keine erfundenen Zahlen:
+   contact 6,5 / 3,8 mm fuer Zeilen, inline 9,5 / 6 mm fuer den Vorteil -
+   dort steht der Kasten neben zwei Zeilen und muss ihre Hoehe treffen. */
+.anl-ic--contact { width: 6.5mm; height: 6.5mm; }
+.anl-ic--contact svg { width: 3.8mm; height: 3.8mm; }
+.anl-ic--inline { width: 9.5mm; height: 9.5mm; }
+.anl-ic--inline svg { width: 6mm; height: 6mm; }
+
+/* Auf dunklem Grund traegt der Kasten Transition Green, sonst steht Deep
+   auf Deep. Der Glyph bleibt Lime - eine Regel, kein Sonderfall. */
+.anl-tipp .anl-ic { background: var(--bkm-transition-green); }
+
+/* === ZWEISPALTIGER SATZ AUF DEN ANLEITUNGSSEITEN ======================= */
+
+/* Die freigegebenen Fassungen setzen den Text in einer 86-mm-Spalte ab
+   x=15mm und stellen Abbildungen rechts ab x=110mm daneben. Ueber die
+   volle Satzbreite von 174 mm gelaufen ergaeben sich bei 9pt mehr als 110
+   Zeichen je Zeile - lesbar sind 45 bis 75. Hier zwei gleiche Spalten auf
+   dem Raster aus brand.json: (174 − 4,6) / 2 = 84,7 mm, also fast genau
+   das Mass der Vorlage. */
+.anl-zwei {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--anl-gutter);
+  align-items: start;
+}
+
+/* === ABSCHNITTE DER ANLEITUNGSSEITEN =================================== */
+
+/* Eng gesetzt: mit 5 mm passten die Hinweise und der Profi-Tipp nicht
+   mehr auf ihre Seite, und die Abbildungen waeren von ihrem Abschnitt
+   getrennt worden. Wer das aufmacht, muss den Umfang nachmessen. */
+.anl-abschnitt { margin: 0 0 3.5mm; }
+.anl-abschnitt__title {
+  display: flow-root;
+  margin: 0 0 1.5mm;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 10pt;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--bkm-deep-green);
+}
+
+/* Rechenwege stehen abgesetzt, nicht im Fliesstext: auf der Baustelle
+   wird die Formel gesucht, nicht gelesen. */
+.anl-formel {
+  margin: 1.6mm 0;
+  padding: 2.6mm 3.5mm;
+  background: var(--bkm-sand-white);
+  border-radius: var(--anl-radius);
+  border-left: 1mm solid var(--bkm-transition-green);
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.5;
+  color: var(--bkm-stone-grey);
+}
+.anl-formel__satz { font-weight: 700; color: var(--bkm-deep-green); }
+.anl-formel__beispiel { color: var(--bkm-muted-grey); }
+
+/* === TABELLEN ========================================================== */
+
+/* Die Vorlagen stellen Verbrauchsangaben zweispaltig gegenueber. Bei
+   NovuSticks wird daraus auf einen Blick sichtbar, dass ein Stick auf
+   3 cm Mauerwerk kommt; als vier Saetze untereinander geht das verloren.
+   Der Datenvertrag kannte bis 31.08.2026 nur bullets und formulas - das
+   war die Luecke dahinter. */
+.anl-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 2.5mm;
+}
+.anl-table th,
+.anl-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 1.8mm 3mm 1.8mm 0;
+  border-bottom: 0.25mm solid var(--bkm-hairline);
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  line-height: 1.4;
+  color: var(--bkm-stone-grey);
+}
+.anl-table th {
+  font-weight: 700;
+  color: var(--bkm-deep-green);
+  border-bottom-width: 0.4mm;
+  border-bottom-color: var(--bkm-rule);
+}
+.anl-table td:last-child,
+.anl-table th:last-child { padding-right: 0; font-variant-numeric: tabular-nums; }
+.anl-text--klein { font-size: 8.5pt; color: var(--bkm-muted-grey); }
+
+/* Zum Umbruch in Ueberschriften: text-wrap:pretty stand hier und hat
+   nichts bewirkt - WeasyPrint 69 kennt die Eigenschaft nicht, am
+   31.08.2026 am gebauten PDF nachgemessen. Der einzige wirklich
+   schlechte Umbruch war "FÜR DIE ANWENDUNG BRAUCHST / DU", ein
+   Zweibuchstaben-Rest auf eigener Zeile. Er ist im Content geloest: ein
+   geschuetztes Leerzeichen bindet die letzten beiden Woerter. Das ist
+   keine Aenderung am freigegebenen Wortlaut, sondern eine Bindung.
+   Zweiwort-Umbrueche wie "VERBRAUCH / PLANEN" bleiben - die sind
+   richtig. */
+
+/* === ABBILDUNGEN ======================================================= */
+
+/* Untereinander in der rechten Spalte, nicht nebeneinander: bei 84,7 mm
+   Spaltenbreite waeren zwei Abbildungen je 40 mm breit und die Maßketten
+   der Bohrlochmuster nicht mehr lesbar. */
+.anl-figs { margin: 0 0 5mm; }
+.anl-fig { margin: 0 0 5mm; }
+/* 16:9, nicht eine feste Hoehe in Millimetern. Das Format ist gesetzt,
+   die Hoehe rechnet sich aus der Spaltenbreite: bei 84,7 mm sind das
+   47,64 mm. Aendert sich die Spalte, bleibt das Format. Eine gesetzte
+   Hoehe waere die zweite Zahl neben der Breite, und zwei Zahlen laufen
+   auseinander. Gilt fuer Bilder wie fuer Platzhalter. */
+.anl-fig__img {
+  width: 100%;
+  height: var(--anl-fig-h);
+  object-fit: cover;
+  display: block;
+  background: var(--bkm-grey-light);
+  border-radius: var(--anl-radius);
+}
+.anl-fig__cap {
+  margin: 2mm 0 0;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 8pt;
+  line-height: 1.35;
+  color: var(--bkm-muted-grey);
+}
+
+/* === NACHARBEIT UND IMPRESSUM ========================================== */
+
+.anl-impressum {
+  position: absolute;
+  left: var(--anl-axis);
+  right: var(--anl-axis);
+  bottom: 17mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 7pt;
+  line-height: 1.4;
+  color: var(--bkm-muted-grey);
+}
+.anl-impressum__datum { font-weight: 700; color: var(--bkm-stone-grey); }
+
+/* === PLATZHALTERFLAECHEN ================================================ */
+
+/* Fehlt ein Motiv, steht hier eine gestreifte Flaeche mit Beschriftung -
+   kein toter Bildverweis. Findet WeasyPrint eine Datei nicht, setzt es
+   still den Alt-Text in einer Serifenschrift an ihre Stelle; auf einer
+   Anleitung faellt das erst im Druck auf. Die Streifen sind aus einem
+   Verlauf gebaut, nicht aus einer Bilddatei, damit der Platzhalter selbst
+   nichts nachladen muss. Muster und Regel: placeholders in brand.json. */
+.anl-ph {
+  display: flex;
+  align-items: flex-end;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--bkm-grey-light) 0, var(--bkm-grey-light) 2.4mm,
+    var(--bkm-white) 2.4mm, var(--bkm-white) 4.8mm);
+  border: 0.25mm solid var(--bkm-rule);
+  border-radius: var(--anl-radius);
+}
+.anl-ph__label {
+  margin: 0;
+  padding: 2mm 2.5mm;
+  background: var(--bkm-white);
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 7.5pt;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  /* Keine Versalien: text-transform macht aus "Maßkette" ein "MASSKETTE",
+     und der Vollstaendigkeitstest in build_anleitung.py vergleicht gegen
+     den Text aus content.json - am ss scheitert der Abgleich, und eine
+     heile Seite wird als fehlender Text gemeldet. */
+  color: var(--bkm-muted-grey);
+}
+
+/* === OFFENE ANGABEN ===================================================== */
+
+/* Fehlende Angaben werden sichtbar gemacht, nicht weggelassen. Dieselbe
+   Regel wie im Datenblatt: ein Entwurf darf Luecken haben, sie duerfen
+   nur nicht stillschweigend verschwinden. */
+.anl-offen {
+  background: var(--bkm-sand-white);
+  border-radius: var(--anl-radius);
+  outline: 0.3mm dashed var(--bkm-pure-green);
+  padding: 0 1mm;
+  font-weight: 700;
+  color: var(--bkm-deep-green);
+}
