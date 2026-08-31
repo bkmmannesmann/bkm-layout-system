@@ -73,6 +73,31 @@ def check_output(pdf_path, content):
 
     fehler.extend(check_bildverweise(content))
     fehler.extend(check_paginierung(content))
+    fehler.extend(check_abbildungen(content))
+    return fehler
+
+
+# Eine Abbildung braucht in der rechten Spalte 46 mm Bildhoehe, rund 4 mm
+# Unterschrift und 5 mm Abstand. Bei 259 mm Satzhoehe abzueglich der
+# Rubrik bleiben rund 245 mm - also vier Abbildungen. Die fuenfte wird von
+# overflow:hidden abgeschnitten; die Seite sieht heil aus.
+ABB_JE_SEITE = 4
+
+
+def check_abbildungen(content):
+    """Prueft, ob eine Seite mehr Abbildungen traegt, als in die Spalte passen.
+
+    Der Vollstaendigkeitstest faengt das zwar auch, aber erst ueber den
+    fehlenden Text der Platzhalterbeschriftung - und nur, solange es eine
+    gibt. Steht dort ein echtes Bild, faellt es ersatzlos weg.
+    """
+    fehler = []
+    for i, seite in enumerate(content.get("pages", []), 2):
+        n = len(seite.get("figures", []))
+        if n > ABB_JE_SEITE:
+            fehler.append(
+                f"Seite {i} traegt {n} Abbildungen, in die Spalte passen "
+                f"{ABB_JE_SEITE}. Die uebrigen werden abgeschnitten.")
     return fehler
 
 

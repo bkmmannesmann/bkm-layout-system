@@ -121,10 +121,6 @@
           "body": "Zeichne zuerst mit einer Wasserwaage und einem Bleistift die gewünschte Sperrhöhe an. Lege dann eine Bohrlochreihe in dieser Höhe fest. Die Bohrlöcher sind je nach Mauerwerksart im jeweiligen Abstand in einem Winkel von ca. 45° in das Mauerwerk zu bohren. Bei Mauerwerksecken setze eine Bohrung direkt in die Ecke. Die erste Bohrung aus der Ecke wird zu beiden Seiten mit 10 cm Abstand angeordnet. Bei Wandstärken über 60 cm muss in der Ecke eine zweite Bohrung um 5 cm nach oben versetzt erfolgen."
         },
         {
-          "title": "Verarbeitung · Flächensperre",
-          "body": "Führe bei einer Flächensperre das Bohrlochmuster der Horizontalsperre nach oben schachbrettartig versetzt fort. Der vertikale Abstand beträgt hierbei 25 cm. Die letzte Bohrlochreihe endet min. 15 cm über Oberkante Gelände."
-        },
-        {
           "title": "Partielle Flächensperre",
           "body": "Wenn nur ein Teilbereich betroffen ist, lege die Sperre zu allen Seiten bis ca. 50 cm über die letzte erkennbare Schadensstelle hinaus an."
         },
@@ -166,6 +162,10 @@
       "running_head": "BKM HZ 250 Pro",
       "sections": [
         {
+          "title": "Verarbeitung · Flächensperre",
+          "body": "Führe bei einer Flächensperre das Bohrlochmuster der Horizontalsperre nach oben schachbrettartig versetzt fort. Der vertikale Abstand beträgt hierbei 25 cm. Die letzte Bohrlochreihe endet min. 15 cm über Oberkante Gelände."
+        },
+        {
           "title": "Injizieren",
           "body": "Injiziere anschließend BKM HZ 250 Pro mit der BKM Profi-Press über die Injektionslanzen in das Mauerwerk. Kontrolliere die Materialmenge über den elektronischen Durchlaufzähler."
         },
@@ -185,7 +185,17 @@
       "tip": {
         "title": "Profi Tipp",
         "body": "Ein Tuch an der Schiebekupplung schützt den Arbeitsbereich vor ungewollten Spritzern."
-      }
+      },
+      "figures": [
+        {
+          "caption": "Bohrlochmuster Flächensperre bei 25 cm Bohrlochabstand",
+          "image_needed": "Zeichnung Bohrlochmuster Flächensperre, 25 cm, schachbrettartig versetzt, mit Maßkette"
+        },
+        {
+          "caption": "Bohrlochmuster Flächensperre bei 12,5 cm Bohrlochabstand",
+          "image_needed": "Zeichnung Bohrlochmuster Flächensperre, 12,5 cm, schachbrettartig versetzt, mit Maßkette"
+        }
+      ]
     },
     {
       "type": "nacharbeit",
