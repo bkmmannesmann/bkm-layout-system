@@ -203,8 +203,20 @@ def baue(content_path):
                   "templates/anleitung/, nicht in diese Datei — sie wird von "
                   "scripts/build_anleitung_canvas.py neu geschrieben.")]
 
-    # Titelblatt: aus dem Cover-Bauweg, nicht neu gebaut
+    # Titelblatt: aus dem Cover-Bauweg, aber selbst gebaut. Vorher wurde
+    # gelesen, was gerade in output/covers/ lag - das war der letzte
+    # Bauablauf, nicht dieses Produkt. Der Canvas trug damit das
+    # Titelblatt eines anderen Dokuments oder den produktneutralen
+    # Vorgabetext, je nachdem, was zuletzt gebaut worden war. Aufgefallen
+    # am 31.08.2026 an einer Datei, die sich ohne Aenderung am Inhalt
+    # unterschied.
     titel_html = ROOT_DIR / "output" / "covers" / "cover_anleitung.html"
+    if content.get("cover"):
+        sys.path.insert(0, str(ROOT_DIR / "scripts"))
+        import build_cover
+        titel = dict(content["cover"])
+        titel.setdefault("title", content.get("title", ""))
+        build_cover.build_cover("anleitung", titel)
     if titel_html.is_file():
         roh = wurzelpfade(titel_html.read_text(encoding="utf-8"))
         m = re.search(r'<div class="cover [^"]*">(.*?)</div>\s*</body>', roh, re.S)
