@@ -62,6 +62,28 @@ ihr Produkt.
 
 Fehlt der Block, entsteht nur der Innenteil, und der Bau sagt das.
 
+**Die Subheadline läuft höchstens zwei Zeilen** (`type_scale.cover.
+subheadline.max_lines`). Wird die Grenze gerissen, ist der Text zu kürzen —
+nicht die Spalte zu verbreitern und nicht die Größe zu senken. Gemessen
+liegt die Grenze bei rund 70 Zeichen: 68 passen, 82 nicht.
+`check_subheadline()` in `scripts/build_cover.py` misst es am fertigen PDF
+und blockiert den Zusammenbau, wenn es reißt.
+
+**Farben auf dem Titelblatt der Anleitung.** Logo, Headline und Fließtext
+stehen in Deep Green, nicht in Stone Grey: Die Anleitung ist ein Dokument
+der AG, und deren Farbe auf hellem Grund ist Deep Green
+(`sender_context.ag.text_on_light`). Das Logo ist
+`bkm-logo-deepgreen-puregreen.svg` — dieselbe Kombination wie im
+technischen Datenblatt, an dessen Pixeln geprüft: `#1c4b42` und `#4daf46`.
+Die Datei ist bis auf die elf Farbwerte identisch mit der Stone-Grey-
+Fassung; Pfadgeometrie und viewBox sind unverändert.
+
+`logos.on_light` in `brand.json` zeigt weiter auf die Stone-Grey-Fassung.
+Sie steht an acht Stellen im Canvas. Ob die ebenfalls wechseln, ist offen.
+
+Die Subheadline bleibt Pure Green — benannte Kontrastausnahme mit 2,79,
+siehe `contrast.accepted_exceptions.pure-green_on_white`.
+
 ## Seitenzählung
 
 Anders als die Broschüre: **das Titelblatt zählt mit.** Die sieben

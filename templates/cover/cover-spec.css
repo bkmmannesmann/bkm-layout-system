@@ -329,6 +329,12 @@ html, body {
 .cover--proline .cover__intro { color: #ffffff; }
 
 /* --- VERARBEITUNGSANLEITUNG (Weiß) --- */
-.cover--anleitung .cover__headline { color: #494949; }
+/* Deep Green statt Stone Grey, in Headline wie Fliesstext. Die Anleitung
+   ist ein Dokument der AG, und deren Farbe auf hellem Grund ist Deep
+   Green - sender_context.ag.text_on_light in brand.json. Dieselbe
+   Aenderung traegt das Logo: bkm-logo-deepgreen-puregreen.svg.
+   Die Subheadline bleibt Pure Green: benannte Kontrastausnahme mit 2,79,
+   siehe contrast.accepted_exceptions.pure-green_on_white. */
+.cover--anleitung .cover__headline { color: #1c4b42; }
 .cover--anleitung .cover__subheadline { color: #4daf46; }
-.cover--anleitung .cover__intro { color: #494949; }
+.cover--anleitung .cover__intro { color: #1c4b42; }

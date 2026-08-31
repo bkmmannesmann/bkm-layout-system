@@ -82,7 +82,12 @@ VARIANTS = {
         "label": "Verarbeitungsanleitung",
         "color_box_bg": "#ffffff",
         "color_box_name": "Weiß",
-        "logo_file": "bkm-logo-stonegrey-puregreen.svg",
+        # Deep Green statt Stone Grey. Die Verarbeitungsanleitung ist ein
+        # Dokument der AG, und deren Farbe auf hellem Grund ist Deep Green
+        # (sender_context.ag.text_on_light). Eigene Datei, nicht der
+        # gemeinsame Bestand: logos.on_light in brand.json zeigt weiter auf
+        # die Stone-Grey-Fassung, die im Canvas an acht Stellen steht.
+        "logo_file": "bkm-logo-deepgreen-puregreen.svg",
         "keyvisual_file": "keyvisual-on-light.png",
     },
 }
@@ -243,8 +248,54 @@ def check_output(html_content, pdf_path):
         except ImportError:
             pass
         fehler.extend(check_fotolage(pdf_path))
+        fehler.extend(check_subheadline(pdf_path))
 
     return fehler
+
+
+def check_subheadline(pdf_path):
+    """Prueft, dass die Subheadline hoechstens zwei Zeilen laeuft.
+
+    type_scale.cover.subheadline.max_lines in brand.json. Drei Zeilen
+    drueckten den Textblock nach unten und liefen bei der
+    Verarbeitungsanleitung in die Hero-Kante.
+
+    Erkannt wird sie an 12 pt in Unbounded: der Fliesstext darunter steht
+    in derselben Groesse, aber in TT Norms. Ueber die Farbe ginge es
+    nicht - die wechselt je Variante.
+
+    Wird die Grenze gerissen, ist der Text zu kuerzen. Nicht die Spalte
+    zu verbreitern und nicht die Groesse zu senken: beides steht im
+    Vertrag.
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        return []
+
+    vertrag = json.loads((ROOT_DIR / "brand.json").read_text(encoding="utf-8"))
+    grenze = (vertrag.get("type_scale", {}).get("cover", {})
+              .get("subheadline", {}).get("max_lines"))
+    soll_pt = (vertrag.get("type_scale", {}).get("cover", {})
+               .get("subheadline", {}).get("size_pt"))
+    if not grenze or not soll_pt:
+        return []
+
+    zeilen = []
+    with pymupdf.open(str(pdf_path)) as doc:
+        for block in doc[0].get_text("dict")["blocks"]:
+            for zeile in block.get("lines", []):
+                for teil in zeile["spans"]:
+                    if (abs(teil["size"] - soll_pt) < 0.3
+                            and "Unbounded" in teil["font"]):
+                        zeilen.append("".join(x["text"] for x in zeile["spans"]).strip())
+                        break
+
+    if len(zeilen) <= grenze:
+        return []
+    return [f"Subheadline laeuft {len(zeilen)} Zeilen, erlaubt sind {grenze} "
+            f"(type_scale.cover.subheadline.max_lines). Text kuerzen, nicht "
+            f"die Spalte verbreitern: {zeilen[0][:44]!r} ..."]
 
 
 def check_fotolage(pdf_path):

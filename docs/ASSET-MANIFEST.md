@@ -47,6 +47,7 @@ Repository-Wurzelverzeichnis.
 - `assets/keyvisual/keyvisual-on-dark.svg`
 - `assets/keyvisual/keyvisual-on-light.svg`
 - `assets/logos/bkm-logo-stonegrey-puregreen.svg`
+- `assets/logos/bkm-logo-deepgreen-puregreen.svg` — für Dokumente der AG auf hellem Grund, derzeit das Titelblatt der Verarbeitungsanleitung
 - `assets/logos/bkm-logo-white-puregreen.svg`
 - `assets/logos/bkm-logo-white.svg`
 

@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.18.0",
+  "version": "1.20.0",
   "updated": "2026-08-25",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -255,7 +255,9 @@
         "size_pt": 12,
         "line_height": 1.3,
         "tracking_em": 0,
-        "uppercase": false
+        "uppercase": false,
+        "max_lines": 2,
+        "max_lines_note": "Nie drei Zeilen oder mehr. Headline und Body tragen dieselbe Grenze. Wird sie gerissen, ist der Text zu kuerzen - nicht die Spalte zu verbreitern oder die Groesse zu senken. check_subheadline in scripts/build_cover.py misst es am fertigen PDF nach; die Subheadline ist dort an 12 pt in Unbounded erkennbar, der Fliesstext steht in derselben Groesse in TT Norms. Entschieden am 31.08.2026."
       },
       "body": {
         "font": "body",
@@ -451,6 +453,9 @@
     "on_dark": "assets/logos/bkm-logo-white-puregreen.svg",
     "on_dark_mono": "assets/logos/bkm-logo-white.svg",
     "on_light": "assets/logos/bkm-logo-stonegrey-puregreen.svg",
+    "on_light_ag": "assets/logos/bkm-logo-deepgreen-puregreen.svg",
+    "on_light_ag_note": "Deep Green statt Stone Grey, das M bleibt Pure Green. Fuer Dokumente, die als Absender die AG fuehren und auf hellem Grund stehen - derzeit das Titelblatt der Verarbeitungsanleitung. Folgt sender_context.ag.text_on_light, das fuer Headline, Sektions-Headline, Akzent und Iconkasten ohnehin Deep Green vorschreibt; das Logo war die letzte Stelle, an der dort noch Stone Grey stand. Byteidentisch zur Stone-Grey-Fassung bis auf die elf Farbwerte. Entschieden am 31.08.2026.",
+    "on_light_open": "logos.on_light zeigt weiter auf die Stone-Grey-Fassung. Sie steht an acht Stellen im Canvas: A-Titelblaetter Zeile 140 und 208, B-Rahmenseiten 169 und 467, E-Strecken 69, 245 und 417. Ob die ebenfalls auf Deep Green wechseln, ist nicht entschieden.",
     "on_light_mono": "assets/logos/bkm-logo-black.svg",
     "width_mm": 42
   },
