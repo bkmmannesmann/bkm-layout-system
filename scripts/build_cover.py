@@ -136,9 +136,6 @@ def build_cover(variant_key: str, content: dict):
         # Die Hero-Grafik ersetzt den frueheren flachen Farbkasten; sie traegt
         # die Eckerweiterung im Alphakanal. Eine je Variante.
         "hero_graphic_path": f"../../uploads/titel-hero-{HERO_GRAPHIC[variant_key]}.png",
-        # Nur die helle Anleitungs-Grafik braucht eine Haarlinie an der
-        # 16:9-Kante, sonst setzt sie sich kaum vom Foto darunter ab.
-        "hairline": variant_key == "anleitung",
         "seal_path": ("../../uploads/signatur-bkm-systempartner-logo.png"
                       if variant_key == "fachbetriebe" else ""),
         "badge_path": badge_path,
