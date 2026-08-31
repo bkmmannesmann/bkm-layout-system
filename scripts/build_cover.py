@@ -216,6 +216,14 @@ def check_output(html_content, pdf_path):
     Zweitens die Schriften. Verweist ein Stylesheet auf eine Schriftdatei, die
     fehlt, wird still ersetzt. Dasselbe Muster.
 
+    Drittens die Lage des Titelfotos. brand.json schreibt cover_geometry vor;
+    die CSS wiederholt die Zahlen, und eine Abweichung faellt nicht auf, weil
+    beide Fassungen fuer sich genommen sauber aussehen. Genau so lief das Foto
+    ueber Monate vollflaechig (210 x 297 mm) statt ab 117,46 mm - derselbe
+    Titel zeigte auf dem Canvas- und auf dem Produktionsweg einen anderen
+    Ausschnitt desselben Motivs. Deshalb wird hier am Ergebnis nachgemessen,
+    gegen brand.json, nicht gegen die CSS.
+
     Die Pfade werden hier geprueft, nicht per Textsuche im Quelltext: sie
     entstehen zur Laufzeit aus variant['logo_file'], eine Suche nach dem
     woertlichen Pfad findet sie nicht.
@@ -234,6 +242,67 @@ def check_output(html_content, pdf_path):
             fehler.extend(check_fonts(PdfReader(str(pdf_path))))
         except ImportError:
             pass
+        fehler.extend(check_fotolage(pdf_path))
+
+    return fehler
+
+
+def check_fotolage(pdf_path):
+    """Misst im fertigen PDF nach, wo Titelfoto und Hero-Grafik sitzen.
+
+    Verglichen wird gegen brand.json, nicht gegen die CSS - sonst prueft die
+    Vorgabe sich selbst. Toleranz 0,3 mm: darunter liegt Rundung beim
+    Umrechnen von Punkt in Millimeter, darueber ist es eine echte Abweichung.
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        return []
+
+    geo = json.loads((ROOT_DIR / "brand.json").read_text(encoding="utf-8"))
+    geo = geo.get("cover_geometry", {})
+    soll_foto = geo.get("photo", {}).get("top_mm")
+    soll_hero = geo.get("hero_graphic", {}).get("height_mm")
+    if soll_foto is None and soll_hero is None:
+        return []
+
+    TOLERANZ = 0.3
+    nach_mm = lambda pt: pt / 72 * 25.4
+    fehler = []
+    with pymupdf.open(str(pdf_path)) as doc:
+        breit = [i for i in doc[0].get_image_info()
+                 if nach_mm(i["bbox"][2] - i["bbox"][0]) > 100]
+
+    # Die Hero-Grafik wird nicht beschnitten, ihr Rahmen steht so im PDF.
+    # Das Foto liegt unter object-fit:cover, sein Rahmen ragt ueber den
+    # Beschnitt hinaus - gemessen wird darum die Unterkante, die bei beiden
+    # Wegen auf der Blattkante liegen muss.
+    if soll_hero is not None:
+        treffer = [i for i in breit
+                   if abs(nach_mm(i["bbox"][3]) - soll_hero) < 1.0]
+        if not treffer:
+            unten = ", ".join(f"{nach_mm(i['bbox'][3]):.2f}" for i in breit) or "keine"
+            fehler.append(
+                f"Hero-Grafik endet nicht bei {soll_hero} mm laut brand.json "
+                f"(gemessen: {unten} mm)")
+
+    if soll_foto is not None:
+        hoehe = 297.0 - soll_foto
+        # Bei object-fit:cover skaliert das Motiv auf die groessere Kante;
+        # der Rahmen im PDF ist deshalb um den Faktor Motivseite/Rahmenseite
+        # groesser. Geprueft wird die Mitte - sie bleibt unter cover fest.
+        mitte_soll = soll_foto + hoehe / 2
+        treffer = [i for i in breit
+                   if abs((nach_mm(i["bbox"][1]) + nach_mm(i["bbox"][3])) / 2
+                          - mitte_soll) < TOLERANZ]
+        if not treffer:
+            gemessen = ", ".join(
+                f"{(nach_mm(i['bbox'][1]) + nach_mm(i['bbox'][3])) / 2:.2f}"
+                for i in breit) or "keine"
+            fehler.append(
+                f"Titelfoto sitzt nicht auf der Achse {mitte_soll:.2f} mm "
+                f"(brand.json: ab {soll_foto} mm, {hoehe:.2f} mm hoch) - "
+                f"gemessen: {gemessen} mm")
 
     return fehler
 
@@ -287,11 +356,17 @@ def main():
     print("=" * 60)
     print("BKM COVER BUILDER v2.0")
     print("=" * 60)
-    print(f"Grundraster: 16:9 Farbkasten (118.1mm) + Hero-Bild (178.9mm)")
-    print(f"Key Visual + Logo: 1/5 Formatbreite = 42mm")
-    print(f"Linker Rand: 18mm")
+    print("Hero-Grafik 210 x 125 mm  |  Foto ab 117,46 mm, 179,54 mm hoch")
+    print("Ueberlappung 7,54 mm (Blitzerschutz)  |  Keyvisual 42 mm ab 102,416 mm")
+    print("Linker Rand 18 mm")
     print("-" * 60)
     
+    # build_cover() gibt bei Beanstandung None zurueck. Das wurde hier nicht
+    # ausgewertet: die Befunde standen auf dem Schirm, das Skript endete
+    # trotzdem mit 0 und die CI lief durch. Eine Pruefung, die nicht
+    # abbricht, ist keine.
+    beanstandet = []
+
     if variant_arg == "all":
         for key in VARIANTS:
             v = VARIANTS[key]
@@ -299,19 +374,24 @@ def main():
             variant_content = VARIANT_CONTENT.get(key, {})
             merged_content = {**variant_content, **content}  # JSON überschreibt Defaults
             print(f"\n→ {v['label']} ({key}) – BG: {v['color_box_name']}")
-            build_cover(key, merged_content)
+            if build_cover(key, merged_content) is None:
+                beanstandet.append(key)
     elif variant_arg in VARIANTS:
         v = VARIANTS[variant_arg]
         variant_content = VARIANT_CONTENT.get(variant_arg, {})
         merged_content = {**variant_content, **content}
         print(f"\n→ {v['label']} ({variant_arg}) – BG: {v['color_box_name']}")
-        build_cover(variant_arg, merged_content)
+        if build_cover(variant_arg, merged_content) is None:
+            beanstandet.append(variant_arg)
     else:
         print(f"Unbekannte Variante: {variant_arg}")
         print(f"Verfügbar: {', '.join(VARIANTS.keys())}, all")
         sys.exit(1)
     
     print(f"\n{'=' * 60}")
+    if beanstandet:
+        print(f"Beanstandet: {', '.join(beanstandet)} - siehe ✗ oben")
+        sys.exit(1)
     print(f"Fertig! Output in: {OUTPUT_DIR}")
 
 

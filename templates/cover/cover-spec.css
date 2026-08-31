@@ -287,10 +287,10 @@ html, body {
 
 .cover__hero {
   position: absolute;
-  top: 0;
+  top: 117.46mm;
   left: 0;
   width: 210mm;
-  height: 297mm;
+  height: 179.54mm;
   overflow: hidden;
   z-index: 1;     /* UNTERSTE Ebene */
 }
