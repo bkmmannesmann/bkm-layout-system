@@ -293,7 +293,7 @@
   width: 1.5mm;
   height: 1.5mm;
   border-radius: 50%;
-  background: var(--bkm-transition-green);
+  background: var(--bkm-deep-green);
 }
 .anl-bullets--negativ li::before { background: var(--bkm-muted-grey); }
 
@@ -398,6 +398,11 @@
 .anl-kasten--deep { background: var(--bkm-deep-green); }
 .anl-kasten--deep .anl-kasten__title { color: var(--bkm-lime-green); }
 .anl-kasten--deep .anl-bullets li { color: var(--bkm-white); }
+/* Der Punkt steht sonst in Deep Green auf Deep Green und ist weg. Heute
+   traegt kein dunkler Kasten eine Punktliste - die Regel haelt den Fall
+   ab, sobald einer eine bekommt. */
+.anl-kasten--deep .anl-bullets li::before,
+.anl-tipp .anl-bullets li::before { background: var(--bkm-lime-green); }
 .anl-kasten--deep .anl-ic { background: var(--bkm-transition-green); }
 .anl-bullets--zwei { column-count: 2; column-gap: 4mm; }
 .anl-bullets--zwei li { break-inside: avoid; }

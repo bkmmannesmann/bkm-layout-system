@@ -154,6 +154,11 @@ rund 9,5 mm — genau das Maß der Stufe `inline`.
 
 ## Aufzählungen
 
+Der Punkt steht in **Deep Green** — dieselbe Farbe wie die Icon-Kästen auf
+hellem Grund, nicht Transition Green. Auf dunkler Fläche wechselt er auf
+Lime Green, sonst stünde Deep auf Deep. Heute trägt kein dunkler Kasten
+eine Punktliste; die Regel hält den Fall ab, sobald einer eine bekommt.
+
 Der gesetzte Punkt trägt nur dort, wo eine Liste als Aufzählung gelesen
 werden muss. In den Untergrundlisten sowie in Werkzeug und Sicherheit ist
 er weggelassen (`anl-bullets--nackt`): die Zeilen sind kurz und stehen
