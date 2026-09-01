@@ -17,6 +17,11 @@ Dokument, nicht ein Archiv fuer alle sieben. Wer eine andere Anleitung
 darauf legt, ueberschreibt die vorherige - das ist gewollt, denn was
 bleiben soll, gehoert ohnehin in den Content zurueck.
 
+Ausgegeben werden nur die A4-Blaetter - keine Gruppen-Navigation, kein
+Kopfblock, keine Labelleiste. Die acht Vorlagengruppen A bis H tragen das
+zu Recht, weil aus ihnen ausgewaehlt wird; die Anleitung ist ein Dokument
+und wird als Blattfolge gelesen.
+
 Die Pfade werden dabei von ../../ auf die Wurzel umgestellt: die
 Canvas-Dateien liegen in templates/brochure/, verweisen aber auf assets/
 und uploads/ ohne Praefix - Claude Design loest sie aus der Repo-Wurzel
@@ -33,19 +38,6 @@ ROOT_DIR = Path(__file__).parent.parent.resolve()
 TEMPLATE_DIR = ROOT_DIR / "templates" / "anleitung"
 COVER_DIR = ROOT_DIR / "templates" / "cover"
 ZIEL = ROOT_DIR / "templates" / "brochure" / "I-Anleitung.dc.html"
-
-GRUPPEN = [
-    ("Bibliothek.dc.html", "Bibliothek"),
-    ("A-Titelblaetter.dc.html", "A · Titelblätter"),
-    ("B-Rahmenseiten.dc.html", "B · Rahmenseiten"),
-    ("C-Navigation.dc.html", "C · Navigation"),
-    ("D-Textstrecken.dc.html", "D · Textstrecken"),
-    ("E-Strecken.dc.html", "E · Strecken"),
-    ("F-Verfahren.dc.html", "F · Verfahren"),
-    ("G-Produktseiten.dc.html", "G · Produktseiten"),
-    ("H-Fachbetrieb.dc.html", "H · Fachbetrieb"),
-    ("I-Anleitung.dc.html", "I · Anleitung"),
-]
 
 STYLESHEETS = [
     ROOT_DIR / "design-system" / "variables.css",
@@ -115,22 +107,27 @@ def seiten_zerlegen(html):
     return re.findall(r'(<section class="anl-page">.*?</section>)', html, re.S)
 
 
-def kopf(titel, untertitel):
+def kopf(titel):
+    """Rahmen der Canvas-Datei: Helmet, Stylesheet, Blattcontainer.
+
+    Ohne Chrome. Die acht Vorlagengruppen A bis H tragen Navigation,
+    Kopfblock und Labelleiste zu Recht - sie sind Sammlungen, aus denen
+    ausgewaehlt wird. Die Anleitung ist das nicht: sie ist ein Dokument,
+    das als Blattfolge gelesen und weitergegeben wird. Links auf die
+    anderen Gruppen sind darin tote Fracht, und der Kopfblock ist Text
+    ueber die Datei, nicht Inhalt der Anleitung.
+
+    Der Titel steht nur noch im <title> - er benennt den Reiter, ohne auf
+    der Flaeche zu erscheinen.
+    """
     css = fontfaces_ausduennen(
         wurzelpfade("\n".join(stylesheet_einlesen(p) for p in STYLESHEETS)))
-    nav = "\n".join(
-        f'<a href="{datei}" style="font-family:\'TT Norms Pro\',sans-serif;'
-        f'font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;'
-        f'text-decoration:none;'
-        + ("background:#1c4b42;color:#b4e717" if datei.startswith("I-")
-           else "background:#fff;color:#1c4b42")
-        + f'">{name}</a>'
-        for datei, name in GRUPPEN)
     return f"""<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{titel}</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -152,33 +149,24 @@ a:hover{{color:#1c4b42;text-decoration:underline}}
 </style>
 </helmet>
 
-<div style="padding:28px 60px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
-{nav}
-</div>
-
 <section style="padding:60px 60px 120px;display:flex;flex-direction:column;gap:48px">
-
-<div style="max-width:900px;display:flex;flex-direction:column;gap:14px">
-<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">I · Anleitung</div>
-<h1 style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:44px;line-height:1.05;letter-spacing:-0.02em;color:#1c4b42;margin:0">{titel}</h1>
-<p style="margin:0;font-size:17px;line-height:1.6;max-width:70ch">{untertitel}</p>
-</div>
 
 <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:60px">
 """
 
 
-def artboard(kennung, label, farbe, inhalt):
+def artboard(kennung, label, inhalt):
+    """Ein A4-Blatt, sonst nichts.
+
+    Die Kennung sitzt jetzt am Blatt selbst - #anleitung-titel bleibt
+    damit anspringbar, obwohl die Leiste darueber weg ist.
+    data-screen-label traegt den Seitennamen fuer Kommentare, ohne
+    sichtbar zu sein. Der Farbname stand bis 01.09.2026 in der Leiste; er
+    lautete auf allen Blaettern "Weiss" und trug nichts.
+    """
     return f"""
-<div id="{kennung}" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">{kennung}</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">{label}</span>
-<span style="font-size:14px;color:#8a8a8a">{farbe}</span>
-</div>
-<div data-screen-label="{label}" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="{kennung}" data-screen-label="{label}" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 {inhalt}
-</div>
 </div>
 """
 
@@ -196,12 +184,7 @@ def baue(content_path):
               f"{len(content['pages'])}. Abbruch.")
         return 1
 
-    teile = [kopf(f"Verarbeitungsanleitung {content['product_name']}",
-                  "Erzeugt aus content/anleitung-" +
-                  Path(content_path).parent.name.replace("anleitung-", "") +
-                  "/content.json. Aenderungen gehoeren in den Content oder in "
-                  "templates/anleitung/, nicht in diese Datei — sie wird von "
-                  "scripts/build_anleitung_canvas.py neu geschrieben.")]
+    teile = [kopf(f"Verarbeitungsanleitung {content['product_name']}")]
 
     # Titelblatt: aus dem Cover-Bauweg, aber selbst gebaut. Vorher wurde
     # gelesen, was gerade in output/covers/ lag - das war der letzte
@@ -221,21 +204,20 @@ def baue(content_path):
         roh = wurzelpfade(titel_html.read_text(encoding="utf-8"))
         m = re.search(r'<div class="cover [^"]*">(.*?)</div>\s*</body>', roh, re.S)
         if m:
-            teile.append(artboard("anleitung-titel", "Titelblatt", "Weiß",
-                                  m.group(1)))
+            teile.append(artboard("anleitung-titel", "Titelblatt", m.group(1)))
 
-    ARTEN = {"vorbereitung": ("Vorteile · Vorbereitung", "Weiß"),
-             "anleitung": ("Anleitung", "Weiß"),
-             "nacharbeit": ("Nacharbeit", "Weiß")}
+    ARTEN = {"vorbereitung": "Vorteile · Vorbereitung",
+             "anleitung": "Anleitung",
+             "nacharbeit": "Nacharbeit"}
     zaehler = {}
     for seite, quelle in zip(seiten, content["pages"]):
         art = quelle["type"]
         zaehler[art] = zaehler.get(art, 0) + 1
-        label, farbe = ARTEN[art]
+        label = ARTEN[art]
         if art == "anleitung":
             label = f"Anleitung {zaehler[art]}"
         kennung = f"anleitung-{art}" + (f"-{zaehler[art]}" if art == "anleitung" else "")
-        teile.append(artboard(kennung, label, farbe, seite))
+        teile.append(artboard(kennung, label, seite))
 
     teile.append("\n</div>\n</section>\n</x-dc>\n</body>\n</html>\n")
     ZIEL.write_text("".join(teile), encoding="utf-8")

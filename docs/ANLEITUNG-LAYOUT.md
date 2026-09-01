@@ -333,3 +333,19 @@ Der Umbruch ist Handarbeit: Jede Seite in `pages[]` muss ihren Inhalt
 fassen. Läuft eine über, meldet der Bau es — dann wandert der letzte
 Abschnitt eine Seite weiter. Seite 2 der HZ-250-Fassung hat nur noch
 1,1 mm Luft; wächst dort etwas, klemmt sie.
+
+## Canvasfassung
+
+`scripts/build_anleitung_canvas.py` erzeugt aus derselben `content.json`
+die Fassung für Claude Design: `templates/brochure/I-Anleitung.dc.html`.
+
+Sie enthält **nur die A4-Blätter** — keine Gruppen-Navigation, keinen
+Kopfblock, keine Labelleiste. Die acht Vorlagengruppen A bis H tragen das
+zu Recht, weil aus ihnen ausgewählt wird; die Anleitung ist ein Dokument
+und wird als Blattfolge gelesen, nicht als Sammlung durchgesehen. Links
+auf die anderen Gruppen wären darin tote Fracht, und der Kopfblock war
+Text über die Datei, nicht Inhalt der Anleitung.
+
+Jedes Blatt trägt seine Kennung als `id` und seinen Namen als
+`data-screen-label` — anspringbar und in Kommentaren benannt, ohne dass
+etwas davon auf dem Blatt steht.

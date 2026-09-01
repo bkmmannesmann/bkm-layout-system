@@ -11,6 +11,14 @@ Produktion sind sonst zwei Wege zu demselben Blatt, und die laufen
 auseinander. In diesem Projekt ist das dreimal passiert: bei der
 Hero-Grafik, bei der Fotolage und beim Keyvisual.
 
+Sie wird **ohne Chrome** ausgegeben: keine Gruppen-Navigation, kein
+Kopfblock, keine Labelleiste über den Blättern — nur die A4-Blätter. Die
+acht Gruppen A bis H tragen das zu Recht, weil aus ihnen ausgewählt wird.
+Die Anleitung ist keine Vorlagensammlung, sondern ein Dokument, das als
+Blattfolge gelesen und weitergegeben wird. Anspringbar bleiben die Blätter
+über ihre `id` (`#anleitung-titel`, `#anleitung-anleitung-1` …), benannt
+sind sie über `data-screen-label`.
+
 Wer darin gestaltet, gestaltet an einem Entwurf. Was bleiben soll,
 gehört zurück in `content/anleitung-<produkt>/content.json` oder in
 `templates/anleitung/` — sonst ist es beim nächsten Erzeugen weg.

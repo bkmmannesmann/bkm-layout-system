@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verarbeitungsanleitung BKM HZ 250 Pro</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -1123,7 +1124,7 @@ section:first-of-type {
   width: 1.5mm;
   height: 1.5mm;
   border-radius: 50%;
-  background: var(--bkm-transition-green);
+  background: var(--bkm-deep-green);
 }
 .anl-bullets--negativ li::before { background: var(--bkm-muted-grey); }
 
@@ -1228,6 +1229,11 @@ section:first-of-type {
 .anl-kasten--deep { background: var(--bkm-deep-green); }
 .anl-kasten--deep .anl-kasten__title { color: var(--bkm-lime-green); }
 .anl-kasten--deep .anl-bullets li { color: var(--bkm-white); }
+/* Der Punkt steht sonst in Deep Green auf Deep Green und ist weg. Heute
+   traegt kein dunkler Kasten eine Punktliste - die Regel haelt den Fall
+   ab, sobald einer eine bekommt. */
+.anl-kasten--deep .anl-bullets li::before,
+.anl-tipp .anl-bullets li::before { background: var(--bkm-lime-green); }
 .anl-kasten--deep .anl-ic { background: var(--bkm-transition-green); }
 .anl-bullets--zwei { column-count: 2; column-gap: 4mm; }
 .anl-bullets--zwei li { break-inside: avoid; }
@@ -1507,36 +1513,11 @@ section:first-of-type {
 </style>
 </helmet>
 
-<div style="padding:28px 60px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
-<a href="Bibliothek.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">Bibliothek</a>
-<a href="A-Titelblaetter.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">A · Titelblätter</a>
-<a href="B-Rahmenseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">B · Rahmenseiten</a>
-<a href="C-Navigation.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">C · Navigation</a>
-<a href="D-Textstrecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">D · Textstrecken</a>
-<a href="E-Strecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">E · Strecken</a>
-<a href="F-Verfahren.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">F · Verfahren</a>
-<a href="G-Produktseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">G · Produktseiten</a>
-<a href="H-Fachbetrieb.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">H · Fachbetrieb</a>
-<a href="I-Anleitung.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#1c4b42;color:#b4e717">I · Anleitung</a>
-</div>
-
 <section style="padding:60px 60px 120px;display:flex;flex-direction:column;gap:48px">
-
-<div style="max-width:900px;display:flex;flex-direction:column;gap:14px">
-<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">I · Anleitung</div>
-<h1 style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:44px;line-height:1.05;letter-spacing:-0.02em;color:#1c4b42;margin:0">Verarbeitungsanleitung BKM HZ 250 Pro</h1>
-<p style="margin:0;font-size:17px;line-height:1.6;max-width:70ch">Erzeugt aus content/anleitung-hz250pro/content.json. Aenderungen gehoeren in den Content oder in templates/anleitung/, nicht in diese Datei — sie wird von scripts/build_anleitung_canvas.py neu geschrieben.</p>
-</div>
 
 <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:60px">
 
-<div id="anleitung-titel" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-titel</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Titelblatt</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Titelblatt" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-titel" data-screen-label="Titelblatt" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 
 
     <!-- HERO-BILD (UNTERSTE EBENE, z-index: 1)
@@ -1623,15 +1604,8 @@ section:first-of-type {
 
   
 </div>
-</div>
 
-<div id="anleitung-vorbereitung" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-vorbereitung</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Vorteile · Vorbereitung</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Vorteile · Vorbereitung" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-vorbereitung" data-screen-label="Vorteile · Vorbereitung" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 <section class="anl-page">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Vorteile</h1>
@@ -1707,15 +1681,8 @@ section:first-of-type {
 </footer>
 </section>
 </div>
-</div>
 
-<div id="anleitung-anleitung-1" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-anleitung-1</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Anleitung 1</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Anleitung 1" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-anleitung-1" data-screen-label="Anleitung 1" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 <section class="anl-page">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Anleitung</h1>
@@ -1776,15 +1743,8 @@ section:first-of-type {
 </footer>
 </section>
 </div>
-</div>
 
-<div id="anleitung-anleitung-2" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-anleitung-2</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Anleitung 2</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Anleitung 2" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-anleitung-2" data-screen-label="Anleitung 2" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 <section class="anl-page">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Anleitung</h1>
@@ -1839,15 +1799,8 @@ section:first-of-type {
 </footer>
 </section>
 </div>
-</div>
 
-<div id="anleitung-anleitung-3" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-anleitung-3</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Anleitung 3</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Anleitung 3" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-anleitung-3" data-screen-label="Anleitung 3" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 <section class="anl-page">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Anleitung</h1>
@@ -1919,15 +1872,8 @@ section:first-of-type {
 </footer>
 </section>
 </div>
-</div>
 
-<div id="anleitung-nacharbeit" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-nacharbeit</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Nacharbeit</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Nacharbeit" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-nacharbeit" data-screen-label="Nacharbeit" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 <section class="anl-page"><img class="anl-keyvisual" src="assets/keyvisual/keyvisual-on-light.svg" alt="">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Nacharbeit</h1>
@@ -1945,7 +1891,6 @@ section:first-of-type {
   <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
 </footer>
 </section>
-</div>
 </div>
 
 </div>
