@@ -44,7 +44,21 @@ STYLESHEETS = [
     ROOT_DIR / "design-system" / "base.css",
     ROOT_DIR / "components" / "components.css",
     TEMPLATE_DIR / "anleitung-spec.css",
+    COVER_DIR / "cover-spec.css",
 ]
+
+# Aus cover-spec.css duerfen nur die .cover-Regeln in den Canvas. Die
+# Datei ist fuer eine Seite geschrieben, die allein im Browser steht:
+# html und body auf 210x297 mm zu nageln reisst die Arbeitsflaeche
+# auseinander, @page traegt dort nichts, und jeder @font-face bietet im
+# Canvas einen Schnitt zur Auswahl an, den es im Haus nicht gibt - so ist
+# in die Bestandsanleitungen Unbounded SemiBold geraten.
+COVER_GLOBAL = (
+    r"@page\s*\{[^}]*\}",
+    r"(?m)^\*\s*\{[^}]*\}",
+    r"(?m)^html,\s*body\s*\{[^}]*\}",
+    r"@font-face\s*\{[^}]*\}",
+)
 
 
 def wurzelpfade(text):
@@ -77,7 +91,11 @@ def stylesheet_einlesen(pfad):
     eingebunden, der Import kann also entfallen.
     """
     css = pfad.read_text(encoding="utf-8")
-    return re.sub(r"@import\s+[^;]+;", "", css)
+    css = re.sub(r"@import\s+[^;]+;", "", css)
+    if pfad == COVER_DIR / "cover-spec.css":
+        for muster in COVER_GLOBAL:
+            css = re.sub(muster, "", css)
+    return css
 
 
 def fontfaces_ausduennen(css):
@@ -146,6 +164,15 @@ a:hover{{color:#1c4b42;text-decoration:underline}}
 /* Erzeugt aus templates/anleitung/. Nicht hier aendern - die Datei wird
    von scripts/build_anleitung_canvas.py neu geschrieben. */
 {css}
+
+/* base.css und components.css setzen text-align:justify fuer die
+   Broschuerenstrecken. In der Produktion sieht das Titelblatt diese
+   beiden Dateien nie - es wird allein aus cover-spec.css gesetzt und
+   steht linksbuendig. Im Canvas liegen alle Stylesheets im selben
+   Dokument, und ohne diese Zeile stuenden Headline, Subheadline und
+   Intro im Blocksatz. cover-spec.css setzt selbst nirgends text-align,
+   links ist dort also der Zustand. */
+.cover, .cover * {{ text-align: left; }}
 </style>
 </helmet>
 
@@ -202,7 +229,10 @@ def baue(content_path):
         build_cover.build_cover("anleitung", titel)
     if titel_html.is_file():
         roh = wurzelpfade(titel_html.read_text(encoding="utf-8"))
-        m = re.search(r'<div class="cover [^"]*">(.*?)</div>\s*</body>', roh, re.S)
+        # Der Wrapper bleibt drin. Ohne ihn fehlt .cover--anleitung, und
+        # damit greifen die Variantenregeln nicht - Headline und Intro
+        # stuenden in der Vorgabefarbe statt in Deep Green.
+        m = re.search(r'(<div class="cover [^"]*">.*?</div>)\s*</body>', roh, re.S)
         if m:
             teile.append(artboard("anleitung-titel", "Titelblatt", m.group(1)))
 

@@ -1510,6 +1510,319 @@ section:first-of-type {
   color: var(--bkm-deep-green);
 }
 
+/* =============================================================================
+   BKM TITELBLATT – LAYOUT-SPEZIFIKATION (v2.0)
+   =============================================================================
+   
+   GRUNDPRINZIP:
+   Das DIN-A4-Titelblatt besteht aus einem vollflächigen 16:9-Farbkasten
+   im oberen Bereich (Höhe: 210/16*9 = 118.125mm) und einem Hero-Bild darunter.
+   
+   RASTER:
+   - 2 Spalten (je 105mm)
+   - Key Visual + Logo = 1/5 der Formatbreite (42mm)
+   - Linker Rand: 18mm (= Startpunkt aller Textelemente)
+   
+   FARBVARIANTEN:
+   - BKM Mannesmann AG  → Deep Green (#1c4b42)
+   - Fachbetriebe       → Transition Green (#287d4b)
+   - BKM Home Line      → Pure Green (#4daf46)
+   - BKM Pro Line       → Stone Grey (#494949)
+   - Verarbeitungsanl.  → Weiß (#ffffff)
+   
+   ============================================================================= */
+
+/* === FONT FACES ===
+   Quelle: assets/fonts/ – dieselben Dateien, die design-system/base.css nutzt.
+   Die zuvor referenzierten .woff2-Dateien liegen nicht im Repository; WeasyPrint
+   fiel dadurch stillschweigend auf DejaVu Sans zurueck. Vorhanden sind von
+   Unbounded ausschliesslich der Black-Schnitt und von TT Norms Pro Regular/Bold. */
+
+
+
+
+
+/* Umlaut-Absicherung, identisch zu design-system/base.css: Einige externe
+   PDF-/Druck-Renderer ersetzen TT-Norms-Umlaute und ss durch einen
+   Trial-Hinweis. Nur diese acht Glyphen beziehen eine lokale Sans-Serif. */
+
+
+
+/* === SEITEN-SETUP (Print/PDF) === */
+
+
+
+
+
+
+
+/* === COVER CONTAINER === */
+
+.cover {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  page-break-after: always;
+}
+
+/* === HERO-GRAFIK ===
+   210 x 125 mm, oben buendig. Sie ersetzt den frueheren flachen Farbkasten
+   samt seiner ::after-Eckerweiterung: die PNG traegt beides schon.
+
+   Unterhalb der 16:9-Kante bei 118,125 mm ist nur der rechte Zipfel deckend
+   (10,75 mm breit, bis 125 mm), der Rest durchsichtig - das ist der
+   Blitzerschutz aus brand.json, in der Datei statt in CSS.
+
+   Damit nutzen Cover-Vorlage und Canvas dieselbe Grafik. Vorher war die
+   Flaeche hier flach und deutlich heller als die Textur, weshalb dieselbe
+   Textfarbe auf beiden Wegen verschiedene Kontraste ergab. */
+
+.cover__hero-graphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 210mm;
+  height: 125mm;
+  z-index: 2;
+  display: block;
+}
+
+/* === TEXT-CONTENT CONTAINER ===
+   Flow-Layout: Elemente fließen vertikal mit definierten Abständen.
+   Subheadline und Fließtext passen sich an die tatsächliche Textlänge an
+   (ein- oder mehrzeilig, KEIN künstlicher Umbruch). */
+
+.cover__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 210mm;
+  height: 118.125mm;  /* wie der Farbkasten, echtes 16:9 */
+  padding: 18mm 18mm 0 18mm;  /* 18mm von oben und links */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* === LOGO ===
+   Breite: 42mm (1/5 der Formatbreite)
+   Die linke Außenkante definiert die Fluchtlinie für alle Textelemente */
+
+.cover__logo {
+  width: 42mm;    /* 1/5 von 210mm */
+  height: auto;
+  margin-bottom: 18mm;  /* 18mm Abstand zwischen Logo-Unterkante und Headline */
+}
+
+/* === SIEGEL (nur Fachbetriebe) ===
+   Das runde Systempartner-Siegel ersetzt das BKM-Logo, ohne dass sich sonst
+   etwas verschiebt: das Logo bleibt im Fluss stehen und traegt weiterhin den
+   Abstand zur Headline, wird aber unsichtbar. Das Siegel liegt absolut
+   darueber, auf derselben Mittelhoehe.
+
+   Rechnung: das Logo ist bei 42 mm Breite 10,161 mm hoch (viewBox
+   1054,34 x 255,08), Oberkante 18 mm, Mitte also 23,081 mm. Das Siegel misst
+   28,16 mm, seine Oberkante liegt damit bei 23,081 - 14,08 = 9,001 mm. */
+
+.cover--fachbetriebe .cover__logo { visibility: hidden; }
+
+.cover--fachbetriebe .cover__seal {
+  position: absolute;
+  top: 9.001mm;
+  left: var(--cover-axis, 18mm);
+  width: 28.16mm;
+  height: 28.16mm;
+  z-index: 3;
+  display: block;
+}
+
+/* === HEADLINE ===
+   Schrift: Unbounded Black (900), 30pt, Versalien
+   Zeilenabstand: 1.25
+   IMMER zweizeilig (Zeile 1 kürzer als Zeile 2)
+   Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
+
+.cover__headline {
+  max-width: 170mm;   /* Breit genug damit Umbruch NUR am <br> erfolgt */
+  
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 30pt;
+  line-height: 1.25;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  
+  color: #ffffff;
+  margin: 0 0 7.87mm 0;  /* 7.87mm (= 95px bei 300dpi) Abstand nach unten zur Subheadline */
+  padding: 0;
+}
+
+/* === SUBHEADLINE ===
+   Schrift: Unbounded Black (900), 12pt, KEINE Versalien
+   Ein- oder zweizeilig je nach Textlänge (KEIN künstlicher Umbruch!)
+   Verhältnis zu Headline: 30pt:12pt = 2.5:1
+   Farbe: Variabel je nach Hintergrund */
+
+.cover__subheadline {
+  max-width: 140mm;
+  
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 12pt;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: none;  /* KEINE Versalien! */
+  
+  margin: 0 0 0.85mm 0;  /* 0.85mm (= 10px bei 300dpi) Abstand nach unten zum Fließtext */
+  padding: 0;
+}
+
+/* === FLIESSTEXT / INTRO ===
+   Schrift: TT Norms Pro Regular (400), 12pt
+   Zeilenabstand: 1.25
+   MAXIMAL 2 Zeilen (NIE mehr!)
+   Max-Breite: 107mm
+   Abstand zur Subheadline: 2.5mm (= 30px bei 300dpi) – IMMER gleich
+   Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
+
+.cover__intro {
+  max-width: 120mm;   /* Breite wie im Original-PDF, passend fuer 2 Zeilen */
+  
+  font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12pt;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  
+  /* HARTE BEGRENZUNG: Maximal 2 Zeilen, Rest wird abgeschnitten */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* === PRODUKT-BADGE (nur Home Line + Pro Line) ===
+   Position: left=0 (der schräge Ansatz ragt bewusst über den Seitenrand),
+   vertikal zentriert auf der Unterkante des Farbkastens bei Y=118.125mm
+   (top = 118.125mm - 14.742mm/2 = 110.754mm, gesetzt sind 110.75mm)
+   Größe: 61mm × 14.742mm (720 × 174 px)
+   Ebene: z-index 4 (vor Key Visual und Farbkasten) */
+
+.cover__badge {
+  position: absolute;
+  /* Vertikal zentriert auf der Farbkasten-Unterkante: 118,125 - 14,742/2 = 110,754.
+     Die Badge-Hoehe folgt aus 61 mm Breite bei 720 x 174 px. */
+  top: 110.75mm;
+  left: 0;          /* Linksbündig am Seitenrand (schräger Ansatz ragt über Rand) */
+  width: 61mm;      /* 720px bei 300dpi */
+  height: auto;
+  z-index: 4;       /* Vor Key Visual (3), vor Farbkasten (2), vor Hero (1) */
+  display: block;
+}
+
+/* === KEY VISUAL ===
+   WICHTIG: Wird IMMER als vorgerenderte Bilddatei platziert!
+   NIEMALS in Code nachbauen (kein SVG, kein CSS-Shape)!
+   
+   Position:
+   - Rechte Kante bündig mit rechtem Seitenrand (right: 0)
+   - Oberkante bei Y=102.3mm (1210px bei 300dpi)
+   - Linke obere Pure-Green-Kante auf Flucht der Farbkasten-Unterkante
+   
+   Größe:
+   - Breite: 42mm (1/5 der Formatbreite)
+   - Höhe: Proportional zum Original-Seitenverhältnis */
+
+.cover__keyvisual {
+  position: absolute;
+  /* 102,416 mm ist nachgerechnet, nicht gerundet: die Chevron-Oberkante liegt
+     15,709 mm unter der Bildoberkante, damit trifft sie die 16:9-Kante bei
+     118,125 mm exakt. Die frühere Angabe 102,3 berief sich auf "1210 px bei
+     300 dpi" - das ergibt jedoch 102,447 mm, der Wert lag also neben seiner
+     eigenen Herleitung. Die Kante stößt damit ohne Überlappung; entschieden
+     am 27.08.2026 zugunsten des hergeleiteten Werts. */
+  top: 102.416mm;
+  right: 0;       /* Bündig rechts */
+  width: 42mm;    /* 1/5 von 210mm */
+  height: auto;
+  z-index: 3;     /* VOR Farbkasten und 8x8mm Kasten, VOR Hero-Bild */
+}
+
+/* === HERO-BILD ===
+   UNTERSTE EBENE (z-index: 1)
+   Vollflächig hinter allem – das Foto füllt die gesamte Seite.
+   Der 16:9-Farbkasten und der 8x8mm Kasten liegen darüber.
+   Das Key Visual liegt vor allem. */
+
+.cover__hero {
+  position: absolute;
+  top: 117.46mm;
+  left: 0;
+  width: 210mm;
+  height: 179.54mm;
+  overflow: hidden;
+  z-index: 1;     /* UNTERSTE Ebene */
+}
+
+.cover__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* =============================================================================
+   FARBVARIANTEN
+   ============================================================================= */
+
+/* --- BKM MANNESMANN AG (Deep Green) --- */
+.cover--mannesmann .cover__headline { color: #ffffff; }
+.cover--mannesmann .cover__subheadline { color: #b4e717; }
+.cover--mannesmann .cover__intro { color: #ffffff; }
+
+/* --- FACHBETRIEBE (Transition Green) --- */
+.cover--fachbetriebe .cover__headline { color: #ffffff; }
+.cover--fachbetriebe .cover__subheadline { color: #b4e717; }
+.cover--fachbetriebe .cover__intro { color: #ffffff; }
+
+/* --- BKM HOME LINE (Pure Green) --- */
+.cover--homeline .cover__headline { color: #ffffff; }
+.cover--homeline .cover__subheadline { color: #b4e717; }  /* Lime: die
+   texturierte Hero-Grafik ist dunkler als die frueher flache Flaeche.
+   Deep Green kaeme dort nur auf 2,02, Lime auf 3,34. */
+.cover--homeline .cover__intro { color: #ffffff; }
+
+/* --- BKM PRO LINE (Stone Grey) --- */
+.cover--proline .cover__headline { color: #ffffff; }
+.cover--proline .cover__subheadline { color: #b4e717; }
+.cover--proline .cover__intro { color: #ffffff; }
+
+/* --- VERARBEITUNGSANLEITUNG (Weiß) --- */
+/* Deep Green statt Stone Grey, in Headline wie Fliesstext. Die Anleitung
+   ist ein Dokument der AG, und deren Farbe auf hellem Grund ist Deep
+   Green - sender_context.ag.text_on_light in brand.json. Dieselbe
+   Aenderung traegt das Logo: bkm-logo-deepgreen-puregreen.svg.
+   Die Subheadline bleibt Pure Green: benannte Kontrastausnahme mit 2,79,
+   siehe contrast.accepted_exceptions.pure-green_on_white. */
+.cover--anleitung .cover__headline { color: #1c4b42; }
+.cover--anleitung .cover__subheadline { color: #4daf46; }
+.cover--anleitung .cover__intro { color: #1c4b42; }
+
+
+/* base.css und components.css setzen text-align:justify fuer die
+   Broschuerenstrecken. In der Produktion sieht das Titelblatt diese
+   beiden Dateien nie - es wird allein aus cover-spec.css gesetzt und
+   steht linksbuendig. Im Canvas liegen alle Stylesheets im selben
+   Dokument, und ohne diese Zeile stuenden Headline, Subheadline und
+   Intro im Blocksatz. cover-spec.css setzt selbst nirgends text-align,
+   links ist dort also der Zustand. */
+.cover, .cover * { text-align: left; }
 </style>
 </helmet>
 
@@ -1518,7 +1831,7 @@ section:first-of-type {
 <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:60px">
 
 <div id="anleitung-titel" data-screen-label="Titelblatt" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
-
+<div class="cover cover--anleitung">
 
     <!-- HERO-BILD (UNTERSTE EBENE, z-index: 1)
          Position: Y=0 (vollflächig hinter allem)
@@ -1602,7 +1915,7 @@ section:first-of-type {
          src="assets/keyvisual/keyvisual-on-light.svg" 
          alt="BKM Key Visual">
 
-  
+  </div>
 </div>
 
 <div id="anleitung-vorbereitung" data-screen-label="Vorteile · Vorbereitung" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
