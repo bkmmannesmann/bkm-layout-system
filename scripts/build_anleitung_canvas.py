@@ -198,6 +198,133 @@ def artboard(kennung, label, inhalt):
 """
 
 
+
+def _stilblock(html):
+    """Der Inhalt des <style>-Blocks im Helmet."""
+    a = html.find("<style>")
+    b = html.find("</style>")
+    return html[a:b] if a >= 0 and b > a else ""
+
+
+def check_chrome(html, seiten_soll):
+    """Die Anleitung wird ohne Chrome ausgegeben.
+
+    Keine Gruppen-Navigation, kein Kopfblock, keine Labelleiste - sie ist
+    ein Dokument, keine Vorlagensammlung. Der Bau hat das dreimal wieder
+    eingezogen, weil die Funktionen aus der Bibliothek stammen; darum
+    steht es hier als Pruefung und nicht nur im Layoutvertrag.
+    """
+    fehler = []
+    if re.search(r'href="[^"]*\.dc\.html"', html):
+        fehler.append("Links auf andere Canvas-Gruppen im Dokument.")
+
+    blaetter = re.findall(r'<div id="([^"]+)" data-screen-label="([^"]+)"'
+                          r' style="width:210mm;height:297mm', html)
+    if len(blaetter) != seiten_soll:
+        fehler.append(f"{len(blaetter)} A4-Blaetter, erwartet {seiten_soll}.")
+
+    aussen = len(re.findall(r"<h1 style=", html))
+    if aussen:
+        fehler.append(f"{aussen} <h1> ausserhalb der Blaetter - Kopfblock.")
+
+    if "border-bottom:2px solid #1c4b42" in html:
+        fehler.append("Labelleiste ueber den Blaettern.")
+
+    if len(set(k for k, _ in blaetter)) != len(blaetter):
+        fehler.append("Zwei Blaetter tragen dieselbe Kennung.")
+    return fehler
+
+
+def check_seitenrahmen(html):
+    """cover-spec.css ist fuer eine Seite geschrieben, die allein steht.
+
+    html und body auf 210x297 mm zu nageln reisst die Arbeitsflaeche
+    auseinander: der Canvas traegt mehrere Blaetter nebeneinander. Die
+    Regel darf im Dokument nicht ankommen.
+    """
+    css = _stilblock(html)
+    if re.search(r"(?m)^html,\s*body\s*\{[^}]*210mm", css):
+        fehler = "html/body auf Blattmass festgenagelt - aus cover-spec.css."
+        return [fehler]
+    return []
+
+
+def check_fotolage(html):
+    """Wo das Titelfoto liegt, steht in brand.json - nicht in der CSS.
+
+    Der Canvas zog seine Regel bis 01.09.2026 aus components.css, wo die
+    alte vollflaechige Fassung steht. Gemessen wird darum am Ergebnis
+    gegen brand.json, und geprueft wird zusaetzlich, ob die Regel auch
+    zuletzt kommt: eine spaetere gleichrangige Regel gewaenne still.
+    """
+    geo = json.loads((ROOT_DIR / "brand.json").read_text(encoding="utf-8"))
+    foto = geo.get("cover_geometry", {}).get("photo", {})
+    soll_top, soll_hoehe = foto.get("top_mm"), foto.get("height_mm")
+    if soll_top is None:
+        return []
+
+    css = _stilblock(html)
+    regeln = list(re.finditer(r"\.cover__hero\s*\{([^}]*)\}", css))
+    if not regeln:
+        return ["Keine Regel fuer .cover__hero - cover-spec.css fehlt."]
+
+    letzte = regeln[-1].group(1)
+    top = re.search(r"top:\s*([\d.]+)mm", letzte)
+    # (?<![-\w]) haelt min-height und max-height heraus - sonst meldet die
+    # Pruefung die 150 mm der alten Regel als Hoehe des Fotos.
+    hoehe = re.search(r"(?<![-\w])height:\s*([\d.]+)mm", letzte)
+    fehler = []
+    if not top or abs(float(top.group(1)) - soll_top) > 0.05:
+        fehler.append(
+            f"Titelfoto beginnt bei {top.group(1) + ' mm' if top else 'unbestimmt'}, "
+            f"brand.json sagt {soll_top} mm.")
+    if soll_hoehe is not None and (
+            not hoehe or abs(float(hoehe.group(1)) - soll_hoehe) > 0.05):
+        fehler.append(
+            f"Titelfoto ist {hoehe.group(1) + ' mm' if hoehe else 'unbestimmt'} hoch, "
+            f"brand.json sagt {soll_hoehe} mm.")
+    if 'class="cover cover--' not in html:
+        fehler.append("Variantenklasse am Titelblatt fehlt - die "
+                      "Variantenregeln greifen dann nicht.")
+    return fehler
+
+
+def check_schriftangebot(html):
+    """Was der Canvas an Schnitten anbietet, kann jemand auswaehlen.
+
+    Im PDF ist ein ungenutzter @font-face folgenlos. Hier nicht: ein
+    deklarierter Schnitt steht in der Auswahl, und genau so ist in die
+    Bestandsanleitungen Unbounded SemiBold geraten. Gemeldet, nicht
+    abgebrochen - BKM PDF Sans ist die eingebettete Druckfassung aus
+    AGENTS.md und gehoert dorthin.
+    """
+    marke = json.loads((ROOT_DIR / "brand.json").read_text(encoding="utf-8"))
+    typo = marke.get("typography", {})
+    erlaubt = {}
+    for rolle in ("display", "body"):
+        eintrag = typo.get(rolle, {})
+        if eintrag.get("family"):
+            erlaubt[eintrag["family"]] = {str(w) for w in eintrag.get("weights", [])}
+
+    angeboten = {}
+    for block in re.finditer(r"@font-face\s*\{([^}]*)\}", _stilblock(html)):
+        b = block.group(1)
+        fam = re.search(r"font-family:\s*['\"]?([^;'\"]+)", b)
+        gew = re.search(r"font-weight:\s*(\d+)", b)
+        if fam:
+            angeboten.setdefault(fam.group(1).strip(), set()).add(
+                gew.group(1) if gew else "?")
+
+    hinweise = []
+    for fam, gewichte in sorted(angeboten.items()):
+        if fam not in erlaubt:
+            continue
+        ueber = sorted(gewichte - erlaubt[fam], key=int)
+        if ueber:
+            hinweise.append(f"{fam}: {', '.join(ueber)} angeboten, "
+                            f"brand.json laesst {', '.join(sorted(erlaubt[fam]))} zu.")
+    return hinweise
+
 def baue(content_path):
     from jinja2 import Environment, FileSystemLoader
 
@@ -253,6 +380,23 @@ def baue(content_path):
     ZIEL.write_text("".join(teile), encoding="utf-8")
     print(f"  {ZIEL.relative_to(ROOT_DIR)}  "
           f"{ZIEL.stat().st_size // 1024} KB, {len(seiten) + 1} Artboards")
+
+    fertig = ZIEL.read_text(encoding="utf-8")
+    fehler = (check_chrome(fertig, len(seiten) + 1)
+              + check_seitenrahmen(fertig)
+              + check_fotolage(fertig))
+    if fehler:
+        print()
+        for f in fehler:
+            print(f"    {f}")
+        return 1
+
+    hinweise = check_schriftangebot(fertig)
+    if hinweise:
+        print()
+        print("    Schnitte, die der Canvas zur Auswahl stellt:")
+        for h in hinweise:
+            print(f"      {h}")
     return 0
 
 

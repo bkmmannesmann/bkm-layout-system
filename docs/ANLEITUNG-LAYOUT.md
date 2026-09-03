@@ -349,3 +349,34 @@ Text über die Datei, nicht Inhalt der Anleitung.
 Jedes Blatt trägt seine Kennung als `id` und seinen Namen als
 `data-screen-label` — anspringbar und in Kommentaren benannt, ohne dass
 etwas davon auf dem Blatt steht.
+
+### Was der Bau prüft
+
+Canvas und Produktion sind zwei Wege zu demselben Blatt, und die laufen
+auseinander. Viermal ist es passiert: Hero-Grafik, Fotolage, Keyvisual,
+und zuletzt das Titelblatt, dem `cover-spec.css` fehlte. Deshalb prüft
+der Bau selbst und bricht ab, wenn etwas nicht stimmt:
+
+| Prüfung | worauf sie sieht |
+|---|---|
+| `check_chrome` | keine Gruppenlinks, kein `<h1>` außerhalb der Blätter, keine Labelleiste, Blattzahl, eindeutige Kennungen |
+| `check_seitenrahmen` | `html, body` auf Blattmaß darf aus `cover-spec.css` nicht durchkommen — das reißt die Arbeitsfläche auseinander |
+| `check_fotolage` | Titelfoto gegen `cover_geometry.photo` aus `brand.json`, und ob die Regel auch **zuletzt** steht; dazu die Variantenklasse am Wrapper |
+| `check_schriftangebot` | welche Schnitte der Canvas zur Auswahl stellt, gegen `typography` — meldet nur, bricht nicht ab |
+
+Gemessen wird gegen `brand.json`, nicht gegen die CSS: sonst prüft die
+Vorgabe sich selbst.
+
+Dass die Prüfungen auch greifen, steht in `scripts/gegenproben_canvas.py`
+— elf Fälle, jeder mit einem echten Fehler vorgesetzt:
+
+```bash
+python3 scripts/gegenproben_canvas.py
+```
+
+**Offen:** Der Canvas bietet TT Norms Pro in 300, 500 und 600 an, obwohl
+`brand.json` nur 400 und 700 zulässt. Die Schnitte stehen in
+`design-system/base.css` und ihre Dateien liegen im Repository, sie sind
+also wählbar — genau so ist Unbounded SemiBold in die Bestandsanleitungen
+geraten. `BKM PDF Sans` ist davon ausgenommen: das ist die eingebettete
+Druckfassung nach `AGENTS.md`, Regel 11.
