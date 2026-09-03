@@ -99,7 +99,10 @@ def stylesheet_einlesen(pfad):
 
 
 def fontfaces_ausduennen(css):
-    """Wirft @font-face-Bloecke weg, deren Datei es nicht gibt.
+    """Duennt die @font-face-Bloecke auf das aus, was gesetzt werden darf.
+
+    Zwei Gruende, einen Block wegzuwerfen: die Datei fehlt, oder der
+    Schnitt steht nicht in brand.json.
 
     design-system/base.css deklariert Schnitte, die im Bestand fehlen -
     Unbounded Regular bis ExtraBold, TT Norms Light, Medium, DemiBold und
@@ -110,9 +113,27 @@ def fontfaces_ausduennen(css):
     Unbounded Black und TT Norms 400 und 700, siehe typography in
     brand.json.
     """
+    marke = json.loads((ROOT_DIR / "brand.json").read_text(encoding="utf-8"))
+    typo = marke.get("typography", {})
+    erlaubt = {eintrag["family"]: {str(w) for w in eintrag.get("weights", [])}
+               for rolle in ("display", "body")
+               for eintrag in [typo.get(rolle, {})] if eintrag.get("family")}
+
     def behalten(block):
-        dateien = re.findall(r"url\(['\"]?([^'\")]+)", block.group(0))
-        return block.group(0) if all((ROOT_DIR / d).is_file() for d in dateien) else ""
+        roh = block.group(0)
+        dateien = re.findall(r"url\(['\"]?([^'\")]+)", roh)
+        if not all((ROOT_DIR / d).is_file() for d in dateien):
+            return ""
+        familie = re.search(r"font-family:\s*['\"]?([^;'\"]+)", roh)
+        gewicht = re.search(r"font-weight:\s*(\d+)", roh)
+        if familie and gewicht:
+            name = familie.group(1).strip()
+            # BKM PDF Sans steht bewusst nicht in brand.json: das ist die
+            # eingebettete Druckfassung nach AGENTS.md, Regel 11. Nur die
+            # beiden Hausfamilien werden auf ihre Schnitte begrenzt.
+            if name in erlaubt and gewicht.group(1) not in erlaubt[name]:
+                return ""
+        return roh
     return re.sub(r"@font-face\s*\{[^}]*\}", behalten, css)
 
 

@@ -73,6 +73,12 @@ def faelle(h, blaetter):
 
         ("Titelfoto um 1 mm verrutscht", bac.check_fotolage,
          h.replace("top: 117.46mm", "top: 118.46mm", 1), True),
+
+        ("ein Schnitt, den brand.json nicht zulaesst", bac.check_schriftangebot,
+         h.replace("<style>",
+                   "<style>\n@font-face{font-family:'TT Norms Pro';"
+                   "src:url('assets/fonts/TT_Norms_Pro_Bold.woff2');"
+                   "font-weight:600;}", 1), True),
     ]
 
 
