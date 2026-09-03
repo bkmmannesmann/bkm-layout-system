@@ -161,9 +161,14 @@ def pruefe_seiten(seiten):
             for a in s.get("sections", []):
                 if not a.get("title"):
                     fehler.append(f"Seite {i}: Abschnitt ohne Titel.")
-                if not (a.get("body") or a.get("bullets") or a.get("formulas")):
+                # table kam am 31.08.2026 in den Datenvertrag, diese Zeile
+                # nicht mit: ein Abschnitt, der nur eine Verbrauchstabelle
+                # traegt, galt als leer.
+                if not (a.get("body") or a.get("bullets")
+                        or a.get("formulas") or a.get("table")):
                     fehler.append(f"Seite {i}: Abschnitt {a.get('title')!r} "
-                                  f"hat weder Text noch Liste noch Formel.")
+                                  f"hat weder Text noch Liste noch Formel "
+                                  f"noch Tabelle.")
         elif art == "nacharbeit":
             for feld in ("headline", "steps", "issued", "copyright"):
                 if not s.get(feld):
