@@ -1,5 +1,5 @@
 {
-  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_BKM_HZC_Creme_DE, ausgegeben am 18.08.2026. Struktur nach docs/anleitung-content.schema.json. Der Abschnitt „Injizieren“ steht auf dem Folgeblatt, damit der Schnitt Vorbereitung von Ausführung trennt.",
+  "$comment": "Wortlaut aus der freigegebenen Fassung VA_BKM_HZC_Creme_DE, ausgegeben am 18.08.2026. Vollstaendige Uebernahme, nicht verdichtet - die vorherige Fassung war eine Zusammenfassung, in der 3 von 31 Saetzen der Vorlage fehlten. Abnahme: jeder Satz der Vorlage muss mit einem Acht-Wort-Fenster in dieser Datei wiederzufinden sein. Vier Eingriffe, alle hier genannt: (1) Die Rubrik ANLEITUNG steht in der Vorlage auf einer Seite, hier auf zwei - vollstaendiger Text passt nicht auf eine. (2) Fliesstext der Vorlage steht teils als bullets, wo es Einzelanweisungen sind; Wortlaut je Satz unveraendert. (3) Die Vorlage schreibt '1-K Injektionspistole fuer 600ml Schlauchbeutel' - hier steht '1-K-Injektionspistole fuer 600-ml-Schlauchbeutel' mit deutscher Durchkopplung. (4) Die Vorlage schreibt 'solltest Du vorab' mit grossem Du - hier steht 'du', wie im uebrigen Dokument. Keine Bilder geliefert - alle Abbildungen als image_needed beschrieben.",
   "title": "BKM HZ-C – Verarbeitungsanleitung",
   "product_name": "BKM HZ-C",
   "product_line": "PRO LINE",
@@ -21,7 +21,7 @@
       "scope": {
         "title": "Anwendungsbereich",
         "icon": "table",
-        "body": "Die BKM HZ-C Creme wird zur nachträglichen Herstellung einer Horizontalsperre gegen kapillar aufsteigende Feuchtigkeit im Mauerwerk eingesetzt. Die Injektionscreme dringt tief in die Kapillaren des Baustoffs ein und sorgt dort für eine imprägnierende Wirkung.",
+        "body": "Die BKM HZ-C Creme wird zur nachträglichen Herstellung einer Horizontalsperre gegen kapillar aufsteigende Feuchtigkeit im Mauerwerk eingesetzt. Die Injektionscreme dringt tief in die Kapillaren des Baustoffs ein und sorgt dort für eine imprägnierende Wirkung. Geeignet für folgende Mauerwerke:",
         "suitable": [
           "Ziegelmauerwerk",
           "Kalksandstein",
@@ -42,12 +42,12 @@
         {
           "icon": "drop",
           "claim": "Hohe Tiefenwirkung",
-          "detail": "Über 80 % Wirkstoff dringen bis in feinste Kapillarporen ein"
+          "detail": "Über 80% Wirkstoff dringen bis in feinste Kapillarporen ein"
         },
         {
           "icon": "seal-check",
-          "claim": "Geprüft und WTA-zertifiziert",
-          "detail": "Streng geprüfte Wirksamkeit, sofort anwendungsfertig"
+          "claim": "Geprüft und WTA zertifiziert",
+          "detail": "Streng geprüfte Wirksamkeit sofort Anwendungsfertig"
         }
       ],
       "workplace": {
@@ -61,16 +61,16 @@
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
           "Zollstock",
-          "Wasserwaage",
           "Bleistift",
+          "Wasserwaage",
+          "Abdeckmaterial",
           "Bohrmaschine",
           "Bohrer Ø 14 mm",
           "Injektionspistole + Lanze",
           "Staubsauger",
-          "Abdeckmaterial",
           "BKM FBM zum Verschließen der Bohrlöcher"
         ]
       },
@@ -90,7 +90,7 @@
         {
           "title": "Verbrauch planen",
           "icon": "drop",
-          "body": "Vor Beginn ermittelst du die benötigte Materialmenge entsprechend der Wandstärke und der Anzahl der Bohrlöcher. Eine Verbrauchstabelle mit den gängigen Wandstärken findest du im technischen Datenblatt."
+          "body": "Vor Beginn ermittelst du die benötigte Materialmenge entsprechend der Wandstärke und der Anzahl der Bohrlöcher. Eine Verbrauchstabelle mit den gängigen Wandstärken findest du im Technischen Datenblatt."
         },
         {
           "title": "Untergrund",
@@ -98,19 +98,24 @@
           "body": "Die Untergrundvorbereitung ist entscheidend für eine fachgerechte Sanierung. Entferne geschädigten Putz bis ca. 80 cm oberhalb des Schadens und reinige die Mauerwerksfugen sorgfältig für eine bessere Haftung des späteren Putzauftrages."
         },
         {
-          "title": "Bohren",
-          "icon": "target",
-          "body": "Bringe die Bohrlöcher waagerecht in die unterste Lagerfuge des Mauerwerks ein. Zeichne dafür die Löcher mit einer Wasserwaage im Abstand von 10 cm ein. Die Bohrtiefe ist die gemessene Wandstärke abzüglich 5 cm, um ein Durchbohren zu verhindern. Anschließend müssen alle Bohrlöcher staubfrei sein. Benutze dafür einen Staubsauger oder blase sie mit ölfreier Druckluft aus."
+          "title": "Verarbeitung · Bohren",
+          "icon": "hammer",
+          "bullets": [
+            "Bringe die Bohrlöcher waagerecht in die unterste Lagerfuge des Mauerwerks ein.",
+            "Zeichne dafür die Löcher mit einer Wasserwaage im Abstand von 10 cm ein.",
+            "Die Bohrtiefe ist die gemessene Wandstärke abzüglich 5 cm, um ein Durchbohren zu verhindern.",
+            "Anschließend müssen alle Bohrlöcher staubfrei sein. Benutze dafür einen Staubsauger oder blase sie mit ölfreier Druckluft aus."
+          ]
         }
       ],
       "figures": [
         {
-          "caption": "Bohrlöcher anzeichnen",
-          "image_needed": "Foto: Anzeichnen der Bohrlochreihe in der untersten Lagerfuge, Wasserwaage angelegt"
+          "caption": "Bohrreihe in der Lagerfuge anzeichnen",
+          "image_needed": "Foto, 16:9: Anzeichnen der Bohrlöcher im Abstand von 10 cm mit der Wasserwaage entlang der untersten Lagerfuge. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         },
         {
-          "caption": "Lanze bis zum Bohrlochende einführen",
-          "image_needed": "Foto: Injektionspistole mit Lanze im Bohrloch, Lanze bis zum Ende eingeführt"
+          "caption": "Bohrlöcher aussaugen",
+          "image_needed": "Foto, 16:9: Absaugen der Bohrlöcher, staubfreies Bohrloch im Bild. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         }
       ]
     },
@@ -121,23 +126,41 @@
         {
           "title": "Injizieren",
           "icon": "drop",
-          "body": "Die BKM HZ-C Creme ist gebrauchsfertig und wird direkt in die vorbereiteten Bohrlöcher injiziert. Eine Verarbeitung kann manuell mit einer 1-K-Injektionspistole für 600-ml-Schlauchbeutel oder im Niederdruckverfahren mit geeigneter Pumpentechnik erfolgen. Führe die Injektionslanze bis zum Ende des Bohrlochs ein. Während du das Material einbringst, ziehst du die Lanze langsam zurück. So füllst du das Bohrloch vollständig und gleichmäßig, und es entstehen keine Hohlräume oder Luftblasen."
+          "body": "Die BKM HZ-C Creme ist gebrauchsfertig und wird direkt in die vorbereiteten Bohrlöcher injiziert.",
+          "bullets": [
+            "Eine Verarbeitung kann manuell mit einer „1-K-Injektionspistole für 600-ml-Schlauchbeutel“ oder im Niederdruckverfahren mit geeigneter Pumpentechnik erfolgen.",
+            "Führe die Injektionslanze bis zum Ende des Bohrlochs ein. Während du das Material einbringst, ziehst du die Lanze langsam zurück.",
+            "So füllst du das Bohrloch vollständig und gleichmäßig mit der Injektionscreme und es entstehen keine Hohlräume oder Luftblasen."
+          ]
         },
         {
           "title": "Verschließen",
           "icon": "check-circle",
-          "body": "Verschließe die Bohrlöcher umgehend mit dem BKM FBM Füll- und Bohrlochmörtel, nachdem du das Material in das Mauerwerk eingebracht hast. Nach Abschluss der Injektionsarbeiten kann der Wandputz wieder hergestellt werden. Hierzu eignet sich der BKM HS Hohlkehlen- und Sperrmörtel. Für eine ansprechende Optik kann der aufgebrachte Putz mit der BKM SF Silikatfarbe gestrichen werden."
+          "bullets": [
+            "Verschließe die Bohrlöcher umgehend mit dem BKM FBM Füll- und Bohrlochmörtel, nachdem du das Material in das Mauerwerk eingebracht hast.",
+            "Nach Abschluss der Injektionsarbeiten kann der Wandputz wieder hergestellt werden. Hierzu eignet sich der BKM HS Hohlkehlen und Sperrmörtel.",
+            "Für eine ansprechende Optik kann der aufgebrachte Putz mit der BKM SF Silikatfarbe gestrichen werden."
+          ]
         },
         {
           "title": "Hinweise",
           "icon": "warning",
-          "body": "Verarbeite das Material nur bei geeigneten Temperaturen ab +5 °C Objekttemperatur. Damit das Mauerwerk oberhalb der Sperre trocknen kann, dürfen keine diffusionsdichten Beschichtungen oder Anstriche vorhanden sein. Entferne diese bei Bedarf vor der Verarbeitung. Bei kritischen Untergründen, wie zum Beispiel Mischmauerwerk, solltest du vorab eine Probeinjektion durchführen. Nicht geeignet für Hochlochziegel und zur Erstellung einer Flächensperre bei Querdurchfeuchtung."
+          "bullets": [
+            "Verarbeite das Material nur bei geeigneten Temperaturen ab +5 °C Objekttemperatur.",
+            "Damit das Mauerwerk oberhalb der Sperre trocknen kann, dürfen keine diffusionsdichten Beschichtungen oder Anstriche vorhanden sein. Entferne diese bei Bedarf vor der Verarbeitung.",
+            "Bei kritischen Untergründen, wie zum Beispiel Mischmauerwerk, solltest du vorab eine Probeinjektion durchführen.",
+            "Nicht geeignet für Hochlochziegel und zur Erstellung einer Flächensperre bei Querdurchfeuchtung."
+          ]
         }
       ],
       "figures": [
         {
-          "caption": "Bohrloch verschließen",
-          "image_needed": "Foto: Verschließen des Bohrlochs mit BKM FBM"
+          "caption": "Injektionslanze bis zum Ende einführen",
+          "image_needed": "Foto, 16:9: Injektionspistole mit Lanze im Bohrloch, Lanze bis zum Ende eingeführt. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
+        },
+        {
+          "caption": "Bohrlöcher verschließen",
+          "image_needed": "Foto, 16:9: Verschließen des Bohrlochs mit BKM FBM Füll- und Bohrlochmörtel. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         }
       ],
       "tip": {

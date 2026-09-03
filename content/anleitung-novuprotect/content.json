@@ -1,5 +1,5 @@
 {
-  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_NovuProtect_DE, ausgegeben am 18.08.2026. ERGÄNZUNG, von der Anwendungstechnik zu bestätigen: Der NovuProtect Vorreiniger steht in der Vorlage im Fließtext, nicht im Werkzeugkasten.",
+  "$comment": "Wortlaut aus der freigegebenen Fassung VA_NovuProtect_DE, ausgegeben am 18.08.2026. Vollstaendige Uebernahme, nicht verdichtet - die vorherige Fassung war eine Zusammenfassung, in der 9 von 35 Saetzen der Vorlage fehlten, darunter die maschinelle Verarbeitung mit Airless-Geraet, die 8-Prozent-Grenzen fuer Verduennung und Abtoenung und die 24-Stunden-Frist nach den Vorarbeiten. Abnahme: jeder Satz der Vorlage muss mit einem Acht-Wort-Fenster in dieser Datei wiederzufinden sein. Vier Eingriffe, alle hier genannt: (1) Die Rubrik ANLEITUNG steht in der Vorlage auf einer Seite, hier auf zwei - vollstaendiger Text passt nicht auf eine. (2) Fliesstext der Vorlage steht teils als bullets, wo es Einzelanweisungen sind; Wortlaut je Satz unveraendert. (3) Die Werkzeugliste nennt genau die sieben Gegenstaende der Vorlage. (4) Die Vorlage schreibt 'Falls Du spaeter Ausbesserungen' mit grossem Du - hier steht 'du', wie im uebrigen Dokument. (5) Die Subheadline der Vorlage laeuft mit 72 Zeichen knapp ueber die Zwei-Zeilen-Grenze; auf dem Titel steht 'reduziert Schimmelbildung' statt 'reduziert die Schimmelbildung'. Keine Bilder geliefert - alle Abbildungen als image_needed beschrieben.",
   "title": "NovuProtect – Verarbeitungsanleitung",
   "product_name": "NovuProtect",
   "product_line": "HOME LINE",
@@ -10,7 +10,7 @@
   "page_total": 5,
   "cover": {
     "headline": "VERARBEITUNGS-<br>ANLEITUNG",
-    "subheadline": "Reguliert Feuchtigkeit und reduziert die Schimmelbildung.",
+    "subheadline": "Reguliert Feuchtigkeit in Innenräumen und reduziert Schimmelbildung.",
     "intro_text": "NovuProtect – Der physikalisch wirkende Schimmelschutz.",
     "hero_image_alt": "NovuProtect Verarbeitungsanleitung"
   },
@@ -21,29 +21,27 @@
       "scope": {
         "title": "Anwendungsbereich",
         "icon": "table",
-        "body": "NovuProtect ist für den Innenbereich vorgesehen. Das Produkt eignet sich insbesondere für Räume mit erhöhter Feuchtigkeitsbelastung oder Schimmelgefahr, etwa Kellerräume.",
+        "body": "NovuProtect ist für den Innenbereich vorgesehen. Das Produkt eignet sich insbesondere für Räume mit erhöhter Feuchtigkeitsbelastung oder Schimmelgefahr wie z. B. Kellerräume. Geeignet für folgende Untergründe:",
         "suitable": [
           "Mineralische Putzoberflächen",
           "Decken und Wände aus Beton",
           "Tapeten",
-          "Metall, etwa Trapezblech"
+          "Metall (z. B. Trapezblech)"
         ],
         "unsuitable": [
-          "Gipsputze",
-          "Unbeschichtete Gipskartonplatten",
-          "Flächen mit dauerhafter Wassereinwirkung, etwa Duschwände"
+          "Nicht geeignet für Gipsputze, unbeschichtete Gipskartonplatten und Flächen mit dauerhafter Wassereinwirkung (z. B. Duschwände)."
         ]
       },
       "advantages": [
         {
           "icon": "stack",
-          "claim": "Untergrund-Multitalent",
-          "detail": "Hochwirksam auf Beton, Putz und sogar Metall"
+          "claim": "Untergrund Multitalent",
+          "detail": "Hochwirksam auf Beton, Putz & sogar Metall"
         },
         {
           "icon": "drop",
-          "claim": "Für Räume mit hoher Luftfeuchtigkeit",
-          "detail": "Keller, Schlafzimmer, Kinderzimmer, Badezimmer, Garagen und mehr"
+          "claim": "Ideal für Räume mit hoher Luftfeuchtigkeit",
+          "detail": "Innenräume wie Keller, Schlafzimmer, Kinderzimmer, Badezimmer, Garagen & mehr"
         },
         {
           "icon": "shield-check",
@@ -56,22 +54,21 @@
         "icon": "clipboard-text",
         "steps": [
           "Angrenzende Bauteile und Flächen sorgfältig abdecken und schützen.",
-          "Prüfe den Untergrund auf Tragfähigkeit. Entferne Schmutz, Ruß, Öl, Fett sowie lose Beläge wie Tapetenreste.",
+          "Prüfe den Untergrund auf Tragfähigkeit. Entferne Schmutz, Ruß, Öl, Fett, sowie lose Beläge wie z. B. Tapetenreste.",
           "Behandle zu beschichtende Flächen falls notwendig vorab mit dem NovuProtect Vorreiniger.",
-          "Rühre NovuProtect vor dem Auftrag gründlich auf. Bei maschineller Vorbereitung mit geringer Drehzahl rühren."
+          "Rühre NovuProtect vor dem Auftrag gründlich auf. Bei maschineller Vorbereitung rühre mit geringer Drehzahl."
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
           "Farbrolle",
           "Pinsel",
           "Rührstab",
-          "Wasser",
           "Klebeband",
+          "Wasser",
           "Abdeckmaterial",
-          "Putzlappen",
-          "NovuProtect Vorreiniger"
+          "Putzlappen"
         ]
       },
       "safety": {
@@ -90,31 +87,27 @@
         {
           "title": "Verbrauch planen",
           "icon": "drop",
-          "body": "Plane den Materialbedarf mit 300 bis 600 g/m² je Auftragsschicht, insgesamt 600 bis 1200 g/m² in mindestens zwei Arbeitsgängen. Für einen wirksamen Schutz ist eine ausreichende Schichtdicke entscheidend.",
-          "formulas": [
-            {
-              "rule": "300 bis 600 g/m² je Auftragsschicht"
-            },
-            {
-              "rule": "600 bis 1200 g/m² insgesamt",
-              "example": "In mindestens zwei Arbeitsgängen"
-            }
-          ]
+          "body": "Plane den Materialbedarf mit ca. 300–600 g/m² je Auftragsschicht. Insgesamt liegt der Verbrauch bei ca. 600–1200 g/m² in mindestens zwei Arbeitsgängen. Für einen wirksamen Schutz ist eine ausreichende Schichtdicke entscheidend."
         },
         {
           "title": "Untergrund",
           "icon": "stack",
-          "body": "Der Untergrund muss sauber und tragfähig sein. Säubere bei verunreinigten Flächen den Untergrund zuerst mit dem NovuProtect Vorreiniger. Bei beschichteten, verunreinigten Untergründen entferne zusätzlich lose, abblätternde oder kreidende Altanstriche. Nach der Reinigung muss die Fläche trocken sein, bevor du NovuProtect aufträgst."
+          "body": "Der Untergrund muss sauber und tragfähig sein.",
+          "bullets": [
+            "Säubere bei verunreinigten Flächen den Untergrund zuerst mit dem NovuProtect Vorreiniger.",
+            "Bei beschichteten, verunreinigten Untergründen entferne zusätzlich lose, abblätternde oder kreidende Altanstriche.",
+            "Nach der Reinigung muss die Fläche trocken sein, bevor du NovuProtect aufträgst."
+          ]
         }
       ],
       "figures": [
         {
           "caption": "Reinigung der Flächen",
-          "image_needed": "Foto: Reinigen der Wandfläche mit dem NovuProtect Vorreiniger"
+          "image_needed": "Foto, 16:9: Reinigung der Wandfläche mit dem NovuProtect Vorreiniger, Putzlappen im Bild. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         },
         {
           "caption": "NovuProtect gut durchrühren",
-          "image_needed": "Foto: Aufrühren des Materials mit dem Rührstab"
+          "image_needed": "Foto, 16:9: Aufrühren des Materials mit dem Rührstab bei geringer Drehzahl. Bei KI-generiertem Motiv Vermerk AI GENERATED in der oberen linken Ecke."
         }
       ]
     },
@@ -125,18 +118,32 @@
         {
           "title": "Verarbeitung",
           "icon": "hammer",
-          "body": "Rühre NovuProtect vor der Verarbeitung gründlich und langsam auf, damit das Material gleichmäßig eingestellt ist. Trage das Produkt mit einer Rolle oder einem Pinsel gleichmäßig im Kreuzgang auf und achte darauf, dass die Fläche vollständig und deckend beschichtet wird. Lasse die erste Schicht ca. vier Stunden trocknen und trage dann die zweite Schicht auf, um die erforderliche Gesamtauftragsmenge zu erreichen. So entsteht eine funktionsfähige Beschichtung, die Feuchtigkeit aufnehmen und wieder abgeben kann. Für eine maschinelle Verarbeitung kannst du auch ein geeignetes Airless-Gerät verwenden; auch dabei werden zwei Auftragsschichten benötigt. Falls du später Ausbesserungen ausführen musst, verwende dafür erneut NovuProtect."
+          "body": "Rühre NovuProtect vor der Verarbeitung gründlich und langsam auf, damit das Material gleichmäßig eingestellt ist.",
+          "bullets": [
+            "Trage das Produkt mit einer Rolle oder einem Pinsel gleichmäßig im Kreuzgang auf. Achte darauf, dass die Fläche vollständig und deckend beschichtet wird.",
+            "Lasse die erste Schicht ca. 4 Stunden trocknen und trage dann die zweite Schicht auf, um die erforderliche Gesamtauftragsmenge zu erreichen. So entsteht eine funktionsfähige Beschichtung, die Feuchtigkeit aufnehmen und wieder abgeben kann.",
+            "Für eine maschinelle Verarbeitung kannst du auch ein geeignetes Airless-Gerät verwenden. Auch bei dieser Methode werden zwei Auftragsschichten benötigt.",
+            "Falls du später Ausbesserungen ausführen musst, verwende dafür erneut NovuProtect."
+          ]
         },
         {
           "title": "Hinweise",
           "icon": "warning",
-          "body": "Zwischen den Schichten halte eine Trocknungszeit von mindestens vier Stunden bei ca. 20 °C Raumtemperatur ein und sorge während der Trocknung für gute Luftzirkulation. Verarbeite das Material nicht unter +8 °C Objekttemperatur. NovuProtect darf nur bis zu 8 % mit Wasser verdünnt werden, bei Verwendung von Airless-Geräten. Nach den entsprechenden Reinigungs- und Vorarbeiten muss die Beschichtung innerhalb von 24 Stunden auf die vorbereitete Fläche aufgebracht werden. Überstreiche die Beschichtung nicht mit anderen Produkten, da sonst die Funktion verloren geht. NovuProtect kann zur farblichen Anpassung mit bis zu 8 % Dispersionsvolltonfarbe abgetönt werden. Nach dem Auftrag weist die behandelte Fläche eine raue Oberflächenstruktur auf."
+          "bullets": [
+            "Zwischen den Schichten halte eine Trocknungszeit von mindestens 4 Stunden bei ca. 20 °C Raumtemperatur ein. Sorge während der Trocknung für gute Luftzirkulation.",
+            "Verarbeite das Material nicht unter +8 °C Objekttemperatur.",
+            "NovuProtect darf nur maximal bis zu 8 % mit Wasser verdünnt werden (bei Verwendung von Airless-Geräten).",
+            "Nach den entsprechenden Reinigungs- und Vorarbeiten muss die Beschichtung innerhalb von 24 Stunden auf die vorbereitete Fläche aufgebracht werden.",
+            "Überstreiche die Beschichtung nicht mit anderen Produkten, da sonst die Funktion verloren geht.",
+            "NovuProtect kann zur farblichen Anpassung mit bis zu 8 % Dispersionsvolltonfarbe abgetönt werden.",
+            "Nach dem Auftrag weist die behandelte Fläche eine raue Oberflächenstruktur auf."
+          ]
         }
       ],
       "figures": [
         {
           "caption": "Auftrag von NovuProtect",
-          "image_needed": "Foto: Auftrag im Kreuzgang mit der Farbrolle"
+          "image_needed": "Foto, 16:9: gleichmäßiger Auftrag im Kreuzgang mit der Farbrolle auf der Wandfläche. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         }
       ],
       "tip": {
