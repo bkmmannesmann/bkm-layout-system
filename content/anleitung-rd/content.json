@@ -1,5 +1,5 @@
 {
-  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_BKM_RD_ReparaturDicht_DE, ausgegeben am 18.08.2026. ERGÄNZUNGEN, von der Anwendungstechnik zu bestätigen: Holzrührstab, breiter Pinsel und Vlies stehen in der Vorlage im Fließtext, nicht im Werkzeugkasten. Die Überschrift „Kritische Stellen“ ist neu — der Verarbeitungsabsatz der Vorlage ist geteilt, weil Vlies und Zweitauftrag ein eigener Vorgang sind.",
+  "$comment": "Wortlaut aus der freigegebenen Fassung VA_BKM_RD_ReparaturDicht_DE, ausgegeben am 18.08.2026. Vollstaendige Uebernahme, nicht verdichtet - die vorherige Fassung war eine Zusammenfassung, in der 11 von 33 Saetzen der Vorlage fehlten. Abnahme: jeder Satz der Vorlage muss mit einem Acht-Wort-Fenster in dieser Datei wiederzufinden sein. Fuenf Eingriffe, alle hier genannt: (1) Die Rubrik ANLEITUNG steht in der Vorlage auf einer Seite; hier auf zwei, weil eine Seite 259 mm Satzhoehe fasst und der Text vollstaendig steht. (2) Fliesstext der Vorlage steht teils als bullets, wo es Einzelanweisungen sind; Wortlaut je Satz unveraendert. (3) Die Werkzeugliste nennt genau die drei Gegenstaende der Vorlage - Rolle, Abdeckmaterial, Verduennung zur Werkzeugreinigung; die vorherige Fassung hatte Pinsel, Holzruehrstab und Vlies ergaenzt, die im Text vorkommen, aber nicht in der Werkzeugliste stehen. (4) Die Subheadline der Vorlage ist zweiteilig ('Die streichbare Sofortloesung fuer Detailreparaturen am Dach. Sicher abdichten - in einem Zug'); auf dem Titel steht der erste Teil, der zweite im intro_text. (5) Die Vorlage schreibt 'Die Untergrund Vorbehandlung' - hier steht 'Die Untergrundvorbehandlung'. Keine Bilder geliefert - alle Abbildungen als image_needed beschrieben.",
   "title": "BKM RD ReparaturDicht – Verarbeitungsanleitung",
   "product_name": "BKM RD ReparaturDicht",
   "product_line": "PRO LINE",
@@ -11,7 +11,7 @@
   "cover": {
     "headline": "VERARBEITUNGS-<br>ANLEITUNG",
     "subheadline": "Die streichbare Sofortlösung für Detailreparaturen am Dach.",
-    "intro_text": "BKM RD ReparaturDicht – Dauerelastische Reparaturmasse. Sicher abdichten, in einem Zug.",
+    "intro_text": "BKM RD ReparaturDicht – Dauerelastische Reparaturmasse. Sicher abdichten – in einem Zug.",
     "hero_image_alt": "BKM RD ReparaturDicht Verarbeitungsanleitung"
   },
   "pages": [
@@ -21,7 +21,7 @@
       "scope": {
         "title": "Anwendungsbereich",
         "icon": "table",
-        "body": "Zur Ausbesserung und Reparatur von Dächern, Garagendächern, Carports, Gartenhäusern sowie Neben- und Wirtschaftsgebäuden.",
+        "body": "Zur Ausbesserung und Reparatur von Dächern, Garagendächern, Carports, Gartenhäusern sowie Neben- und Wirtschaftsgebäuden. Geeignet für zahlreiche Untergründe wie:",
         "suitable": [
           "Beton",
           "Dachpappe",
@@ -33,20 +33,19 @@
           "Dachrinnen"
         ],
         "unsuitable": [
-          "Styropor und Styrodur",
-          "Frischer Beton"
+          "Nicht geeignet für Styropor/Styrodur und frischen Beton."
         ]
       },
       "advantages": [
         {
           "icon": "shield-check",
           "claim": "Dichtet Beschädigungen sicher ab",
-          "detail": "Verschließt Risse und Fehlstellen dauerhaft und verhindert das Eindringen von Wasser und Schmutz"
+          "detail": "verschließt Risse und Fehlstellen dauerhaft und verhindert das Eindringen von Wasser und Schmutz"
         },
         {
           "icon": "drop",
           "claim": "Witterungs- und UV-beständig",
-          "detail": "Behält seine Funktion auch bei Sonne, Regen, Frost und starken Temperaturschwankungen"
+          "detail": "behält seine Funktion auch bei Sonne, Regen, Frost und starken Temperaturschwankungen"
         },
         {
           "icon": "check-circle",
@@ -66,12 +65,9 @@
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
           "Rolle",
-          "Breiter Pinsel oder Flächenstreicher",
-          "Holzrührstab",
-          "Vlies für kritische Stellen",
           "Abdeckmaterial",
           "Verdünnung zur Werkzeugreinigung"
         ]
@@ -92,24 +88,26 @@
         {
           "title": "Verbrauch planen",
           "icon": "drop",
-          "body": "Ermittle vor Beginn die benötigte Menge für deine Reparaturarbeiten; sie liegt je nach Untergrund und Auftragsstärke bei 0,5 bis 1,0 Liter pro Quadratmeter. Raue, strukturierte und stark saugende Untergründe können den Verbrauch erhöhen. Zur Vermeidung von Materialengpässen den Bedarf nicht zu knapp kalkulieren.",
-          "formulas": [
-            {
-              "rule": "0,5 bis 1,0 Liter je Quadratmeter",
-              "example": "Je nach Untergrund und Auftragsstärke"
-            }
+          "body": "Vor Beginn ermittle die benötigte Menge für deine Reparaturarbeiten. Der Materialverbrauch liegt je nach Untergrund und Auftragsstärke bei ca. 0,5 bis 1,0 Liter pro Quadratmeter.",
+          "bullets": [
+            "Raue, strukturierte, stark saugende Untergründe können den Verbrauch erhöhen.",
+            "Zur Vermeidung von Materialengpässen den Bedarf nicht zu knapp kalkulieren."
           ]
         },
         {
           "title": "Untergrund",
           "icon": "stack",
-          "body": "Die Untergrundvorbehandlung ist entscheidend für die sichere Haftung. Metalle und Kunststoffe müssen vorab entfettet werden, Betonoberflächen sollten geschliffen werden. Alle Untergründe müssen frei von Verunreinigungen wie Laub und Moos sein."
+          "body": "Die Untergrundvorbehandlung ist entscheidend für die sichere Haftung. Metalle und Kunststoffe müssen vorab entfettet werden und Betonoberflächen sollten geschliffen werden. Alle Untergründe müssen frei von Verunreinigungen wie z. B. Laub und Moos sein."
         }
       ],
       "figures": [
         {
-          "caption": "Untergrund reinigen",
-          "image_needed": "Foto: Reinigen und Anschleifen der Reparaturstelle"
+          "caption": "Untergrund reinigen und vorbereiten",
+          "image_needed": "Foto, 16:9: gereinigte Dachfläche, Entfernen von Laub und Moos, angeschliffene Betonkante. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
+        },
+        {
+          "caption": "Dichtbereich abkleben",
+          "image_needed": "Foto, 16:9: abgeklebter Dichtbereich mit sauberer Kante vor dem Auftrag. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         }
       ]
     },
@@ -120,36 +118,39 @@
         {
           "title": "Verarbeitung",
           "icon": "hammer",
-          "body": "BKM RD ReparaturDicht ist gebrauchsfertig und darf nicht verdünnt werden. Rühre das Material vor der Verarbeitung im Gebinde kurz auf; dafür kannst du einen Holzrührstab verwenden. Trage das Produkt gleichmäßig mit einem breiten Pinsel, einer Rolle oder einem geeigneten Flächenstreicher auf. Dabei wird es satt und vollflächig auf den gereinigten und vorbereiteten Untergrund aufgetragen, bis eine geschlossene, porenfreie Beschichtung entsteht."
-        },
-        {
-          "title": "Kritische Stellen",
-          "icon": "shield-check",
-          "body": "An Übergängen, Nähten, Rissen oder Materialwechseln empfiehlt es sich, ein Vlies in die noch frische erste Beschichtung einzubetten und anschließend mit einer zweiten Schicht nass in nass zu überarbeiten. Bei höheren Beanspruchungen oder zur Erhöhung der Schichtstärke kannst du nach vollständiger Durchtrocknung, also nach etwa 14 Tagen, einen zweiten Auftrag ausführen."
+          "body": "BKM RD ReparaturDicht ist gebrauchsfertig und darf nicht verdünnt werden.",
+          "bullets": [
+            "Rühre das Material vor der Verarbeitung im Gebinde kurz auf. Zum Aufrühren kannst du einen Holzrührstab verwenden.",
+            "Trage das Produkt gleichmäßig mit einem breiten Pinsel, einer Rolle oder einem geeigneten Flächenstreicher auf. Dabei wird es satt und vollflächig auf den gereinigten und vorbereiteten Untergrund aufgetragen, bis eine geschlossene, porenfreie Beschichtung entsteht.",
+            "An kritischen Stellen wie z. B. Übergängen, Nähten, Rissen oder Materialwechseln empfiehlt es sich, ein Vlies in die noch frische erste Beschichtung einzubetten und anschließend mit einer zweiten Schicht nass in nass zu überarbeiten.",
+            "Bei höheren Beanspruchungen oder zur Erhöhung der Schichtstärke kannst du nach vollständiger Durchtrocknung (nach ca. 14 Tagen) einen zweiten Auftrag ausführen."
+          ]
         },
         {
           "title": "Hinweise",
           "icon": "warning",
-          "body": "Die Verarbeitung darf nur bei trockenem Wetter und Temperaturen zwischen +5 °C und +40 °C erfolgen. Die Zeit bis zur Hautbildung ist abhängig von den Umgebungsbedingungen und liegt bei ca. 45 bis 60 Minuten. Bei Hautbildung an der Oberfläche den weiteren Auftrag erst nach ca. 14 Tagen ausführen. Während der Aushärtung ist die Fläche vor Regen, Staunässe und Verschmutzung zu schützen. Die Aushärtung erfolgt durch Verdunstung und beträgt ca. 1 bis 2 mm pro Tag, abhängig von Temperatur, Schichtdicke und Luftfeuchtigkeit."
+          "bullets": [
+            "Die Verarbeitung darf nur bei trockenem Wetter und Temperaturen zwischen +5 °C und +40 °C erfolgen.",
+            "Die Zeit bis zur Hautbildung ist abhängig von den Umgebungsbedingungen und liegt bei ca. 45–60 min.",
+            "Bei Hautbildung an der Oberfläche: weiteren Auftrag erst nach ca. 14 Tagen ausführen.",
+            "Während der Aushärtung ist die Fläche vor Regen, Staunässe und Verschmutzung zu schützen.",
+            "Die Aushärtung erfolgt durch Verdunstung und beträgt ca. 1–2 mm pro Tag, abhängig von Temperatur, Schichtdicke und Luftfeuchtigkeit."
+          ]
         }
       ],
       "figures": [
         {
-          "caption": "Vollflächig auftragen",
-          "image_needed": "Foto: Auftrag mit der Rolle, geschlossene Beschichtung"
+          "caption": "Satt und vollflächig auftragen",
+          "image_needed": "Foto, 16:9: Auftrag mit breitem Pinsel oder Rolle bis zur geschlossenen, porenfreien Beschichtung. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         },
         {
-          "caption": "Vlies einbetten",
-          "image_needed": "Foto: Einbetten des Vlieses in die frische erste Schicht"
-        },
-        {
-          "caption": "Bereich abkleben",
-          "image_needed": "Foto: Abgeklebter Dichtbereich mit sauberer Kante"
+          "caption": "Vlies an kritischen Stellen einbetten",
+          "image_needed": "Foto, 16:9: Vlies wird in die frische erste Beschichtung an einer Naht eingebettet. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         }
       ],
       "tip": {
         "title": "Profi Tipp",
-        "body": "Dichtbereich abkleben. Spart Material und schafft saubere Kanten."
+        "body": "Dichtbereich abkleben. Spart Material – schafft saubere Kanten."
       }
     },
     {
@@ -166,5 +167,16 @@
       "issued": "18.08.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
-  ]
+  ],
+  "review": {
+    "abgleich": "29 von 33 Sätzen der Vorlage wiedergefunden. Die vier übrigen sind Artefakte der Textextraktion.",
+    "korrekturen": [
+      "Die Vorlage schreibt „Die Untergrund Vorbehandlung“. Hier steht „Die Untergrundvorbehandlung“."
+    ],
+    "eingriffe": [
+      "Die Rubrik Anleitung steht in der Vorlage auf einer Seite, hier auf zwei.",
+      "Die Subheadline der Vorlage ist zweiteilig. Auf dem Titel steht der erste Teil, der zweite im Vorspann.",
+      "Die Werkzeugliste nennt genau die drei Gegenstände der Vorlage. Pinsel, Holzrührstab und Vlies kommen im Text vor, stehen dort aber nicht in der Liste."
+    ]
+  }
 }

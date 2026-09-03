@@ -334,6 +334,43 @@ fassen. Läuft eine über, meldet der Bau es — dann wandert der letzte
 Abschnitt eine Seite weiter. Seite 2 der HZ-250-Fassung hat nur noch
 1,1 mm Luft; wächst dort etwas, klemmt sie.
 
+## Prüfteil
+
+Hinter dem Dokument liegt ein **Prüfprotokoll** — eine Seite, die nicht
+zur Anleitung gehört, sondern ihr beiliegt. Sie trägt darum weder Folio
+noch Kolumnentitel und wird mit `--release` nicht gebaut. Dasselbe
+Prinzip wie der `review`-Block im Datenblatt.
+
+Der Grund: Was zu prüfen ist, stand bis zum 03.09.2026 nur im
+`$comment` der `content.json`. Den liest beim Gegenlesen niemand — er
+steht in einer Datei, nicht auf dem Blatt. Genau so sind 75 fehlende
+Sätze über Wochen unentdeckt geblieben.
+
+Das meiste holt der Bau aus dem Content selbst und muss nicht gepflegt
+werden:
+
+| Block | Herkunft |
+|---|---|
+| Offene Angaben | jeder `[ANGABE FEHLT: …]`-Marker, mit Seitenzahl |
+| Fehlende Motive | jedes `image_needed`, mit Seitenzahl und Bildunterschrift |
+| Quelle und Stand | `source_pdf`, `issued`, `page_total` |
+
+Was eine Maschine nicht wissen kann, steht im `review`-Block:
+`korrekturen` für Stellen, an denen die Vorlage einen Fehler hat und
+diese Fassung abweicht; `eingriffe` für alles, was der Satzspiegel
+verlangt hat; `abgleich` für das Ergebnis von
+`scripts/abgleich_vorlage.py`; `protokoll` für freien Text.
+
+**Zwei Blätter ab acht Einträgen.** Die Grenze ist gemessen, nicht
+gesetzt: bei acht Einträgen fielen die drei Freigabezeilen vom Blatt.
+`check_pruefteil` prüft nach — und zwar auf **Anwesenheit** der
+Freigabezeilen, nicht auf ihre Lage. Die erste Fassung dieser Prüfung
+maß die Unterkante des letzten Textblocks gegen den Satzspiegel und war
+wertlos: `overflow: hidden` schneidet Text weg, ohne eine Spur im PDF
+zu lassen, und die Messung sah nur, was überlebt hatte. Bei HZ 250 Pro
+und SH-1K fehlten die Freigabezeilen, und die Prüfung meldete 260 mm —
+alles in Ordnung.
+
 ## Canvasfassung
 
 `scripts/build_anleitung_canvas.py` erzeugt aus derselben `content.json`

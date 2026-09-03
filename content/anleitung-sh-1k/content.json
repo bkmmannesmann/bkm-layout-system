@@ -61,7 +61,7 @@
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst\u00a0du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
           "Bohrmaschine mit 14-mm-Bohrer",
           "Injektionspacker",
@@ -221,5 +221,15 @@
       "issued": "01.09.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
-  ]
+  ],
+  "review": {
+    "abgleich": "Keine freigegebene Vorlage. Diese Fassung stammt aus einem Entwurf und ist fachlich nicht gegengelesen.",
+    "korrekturen": [],
+    "eingriffe": [
+      "Die Rubrik Anleitung steht im Entwurf als ein Block, hier auf drei Seiten.",
+      "Die Titelzeile des Entwurfs läuft 94 Zeichen und steht auf dem Titel gekürzt; der volle Wortlaut steht im Anwendungsbereich.",
+      "Die im Entwurf als Fließtext gesetzten Einzelanweisungen stehen als Liste. Wortlaut je Satz unverändert."
+    ],
+    "protokoll": "Entwurfsfassung. Der Text ist fachlich noch nicht freigegeben; eine endgültige Fassung wird nachgereicht. Zusätzlich zu klären: „Verschließe die Bohrlöcher mit BKM FBM“ steht auf zwei Seiten, die Kratz-Anweisung fast wortgleich. Keine der sieben freigegebenen Anleitungen hat eine solche Doppelung."
+  }
 }

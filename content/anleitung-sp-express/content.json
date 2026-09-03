@@ -1,5 +1,5 @@
 {
-  "$comment": "Wortlaut übernommen aus der freigegebenen Fassung VA_BKM_SP_Express_DE, ausgegeben am 18.08.2026. Seite 3 der Vorlage ist eine Systemzeichnung des fünflagigen Aufbaus; die Lagen stehen hier als Abschnitte, die Zeichnung selbst ist als Motiv angefordert. Seite 3 der Vorlage ist eine Systemzeichnung; die fünf Lagen stehen hier als Abschnitte auf einem Blatt, die drei Bauteile (Horizontalsperre, Harzinjektion Boden-Wandanschluss, Dichtkehle) als Vorspann. Die Zeichnung selbst ist als Motiv angefordert.",
+  "$comment": "Wortlaut aus der freigegebenen Fassung VA_BKM_SP_Express_DE, ausgegeben am 18.08.2026. Vollstaendige Uebernahme, nicht verdichtet - die vorherige Fassung war eine Zusammenfassung, in der 14 von 37 Saetzen der Vorlage fehlten. Abnahme: jeder Satz der Vorlage muss mit einem Acht-Wort-Fenster in dieser Datei wiederzufinden sein. Sieben Eingriffe, alle hier genannt: (1) Die Vorlage stellt die druckwasserhaltende Innenabdichtung als ganzseitige Systemzeichnung mit fuenf Lagen und drei Tagesmarken dar; das Layout kennt keine solche Seite, die fuenf Lagen stehen deshalb als Abschnitte mit Auftrag, Verbrauch und Trockenzeit als bullets, die Tagesmarken im jeweiligen Abschnittstitel. (2) Die Fussnote zur Dichtkehle steht als eigener bullet unter dem Systemaufbau. (3) Die Rubrik ANLEITUNG laeuft in der Vorlage ueber zwei Seiten, hier ueber vier - vollstaendiger Text passt nicht in weniger. (4) Fliesstext der Vorlage steht teils als bullets, wo es Einzelanweisungen sind; Wortlaut je Satz unveraendert. (5) Die Subheadline der Vorlage laeuft 76 Zeichen, erlaubt sind rund 70; auf dem Titel steht 'Fuer die schnelle und sichere Sanierung feuchte- und salzgeschaedigter Waende.' gekuerzt, der volle Wortlaut steht im Anwendungsbereich. (6) Die Vorlage schreibt in der Nacharbeit 'gemaess den oertlichen Vorschriften entsorgen lagern' - hier steht 'entsorgen und lagern'. Korrektur, kein Zitat, bitte fachlich bestaetigen. (7) 'ca 18 kg/m2' der Vorlage steht hier als 'ca. 18 kg/m²'. (8) Der Profi-Tipp steht in der Vorlage neben 'Anmischen'; das Layout fuehrt ihn auf der letzten Anleitungsseite. Keine Bilder geliefert - alle Abbildungen als image_needed beschrieben.",
   "title": "BKM SP Express – Verarbeitungsanleitung",
   "product_name": "BKM SP Express",
   "product_line": "PRO LINE",
@@ -21,7 +21,7 @@
       "scope": {
         "title": "Anwendungsbereich",
         "icon": "table",
-        "body": "Der BKM SP Express ist ein mineralischer, reaktiv abbindender, WTA-zertifizierter Sanierputz zur Sanierung von feuchten und salzgeschädigten Wandflächen.",
+        "body": "Der BKM SP Express ist ein mineralischer, reaktiv abbindender, WTA-zertifizierter Sanierputz zur Sanierung von feuchten und salzgeschädigten Wandflächen. Er ist ideal geeignet für:",
         "suitable": [
           "Feuchte- und salzbelastete Wände",
           "Keller",
@@ -34,18 +34,18 @@
       "advantages": [
         {
           "icon": "target",
-          "claim": "Schnell, reaktiv und absolut zuverlässig",
-          "detail": "Die schnelle Reaktivabbindung beschleunigt den Arbeitsablauf, Flächen lassen sich zügig weiterbearbeiten"
+          "claim": "Schnell, reaktiv & absolut zuverlässig",
+          "detail": "Durch die schnelle Reaktivabbindung lässt sich der Arbeitsablauf deutlich beschleunigen, sodass Flächen zügig weiterbearbeitet werden können"
         },
         {
-          "icon": "drop",
-          "claim": "Perfekt für feuchte und salzbelastete Wände",
-          "detail": "Speichert schädliche Salze, bleibt diffusionsoffen und trägt zu dauerhaft trockenen Wandoberflächen bei"
+          "icon": "shield-check",
+          "claim": "Perfekt für feuchte & salzbelastete Wände",
+          "detail": "Das Material speichert schädliche Salze, bleibt diffusionsoffen und trägt zu dauerhaft trockenen Wandoberflächen bei"
         },
         {
           "icon": "stack",
           "claim": "Hohe Schichtstärken in einem Durchgang",
-          "detail": "Auftragstärken bis 25 mm pro Lage ermöglichen eine wirtschaftliche Verarbeitung"
+          "detail": "Auftragstärken bis 25 mm pro Lage ermöglichen eine wirtschaftliche Verarbeitung und reduzieren zusätzlichen Arbeitsaufwand"
         }
       ],
       "workplace": {
@@ -60,16 +60,16 @@
         ]
       },
       "tools": {
-        "title": "Für die Anwendung brauchst du",
+        "title": "Für die Anwendung brauchst du",
         "items": [
-          "Rührwerk 500–700 U/min",
+          "Rührwerk 500–700 U/min.",
           "Rührpaddel",
-          "Mischeimer",
-          "Wasser",
           "Maurerkelle",
           "Putzkelle",
+          "Gitterrabot",
           "Kartätsche",
-          "Gitterrabot"
+          "Mischeimer",
+          "Wasser"
         ]
       },
       "safety": {
@@ -89,75 +89,47 @@
         {
           "title": "Druckwasserhaltende Innenabdichtung",
           "icon": "stack",
-          "body": "Die Innenabdichtung besteht aus drei Bauteilen: der Horizontalsperre, der Harzinjektion am Boden-Wandanschluss und der Dichtkehle. Der Systemaufbau erfolgt darüber in fünf Lagen über drei Tage. Für den Boden-Wandanschluss ist die ergänzende Ausführungsrichtlinie „Dichtkehle Boden-Wandanschluss“ zu beachten.",
-          "bullets": [
-            "1. Tag: Grundierung, Vorabdichtung",
-            "2. Tag: Abdichtungsebene, Haftvermittler",
-            "3. Tag: Oberputz"
-          ]
+          "body": "Der Systemaufbau läuft über drei Tage. Die ergänzende Ausführungsrichtlinie „Dichtkehle-Boden-Wandanschluss“ ist zu beachten."
         },
         {
-          "title": "Grundierung",
+          "title": "1. Tag · Grundierung",
           "icon": "drop",
-          "body": "BKM MHG MultiHaftGrund.",
           "bullets": [
-            "Auftrag 1× unverdünnt",
-            "Verbrauch je nach Untergrund ca. 0,5 l/m²",
-            "Trockenzeit mindestens 30 Minuten"
+            "BKM MHG MultiHaftGrund.",
+            "Auftrag 1x unverdünnt.",
+            "Verbrauch je nach Untergrund ca. 0,5 l/m².",
+            "Trockenzeit mindestens 30 Minuten."
           ]
         },
         {
-          "title": "Vorabdichtung",
+          "title": "1. Tag · Vorabdichtung",
           "icon": "shield-check",
-          "body": "BKM HS Hohlkehlen- und Sperrmörtel.",
           "bullets": [
-            "Auftrag 1× flächig mit einer Mindestschichtstärke von 1 cm, als Dichtkehle mit einer Schenkellänge von 3 × 3 cm",
-            "Verbrauch ca. 15 kg/m² Wandfläche bzw. 3 kg/m als Dichtkehle",
-            "Trockenzeit mindestens 4 bis 6 Stunden"
+            "BKM HS Hohlkehlen- und Sperrmörtel.",
+            "Auftrag 1x flächig mit einer Mindestschichtstärke von 1 cm / als Dichtkehle mit einer Schenkellänge von 3x3 cm.",
+            "Verbrauch ca. 15 kg/m² (Wandfläche) bzw. 3 kg/m (als Dichtkehle).",
+            "Trockenzeit mindestens 4–6 Stunden."
           ]
         },
         {
-          "title": "Abdichtungsebene",
+          "title": "2. Tag · Abdichtungsebene",
           "icon": "shield-check",
-          "body": "BKM HDS-2K HybridDichtSchlämme, zweikomponentig.",
           "bullets": [
-            "Auftrag 2× mit einer Gesamtdicke von 3 mm, pro Auftrag 1,5 mm Nassschichtdicke",
-            "Verbrauch pro Lage ca. 1,5 kg/m², Gesamtverbrauch ca. 3 kg/m²",
-            "Trockenzeit ca. 2 bis 4 Stunden zwischen den Lagen"
-          ]
-        },
-        {
-          "title": "Haftvermittler",
-          "icon": "stack",
-          "body": "BKM VM VorspritzMörtel.",
-          "bullets": [
-            "Auftrag volldeckend, frisch in frisch, auf die noch feuchte Kratzspachtelung BKM HDS-2K",
-            "Verbrauch ca. 3 kg/m²",
-            "Trockenzeit ca. 12 Stunden, über Nacht"
-          ]
-        },
-        {
-          "title": "Oberputz",
-          "icon": "hammer",
-          "body": "BKM SP SanierPutz Express.",
-          "bullets": [
-            "Auftrag 1× mit einer Mindestschichtdicke von 2 cm",
-            "Verbrauch ca. 18 kg/m²"
+            "BKM HDS-2K HybridDichtSchlämme, 2-komponentig.",
+            "Auftrag 2x mit einer Gesamtdicke 3 mm, pro Auftrag 1,5 mm Nassschichtdicke.",
+            "Verbrauch pro Lage ca. 1,5 kg/m², Gesamtverbrauch ca. 3 kg/m².",
+            "Trockenzeit ca. 2–4 Stunden zwischen den Lagen."
           ]
         }
       ],
       "figures": [
         {
           "caption": "Systemaufbau der druckwasserhaltenden Innenabdichtung",
-          "image_needed": "Zeichnung: Schnitt durch Boden-Wandanschluss mit den fünf nummerierten Lagen und den Tagesangaben"
+          "image_needed": "Zeichnung, 16:9: Wandschnitt mit den fünf nummerierten Lagen Grundierung, Vorabdichtung, Abdichtungsebene, Haftvermittler, Oberputz, dazu Horizontalsperre, Harzinjektion und Dichtkehle am Boden-Wandanschluss. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         },
         {
           "caption": "Dichtkehle am Boden-Wandanschluss",
-          "image_needed": "Zeichnung oder Foto: Dichtkehle mit Schenkellänge 3 × 3 cm"
-        },
-        {
-          "caption": "HybridDichtSchlämme auftragen, zweite Lage",
-          "image_needed": "Foto: Auftrag der HybridDichtSchlämme, zweite Lage"
+          "image_needed": "Zeichnung, 16:9: Dichtkehle mit Schenkellänge 3x3 cm im Boden-Wandanschluss. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         }
       ]
     },
@@ -166,52 +138,92 @@
       "running_head": "BKM SP Express",
       "sections": [
         {
-          "title": "Verbrauch und Schichtdicken planen",
-          "icon": "table",
-          "body": "Der BKM SP Express liegt bei etwa 9 kg pro Quadratmeter und pro Zentimeter Schichtdicke. Bei einer empfohlenen Schichtdicke von 25 mm ergibt ein Sack eine Fläche von ca. 1,1 m². Da der tatsächliche Verbrauch stark vom Untergrund, der Saugfähigkeit und der Applikationsmethode abhängt, lohnt sich eine kleine Probefläche, um die Menge genau einschätzen zu können.",
-          "formulas": [
-            {
-              "rule": "9 kg/m² je Zentimeter Schichtdicke",
-              "example": "Bei 25 mm ergibt ein 25-kg-Sack ca. 1,1 m²"
-            }
+          "title": "2. Tag · Haftvermittler",
+          "icon": "drop",
+          "bullets": [
+            "BKM VM VorspritzMörtel.",
+            "Auftrag volldeckend, frisch-in-frisch, auf die noch feuchte Kratzspachtelung BKM HDS-2K.",
+            "Verbrauch ca. 3 kg/m².",
+            "Trockenzeit ca. 12 Stunden (über Nacht)."
           ]
         },
         {
+          "title": "3. Tag · Oberputz",
+          "icon": "stack",
+          "bullets": [
+            "BKM SP SanierPutz Express.",
+            "Auftrag 1x mit einer Mindestschichtdicke von 2 cm.",
+            "Verbrauch ca. 18 kg/m²."
+          ]
+        },
+        {
+          "title": "Verbrauch und Schichtdicken planen",
+          "icon": "table",
+          "body": "Bevor du startest, hilft dir eine realistische Verbrauchsplanung. Der BKM SP Express liegt bei etwa 9 kg pro Quadratmeter und pro Zentimeter Schichtdicke. Bei einer empfohlenen Schichtdicke von 25 mm ergibt 1 Sack eine Fläche von ca. 1,1 m². Da der tatsächliche Verbrauch stark vom Untergrund, der Saugfähigkeit und Applikationsmethode abhängig ist, lohnt sich eine kleine Probefläche, um die Menge genau einschätzen zu können.",
+          "formulas": [
+            {
+              "rule": "9 kg/m² je Zentimeter Schichtdicke",
+              "example": "Bei 25 mm Schichtdicke reicht 1 Sack für ca. 1,1 m²."
+            }
+          ]
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Haftvermittler frisch-in-frisch auftragen",
+          "image_needed": "Foto, 16:9: volldeckender Auftrag des BKM VM VorspritzMörtels auf die noch feuchte Kratzspachtelung. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
+        },
+        {
+          "caption": "Verbrauch an der Probefläche einschätzen",
+          "image_needed": "Foto, 16:9: kleine Probefläche mit aufgezogenem Sanierputz, Schichtstärkenkelle im Bild. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "BKM SP Express",
+      "sections": [
+        {
           "title": "Anmischen",
           "icon": "drop",
-          "body": "Für das Anmischen gibst du 7,0 bis 7,5 Liter Wasser pro 25-kg-Sack in einen sauberen Mischeimer und streue den trockenen Mörtel langsam ein. Anschließend mischst du den Sanierputz für etwa drei Minuten, bis eine homogene, spachtelfähige Masse entsteht. Nach kurzer Ruhezeit rührst du das Material nochmals kurz homogen auf, um die Reaktivkomponenten optimal zu aktivieren."
+          "bullets": [
+            "Für das Anmischen gibst du 7,0 bis 7,5 Liter Wasser pro 25 kg Sack in einen sauberen Mischeimer und streust den trockenen Mörtel langsam ein.",
+            "Anschließend mischst du den Sanierputz für etwa 3 Minuten, bis eine homogene, spachtelfähige Masse entsteht.",
+            "Nach kurzer Ruhezeit solltest du das Material nochmals kurz homogen aufrühren, um die Reaktivkomponenten optimal zu aktivieren."
+          ]
+        },
+        {
+          "title": "Verarbeitung",
+          "icon": "hammer",
+          "body": "Der frisch angemischte Putz wird direkt auf die zuvor erstellte Haftbrücke aufgezogen. Die reaktive Abbindung ermöglicht eine schnelle Oberflächenbearbeitung.",
+          "bullets": [
+            "Je nach Applikationsmethode kannst du den Putz bis zu 25 mm pro Arbeitsgang auftragen.",
+            "Für stärkere Schichtaufbauten arbeitest du mehrlagig, wobei jede Lage zunächst ansteifen sollte und waagerecht aufgeraut wird, bevor die nächste folgt.",
+            "Die letzte Lage sollte mit einem Gitterrabot egalisiert werden. Dies schafft auch eine porenoffene Oberfläche."
+          ]
+        },
+        {
+          "title": "Weiterverarbeitung",
+          "icon": "check-circle",
+          "body": "Nach ausreichender Erhärtung kannst du die Fläche weiterbearbeiten oder beschichten.",
+          "bullets": [
+            "Eine zweite Lage Putz kann nach 24 Stunden aufgetragen werden, wobei die erste Schicht zuvor mit einem Gitterrabot aufzurauen ist.",
+            "Der BKM FP Feinputz oder eine diffusionsoffene Beschichtung mit der BKM SF Silikatfarbe können ebenfalls nach 24 Stunden erfolgen."
+          ]
         }
       ],
       "figures": [
         {
           "caption": "Sanierputz anmischen",
-          "image_needed": "Foto: Einstreuen des Mörtels in den Mischeimer, Rührwerk im Einsatz"
-        }
-      ]
-    },
-    {
-      "type": "anleitung",
-      "running_head": "BKM SP Express",
-      "sections": [
-        {
-          "title": "Verarbeitung",
-          "icon": "hammer",
-          "body": "Der frisch angemischte Putz wird direkt auf die zuvor erstellte Haftbrücke aufgezogen. Die reaktive Abbindung ermöglicht eine schnelle Oberflächenbearbeitung. Je nach Applikationsmethode kannst du den Putz bis zu 25 mm pro Arbeitsgang auftragen. Für stärkere Schichtaufbauten arbeitest du mehrlagig, wobei jede Lage zunächst ansteifen sollte und waagerecht aufgeraut wird, bevor die nächste folgt. Die letzte Lage sollte mit einem Gitterrabot egalisiert werden. Das schafft auch eine porenoffene Oberfläche."
+          "image_needed": "Foto, 16:9: Rührwerk mit Rührpaddel im Mischeimer, 25-kg-Sack im Bild. Bei KI-generiertem Motiv Vermerk AI GENERATED in der oberen linken Ecke."
         },
         {
-          "title": "Weiterverarbeitung",
-          "icon": "check-circle",
-          "body": "Nach ausreichender Erhärtung kannst du die Fläche weiterbearbeiten oder beschichten. Eine zweite Lage Putz kann nach 24 Stunden aufgetragen werden, wobei die erste Schicht zuvor mit einem Gitterrabot aufzurauen ist. Der BKM FP Feinputz oder eine diffusionsoffene Beschichtung mit der BKM SF Silikatfarbe können ebenfalls nach 24 Stunden erfolgen."
-        }
-      ],
-      "figures": [
-        {
           "caption": "Putz aufziehen",
-          "image_needed": "Foto: Auftrag des Sanierputzes mit der Putzkelle"
+          "image_needed": "Foto, 16:9: Auftrag des Putzes auf die Haftbrücke mit der Putzkelle. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         },
         {
           "caption": "Mit dem Gitterrabot egalisieren",
-          "image_needed": "Foto: Egalisieren der letzten Lage mit dem Gitterrabot"
+          "image_needed": "Foto, 16:9: Egalisieren der letzten Lage mit dem Gitterrabot, porenoffene Oberfläche. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
         }
       ],
       "tip": {
@@ -225,12 +237,24 @@
       "headline": "Abschluss und Reinigung",
       "icon": "check-circle",
       "steps": [
-        "Die frische Putzfläche unbedingt vor zu schneller Austrocknung schützen, etwa vor Sonne, Zugluft oder starker Heizung.",
+        "Die frische Putzfläche unbedingt vor zu schneller Austrocknung schützen. (z. B. vor Sonne, Zugluft oder starker Heizung)",
         "Werkzeuge direkt nach der Verarbeitung gründlich mit sauberem Wasser reinigen.",
         "Produktreste und Verpackungen gemäß den örtlichen Vorschriften entsorgen und lagern."
       ],
       "issued": "18.08.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
-  ]
+  ],
+  "review": {
+    "abgleich": "31 von 37 Sätzen der Vorlage wiedergefunden. Die sechs übrigen sind Artefakte der Textextraktion.",
+    "korrekturen": [
+      "Die Vorlage schreibt „gemäß den örtlichen Vorschriften entsorgen lagern“. Hier steht „entsorgen und lagern“.",
+      "Die Vorlage schreibt „Verbrauch ca 18 kg/m2“. Hier steht „ca. 18 kg/m²“."
+    ],
+    "eingriffe": [
+      "Die druckwasserhaltende Innenabdichtung steht in der Vorlage als ganzseitige Systemzeichnung mit fünf Lagen und drei Tagesmarken. Das Layout kennt keine solche Seite; die Lagen stehen als Abschnitte, die Tagesmarken im Abschnittstitel.",
+      "Die Subheadline der Vorlage läuft 76 Zeichen und steht auf dem Titel gekürzt.",
+      "Die Rubrik Anleitung steht in der Vorlage auf zwei Seiten, hier auf vier."
+    ]
+  }
 }

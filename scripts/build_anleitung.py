@@ -17,6 +17,7 @@ Schriftdatei wird still ersetzt, ein zu langer Text still abgeschnitten.
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -51,7 +52,7 @@ def seiten_soll(content):
     return len(content.get("pages", []))
 
 
-def check_output(pdf_path, content):
+def check_output(pdf_path, content, zusatzseiten=0):
     """Prueft das erzeugte PDF auf vier stille Fehler."""
     from pypdf import PdfReader
 
@@ -71,7 +72,8 @@ def check_output(pdf_path, content):
 
     # Das Titelblatt liegt im selben PDF und zaehlt mit, sofern es gebaut
     # wurde. Ohne cover-Block enthaelt die Datei nur den Innenteil.
-    soll = seiten_soll(content) + (1 if content.get("cover") else 0)
+    soll = (seiten_soll(content) + (1 if content.get("cover") else 0)
+            + zusatzseiten)
     ist = len(reader.pages)
     if ist != soll:
         fehler.append(
@@ -79,11 +81,44 @@ def check_output(pdf_path, content):
             f"Faellt eine Seite aus, fasst ein Bereich seinen Inhalt nicht - "
             f"siehe .anl-page__body, dort steht overflow:hidden.")
 
+    if zusatzseiten:
+        fehler.extend(check_pruefteil(pdf_path, zusatzseiten))
     fehler.extend(check_bildverweise(content))
     fehler.extend(check_paginierung(content))
     fehler.extend(check_abbildungen(content))
     fehler.extend(check_typoskala(pdf_path))
     return fehler
+
+
+def check_pruefteil(pdf_path, seiten):
+    """Prueft, ob der Prueftteil vollstaendig auf seinen Blaettern steht.
+
+    Die erste Fassung dieser Pruefung mass die Unterkante des letzten
+    Textblocks gegen den Satzspiegel. Das war wertlos: .anl-page__body
+    traegt overflow:hidden, abgeschnittener Text steht gar nicht im PDF,
+    und die Messung sah nur, was ueberlebt hat. Bei HZ 250 Pro und SH-1K
+    fehlten die drei Freigabezeilen, und die Pruefung meldete 260 mm -
+    alles in Ordnung.
+
+    Geprueft wird darum auf Anwesenheit, nicht auf Lage: die drei
+    Freigabezeilen stehen am Fuss des Prueftteils. Fehlt eine, ist die
+    Seite uebergelaufen.
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        return []
+    with pymupdf.open(str(pdf_path)) as doc:
+        text = " ".join(doc[i].get_text()
+                        for i in range(len(doc) - seiten, len(doc))).lower()
+    fehlend = [n for n in ("anwendungstechnik", "qualitätsmanagement",
+                           "leitung technik") if n not in text]
+    if fehlend:
+        return [f"Im Prueftteil fehlen die Freigabezeilen "
+                f"{', '.join(fehlend)} - die Seite ist uebergelaufen und "
+                f"overflow:hidden hat sie abgeschnitten. Der Prueftteil "
+                f"braucht ein zweites Blatt."]
+    return []
 
 
 def check_typoskala(pdf_path):
@@ -282,6 +317,64 @@ def fuege_zusammen(titel_pdf, innen_pdf, ziel):
         w.write(f)
 
 
+def pruefteil(content):
+    """Stellt zusammen, was beim Gegenlesen sichtbar sein muss.
+
+    Das meiste steht schon im Content und muss nicht gepflegt werden:
+    die [ANGABE FEHLT: ...]-Marker und jedes image_needed. Was eine
+    Maschine nicht wissen kann - welche Abweichung von der Vorlage
+    fachlich zu bestaetigen ist, welcher Eingriff dem Satzspiegel
+    geschuldet war - steht im review-Block der content.json.
+
+    Bis 03.09.2026 stand all das nur im $comment. Den liest beim
+    Gegenlesen niemand: er steht in einer Datei, nicht auf dem Blatt.
+    """
+    seiten = content.get("pages", [])
+
+    offen = []
+    for nr, seite in enumerate(seiten, start=content.get("page_number_start", 1)):
+        for text in collect_strings([seite], min_length=3, skip_keys=SKIP_KEYS):
+            for treffer in re.findall(r"\[ANGABE FEHLT:\s*([^\]]+)\]", text):
+                offen.append(f"Seite {nr} · {treffer.strip()}")
+
+    motive = []
+    for nr, seite in enumerate(seiten, start=content.get("page_number_start", 1)):
+        for g in seite.get("figures", []):
+            if g.get("image_needed"):
+                # Der Hinweis auf den AI-GENERATED-Vermerk steht in jeder
+                # Motivbeschreibung. Auf dem Prueftteil siebenmal
+                # untereinander schiebt er die Seite ueber den Satzspiegel,
+                # ohne etwas zu sagen, das nicht einmal genuegt.
+                text = re.split(r"\s*(?:Bei KI-generiertem|Kein KI-Motiv)",
+                                g["image_needed"])[0].strip().rstrip(".")
+                motive.append({"seite": nr,
+                               "caption": g.get("caption", "ohne Bildunterschrift"),
+                               "beschreibung": text})
+
+    review = content.get("review", {})
+    # Ein Blatt fasst rund zwoelf Eintraege. Darueber wandern Motive,
+    # Quelle und Freigaben auf ein zweites - sonst faellt ausgerechnet
+    # die Freigabezeile vom Blatt, und die Seite, die Fehler sichtbar
+    # machen soll, verschweigt einen. check_pruefteil misst nach, ob die
+    # Schaetzung getragen hat.
+    umfang = (len(offen) + len(motive) + len(review.get("korrekturen", []))
+              + len(review.get("eingriffe", [])))
+    # Die Grenze ist gemessen, nicht gesetzt: bei acht Eintraegen fielen
+    # die Freigabezeilen vom Blatt.
+    return {
+        "zweiseitig": umfang > 7,
+        "offene_angaben": offen,
+        "motive": motive,
+        "korrekturen": review.get("korrekturen", []),
+        "eingriffe": review.get("eingriffe", []),
+        "protokoll": review.get("protokoll"),
+        "abgleich": review.get("abgleich"),
+        "quelle": content.get("source_pdf", "keine Vorlage hinterlegt"),
+        "issued": content.get("issued", ""),
+        "seiten": content.get("page_total", len(seiten) + 1),
+    }
+
+
 def baue(content_path, release=False):
     from jinja2 import Environment, FileSystemLoader
     from weasyprint import HTML
@@ -290,7 +383,9 @@ def baue(content_path, release=False):
     content.setdefault("page_number_start", 1)
 
     env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
-    html = env.get_template("template.html").render(**content)
+    protokoll = None if release else pruefteil(content)
+    html = env.get_template("template.html").render(
+        pruefteil=protokoll, **content)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     name = Path(content_path).parent.name
@@ -318,7 +413,8 @@ def baue(content_path, release=False):
         for eintrag in offen:
             print(f"    - {eintrag}")
 
-    fehler = check_output(pdf_path, content)
+    fehler = check_output(pdf_path, content,
+                          0 if release else (2 if protokoll["zweiseitig"] else 1))
     if fehler:
         print(f"\n  Beanstandet ({len(fehler)}):")
         for eintrag in fehler:

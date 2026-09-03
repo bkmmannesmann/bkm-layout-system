@@ -678,3 +678,102 @@
   font-weight: 700;
   color: var(--bkm-deep-green);
 }
+
+/* === PRUEFTEIL ========================================================= */
+
+/* Eine Seite hinter dem Dokument, kein Teil davon. Sie traegt darum
+   weder Folio noch Kolumnentitel und wird mit --release nicht gebaut.
+   Dasselbe Prinzip wie der review-Block im Datenblatt: was zu pruefen
+   ist, steht sichtbar auf Papier und nicht in einer Datei, die beim
+   Gegenlesen niemand aufmacht. */
+.anl-pruef__hinweis {
+  background: var(--bkm-deep-green);
+  color: var(--bkm-white);
+  border-radius: var(--anl-radius);
+  padding: 3.4mm 4.5mm;
+  margin: 0 0 4.5mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.4;
+}
+.anl-pruef__hinweis strong { color: var(--bkm-lime-green); }
+/* Ohne das zieht TT Norms Pro die beiden Bindestriche von --release zu
+   einem Halbgeviertstrich zusammen, und der Schalter stimmt nicht mehr. */
+.anl-pruef__hinweis { font-variant-ligatures: none; }
+
+.anl-pruef__bar {
+  background: var(--bkm-deep-green);
+  color: var(--bkm-lime-green);
+  border-radius: var(--anl-radius);
+  padding: 2mm 4mm;
+  margin: 0 0 2.4mm;
+  font-family: 'Unbounded', Impact, sans-serif;
+  font-weight: 900;
+  font-size: 9pt;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.anl-pruef__leer {
+  margin: 0 0 4.5mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 9pt;
+  color: var(--bkm-muted-grey);
+}
+.anl-pruef__liste { margin: 0 0 4.5mm; padding: 0; list-style: none; }
+.anl-pruef__liste li {
+  position: relative;
+  padding: 0 0 1.3mm 5mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.4;
+  color: var(--bkm-stone-grey);
+  text-align: left;
+  hyphens: none;
+}
+.anl-pruef__liste li::before {
+  content: "";
+  position: absolute;
+  left: 0.6mm;
+  top: 1.75mm;
+  width: 1.5mm;
+  height: 1.5mm;
+  border-radius: 50%;
+  background: var(--bkm-deep-green);
+}
+/* Was fachlich bestaetigt werden muss, traegt einen offenen Kreis statt
+   eines gefuellten Punktes - der Unterschied ist auf einen Blick da,
+   auch in einer Schwarzweisskopie von der Baustelle. */
+.anl-pruef__liste--offen li::before {
+  background: transparent;
+  border: 0.4mm solid var(--bkm-deep-green);
+  top: 1.55mm;
+}
+.anl-pruef__quelle {
+  border: 0.3mm solid var(--bkm-hairline, #d8d5cf);
+  border-radius: var(--anl-radius);
+  padding: 3mm 4mm;
+  margin: 0 0 4.5mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.6;
+  color: var(--bkm-stone-grey);
+}
+.anl-pruef__quelle dt {
+  float: left;
+  width: 34mm;
+  font-weight: 700;
+  color: var(--bkm-deep-green);
+}
+.anl-pruef__quelle dd { margin: 0 0 0 34mm; }
+.anl-pruef__freigabe { display: flex; gap: 6mm; margin-top: 2mm; }
+.anl-pruef__feld { flex: 1 1 0; }
+.anl-pruef__feld span {
+  display: block;
+  border-top: 0.3mm solid var(--bkm-stone-grey);
+  padding-top: 1.5mm;
+  font-family: 'TT Norms Pro', Arial, sans-serif;
+  font-size: 8pt;
+  color: var(--bkm-stone-grey);
+}
+.anl-pruef__feld--linie { height: 12mm; }

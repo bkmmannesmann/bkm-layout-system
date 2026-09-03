@@ -209,5 +209,80 @@
 {% endif %}
 {% endfor %}
 
+{# ---- PRUEFTEIL: hinter dem Dokument, nicht Teil davon -----------------
+     Wird nur ohne --release gebaut. Er traegt weder Folio noch
+     Kolumnentitel: die Seite gehoert nicht zur Anleitung, sie liegt ihr
+     bei. Der Inhalt kommt aus dem Content selbst - offene Angaben,
+     fehlende Motive - und aus dem review-Block, wo jemand etwas
+     hinterlegt hat, das die Maschine nicht wissen kann.             #}
+{% if pruefteil %}
+<section class="anl-page">
+  <div class="anl-page__body">
+    <h1 class="anl-rubrik">Prüfprotokoll</h1>
+    <div class="anl-pruef__hinweis">
+      <strong>Interner Prüfteil – nicht Teil der veröffentlichten Verarbeitungsanleitung.</strong>
+      Er wird mit der Option -⁠-release nicht gebaut und entfällt in der Freigabefassung.
+    </div>
+
+    <div class="anl-pruef__bar">Offene Angaben – fachlich zu bestätigen</div>
+    {% if pruefteil.offene_angaben %}
+    <ul class="anl-pruef__liste anl-pruef__liste--offen">
+      {% for e in pruefteil.offene_angaben %}<li>{{ e }}</li>{% endfor %}
+    </ul>
+    {% else %}<p class="anl-pruef__leer">Keine.</p>{% endif %}
+
+    {% if pruefteil.korrekturen %}
+    <div class="anl-pruef__bar">Abweichungen von der Vorlage – fachlich zu bestätigen</div>
+    <ul class="anl-pruef__liste anl-pruef__liste--offen">
+      {% for e in pruefteil.korrekturen %}<li>{{ e }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if pruefteil.eingriffe %}
+    <div class="anl-pruef__bar">Eingriffe, die das Layout verlangt hat</div>
+    <ul class="anl-pruef__liste">
+      {% for e in pruefteil.eingriffe %}<li>{{ e }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="anl-pruef__bar">Quelle und Stand</div>
+    <dl class="anl-pruef__quelle">
+      <dt>Vorlage</dt><dd>{{ pruefteil.quelle }}</dd>
+      <dt>Ausgegeben am</dt><dd>{{ pruefteil.issued }}</dd>
+      <dt>Umfang</dt><dd>{{ pruefteil.seiten }} Seiten einschließlich Titelblatt</dd>
+      {% if pruefteil.abgleich %}<dt>Abgleich</dt><dd>{{ pruefteil.abgleich }}</dd>{% endif %}
+    </dl>
+
+    {% if pruefteil.protokoll %}
+    <div class="anl-pruef__bar">Anmerkung</div>
+    <p class="anl-text">{{ pruefteil.protokoll }}</p>
+    {% endif %}
+
+    {% if pruefteil.zweiseitig %}
+  </div>
+</section>
+<section class="anl-page">
+  <div class="anl-page__body">
+    <h1 class="anl-rubrik">Prüfprotokoll</h1>
+    {% endif %}
+
+    <div class="anl-pruef__bar">Fehlende Motive</div>
+    {% if pruefteil.motive %}<p class="anl-pruef__leer">Entsteht ein Motiv mit KI, trägt es den Vermerk AI GENERATED in einer Ecke — EU-KI-Verordnung. Der Vermerk darf beim Beschnitt nicht wegfallen.</p>{% endif %}
+    {% if pruefteil.motive %}
+    <ul class="anl-pruef__liste anl-pruef__liste--offen">
+      {% for m in pruefteil.motive %}<li>Seite {{ m.seite }} · {{ m.caption }} — {{ m.beschreibung }}</li>{% endfor %}
+    </ul>
+    {% else %}<p class="anl-pruef__leer">Keine. Alle Abbildungen liegen vor.</p>{% endif %}
+
+    <div class="anl-pruef__bar">Freigaben</div>
+    <div class="anl-pruef__freigabe">
+      <div class="anl-pruef__feld"><div class="anl-pruef__feld--linie"></div><span>Anwendungstechnik · Datum</span></div>
+      <div class="anl-pruef__feld"><div class="anl-pruef__feld--linie"></div><span>Qualitätsmanagement · Datum</span></div>
+      <div class="anl-pruef__feld"><div class="anl-pruef__feld--linie"></div><span>Leitung Technik · Datum</span></div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
 </body>
 </html>
