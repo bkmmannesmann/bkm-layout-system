@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verarbeitungsanleitung BKM SH-1K</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -212,13 +213,7 @@ a:hover{color:#1c4b42;text-decoration:underline}
    beziehen daher eine lokale Sans-Serif-Schrift; alle anderen Zeichen bleiben
    unverändert TT Norms Pro. Erst nach bestätigtem Austausch der Vollversionen
    entfernen. */
-@font-face {
-  font-family: 'TT Norms Pro';
-  src: url('assets/fonts/LiberationSans-Regular.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
-}
+
 @font-face {
   font-family: 'TT Norms Pro';
   src: url('assets/fonts/LiberationSans-Regular.ttf') format('truetype');
@@ -226,20 +221,8 @@ a:hover{color:#1c4b42;text-decoration:underline}
   font-style: normal;
   unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
 }
-@font-face {
-  font-family: 'TT Norms Pro';
-  src: url('assets/fonts/LiberationSans-Regular.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
-}
-@font-face {
-  font-family: 'TT Norms Pro';
-  src: url('assets/fonts/LiberationSans-Bold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  unicode-range: U+00C4, U+00D6, U+00DC, U+00DF, U+00E4, U+00F6, U+00FC, U+1E9E;
-}
+
+
 @font-face {
   font-family: 'TT Norms Pro';
   src: url('assets/fonts/LiberationSans-Bold.ttf') format('truetype');
@@ -1123,7 +1106,7 @@ section:first-of-type {
   width: 1.5mm;
   height: 1.5mm;
   border-radius: 50%;
-  background: var(--bkm-transition-green);
+  background: var(--bkm-deep-green);
 }
 .anl-bullets--negativ li::before { background: var(--bkm-muted-grey); }
 
@@ -1228,6 +1211,11 @@ section:first-of-type {
 .anl-kasten--deep { background: var(--bkm-deep-green); }
 .anl-kasten--deep .anl-kasten__title { color: var(--bkm-lime-green); }
 .anl-kasten--deep .anl-bullets li { color: var(--bkm-white); }
+/* Der Punkt steht sonst in Deep Green auf Deep Green und ist weg. Heute
+   traegt kein dunkler Kasten eine Punktliste - die Regel haelt den Fall
+   ab, sobald einer eine bekommt. */
+.anl-kasten--deep .anl-bullets li::before,
+.anl-tipp .anl-bullets li::before { background: var(--bkm-lime-green); }
 .anl-kasten--deep .anl-ic { background: var(--bkm-transition-green); }
 .anl-bullets--zwei { column-count: 2; column-gap: 4mm; }
 .anl-bullets--zwei li { break-inside: avoid; }
@@ -1504,47 +1492,335 @@ section:first-of-type {
   color: var(--bkm-deep-green);
 }
 
+/* =============================================================================
+   BKM TITELBLATT – LAYOUT-SPEZIFIKATION (v2.0)
+   =============================================================================
+   
+   GRUNDPRINZIP:
+   Das DIN-A4-Titelblatt besteht aus einem vollflächigen 16:9-Farbkasten
+   im oberen Bereich (Höhe: 210/16*9 = 118.125mm) und einem Hero-Bild darunter.
+   
+   RASTER:
+   - 2 Spalten (je 105mm)
+   - Key Visual + Logo = 1/5 der Formatbreite (42mm)
+   - Linker Rand: 18mm (= Startpunkt aller Textelemente)
+   
+   FARBVARIANTEN:
+   - BKM Mannesmann AG  → Deep Green (#1c4b42)
+   - Fachbetriebe       → Transition Green (#287d4b)
+   - BKM Home Line      → Pure Green (#4daf46)
+   - BKM Pro Line       → Stone Grey (#494949)
+   - Verarbeitungsanl.  → Weiß (#ffffff)
+   
+   ============================================================================= */
+
+/* === FONT FACES ===
+   Quelle: assets/fonts/ – dieselben Dateien, die design-system/base.css nutzt.
+   Die zuvor referenzierten .woff2-Dateien liegen nicht im Repository; WeasyPrint
+   fiel dadurch stillschweigend auf DejaVu Sans zurueck. Vorhanden sind von
+   Unbounded ausschliesslich der Black-Schnitt und von TT Norms Pro Regular/Bold. */
+
+
+
+
+
+/* Umlaut-Absicherung, identisch zu design-system/base.css: Einige externe
+   PDF-/Druck-Renderer ersetzen TT-Norms-Umlaute und ss durch einen
+   Trial-Hinweis. Nur diese acht Glyphen beziehen eine lokale Sans-Serif. */
+
+
+
+/* === SEITEN-SETUP (Print/PDF) === */
+
+
+
+
+
+
+
+/* === COVER CONTAINER === */
+
+.cover {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  page-break-after: always;
+}
+
+/* === HERO-GRAFIK ===
+   210 x 125 mm, oben buendig. Sie ersetzt den frueheren flachen Farbkasten
+   samt seiner ::after-Eckerweiterung: die PNG traegt beides schon.
+
+   Unterhalb der 16:9-Kante bei 118,125 mm ist nur der rechte Zipfel deckend
+   (10,75 mm breit, bis 125 mm), der Rest durchsichtig - das ist der
+   Blitzerschutz aus brand.json, in der Datei statt in CSS.
+
+   Damit nutzen Cover-Vorlage und Canvas dieselbe Grafik. Vorher war die
+   Flaeche hier flach und deutlich heller als die Textur, weshalb dieselbe
+   Textfarbe auf beiden Wegen verschiedene Kontraste ergab. */
+
+.cover__hero-graphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 210mm;
+  height: 125mm;
+  z-index: 2;
+  display: block;
+}
+
+/* === TEXT-CONTENT CONTAINER ===
+   Flow-Layout: Elemente fließen vertikal mit definierten Abständen.
+   Subheadline und Fließtext passen sich an die tatsächliche Textlänge an
+   (ein- oder mehrzeilig, KEIN künstlicher Umbruch). */
+
+.cover__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 210mm;
+  height: 118.125mm;  /* wie der Farbkasten, echtes 16:9 */
+  padding: 18mm 18mm 0 18mm;  /* 18mm von oben und links */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* === LOGO ===
+   Breite: 42mm (1/5 der Formatbreite)
+   Die linke Außenkante definiert die Fluchtlinie für alle Textelemente */
+
+.cover__logo {
+  width: 42mm;    /* 1/5 von 210mm */
+  height: auto;
+  margin-bottom: 18mm;  /* 18mm Abstand zwischen Logo-Unterkante und Headline */
+}
+
+/* === SIEGEL (nur Fachbetriebe) ===
+   Das runde Systempartner-Siegel ersetzt das BKM-Logo, ohne dass sich sonst
+   etwas verschiebt: das Logo bleibt im Fluss stehen und traegt weiterhin den
+   Abstand zur Headline, wird aber unsichtbar. Das Siegel liegt absolut
+   darueber, auf derselben Mittelhoehe.
+
+   Rechnung: das Logo ist bei 42 mm Breite 10,161 mm hoch (viewBox
+   1054,34 x 255,08), Oberkante 18 mm, Mitte also 23,081 mm. Das Siegel misst
+   28,16 mm, seine Oberkante liegt damit bei 23,081 - 14,08 = 9,001 mm. */
+
+.cover--fachbetriebe .cover__logo { visibility: hidden; }
+
+.cover--fachbetriebe .cover__seal {
+  position: absolute;
+  top: 9.001mm;
+  left: var(--cover-axis, 18mm);
+  width: 28.16mm;
+  height: 28.16mm;
+  z-index: 3;
+  display: block;
+}
+
+/* === HEADLINE ===
+   Schrift: Unbounded Black (900), 30pt, Versalien
+   Zeilenabstand: 1.25
+   IMMER zweizeilig (Zeile 1 kürzer als Zeile 2)
+   Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
+
+.cover__headline {
+  max-width: 170mm;   /* Breit genug damit Umbruch NUR am <br> erfolgt */
+  
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 30pt;
+  line-height: 1.25;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  
+  color: #ffffff;
+  margin: 0 0 7.87mm 0;  /* 7.87mm (= 95px bei 300dpi) Abstand nach unten zur Subheadline */
+  padding: 0;
+}
+
+/* === SUBHEADLINE ===
+   Schrift: Unbounded Black (900), 12pt, KEINE Versalien
+   Ein- oder zweizeilig je nach Textlänge (KEIN künstlicher Umbruch!)
+   Verhältnis zu Headline: 30pt:12pt = 2.5:1
+   Farbe: Variabel je nach Hintergrund */
+
+.cover__subheadline {
+  max-width: 140mm;
+  
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 12pt;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: none;  /* KEINE Versalien! */
+  
+  margin: 0 0 0.85mm 0;  /* 0.85mm (= 10px bei 300dpi) Abstand nach unten zum Fließtext */
+  padding: 0;
+}
+
+/* === FLIESSTEXT / INTRO ===
+   Schrift: TT Norms Pro Regular (400), 12pt
+   Zeilenabstand: 1.25
+   MAXIMAL 2 Zeilen (NIE mehr!)
+   Max-Breite: 107mm
+   Abstand zur Subheadline: 2.5mm (= 30px bei 300dpi) – IMMER gleich
+   Farbe: Weiß (auf dunklem BG) oder Stone Grey (auf weißem BG) */
+
+.cover__intro {
+  max-width: 120mm;   /* Breite wie im Original-PDF, passend fuer 2 Zeilen */
+  
+  font-family: 'TT Norms Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12pt;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  
+  /* HARTE BEGRENZUNG: Maximal 2 Zeilen, Rest wird abgeschnitten */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* === PRODUKT-BADGE (nur Home Line + Pro Line) ===
+   Position: left=0 (der schräge Ansatz ragt bewusst über den Seitenrand),
+   vertikal zentriert auf der Unterkante des Farbkastens bei Y=118.125mm
+   (top = 118.125mm - 14.742mm/2 = 110.754mm, gesetzt sind 110.75mm)
+   Größe: 61mm × 14.742mm (720 × 174 px)
+   Ebene: z-index 4 (vor Key Visual und Farbkasten) */
+
+.cover__badge {
+  position: absolute;
+  /* Vertikal zentriert auf der Farbkasten-Unterkante: 118,125 - 14,742/2 = 110,754.
+     Die Badge-Hoehe folgt aus 61 mm Breite bei 720 x 174 px. */
+  top: 110.75mm;
+  left: 0;          /* Linksbündig am Seitenrand (schräger Ansatz ragt über Rand) */
+  width: 61mm;      /* 720px bei 300dpi */
+  height: auto;
+  z-index: 4;       /* Vor Key Visual (3), vor Farbkasten (2), vor Hero (1) */
+  display: block;
+}
+
+/* === KEY VISUAL ===
+   WICHTIG: Wird IMMER als vorgerenderte Bilddatei platziert!
+   NIEMALS in Code nachbauen (kein SVG, kein CSS-Shape)!
+   
+   Position:
+   - Rechte Kante bündig mit rechtem Seitenrand (right: 0)
+   - Oberkante bei Y=102.3mm (1210px bei 300dpi)
+   - Linke obere Pure-Green-Kante auf Flucht der Farbkasten-Unterkante
+   
+   Größe:
+   - Breite: 42mm (1/5 der Formatbreite)
+   - Höhe: Proportional zum Original-Seitenverhältnis */
+
+.cover__keyvisual {
+  position: absolute;
+  /* 102,416 mm ist nachgerechnet, nicht gerundet: die Chevron-Oberkante liegt
+     15,709 mm unter der Bildoberkante, damit trifft sie die 16:9-Kante bei
+     118,125 mm exakt. Die frühere Angabe 102,3 berief sich auf "1210 px bei
+     300 dpi" - das ergibt jedoch 102,447 mm, der Wert lag also neben seiner
+     eigenen Herleitung. Die Kante stößt damit ohne Überlappung; entschieden
+     am 27.08.2026 zugunsten des hergeleiteten Werts. */
+  top: 102.416mm;
+  right: 0;       /* Bündig rechts */
+  width: 42mm;    /* 1/5 von 210mm */
+  height: auto;
+  z-index: 3;     /* VOR Farbkasten und 8x8mm Kasten, VOR Hero-Bild */
+}
+
+/* === HERO-BILD ===
+   UNTERSTE EBENE (z-index: 1)
+   Vollflächig hinter allem – das Foto füllt die gesamte Seite.
+   Der 16:9-Farbkasten und der 8x8mm Kasten liegen darüber.
+   Das Key Visual liegt vor allem. */
+
+.cover__hero {
+  position: absolute;
+  top: 117.46mm;
+  left: 0;
+  width: 210mm;
+  height: 179.54mm;
+  overflow: hidden;
+  z-index: 1;     /* UNTERSTE Ebene */
+}
+
+.cover__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* =============================================================================
+   FARBVARIANTEN
+   ============================================================================= */
+
+/* --- BKM MANNESMANN AG (Deep Green) --- */
+.cover--mannesmann .cover__headline { color: #ffffff; }
+.cover--mannesmann .cover__subheadline { color: #b4e717; }
+.cover--mannesmann .cover__intro { color: #ffffff; }
+
+/* --- FACHBETRIEBE (Transition Green) --- */
+.cover--fachbetriebe .cover__headline { color: #ffffff; }
+.cover--fachbetriebe .cover__subheadline { color: #b4e717; }
+.cover--fachbetriebe .cover__intro { color: #ffffff; }
+
+/* --- BKM HOME LINE (Pure Green) --- */
+.cover--homeline .cover__headline { color: #ffffff; }
+.cover--homeline .cover__subheadline { color: #b4e717; }  /* Lime: die
+   texturierte Hero-Grafik ist dunkler als die frueher flache Flaeche.
+   Deep Green kaeme dort nur auf 2,02, Lime auf 3,34. */
+.cover--homeline .cover__intro { color: #ffffff; }
+
+/* --- BKM PRO LINE (Stone Grey) --- */
+.cover--proline .cover__headline { color: #ffffff; }
+.cover--proline .cover__subheadline { color: #b4e717; }
+.cover--proline .cover__intro { color: #ffffff; }
+
+/* --- VERARBEITUNGSANLEITUNG (Weiß) --- */
+/* Deep Green statt Stone Grey, in Headline wie Fliesstext. Die Anleitung
+   ist ein Dokument der AG, und deren Farbe auf hellem Grund ist Deep
+   Green - sender_context.ag.text_on_light in brand.json. Dieselbe
+   Aenderung traegt das Logo: bkm-logo-deepgreen-puregreen.svg.
+   Die Subheadline bleibt Pure Green: benannte Kontrastausnahme mit 2,79,
+   siehe contrast.accepted_exceptions.pure-green_on_white. */
+.cover--anleitung .cover__headline { color: #1c4b42; }
+.cover--anleitung .cover__subheadline { color: #4daf46; }
+.cover--anleitung .cover__intro { color: #1c4b42; }
+
+
+/* base.css und components.css setzen text-align:justify fuer die
+   Broschuerenstrecken. In der Produktion sieht das Titelblatt diese
+   beiden Dateien nie - es wird allein aus cover-spec.css gesetzt und
+   steht linksbuendig. Im Canvas liegen alle Stylesheets im selben
+   Dokument, und ohne diese Zeile stuenden Headline, Subheadline und
+   Intro im Blocksatz. cover-spec.css setzt selbst nirgends text-align,
+   links ist dort also der Zustand. */
+.cover, .cover * { text-align: left; }
 </style>
 </helmet>
 
-<div style="padding:28px 60px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
-<a href="Bibliothek.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">Bibliothek</a>
-<a href="A-Titelblaetter.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">A · Titelblätter</a>
-<a href="B-Rahmenseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">B · Rahmenseiten</a>
-<a href="C-Navigation.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">C · Navigation</a>
-<a href="D-Textstrecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">D · Textstrecken</a>
-<a href="E-Strecken.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">E · Strecken</a>
-<a href="F-Verfahren.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">F · Verfahren</a>
-<a href="G-Produktseiten.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">G · Produktseiten</a>
-<a href="H-Fachbetrieb.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#fff;color:#1c4b42">H · Fachbetrieb</a>
-<a href="I-Anleitung.dc.html" style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;text-decoration:none;background:#1c4b42;color:#b4e717">I · Anleitung</a>
-</div>
-
 <section style="padding:60px 60px 120px;display:flex;flex-direction:column;gap:48px">
-
-<div style="max-width:900px;display:flex;flex-direction:column;gap:14px">
-<div style="font-family:'TT Norms Pro',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4daf46">I · Anleitung</div>
-<h1 style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:44px;line-height:1.05;letter-spacing:-0.02em;color:#1c4b42;margin:0">Verarbeitungsanleitung BKM HZ 250 Pro</h1>
-<p style="margin:0;font-size:17px;line-height:1.6;max-width:70ch">Erzeugt aus content/anleitung-hz250pro/content.json. Aenderungen gehoeren in den Content oder in templates/anleitung/, nicht in diese Datei — sie wird von scripts/build_anleitung_canvas.py neu geschrieben.</p>
-</div>
 
 <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:60px">
 
-<div id="anleitung-titel" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-titel</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Titelblatt</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Titelblatt" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
-
+<div id="anleitung-titel" data-screen-label="Titelblatt" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div class="cover cover--anleitung">
 
     <!-- HERO-BILD (UNTERSTE EBENE, z-index: 1)
          Position: Y=0 (vollflächig hinter allem)
          Breite: 210mm, Höhe: 297mm
          Fit: cover -->
     <div class="cover__hero">
-      <img src="uploads/cover-hero-standard.jpg" alt="BKM HZ 250 Pro Verarbeitungsanleitung">
+      <img src="uploads/cover-hero-standard.jpg" alt="BKM SH-1K Verarbeitungsanleitung">
     </div>
 
     <!-- L-FÖRMIGE FARBFLÄCHE (z-index: 2)
@@ -1589,14 +1865,14 @@ section:first-of-type {
            Abstand oben: 10.6mm (= 30pt Zeichenhöhe)
            Ein- oder zweizeilig je nach Textlänge (KEIN künstlicher Umbruch)
            Farbe: Variabel (Lime Green / Deep Green / Pure Green) -->
-      <p class="cover__subheadline">Zur Injektion in mineralisches Mauerwerk gegen Feuchtigkeit.</p>
+      <p class="cover__subheadline">Zum schnellen Stoppen von fließendem Wasser in Rissen und Fugen.</p>
 
       <!-- FLIESSTEXT
            Schrift: TT Norms Pro Regular (400), 12pt
            Abstand oben: Immer gleich nah an Subheadline (6mm)
            Ein- bis dreizeilig je nach Textlänge
            Max-Breite: 107mm -->
-      <p class="cover__intro">BKM HZ 250 Pro – Dauerhafte Kapillarsperre für die professionelle Anwendung.</p>
+      <p class="cover__intro">BKM SH-1K – Schaumharz zum schnellen Wasserstopp.</p>
 
     </div>
 
@@ -1621,58 +1897,51 @@ section:first-of-type {
          src="assets/keyvisual/keyvisual-on-light.svg" 
          alt="BKM Key Visual">
 
-  
-</div>
+  </div>
 </div>
 
-<div id="anleitung-vorbereitung" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-vorbereitung</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Vorteile · Vorbereitung</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Vorteile · Vorbereitung" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-vorbereitung" data-screen-label="Vorteile · Vorbereitung" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 <section class="anl-page">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Vorteile</h1>
     <div class="anl-vorteil">
-      <span class="anl-ic anl-ic--inline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M229.26,90.4a108,108,0,0,1-177.63,114A108,108,0,0,1,195.41,43.63l20.1-20.11a12,12,0,0,1,17,17l-96,96a12,12,0,1,1-17-17l24-24a36,36,0,1,0,19.76,39.65,12,12,0,0,1,23.53,4.74,60,60,0,1,1-25.73-62L178.3,60.74a84,84,0,1,0,28.46,38,12,12,0,1,1,22.5-8.35Z"></path></svg></span>
-      <div class="anl-vorteil__text">
-        <p class="anl-vorteil__claim">Präzise kalkulierbar – effizient im Einsatz</p>
-        <p class="anl-vorteil__detail">Exakt planbarer Verbrauch</p>
-      </div>
-    </div>
-    
-    <div class="anl-vorteil">
-      <span class="anl-ic anl-ic--inline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M208,36H48A20,20,0,0,0,28,56V114.8c0,92.36,78.1,123,93.76,128.18a19.6,19.6,0,0,0,12.48,0C149.9,237.78,228,207.16,228,114.8V56A20,20,0,0,0,208,36Zm-4,78.8c0,73.56-60.53,99.53-76,105-15.47-5.42-76-31.39-76-104.95V60H204ZM79.51,144.49a12,12,0,1,1,17-17L112,143l47.51-47.51a12,12,0,0,1,17,17l-56,56a12,12,0,0,1-17,0Z"></path></svg></span>
-      <div class="anl-vorteil__text">
-        <p class="anl-vorteil__claim">Angenehmeres Arbeiten im Innenbereich</p>
-        <p class="anl-vorteil__detail">VOC-freies Material für eine verarbeitungsfreundliche Anwendung</p>
-      </div>
-    </div>
-    
-    <div class="anl-vorteil">
       <span class="anl-ic anl-ic--inline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M134.88,6.17a12,12,0,0,0-13.76,0,259,259,0,0,0-42.18,39C50.85,77.43,36,111.62,36,144a92,92,0,0,0,184,0C220,66.64,138.36,8.6,134.88,6.17ZM128,212a68.07,68.07,0,0,1-68-68c0-33.31,20-63.37,36.7-82.71A249.35,249.35,0,0,1,128,31.11a249.35,249.35,0,0,1,31.3,30.18C176,80.63,196,110.69,196,144A68.07,68.07,0,0,1,128,212Zm49.62-52.4a52,52,0,0,1-34,34,12.2,12.2,0,0,1-3.6.55,12,12,0,0,1-3.6-23.45,28,28,0,0,0,18.32-18.32,12,12,0,0,1,22.9,7.2Z"></path></svg></span>
       <div class="anl-vorteil__text">
-        <p class="anl-vorteil__claim">Kraftvolle Sperrschicht ohne Porenverschluss</p>
-        <p class="anl-vorteil__detail">Zuverlässige Feuchtebarriere ohne Verstopfen der Kapillarporen</p>
+        <p class="anl-vorteil__claim">Schneller Wasserstopp</p>
+        <p class="anl-vorteil__detail">Reagiert bei Wasserkontakt innerhalb kurzer Zeit.</p>
+      </div>
+    </div>
+    
+    <div class="anl-vorteil">
+      <span class="anl-ic anl-ic--inline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M229.26,90.4a108,108,0,0,1-177.63,114A108,108,0,0,1,195.41,43.63l20.1-20.11a12,12,0,0,1,17,17l-96,96a12,12,0,1,1-17-17l24-24a36,36,0,1,0,19.76,39.65,12,12,0,0,1,23.53,4.74,60,60,0,1,1-25.73-62L178.3,60.74a84,84,0,1,0,28.46,38,12,12,0,1,1,22.5-8.35Z"></path></svg></span>
+      <div class="anl-vorteil__text">
+        <p class="anl-vorteil__claim">Reaktionszeit einstellbar</p>
+        <p class="anl-vorteil__detail">Die Reaktionsgeschwindigkeit lässt sich über die Katalysatorkomponente beeinflussen.</p>
+      </div>
+    </div>
+    
+    <div class="anl-vorteil">
+      <span class="anl-ic anl-ic--inline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M234.36,170A12,12,0,0,1,230,186.37l-96,56a12,12,0,0,1-12.1,0l-96-56a12,12,0,0,1,12.09-20.74l90,52.48L218,165.63A12,12,0,0,1,234.36,170ZM218,117.63,128,170.11,38.05,117.63A12,12,0,0,0,26,138.37l96,56a12,12,0,0,0,12.1,0l96-56A12,12,0,0,0,218,117.63ZM20,80a12,12,0,0,1,6-10.37l96-56a12.06,12.06,0,0,1,12.1,0l96,56a12,12,0,0,1,0,20.74l-96,56a12,12,0,0,1-12.1,0l-96-56A12,12,0,0,1,20,80Zm35.82,0L128,122.11,200.18,80,128,37.89Z"></path></svg></span>
+      <div class="anl-vorteil__text">
+        <p class="anl-vorteil__claim">Starke Schaumausdehnung</p>
+        <p class="anl-vorteil__detail">Bis zu 30-fache Volumenzunahme bei freiem Schäumen.</p>
       </div>
     </div>
     
 
     <h1 class="anl-rubrik anl-rubrik--zweit">Vorbereitung</h1>
     <h2 class="anl-abschnitt__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M224,44H32A12,12,0,0,0,20,56V192a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V56A12,12,0,0,0,224,44ZM44,116H76v24H44Zm56,0H212v24H100ZM212,68V92H44V68ZM44,164H76v24H44Zm56,24V164H212v24Z"></path></svg></span><span>Anwendungsbereich</span></h2>
-    <p class="anl-text">BKM HZ 250 Pro dient zur Erstellung horizontaler oder flächiger Injektionsbarrieren gegen aufsteigende Feuchtigkeit und Querdurchfeuchtung in mineralischem Mauerwerk. Es unterbricht die kapillare Feuchtigkeitsaufnahme bei fehlender oder defekter Horizontalsperre und ermöglicht bei nicht ausschachtbaren Bereichen eine vollflächige Sperre von innen.</p>
+    <p class="anl-text">BKM SH-1K wird zum schnellen Stoppen von fließendem Wasser eingesetzt. Das Schaumharz eignet sich für wasserführende Risse, Fugen und Hohlräume und wird als Vorinjektion vor einer nachfolgenden BKM SEF-2K Injektion verwendet. Es stoppt schnell fließendes Wasser in Rissen, Fugen und Hohlräumen durch schnelle Schaumbildung.</p>
     <div class="anl-zwei">
       <div>
         
         <p class="anl-text anl-text--label"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M176.49,95.51a12,12,0,0,1,0,17l-56,56a12,12,0,0,1-17,0l-24-24a12,12,0,1,1,17-17L112,143l47.51-47.52A12,12,0,0,1,176.49,95.51ZM236,128A108,108,0,1,1,128,20,108.12,108.12,0,0,1,236,128Zm-24,0a84,84,0,1,0-84,84A84.09,84.09,0,0,0,212,128Z"></path></svg></span><span>Geeignet für</span></p>
-        <ul class="anl-bullets anl-bullets--nackt"><li>Ziegel- und Klinkermauerwerk</li><li>Naturstein- und Bruchsteinmauerwerk</li><li>Sandsteinmauerwerk</li><li>Kalksandstein und Porenbeton</li><li>Gitter- und Hohlkammersteine</li><li>Stampfbeton</li></ul>
+        <ul class="anl-bullets anl-bullets--nackt"><li>Risse und Aufstandsfugen</li><li>Hohlräume, Spalten und Klüfte</li><li>wasserführende Bereiche im Hoch- und Tiefbau</li></ul>
         
       </div>
       <div>
         <p class="anl-text anl-text--label"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M240.26,186.1,152.81,34.23h0a28.74,28.74,0,0,0-49.62,0L15.74,186.1a27.45,27.45,0,0,0,0,27.71A28.31,28.31,0,0,0,40.55,228h174.9a28.31,28.31,0,0,0,24.79-14.19A27.45,27.45,0,0,0,240.26,186.1Zm-20.8,15.7a4.46,4.46,0,0,1-4,2.2H40.55a4.46,4.46,0,0,1-4-2.2,3.56,3.56,0,0,1,0-3.73L124,46.2a4.77,4.77,0,0,1,8,0l87.44,151.87A3.56,3.56,0,0,1,219.46,201.8ZM116,136V104a12,12,0,0,1,24,0v32a12,12,0,0,1-24,0Zm28,40a16,16,0,1,1-16-16A16,16,0,0,1,144,176Z"></path></svg></span><span>Nicht geeignet für</span></p>
-        <ul class="anl-bullets anl-bullets--nackt"><li>Flächige Abdichtungen in Hohlkammersteinmauerwerk ohne intakte Lagerfugen und gedeckelte Hohlkammern</li><li>WU-Beton</li><li>Dämmstoffgefülltes Mauerwerk</li></ul>
+        <ul class="anl-bullets anl-bullets--nackt"><li>Stark sandendes oder lockeres Mauerwerk</li></ul>
       </div>
     </div>
     
@@ -1680,7 +1949,7 @@ section:first-of-type {
 
     
     <h2 class="anl-abschnitt__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M172,156a12,12,0,0,1-12,12H96a12,12,0,0,1,0-24h64A12,12,0,0,1,172,156Zm-12-52H96a12,12,0,0,0,0,24h64a12,12,0,0,0,0-24Zm60-56V216a20,20,0,0,1-20,20H56a20,20,0,0,1-20-20V48A20,20,0,0,1,56,28H90.53a51.88,51.88,0,0,1,74.94,0H200A20,20,0,0,1,220,48ZM128,36a28,28,0,0,0-27.71,24h55.42A28,28,0,0,0,128,36Zm68,16H178.59A52.13,52.13,0,0,1,180,64v8a12,12,0,0,1-12,12H88A12,12,0,0,1,76,72V64a52.13,52.13,0,0,1,1.41-12H60V212H196Z"></path></svg></span><span>Arbeitsplatz vorbereiten</span></h2>
-    <ul class="anl-schritte anl-schritte--breit"><li>Lege die gewünschte Sperrhöhe fest. Bei Horizontalsperren liegt diese ca. 5–15 cm über Oberkante Fußboden oder mindestens 15 cm über dem Erdreich.</li><li>Prüfe den Untergrund (Leitungen, Mauerwerksart) und ermittle die Wandstärke.</li><li>Prüfe bei Hohlkammersteinmauerwerk vor Beginn, ob durchgehende und intakte Lagerfugen oder gedeckelte Hohlkammersteine vorliegen.</li><li>Decke nicht zu behandelnde Flächen sorgfältig ab.</li></ul>
+    <ul class="anl-schritte anl-schritte--breit"><li>Decke angrenzende Bauteile und Flächen sorgfältig ab.</li><li>Beurteile Riss- oder Fugenverlauf, Wasserführung und vorhandene Hohlräume.</li><li>Prüfe den Bohrbereich auf Leitungen und andere Einbauten.</li><li>Zeichne die benötigten Bohrungen im Abstand von 10–12,5 cm an.</li><li>Stelle Material, Werkzeuge, Injektionsgerät, Packer und Reinigungsmaterial bereit.</li></ul>
     
 
     <div class="anl-zwei">
@@ -1688,14 +1957,14 @@ section:first-of-type {
         
         <div class="anl-kasten">
           <p class="anl-kasten__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M250.18,105.17,186.71,41.25a100.11,100.11,0,0,0-141.43,0l-.13.14L31.37,55.61a12,12,0,1,0,17.24,16.7L62.32,58.16A75.68,75.68,0,0,1,77.49,46.43L119,88,25.85,181.16a20,20,0,0,0,0,28.29l20.69,20.69a20,20,0,0,0,28.28,0L168,137l1.51,1.51h0l23.65,23.66a20,20,0,0,0,28.29,0l28.69-28.7A20,20,0,0,0,250.18,105.17ZM60.68,210.34l-15-15L108,133l15,15ZM140,131l-15-15,19.51-19.51a12,12,0,0,0,0-17L102.24,37.24a75.94,75.94,0,0,1,67.47,20.95l31.44,31.67L178,113l-1.51-1.51a12,12,0,0,0-17,0Zm67.32,11.31L195,130l23.09-23.09,12.3,12.39Z"></path></svg></span><span>Für die Anwendung brauchst du</span></p>
-          <ul class="anl-bullets anl-bullets--nackt anl-bullets--zwei"><li>Zollstock</li><li>Wasserwaage</li><li>Akkuschrauber</li><li>Bohrmaschine</li><li>Bohrer Ø 14 mm</li><li>Bleistift</li><li>Injektionsflaschen</li><li>Injektionslanzen</li><li>BKM Profi-Press</li><li>Einschraubadapter + 17 mm Nuss</li></ul>
+          <ul class="anl-bullets anl-bullets--nackt anl-bullets--zwei"><li>Bohrmaschine mit 14-mm-Bohrer</li><li>Injektionspacker</li><li>1K-Injektionsgerät</li><li>Waage und Mischgefäß</li><li>Rührquirl</li><li>Akkuschrauber mit Stecknuss</li></ul>
         </div>
         
       </div>
       <div>
         <div class="anl-kasten anl-kasten--deep">
           <p class="anl-kasten__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M208,36H48A20,20,0,0,0,28,56V114.8c0,92.36,78.1,123,93.76,128.18a19.6,19.6,0,0,0,12.48,0C149.9,237.78,228,207.16,228,114.8V56A20,20,0,0,0,208,36Zm-4,78.8c0,73.56-60.53,99.53-76,105-15.47-5.42-76-31.39-76-104.95V60H204ZM79.51,144.49a12,12,0,1,1,17-17L112,143l47.51-47.51a12,12,0,0,1,17,17l-56,56a12,12,0,0,1-17,0Z"></path></svg></span><span>Für deine eigene<br>Sicherheit</span></p>
-          <ul class="anl-bullets anl-bullets--nackt"><li>Schutzbrille</li><li>Schutzhandschuhe</li><li>Schutzkleidung</li><li>Gehörschutz</li><li>Staubmaske</li></ul>
+          <ul class="anl-bullets anl-bullets--nackt"><li>Schutzvisier</li><li>Schutzhandschuhe</li><li>Schutzkleidung</li></ul>
         </div>
         
       </div>
@@ -1703,51 +1972,32 @@ section:first-of-type {
   </div>
   <footer class="anl-foot anl-foot--verso">
   <span class="anl-foot__folio">2/6</span>
-  <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
+  <span class="anl-foot__rubrik">BKM SH-1K</span>
 </footer>
 </section>
 </div>
-</div>
 
-<div id="anleitung-anleitung-1" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-anleitung-1</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Anleitung 1</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Anleitung 1" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-anleitung-1" data-screen-label="Anleitung 1" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 <section class="anl-page">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Anleitung</h1>
     <div class="anl-zwei">
       <div>
         <div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verbrauch planen</h2>
-  <p class="anl-text">Je nach Mauerwerk gelten unterschiedliche Bohrlochabstände. Verwende bei normalem mineralischem Mauerwerk einen Bohrlochabstand von 25 cm und bei Beton, Natur- und Bruchstein, Kalksandstein und Porenbeton einen Bohrlochabstand von 12,5 cm. Der empfohlene Bohrlochabstand nach WTA-Vorgabe ist 12,5 cm. Der Bohrlochabstand muss so gewählt werden, dass mindestens eine Bohrung pro Stein erfolgt.</p>
+  <p class="anl-text">Der Materialverbrauch hängt vom vorhandenen Hohlraumvolumen und der jeweiligen Bauteilsituation ab. Eine feste Verbrauchsmenge kann deshalb nicht angegeben werden.</p>
   
-  
-  <div class="anl-formel">
-    <div class="anl-formel__satz">Bei 25 cm Bohrlochabstand · Horizontalsperre: 14 × Wandstärke in cm = Verbrauch in ml je Bohrloch</div>
-    <div class="anl-formel__beispiel">Beispiel bei 30 cm Wandstärke: 14 × 30 = 420 ml je Bohrloch</div>
-  </div>
-  
-  <div class="anl-formel">
-    <div class="anl-formel__satz">Bei 25 cm Bohrlochabstand · Flächensperre: 10 × Wandstärke in cm = Verbrauch in ml je Bohrloch</div>
-    <div class="anl-formel__beispiel">Beispiel bei 30 cm Wandstärke: 10 × 30 = 300 ml je Bohrloch</div>
-  </div>
-  
-  <div class="anl-formel">
-    <div class="anl-formel__satz">Bei 12,5 cm Bohrlochabstand · Horizontalsperre: 7 × Wandstärke in cm = Verbrauch in ml je Bohrloch</div>
-    <div class="anl-formel__beispiel">Beispiel bei 30 cm Wandstärke: 7 × 30 = 210 ml je Bohrloch</div>
-  </div>
-  
-  <div class="anl-formel">
-    <div class="anl-formel__satz">Bei 12,5 cm Bohrlochabstand · Flächensperre: 5 × Wandstärke in cm = Verbrauch in ml je Bohrloch</div>
-    <div class="anl-formel__beispiel">Beispiel bei 30 cm Wandstärke: 5 × 30 = 150 ml je Bohrloch</div>
-  </div>
   
 </div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Untergrund</h2>
-  <p class="anl-text">Der Untergrund muss mineralisch sein. Setze bei einem Natursteinmauerwerk die Bohrung so in den Stein, dass auf halber Mauerwerksstärke eine Lagerfuge oder ein Hohlraum getroffen wird. Bei Gitter- und Hohlkammersteinen erfolgt die Injektion im oberen Drittel des Steins mit dem Ziel, das Material im Hohlraum anzureichern. Die weitere Verteilung erfolgt über das Fugenmaterial. Hohlräume oder Kammern müssen vor der Injektion nicht mit Suspensionen verfüllt werden.</p>
+  <p class="anl-text">Bereite den Injektionsbereich entsprechend der jeweiligen baulichen Situation vor.</p>
   
+  
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verarbeitung · Boden-Wand-Anschluss</h2>
+  
+  <ul class="anl-bullets "><li>Bohre die Injektionslöcher mit einem 14-mm-Bohrer im Winkel von ca. 45°. Halte zwischen den Bohrungen einen Abstand von 10–12,5 cm ein.</li><li>Führe die Bohrungen am Boden-Wand-Anschluss bis zum Fundament.</li><li>Entferne den Bohrstaub vollständig und setze die Injektionspacker fest in die Bohrlöcher ein. Verspanne sie sicher im Bauteil, damit sie sich während der Druckinjektion nicht lösen.</li></ul>
+  
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verarbeitung · Wandfläche</h2>
+  
+  <ul class="anl-bullets "><li>Bohre ebenfalls mit einem 14-mm-Bohrer im Winkel von ca. 45° und einem Abstand von 10–12,5 cm.</li><li>Führe die Bohrungen bis zur Mitte des Mauerwerks.</li><li>Entferne den Bohrstaub vollständig und setze die Injektionspacker fest ein.</li></ul>
   
 </div>
       </div>
@@ -1756,13 +2006,13 @@ section:first-of-type {
         <div class="anl-figs">
           
           <figure class="anl-fig">
-            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto: Messen der Wandstärke am Mauerwerk, Zollstock angelegt</p></div>
-            <figcaption class="anl-fig__cap">Wandstärke ermitteln</figcaption>
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung, 16:9: Schnitt durch den Boden-Wand-Anschluss mit Bohrungen im 45°-Winkel bis zum Fundament, Maßkette 10–12,5 cm. Kein KI-Motiv vorgesehen; entsteht ein KI-generiertes Bild daraus, trägt es den Vermerk AI GENERATED in der unteren rechten Ecke.</p></div>
+            <figcaption class="anl-fig__cap">Bohrbild am Boden-Wand-Anschluss</figcaption>
           </figure>
           
           <figure class="anl-fig">
-            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto oder Schnitt: Ziegel, Naturstein und Hohlkammerstein nebeneinander</p></div>
-            <figcaption class="anl-fig__cap">Ziegel, Naturstein und Hohlkammerstein im Vergleich</figcaption>
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung, 16:9: Wandschnitt mit Bohrungen im 45°-Winkel bis zur Mauermitte, Maßkette 10–12,5 cm. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke.</p></div>
+            <figcaption class="anl-fig__cap">Bohrbild in der Wandfläche</figcaption>
           </figure>
           
         </div>
@@ -1772,35 +2022,24 @@ section:first-of-type {
   </div>
   <footer class="anl-foot anl-foot--recto">
   <span class="anl-foot__folio">3/6</span>
-  <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
+  <span class="anl-foot__rubrik">BKM SH-1K</span>
 </footer>
 </section>
 </div>
-</div>
 
-<div id="anleitung-anleitung-2" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-anleitung-2</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Anleitung 2</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Anleitung 2" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-anleitung-2" data-screen-label="Anleitung 2" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 <section class="anl-page">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Anleitung</h1>
     <div class="anl-zwei">
       <div>
-        <div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verarbeitung · Horizontalsperre</h2>
-  <p class="anl-text">Zeichne zuerst mit einer Wasserwaage und einem Bleistift die gewünschte Sperrhöhe an. Lege dann eine Bohrlochreihe in dieser Höhe fest. Die Bohrlöcher sind je nach Mauerwerksart im jeweiligen Abstand in einem Winkel von ca. 45° in das Mauerwerk zu bohren. Bei Mauerwerksecken setze eine Bohrung direkt in die Ecke. Die erste Bohrung aus der Ecke wird zu beiden Seiten mit 10 cm Abstand angeordnet. Bei Wandstärken über 60 cm muss in der Ecke eine zweite Bohrung um 5 cm nach oben versetzt erfolgen.</p>
+        <div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verarbeitung · Risse</h2>
   
+  <ul class="anl-bullets "><li>Markiere zuerst den Rissverlauf.</li><li>Setze die Injektionsbohrungen abwechselnd links und rechts vom Riss. Ordne die Bohrungen versetzt an, sodass ein kreuzförmiges Bohrbild entsteht.</li><li>Bohre mit einem 14-mm-Bohrer im Winkel von ca. 45° schräg zum Rissverlauf, sodass die Bohrungen den Riss im Bauteil kreuzen.</li><li>Halte zwischen den Bohrungen einen Abstand von 10–12,5 cm ein.</li><li>Entferne den Bohrstaub vollständig und setze die Injektionspacker fest ein.</li><li>[ANGABE FEHLT: Bohrlochtiefe bei der Rissinjektion – bitte fachlich bestätigen.]</li></ul>
   
-</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Verarbeitung · Flächensperre</h2>
-  <p class="anl-text">Führe bei einer Flächensperre das Bohrlochmuster der Horizontalsperre nach oben schachbrettartig versetzt fort. Der vertikale Abstand beträgt hierbei 25 cm. Die letzte Bohrlochreihe endet min. 15 cm über Oberkante Gelände.</p>
+</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Anmischen</h2>
   
-  
-</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Partielle Flächensperre</h2>
-  <p class="anl-text">Wenn nur ein Teilbereich betroffen ist, lege die Sperre zu allen Seiten bis ca. 50 cm über die letzte erkennbare Schadensstelle hinaus an.</p>
-  
+  <ul class="anl-bullets "><li>Wiege Komponente A und B im Mischungsverhältnis von 10 : 1 nach Gewichtsteilen ab.</li><li>Mische beide Komponenten gründlich, bis eine homogene Mischung entsteht. Fülle das Material anschließend in das 1K-Injektionsgerät.</li><li>Bei 15 °C Wassertemperatur beträgt die Reaktionszeit bei einem Mischungsverhältnis von 10 : 1 ca. 11 Sekunden.</li><li>Die Reaktionszeit kann über die Katalysatorkomponente B beeinflusst werden.</li><li>Die Topfzeit beträgt ca. 45–60 Minuten. Mische nur so viel Material an, wie du innerhalb dieser Zeit verarbeiten kannst.</li></ul>
   
 </div>
       </div>
@@ -1809,23 +2048,13 @@ section:first-of-type {
         <div class="anl-figs">
           
           <figure class="anl-fig">
-            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung Bohrlochmuster Horizontalsperre, 25 cm, mit Maßkette</p></div>
-            <figcaption class="anl-fig__cap">Bohrlochmuster Horizontalsperre bei 25 cm Bohrlochabstand</figcaption>
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung, 16:9: Rissverlauf in der Wandansicht, Bohrungen abwechselnd links und rechts versetzt, schräg kreuzend, mit Maßkette 10–12,5 cm. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke.</p></div>
+            <figcaption class="anl-fig__cap">Kreuzförmiges Bohrbild am Riss</figcaption>
           </figure>
           
           <figure class="anl-fig">
-            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung Bohrlochmuster Horizontalsperre, 12,5 cm, mit Maßkette</p></div>
-            <figcaption class="anl-fig__cap">Bohrlochmuster Horizontalsperre bei 12,5 cm Bohrlochabstand</figcaption>
-          </figure>
-          
-          <figure class="anl-fig">
-            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung Bohrlochmuster Flächensperre, 25 cm, schachbrettartig versetzt, mit Maßkette</p></div>
-            <figcaption class="anl-fig__cap">Bohrlochmuster Flächensperre bei 25 cm Bohrlochabstand</figcaption>
-          </figure>
-          
-          <figure class="anl-fig">
-            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Zeichnung Bohrlochmuster Flächensperre, 12,5 cm, schachbrettartig versetzt, mit Maßkette</p></div>
-            <figcaption class="anl-fig__cap">Bohrlochmuster Flächensperre bei 12,5 cm Bohrlochabstand</figcaption>
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto, 16:9: Waage mit Mischgefäß, Komponente A und B, Rührquirl im Bild. Bei KI-generiertem Motiv Vermerk AI GENERATED in der oberen linken Ecke.</p></div>
+            <figcaption class="anl-fig__cap">Komponente A und B im Verhältnis 10 : 1 abwiegen</figcaption>
           </figure>
           
         </div>
@@ -1835,52 +2064,24 @@ section:first-of-type {
   </div>
   <footer class="anl-foot anl-foot--verso">
   <span class="anl-foot__folio">4/6</span>
-  <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
+  <span class="anl-foot__rubrik">BKM SH-1K</span>
 </footer>
 </section>
 </div>
-</div>
 
-<div id="anleitung-anleitung-3" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-anleitung-3</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Anleitung 3</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Anleitung 3" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-anleitung-3" data-screen-label="Anleitung 3" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 <section class="anl-page">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Anleitung</h1>
     <div class="anl-zwei">
       <div>
-        <div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Bohren</h2>
-  <p class="anl-text">Stimme die Bohrlochtiefe auf die Wandstärke ab. Bei Wandstärken bis 60 cm beträgt die Bohrlochtiefe die halbe Wandstärke. Bei Wandstärken über 60 cm ist die Bohrlochtiefe so zu wählen, dass diese im hinteren Drittel des Mauerwerkquerschnitts endet. Durch die Bohrung im 45°-Winkel verlängert sich der tatsächliche Bohrweg auf etwa das 1,41-Fache der gewünschten Eindringtiefe, da die Bohrung schräg in das Mauerwerk verläuft.</p>
-  
-  
-  <div class="anl-formel">
-    <div class="anl-formel__satz">Bohrweg = gewünschte Eindringtiefe × 1,41</div>
-    
-  </div>
-  
-</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Injektionslanzen setzen</h2>
-  <p class="anl-text">Setze die Injektionslanzen mit einem Akkuschrauber sowie dem passenden Einschraubadapter und einer geeigneten Nuss in die Bohrlöcher ein. Schraube die Lanzen vorsichtig mit geringem Drehmoment ein und fixiere sie sicher im Bohrloch.</p>
-  
-  
-</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Injizieren</h2>
-  <p class="anl-text">Injiziere anschließend BKM HZ 250 Pro mit der BKM Profi-Press über die Injektionslanzen in das Mauerwerk. Kontrolliere die Materialmenge über den elektronischen Durchlaufzähler.</p>
-  
-  
-</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Bohrlöcher verschließen</h2>
-  <p class="anl-text">Verschließe die Bohrlöcher direkt nach der Injektion bzw. nach dem Entfernen der Lanzen mit BKM FBM.</p>
-  
-  
-</div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Alternative Verarbeitung</h2>
-  <p class="anl-text">Bei wenig saugenden Untergründen oder bei zu geringer Materialaufnahme des Mauerwerks über Niederdruckinjektion ist eine Verarbeitung mit geeigneten Injektionsflaschen möglich, zum Beispiel bei Naturstein oder Kalksandstein. Die Bohrlochabstände bleiben dabei unverändert.</p>
-  
+        <div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Injizieren</h2>
+  <p class="anl-text">Beginne die Injektion in der Regel mit einem Anfangsdruck von ca. 15 bar bei Beton und ca. 3 bar bei Mauerwerk. Passe den Druck an die jeweilige Bauteilsituation an. Injiziere BKM SH-1K, bis der Wasserfluss gestoppt ist.</p>
+  <ul class="anl-bullets "><li>Wechsle zum nächsten Packer, sobald Material am benachbarten Packer, an der Rissoberfläche oder aus der Fuge austritt.</li><li>Bei Bedarf kannst du innerhalb der Topfzeit über denselben Packer nachinjizieren.</li><li>Bei einer nachfolgenden kraftschlüssigen Riss- oder Aufstandsfugenabdichtung wird anschließend mit BKM SEF-2K über dem gleichen Packer nachinjiziert.</li><li>Kratze ausgetretenes und ausgehärtetes Schaumharz mechanisch von der Oberfläche ab.</li><li>Verschließe die Bohrlöcher anschließend mit BKM FBM Füll- und Bohrlochmörtel.</li></ul>
   
 </div><div class="anl-abschnitt"><h2 class="anl-abschnitt__title">Hinweise</h2>
-  <p class="anl-text">Für die Verarbeitung nach WTA-Richtlinie ist für horizontale Kapillarsperren ein maximaler Bohrlochabstand von 12,5 cm einzuhalten. Flächensperren fallen nicht unter diese Richtlinie. Materialbedingte Farbvertiefungen in vorhandenem Altputz infolge der Injektion sind systembedingt und stellen keinen Mangel dar. Während der Austrocknung des Mauerwerks bis zum Erreichen der Ausgleichsfeuchte können durch den Feuchtetransport an die Oberfläche Salzausblühungen entstehen.</p>
   
+  <ul class="anl-bullets "><li>Verarbeite BKM SH-1K nur bei Temperaturen von +5 °C bis ca. +35 °C.</li><li>Die Material- und Wassertemperatur beeinflusst die Reaktionsgeschwindigkeit.</li><li>Das Produkt reagiert auch mit Luftfeuchtigkeit. Unbeabsichtigter Feuchtigkeitseintrag ist deshalb zu vermeiden.</li><li>Schütze angrenzende Bereiche vor ungewolltem Produktkontakt.</li><li>Stelle sicher, dass die Injektionspacker fest und sicher sitzen. Sie dürfen sich während der Druckinjektion nicht lösen.</li><li>Reinige das Injektionsgerät unmittelbar nach Gebrauch.</li><li>Vor der industriellen oder gewerblichen Verwendung ist eine angemessene Schulung erforderlich.</li><li>Beachte die Gefahrenhinweise und Sicherheitsmaßnahmen auf dem Gebinde und im aktuellen Sicherheitsdatenblatt.</li></ul>
   
 </div>
       </div>
@@ -1889,25 +2090,15 @@ section:first-of-type {
         <div class="anl-figs">
           
           <figure class="anl-fig">
-            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto oder Schnitt: Bohrung im 45-Grad-Winkel</p></div>
-            <figcaption class="anl-fig__cap">Bohrung im 45°-Winkel</figcaption>
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto, 16:9: 1K-Injektionsgerät am gesetzten Packer, Manometer im Bild. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren linken Ecke.</p></div>
+            <figcaption class="anl-fig__cap">Injektion über den gesetzten Packer</figcaption>
           </figure>
           
           <figure class="anl-fig">
-            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto: gesetzte Injektionslanzen an der Wand</p></div>
-            <figcaption class="anl-fig__cap">Einsatz der Injektionslanzen</figcaption>
+            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto, 16:9: Verschließen des Bohrlochs mit BKM FBM Füll- und Bohrlochmörtel nach dem Entfernen des Packers. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke.</p></div>
+            <figcaption class="anl-fig__cap">Bohrlöcher mit BKM FBM verschließen</figcaption>
           </figure>
           
-          <figure class="anl-fig">
-            <div class="anl-fig__img anl-ph"><p class="anl-ph__label">Motiv fehlt: Foto: Verschließen des Bohrlochs mit BKM FBM nach dem Entfernen der Lanze</p></div>
-            <figcaption class="anl-fig__cap">Bohrlöcher verschließen</figcaption>
-          </figure>
-          
-        </div>
-        
-        <div class="anl-tipp">
-          <p class="anl-tipp__title"><span class="anl-ic anl-ic--contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" style="fill:#b4e717"><path d="M229.26,90.4a108,108,0,0,1-177.63,114A108,108,0,0,1,195.41,43.63l20.1-20.11a12,12,0,0,1,17,17l-96,96a12,12,0,1,1-17-17l24-24a36,36,0,1,0,19.76,39.65,12,12,0,0,1,23.53,4.74,60,60,0,1,1-25.73-62L178.3,60.74a84,84,0,1,0,28.46,38,12,12,0,1,1,22.5-8.35Z"></path></svg></span><span>Profi Tipp</span></p>
-          <p class="anl-tipp__body">Ein Tuch an der Schiebekupplung schützt den Arbeitsbereich vor ungewollten Spritzern.</p>
         </div>
         
       </div>
@@ -1915,37 +2106,29 @@ section:first-of-type {
   </div>
   <footer class="anl-foot anl-foot--recto">
   <span class="anl-foot__folio">5/6</span>
-  <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
+  <span class="anl-foot__rubrik">BKM SH-1K</span>
 </footer>
 </section>
 </div>
-</div>
 
-<div id="anleitung-nacharbeit" style="display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid #1c4b42">
-<span style="font-family:'TT Norms Pro',sans-serif;font-size:13px;font-weight:700;background:#1c4b42;color:#b4e717;padding:5px 10px">anleitung-nacharbeit</span>
-<span style="font-family:'Unbounded',sans-serif;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:-0.01em;color:#1c4b42">Nacharbeit</span>
-<span style="font-size:14px;color:#8a8a8a">Weiß</span>
-</div>
-<div data-screen-label="Nacharbeit" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
+<div id="anleitung-nacharbeit" data-screen-label="Nacharbeit" style="width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(28,75,66,.18)">
 <section class="anl-page"><img class="anl-keyvisual" src="assets/keyvisual/keyvisual-on-light.svg" alt="">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Nacharbeit</h1>
     <h2 class="anl-abschnitt__title">Abschluss und Reinigung</h2>
     
-    <ul class="anl-schritte"><li>Entferne nach der Injektion alte Putze und Anstriche.</li><li>Trage vor dem späteren Aufbringen von Putzen oder Anstrichen BKM MHG als sichere Haftbrücke auf.</li><li>Schließe angebrochene Gebinde sofort wieder und schütze sie vor Kontakt mit Luft und Wasser.</li><li>Lagere Restmaterial frostfrei.</li></ul>
+    <ul class="anl-schritte"><li>Kontrolliere den ausgeführten Injektionsbereich und prüfe, ob der Wasserfluss gestoppt ist.</li><li>Entferne die Packer und kratze ausgehärtetes, ausgetretenes Material von der Oberfläche ab.</li><li>Verschließe die Bohrlöcher mit BKM FBM Füll- und Bohrlochmörtel.</li><li>Reinige Injektionsgerät und Werkzeuge sofort mit BKM Harzreiniger.</li><li>Entferne Abdeckmaterial, reinige den Arbeitsbereich und entsorge Produktreste sowie Verpackungen sachgerecht.</li><li>[ANGABE FEHLT: Lagerung von Restmaterial und angebrochenen Gebinden – bitte fachlich bestätigen.]</li></ul>
     
   </div>
   <div class="anl-impressum">
-    <span class="anl-impressum__datum">Ausgegeben am 18.08.2026</span><br>
+    <span class="anl-impressum__datum">Ausgegeben am 01.09.2026</span><br>
     Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission.
   </div>
   <footer class="anl-foot anl-foot--verso">
   <span class="anl-foot__folio">6/6</span>
-  <span class="anl-foot__rubrik">BKM HZ 250 Pro</span>
+  <span class="anl-foot__rubrik">BKM SH-1K</span>
 </footer>
 </section>
-</div>
 </div>
 
 </div>

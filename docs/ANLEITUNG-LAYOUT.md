@@ -154,6 +154,11 @@ rund 9,5 mm — genau das Maß der Stufe `inline`.
 
 ## Aufzählungen
 
+Der Punkt steht in **Deep Green** — dieselbe Farbe wie die Icon-Kästen auf
+hellem Grund, nicht Transition Green. Auf dunkler Fläche wechselt er auf
+Lime Green, sonst stünde Deep auf Deep. Heute trägt kein dunkler Kasten
+eine Punktliste; die Regel hält den Fall ab, sobald einer eine bekommt.
+
 Der gesetzte Punkt trägt nur dort, wo eine Liste als Aufzählung gelesen
 werden muss. In den Untergrundlisten sowie in Werkzeug und Sicherheit ist
 er weggelassen (`anl-bullets--nackt`): die Zeilen sind kurz und stehen
@@ -328,3 +333,50 @@ Der Umbruch ist Handarbeit: Jede Seite in `pages[]` muss ihren Inhalt
 fassen. Läuft eine über, meldet der Bau es — dann wandert der letzte
 Abschnitt eine Seite weiter. Seite 2 der HZ-250-Fassung hat nur noch
 1,1 mm Luft; wächst dort etwas, klemmt sie.
+
+## Canvasfassung
+
+`scripts/build_anleitung_canvas.py` erzeugt aus derselben `content.json`
+die Fassung für Claude Design: `templates/brochure/I-Anleitung.dc.html`.
+
+Sie enthält **nur die A4-Blätter** — keine Gruppen-Navigation, keinen
+Kopfblock, keine Labelleiste. Die acht Vorlagengruppen A bis H tragen das
+zu Recht, weil aus ihnen ausgewählt wird; die Anleitung ist ein Dokument
+und wird als Blattfolge gelesen, nicht als Sammlung durchgesehen. Links
+auf die anderen Gruppen wären darin tote Fracht, und der Kopfblock war
+Text über die Datei, nicht Inhalt der Anleitung.
+
+Jedes Blatt trägt seine Kennung als `id` und seinen Namen als
+`data-screen-label` — anspringbar und in Kommentaren benannt, ohne dass
+etwas davon auf dem Blatt steht.
+
+### Was der Bau prüft
+
+Canvas und Produktion sind zwei Wege zu demselben Blatt, und die laufen
+auseinander. Viermal ist es passiert: Hero-Grafik, Fotolage, Keyvisual,
+und zuletzt das Titelblatt, dem `cover-spec.css` fehlte. Deshalb prüft
+der Bau selbst und bricht ab, wenn etwas nicht stimmt:
+
+| Prüfung | worauf sie sieht |
+|---|---|
+| `check_chrome` | keine Gruppenlinks, kein `<h1>` außerhalb der Blätter, keine Labelleiste, Blattzahl, eindeutige Kennungen |
+| `check_seitenrahmen` | `html, body` auf Blattmaß darf aus `cover-spec.css` nicht durchkommen — das reißt die Arbeitsfläche auseinander |
+| `check_fotolage` | Titelfoto gegen `cover_geometry.photo` aus `brand.json`, und ob die Regel auch **zuletzt** steht; dazu die Variantenklasse am Wrapper |
+| `check_schriftangebot` | welche Schnitte der Canvas zur Auswahl stellt, gegen `typography` — meldet nur, bricht nicht ab |
+
+Gemessen wird gegen `brand.json`, nicht gegen die CSS: sonst prüft die
+Vorgabe sich selbst.
+
+Dass die Prüfungen auch greifen, steht in `scripts/gegenproben_canvas.py`
+— elf Fälle, jeder mit einem echten Fehler vorgesetzt:
+
+```bash
+python3 scripts/gegenproben_canvas.py
+```
+
+**Offen:** Der Canvas bietet TT Norms Pro in 300, 500 und 600 an, obwohl
+`brand.json` nur 400 und 700 zulässt. Die Schnitte stehen in
+`design-system/base.css` und ihre Dateien liegen im Repository, sie sind
+also wählbar — genau so ist Unbounded SemiBold in die Bestandsanleitungen
+geraten. `BKM PDF Sans` ist davon ausgenommen: das ist die eingebettete
+Druckfassung nach `AGENTS.md`, Regel 11.

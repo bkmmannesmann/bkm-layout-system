@@ -1,0 +1,225 @@
+{
+  "$comment": "Inhalt woertlich uebernommen aus dem gelieferten Entwurf VA_Entwurf_BKM_SH-1K.docx. Struktur kopiert von content/anleitung-hz250pro/ - strukturell naechste Referenz: Injektion mit Bohrlochmustern (hier Boden-Wand-Anschluss, Wandflaeche, Riss). Nicht umformuliert. Vier Eingriffe, die das Layout verlangt: (1) Die Titelzeile des Entwurfs 'Stoppt schnell fliessendes Wasser in Rissen, Fugen und Hohlraeumen durch schnelle Schaumbildung.' laeuft mit 94 Zeichen ueber die Zwei-Zeilen-Grenze der Subheadline (rund 70 Zeichen); sie steht gekuerzt auf dem Titel, der vollstaendige Wortlaut steht unveraendert im scope.body-Umfeld der Vorbereitungsseite. (2) Der Entwurf fuehrt die Rubrik ANLEITUNG als einen Block; er ist auf drei Anleitungsseiten aufgeteilt (Verbrauch/Untergrund/Boden-Wand-Anschluss/Wandflaeche - Risse/Anmischen - Injizieren/Hinweise), weil eine Seite 259 mm Satzhoehe fasst. (3) Die im Entwurf als Fliesstext hintereinander gesetzten Einzelanweisungen unter Verarbeitung, Anmischen, Injizieren und Hinweise stehen als bullets; Wortlaut je Satz unveraendert. (4) Die beiden Schlusssaetze des Entwurfs zu Schulung und Sicherheitsdatenblatt stehen als letzte zwei bullets der Hinweise. Kein Profi-Tipp: der Entwurf enthaelt keinen, und er wird nicht erfunden. Keine Bilder geliefert - alle Abbildungen als image_needed beschrieben.",
+  "title": "BKM SH-1K – Verarbeitungsanleitung",
+  "product_name": "BKM SH-1K",
+  "product_line": "PRO LINE",
+  "document_rubrik": "Verarbeitungsanleitung",
+  "issued": "01.09.2026",
+  "source_pdf": "VA_Entwurf_BKM_SH-1K",
+  "page_number_start": 2,
+  "page_total": 6,
+  "cover": {
+    "$comment": "Wortlaut aus dem Entwurf. Subheadline gekuerzt: der Entwurf laeuft dort 94 Zeichen, erlaubt sind rund 70 (type_scale.cover.subheadline.max_lines = 2). 'Hohlraeume' und 'Schaumbildung' entfallen auf dem Titel und stehen unveraendert im Anwendungsbereich und im intro_text.",
+    "headline": "VERARBEITUNGS-<br>ANLEITUNG",
+    "subheadline": "Zum schnellen Stoppen von fließendem Wasser in Rissen und Fugen.",
+    "intro_text": "BKM SH-1K – Schaumharz zum schnellen Wasserstopp.",
+    "hero_image_alt": "BKM SH-1K Verarbeitungsanleitung"
+  },
+  "pages": [
+    {
+      "type": "vorbereitung",
+      "running_head": "BKM SH-1K",
+      "scope": {
+        "title": "Anwendungsbereich",
+        "icon": "table",
+        "body": "BKM SH-1K wird zum schnellen Stoppen von fließendem Wasser eingesetzt. Das Schaumharz eignet sich für wasserführende Risse, Fugen und Hohlräume und wird als Vorinjektion vor einer nachfolgenden BKM SEF-2K Injektion verwendet. Es stoppt schnell fließendes Wasser in Rissen, Fugen und Hohlräumen durch schnelle Schaumbildung.",
+        "suitable": [
+          "Risse und Aufstandsfugen",
+          "Hohlräume, Spalten und Klüfte",
+          "wasserführende Bereiche im Hoch- und Tiefbau"
+        ],
+        "unsuitable": [
+          "Stark sandendes oder lockeres Mauerwerk"
+        ]
+      },
+      "advantages": [
+        {
+          "icon": "drop",
+          "claim": "Schneller Wasserstopp",
+          "detail": "Reagiert bei Wasserkontakt innerhalb kurzer Zeit."
+        },
+        {
+          "icon": "target",
+          "claim": "Reaktionszeit einstellbar",
+          "detail": "Die Reaktionsgeschwindigkeit lässt sich über die Katalysatorkomponente beeinflussen."
+        },
+        {
+          "icon": "stack",
+          "claim": "Starke Schaumausdehnung",
+          "detail": "Bis zu 30-fache Volumenzunahme bei freiem Schäumen."
+        }
+      ],
+      "workplace": {
+        "title": "Arbeitsplatz vorbereiten",
+        "icon": "clipboard-text",
+        "steps": [
+          "Decke angrenzende Bauteile und Flächen sorgfältig ab.",
+          "Beurteile Riss- oder Fugenverlauf, Wasserführung und vorhandene Hohlräume.",
+          "Prüfe den Bohrbereich auf Leitungen und andere Einbauten.",
+          "Zeichne die benötigten Bohrungen im Abstand von 10–12,5 cm an.",
+          "Stelle Material, Werkzeuge, Injektionsgerät, Packer und Reinigungsmaterial bereit."
+        ]
+      },
+      "tools": {
+        "title": "Für die Anwendung brauchst\u00a0du",
+        "items": [
+          "Bohrmaschine mit 14-mm-Bohrer",
+          "Injektionspacker",
+          "1K-Injektionsgerät",
+          "Waage und Mischgefäß",
+          "Rührquirl",
+          "Akkuschrauber mit Stecknuss"
+        ]
+      },
+      "safety": {
+        "title": "Für deine eigene<br>Sicherheit",
+        "items": [
+          "Schutzvisier",
+          "Schutzhandschuhe",
+          "Schutzkleidung"
+        ]
+      }
+    },
+    {
+      "type": "anleitung",
+      "running_head": "BKM SH-1K",
+      "sections": [
+        {
+          "title": "Verbrauch planen",
+          "icon": "drop",
+          "body": "Der Materialverbrauch hängt vom vorhandenen Hohlraumvolumen und der jeweiligen Bauteilsituation ab. Eine feste Verbrauchsmenge kann deshalb nicht angegeben werden."
+        },
+        {
+          "title": "Untergrund",
+          "icon": "stack",
+          "body": "Bereite den Injektionsbereich entsprechend der jeweiligen baulichen Situation vor."
+        },
+        {
+          "title": "Verarbeitung · Boden-Wand-Anschluss",
+          "icon": "hammer",
+          "bullets": [
+            "Bohre die Injektionslöcher mit einem 14-mm-Bohrer im Winkel von ca. 45°. Halte zwischen den Bohrungen einen Abstand von 10–12,5 cm ein.",
+            "Führe die Bohrungen am Boden-Wand-Anschluss bis zum Fundament.",
+            "Entferne den Bohrstaub vollständig und setze die Injektionspacker fest in die Bohrlöcher ein. Verspanne sie sicher im Bauteil, damit sie sich während der Druckinjektion nicht lösen."
+          ]
+        },
+        {
+          "title": "Verarbeitung · Wandfläche",
+          "icon": "hammer",
+          "bullets": [
+            "Bohre ebenfalls mit einem 14-mm-Bohrer im Winkel von ca. 45° und einem Abstand von 10–12,5 cm.",
+            "Führe die Bohrungen bis zur Mitte des Mauerwerks.",
+            "Entferne den Bohrstaub vollständig und setze die Injektionspacker fest ein."
+          ]
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Bohrbild am Boden-Wand-Anschluss",
+          "image_needed": "Zeichnung, 16:9: Schnitt durch den Boden-Wand-Anschluss mit Bohrungen im 45°-Winkel bis zum Fundament, Maßkette 10–12,5 cm. Kein KI-Motiv vorgesehen; entsteht ein KI-generiertes Bild daraus, trägt es den Vermerk AI GENERATED in der unteren rechten Ecke."
+        },
+        {
+          "caption": "Bohrbild in der Wandfläche",
+          "image_needed": "Zeichnung, 16:9: Wandschnitt mit Bohrungen im 45°-Winkel bis zur Mauermitte, Maßkette 10–12,5 cm. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "BKM SH-1K",
+      "sections": [
+        {
+          "title": "Verarbeitung · Risse",
+          "icon": "hammer",
+          "bullets": [
+            "Markiere zuerst den Rissverlauf.",
+            "Setze die Injektionsbohrungen abwechselnd links und rechts vom Riss. Ordne die Bohrungen versetzt an, sodass ein kreuzförmiges Bohrbild entsteht.",
+            "Bohre mit einem 14-mm-Bohrer im Winkel von ca. 45° schräg zum Rissverlauf, sodass die Bohrungen den Riss im Bauteil kreuzen.",
+            "Halte zwischen den Bohrungen einen Abstand von 10–12,5 cm ein.",
+            "Entferne den Bohrstaub vollständig und setze die Injektionspacker fest ein.",
+            "[ANGABE FEHLT: Bohrlochtiefe bei der Rissinjektion – bitte fachlich bestätigen.]"
+          ]
+        },
+        {
+          "title": "Anmischen",
+          "icon": "drop",
+          "bullets": [
+            "Wiege Komponente A und B im Mischungsverhältnis von 10 : 1 nach Gewichtsteilen ab.",
+            "Mische beide Komponenten gründlich, bis eine homogene Mischung entsteht. Fülle das Material anschließend in das 1K-Injektionsgerät.",
+            "Bei 15 °C Wassertemperatur beträgt die Reaktionszeit bei einem Mischungsverhältnis von 10 : 1 ca. 11 Sekunden.",
+            "Die Reaktionszeit kann über die Katalysatorkomponente B beeinflusst werden.",
+            "Die Topfzeit beträgt ca. 45–60 Minuten. Mische nur so viel Material an, wie du innerhalb dieser Zeit verarbeiten kannst."
+          ]
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Kreuzförmiges Bohrbild am Riss",
+          "image_needed": "Zeichnung, 16:9: Rissverlauf in der Wandansicht, Bohrungen abwechselnd links und rechts versetzt, schräg kreuzend, mit Maßkette 10–12,5 cm. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
+        },
+        {
+          "caption": "Komponente A und B im Verhältnis 10 : 1 abwiegen",
+          "image_needed": "Foto, 16:9: Waage mit Mischgefäß, Komponente A und B, Rührquirl im Bild. Bei KI-generiertem Motiv Vermerk AI GENERATED in der oberen linken Ecke."
+        }
+      ]
+    },
+    {
+      "type": "anleitung",
+      "running_head": "BKM SH-1K",
+      "sections": [
+        {
+          "title": "Injizieren",
+          "icon": "drop",
+          "body": "Beginne die Injektion in der Regel mit einem Anfangsdruck von ca. 15 bar bei Beton und ca. 3 bar bei Mauerwerk. Passe den Druck an die jeweilige Bauteilsituation an. Injiziere BKM SH-1K, bis der Wasserfluss gestoppt ist.",
+          "bullets": [
+            "Wechsle zum nächsten Packer, sobald Material am benachbarten Packer, an der Rissoberfläche oder aus der Fuge austritt.",
+            "Bei Bedarf kannst du innerhalb der Topfzeit über denselben Packer nachinjizieren.",
+            "Bei einer nachfolgenden kraftschlüssigen Riss- oder Aufstandsfugenabdichtung wird anschließend mit BKM SEF-2K über dem gleichen Packer nachinjiziert.",
+            "Kratze ausgetretenes und ausgehärtetes Schaumharz mechanisch von der Oberfläche ab.",
+            "Verschließe die Bohrlöcher anschließend mit BKM FBM Füll- und Bohrlochmörtel."
+          ]
+        },
+        {
+          "title": "Hinweise",
+          "icon": "warning",
+          "bullets": [
+            "Verarbeite BKM SH-1K nur bei Temperaturen von +5 °C bis ca. +35 °C.",
+            "Die Material- und Wassertemperatur beeinflusst die Reaktionsgeschwindigkeit.",
+            "Das Produkt reagiert auch mit Luftfeuchtigkeit. Unbeabsichtigter Feuchtigkeitseintrag ist deshalb zu vermeiden.",
+            "Schütze angrenzende Bereiche vor ungewolltem Produktkontakt.",
+            "Stelle sicher, dass die Injektionspacker fest und sicher sitzen. Sie dürfen sich während der Druckinjektion nicht lösen.",
+            "Reinige das Injektionsgerät unmittelbar nach Gebrauch.",
+            "Vor der industriellen oder gewerblichen Verwendung ist eine angemessene Schulung erforderlich.",
+            "Beachte die Gefahrenhinweise und Sicherheitsmaßnahmen auf dem Gebinde und im aktuellen Sicherheitsdatenblatt."
+          ]
+        }
+      ],
+      "figures": [
+        {
+          "caption": "Injektion über den gesetzten Packer",
+          "image_needed": "Foto, 16:9: 1K-Injektionsgerät am gesetzten Packer, Manometer im Bild. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren linken Ecke."
+        },
+        {
+          "caption": "Bohrlöcher mit BKM FBM verschließen",
+          "image_needed": "Foto, 16:9: Verschließen des Bohrlochs mit BKM FBM Füll- und Bohrlochmörtel nach dem Entfernen des Packers. Bei KI-generiertem Motiv Vermerk AI GENERATED in der unteren rechten Ecke."
+        }
+      ]
+    },
+    {
+      "type": "nacharbeit",
+      "running_head": "BKM SH-1K",
+      "headline": "Abschluss und Reinigung",
+      "icon": "check-circle",
+      "steps": [
+        "Kontrolliere den ausgeführten Injektionsbereich und prüfe, ob der Wasserfluss gestoppt ist.",
+        "Entferne die Packer und kratze ausgehärtetes, ausgetretenes Material von der Oberfläche ab.",
+        "Verschließe die Bohrlöcher mit BKM FBM Füll- und Bohrlochmörtel.",
+        "Reinige Injektionsgerät und Werkzeuge sofort mit BKM Harzreiniger.",
+        "Entferne Abdeckmaterial, reinige den Arbeitsbereich und entsorge Produktreste sowie Verpackungen sachgerecht.",
+        "[ANGABE FEHLT: Lagerung von Restmaterial und angebrochenen Gebinden – bitte fachlich bestätigen.]"
+      ],
+      "issued": "01.09.2026",
+      "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
+    }
+  ]
+}

@@ -101,8 +101,7 @@ bkm-layout-system/
 │   │   └── TT_Norms_Pro_Bold.woff2
 │   └── images/
 │       ├── logos/                ← BKM-Logos (4 Varianten: SVG + PNG)
-│       ├── keyvisual-on-light.png
-│       ├── keyvisual-on-dark.png
+│       ├── keyvisual-on-light.png     ← nur noch die vier Datenblätter
 │       ├── badge-homeline.png
 │       ├── badge-proline.png
 │       └── placeholder/
