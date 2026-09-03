@@ -183,5 +183,15 @@
       "issued": "18.08.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
-  ]
+  ],
+  "review": {
+    "abgleich": "28 von 31 Sätzen der Vorlage wiedergefunden. Die drei übrigen sind Artefakte der Textextraktion.",
+    "korrekturen": [
+      "Die Vorlage schreibt „solltest Du vorab“ mit großem Du. Hier steht „du“, wie im übrigen Dokument.",
+      "Die Vorlage schreibt „1-K Injektionspistole für 600ml Schlauchbeutel“. Hier steht „1-K-Injektionspistole für 600-ml-Schlauchbeutel“ mit deutscher Durchkopplung."
+    ],
+    "eingriffe": [
+      "Die Rubrik Anleitung steht in der Vorlage auf einer Seite, hier auf zwei."
+    ]
+  }
 }

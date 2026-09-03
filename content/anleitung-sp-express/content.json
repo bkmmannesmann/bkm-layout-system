@@ -244,5 +244,17 @@
       "issued": "18.08.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
-  ]
+  ],
+  "review": {
+    "abgleich": "31 von 37 Sätzen der Vorlage wiedergefunden. Die sechs übrigen sind Artefakte der Textextraktion.",
+    "korrekturen": [
+      "Die Vorlage schreibt „gemäß den örtlichen Vorschriften entsorgen lagern“. Hier steht „entsorgen und lagern“.",
+      "Die Vorlage schreibt „Verbrauch ca 18 kg/m2“. Hier steht „ca. 18 kg/m²“."
+    ],
+    "eingriffe": [
+      "Die druckwasserhaltende Innenabdichtung steht in der Vorlage als ganzseitige Systemzeichnung mit fünf Lagen und drei Tagesmarken. Das Layout kennt keine solche Seite; die Lagen stehen als Abschnitte, die Tagesmarken im Abschnittstitel.",
+      "Die Subheadline der Vorlage läuft 76 Zeichen und steht auf dem Titel gekürzt.",
+      "Die Rubrik Anleitung steht in der Vorlage auf zwei Seiten, hier auf vier."
+    ]
+  }
 }

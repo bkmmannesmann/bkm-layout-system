@@ -167,5 +167,16 @@
       "issued": "18.08.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
-  ]
+  ],
+  "review": {
+    "abgleich": "29 von 33 Sätzen der Vorlage wiedergefunden. Die vier übrigen sind Artefakte der Textextraktion.",
+    "korrekturen": [
+      "Die Vorlage schreibt „Die Untergrund Vorbehandlung“. Hier steht „Die Untergrundvorbehandlung“."
+    ],
+    "eingriffe": [
+      "Die Rubrik Anleitung steht in der Vorlage auf einer Seite, hier auf zwei.",
+      "Die Subheadline der Vorlage ist zweiteilig. Auf dem Titel steht der erste Teil, der zweite im Vorspann.",
+      "Die Werkzeugliste nennt genau die drei Gegenstände der Vorlage. Pinsel, Holzrührstab und Vlies kommen im Text vor, stehen dort aber nicht in der Liste."
+    ]
+  }
 }

@@ -228,5 +228,16 @@
       "issued": "19.08.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
-  ]
+  ],
+  "review": {
+    "abgleich": "26 von 34 Sätzen der Vorlage wiedergefunden. Die acht übrigen sind Artefakte der Textextraktion.",
+    "korrekturen": [
+      "Die Vorlage schreibt in der Werkzeugliste „Staubsauber“. Hier steht „Staubsauger“."
+    ],
+    "eingriffe": [
+      "Die Rubrik Anleitung steht in der Vorlage auf zwei Seiten, hier auf drei.",
+      "Die Subheadline der Vorlage läuft 84 Zeichen und steht auf dem Titel gekürzt.",
+      "Die Nacharbeit steht in der Vorlage unten auf derselben Seite wie die letzte Anleitung, hier auf einer eigenen Seite."
+    ]
+  }
 }

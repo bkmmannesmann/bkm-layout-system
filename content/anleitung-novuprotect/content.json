@@ -164,5 +164,15 @@
       "issued": "18.08.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
-  ]
+  ],
+  "review": {
+    "abgleich": "29 von 35 Sätzen der Vorlage wiedergefunden. Die sechs übrigen sind Artefakte der Textextraktion.",
+    "korrekturen": [
+      "Die Vorlage schreibt „Falls Du später Ausbesserungen“ mit großem Du. Hier steht „du“, wie im übrigen Dokument."
+    ],
+    "eingriffe": [
+      "Die Rubrik Anleitung steht in der Vorlage auf einer Seite, hier auf zwei.",
+      "Die Subheadline der Vorlage läuft 72 Zeichen. Auf dem Titel steht „reduziert Schimmelbildung“ statt „reduziert die Schimmelbildung“."
+    ]
+  }
 }

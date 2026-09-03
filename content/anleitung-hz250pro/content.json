@@ -264,5 +264,16 @@
       "issued": "18.08.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
-  ]
+  ],
+  "review": {
+    "abgleich": "39 von 46 Sätzen der Vorlage wiedergefunden. Die sieben übrigen sind Artefakte der Textextraktion und wurden einzeln nachgeschlagen.",
+    "korrekturen": [
+      "Die Vorlage schreibt „Der Empfohlene Bohrlochabstand“. Hier steht „empfohlene“."
+    ],
+    "eingriffe": [
+      "Die Rubrik Anleitung steht in der Vorlage auf zwei Seiten, hier auf vier.",
+      "Die Subheadline der Vorlage läuft 94 Zeichen. Auf dem Titel steht sie gekürzt; der volle Wortlaut steht im Anwendungsbereich.",
+      "Die vier Verbrauchsformeln stehen als Regel mit Beispiel, in der Vorlage als Fließtext neben den Bohrlochmustern."
+    ]
+  }
 }

@@ -266,5 +266,19 @@
       "issued": "18.08.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
-  ]
+  ],
+  "review": {
+    "abgleich": "58 von 66 Sätzen der Vorlage wiedergefunden. Die acht übrigen sind Artefakte der Textextraktion und wurden einzeln nachgeschlagen.",
+    "korrekturen": [
+      "Die Vorlage schreibt „40 Flaschen Novusan Quadratmeter“. Hier steht „pro Quadratmeter“."
+    ],
+    "eingriffe": [
+      "Die Rubrik Anleitung steht in der Vorlage auf zwei Seiten, hier auf vier. Vollständiger Text passt nicht in weniger.",
+      "Die Subheadline der Vorlage läuft 76 Zeichen. Auf dem Titel steht „im Mauerwerk“ statt „in mineralischem Mauerwerk“; der volle Wortlaut steht im Anwendungsbereich.",
+      "Die Fußnote zu Gitter- und Hohlkammersteinen hängt am Listeneintrag, weil das Layout keine Fußnote unter der Aufzählung kennt. Wortlaut unverändert.",
+      "Die Verbrauchsangaben stehen als Tabelle statt als vier Zeilen Fließtext.",
+      "Der Profi-Tipp steht in der Vorlage neben „Bohren“, hier auf der letzten Anleitungsseite.",
+      "Die Werkzeugliste nennt genau die sechs Gegenstände der Vorlage. Injektionsflaschen und BKM FBM stehen dort nicht, obwohl der Text sie nennt."
+    ]
+  }
 }

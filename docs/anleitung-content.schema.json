@@ -76,6 +76,35 @@
           }
         ]
       }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Was auf dem Prueftteil hinter dem Dokument steht. Offene Angaben und fehlende Motive holt der Bau aus dem Content selbst; hier steht nur, was er nicht wissen kann.",
+      "properties": {
+        "korrekturen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Stellen, an denen diese Fassung von der freigegebenen Vorlage abweicht, weil die Vorlage dort einen Fehler hat. Jede einzeln fachlich zu bestaetigen."
+        },
+        "eingriffe": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Was der Satzspiegel verlangt hat - Seitenaufteilung, gekuerzte Subheadline, Fliesstext als Liste. Kein Eingriff in die Sache."
+        },
+        "abgleich": {
+          "type": "string",
+          "description": "Ergebnis von scripts/abgleich_vorlage.py, etwa '58 von 66 Saetzen'."
+        },
+        "protokoll": {
+          "type": "string",
+          "description": "Freier Text fuer das Gegenlesen."
+        }
+      }
     }
   },
   "$defs": {
