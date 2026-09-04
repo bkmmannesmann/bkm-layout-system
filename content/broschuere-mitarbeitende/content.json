@@ -1,0 +1,856 @@
+{
+  "title": "BKM MANNESMANN AG – Unternehmensbroschüre für Mitarbeitende",
+  "sender": "ag",
+  "page_number_start": 1,
+  "pages": [
+    {
+      "type": "content",
+      "no_folio": true,
+      "running_head": "Interne Ausgabe · September 2026",
+      "headline_large": "BUILD. KEEP. MAINTAIN.",
+      "headline_section": "Schutz aufbauen. Bestand bewahren. Gebäude erhalten.",
+      "leadline": "Wer wir sind. Wofür wir da sind. Wie wir arbeiten. Und welche Rolle du dabei spielst.",
+      "columns": 2,
+      "col_content": [
+        "Diese Broschüre ist kein Produktkatalog und keine Marketingbroschüre. Sie richtet sich nach innen. Sie soll allen Mitarbeitenden ein gemeinsames Verständnis davon geben, wofür BKM MANNESMANN steht, wie wir denken und wie wir mit Kunden, Partnern und miteinander umgehen.",
+        "Die Kapitel bauen aufeinander auf, lassen sich aber auch einzeln lesen. Wer neu ist, liest einmal von vorne bis hinten. Wer länger dabei ist, nutzt sie als Nachschlagewerk. Am Ende steht ein Glossar, das Fachbegriffe in Kundensprache übersetzt."
+      ]
+    },
+
+    {
+      "type": "toc",
+      "no_folio": true,
+      "title": "Inhalt",
+      "two_columns": true,
+      "entries": [
+        { "is_chapter": true,  "title": "1 Vorwort des Vorstands", "page": "03" },
+        { "is_chapter": false, "title": "Warum es uns gibt", "page": "03" },
+        { "is_chapter": true,  "title": "2 Wozu diese Broschüre", "page": "05" },
+        { "is_chapter": true,  "title": "3 Woher wir kommen: Unsere Legacy", "page": "06" },
+        { "is_chapter": false, "title": "Vom Baustoff zur Schutzlösung", "page": "07" },
+        { "is_chapter": false, "title": "Vom Hersteller zum Systemgeber", "page": "08" },
+        { "is_chapter": true,  "title": "4 Mission, Vision, Positionierung", "page": "09" },
+        { "is_chapter": true,  "title": "5 Zwei Wege. Ein Ziel.", "page": "12" },
+        { "is_chapter": false, "title": "Die Entscheidungshilfe", "page": "14" },
+        { "is_chapter": true,  "title": "6 Build. Keep. Maintain. – das Claim-System", "page": "15" },
+        { "is_chapter": true,  "title": "7 Wer unser Held ist", "page": "18" },
+        { "is_chapter": false, "title": "Sechs Avatare", "page": "19" },
+        { "is_chapter": true,  "title": "8 Unsere sieben Kernwerte", "page": "22" },
+        { "is_chapter": true,  "title": "9 Wie wir arbeiten: Unsere Culture", "page": "26" },
+        { "is_chapter": true,  "title": "10 Wie wir sprechen: Brand Voice", "page": "30" },
+        { "is_chapter": true,  "title": "11 Die BKM-Systemwelt", "page": "34" },
+        { "is_chapter": false, "title": "Die Systemlandkarte: 18 Systeme", "page": "36" },
+        { "is_chapter": false, "title": "Die zehn Grundregeln", "page": "37" },
+        { "is_chapter": true,  "title": "12 Der zertifizierte BKM-Fachbetrieb", "page": "39" },
+        { "is_chapter": true,  "title": "13 Was wir versprechen – und was nicht", "page": "42" },
+        { "is_chapter": true,  "title": "14 Wohin wir gehen", "page": "44" },
+        { "is_chapter": true,  "title": "15 Dein Platz bei BKM", "page": "46" },
+        { "is_chapter": true,  "title": "16 Anhang: Glossar und Quellen", "page": "48" }
+      ]
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 1 · Vorwort des Vorstands",
+      "upper_surface": "deep",
+      "headline": "WARUM ES UNS GIBT.",
+      "section_headline": "Liebe Kolleginnen und Kollegen,",
+      "upper_cols": 3,
+      "upper_text": "Wer neu bei BKM anfängt, lernt in den ersten Wochen viele Dinge gleichzeitig: Produkte, Systeme, Abläufe, Namen, Datenblätter, Kunden, Partner. Das ist notwendig. Aber es ist nicht das Wichtigste. Das Wichtigste ist, zu verstehen, warum es uns gibt. BKM MANNESMANN gibt es, weil Feuchtigkeit im Gebäude eines der häufigsten und zugleich am schlechtesten verstandenen Probleme ist, mit denen Eigentümer konfrontiert werden.",
+      "lower_surface": "white",
+      "lower_headline": "Der Held ist nicht BKM",
+      "lower_leadline": "Der Held unserer Geschichte ist der Mensch mit der feuchten Wand.",
+      "lower_cols": 3,
+      "lower_text": "Ein feuchter Keller, ein dunkler Fleck an der Wand, ein muffiger Geruch: Das ist selten dramatisch, aber fast immer verunsichernd. Die Menschen, die uns anrufen, im Shop bestellen oder einen unserer Fachbetriebe beauftragen, wissen in den meisten Fällen nicht, was mit ihrer Wand passiert. Sie wissen nur, dass sie es nicht so lassen wollen. Genau hier beginnt unsere Arbeit. Wir bauen Schutz auf. Wir bewahren Substanz. Wir erhalten Gebäude."
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 1 · Vorwort des Vorstands",
+      "headline_section": "Wir bauen Schutz auf. Wir bewahren Substanz. Wir erhalten Gebäude.",
+      "leadline": "Build. Keep. Maintain. – diese drei Wörter stehen in unserem Namen.",
+      "columns": 2,
+      "col_content": [
+        "Diese Broschüre erklärt, was hinter diesen drei Wörtern steht: unsere Herkunft, die bis zu den Brüdern Mannesmann zurückreicht, unsere Philosophie „Zwei Wege. Ein Ziel.“ und warum wir Kunden nie in einen Vertriebsweg drängen. Sie erklärt unsere Werte, unsere Kultur, unsere Sprache und unsere Systemwelt.",
+        "Unsere Aufgabe ist es, dem Kunden den passenden Weg zu zeigen. Manchmal ist das ein Produkt aus der Home Line. Manchmal ein zertifizierter BKM-Fachbetrieb. Und manchmal ist die verlässlichste Antwort: Dieser Fall braucht zuerst eine professionelle Einschätzung."
+      ],
+      "section2": {
+        "headline": "Ein Nachschlagewerk, kein Dokument für die Ablage",
+        "leadline": "Danke, dass du Teil davon bist.",
+        "columns": 2,
+        "col_content": [
+          "Wenn du in einem Kundengespräch, in einer Produktentscheidung oder in einer internen Diskussion unsicher bist, was „BKM-typisch“ wäre, dann findest du hier die Grundlage.",
+          "[ANGABE FEHLT: Name des unterzeichnenden Vorstandsmitglieds und Porträtmotiv – bitte ergänzen.]"
+        ]
+      }
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 2 · Wozu diese Broschüre",
+      "headline_large": "WOZU DIESE BROSCHÜRE",
+      "headline_section": "Fragen, die in den ersten Monaten fast jeder stellt",
+      "leadline": "Die Antworten stehen nicht in Datenblättern. Sie stehen in der Haltung des Unternehmens.",
+      "columns": 3,
+      "col_content": [
+        "Was bedeutet eigentlich BKM? Warum sprechen wir von „Zwei Wegen“? Warum sagen wir einem Kunden manchmal, dass er unser Produkt nicht kaufen sollte?",
+        "Warum unterscheiden wir so streng zwischen Home Line und Pro Line, obwohl beide dieselbe Qualität haben? Warum ist der zertifizierte Fachbetrieb kein Franchise-Partner?",
+        "Warum dürfen wir bestimmte Dinge nicht behaupten, obwohl sie wahrscheinlich stimmen? Und was ist meine Rolle in all dem?"
+      ],
+      "section2": {
+        "headline": "Was diese Broschüre nicht ist",
+        "leadline": "Diese Broschüre erklärt das Warum. Das Wie steht in den Fachdokumenten.",
+        "columns": 2,
+        "col_content": [
+          "Sie ersetzt keine Produktschulung, keine Verarbeitungsanleitung und kein technisches Datenblatt. Wo es um konkrete Werte, Verbräuche, Bohrbilder oder Normen geht, gilt immer das aktuelle technische Datenblatt.",
+          "Wer neu ist, liest die Broschüre am besten einmal von vorne bis hinten. Wer schon länger dabei ist, nutzt sie als Nachschlagewerk: Kapitel 6 erklärt das Claim-System, Kapitel 10 die Sprache, Kapitel 11 die Systemwelt, Kapitel 13 die Grenzen dessen, was wir versprechen. Quellenübersicht im Anhang, Seite 49."
+        ]
+      }
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 3 · Woher wir kommen",
+      "upper_surface": "transition",
+      "headline": "EIN NAME, DER VERPFLICHTET.",
+      "section_headline": "1886 beginnt eine Arbeitsweise, die wir bis heute für richtig halten.",
+      "upper_cols": 3,
+      "upper_text": "Der Name Mannesmann steht seit Generationen für technischen Fortschritt, Erfindergeist und den Anspruch, bestehende Grenzen neu zu denken. 1886 entwickelten Reinhard und Max Mannesmann ein Verfahren zur Herstellung nahtloser Stahlrohre. Es schrieb Industriegeschichte.",
+      "lower_surface": "white",
+      "lower_headline": "Aus Herkunft wird Haltung",
+      "lower_leadline": "Aus Technik wird Schutz. Aus einem Problem wird ein klarer Weg.",
+      "lower_cols": 3,
+      "lower_text": "Für uns ist diese Herkunft mehr als eine schöne Geschichte für die Website. Sie beschreibt eine Arbeitsweise: Probleme nicht oberflächlich betrachten, sondern technisch verstehen. Lösungen nicht zufällig entwickeln, sondern systematisch verbessern. Fortschritt nicht behaupten, sondern anwendbar machen. Diese drei Sätze könnten auch heute in einem Entwicklungsmeeting bei BKM fallen."
+    },
+
+    {
+      "type": "feature",
+      "running_head": "Kapitel 3 · Vom Baustoff zur Schutzlösung",
+      "layout": "left-image",
+      "image_height": "110.0mm",
+      "headline": "Vom Baustoff zur Schutzlösung",
+      "leadline": "Die sichtbaren Spuren sind meist nur der Anfang. Entscheidend ist, was im Bauteil passiert.",
+      "columns": 2,
+      "text": "Seit den 1970er-Jahren wurde im Umfeld der Mannesmann-Forschung an Baustoffimprägnierungen gearbeitet; bereits 1976 kamen erste eigene Rezepturen zum Einsatz. Aus dieser technischen Grundlage entwickelte sich ein klarer Fokus: Feuchtigkeit nicht nur überdecken, sondern Gebäude von innen heraus besser schützen. Statt Poren zu verstopfen, kleiden unsere hydrophobierenden Wirkstoffe die Kapillaren des Mauerwerks von innen aus. Flüssiges Wasser kann nicht mehr aufsteigen, Wasserdampf kann weiter entweichen. Die Wand bleibt diffusionsoffen.",
+      "lower_surface": "deep",
+      "lower_section": {
+        "headline": "Das Funktionsjacken-Prinzip",
+        "leadline": "Abdichtung ist ein System, kein Einzelprodukt.",
+        "columns": 2,
+        "text": "Ein Gummimantel hält Regen ab, lässt einen aber von innen nass werden. Eine Funktionsjacke hält Regen ab und lässt Wasserdampf entweichen. Genau so arbeitet MicroPorex®: Der Wirkstoff verbindet sich chemisch mit dem Stein, flüssiges Wasser perlt ab, Wasserdampf entweicht weiter. Bei drückendem Wasser braucht es zusätzliche Abdichtungsmaßnahmen nach Norm."
+      }
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 3 · Vom Hersteller zum Systemgeber",
+      "headline_section": "Ein gutes Produkt allein hält kein Gebäude trocken",
+      "leadline": "Wir entwickeln Produkte – und die Systemlogik dahinter.",
+      "columns": 2,
+      "col_content": [
+        "Ein Injektionsmittel wirkt nur, wenn die Ursache richtig erkannt wurde, wenn das Bohrbild stimmt, wenn der Bohrlochverschluss passt, wenn der Putz danach salzspeichernd und diffusionsoffen ist und wenn der Anstrich nicht alles wieder zunichtemacht.",
+        "Deshalb versteht sich BKM MANNESMANN heute nicht mehr nur als Hersteller, sondern als Systemgeber: Welche Lösung passt zu welchem Schaden? In welcher Reihenfolge wird gearbeitet? Welche Detailanschlüsse gehören dazu? Wo liegen die Grenzen?"
+      ],
+      "section2": {
+        "headline": "Was das für die drei Seiten bedeutet",
+        "leadline": "Für Eigentümer, für Fachbetriebe, für Gebäude.",
+        "columns": 3,
+        "col_content": [
+          "Für Eigentümer: Orientierung und eine passende Lösung statt widersprüchlicher Angebote.",
+          "Für Fachbetriebe: spezialisierte Systeme, technische Unterstützung und Schulungen direkt vom Hersteller.",
+          "Für Gebäude: Feuchtigkeit wird als Aufgabe für den langfristigen Erhalt von Bausubstanz behandelt, nicht als kosmetisches Problem."
+        ]
+      }
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 4 · Wofür wir da sind",
+      "upper_surface": "deep",
+      "headline": "MISSION, VISION, POSITION.",
+      "section_headline": "Unsere Mission",
+      "upper_cols": 3,
+      "upper_text": "BKM MANNESMANN entwickelt und vermittelt spezialisierte Abdichtungssysteme für Eigentümer, die ihren Feuchtigkeitsschaden selbst sanieren möchten oder professionelle Ausführung durch einen zertifizierten BKM-Fachbetrieb suchen. Wir geben Kunden zwei klare Wege: hochwertige Produkte für die sichere Eigenanwendung und den Zugang zu zertifizierten Fachbetrieben.",
+      "lower_surface": "white",
+      "lower_headline": "In einem Satz",
+      "lower_leadline": "Wir helfen Menschen, ihr Zuhause langfristig trocken zu halten. In drei Wörtern: Build. Keep. Maintain.",
+      "lower_cols": 2,
+      "lower_text": "Mit spezialisierten Produkten für die Eigenanwendung, dem Zugang zu geschulten Fachbetrieben und Abdichtungssystemen, die auf den Schutz von Bestandsgebäuden ausgerichtet sind. Beide Wege folgen demselben Anspruch: die Ursache von Feuchtigkeit ernst nehmen, die passende Lösung ermöglichen und das Zuhause dauerhaft trocken halten."
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 4 · Vision und Positionierung",
+      "headline_section": "Der Orientierungspunkt, nicht der lauteste Anbieter",
+      "leadline": "Wir streben danach, der zu sein, bei dem Menschen Klarheit finden.",
+      "columns": 2,
+      "col_content": [
+        "Unsere Vision ist ein Markt, in dem Feuchtigkeitsschäden weder verharmlost noch überdeckt noch unnötig verkompliziert werden. Eigentümer sollen verstehen, welche Möglichkeiten sie haben.",
+        "Fachbetriebe sollen mit klaren Systemen und verlässlicher Unterstützung arbeiten können. Bestandsgebäude sollen länger nutzbar bleiben und in ihrem Wert erhalten werden."
+      ],
+      "section2": {
+        "headline": "Drei Dinge grenzen uns ab",
+        "leadline": "Bestand. Systeme. Drei Ebenen zugleich.",
+        "columns": 3,
+        "col_content": [
+          "Erstens: Wir arbeiten im Bestand. Bestandsgebäude verlangen andere Antworten als der Neubau – ein Markt, in dem Erfahrung mit alten Materialien und unklaren Ursachen zählt.",
+          "Zweitens: Wir denken in Systemen. Die Frage lautet nicht „Was kann dieses Produkt?“, sondern „Welche Aufgabe übernimmt dieses Produkt in einer konkreten Systemlösung?“",
+          "Drittens: Wir verbinden Endkunden-, Fachbetriebs- und Händlerlogik. Wenige Anbieter im Markt bringen diese drei Ebenen so zusammen."
+        ]
+      }
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 4 · Positionierung",
+      "headline_large": "HERSTELLER UND SYSTEMGEBER",
+      "headline_section": "Warum Spezialisierung unsere Stärke ist",
+      "leadline": "BKM ist die Systemmarke für Feuchtigkeitsschutz im Bestand.",
+      "columns": 3,
+      "col_content": [
+        "Im Mittelpunkt steht nicht das einzelne Produkt, sondern der passende Weg zum geschützten Gebäude: selbst sanieren mit der BKM Home Line oder sanieren lassen durch zertifizierte BKM-Fachbetriebe.",
+        "Es wäre einfach, das Angebot zu verbreitern: Renovierung, Fassadengestaltung, Bodenbeläge, allgemeine Bauchemie. Wir tun das bewusst nicht. Die Stärke von BKM entsteht aus Fokus.",
+        "Neue Angebote prüfen wir immer darauf, ob sie den Abdichtungskern stärken. Spezialisierung bedeutet dabei keinen Stillstand. Sie erlaubt Wachstum, aber nur dort, wo es den Kern stärkt."
+      ]
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 5 · Unsere Philosophie",
+      "upper_surface": "deep",
+      "headline": "ZWEI WEGE. EIN ZIEL.",
+      "section_headline": "Der Kunde steht vor einer Entscheidung",
+      "upper_cols": 3,
+      "upper_text": "Ein Eigentümer mit feuchten Wänden steht vor einer realen Entscheidung: Kann ich das selbst lösen? Brauche ich professionelle Unterstützung? Welches System passt zu meinem Gebäude? Was schützt langfristig? BKM denkt Feuchtigkeitsschutz deshalb nicht aus Sicht eines einzelnen Produkts, sondern aus Sicht dieses Kundenproblems.",
+      "lower_surface": "white",
+      "lower_headline": "Der richtige Weg",
+      "lower_leadline": "Der richtige Weg ist der, der zum Schaden, zum Gebäude und zum Kunden passt.",
+      "lower_cols": 2,
+      "lower_text": "Weg 1 – Selbst sanieren: Für Eigentümer, die selbst aktiv werden möchten, gibt es die BKM Home Line: Produkte für die sichere Eigenanwendung, ohne Spezialgerät, mit Schritt-für-Schritt-Anleitung und Support. Weg 2 – Sanieren lassen: Für Kunden, die professionelle Unterstützung wünschen, gibt es das Netzwerk zertifizierter BKM-Fachbetriebe, die mit der BKM Pro Line arbeiten. Das Ziel bleibt immer gleich: ein dauerhaft trockenes, geschütztes Zuhause."
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 5 · Die zwei Wege",
+      "headline_section": "Selbst sanieren. Oder sanieren lassen.",
+      "leadline": "Beide Wege sind richtig, wenn sie zur Situation passen.",
+      "columns": 2,
+      "col_content": [
+        "Home Line: Produkte, die für die sichere Eigenanwendung entwickelt sind – ohne Spezialgerät, gebrauchsfertig, mit Anleitung und Support. Claim: Selbst sanieren. Klar anwenden.",
+        "Pro Line: Systeme für Fachverarbeitung, technische Anwendungen und komplexere Sanierungssituationen. Claim: Für Fachverarbeitung entwickelt."
+      ],
+      "section2": {
+        "headline": "Was „Zwei Wege“ nicht bedeutet",
+        "leadline": "Wir kommunizieren beide Wege gleichwertig, aber nicht beliebig.",
+        "columns": 2,
+        "col_content": [
+          "Es bedeutet nicht, dass jedes Problem selbst gelöst werden kann. Es bedeutet auch nicht, dass der Fachbetriebsweg nur eine teurere Alternative zum Produktkauf ist. Und es bedeutet vor allem nicht: „DIY oder Fachbetrieb ist egal.“",
+          "Wenn wir beide Wege zu gleichförmig kommunizieren, entsteht der Eindruck, jedes Problem sei einfach selbst lösbar. Das wäre fachlich falsch und für die Kunden riskant."
+        ]
+      }
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 5 · Die Entscheidungshilfe",
+      "headline_section": "Wann Eigenanwendung, wann Fachbetrieb",
+      "leadline": "Das Gesundheitskriterium schlägt den DIY-Wunsch.",
+      "columns": 2,
+      "col_content": [
+        "Die Eigenanwendung ist geeignet, wenn das Schadensbild klar eingrenzbar ist, die Anwendung verständlich und sicher möglich ist, kein drückendes Wasser und kein struktureller Schaden vorliegt und der Kunde handwerklich selbst handeln möchte.",
+        "Der Fachbetrieb ist empfohlen oder erforderlich, wenn die Ursache unklar ist, mehrere Schadensbilder zusammenkommen, Schimmel, starke Durchfeuchtung oder wiederkehrende Schäden bestehen, größere Flächen oder komplexe Keller betroffen sind, drückendes Wasser im Spiel ist oder eine professionelle Einschätzung gewünscht wird."
+      ],
+      "section2": {
+        "headline": "Entscheidungsorientiert statt verkaufsorientiert",
+        "leadline": "Wir messen unseren Erfolg am Ergebnis, nicht am Vertriebsweg.",
+        "columns": 2,
+        "col_content": [
+          "Bei Schimmelbefall in größerem Umfang und Risikopersonen im Haushalt – etwa Kleinkindern, Allergikern oder Asthmatikern – leiten wir konsequent in den Fachbetriebsweg. Diese Regel gilt über alles andere.",
+          "Das kann im Einzelfall bedeuten, einem Kunden vom Kauf eines Produkts abzuraten, weil sein Fall größer ist als das, was er selbst lösen kann. Es kann auch bedeuten, einen Kunden vom Fachbetriebsweg zur Home Line zu führen. Beides ist BKM."
+        ]
+      }
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 6 · Das Claim-System",
+      "upper_surface": "deep",
+      "headline": "DREI BUCHSTABEN MIT BEDEUTUNG.",
+      "section_headline": "Wer die drei Wörter verstanden hat, versteht BKM.",
+      "upper_cols": 3,
+      "upper_text": "BKM ist mehr als eine Abkürzung. Die drei Buchstaben stehen für Build. Keep. Maintain. – und damit für die drei Dinge, die wir tun: Wir bauen Schutz auf. Wir bewahren Substanz. Wir erhalten Gebäude. Dieses Bedeutungsmodell ist der strategische Mittelpunkt unserer Marke.",
+      "lower_surface": "white",
+      "lower_headline": "Build, Keep, Maintain",
+      "lower_leadline": "Schutz aufbauen. Substanz bewahren. Dauerhaft erhalten.",
+      "lower_cols": 3,
+      "lower_text": "Build: Wir schaffen eine verlässliche Grundlage – Systeme, Produkte, Wissen und Strukturen, die Orientierung geben und professionelle Ausführung ermöglichen. Keep: Nicht ersetzen, wenn Erhalt möglich ist; nicht überdecken, wenn Schutz nötig ist. Wir bewahren Häuser, Werte, Räume und Investitionen. Maintain: Unser Anspruch endet nicht bei einer trockenen Oberfläche – Produktqualität, Anleitung, Schulung, Fachbetriebskompetenz und ehrliche Orientierung gehören zusammen."
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 6 · Das abgestufte Claim-System",
+      "headline_large": "FÜNF EBENEN, EINE KLAMMER",
+      "headline_section": "Die Claims sind Versprechen, keine Dekoration",
+      "leadline": "„Dauerhaft trockene Wände“ ist nur richtig, wenn das System zur Ursache passt.",
+      "items": [
+        { "title": "Masterclaim · Build. Keep. Maintain.", "body": "Steht über allem. Erklärt den Namen. Wird auf der Dachmarkenebene verwendet. Wird nicht verändert, nicht übersetzt, nicht mit anderen Wörtern gemischt." },
+        { "title": "Erklärende Langform · Schutz aufbauen. Bestand bewahren. Gebäude erhalten.", "body": "Übersetzt den Masterclaim ins Deutsche und macht ihn selbsterklärend." },
+        { "title": "Markenclaim · Zwei Wege. Ein Ziel: dauerhaft trockene Wände.", "body": "Trägt die Philosophie und erklärt das Angebot aus Kundensicht. Der Arbeitsclaim für alles, was mit Kunden zu tun hat." },
+        { "title": "Emotionaler Zusatz · Für ein Zuhause, das geschützt bleibt.", "body": "Verbindet das Angebot mit dem, was für den Kunden zählt." },
+        { "title": "Fachliche Ergänzung · Spezialisierte Abdichtungssysteme für Bestandsimmobilien.", "body": "Ordnet BKM fachlich ein, etwa für Presse, Partner oder Fachpublikum." },
+        { "title": "Bereichsclaims", "body": "Endkunden: Der passende Weg zu trockenen Wänden. Home Line: Selbst sanieren. Klar anwenden. Pro Line: Für Fachverarbeitung entwickelt. Fachbetriebe: Sanieren lassen mit zertifizierten BKM-Fachbetrieben. Partnernetzwerk: Selbstständig bleiben. Mit System wachsen. International: Internationales System. Lokale Nähe." }
+      ]
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 6 · Wie wir die Claims verwenden",
+      "headline_section": "Der Masterclaim ist die Klammer",
+      "leadline": "Er wird nicht verändert, nicht übersetzt und nicht mit anderen Wörtern gemischt.",
+      "columns": 2,
+      "col_content": [
+        "„Build. Keep. Maintain.“ gehört auf die Rückseite jeder Broschüre, in die Signatur der Dachmarke, ans Ende einer Präsentation. Der Markenclaim darf um das Ziel ergänzt werden: „Zwei Wege. Ein Ziel: dauerhaft trockene Wände.“",
+        "Die Bereichsclaims werden nur in ihrem Bereich eingesetzt. „Selbst sanieren. Klar anwenden.“ steht auf Home-Line-Materialien, nicht auf einer Fachbetriebsbroschüre. „Selbstständig bleiben. Mit System wachsen.“ richtet sich an Handwerksbetriebe, nicht an Endkunden."
+      ],
+      "section2": {
+        "headline": "Build. Keep. Maintain. gilt auch nach innen",
+        "leadline": "Das Bedeutungsmodell beschreibt auch die Art, wie wir arbeiten.",
+        "columns": 3,
+        "col_content": [
+          "Build: Wir bauen Neues auf, wenn es einen echten Unterschied macht.",
+          "Keep: Wir bewahren Erfahrung, Wissen und das, was sich bewährt hat.",
+          "Maintain: Wir entwickeln weiter, was auch morgen noch Bestand haben soll. Mehr dazu in Kapitel 9."
+        ]
+      }
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 7 · Wer unser Held ist",
+      "upper_surface": "deep",
+      "headline": "DER MENSCH MIT DER FEUCHTEN WAND.",
+      "section_headline": "Eine Frage, die viel klärt",
+      "upper_cols": 3,
+      "upper_text": "In vielen Unternehmen wird nach innen erzählt, das Unternehmen sei der Held: die beste Technologie, die stärkste Marke, die klügsten Köpfe. Wir erzählen die Geschichte anders, und dieser Unterschied prägt unseren Alltag stärker, als man zunächst denkt. Der Held unserer Geschichte ist nicht BKM.",
+      "lower_surface": "white",
+      "lower_headline": "Wir sind der Guide",
+      "lower_leadline": "Jede gute Geschichte hat eine Hauptfigur, die ein Problem hat und einen Guide trifft.",
+      "lower_cols": 3,
+      "lower_text": "Der Guide gibt ihr einen Plan, ruft sie zum Handeln auf und hilft ihr, ein Scheitern zu vermeiden. Wir verwenden dieses Modell nicht, weil es modern ist, sondern weil es genau beschreibt, wie unsere Kunden ihre Situation erleben – und weil es uns hilft, unsere eigene Rolle richtig einzuordnen. [ANGABE FEHLT: Bildmotiv Kundensituation für diesen Öffner.]"
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 7 · Sechs Avatare",
+      "headline_section": "Die Namen sind fiktiv, die Situationen nicht",
+      "leadline": "Unsere Kunden sind keine anonyme Zielgruppe.",
+      "items": [
+        { "title": "P1 · Der pragmatische Kontrollsucher", "body": "Haus aus den 1970er-Jahren, zwei Kostenvoranschläge über 28.000 und 41.000 Euro. „Wenn die Firmen das auch so machen, wird es ja funktionieren, wenn ich es selbst mache.“ Er sucht professionelle Produkte, die für Endanwender freigegeben sind, und misstraut allen, die nur verkaufen wollen." },
+        { "title": "P2 · Die sicherheitsorientierte Schützerin", "body": "Ihre erste Suche lautete nicht „Kellerabdichtung“, sondern „Schimmel im Keller gesundheitsschädlich“. Sie braucht zuerst die Antwort auf: Ist das sicher für meine Kinder? Erst danach die Technik." },
+        { "title": "P3 · Der Unentschlossene", "body": "Kennt den feuchten Fleck seit drei Jahren, hat fünf Angebote zwischen 8.000 und 39.000 Euro mit drei Diagnosen erhalten und ist seitdem blockiert. Er sucht keinen Verkäufer, sondern eine neutrale Instanz, die das Chaos ordnet." },
+        { "title": "P4 · Der Delegierer", "body": "Ingenieur in leitender Position, Keller wiederkehrend feucht. Sein Satz: „Ich will das ein für alle Mal aus dem Kopf haben.“ Er will kontrolliert und abgesichert delegieren." },
+        { "title": "P5 · Der skeptische Praktiker", "body": "Maurermeister mit acht Mitarbeitern. „Ich mache das seit 20 Jahren so, warum soll ich jetzt wechseln?“ Er wechselt Methoden nicht leichtfertig, weil er mit seinem Namen für das Ergebnis haftet." },
+        { "title": "P6 · Die Immobilienverwalterin", "body": "Schon wieder drei Schimmelmeldungen aus demselben Objekt. Sie kauft Planbarkeit: Standards, Prävention, einen verlässlichen Partner für alle Objekte statt Einzelfall-Feuerwehr." }
+      ]
+    },
+
+    {
+      "type": "process",
+      "running_head": "Kapitel 7 · Der Guide und der Plan",
+      "headline_large": "DER PLAN: ZWEI WEGE. EIN ZIEL.",
+      "headline_section": "Drei Schritte, die jeder verstehen kann",
+      "leadline": "Du musst Feuchtigkeit nicht akzeptieren. Es gibt einen Weg zu einem trockenen, geschützten Zuhause.",
+      "steps": [
+        { "number": "1", "title": "Klarheit gewinnen", "body": "Mit dem Feuchte-Check, einer Beratung oder einer Einschätzung vor Ort wird eingeordnet, was mit der Wand passiert und ob der Fall für die Eigenanwendung geeignet ist." },
+        { "number": "2", "title": "Den passenden Weg wählen", "body": "Selbst sanieren mit der Home Line oder sanieren lassen durch einen zertifizierten BKM-Fachbetrieb." },
+        { "number": "3", "title": "Das Zuhause dauerhaft geschützt halten", "body": "Mit dem passenden System, der richtigen Anwendung und dem Wissen, worauf es langfristig ankommt." }
+      ],
+      "benefits": {
+        "headline": "Der Aufruf: klar, aber ohne Druck",
+        "body": "Bei uns lautet der Aufruf nie „Handeln Sie sofort, bevor es zu spät ist“. Er lautet: Finde heraus, welcher Weg zu deinem Zuhause passt. Der erste Schritt ist immer ein Schritt zu mehr Klarheit, nie direkt zur Kasse. Wer zu früh verkauft, verliert den Unentschlossenen ganz."
+      }
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 7 · Und wo stehst du?",
+      "headline_section": "Du bist derjenige, durch den der Guide sichtbar wird",
+      "leadline": "Ein Unternehmen kann nicht zuhören. Das tun Menschen. Das tust du.",
+      "columns": 2,
+      "col_content": [
+        "Ein Unternehmen kann nicht ruhig erklären, warum ein Angebot 8.000 und ein anderes 39.000 Euro kostet. Ein Unternehmen kann keinem Fachbetrieb am Telefon sagen, welches Bohrbild für Hochlochziegel passt.",
+        "Du sprichst so, dass der Kunde sich verstanden fühlt und den nächsten Schritt erkennt. Du bist ehrlich, auch wenn die ehrliche Antwort „Dieser Fall braucht einen Fachbetrieb“ oder „Dafür haben wir noch keinen Nachweis“ lautet. Du hältst den Plan einfach."
+      ],
+      "section2": {
+        "headline": "Wir bleiben in unserer Rolle",
+        "leadline": "Ein Guide, der sich selbst zum Helden macht, ist kein guter Guide.",
+        "columns": 2,
+        "col_content": [
+          "Wir benennen Risiken sachlich – Bausubstanz, die schleichend Schaden nimmt, Räume, die nicht genutzt werden, Immobilienwerte, die sinken – aber wir bauen unsere Kommunikation nicht auf Angst.",
+          "Du trittst nicht in den Vordergrund, sondern hilfst dem Kunden, seine Geschichte gut zu Ende zu bringen. Das ist anspruchsvoll, und es ist genau das, was uns glaubwürdig macht."
+        ]
+      }
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 8 · Unsere sieben Kernwerte",
+      "upper_surface": "transition",
+      "headline": "WERTE, DIE VERHALTEN BESCHREIBEN.",
+      "section_headline": "1 · Orientierung",
+      "upper_cols": 3,
+      "upper_text": "Werte sind nur dann etwas wert, wenn sie Verhalten beschreiben. Deshalb steht bei jedem unserer Kernwerte nicht nur, was er bedeutet, sondern auch, wie er sich im Alltag zeigt und was er ausdrücklich nicht bedeutet. Letzteres ist oft der hilfreichste Teil.",
+      "lower_surface": "white",
+      "lower_headline": "Orientierung",
+      "lower_leadline": "Wir machen Feuchtigkeitsschutz verständlich und entscheidbar.",
+      "lower_cols": 3,
+      "lower_text": "Viele Kunden wissen nicht, ob sie selbst abdichten können oder einen Fachbetrieb benötigen. BKM schafft Klarheit, ohne zu vereinfachen. Im Alltag heißt das: Wir erklären Schadensbilder verständlich, zeigen klare Wege, helfen Kunden bei der Entscheidung und kommunizieren die Grenzen der Eigenanwendung offen. Es bedeutet nicht, jedes Problem einfach erscheinen zu lassen, und nicht, Kunden in einen bevorzugten Vertriebsweg zu drängen. Orientierung heißt: passend führen."
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 8 · Kernwerte 2 bis 4",
+      "headline_section": "Spezialisierung, Zwei Wege, Bestandsschutz",
+      "leadline": "Gleichwertig, aber nicht beliebig.",
+      "items": [
+        { "title": "2 · Spezialisierung", "body": "Wir konzentrieren uns auf Abdichtung, Feuchtigkeitsschutz und Gebäudeschutz im Bestand. Im Alltag: Wir prüfen neue Angebote darauf, ob sie den Abdichtungskern stärken, vermeiden Themen, die die Marke verwässern, und bauen Fachwissen kontinuierlich aus. Spezialisierung bedeutet nicht Stillstand." },
+        { "title": "3 · Zwei Wege. Ein Ziel.", "body": "Wir respektieren unterschiedliche Kundenentscheidungen und richten beide Wege auf dasselbe Ergebnis aus. Eigenanwendung und professionelle Ausführung sind keine Gegensätze, sondern zwei Lösungswege innerhalb einer gemeinsamen Systemlogik. Der passende Weg hängt vom Schaden, vom Gebäude und vom Kundenwunsch ab." },
+        { "title": "4 · Bestandsschutz", "body": "Wir schützen bestehende Gebäude, damit sie trocken, nutzbar und wertstabil bleiben. Wir sprechen über Werterhalt, Nutzbarkeit und Substanzschutz und vermeiden rein kosmetische Lösungen. Bestandsschutz bedeutet nicht, pauschal Nachhaltigkeit zu behaupten." }
+      ]
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 8 · Kernwerte 5 bis 7",
+      "headline_section": "Anwendungssicherheit, Verlässlichkeit, Fortschritt mit Wirkung",
+      "leadline": "Nicht ersetzen, wenn Erhalt möglich ist.",
+      "items": [
+        { "title": "5 · Anwendungssicherheit", "body": "Wir sorgen dafür, dass Systeme nicht nur verfügbar sind, sondern richtig verstanden und angewendet werden: klare Verarbeitungshinweise, Schulungen HW1 bis HW3, Unterstützung bei der Produktauswahl. Sie bedeutet nicht, jeden Kunden zum Profi zu machen, sondern ihn zum richtigen nächsten Schritt zu befähigen." },
+        { "title": "6 · Verlässlichkeit", "body": "Wir handeln so, dass Kunden und Partner unseren Aussagen, Systemen und Empfehlungen vertrauen können. Wir versprechen nur, was fachlich vertretbar ist, und erklären Nutzen und Grenzen. Manchmal ist die verlässlichste Aussage: Dieser Fall braucht professionelle Einschätzung." },
+        { "title": "7 · Fortschritt mit Wirkung", "body": "Wir entwickeln Produkte, Systeme und Verfahren weiter, wenn sie Feuchtigkeitsschutz wirksamer, verständlicher oder sicherer machen. Fortschritt muss im Gebäude spürbar werden. Fortschritt bedeutet nicht, ständig Neues zu behaupten – Bewährtes bleibt wertvoll, wenn es wirkt." },
+        { "title": "Wie die Werte zusammenhängen", "body": "Orientierung ist das, was der Kunde von uns erwartet. Spezialisierung und Bestandsschutz beschreiben, worauf wir uns konzentrieren. Zwei Wege. Ein Ziel. ist die Methode. Anwendungssicherheit und Verlässlichkeit sind die Bedingungen. Fortschritt mit Wirkung sorgt dafür, dass wir nicht stehen bleiben." }
+      ]
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 9 · Unsere Culture",
+      "upper_surface": "deep",
+      "headline": "BEWAHREN, WAS FUNKTIONIERT.",
+      "section_headline": "Verändern, was besser geht",
+      "upper_cols": 3,
+      "upper_text": "Bei BKM geht es um den Erhalt von Bestehendem. Das gilt für Gebäude, aber nicht für Gewohnheiten. Wir respektieren Erfahrung, Handwerk und Wissen, das über Jahre entstanden ist. Gleichzeitig hinterfragen wir, wie Dinge einfacher, verständlicher und besser werden können.",
+      "lower_surface": "white",
+      "lower_headline": "Zehn Grundsätze",
+      "lower_leadline": "Nicht als Regeln formuliert, sondern als Haltung – und für alle gültig.",
+      "lower_cols": 2,
+      "lower_text": "Fortschritt bedeutet für uns nicht, alles neu zu machen, sondern das Richtige weiterzuentwickeln. Build. Keep. Maintain. gilt auch für die Art, wie wir arbeiten. Die folgenden Grundsätze gelten unabhängig von Position, Abteilung oder Betriebszugehörigkeit."
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 9 · Grundsätze 1 bis 5",
+      "headline_section": "Wie wir zusammenarbeiten",
+      "leadline": "Wir automatisieren Arbeit, nicht Verantwortung.",
+      "items": [
+        { "title": "01 · Wir denken vom Problem aus, nicht vom Produkt", "body": "Wir beginnen mit der Frage: Was muss hier eigentlich besser werden? Für einen Eigentümer kann das bedeuten, endlich zu verstehen, was mit seiner Wand passiert. Für einen Fachbetrieb eine einfachere Verarbeitung. Für eine Kollegin ein Prozess, der unnötige Arbeit vermeidet." },
+        { "title": "02 · Wir machen Komplexes verständlich", "body": "Bauwerksabdichtung ist komplex. Sie muss deshalb nicht kompliziert kommuniziert werden. Wir benutzen Fachwissen nicht, um Distanz zu schaffen, sondern um Sicherheit zu geben. Wer etwas wirklich verstanden hat, kann es verständlich erklären." },
+        { "title": "03 · Wir übernehmen Verantwortung, statt sie weiterzugeben", "body": "Wer ein Problem erkennt, spricht es an. Wer eine bessere Möglichkeit sieht, bringt sie ein. Wer eine Entscheidung trifft, steht dafür ein. Wir suchen nicht zuerst danach, wer schuld ist, sondern warum etwas passiert ist." },
+        { "title": "04 · Wir sprechen Probleme an und dürfen widersprechen", "body": "Kritik richtet sich gegen eine Idee, eine Entscheidung oder einen Prozess, nie gegen einen Menschen. Eine bessere Idee soll gewinnen können, auch wenn sie nicht von der ranghöchsten Person im Raum kommt." },
+        { "title": "05 · Wir teilen Wissen, statt es festzuhalten", "body": "Wissen wird wertvoller, wenn andere damit arbeiten können. Wir dokumentieren, erklären und geben weiter, was anderen hilft. So wird aus individuellem Wissen Unternehmenswissen." }
+      ]
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 9 · Grundsätze 6 bis 10",
+      "headline_section": "Wie wir zusammenarbeiten",
+      "leadline": "Langfristiges Vertrauen ist wertvoller als ein kurzfristiger Erfolg.",
+      "items": [
+        { "title": "06 · Wir nutzen Technologie dort, wo sie Menschen besser macht", "body": "Digitalisierung und künstliche Intelligenz sind weder Selbstzweck noch Bedrohung. Wir setzen Technologie dort ein, wo sie Arbeit abnimmt, Wissen zugänglicher macht oder Entscheidungen verbessert. Die Verantwortung bleibt beim Menschen." },
+        { "title": "07 · Wir testen, lernen und verbessern", "body": "Wir machen lieber einen guten ersten Schritt als den perfekten irgendwann. Was funktioniert, bauen wir aus. Was nicht funktioniert, verändern oder beenden wir. Perfektion darf kein Grund sein, nicht anzufangen." },
+        { "title": "08 · Wir arbeiten miteinander, nicht nebeneinander", "body": "BKM besteht aus Menschen mit unterschiedlichen Fähigkeiten, die am selben Ergebnis arbeiten. Das Ergebnis zählt mehr als die Zuständigkeit." },
+        { "title": "09 · Wir bleiben nah an Kunden, Handwerk und Praxis", "body": "Unsere Systeme müssen nicht auf dem Papier überzeugen, sondern am Gebäude. Was draußen passiert, gehört nach drinnen. Und was wir drinnen entwickeln, muss draußen funktionieren." },
+        { "title": "10 · Wir denken langfristiger als bis zum nächsten Auftrag", "body": "Manchmal bedeutet das, auf einen kurzfristigen Vorteil zu verzichten, einem Kunden von einer Lösung abzuraten oder etwas Bestehendes grundlegend zu verändern." }
+      ]
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 9 · Culture in zehn Sätzen",
+      "headline_large": "ZUM MITNEHMEN",
+      "headline_section": "Unsere Culture in zehn Sätzen",
+      "leadline": "Das ist die Art, wie wir BKM weiterbauen.",
+      "columns": 2,
+      "col_content": [
+        "1. Wir denken vom Problem aus, nicht vom Produkt. 2. Wir machen Komplexes verständlich. 3. Wir übernehmen Verantwortung, statt sie weiterzugeben. 4. Wir sprechen Probleme an und dürfen widersprechen. 5. Wir teilen Wissen, statt es festzuhalten.",
+        "6. Wir nutzen Technologie dort, wo sie Menschen besser macht. 7. Wir testen, lernen und verbessern. 8. Wir arbeiten miteinander, nicht nebeneinander. 9. Wir bleiben nah an Kunden, Handwerk und Praxis. 10. Wir denken langfristiger als bis zum nächsten Auftrag."
+      ]
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 10 · Unsere Brand Voice",
+      "upper_surface": "deep",
+      "headline": "SPRACHE IST SYSTEMBESTANDTEIL.",
+      "section_headline": "Der Kern in einem Satz",
+      "upper_cols": 3,
+      "upper_text": "BKM spricht klar, fachlich und verlässlich – mit dem Ziel, Feuchtigkeitsschutz verständlich, anwendbar und professionell umsetzbar zu machen. BKM macht keine Panik. BKM übertreibt nicht. BKM vereinfacht nicht falsch. BKM ordnet ein, zeigt Wege und schafft Vertrauen.",
+      "lower_surface": "white",
+      "lower_headline": "Warum Sprache bei uns Systembestandteil ist",
+      "lower_leadline": "Eine falsche Formulierung kann dazu führen, dass jemand ein Produkt für einen Fall kauft, für den es nicht gemacht ist.",
+      "lower_cols": 3,
+      "lower_text": "Unsere Kunden treffen eine Entscheidung, die sie oft nicht fachlich beurteilen können. Sie sind auf das angewiesen, was wir ihnen sagen – am Telefon, im Shop, in der Anleitung, auf der Baustelle. Eine gute Formulierung kann dazu führen, dass jemand nach drei Jahren Unsicherheit endlich den richtigen Schritt geht. Deshalb gibt es bei BKM eine Brand Voice, die für alle gilt, die nach außen sprechen oder schreiben. Und weil jeder von uns irgendwann nach außen spricht, gilt sie für alle."
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 10 · Die fünf Säulen",
+      "headline_section": "Wie BKM klingt – und wie nicht",
+      "leadline": "Wie ein erfahrener Spezialist, der Feuchtigkeitsschäden ernst nimmt, aber ruhig erklärt.",
+      "items": [
+        { "title": "Klarheit", "body": "BKM erklärt zuerst die Situation und dann die Lösung. Beispiel: „Nicht jeder Feuchtigkeitsschaden braucht denselben Weg. Entscheidend ist, was zum Gebäude, zum Schaden und zur Anwendung passt.“" },
+        { "title": "Fachlichkeit", "body": "BKM bleibt fachlich glaubwürdig, ohne unnötig kompliziert zu werden. Technische Begriffe sind erlaubt, wenn sie relevant sind – sie dürfen aber nicht wie Fachsprache um ihrer selbst willen wirken." },
+        { "title": "Orientierung", "body": "BKM zeigt Wege, nicht nur Produkte. Beispiel: „Du kannst geeignete Schäden selbst angehen oder die Sanierung durch einen zertifizierten BKM-Fachbetrieb ausführen lassen.“" },
+        { "title": "Verlässlichkeit", "body": "BKM spricht ruhig, sachlich und belastbar. Keine Übertreibung, keine falschen Garantien, keine künstliche Dramatik, keine angreifbaren Aussagen." },
+        { "title": "Systemdenken", "body": "Die Sprache macht deutlich, dass Produkt, Untergrund, Anwendung und Ausführung zusammengehören. Beispiel: „Entscheidend ist nicht nur das Produkt, sondern der passende Aufbau.“" },
+        { "title": "Wie BKM nicht klingt", "body": "Nicht wie ein aggressiver Verkäufer, nicht wie ein reiner Baumarkt-Ratgeber, nicht wie ein Angstmacher, nicht wie ein technisches Datenblatt, nicht wie ein Lifestyle-Sanierer und nicht wie ein Beratungsunternehmen mit abstrakter Sprache." }
+      ]
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 10 · Ein Ton, viele Zielgruppen",
+      "headline_section": "Die Haltung bleibt gleich, die Tonlage passt sich an",
+      "leadline": "Ein Ton. Viele Zielgruppen. Eine Haltung.",
+      "columns": 2,
+      "col_content": [
+        "Mit Endkunden sprechen wir klar, ruhig, verständlich und vertrauensbildend, in der Regel per „du“. Für die Home Line wird der Ton praktisch, einfach, anwendungsnah und ermutigend, aber nicht kindlich. Kunden, die sanieren lassen möchten, sprechen wir beruhigend, professionell und vertrauensbildend an.",
+        "Für die Pro Line und Fachhandwerker wird der Ton fachlich, direkt, präzise und anwendungsorientiert. Mit BKM-Fachbetrieben sprechen wir partnerschaftlich, unternehmerisch, konkret und respektvoll. Mit Händlern und internationalen Partnern geschäftlich, strukturiert und marktorientiert. Gegenüber der Presse sachlich, kompakt, zitierfähig und nicht werblich."
+      ],
+      "section2": {
+        "headline": "Sprachregeln für den Alltag",
+        "leadline": "Wörter, die wir nur verwenden, wenn sie belegbar sind – in der Praxis fast immer: gar nicht.",
+        "columns": 2,
+        "col_content": [
+          "BKM schreibt bevorzugt kurze bis mittellange Sätze, klare Hauptaussagen, konkrete Begriffe statt abstrakter Konzepte, Anwendung statt Werbeversprechen, Orientierung statt Druck. BKM vermeidet überladene Marketingsprache, Angstkommunikation, unbelegte Superlative und zu technische Sprache ohne Erklärung.",
+          "Nur bei Belegbarkeit: Marktführer, Innovationsführer, höchste Qualität, garantiert dauerhaft trocken, maximale Sicherheit, perfekte Lösung, einzigartig, revolutionär, garantierter Schimmelschutz. Gute BKM-Wörter: Feuchtigkeitsschutz, Bauwerksabdichtung, Bestandsgebäude, Bausubstanz, Eigenanwendung, Fachverarbeitung, Systemlösung, Anwendungsweg, Schulung, Support, Partnernetzwerk."
+        ]
+      }
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 10 · Beispiele und Prüffragen",
+      "headline_large": "STATT – SAGEN WIR",
+      "headline_section": "Die BKM-Prüffragen",
+      "leadline": "Wer diese elf Fragen mit gutem Gewissen beantworten kann, spricht BKM.",
+      "items": [
+        { "title": "Statt „Unsere innovativen Premiumprodukte bieten maximale Sicherheit gegen Feuchtigkeit“", "body": "Sagen wir: „BKM-Systemlösungen sind für Feuchtigkeitsschutz im Gebäudebestand entwickelt. Entscheidend ist der passende Aufbau aus Produkt, Anwendung und fachgerechter Verarbeitung.“" },
+        { "title": "Statt „Die Pro Line bietet bessere Qualität für Profis“", "body": "Sagen wir: „Die Pro Line ist für Fachverarbeitung, technische Anwendungen und professionelle Sanierungssituationen ausgelegt.“" },
+        { "title": "Statt „Handeln Sie sofort, bevor es zu spät ist“", "body": "Sagen wir: „Feuchtigkeit sollte früh eingeordnet werden. Sichtbare Schäden können auf Ursachen hinweisen, die eine passende Lösung oder fachliche Einschätzung brauchen.“" },
+        { "title": "Die elf Prüffragen", "body": "Ist der Text klar? Ist er fachlich korrekt? Wird etwas versprochen, das nicht belegbar ist? Klingt der Text zu werblich? Zu technisch? Ist der nächste Schritt erkennbar? Wird zwischen Home Line und Pro Line sauber unterschieden? Wird der Fachbetrieb richtig eingeordnet? Wird BKM als Systemgeber erkennbar? Würde ein Endkunde den Text verstehen? Würde ein Fachhandwerker ihn ernst nehmen?" }
+      ]
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 11 · Die BKM-Systemwelt",
+      "upper_surface": "deep",
+      "headline": "URSACHE VOR PRODUKT.",
+      "section_headline": "System vor Einzelprodukt",
+      "upper_cols": 3,
+      "upper_text": "Dieses Kapitel gibt keinen Produktkatalog wieder. Es erklärt die Logik, nach der unsere Produkte, Systeme und Linien geordnet sind. Wer diese Logik kennt, findet sich auch in fünfzig Produktnamen zurecht. Ein BKM-Produkt wird nie isoliert betrachtet.",
+      "lower_surface": "white",
+      "lower_headline": "Die BKM-Sanierungskette",
+      "lower_leadline": "Wer diese Kette verinnerlicht hat, denkt BKM.",
+      "lower_cols": 2,
+      "lower_text": "Schadensbild erkennen, Ursache bestimmen, Sanierungsziel definieren, BKM-System wählen, Systemaufbau festlegen, Detailpunkte berücksichtigen, Produkte zuordnen, Verarbeitung definieren, Nachweise dokumentieren, Grenzen des Systems benennen. Diese Reihenfolge schützt uns davor, ein Produkt zu empfehlen, bevor wir das Problem verstanden haben."
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 11 · Sechs Wege der Feuchtigkeit",
+      "headline_section": "Jeder Weg braucht ein anderes System",
+      "leadline": "Sechs Wege. Sechs Antworten. Nie eine für alle.",
+      "items": [
+        { "title": "Kapillar aufsteigend", "body": "Aus dem Erdreich über die Kapillaren des Mauerwerks. Typisch: waagerechter Feuchtehorizont im Sockel mit Salzrändern. Standard: Horizontalsperre im Injektionsverfahren." },
+        { "title": "Seitlich eindringend", "body": "Als Bodenfeuchte oder nicht drückendes Wasser durch die erdberührte Wand. Der Schaden zeigt sich flächig. Standard im Bestand: Innenabdichtung nach WTA." },
+        { "title": "Drückend", "body": "Als Grund- oder Stauwasser. Die Systemgrenze aller Injektionen – hier braucht es Abdichtung nach Norm." },
+        { "title": "Aktiv über Risse", "body": "Durch Risse, Fugen oder Rohrdurchführungen. Zuerst wird das Wasser gestoppt, dann dauerhaft gedichtet." },
+        { "title": "Kondensation", "body": "An kalten Oberflächen. Kein Wasser von außen: Schimmel in der Zimmerecke hinter dem Schrank ohne Feuchtehorizont ist meist ein Kondensationsproblem." },
+        { "title": "Von oben und außen", "body": "Nassraum, Flachdach, Schlagregen. Eigene Systeme für Verbundabdichtung und Flächenschutz." }
+      ]
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 11 · Die Systemlandkarte",
+      "headline_large": "18 SYSTEME IN VIER EBENEN",
+      "headline_section": "Die Systemlandkarte",
+      "leadline": "Jedes System hat eine Priorität: Standardlösung, Ergänzungssystem, Detaillösung oder Sonderlösung.",
+      "items": [
+        { "title": "Ebene A · Hauptsanierungssysteme", "body": "Horizontalsperre (Injektion), Flächensperre (Rasterinjektion), Innenabdichtung nach WTA, Außenabdichtung, Sanierputz nach WTA, Rissverpressung, Flachdachabdichtung, Bodenabdichtung und Bodenbeschichtung, Feuchtraumabdichtung." },
+        { "title": "Ebene B · Detailabdichtungen", "body": "Rohrdurchführung, Boden-Wand-Anschluss, Flüssigkunststoff-Details." },
+        { "title": "Ebene C · Spezialsysteme", "body": "BetonDichtBand Flex für Fugen und Risse in WU-Beton." },
+        { "title": "Ebene D · Ergänzende bauphysikalische Systeme", "body": "Anti-Kondensationsbeschichtung, Innendämmung Kalziumsilikat, Radonschutz. [ANGABE FEHLT: technische Systemausarbeitung Radonschutz mit Prüfnachweis – keine Aussagen zu Radondichtheit bis dahin.]" },
+        { "title": "Erweiterung", "body": "Fassadenschutz und Hydrophobierung, Mauerwerksverfestigung und Hausschwamm." }
+      ]
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 11 · Die zehn Grundregeln",
+      "headline_section": "Die zehn Grundregeln",
+      "leadline": "Technische Richtigkeit vor Marketing. Keine erfundenen Werte, keine erfundenen Zertifikate.",
+      "items": [
+        { "title": "01", "body": "Seitliche Feuchte im erdberührten Bestand: Die Innenabdichtung nach WTA ist Standard. Außenabdichtung nur bei Neubau, offener Baugrube, ausdrücklichem Kundenwunsch oder objektbezogenen Gründen." },
+        { "title": "02", "body": "Aufsteigende Feuchte: Die Horizontalsperre im Injektionsverfahren ist Standard." },
+        { "title": "03", "body": "Sanierputz ist immer Folgesystem, nie Ursachenlösung." },
+        { "title": "04", "body": "Rissverpressung ist zweistufig: Zuerst wird das Wasser gestoppt, dann dauerhaft gedichtet." },
+        { "title": "05", "body": "Bei Fugen und Rissen in WU-Beton folgt auf die Injektion das BetonDichtBand Flex." },
+        { "title": "06", "body": "Drückendes Wasser ist die Systemgrenze aller Injektionen. Dort braucht es Abdichtung nach Norm." },
+        { "title": "07", "body": "Bodenbeschichtung ist keine Bauwerksabdichtung." },
+        { "title": "08", "body": "Anti-Kondensationsbeschichtung und Innendämmung lösen nur Kondensation, nie eindringende Baufeuchte." },
+        { "title": "09", "body": "Detailanschlüsse gehören zum System: Hohlkehle, Dichtbänder, Rohrdurchführungen." },
+        { "title": "10", "body": "Die Endbeschichtung nach einer Sanierung ist diffusionsoffen. Diffusionsdichte Schichten oberhalb der Sperre sind untersagt." }
+      ]
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 11 · Linien und Technologiemarke",
+      "headline_section": "Zwei Linien. Eine BKM-Systemqualität.",
+      "leadline": "Der Unterschied liegt in der Anwendung – nicht im Qualitätsanspruch.",
+      "columns": 2,
+      "col_content": [
+        "Home Line: alle Novu-Produkte (Novusan, NovuSticks, NovuProtect, NovuShield und weitere). Für Kunden, die geeignete Feuchtigkeitsschäden selbst angehen möchten: ohne Spezialgerät, gebrauchsfertig, mit Schritt-für-Schritt-Anleitung und Support.",
+        "Pro Line: alle übrigen Produkte. Für Fachverarbeitung, technische Anwendungen und Sanierungssituationen, in denen Erfahrung, Werkzeug und ein sauberer Systemaufbau entscheidend sind. „Profi-Qualität“ als Verkaufsargument auf Home-Line-Produkten ist falsch."
+      ],
+      "section2": {
+        "headline": "MicroPorex® und der Feuchte-Check",
+        "leadline": "Die dokumentierte Sicherheit für trockene Wände.",
+        "columns": 2,
+        "col_content": [
+          "MicroPorex® ist die eingetragene Technologiemarke für unsere hydrophobierenden Injektionssysteme und wirkt wie eine Ingredient Brand: Die Marke bezeichnet die Technologie, nicht den Vertriebskanal. Flaggschiff der Pro Line ist BKM HZ X, exklusiv beim zertifizierten Fachbetrieb. [ANGABE FEHLT: technisches Datenblatt BKM HZ X – Verbrauch, Bohrbild und Wartezeiten erst nach Veröffentlichung kommunizieren.]",
+          "Der Feuchte-Check ist unsere digitale Triage. Zehn Pflichtfragen gehören zu jeder Systemempfehlung: Bauteil und Lage, Material und Wandstärke, Feuchteverteilung, Salzbelastung, Wassereinwirkung, Rissbild, Untergrund, Nutzung, Zugänglichkeit und Temperatur. Wer diese Fragen nicht beantworten kann, kann kein System empfehlen. Das gilt auch für uns."
+        ]
+      }
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 12 · Unsere Partner",
+      "upper_surface": "transition",
+      "headline": "DER ZERTIFIZIERTE BKM-FACHBETRIEB.",
+      "section_headline": "Die Engpassressource unseres Geschäftsmodells",
+      "upper_cols": 3,
+      "upper_text": "Der zweite unserer beiden Wege führt über den zertifizierten BKM-Fachbetrieb. Ohne ihn gäbe es diesen Weg nicht. Er steht beim Kunden vor Ort, bewertet den Schaden, führt die Sanierung aus und steht dafür mit seinem Namen ein. Unser interner Anspruch: Antwort innerhalb von 24 Stunden.",
+      "lower_surface": "white",
+      "lower_headline": "Partner, nicht Vertriebskanal",
+      "lower_leadline": "Dein Betrieb. Dein Name. Unser System.",
+      "lower_cols": 2,
+      "lower_text": "Unsere Reichweite kann so groß sein, wie sie will: Wenn kein Fachbetrieb in seiner Region zeitnah antwortet, geht der Kunde zum nächsten Anbieter, der Klarheit bietet. Deshalb behandeln wir Fachbetriebe nicht als Vertriebskanal, sondern als Partner. [ANGABE FEHLT: Anzahl zertifizierter Fachbetriebe und Partnerstufen – bitte ergänzen.]"
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 12 · Acht Rollen zugleich",
+      "headline_section": "Was BKM für den Fachbetrieb ist",
+      "leadline": "Selbstständig bleiben. Mit System wachsen.",
+      "items": [
+        { "title": "Systemgeber", "body": "Nicht einzelne Produkte, sondern eine Systemwelt: Pro-Line-Systeme, Anwendungsempfehlungen, technische Grundlagen und die Systemlogik für unterschiedliche Schadensbilder." },
+        { "title": "Hersteller", "body": "Wir entwickeln und liefern die Produkte. Der Betrieb muss keine Produktlösungen selbst entwickeln oder Systeme unstrukturiert kombinieren." },
+        { "title": "Schulungspartner", "body": "Fachbetriebsschulungen HW1 bis HW3 mit Leistungstests: Grundlagen und Injektion, Putz- und Dichtsysteme, Spezialsysteme." },
+        { "title": "Technischer Ansprechpartner", "body": "Wir geben technische Orientierung – ersetzen aber nicht die Verantwortung des Fachbetriebs auf der Baustelle." },
+        { "title": "Marken- und Vertrauensgeber", "body": "Durch die Zertifizierung kann sich der Betrieb als spezialisierter Ansprechpartner positionieren und von unspezialisierten Anbietern abgrenzen." },
+        { "title": "Netzwerkbetreiber und Marketingunterstützer", "body": "Wir bauen das Netzwerk auf, leiten Endkundenanfragen weiter und unterstützen mit Partnerseiten, Landingpages, Werbematerialien und Leadgenerierung." },
+        { "title": "Geschäftsfeld-Ermöglicher", "body": "Für viele Betriebe ist Bauwerksabdichtung ein neues Leistungsfeld. Wir helfen beim strukturierten Einstieg, mit Partnerstufen, die zum Betrieb passen." },
+        { "title": "Was BKM nicht ist", "body": "Nicht der Handwerksbetrieb selbst, nicht automatisch derjenige, der vor Ort saniert, kein Ersatz für die fachliche Verantwortung des ausführenden Betriebs, nicht nur ein reiner Produktlieferant – und kein klassisches Franchise." }
+      ]
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 12 · Die Rollenverteilung",
+      "headline_section": "Die Rollenverteilung auf einen Blick",
+      "leadline": "BKM gibt System, Marke und Unterstützung. Der Fachbetrieb bringt Handwerk, Kundennähe und Ausführung vor Ort.",
+      "columns": 3,
+      "col_content": [
+        "BKM MANNESMANN AG: entwickelt Produkte, stellt Systemlösungen bereit, schult Fachbetriebe, bietet technische Unterstützung, gibt den Markenrahmen, unterstützt Marketing und Sichtbarkeit, organisiert das Partnernetzwerk.",
+        "Zertifizierter BKM-Fachbetrieb: bleibt eigenständiger Handwerksbetrieb, berät Kunden vor Ort, bewertet konkrete Schäden, führt Sanierungen aus, verarbeitet BKM-Systemlösungen, verantwortet die fachgerechte Umsetzung, ist lokaler Ansprechpartner.",
+        "Endkunde: hat einen Feuchtigkeitsschaden, möchte sanieren lassen, sucht Vertrauen und fachgerechte Ausführung, findet über BKM einen zertifizierten Fachbetrieb und erhält vor Ort Unterstützung durch den Partnerbetrieb."
+      ],
+      "section2": {
+        "headline": "Warum die Home Line dem Fachbetrieb hilft",
+        "leadline": "Jede Endkunden-Maßnahme endet im Fachbetrieb-Finder.",
+        "columns": 2,
+        "col_content": [
+          "Ein häufiges Missverständnis, auch intern: Die Home Line nehme dem Fachbetrieb Aufträge weg. Das Gegenteil ist gemeint. Der Weg zur Eigenanwendung ersetzt den Fachbetrieb nicht, er füttert ihn.",
+          "Jeder Fall, der eine Nummer größer ist – unklare Ursache, Salzbelastung, drückendes Wasser oder Garantiewunsch –, wird über Verpackung, Anleitung und Feuchte-Check aktiv zum zertifizierten Fachbetrieb geleitet. Der Pull-Effekt gehört den Partnern."
+        ]
+      }
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 13 · Was wir versprechen",
+      "upper_surface": "deep",
+      "headline": "WIR BEHAUPTEN NUR, WAS WIR BELEGEN KÖNNEN.",
+      "section_headline": "Ein widerlegter Claim kostet mehr, als zehn starke einbringen",
+      "upper_cols": 3,
+      "upper_text": "Feuchtigkeitsschutz ist ein Feld, in dem viel versprochen wird: „garantiert trocken“, „für immer dicht“, „revolutionär“, „patentiert“. Kunden können diese Aussagen nicht prüfen. Genau deshalb sind sie so wirksam – und genau deshalb verwenden wir sie nicht.",
+      "lower_surface": "white",
+      "lower_headline": "Woran wir uns halten",
+      "lower_leadline": "Keine erfundenen Werte. Keine erfundenen Zertifikate. Keine pauschalen Wirkversprechen.",
+      "lower_cols": 2,
+      "lower_text": "Wenn ein Verbrauch, eine Schichtdicke oder ein Bohrabstand nicht im technischen Datenblatt steht, schätzen wir ihn nicht, sondern sagen: Angabe folgt. „WTA-geprüft“ steht nur dort, wo ein Zertifikat vorliegt; „patentiert“ nur dort, wo ein Patent erteilt ist; „dokumentiert“ verwenden wir, wenn ein Sicherheitsdatenblatt oder ein Prüfbericht die Aussage deckt. Jede Produktbeschreibung nennt auch, wofür das System nicht gemacht ist."
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 13 · Wo wir Lücken haben",
+      "headline_section": "Offenheit ist kein Makel",
+      "leadline": "Die richtige Antwort ist nicht die wahrscheinliche Zahl, sondern: „Dafür haben wir noch keinen belastbaren Nachweis. Ich kläre das.“",
+      "columns": 2,
+      "col_content": [
+        "[ANGABE FEHLT: Radonschutz – keine technische Systemausarbeitung mit Prüfnachweis; bis dahin keine Aussagen zu Radondichtheit.] [ANGABE FEHLT: technisches Datenblatt BKM HZ X – Verbrauch, Bohrbild und Wartezeiten.]",
+        "[ANGABE FEHLT: Nachweis nach WTA-Merkblatt 4-10 für die MicroPorex®-Technologie – angestrebt, noch nicht abgeschlossen.] Einige ältere Texte auf Website und in Broschüren beschreiben Injektionsmittel oder Verfahren noch nach früherem Stand und werden korrigiert."
+      ],
+      "section2": {
+        "headline": "Keine Angstkommunikation",
+        "leadline": "Wir benennen Risiken sachlich. Wir bauen keinen Druck auf.",
+        "columns": 2,
+        "col_content": [
+          "Ein einziger widerlegter Claim kostet mehr Vertrauen, als zehn starke Claims einbringen.",
+          "Diese Offenheit ist die Voraussetzung dafür, dass unsere Aussagen etwas wert sind."
+        ]
+      }
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 14 · Wohin wir gehen",
+      "upper_surface": "deep",
+      "headline": "DER ANSPRUCH BLEIBT.",
+      "section_headline": "Die Mittel entwickeln sich",
+      "upper_cols": 3,
+      "upper_text": "Unsere Vision beschreibt einen Markt, in dem Feuchtigkeitsschäden weder verharmlost noch überdeckt noch unnötig verkompliziert werden. Von diesem Markt sind wir noch entfernt: Angebote für denselben Schaden unterscheiden sich um ein Vielfaches, Experten widersprechen sich, Eigentümer bleiben jahrelang blockiert. Genau darin liegt unsere Aufgabe für die kommenden Jahre.",
+      "lower_surface": "white",
+      "lower_headline": "Fünf Richtungen",
+      "lower_leadline": "Nachweis vor Claim. Claim vor Erweiterung.",
+      "lower_cols": 3,
+      "lower_text": "Die Diagnose zum Standard machen: Der Feuchte-Check soll zur ersten Anlaufstelle werden. Die Technologiemarke absichern: MicroPorex® mit externen Prüfnachweisen als Markenkapital sichern. Das Partnernetzwerk stärken: Unsere Skalierung folgt der Fachbetriebskarte, nicht der Reichweite. Wissen zugänglich machen: aus der Systemarchitektur und dem Schulungs-Framework wird eine Wissensbasis. Technologie nutzen, Verantwortung behalten: Wir automatisieren Arbeit, nicht Verantwortung."
+    },
+
+    {
+      "type": "list",
+      "running_head": "Kapitel 14 · Fünf Richtungen",
+      "headline_section": "Fünf Richtungen im Detail",
+      "leadline": "Wer die Einordnung besitzt, muss nicht den Feed besitzen.",
+      "items": [
+        { "title": "Die Diagnose zum Standard machen", "body": "Ein Werkzeug, das ehrlich zwischen „für die Eigenanwendung geeignet“, „Fachbetrieb empfohlen“ und „beobachten“ unterscheidet. Wir bauen kein Publikum auf, sondern ein Netzwerk aus Erklärern, Anwendern und Ausführenden." },
+        { "title": "Die Technologiemarke absichern und ausbauen", "body": "Wirksamkeit nach WTA-Merkblatt 4-10, Emissionsprüfungen für den Innenraum, analytische Bestätigung der VOC-Freiheit. Erst wenn diese Nachweise vorliegen, erweitern wir die Produktfamilie, etwa in Richtung Fassade oder Denkmal." },
+        { "title": "Das Partnernetzwerk stärken", "body": "Zertifizierungsprogramm, Partnerstufen, Partner-Portal mit freigegebenen Materialien und Marketingunterstützung. Das Versprechen bleibt: Siegel, Pro Line, Systemgarantie und regionale Positionierung, ohne Franchise-Zwang." },
+        { "title": "Wissen zugänglich machen", "body": "Ziel ist, dass ein Quereinsteiger ohne Bauvorkenntnisse nach der Schulung ein Schadensbild einordnen, das passende System benennen und seine Grenzen erklären kann." },
+        { "title": "Technologie nutzen, Verantwortung behalten", "body": "Digitale Werkzeuge und künstliche Intelligenz werden in Beratung, Diagnose und Wissensvermittlung eine größere Rolle spielen. Die Verantwortung für eine Systemempfehlung bleibt beim Menschen." },
+        { "title": "Und international?", "body": "BKM ist als System auch außerhalb Deutschlands anschlussfähig. Der Claim: Internationales System. Lokale Nähe. Ein Partner vor Ort, ein System im Hintergrund, klare Wege für den Kunden." }
+      ]
+    },
+
+    {
+      "type": "opener",
+      "running_head": "Kapitel 15 · Dein Platz bei BKM",
+      "upper_surface": "deep",
+      "headline": "WAS DAS FÜR DEINEN ALLTAG HEISST.",
+      "section_headline": "Die Antwort hängt nicht von deiner Abteilung ab",
+      "upper_cols": 3,
+      "upper_text": "Vielleicht fragst du dich nach diesen Kapiteln, wie sich Mission, Werte und Systemlogik in deiner konkreten Arbeit zeigen sollen. Die Antwort ist einfacher, als es klingt.",
+      "lower_surface": "white",
+      "lower_headline": "Wenn du mit Kunden oder Fachbetrieben arbeitest",
+      "lower_leadline": "Du bist in diesem Moment der Guide.",
+      "lower_cols": 2,
+      "lower_text": "Im Kundenkontakt: Du hörst zuerst zu. Du ordnest ein, bevor du empfiehlst. Du stellst die Pflichtfragen, bevor du ein System nennst. Du sagst, wenn ein Fall einen Fachbetrieb braucht, auch wenn der Kunde lieber ein Produkt kaufen würde – und umgekehrt. Mit Fachbetrieben: Du bist Partner, nicht Lieferant. Du gibst technische Orientierung, ohne die Verantwortung des Betriebs zu übernehmen, und hältst Zusagen ein, weil der Betrieb seinem Kunden gegenüber darauf angewiesen ist."
+    },
+
+    {
+      "type": "content",
+      "running_head": "Kapitel 15 · In jeder Rolle",
+      "headline_section": "Sieben Fragen für schwierige Momente",
+      "leadline": "Unser Anspruch ist nicht, irgendeine Lösung zu liefern. Unser Anspruch ist, den passenden Weg zu zeigen.",
+      "columns": 3,
+      "col_content": [
+        "Wenn du entwickelst oder in der Technik arbeitest: Du denkst in Systemen, nicht in Einzelprodukten. Jeder Wert, den du dokumentierst, ist die Grundlage für das, was Kolleginnen und Partner später versprechen dürfen. Keine Zahl ohne Beleg.",
+        "Wenn du schreibst: Du sprichst BKM – klar, fachlich, orientierend. Die elf Prüffragen aus Kapitel 10 sind dein Werkzeug. Wenn du in Logistik oder Verwaltung arbeitest: Du sorgst dafür, dass Versprechen eingehalten werden. Verlässlichkeit ist kein Marketingwert, sondern ein Betriebsablauf.",
+        "Und in jeder Rolle: Du darfst widersprechen. Du sprichst Probleme an. Du teilst, was du gelernt hast. Du fragst nach dem Problem, bevor du eine Lösung baust. Und du denkst länger als bis zum nächsten Auftrag."
+      ],
+      "section2": {
+        "headline": "Die sieben Fragen",
+        "leadline": "Build. Keep. Maintain.",
+        "columns": 2,
+        "col_content": [
+          "Habe ich das Problem verstanden, bevor ich über die Lösung spreche? Ist das, was ich sage, fachlich belegbar? Erkennt mein Gegenüber den nächsten Schritt? Habe ich beide Wege gleichwertig, aber nicht beliebig dargestellt?",
+          "Habe ich die Grenze des Systems genannt? Ist meine Entscheidung auch in drei Jahren noch richtig? Und: Bleibe ich in der Rolle des Guides, oder mache ich BKM zum Helden?"
+        ]
+      }
+    },
+
+    {
+      "type": "list",
+      "running_head": "Anhang · Glossar",
+      "headline_large": "FACHBEGRIFF ZU KUNDENSPRACHE",
+      "headline_section": "Glossar, Teil 1",
+      "leadline": "Jeder Fachbegriff bei BKM hat einen Kundensatz.",
+      "items": [
+        { "title": "Kapillar aufsteigende Feuchte", "body": "Die Wand wirkt wie ein Schwamm und saugt Wasser aus dem Boden nach oben." },
+        { "title": "Diffusion / diffusionsoffen", "body": "Die Wand kann Wasserdampf nach außen abgeben. Umgangssprachlich: Sie kann atmen." },
+        { "title": "Hydrophobierung", "body": "Die Poren der Wand werden von innen wasserabweisend gemacht, statt verstopft." },
+        { "title": "Abdichtung", "body": "Eine Schicht, die Wasser vom Bauteil fernhält." },
+        { "title": "Horizontalsperre", "body": "Eine waagerechte Sperre im Mauerwerk, die verhindert, dass Feuchtigkeit von unten aufsteigt." },
+        { "title": "Flächensperre", "body": "Die gleiche Sperre, aber flächig in der Wand, wenn Feuchtigkeit seitlich durch die Wand kommt." },
+        { "title": "Innenabdichtung (nach WTA)", "body": "Der Keller wird von innen abgedichtet, ohne die Wand von außen aufzugraben." },
+        { "title": "Außenabdichtung", "body": "Die Wand wird von außen freigelegt und abgedichtet. Im Bestand die Ausnahme." },
+        { "title": "Drückendes Wasser", "body": "Wasser, das mit Druck an der Wand steht, etwa Grundwasser oder Stauwasser. Hier reichen Injektionen nicht." },
+        { "title": "Lastfall / Wassereinwirkungsklasse", "body": "Wie stark und in welcher Form Wasser auf das Bauteil wirkt. Bestimmt, welche Abdichtung nötig ist." },
+        { "title": "Sanierputz", "body": "Ein Putz, der Salze aufnimmt und Feuchtigkeit nach außen lässt. Er dichtet nicht ab." }
+      ]
+    },
+
+    {
+      "type": "list",
+      "running_head": "Anhang · Glossar und Quellen",
+      "headline_section": "Glossar, Teil 2",
+      "leadline": "Bei Abweichungen gilt das Fachdokument.",
+      "items": [
+        { "title": "Hohlkehle", "body": "Eine abgerundete Ecke aus Dichtmörtel am Übergang von Boden und Wand." },
+        { "title": "Rissverpressung", "body": "Ein Riss wird mit Harz gefüllt: zuerst wird das Wasser gestoppt, dann dauerhaft gedichtet." },
+        { "title": "Verbundabdichtung", "body": "Die Abdichtung unter den Fliesen im Bad." },
+        { "title": "Kondensation", "body": "Feuchtigkeit aus der Raumluft schlägt sich an kalten Wänden nieder. Kein Wasser von außen." },
+        { "title": "Feuchtehorizont", "body": "Die waagerechte Linie, bis zu der die Wand feucht ist. Typisch für aufsteigende Feuchte." },
+        { "title": "Salzausblühungen", "body": "Weiße Ränder oder Kristalle auf der Wand. Salze, die das Wasser mitgebracht hat." },
+        { "title": "WTA", "body": "Fachverband, dessen Merkblätter als anerkannte Regeln für die Bauwerkserhaltung gelten." },
+        { "title": "Technisches Datenblatt (TDS)", "body": "Das Dokument, in dem verbindlich steht, was ein Produkt kann, wie es verarbeitet wird und wo seine Grenzen liegen." },
+        { "title": "Systemgarantie", "body": "Die Garantie, die der zertifizierte Fachbetrieb auf eine Sanierung gibt, die er als komplettes BKM-System ausgeführt hat." },
+        { "title": "Die Claims auf einen Blick", "body": "Masterclaim: Build. Keep. Maintain. Langform: Schutz aufbauen. Bestand bewahren. Gebäude erhalten. Markenclaim: Zwei Wege. Ein Ziel: dauerhaft trockene Wände. Home Line: Selbst sanieren. Klar anwenden. Pro Line: Für Fachverarbeitung entwickelt. MicroPorex®: Die dokumentierte Sicherheit für trockene Wände. Vollständige Übersicht in Kapitel 6." },
+        { "title": "Quellen dieser Broschüre", "body": "Mission, Vision, Philosophie, Manifest, Strategische Leitidee, Positionierungsstatement, Kernwerte, Claim-System und Bedeutungsmodell, Historie, Brand Voice, Culture, Rolle gegenüber dem Fachbetrieb, Home Line und Pro Line, MicroPorex® Markenstrategie v2, Redaktionskanon v1, Avatare P1 bis P6, Systemarchitektur der Sanierungssysteme (Module 01 bis 18, Stand 02.09.2026), Schulungs-Framework Feuchtesanierung (Entwurf)." }
+      ]
+    },
+
+    {
+      "type": "backcover",
+      "no_folio": true,
+      "cta_headline": "Unser Anspruch ist nicht, irgendeine Lösung zu liefern. Unser Anspruch ist, den passenden Weg zu zeigen.",
+      "cta_body": "Selbst abdichten oder Fachbetrieb beauftragen. Produkt oder professionelle Sanierung. Eigenleistung oder Partnernetzwerk. Am Ende zählt, dass das Zuhause trocken bleibt.",
+      "cta_action": "Build. Keep. Maintain.",
+      "contact": {
+        "company": "BKM MANNESMANN AG",
+        "street": "Wideystraße 23",
+        "city": "59174 Kamen (Germany)",
+        "web": "www.bkm-mannesmann.de",
+        "email": "info@bkm-mannesmann.de",
+        "phone": "+49 (0) 2307-99034-0"
+      },
+      "imprint": "Herausgeber BKM MANNESMANN AG · Interne Ausgabe, Stand September 2026 · Redaktion Unternehmenskommunikation · Nur zur internen Verwendung. Diese Broschüre ersetzt keine Produktschulung, keine Verarbeitungsanleitung und kein technisches Datenblatt; bei Abweichungen gilt das Fachdokument. MicroPorex® ist eine eingetragene Marke der BKM MANNESMANN AG. BKM MANNESMANN AG – All rights reserved."
+    }
+  ]
+}
