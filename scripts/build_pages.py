@@ -20,9 +20,11 @@ import sys
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML
+
 from pypdf import PdfReader
 
 from pdf_checks import check_completeness, check_fonts, collect_strings
+from pruefe_wortlaenge import pruefe_dokument
 
 # Pfadschluessel des Innenteils. Sie stehen als Pfad im Content und nicht als
 # Text im PDF.
@@ -213,12 +215,21 @@ def build_brochure(content_data, output_name):
     html_content = template.render(**content_data)
 
     output_path = OUTPUT_DIR / f"{output_name}.pdf"
-    HTML(
+    # Einmal auslegen, zweimal nutzen: die Wortlaengen werden am
+    # ausgelegten Satz gemessen, bevor daraus ein PDF wird.
+    dokument = HTML(
         string=html_content,
         base_url=str(TEMPLATES_DIR)
-    ).write_pdf(str(output_path))
+    ).render()
+    zu_lang = pruefe_dokument(dokument, quelle=html_content)
+    dokument.write_pdf(str(output_path))
 
     errors = check_output(output_path, content_data)
+    errors.extend(
+        f"Seite {min(b['seiten'])}: {b['wort']!r} misst {b['breit']:.1f} mm, "
+        f"<{b['tag']}> haelt {b['kasten']:.1f} mm - das Wort passt nicht in "
+        f"seine Spalte und bricht mitten durch."
+        for b in zu_lang)
     if errors:
         print(f"  [FEHLER] {output_path}")
         for error in errors:

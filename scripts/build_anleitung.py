@@ -24,6 +24,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from pdf_checks import check_completeness, check_fonts, collect_strings
+from pruefe_wortlaenge import pruefe_dokument
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = PROJECT_ROOT / "templates" / "anleitung"
@@ -393,7 +394,11 @@ def baue(content_path, release=False):
     innen_pdf = OUTPUT_DIR / f"{name}-innenteil.pdf"
     pdf_path = OUTPUT_DIR / f"{name}.pdf"
     html_path.write_text(html, encoding="utf-8")
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(innen_pdf))
+    # Einmal auslegen, zweimal nutzen: die Wortlaengen werden am
+    # ausgelegten Satz gemessen, bevor daraus ein PDF wird.
+    dokument = HTML(string=html, base_url=str(TEMPLATE_DIR)).render()
+    zu_lang = pruefe_dokument(dokument, quelle=html)
+    dokument.write_pdf(str(innen_pdf))
 
     titel_pdf = baue_titelblatt(content)
     if titel_pdf and titel_pdf.is_file():
@@ -415,6 +420,11 @@ def baue(content_path, release=False):
 
     fehler = check_output(pdf_path, content,
                           0 if release else (2 if protokoll["zweiseitig"] else 1))
+    fehler.extend(
+        f"Seite {min(b['seiten'])}: {b['wort']!r} misst {b['breit']:.1f} mm, "
+        f"<{b['tag']}> haelt {b['kasten']:.1f} mm - das Wort passt nicht in "
+        f"seine Spalte und bricht mitten durch."
+        for b in zu_lang)
     if fehler:
         print(f"\n  Beanstandet ({len(fehler)}):")
         for eintrag in fehler:

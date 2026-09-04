@@ -75,12 +75,43 @@ jobs:
       # Schriften, Vollstaendigkeit ab 3 Zeichen, Seitenzahl, Bildverweise
       # und die Paginierung gegen den Umfang. Siehe docs/ANLEITUNG-LAYOUT.md.
       # Nur bauen - den Inhalt hat der check-Auftrag bereits geprueft.
+      # Der Rueckgabewert jeder einzelnen Anleitung zaehlt. Ohne das
+      # status=1 traegt die Schleife nur den der letzten nach draussen -
+      # eine beanstandete Anleitung mitten in der Reihe waere durchgegangen.
       - name: Verarbeitungsanleitungen bauen
         run: |
+          status=0
           for d in content/anleitung-*/; do
             echo "--- $d"
-            python3 scripts/build_anleitung.py "$d/content.json"
+            python3 scripts/build_anleitung.py "$d/content.json" || status=1
           done
+          exit $status
+
+      # Die Gegenproben pruefen die Pruefer: jede Regel bekommt einen Fall,
+      # der sie anschlagen laesst, und einen, bei dem sie still zu bleiben
+      # hat. Sie laufen hier und nicht im check-Auftrag, weil sie WeasyPrint
+      # und PyMuPDF brauchen - und nach dem Bau, weil ein Teil von ihnen
+      # gegen die eben gebauten Dateien misst.
+      - name: Gegenproben
+        run: |
+          status=0
+          for probe in scripts/gegenproben_*.py; do
+            echo "--- $probe"
+            python3 "$probe" || status=1
+          done
+          exit $status
+
+      # Die fertigen PDF werden noch einmal von aussen vermessen, als
+      # kaeme keines davon aus diesem Repository. Siehe docs/PDF-ABNAHME.md.
+      - name: PDF-Abnahme
+        run: |
+          status=0
+          for pdf in output/anleitung/*.pdf; do
+            case "$pdf" in *-innenteil.pdf|*-titel.pdf) continue ;; esac
+            echo "--- $pdf"
+            python3 scripts/pruefe_pdf.py "$pdf" --art anleitung || status=1
+          done
+          exit $status
 
       - uses: actions/upload-artifact@v4
         if: always()

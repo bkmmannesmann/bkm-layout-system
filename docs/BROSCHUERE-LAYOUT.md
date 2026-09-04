@@ -205,9 +205,18 @@ im Content über `type` gewählt.
 | `content` | Textseite auf weißem Grund. Optionale Hauptheadline, Sektions-Headline, Leadline, ein- bis dreispaltiger Satz, optional eine zweite Sektion. |
 | `feature` | Bild-Text-Kombination in drei Ausprägungen: `top-image`, `left-image`, `right-image`. Optional ein unteres Band mit eigener Fläche. |
 | `process` | Nummerierte Schritte mit Titel und Fließtext, optional ein Vorteilsblock. |
-| `list` | Aufzählung aus Titel-/Textpaaren. |
+| `list` | Aufzählung aus Titel-/Textpaaren unter `entries`. |
 | `toc` | Inhaltsverzeichnis, ein- oder zweispaltig, Kapitel fett und Unterpunkte mager. |
 | `backcover` | Rückseite mit CTA-Block, Kontaktdaten, Impressum und optionalem Line-Badge. |
+
+**Eine Überschrift heißt überall gleich.** `content` und `process` lasen ihre große
+Überschrift aus `headline_large` und ihre Sektions-Überschrift aus `headline_section`;
+`feature` und `list` lasen stattdessen `headline` und kannten überhaupt keine große
+Überschrift. Wer die eine Konvention gelernt hatte, schrieb sie auf der anderen Seite
+hin und bekam eine leere Seite — fünfzehnmal hintereinander, am 03.09.2026, in einer
+neunundvierzigseitigen Broschüre. Alle vier Typen nehmen jetzt dasselbe Paar. `headline`
+funktioniert auf `feature` und `list` weiter; es ist die alte Schreibweise, und die
+bestehenden Contents nutzen sie.
 
 **Bänder stehen im Fluss, nicht absolut.** Auf der `feature`-Seite laufen Bild- und Textbänder
 über die volle Blattbreite untereinander weg. Ein absolut gesetztes Band, dessen Oberkante frei

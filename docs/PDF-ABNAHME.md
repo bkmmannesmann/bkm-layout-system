@@ -118,3 +118,51 @@ Stellen. Das Paket `jsonschema` liegt nicht im Bestand, der Datenvertrag
 wird von Hand geprüft, und diese eine Regel war dabei nie umgesetzt. Der
 Feldabgleich holt sie nach, und zwar gegen das Template statt gegen das
 Schema: das Template ist die Wahrheit darüber, was gesetzt wird.
+
+
+## Der dritte Riegel: die Wortlänge
+
+Ein Wort, das breiter ist als seine Spalte, ist ein Fehler in zwei
+Gestalten. Mit `overflow-wrap: break-word` wird es mitten durchgehackt —
+so entstanden `Technologi/emarke` und `Partnernet/zwerk`. Ohne diese
+Regel steht es über die Spaltenkante hinaus. Beides sieht man erst im
+fertigen PDF.
+
+```bash
+python3 scripts/pruefe_wortlaenge.py <datei.html> [--basis <ordner>]
+python3 scripts/gegenproben_wortlaenge.py
+```
+
+Die Bauwege rufen die Prüfung selbst auf. `scripts/build_pages.py` und
+`scripts/build_anleitung.py` legen den Satz ohnehin aus, bevor sie
+schreiben — sie reichen das ausgelegte Dokument herein, statt es ein
+zweites Mal auszulegen. Ein zu langes Wort steht dann unter den
+Beanstandungen des Baus, bevor jemand das PDF öffnet.
+
+**Gemessen, nicht geschätzt.** Jedes Wort wird mit seinem eigenen Stil
+noch einmal ausgelegt — Schrift, Schnitt, Größe, Laufweite — und die
+Breite geht gegen die Innenbreite seines Kastens. Zeichenzahl mal
+Durchschnittsbreite wäre geraten; das `W` ist in TT Norms Pro dreimal so
+breit wie das `i`.
+
+**Zwei Dinge sind ausdrücklich kein Fehler.** Unter `hyphens: auto` darf
+das Wort brechen; gemessen wird dann nicht das ganze Wort, sondern seine
+längste Silbe. Und ein Bindestrichwort zerfällt in seine Teile, die
+einzeln gemessen werden. Ohne diese Unterscheidung wäre jeder deutsche
+Fließtext voller Falschmeldungen — und eine Prüfung, die immer
+anschlägt, sieht sich nach kurzer Zeit niemand mehr an.
+
+**Eine Fallgrube, die zwei Anläufe gekostet hat:** WeasyPrint wirft das
+weiche Trennzeichen U+00AD beim Auslegen weg. Im Boxbaum steht
+`Technologiemarke`, nicht `Technologie­marke` — die vom Setzer von Hand
+gesetzte Bruchstelle ist unsichtbar. Ohne Gegenmaßnahme hätte die Prüfung
+ausgerechnet das Wort angemahnt, an dem der Fehler schon behoben war,
+und der in ihrem eigenen Hinweistext empfohlene Weg hätte nicht
+funktioniert. Die Prüfung liest die weichen Trennzeichen deshalb aus der
+Quelle nach.
+
+**Wo sie nichts findet, und warum das richtig ist:** eine Tabellenspalte
+ohne feste Breite wächst mit ihrem Inhalt. Dort entsteht kein Wortbruch,
+sondern eine zu breite Tabelle — ein anderer Fehler, den die Blattkante
+oben findet. Diese Prüfung greift, wo die Breite feststeht, und das ist
+im Satzspiegel die Regel.

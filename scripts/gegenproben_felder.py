@@ -40,10 +40,14 @@ def faelle():
                              "items": [{"title": "a", "body": "b"}]})
 
     # Ein Feld, das es auf einem anderen Seitentyp gibt, hier aber nicht:
-    # headline_large liest nur content und process, nicht list.
+    # steps liest nur process, nicht list. Hier stand frueher
+    # headline_large - das war ein gutes Beispiel, bis list und feature
+    # dieselben Kopfzeilenfelder bekamen wie content und process. Seither
+    # ist es dort erlaubt, und die Gegenprobe braucht ein Feld, das
+    # wirklich nur einem einzigen Seitentyp gehoert.
     b_fremd = copy.deepcopy(b)
     b_fremd["pages"].append({"type": "list", "headline": "Titel",
-                             "entries": [], "headline_large": "gross"})
+                             "entries": [], "steps": []})
 
     a_fremd = copy.deepcopy(a)
     a_fremd["pages"][0]["erfundenes_feld"] = "steht nirgends im Template"
