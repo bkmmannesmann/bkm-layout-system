@@ -422,6 +422,56 @@ def check_layout() -> list[str]:
 # Inhaltspruefung
 # --------------------------------------------------------------------------
 
+# Felder, die nicht im Seitentyp-Block stehen, sondern im folio-Makro und
+# darum auf jeder Seite gelten.
+FELDER_IMMER = {"type", "no_folio", "running_head", "folio_color"}
+
+
+def template_felder() -> dict[str, set[str]]:
+    """Liest aus page-template.html, welches Feld welcher Seitentyp setzt.
+
+    Ein Feld, das der Content fuehrt und das Template nicht liest, fehlt
+    im PDF - ohne dass irgendetwas meldet. Am 03.09.2026 kam eine
+    49-seitige Broschuere so zurueck: fuenfzehn list-Seiten trugen ihre
+    Eintraege unter 'items' und ihre Ueberschrift unter
+    'headline_section', das Template liest dort 'entries' und 'headline'.
+    Die Seiten kamen fast leer heraus, der Validator lief gruen durch.
+    """
+    quelle = (ROOT_DIR / "templates" / "pages" / "page-template.html")
+    if not quelle.is_file():
+        return {}
+    text = quelle.read_text(encoding="utf-8")
+    teile = re.split(r"\{%-?\s*(?:el)?if\s+page\.type\s*==\s*'([a-z]+)'\s*-?%\}",
+                     text)
+    karte: dict[str, set[str]] = {}
+    for i in range(1, len(teile), 2):
+        typ, block = teile[i], teile[i + 1]
+        felder = set(re.findall(r"page\.([a-zA-Z_][a-zA-Z0-9_]*)", block))
+        karte[typ] = felder | FELDER_IMMER
+    return karte
+
+
+def check_felder(data: dict) -> list[str]:
+    """Jedes Feld im Content muss vom Template auch gesetzt werden."""
+    karte = template_felder()
+    if not karte:
+        return []
+    errors = []
+    for i, seite in enumerate(data.get("pages", []), start=1):
+        typ = seite.get("type")
+        bekannt = karte.get(typ)
+        if bekannt is None:
+            continue          # unbekannter Typ meldet schon check_content
+        for feld in sorted(seite):
+            if feld.startswith("$") or feld in bekannt:
+                continue
+            errors.append(
+                f"Seite {i} ({typ}): Feld {feld!r} wird vom Template nicht "
+                f"gesetzt. Der Inhalt faellt still weg. Der Seitentyp liest: "
+                f"{', '.join(sorted(bekannt - FELDER_IMMER))}.")
+    return errors
+
+
 def check_content(path: Path) -> list[str]:
     errors: list[str] = []
 
@@ -440,6 +490,8 @@ def check_content(path: Path) -> list[str]:
 
     if not isinstance(data.get("pages"), list) or not data["pages"]:
         return [f"{path.name}: 'pages' ist leer"]
+
+    errors.extend(check_felder(data))
 
     absender = data.get("sender")
     if absender is not None and absender not in SENDERS:

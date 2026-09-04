@@ -81,6 +81,7 @@ def pruefe(daten):
     fehler.extend(pruefe_cover(daten.get("cover")))
     fehler.extend(pruefe_seiten(seiten))
     fehler.extend(pruefe_verweise(daten))
+    fehler.extend(pruefe_felder(daten))
     return fehler
 
 
@@ -173,6 +174,56 @@ def pruefe_seiten(seiten):
             for feld in ("headline", "steps", "issued", "copyright"):
                 if not s.get(feld):
                     fehler.append(f"Seite {i}: {feld} fehlt.")
+    return fehler
+
+
+# Felder, die nicht im Seitentyp-Block stehen, sondern im fuss-Makro und
+# darum auf jeder Seite gelten.
+FELDER_IMMER = {"type", "running_head"}
+
+
+def template_felder():
+    """Liest aus template.html, welches Feld welcher Seitentyp setzt.
+
+    Ein Feld, das der Content fuehrt und das Template nicht liest, faellt
+    still weg. Am 03.09.2026 kam eine Broschuere so zurueck: fuenfzehn
+    Seiten trugen ihre Eintraege unter einem Namen, den das Template
+    nicht kennt, und kamen fast leer heraus. Der Datenvertrag verbietet
+    fremde Felder ueber additionalProperties, aber jsonschema liegt nicht
+    im Bestand - geprueft wird darum hier, gegen das Template selbst.
+    """
+    quelle = TEMPLATE_DIR / "template.html"
+    if not quelle.is_file():
+        return {}
+    text = quelle.read_text(encoding="utf-8")
+    teile = re.split(r"\{%-?\s*(?:el)?if\s+page\.type\s*==\s*'([a-z]+)'\s*-?%\}",
+                     text)
+    karte = {}
+    for i in range(1, len(teile), 2):
+        felder = set(re.findall(r"page\.([a-zA-Z_][a-zA-Z0-9_]*)", teile[i + 1]))
+        karte[teile[i]] = felder | FELDER_IMMER
+    return karte
+
+
+def pruefe_felder(daten):
+    """Jedes Feld im Content muss vom Template auch gesetzt werden."""
+    karte = template_felder()
+    if not karte:
+        return []
+    fehler = []
+    for i, seite in enumerate(daten.get("pages", []),
+                              start=daten.get("page_number_start", 1)):
+        bekannt = karte.get(seite.get("type"))
+        if bekannt is None:
+            continue
+        for feld in sorted(seite):
+            if feld.startswith("$") or feld in bekannt:
+                continue
+            fehler.append(
+                f"Seite {i}: Feld {feld!r} wird vom Template nicht gesetzt. "
+                f"Der Inhalt faellt still weg. Der Seitentyp "
+                f"{seite.get('type')!r} liest: "
+                f"{', '.join(sorted(bekannt - FELDER_IMMER))}.")
     return fehler
 
 

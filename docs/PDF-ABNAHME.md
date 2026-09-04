@@ -84,3 +84,37 @@ Impressum.
 
 Alle acht Verarbeitungsanleitungen laufen mit **null Beanstandungen**
 durch. Was die Prüfung meldet, ist dann auch etwas.
+
+
+## Der zweite Riegel: der Feldabgleich
+
+Die PDF-Abnahme greift am Ende. Davor steht seit dem 03.09.2026 eine
+zweite Prüfung, die früher greift: **jedes Feld im Content muss vom
+Template auch gesetzt werden.**
+
+```bash
+python3 scripts/validate_brochure.py content/<name>/content.json
+python3 scripts/validate_anleitung.py content/<name>/content.json
+python3 scripts/gegenproben_felder.py
+```
+
+Beide Prüfer lesen dafür ihr eigenes Template und ziehen heraus, welches
+Feld welcher Seitentyp liest. Ein Feld, das dort nicht vorkommt, ist tot
+— der Inhalt fällt weg, ohne dass irgendetwas meldet.
+
+Der Anlass: fünfzehn `list`-Seiten führten ihre Einträge unter `items`
+und ihre Überschrift unter `headline_section`. Der Seitentyp liest
+`entries` und `headline`. Die Seiten kamen fast leer heraus.
+
+Der Abgleich hat sofort einen zweiten Fall gefunden, älter und in allen
+acht Verarbeitungsanleitungen: `icon` stand auf jeder Nacharbeitsseite im
+Content und im Datenvertrag und wurde nie gesetzt — die Nacharbeitsseite
+war die einzige, deren Überschrift ohne Icon blieb. Jetzt trägt sie
+eines, wie jede andere Abschnittsüberschrift auch.
+
+**Warum nicht über das JSON-Schema?** `docs/anleitung-content.schema.json`
+verbietet fremde Felder über `additionalProperties: false` — an achtzehn
+Stellen. Das Paket `jsonschema` liegt nicht im Bestand, der Datenvertrag
+wird von Hand geprüft, und diese eine Regel war dabei nie umgesetzt. Der
+Feldabgleich holt sie nach, und zwar gegen das Template statt gegen das
+Schema: das Template ist die Wahrheit darüber, was gesetzt wird.
