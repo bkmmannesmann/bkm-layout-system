@@ -17,10 +17,16 @@ Sie aendert nichts. Sie misst und meldet.
 """
 
 import argparse
+import collections
 import json
 import re
 import sys
 from pathlib import Path
+
+try:
+    import pyphen
+except ImportError:                                   # pragma: no cover
+    pyphen = None
 
 ROOT_DIR = Path(__file__).parent.parent.resolve()
 MM = 72 / 25.4
@@ -53,6 +59,22 @@ TOLERANZ_OBEN = 1.5
 # der groesste solche Ueberhang 0,90 mm. Ab 1,0 mm steht wirklich Tinte
 # im Rand.
 TOLERANZ_RECHTS = 1.0
+
+# Wortabstand im Blocksatz. Ein Setzer laesst den Zwischenraum zwischen
+# vier Fuenfteln und vier Dritteln seiner natuerlichen Breite laufen;
+# InDesign hat 80/100/133 Prozent als Vorgabe. Darueber sieht man die
+# Luecke, ab dem Doppelten reisst sie ein Loch in die Spalte. Gemessen
+# wird gegen die Breite, die die eingebettete Schrift selbst fuer das
+# Leerzeichen angibt - nicht gegen einen Mittelwert aus dem Dokument,
+# denn wenn die Haelfte aller Zeilen gedehnt ist, waere der Mittelwert
+# schon mitgedehnt und die Messung schoenrechnend.
+ABSTAND_AUFFAELLIG = 1.33
+ABSTAND_LOCH = 2.0
+
+# Kurze Zeilen sind Ueberschriften, Bildunterschriften und Tabellenzellen.
+# Fuer eine Aussage ueber den Blocksatz braucht es eine gefuellte Zeile.
+ABSTAND_MIN_ZEICHEN = 20
+ABSTAND_MIN_LUECKEN = 3
 
 # Blattbeschriftungen aus Canvas-Werkzeugen. U2 bis U4 sind die
 # Umschlagseiten - als Satzbegriff richtig, auf dem Blatt nicht.
@@ -238,6 +260,156 @@ def check_wortbruch(doc):
     return fehler
 
 
+# Die eingebetteten Schriften, zum Nachmessen einer Silbe.
+SCHRIFTEN = {}
+
+Zeile = collections.namedtuple(
+    "Zeile", "faktor seite breite text folgt frei schrift groesse")
+
+
+def leerzeichenbreiten(doc):
+    """Wie breit jede eingebettete Schrift ihr Leerzeichen setzt, in em.
+
+    Aus der Schriftdatei im PDF, nicht aus dem Satz. Damit gilt die
+    Messung auch fuer ein PDF, das nicht aus diesem Repository kommt.
+    """
+    import pymupdf
+    breiten, _schriften = {}, {}
+    for seite in doc:
+        for xref, _, _, basename, *_ in seite.get_fonts(full=True):
+            # get_fonts liefert 'DJXTCH+TT-Norms-Pro', der Satz meldet
+            # 'TT-Norms-Pro'. Das Praefix ist die Untergruppenkennung des
+            # PDF; ohne sie abzuschneiden findet keine Zeile ihre Schrift,
+            # und die Pruefung bleibt stumm, ohne es zu sagen.
+            name = basename.split("+")[-1]
+            if name in breiten:
+                continue
+            try:
+                puffer = doc.extract_font(xref)[3]
+                if puffer:
+                    schrift = pymupdf.Font(fontbuffer=puffer)
+                    breiten[name] = schrift.glyph_advance(32)
+                    _schriften[name] = schrift
+                else:
+                    breiten[name] = None
+            except Exception:
+                breiten[name] = None
+    SCHRIFTEN.update(_schriften)
+    return breiten
+
+
+def zeilenabstaende(doc):
+    """Je Zeile: Faktor des Wortabstands, Seite, Zeilenbreite, Text.
+
+    Gemessen wird der Vorschub des Leerzeichens - der Abstand vom Anfang
+    des Leerzeichens zum Anfang des naechsten Buchstabens. Genommen wird
+    der Mittelwert der Zeile in der Mitte, nicht der groesste Abstand:
+    ein einzelner grosser Zwischenraum kann ein geschuetztes Leerzeichen
+    oder ein Einzug sein, eine durchgehend gedehnte Zeile ist das Loch.
+    """
+    import statistics
+    breiten = leerzeichenbreiten(doc)
+    zeilen = []
+    for nr, seite in enumerate(doc, 1):
+        for block in seite.get_text("rawdict")["blocks"]:
+            reihe = block.get("lines", [])
+            for lfd, zeile in enumerate(reihe):
+                zeichen, natur, schrift, groesse = [], [], None, 9.0
+                for span in zeile["spans"]:
+                    name = span["font"].split("+")[-1]
+                    em = breiten.get(name)
+                    if em is None:
+                        continue
+                    zeichen += span["chars"]
+                    natur.append(em * span["size"] / MM)
+                    if schrift is None:
+                        schrift, groesse = name, span["size"]
+                if len(zeichen) < ABSTAND_MIN_ZEICHEN or not natur:
+                    continue
+                luecken = [(b["bbox"][0] - a["bbox"][0]) / MM
+                           for a, b in zip(zeichen, zeichen[1:])
+                           if a["c"] == " "]
+                if len(luecken) < ABSTAND_MIN_LUECKEN:
+                    continue
+                normal = statistics.median(natur)
+                if normal <= 0:
+                    continue
+                text = "".join(c["c"] for c in zeichen).strip()
+                # Das erste Wort der naechsten Zeile ist das, was nicht
+                # mehr gepasst hat. Es zu nennen macht aus einer Meldung
+                # eine Handlungsanweisung.
+                folgt = ""
+                if lfd + 1 < len(reihe):
+                    weiter = "".join(c["c"] for sp in reihe[lfd+1]["spans"]
+                                     for c in sp.get("chars", ())).strip()
+                    if weiter:
+                        folgt = weiter.split()[0].strip(".,;:()\u201e\u201c")
+                faktor = statistics.median(luecken) / normal
+                # So viel Platz gaebe die Zeile her, wenn ihre
+                # Zwischenraeume wieder auf Normalmass zurueckgingen.
+                frei = (faktor - 1) * normal * len(luecken)
+                zeilen.append(Zeile(faktor, nr,
+                                    (zeichen[-1]["bbox"][2]
+                                     - zeichen[0]["bbox"][0]) / MM,
+                                    text, folgt, frei, schrift, groesse))
+    return zeilen
+
+
+def check_wortabstand(doc):
+    """Zeilen, deren Wortzwischenraum ein Loch in die Spalte reisst.
+
+    Blocksatz dehnt den Zwischenraum, bis die Zeile die Spalte fuellt.
+    Passt das naechste Wort nicht mehr und laesst es sich nicht trennen,
+    wird die Zeile auseinandergezogen. Bei 55 mm Spaltenbreite und 9 pt
+    traegt eine Zeile sechsunddreissig Zeichen; da geraet das schnell
+    ausser Rand und Band.
+
+    Gemeldet wird ab dem Doppelten, und zwar unter den Hinweisen: ein
+    Loch ist haesslich, aber es bricht keine Zusage. Das Auffaellige
+    darunter steht nur in der Kennzahl - es einzeln zu melden hiesse,
+    vierzig Prozent einer Broschuere zu melden, und eine Pruefung, die
+    das tut, liest niemand zu Ende.
+
+    Zur Abhilfe wird das Wort am Anfang der naechsten Zeile genannt. Ein
+    weiches Trennzeichen darin hilft - aber nicht, indem seine erste
+    Silbe die Luecke fuellt. Das war die erste Vermutung, und sie war
+    falsch: gemessen passt die Silbe so gut wie nie hinein, denn genau
+    dann haette Pango von sich aus getrennt. Es hilft, weil es den
+    Umbruch der ganzen Zeile verschiebt. Deshalb ist das Ergebnis nicht
+    vorherzusagen - man setzt es, baut neu und misst nach.
+    """
+    loecher = []
+    for z in zeilenabstaende(doc):
+        if z.faktor <= ABSTAND_LOCH:
+            continue
+        meldung = (f"Seite {z.seite}: Wortabstand {z.faktor:.1f}-fach in einer "
+                   f"Spalte von {z.breite:.0f} mm: {z.text[:48]!r}")
+        if len(z.folgt) >= 6:
+            meldung += (f" - es haengt an {z.folgt!r}; ein weiches "
+                        f"Trennzeichen darin verschiebt den Umbruch")
+        loecher.append(meldung)
+    return loecher
+
+
+def wortabstand_kennzahl(doc):
+    """Eine Zeile Bilanz zum Blocksatz, auch wenn nichts zu melden ist.
+
+    Die Meldung nennt nur die Loecher. Der Zustand dazwischen - laeuft
+    der Satz ruhig oder steht die Haelfte aller Zeilen gedehnt - steht
+    in keiner Meldung und ist doch das, was man auf dem Blatt sieht.
+    """
+    import statistics
+    werte = sorted(z.faktor for z in zeilenabstaende(doc))
+    if not werte:
+        return None
+    return {
+        "zeilen": len(werte),
+        "median": statistics.median(werte),
+        "auffaellig": sum(x > ABSTAND_AUFFAELLIG for x in werte)/len(werte)*100,
+        "max": werte[-1],
+    }
+
+
 def fuellgrad(doc, geo):
     zeilen = []
     for i, p in enumerate(doc, 1):
@@ -271,6 +443,12 @@ def main():
     geo = seiten_geometrie(doc, a.art)
 
     satz, hinweise = check_satzspiegel(doc, geo)
+    # Der Blocksatz misst Satzqualitaet, nicht Vertragstreue. Ein Loch
+    # ist haesslich, aber es verletzt keine Zusage - anders als Text
+    # ueber der Blattkante oder eine fehlende Schrift. Es laeuft darum
+    # unter den Hinweisen und beeinflusst den Rueckgabewert nicht.
+    # Sichtbar ist es trotzdem, mitsamt der Kennzahl darunter.
+    hinweise = hinweise + check_wortabstand(doc)
     gruppen = [
         ("Blattbeschriftung aus dem Canvas", check_canvas_marker(doc)),
         ("Text ueber der Blattkante",        check_blattkante(doc)),
@@ -295,9 +473,17 @@ def main():
                 print(f"    … und {len(fehler)-12} weitere")
         else:
             print(f"  {name}: nichts zu beanstanden.")
+    kennzahl = wortabstand_kennzahl(doc)
+    if kennzahl:
+        print()
+        print(f"  Blocksatz: {kennzahl['zeilen']} Fliesstextzeilen gemessen, "
+              f"Wortabstand im Mittel {kennzahl['median']:.2f}-fach, "
+              f"{kennzahl['auffaellig']:.0f}% ueber der Setzergrenze von "
+              f"{ABSTAND_AUFFAELLIG:.2f}, weiteste Zeile {kennzahl['max']:.1f}-fach.")
+
     if hinweise:
         print()
-        print("  Hinweise - bekannt und in unseren Vorlagen gewollt:")
+        print("  Hinweise - gesehen, aber nicht als Fehler gewertet:")
         for h in hinweise:
             print(f"    · {h}")
     if a.fuellgrad:

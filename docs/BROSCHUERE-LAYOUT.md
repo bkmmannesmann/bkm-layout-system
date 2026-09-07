@@ -218,6 +218,13 @@ neunundvierzigseitigen Broschüre. Alle vier Typen nehmen jetzt dasselbe Paar. `
 funktioniert auf `feature` und `list` weiter; es ist die alte Schreibweise, und die
 bestehenden Contents nutzen sie.
 
+**Blocksatz nur ab vierzig Zeichen.** Der Fließtext steht im Blocksatz, aber nicht überall:
+die vier Spaltenklassen, die 55 mm erzeugen — `columns-3`, `columns-2` und die Spalten der
+beiden `flex-cols` —, laufen linksbündig. Bei 55 mm und 9 pt trägt eine Zeile
+sechsunddreißig Zeichen; der Blocksatz braucht vierzig. Die Messung dazu steht in
+`docs/PDF-ABNAHME.md`, die Regel mit ihrer Begründung in `templates/pages/pages-spec.css`.
+Wer eine neue Spaltenklasse anlegt, trägt sie dort ein, wenn sie unter 61 mm bleibt.
+
 **Bänder stehen im Fluss, nicht absolut.** Auf der `feature`-Seite laufen Bild- und Textbänder
 über die volle Blattbreite untereinander weg. Ein absolut gesetztes Band, dessen Oberkante frei
 gewählt wird, hat den Text darüber verdeckt, ohne dass der Build etwas gemeldet hat. Das Feld

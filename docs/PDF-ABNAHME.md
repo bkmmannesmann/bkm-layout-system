@@ -166,3 +166,96 @@ ohne feste Breite wächst mit ihrem Inhalt. Dort entsteht kein Wortbruch,
 sondern eine zu breite Tabelle — ein anderer Fehler, den die Blattkante
 oben findet. Diese Prüfung greift, wo die Breite feststeht, und das ist
 im Satzspiegel die Regel.
+
+
+## Der vierte Riegel: Löcher im Blocksatz
+
+Blocksatz dehnt den Wortzwischenraum, bis die Zeile die Spalte füllt.
+Passt das nächste Wort nicht mehr und lässt es sich nicht trennen, reißt
+die Zeile auf. Am 07.09.2026 nachgemessen — 1759 Zeilen aus drei
+Broschüren und drei Verarbeitungsanleitungen, jede Lücke gegen die
+**0,7303 mm**, die TT Norms Pro bei 9 pt für das Leerzeichen vorsieht:
+
+| Zeichen je Zeile | Wortabstand im Mittel | über 1,33× | über 2,0× |
+|---:|---:|---:|---:|
+| 30–34 | 1,51× | 59 % | 24 % |
+| 35–39 | 1,28× | 43 % | 3 % |
+| 40–44 | 1,00× | 6 % | 1 % |
+| ab 45 | 1,00× | unter 10 % | unter 2 % |
+
+**Der Bruch liegt bei vierzig Zeichen.** Die dreispaltige Anlage trägt
+bei 55,4 mm und 9 pt sechsunddreißig — knapp darunter. Deshalb standen in
+der Broschüre vom 03.09.2026 vierzig Prozent aller Zeilen über der
+Setzergrenze und acht Prozent über dem Doppelten. Die
+Verarbeitungsanleitungen mit 76 und 85 mm liegen im selben Repository bei
+1,00×; es lag nicht am Text.
+
+**Kein Schalter hilft dagegen.** Getrennt wird bereits am Anschlag —
+dreiundzwanzig Prozent der Zeilen endeten mit Trennstrich.
+`hyphenate-limit-zone` von 0 bis 20 %, `hyphenate-limit-chars` von 4 2 2
+bis 5 3 3, kleinere Laufweite, engerer Grundwortabstand: alles gemessen,
+alles unter einem Prozentpunkt Wirkung, und die strengere Trennregel
+machte es schlechter. Pango bricht gierig um; es nutzt eine Trennstelle
+nur, wenn das Wort sonst gar nicht passt, nicht um eine Lücke zu
+verkleinern.
+
+**Also: Blocksatz behält, wer ihn tragen kann.** Die vier Spaltenklassen,
+die 55 mm erzeugen, laufen linksbündig; alles ab 85 mm bleibt Blocksatz —
+und das ist der größere Teil jeder Seite. Die Regel steht mit ihrer
+Begründung in `templates/pages/pages-spec.css`.
+
+Was das gebracht hat, an denselben drei Broschüren gemessen:
+
+| | Wortabstand im Mittel | über 1,33× | Löcher |
+|:---|---:|---:|---:|
+| vorher | 1,20–1,33× | 36–49 % | 7–10 % |
+| nachher | 1,00× | 4–7 % | 0–1 Zeile |
+
+```bash
+python3 scripts/pruefe_pdf.py <datei.pdf>
+python3 scripts/gegenproben_wortabstand.py
+```
+
+Die Meldung nennt die Seite, den Faktor, die Spaltenbreite und **das Wort
+am Anfang der nächsten Zeile** — das ist das, was nicht mehr gepasst hat.
+Ein weiches Trennzeichen U+00AD darin schließt die Lücke meistens.
+
+**Warum es wirkt, ist nicht das, was man zuerst denkt.** Die erste
+Vermutung war: die erste Silbe des Wortes rutscht in die Lücke. Gemessen
+stimmt das so gut wie nie — genau dann hätte Pango nämlich von sich aus
+getrennt. Es wirkt, weil es den Umbruch der ganzen Zeile verschiebt. Das
+Ergebnis ist deshalb nicht vorherzusagen: setzen, neu bauen, nachmessen.
+In der 49-seitigen Broschüre haben so gesetzte 37 Trennzeichen elf Löcher
+auf eines gebracht — in drei Runden, weil jede Runde den Fluss verschob.
+
+Gemeldet wird ab dem Doppelten, und zwar **unter den Hinweisen**: ein
+Loch ist hässlich, aber es bricht keine Zusage — anders als Text über der
+Blattkante oder eine fehlende Schrift. Der Rückgabewert bleibt davon
+unberührt. Das Auffällige unter 2,0× steht nur in der Kennzahl; alles ab
+1,33× einzeln zu melden hieße, vierzig Prozent einer Broschüre zu melden,
+und eine Prüfung, die das tut, liest niemand zu Ende.
+
+**In den Verarbeitungsanleitungen bleiben vier Zeilen über dem Doppelten**
+— Novusan S3, RD S4, SH-1K S3 zweimal. Sie stehen alle als vorletzte
+Zeile eines kurzen Absatzes, und ein weiches Trennzeichen hat dort den
+Satz an der rechten Fluchtlinie aufgerissen statt die Lücke zu schließen.
+Die Texte sind wortgetreue Transkriptionen freigegebener Anleitungen; sie
+werden nicht angefasst. Die vier Zeilen stehen im Bericht.
+
+### Ein weiches Trennzeichen ist nicht folgenlos
+
+Beim Schließen der letzten Lücken kam ein zweiter Fund heraus. Ein
+einziges U+00AD im Fließtext einer `feature`-Seite hat den Textkasten von
+174 auf **599 mm** aufgeblasen; der Satz stand zwanzig Millimeter über
+dem Blattrand. Ursache war nicht das Zeichen, sondern ein Flexelement
+ohne `min-width: 0` — es rechnete seine Mindestbreite aus dem Inhalt.
+Das konnte jederzeit auch ohne Zutun geschehen, denn `hyphens: auto` gilt
+dort ohnehin. Behoben in `.feature-split__body`; gefunden hat es die
+Ausgabeprüfung des Baus, nicht das Auge.
+
+Zwei Dinge folgen daraus. Ein Trennzeichen gehört **nur in
+Fließtextfelder** — nicht in Überschriften, Verzeichniseinträge oder
+Pfade; ein globaler Textersatz über die ganze `content.json` trifft sie
+alle und war der erste Fehlversuch. Und nach jedem gesetzten Trennzeichen
+läuft der Bau samt Ausgabeprüfung, weil jede Satzkorrektur den Umbruch
+verschiebt und anderswo eine neue Lücke aufmachen kann.

@@ -239,6 +239,54 @@ html, body {
   hyphenate-character: "-";
 }
 
+/* Blocksatz nur, wo die Spalte ihn traegt.
+
+   Blocksatz dehnt den Wortzwischenraum, bis die Zeile die Spalte fuellt.
+   Passt das naechste Wort nicht mehr und laesst es sich nicht trennen,
+   reisst die Zeile auf. Wie oft das geschieht, haengt an einer einzigen
+   Groesse: wie viele Zeichen eine Zeile traegt.
+
+   Am eigenen Bestand nachgemessen, 1759 Zeilen aus drei Broschueren und
+   drei Verarbeitungsanleitungen, Wortabstand gegen die 0,73 mm, die
+   TT Norms Pro bei 9 pt fuer das Leerzeichen vorsieht:
+
+     30-34 Zeichen   Mittel 1,51x   24 % der Zeilen ueber dem Doppelten
+     35-39 Zeichen   Mittel 1,28x    3 %
+     40-44 Zeichen   Mittel 1,00x    1 %
+     ab 45 Zeichen   Mittel 1,00x   unter 2 %
+
+   Der Bruch liegt bei vierzig Zeichen. Die dreispaltige Anlage traegt
+   bei 55,4 mm und 9 pt sechsunddreissig - knapp darunter, und genau
+   deshalb standen in der Broschuere vom 03.09.2026 vierzig Prozent der
+   Zeilen ueber der Setzergrenze und acht Prozent ueber dem Doppelten.
+   Die Verarbeitungsanleitungen mit 76 und 85 mm liegen im selben
+   Repository bei 1,00x; es liegt nicht am Text.
+
+   Kein Schalter hilft dagegen. Getrennt wird bereits am Anschlag -
+   dreiundzwanzig Prozent der Zeilen enden mit Trennstrich, und
+   hyphenate-limit-zone oder eine lockerere hyphenate-limit-chars
+   aendern die Verteilung um weniger als einen Prozentpunkt. Gemessen,
+   nicht vermutet.
+
+   Also: Blocksatz behaelt, wer ihn tragen kann. Die vier Klassen unten
+   erzeugen 55 mm; dort laeuft der Satz linksbuendig. Alles ab 85 mm -
+   columns-2-wide, col-wide und der einspaltige Satz - bleibt Blocksatz,
+   und das ist der groessere Teil jeder Seite.
+
+   Wer eine neue Spaltenklasse anlegt, traegt sie hier ein, wenn sie
+   unter 61 mm bleibt. Das ist die Breite, bei der vierzig Zeichen
+   stehen. scripts/pruefe_pdf.py misst nach und meldet, was durchrutscht. */
+.columns-3,
+.columns-3 p,
+.columns-2,
+.columns-2 p,
+.flex-cols-3 > .col,
+.flex-cols-3 > .col p,
+.flex-cols-2 > .col,
+.flex-cols-2 > .col p {
+  text-align: left;
+}
+
 /* Fließtext Bold */
 .body-text strong,
 .body-text-bold {
@@ -862,6 +910,15 @@ html, body {
 
 .feature-split__body {
   flex: 1 1 auto;
+  /* Ohne min-width:0 rechnet das Flexelement seine Mindestbreite aus dem
+     Inhalt. Ein einziges weiches Trennzeichen im Text hat den Kasten am
+     07.09.2026 auf 599 mm aufgeblasen - der Satz stand zwanzig Millimeter
+     ueber dem Blattrand, gemeldet von der Ausgabepruefung des Baus. Der
+     Text war derselbe, nur ein unsichtbares Zeichen war dazugekommen.
+     Es kann auch ohne Zutun auftreten: hyphens:auto gilt hier ohnehin.
+     min-width:0 ist die vorgeschriebene Gegenmassnahme - das Element
+     nimmt, was der Flexkasten uebrig laesst, und nicht mehr. */
+  min-width: 0;
   padding: var(--brochure-margin-top) var(--brochure-margin-x);
 }
 
