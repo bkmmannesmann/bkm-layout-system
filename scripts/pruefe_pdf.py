@@ -36,6 +36,11 @@ MM = 72 / 25.4
 # der Anleitung in brand.json unter grid.anleitung.
 GEOMETRIE = {
     "broschuere": {"links": 18.0, "rechts": 192.0, "oben": 26.7, "unten": 273.5},
+    # Der Innenteil aus dem Canvas seit dem 07.09.2026: Beiwerk steht unten,
+    # oben ist kein Kopfsteg mehr fuer Kolumnentitel noetig. Der Druckweg
+    # unter 'broschuere' faehrt weiter 26,7 und 273,5 - wer ein PDF aus
+    # scripts/build_pages.py prueft, nimmt jenen Schluessel.
+    "innenteil":  {"links": 18.0, "rechts": 192.0, "oben": 18.0, "unten": 276.0},
     "anleitung":  {"links": 18.0, "rechts": 192.0, "oben": 18.0, "unten": 277.0},
 }
 BLATT_HOEHE = 297.0
@@ -199,11 +204,16 @@ def check_schriften(doc):
     sind es oft gezeichnete Glyphen ohne Namen. Darum werden beide
     getrennt gemeldet und die namenlosen nur einmal, mit Seitenliste.
     """
-    erlaubt = ("TT-Norms", "TTNorms", "Unbounded", "LiberationSans", "BKM")
+    # Ein Erzeuger bettet die Schrift unter ihrem Klarnamen ein - mit
+    # Leerzeichen statt Bindestrichen. 'TT Norms Pro Bold' wurde dadurch
+    # als Fremdschrift gemeldet, obwohl es die Hausschrift ist. Verglichen
+    # wird deshalb ohne Trennzeichen.
+    erlaubt = ("TTNorms", "Unbounded", "LiberationSans", "BKM")
     fehler, gesehen, type3 = [], set(), []
     for i, p in enumerate(doc, 1):
         for f in p.get_fonts(full=True):
             kurz = (f[3] or "").split("+")[-1]
+            nackt = kurz.replace("-", "").replace(" ", "").replace("_", "")
             if f[2] == "Type3" and not kurz:
                 if i not in type3:
                     type3.append(i)
@@ -214,7 +224,7 @@ def check_schriften(doc):
             if f[2] == "Type3":
                 fehler.append(f"Seite {i}: Type-3-Schrift {kurz!r} - eine "
                               f"Schriftdatei wurde nicht gefunden und still ersetzt.")
-            elif not any(e.lower() in kurz.lower() for e in erlaubt):
+            elif not any(e.lower() in nackt.lower() for e in erlaubt):
                 fehler.append(f"Seite {i}: Fremdschrift {kurz!r} im Dokument.")
     if type3:
         seiten = ", ".join(str(s) for s in type3[:8])

@@ -86,6 +86,29 @@ Alle acht Verarbeitungsanleitungen laufen mit **null Beanstandungen**
 durch. Was die Prüfung meldet, ist dann auch etwas.
 
 
+## Drei Satzspiegel, drei Prüfarten
+
+```bash
+python3 scripts/pruefe_pdf.py datei.pdf                      # Druckweg
+python3 scripts/pruefe_pdf.py datei.pdf --art innenteil      # Canvas-Innenteil
+python3 scripts/pruefe_pdf.py datei.pdf --art anleitung      # Anleitung
+```
+
+| Art | Satzspiegel senkrecht | wer baut so |
+|:---|:---|:---|
+| `broschuere` | 26,7 bis 273,5 mm | `scripts/build_pages.py`, Seitenzahl unten |
+| `innenteil` | 18,0 bis 276,0 mm | Canvas-Vorlagen, Beiwerk unten bei 284,6 mm |
+| `anleitung` | 18,0 bis 277,0 mm | `scripts/build_anleitung.py` |
+
+Die falsche Art zu wählen, meldet jede korrekt gesetzte Seite als Fehler.
+An den vier umgebauten Innenseiten waren es sieben Beanstandungen gegen
+`broschuere` und eine gegen `innenteil` — und diese eine kam aus dem
+Design-Export, nicht aus dem Satz.
+
+**Schriftnamen werden ohne Trennzeichen verglichen.** Ein Erzeuger bettet
+`TT-Norms-Pro-Bold` ein, ein anderer `TT Norms Pro Bold`. Die Klarform mit
+Leerzeichen wurde als Fremdschrift gemeldet, obwohl es die Hausschrift ist.
+
 ## Der zweite Riegel: der Feldabgleich
 
 Die PDF-Abnahme greift am Ende. Davor steht seit dem 03.09.2026 eine

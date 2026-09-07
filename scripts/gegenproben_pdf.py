@@ -61,7 +61,25 @@ def faelle():
     d_normal = blatt([(20, 40, "Wir bauen kein Publikum"),
                       (20, 44, "auf, sondern ein Netzwerk.")])
 
+    # Die Hausschrift unter ihrem Klarnamen: ein Erzeuger bettet
+    # 'TT-Norms-Pro-Bold' ein, ein anderer 'TT Norms Pro Bold'. Beides ist
+    # dieselbe Datei; die zweite Form galt am 07.09.2026 als Fremdschrift.
+    d_haus = pymupdf.open()
+    s_haus = d_haus.new_page(width=210 * MM, height=297 * MM)
+    tw = pymupdf.TextWriter(s_haus.rect)
+    tw.append(pymupdf.Point(20 * MM, 40 * MM), "Hausschrift",
+              font=pymupdf.Font(fontfile=str(ROOT_DIR / "assets/fonts/TT_Norms_Pro_Bold.ttf")),
+              fontsize=10)
+    tw.write_text(s_haus)
+
+    # Eine echte Fremdschrift muss weiter auffallen.
+    d_fremd = pymupdf.open()
+    d_fremd.new_page(width=210 * MM, height=297 * MM).insert_text(
+        (20 * MM, 40 * MM), "Fremde Schrift", fontsize=10, fontname="tiro")
+
     return [
+        ("Hausschrift unter ihrem Klarnamen", pp.check_schriften, d_haus, False),
+        ("echte Fremdschrift", pp.check_schriften, d_fremd, True),
         ("unveraendert - alle Pruefungen still",
          lambda d: (pp.check_canvas_marker(d) + pp.check_blattkante(d)
                     + pp.check_satzspiegel(d, geo)[0] + pp.check_wortbruch(d)
