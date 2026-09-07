@@ -281,10 +281,54 @@ Auszeichnungen, Zahlen und Preise.
 eine halbe Punktgröße größer als der Fließtext — Monospace trägt optisch mehr und
 sah im Satz technisch statt redaktionell aus.
 
-### Blocksatz erst ab 61 mm Spaltenbreite
+### Im Canvas: Flattersatz, und weiche Trennzeichen in die langen Wörter
 
-`text-align: justify` gilt für Fließtext **ab 61 mm** Spaltenbreite bei 9 pt.
-Schmalere Spalten laufen linksbündig. Silbentrennung bleibt überall an:
+**Browser und WeasyPrint brechen verschieden um.** Das ist der Grund, warum
+eine Broschüre im Repo-Bau sauber aussieht und in der Design-Vorschau nicht.
+
+Am 07.09.2026 an denselben zwölf Absätzen der Mitarbeiterbroschüre gemessen,
+Wortabstand im Blocksatz gegen den natürlichen Zwischenraum der Schrift:
+
+| Spalte | WeasyPrint | Chromium |
+|---:|---:|---:|
+| 55 mm | 1,31× | **2,21×** |
+| 85 mm | 1,19× | **1,63×** |
+| 114 mm | 1,20× | **1,46×** |
+
+Die Ursache: Browser trennen deutschen Text bei `hyphens: auto` nur, wenn sie
+ein Trennwörterbuch für die Sprache haben — und darauf ist kein Verlass. Der
+gemessene Chromium trennt gar nicht: `hyphens: none` und `hyphens: auto`
+liefern Zeile für Zeile dasselbe, mit und ohne `lang`-Attribut. Ohne Trennung
+reißt der Blocksatz in **jeder** Spaltenbreite des Innenteils auf, auch in der
+breitesten.
+
+**Deshalb im Canvas: Flattersatz.** Und weil ohne Trennung auch der Flatterrand
+zerklüftet, kommen weiche Trennzeichen U+00AD in die langen Wörter. Die wirken
+ohne Wörterbuch, in jedem Browser und in WeasyPrint gleichermaßen:
+
+| Flatterrand, gemessen an echtem Text | ohne Fugen | mit Fugen |
+|:---|---:|---:|
+| 55 mm | 23,4 % | **17,7 %** |
+| 85 mm | 13,7 % | **9,8 %** |
+
+Die geprüften Fugen stehen in `brand.json` unter `typography.trennfugen` —
+44 BKM-Fachwörter, deren Fugen die automatische Silbentrennung nicht kennt
+(`Bau-werksab-dich-tung` statt `Bauwerks-abdichtung`, `Schim-mel-s-chutz`,
+`Mau-e-r-werks-s-tär-ke`). Alles andere wird nach Silben getrennt, mit
+mindestens drei Zeichen zu jeder Seite.
+
+```bash
+python3 scripts/trennhilfe.py --wort Bauwerksabdichtung
+python3 scripts/trennhilfe.py content/<name>/content.json
+python3 scripts/trennhilfe.py --pruefe-liste
+```
+
+### Im Druckweg: Blocksatz erst ab 61 mm Spaltenbreite
+
+Für den Bau über `scripts/build_pages.py` gilt: `text-align: justify` für
+Fließtext **ab 61 mm** Spaltenbreite bei 9 pt, schmalere Spalten linksbündig.
+Dort trennt WeasyPrint selbst und erreicht 1,00× — weiche Trennzeichen sind
+dort nicht nötig und schaden leicht, weil sie den Umbruch verschieben. Silbentrennung bleibt überall an:
 `hyphens: auto; hyphenate-character: "-";`
 
 Der Grund steht in `brand.json` unter `typography.blocksatz`, gemessen an 1759

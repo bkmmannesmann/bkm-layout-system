@@ -136,7 +136,7 @@
       ]
     },
     "blocksatz": {
-      "$comment": "Blocksatz oder Flattersatz. Haengt allein an der Spaltenbreite.",
+      "$comment": "Blocksatz oder Flattersatz. Haengt an der Spaltenbreite - und daran, wer setzt.",
       "regel": "text-align:justify erst ab 61 mm Spaltenbreite bei 9 pt. Darunter text-align:left.",
       "schwelle_mm": 61.0,
       "schwelle_zeichen": 40,
@@ -151,7 +151,93 @@
       },
       "kein_schalter_hilft": "hyphenate-limit-zone von 0 bis 20 Prozent, hyphenate-limit-chars von 4 2 2 bis 5 3 3, engere Laufweite, kleinerer Grundwortabstand: alles gebaut und gemessen, alles unter einem Prozentpunkt Wirkung, und die strengere Trennregel machte es schlechter. Getrennt wird bereits am Anschlag - dreiundzwanzig Prozent der Zeilen endeten mit Trennstrich.",
       "dreispaltig": "Die dreispaltige Anlage traegt bei 55,4 mm und 9 pt sechsunddreissig Zeichen und laeuft deshalb linksbuendig: columns-3, columns-2 und die Spalten der beiden flex-cols. Alles ab 85 mm bleibt Blocksatz.",
-      "gemessen_mit": "scripts/pruefe_pdf.py, Kennzahl am Ende jedes Berichts"
+      "gemessen_mit": "scripts/pruefe_pdf.py, Kennzahl am Ende jedes Berichts",
+      "zwei_wege": {
+        "$comment": "Browser und WeasyPrint brechen verschieden um. Am 07.09.2026 an denselben zwoelf Absaetzen der Mitarbeiterbroschuere gemessen.",
+        "druckweg": {
+          "wer": "scripts/build_pages.py, WeasyPrint",
+          "satzart": "Blocksatz ab 61 mm, darunter linksbuendig",
+          "wortabstand_blocksatz": {
+            "55mm": "1,31x",
+            "85mm": "1,19x",
+            "114mm": "1,20x"
+          },
+          "weiche_trennzeichen": "nicht noetig und leicht schaedlich: WeasyPrint trennt selbst, zusaetzliche Fugen verschieben den Umbruch und hoben den Wortabstand von 1,19 auf 1,28"
+        },
+        "canvasweg": {
+          "wer": "Claude Design, Vorschau und PDF-Export im Browser",
+          "satzart": "Flattersatz, ueberall",
+          "warum": "Browser trennen deutschen Text nur mit Trennwoerterbuch, und darauf ist kein Verlass. Der gemessene Chromium trennt nicht: hyphens:none und hyphens:auto liefern Zeile fuer Zeile dasselbe, mit und ohne lang-Attribut. Der Blocksatz reisst dadurch in jeder Spaltenbreite des Innenteils auf - auch in der breitesten.",
+          "wortabstand_blocksatz": {
+            "55mm": "2,21x",
+            "85mm": "1,63x",
+            "114mm": "1,46x"
+          },
+          "weiche_trennzeichen": "noetig, siehe typography.trennfugen",
+          "flatterrand_ohne_fugen": {
+            "55mm": "23,4 %",
+            "85mm": "13,7 %"
+          },
+          "flatterrand_mit_fugen": {
+            "55mm": "17,7 %",
+            "85mm": "9,8 %"
+          }
+        }
+      }
+    },
+    "trennfugen": {
+      "$comment": "Wortfugen fuer weiche Trennzeichen U+00AD in langen Komposita.",
+      "warum": "Browser trennen deutschen Text bei hyphens:auto nur, wenn sie ein Trennwoerterbuch fuer die Sprache haben. Der Chromium, mit dem am 07.09.2026 gemessen wurde, tut es nicht: hyphens:none und hyphens:auto liefern Zeile fuer Zeile dasselbe, mit und ohne lang-Attribut. In einer 55-mm-Spalte schwankt der Flatterrand dadurch um 31 Prozent der Spaltenbreite, und der Blocksatz reisst auf. Ein weiches Trennzeichen im Text braucht kein Woerterbuch - es wirkt in jedem Browser und in WeasyPrint gleichermassen. Gemessen: Flatterrand von 31 auf 17,6 Prozent.",
+      "regel": "Woerter ab zwoelf Zeichen bekommen weiche Trennzeichen an den Fugen unten. Was hier nicht steht, wird nach Silben getrennt, mit mindestens drei Zeichen zu jeder Seite.",
+      "warum_liste": "pyphen trennt deutsche Komposita nach Sprechsilben quer ueber die Wortgrenze - 'Bau-werksab-dich-tung' statt 'Bauwerks-abdichtung', 'Schim-mel-s-chutz', 'Mau-e-r-werks-s-tär-ke'. Diese Liste setzt die Wortfugen, die es nicht kennt.",
+      "zeichen": "U+00AD",
+      "trennstrich_beim_umbruch": "U+002D, siehe typography.hyphenation",
+      "fugen": {
+        "Anwendungssicherheit": "Anwen|dungs|sicher|heit",
+        "Außenabdichtung": "Außen|abdich|tung",
+        "Bauteilsituation": "Bauteil|situa|tion",
+        "Bauwerksabdichtung": "Bau|werks|abdich|tung",
+        "Bauwerkserhaltung": "Bau|werks|erhal|tung",
+        "Bereichsclaims": "Bereichs|claims",
+        "Detailanschlüsse": "Detail|anschlüsse",
+        "Eigenanwendung": "Eigen|anwen|dung",
+        "Fachverarbeitung": "Fach|ver|arbei|tung",
+        "Feuchtehaushalt": "Feuchte|haus|halt",
+        "Feuchtigkeitsschaden": "Feuchtig|keits|schaden",
+        "Feuchtigkeitsschutz": "Feuchtig|keits|schutz",
+        "Feuchtigkeitsschäden": "Feuchtig|keits|schäden",
+        "Gebäudebestand": "Gebäude|bestand",
+        "Injektionsflaschen": "Injek|tions|flaschen",
+        "Injektionsverfahren": "Injek|tions|ver|fahren",
+        "Innenabdichtung": "Innen|abdich|tung",
+        "Internationales": "Inter|natio|nales",
+        "Kalksandstein": "Kalk|sand|stein",
+        "Kellerabdichtung": "Keller|abdich|tung",
+        "Kondensationsbeschichtung": "Konden|sations|beschich|tung",
+        "Materialbedarf": "Mate|rial|bedarf",
+        "Materialmenge": "Mate|rial|menge",
+        "Materialverbrauch": "Mate|rial|ver|brauch",
+        "Mauerwerk": "Mauer|werk",
+        "Mauerwerks": "Mauer|werks",
+        "Mauerwerksstärke": "Mauer|werks|stärke",
+        "Partnernetzwerk": "Partner|netz|werk",
+        "Positionierung": "Positio|nie|rung",
+        "Quadratmeter": "Quadrat|meter",
+        "Salzausblühungen": "Salz|ausblü|hungen",
+        "Salzbelastung": "Salz|belas|tung",
+        "Sanierungssituationen": "Sanie|rungs|situa|tionen",
+        "Schimmelschutz": "Schim|mel|schutz",
+        "Schulungsframework": "Schu|lungs|frame|work",
+        "Spezialisierung": "Spezia|lisie|rung",
+        "Systemarchitektur": "System|archi|tektur",
+        "Systemausarbeitung": "System|ausar|bei|tung",
+        "Technologiemarke": "Techno|logie|marke",
+        "Untergrundvorbereitung": "Unter|grund|vor|berei|tung",
+        "Verarbeitung": "Ver|arbei|tung",
+        "Verarbeitungsanleitung": "Ver|arbei|tungs|anlei|tung",
+        "Verbrauchstabelle": "Ver|brauchs|tabelle",
+        "Verbundabdichtung": "Verbund|abdich|tung"
+      }
     }
   },
   "grid": {
