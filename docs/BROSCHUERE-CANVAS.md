@@ -281,6 +281,47 @@ Auszeichnungen, Zahlen und Preise.
 eine halbe Punktgröße größer als der Fließtext — Monospace trägt optisch mehr und
 sah im Satz technisch statt redaktionell aus.
 
+### Blocksatz erst ab 61 mm Spaltenbreite
+
+`text-align: justify` gilt für Fließtext **ab 61 mm** Spaltenbreite bei 9 pt.
+Schmalere Spalten laufen linksbündig. Silbentrennung bleibt überall an:
+`hyphens: auto; hyphenate-character: "-";`
+
+Der Grund steht in `brand.json` unter `typography.blocksatz`, gemessen an 1759
+Zeilen aus sechs Dokumenten. Blocksatz dehnt den Wortzwischenraum, bis die Zeile
+die Spalte füllt; passt das nächste Wort nicht mehr, reißt die Zeile auf:
+
+| Zeichen je Zeile | Wortabstand im Mittel | Zeilen über dem Doppelten |
+|---:|---:|---:|
+| 30–34 | 1,51× | 24 % |
+| 35–39 | 1,28× | 3 % |
+| **40–44** | **1,00×** | 1 % |
+| ab 45 | 1,00× | unter 2 % |
+
+Bei 9 pt trägt eine Zeile rund **0,66 Zeichen je Millimeter**: 55 mm sind 36
+Zeichen, 61 mm sind 40, 85 mm sind 55. Die dreispaltige Anlage liegt mit 55,4 mm
+unter der Schwelle und läuft deshalb linksbündig — betroffen sind `columns-3`,
+`columns-2` und die Spalten der beiden `flex-cols`. Alles ab 85 mm bleibt
+Blocksatz, und das ist der größere Teil jeder Seite.
+
+**Kein Schalter hilft dagegen.** Trennzone von 0 bis 20 %, Trennregeln von 4/2/2
+bis 5/3/3, engere Laufweite, kleinerer Grundwortabstand — alles gebaut und
+gemessen, alles unter einem Prozentpunkt Wirkung, und die strengere Trennregel
+machte es schlechter. Getrennt wird schon am Anschlag: 23 % der Zeilen endeten
+mit Trennstrich. Wer den Blocksatz in einer 55-mm-Spalte behalten will, bekommt
+die Löcher mit.
+
+Nachgemessen wird am fertigen PDF:
+
+```bash
+python3 scripts/pruefe_pdf.py broschuere.pdf
+```
+
+Jeder Bericht endet mit einer Zeile wie „1035 Fließtextzeilen gemessen,
+Wortabstand im Mittel 1.00-fach, 7 % über der Setzergrenze von 1.33, weiteste
+Zeile 2.3-fach". Über 1,00× im Mittel heißt: die Spalten sind zu schmal für den
+Blocksatz, der darin steht.
+
 ## Verhältnis zum TDS-Vertrag
 
 Drei Werte weichen bewusst ab. Sie werden **nicht** angeglichen:

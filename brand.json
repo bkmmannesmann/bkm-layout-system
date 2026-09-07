@@ -134,6 +134,24 @@
         "TT Norms Pro Bold",
         "TT Norms Pro Compact Regular"
       ]
+    },
+    "blocksatz": {
+      "$comment": "Blocksatz oder Flattersatz. Haengt allein an der Spaltenbreite.",
+      "regel": "text-align:justify erst ab 61 mm Spaltenbreite bei 9 pt. Darunter text-align:left.",
+      "schwelle_mm": 61.0,
+      "schwelle_zeichen": 40,
+      "gilt_fuer": "Broschuere, Canvas wie Druck. Verarbeitungsanleitungen und Datenblaetter setzen ohnehin 76 bis 114 mm breit.",
+      "css": "text-align: justify; hyphens: auto; hyphenate-character: \"-\";",
+      "why": "Blocksatz dehnt den Wortzwischenraum, bis die Zeile die Spalte fuellt. Passt das naechste Wort nicht mehr und laesst es sich nicht trennen, reisst die Zeile auf. Am 07.09.2026 an 1759 Zeilen aus sechs Dokumenten gemessen, jede Luecke gegen die 0,7303 mm, die TT Norms Pro bei 9 pt fuer das Leerzeichen vorsieht.",
+      "messung": {
+        "30-34 Zeichen": "Wortabstand im Mittel 1,51-fach, 24 Prozent der Zeilen ueber dem Doppelten",
+        "35-39 Zeichen": "1,28-fach, 3 Prozent",
+        "40-44 Zeichen": "1,00-fach, 1 Prozent",
+        "ab 45 Zeichen": "1,00-fach, unter 2 Prozent"
+      },
+      "kein_schalter_hilft": "hyphenate-limit-zone von 0 bis 20 Prozent, hyphenate-limit-chars von 4 2 2 bis 5 3 3, engere Laufweite, kleinerer Grundwortabstand: alles gebaut und gemessen, alles unter einem Prozentpunkt Wirkung, und die strengere Trennregel machte es schlechter. Getrennt wird bereits am Anschlag - dreiundzwanzig Prozent der Zeilen endeten mit Trennstrich.",
+      "dreispaltig": "Die dreispaltige Anlage traegt bei 55,4 mm und 9 pt sechsunddreissig Zeichen und laeuft deshalb linksbuendig: columns-3, columns-2 und die Spalten der beiden flex-cols. Alles ab 85 mm bleibt Blocksatz.",
+      "gemessen_mit": "scripts/pruefe_pdf.py, Kennzahl am Ende jedes Berichts"
     }
   },
   "grid": {
