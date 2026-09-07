@@ -426,6 +426,8 @@ def main():
     p.add_argument("pdf")
     p.add_argument("--art", choices=sorted(GEOMETRIE), default="broschuere",
                    help="Satzspiegel, gegen den geprueft wird.")
+    p.add_argument("--blocksatz", action="store_true",
+                   help="Wortabstaende auch ausserhalb der Broschuere messen.")
     p.add_argument("--fuellgrad", action="store_true",
                    help="Zusaetzlich ausgeben, wie voll jede Seite steht.")
     a = p.parse_args()
@@ -443,12 +445,22 @@ def main():
     geo = seiten_geometrie(doc, a.art)
 
     satz, hinweise = check_satzspiegel(doc, geo)
-    # Der Blocksatz misst Satzqualitaet, nicht Vertragstreue. Ein Loch
-    # ist haesslich, aber es verletzt keine Zusage - anders als Text
-    # ueber der Blattkante oder eine fehlende Schrift. Es laeuft darum
-    # unter den Hinweisen und beeinflusst den Rueckgabewert nicht.
-    # Sichtbar ist es trotzdem, mitsamt der Kennzahl darunter.
-    hinweise = hinweise + check_wortabstand(doc)
+
+    # Der Blocksatz ist ein Broschuerenthema. Er entstand an der
+    # dreispaltigen Anlage des Innenteils - 55 mm, sechsunddreissig
+    # Zeichen je Zeile. Die Verarbeitungsanleitungen und die
+    # Datenblaetter setzen ihren Text 76 bis 114 mm breit und liegen
+    # gemessen bei 1,00-fachem Wortabstand; dort gibt es nichts zu
+    # holen, und vier Randbefunde ueber acht Anleitungen wuerden nur
+    # den Bericht zustellen. Mit --blocksatz laeuft die Messung
+    # trotzdem, wenn jemand nachsehen will.
+    blocksatz = a.blocksatz or a.art == "broschuere"
+    # Ein Loch misst Satzqualitaet, nicht Vertragstreue: haesslich, aber
+    # keine gebrochene Zusage - anders als Text ueber der Blattkante
+    # oder eine fehlende Schrift. Es laeuft darum unter den Hinweisen
+    # und beeinflusst den Rueckgabewert nicht.
+    if blocksatz:
+        hinweise = hinweise + check_wortabstand(doc)
     gruppen = [
         ("Blattbeschriftung aus dem Canvas", check_canvas_marker(doc)),
         ("Text ueber der Blattkante",        check_blattkante(doc)),
@@ -473,7 +485,7 @@ def main():
                 print(f"    … und {len(fehler)-12} weitere")
         else:
             print(f"  {name}: nichts zu beanstanden.")
-    kennzahl = wortabstand_kennzahl(doc)
+    kennzahl = wortabstand_kennzahl(doc) if blocksatz else None
     if kennzahl:
         print()
         print(f"  Blocksatz: {kennzahl['zeilen']} Fliesstextzeilen gemessen, "

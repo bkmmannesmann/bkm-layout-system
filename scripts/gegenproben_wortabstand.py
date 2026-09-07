@@ -73,7 +73,7 @@ def ohne_schrift():
 
 
 def gebaut(name):
-    p = ROOT_DIR / "output" / "anleitung" / f"{name}.pdf"
+    p = ROOT_DIR / "output" / "pages" / f"{name}.pdf"
     if not p.is_file():
         return None
     import pymupdf
@@ -150,13 +150,17 @@ def main():
         print(f"  [{'ok' if ok else 'XX'}] {name}")
         print(f"        {wert}")
 
-    # Gegen den echten Bestand. Nicht "kein Loch": vier Zeilen ueber acht
-    # Anleitungen stehen bekanntermassen darueber, und sie mit weichen
-    # Trennzeichen zu schliessen hat den Satz an der rechten Fluchtlinie
-    # aufgerissen. Geprueft wird, was zaehlt - dass der Satz im Mittel
-    # auf Normalmass laeuft und nicht stillschweigend abrutscht.
-    for name in ("anleitung-novusan", "anleitung-hz250pro",
-                 "anleitung-sp-express"):
+    # Gegen den echten Bestand, und zwar gegen die Broschueren: dort ist
+    # das Thema entstanden, dort wird gemessen. Die
+    # Verarbeitungsanleitungen und die Datenblaetter setzen ihren Text
+    # breit genug und bleiben aussen vor - so, wie es auch
+    # scripts/pruefe_pdf.py haelt.
+    #
+    # Geprueft wird nicht "kein Loch", sondern was zaehlt: dass der Satz
+    # im Mittel auf Normalmass laeuft. Eine Zeile auf Seite 7 der
+    # Mitarbeiterbroschuere steht bekanntermassen bei 2,3-fach.
+    for name in ("demo-broschuere", "broschuere-mannesmann",
+                 "broschuere-mitarbeitende"):
         doc = gebaut(name)
         if doc is None:
             print(f"  [ - ] {name} - uebersprungen, nicht gebaut")

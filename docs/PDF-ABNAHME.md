@@ -235,12 +235,22 @@ unberührt. Das Auffällige unter 2,0× steht nur in der Kennzahl; alles ab
 1,33× einzeln zu melden hieße, vierzig Prozent einer Broschüre zu melden,
 und eine Prüfung, die das tut, liest niemand zu Ende.
 
-**In den Verarbeitungsanleitungen bleiben vier Zeilen über dem Doppelten**
-— Novusan S3, RD S4, SH-1K S3 zweimal. Sie stehen alle als vorletzte
-Zeile eines kurzen Absatzes, und ein weiches Trennzeichen hat dort den
-Satz an der rechten Fluchtlinie aufgerissen statt die Lücke zu schließen.
-Die Texte sind wortgetreue Transkriptionen freigegebener Anleitungen; sie
-werden nicht angefasst. Die vier Zeilen stehen im Bericht.
+**Gemessen wird nur die Broschüre.** Das Thema ist an der dreispaltigen
+Anlage des Innenteils entstanden — 55 mm, sechsunddreißig Zeichen je
+Zeile. Verarbeitungsanleitungen und Datenblätter setzen ihren Text 76 bis
+114 mm breit und liegen bei 1,00×; dort ist nichts zu holen. Vier
+Randbefunde über acht Anleitungen — Novusan S3, RD S4, SH-1K S3 zweimal —
+würden nur den Bericht zustellen. Sie stehen alle als vorletzte Zeile
+eines kurzen Absatzes, und ein weiches Trennzeichen hat dort den Satz an
+der rechten Fluchtlinie aufgerissen statt die Lücke zu schließen; die
+Texte sind ohnehin wortgetreue Transkriptionen freigegebener Anleitungen
+und werden nicht angefasst.
+
+Wer trotzdem nachsehen will:
+
+```bash
+python3 scripts/pruefe_pdf.py anleitung.pdf --art anleitung --blocksatz
+```
 
 ### Ein weiches Trennzeichen ist nicht folgenlos
 
