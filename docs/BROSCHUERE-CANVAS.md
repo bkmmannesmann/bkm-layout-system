@@ -168,39 +168,43 @@ Der TDS löst dasselbe Problem über `.tds-band` mit `margin-top: -10px`. Beide 
 sind gültig; der Broschüren-Weg ist nötig, weil das Hero eine Grafikdatei ist und
 kein CSS-Balken.
 
-## Kopfzeile: Beiwerk auf 12 mm
+## Satzspiegel und Beiwerk der Innenseiten
 
-Kolumnentitel und Seitenzahl stehen auf Innenseiten oben, in einer Zeile,
-mit einer Haarlinie darunter. Ihre Oberkante liegt bei **12 mm**.
+**Satzspiegel 18 bis 276 mm.** Kopfsteg 18 mm, Fußsteg 21 mm, Verhältnis
+1 : 1,17 — der Fußsteg ist größer als der Kopfsteg, damit der Satzspiegel
+optisch über der Blattmitte sitzt.
 
-Vorher lag sie bei 26,7 mm — dem Kopfsteg des Satzspiegels. Beiwerk gehört
-aber außerhalb des Satzspiegels, so wie die Fußzeile im Druckweg 18 mm über
-der Blattunterkante steht. Auf der Satzspiegelkante stehend fraß die Kopfzeile
-den Kopfsteg auf: die Headline begann erst bei 42,7 mm, und oben blieben knapp
-27 mm ungenutzt — mehr als der Seitenrand von 18 mm.
+**Kolumnentitel und Seitenzahl stehen unten**, in einer Zeile, Oberkante bei
+284,6 mm, Haarlinie 3 mm darüber bei 281,6 mm. Bis zur Blattkante bleiben
+8,6 mm. Ziffer außen, Kolumnentitel innen, im Bund wechselnd. TT Norms Pro
+Bold 8,5 pt, Versalien, Laufweite 0,12 em.
 
-Bei 12 mm rückt die ganze Seite um 14,7 mm hoch. Der Abstand von Kopfzeile zu
-Haarlinie zu Headline bleibt unverändert, die Proportion also auch.
+Vorher stand das Beiwerk oben auf 26,7 mm — genau auf der Oberkante des
+Satzspiegels. Dort gehört es nicht hin: es fraß den Kopfsteg auf, die Headline
+begann erst bei 44,6 mm, und der Kopfsteg war größer als der Fußsteg, wodurch
+der Satz optisch absackte. Jetzt steht oben nichts mehr, und der Kopfsteg
+konnte auf 18 mm — das Grundmaß, auf dem auch der Seitenrand steht.
 
-An 48 Innenseiten der Vorlagen nachgemessen:
+An 65 Innenseiten nachgemessen:
 
 | | vorher | nachher |
 |:---|---:|---:|
-| Kopfzeile, Oberkante | 26,7 mm | 12,0 mm |
-| Headline beginnt | 44,6 mm | 29,9 mm |
-| Seiten mit Text unter dem Fußsteg | 6 | 2 |
-| tiefste Textstelle davon | 284,4 mm | 274,6 mm |
+| Kopfsteg | 26,7 mm | 18,0 mm |
+| Fußsteg | 23,5 mm | 21,0 mm |
+| oberste Zeile im Mittel | 44,6 mm | 29,0 mm |
+| Beiwerk | oben, im Satzspiegel | unten, bei 284,6 mm |
+| Kopf : Fuß | 1 : 0,88 | 1 : 1,17 |
 
-**Was nicht betroffen ist:** der Umschlag — Titelblätter und U4 in
-`A-Titelblaetter.dc.html` — und Innenseiten ohne Kopfzeile. Die behalten
-26,7 mm; dort beginnt der Inhalt am Satzspiegel, wie es der Vertrag vorsieht.
-Der Unterschied fällt nicht auf, weil die Headline auf einer Kopfzeilenseite
-bei 29,9 mm einsetzt.
+**Was nicht dazugehört:** der Umschlag. Titelblätter und U4 in
+`A-Titelblaetter.dc.html` sind anders aufgebaut und bleiben unberührt. Ebenso
+der Druckweg in `templates/pages/`: er fährt weiter 26,7 und 23,5 mm und trug
+seine Seitenzahl schon immer unten. Ob beide Wege angeglichen werden, ist eine
+offene Entscheidung.
 
-Die verbleibende Überschreitung steht auf Seite 14 von `E-Strecken` und ist
-älter: die Seite trägt mehr Inhalt, als ein Blatt fasst, und lief auch vorher
-schon auf zwei. Dass ihr Text jetzt tiefer reicht als vorher, liegt daran,
-dass mehr davon auf das erste Blatt passt.
+Drei Innenseiten laufen auf mehr als ein Blatt — `B-Rahmenseiten` 3,
+`D-Textstrecken` 2 und `E-Strecken` 14. Alle drei taten das schon vorher; sie
+tragen mehr Inhalt, als ein Blatt fasst. Das ist redaktionell zu lösen, nicht
+über das Raster.
 
 ## Paginierung
 

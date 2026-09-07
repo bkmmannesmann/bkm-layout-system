@@ -273,13 +273,24 @@
         "gutter_mm": 6
       },
       "column_width_note": "Die Spaltenbreite wird nicht gesetzt, sondern gerechnet: (174 − 2 × Steg) / 3. Bei 4,6 mm Steg sind das 54,933 mm. Zwei nebeneinander gesetzte Zahlen laufen auseinander — genau daran stand der Satz zeitweise 0,8 mm über der rechten Fluchtlinie.",
-      "kopfzeile": {
-        "$comment": "Kolumnentitel und Seitenzahl auf Innenseiten, wenn sie oben stehen.",
-        "oben_mm": 12.0,
-        "gilt_fuer": "Innenseiten mit Kopfzeile. Umschlag - Titel und U4 - bleibt unberuehrt, ebenso Innenseiten ohne Kopfzeile: die behalten 26,7 mm Kopfsteg.",
-        "warum": "Beiwerk gehoert ausserhalb des Satzspiegels. Es stand auf 26,7 mm und damit genau auf dessen Oberkante; die Headline begann dadurch erst bei 42,7 mm, und oben blieben knapp 27 mm ungenutzt - mehr als der Seitenrand von 18 mm. Bei 12 mm rueckt die ganze Seite um 14,7 mm hoch, der Abstand von Kopfzeile zu Headline bleibt unveraendert.",
-        "gemessen_am": "48 Innenseiten der Canvas-Vorlagen, 07.09.2026. Seiten mit Text unter dem Fusssteg: sechs vorher, zwei nachher. Die tiefste ging von 284,4 auf 274,6 mm zurueck.",
-        "entschieden_am": "07.09.2026, Variante E aus fuenf vorgelegten"
+      "innenteil_canvas": {
+        "$comment": "Satzspiegel und Beiwerk der Broschueren-Innenseiten im Canvas. Entschieden am 07.09.2026 anhand von fuenf Kopfstegen und drei Fusszeilenlagen, jeweils an denselben Innenseiten gerendert.",
+        "margin_top_mm": 18.0,
+        "margin_bottom_mm": 21.0,
+        "satzspiegel_mm": "18,0 bis 276,0",
+        "verhaeltnis_kopf_fuss": "1 : 1,17",
+        "beiwerk": {
+          "wo": "unten, Kolumnentitel und Seitenzahl in einer Zeile",
+          "oberkante_mm": 284.6,
+          "haarlinie_mm": 281.6,
+          "bis_blattkante_mm": 8.6,
+          "schrift": "TT Norms Pro Bold 8,5 pt, Versalien, Laufweite 0,12 em",
+          "reihenfolge": "wie im Bund: Ziffer aussen, Kolumnentitel innen"
+        },
+        "warum_unten": "Beiwerk gehoert nicht in den Satzspiegel. Es stand oben auf 26,7 mm, also genau auf dessen Oberkante, und frass den Kopfsteg auf - die Headline begann erst bei 44,6 mm. Oben steht jetzt nichts mehr, deshalb konnte der Kopfsteg auf 18 mm, das Grundmass des Systems.",
+        "warum_fuss_groesser": "Der Fusssteg muss groesser sein als der Kopfsteg, sonst sitzt der Satzspiegel optisch zu tief. Vorher war es umgekehrt: 26,7 oben gegen 23,5 unten.",
+        "gilt_nicht_fuer": "Umschlag - Titelblaetter und U4 in A-Titelblaetter.dc.html sind anders aufgebaut und bleiben unberuehrt. Ebenso der Druckweg in templates/pages/, der weiter 26,7 und 23,5 faehrt und seine Seitenzahl schon immer unten trug.",
+        "gemessen": "65 Innenseiten. Oberste Zeile im Mittel von 12,0 auf 29,0 mm, Fusszeile auf allen 49 Seiten mit Beiwerk exakt bei 284,6 mm. Drei Seiten laufen auf mehr als ein Blatt - alle drei schon vorher, eine davon nun mit zwei Zeilen mehr auf dem ersten."
       }
     },
     "anleitung": {
