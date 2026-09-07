@@ -272,7 +272,15 @@
         "width_mm": 38,
         "gutter_mm": 6
       },
-      "column_width_note": "Die Spaltenbreite wird nicht gesetzt, sondern gerechnet: (174 − 2 × Steg) / 3. Bei 4,6 mm Steg sind das 54,933 mm. Zwei nebeneinander gesetzte Zahlen laufen auseinander — genau daran stand der Satz zeitweise 0,8 mm über der rechten Fluchtlinie."
+      "column_width_note": "Die Spaltenbreite wird nicht gesetzt, sondern gerechnet: (174 − 2 × Steg) / 3. Bei 4,6 mm Steg sind das 54,933 mm. Zwei nebeneinander gesetzte Zahlen laufen auseinander — genau daran stand der Satz zeitweise 0,8 mm über der rechten Fluchtlinie.",
+      "kopfzeile": {
+        "$comment": "Kolumnentitel und Seitenzahl auf Innenseiten, wenn sie oben stehen.",
+        "oben_mm": 12.0,
+        "gilt_fuer": "Innenseiten mit Kopfzeile. Umschlag - Titel und U4 - bleibt unberuehrt, ebenso Innenseiten ohne Kopfzeile: die behalten 26,7 mm Kopfsteg.",
+        "warum": "Beiwerk gehoert ausserhalb des Satzspiegels. Es stand auf 26,7 mm und damit genau auf dessen Oberkante; die Headline begann dadurch erst bei 42,7 mm, und oben blieben knapp 27 mm ungenutzt - mehr als der Seitenrand von 18 mm. Bei 12 mm rueckt die ganze Seite um 14,7 mm hoch, der Abstand von Kopfzeile zu Headline bleibt unveraendert.",
+        "gemessen_am": "48 Innenseiten der Canvas-Vorlagen, 07.09.2026. Seiten mit Text unter dem Fusssteg: sechs vorher, zwei nachher. Die tiefste ging von 284,4 auf 274,6 mm zurueck.",
+        "entschieden_am": "07.09.2026, Variante E aus fuenf vorgelegten"
+      }
     },
     "anleitung": {
       "$comment": "Verarbeitungsanleitung. Eigener Satzspiegel, siehe why. Struktur und Rubrikenfolge abgelesen an sieben freigegebenen Fassungen: HZ 250 Pro, HZC Creme, SP Express, RD ReparaturDicht, Novusan, NovuSticks, NovuProtect.",
