@@ -25,7 +25,7 @@ nicht.
 | Breite | 9,5 % der Bildbreite |
 | Abstand zur Kante | 1,0 % der Bildbreite, in x und y derselbe Pixelwert |
 | Mindestbreite Bildschirm | 90 px |
-| Mindestbreite Druck | 20 mm |
+| Mindestbreite Druck | 15 mm |
 | Ecke | unten rechts oder unten links, nach Kontrast |
 
 Die Werte für Breite und Abstand sind nicht gesetzt, sondern **gemessen**: an
@@ -43,23 +43,30 @@ auf das Motiv, nicht auf die Marke — dann wird der Bildausschnitt geändert.
 
 ### Warum eine Mindestbreite in Millimetern
 
-Die Zeile „AI GENERATED" misst 24 % der Logohöhe. Bei 20 mm Logobreite ergibt das
-rund 1,14 mm Versalhöhe — die untere Grenze der Lesbarkeit im Druck.
+Die Zeile „AI GENERATED" misst 24 % der Logohöhe. Bei 15 mm Logobreite ergibt das
+rund 0,85 mm Versalhöhe.
 
-Ein rein prozentualer Wert unterschreitet sie fast immer: **9,5 % erreichen 20 mm
-erst bei 211 mm Bildbreite**, die im A4-Satzspiegel nicht vorkommt.
+Ein rein prozentualer Wert fällt auf kleinen Bildern darunter: auf 85 mm Bildbreite
+ergeben 9,5 % nur 8,1 mm Marke und 0,46 mm Versalhöhe — die Zeile ist dort nicht
+mehr zu entziffern.
 
-| Bildbreite | 9,5 % | Versalhöhe | Mindestmaß 20 mm |
-|---:|---:|---:|---:|
-| 174 mm | 16,5 mm | 0,94 mm | 11 % der Bildbreite |
-| 113 mm | 10,7 mm | 0,61 mm | 18 % |
-| 85 mm | 8,1 mm | 0,46 mm | 24 % |
-| 55 mm | 5,2 mm | 0,30 mm | 36 % |
+Das Mindestmaß ist so gewählt, dass es **die bestehende Praxis nicht antastet**:
+9,5 % erreichen 15 mm bereits bei 158 mm Bildbreite. Ein Motiv über die volle
+Satzbreite behält deshalb seine 16,5 mm — dort greift weiterhin der Anteil.
+Angehoben werden nur schmalere Bilder.
 
-Beide Regeln kosten etwas. Der Anteil hält die Marke unauffällig und wird auf
-kleinen Bildern unlesbar; das Mindestmaß bleibt lesbar und nimmt auf schmalen
-Motiven ein Viertel bis ein Drittel der Bildbreite ein. Gegenübergestellt an
-sieben Formaten von 21:9 bis 9:16 am 08.09.2026.
+| Bildbreite | 9,5 % | es gilt | Marke | Anteil | Versalhöhe |
+|---:|---:|:---|---:|---:|---:|
+| 174 mm | 16,5 mm | Anteil | 16,5 mm | 9,5 % | 0,94 mm |
+| 158 mm | 15,0 mm | Umschlagpunkt | 15,0 mm | 9,5 % | 0,85 mm |
+| 113 mm | 10,7 mm | Mindestmaß | 15,0 mm | 13,3 % | 0,85 mm |
+| 85 mm | 8,1 mm | Mindestmaß | 15,0 mm | 17,6 % | 0,85 mm |
+| 55 mm | 5,2 mm | Mindestmaß | 15,0 mm | 27,3 % | 0,85 mm |
+
+Entschieden am 08.09.2026 nach einer Formatprobe über sieben Bildformate von
+21:9 bis 9:16. Ein zuvor geprüfter Wert von 20 mm hätte 1,14 mm Versalhöhe
+gehalten, dafür aber 24 bis 36 % der Bildbreite beansprucht und wirkte am Motiv
+zu schwer.
 
 ### Die Platzierungsbreite gehört zum Stempeln
 
@@ -118,9 +125,9 @@ unter 0,455. Die Schwelle liegt bei 0,75, mitten in der Lücke. Reines Rauschen
 kommt über fünf Durchgänge nicht über 0,20.
 
 Gesucht wird über **5 % bis 45 % der Bildbreite**. Die Obergrenze folgt aus dem
-Mindestmaß: druckgerecht gesetzt misst die Marke auf schmalen Motiven bis zu 36 %.
-Sie lag zuerst bei 21 % — damit fand der Sucher genau die Marken nicht, die das
-Repository selbst druckgerecht aufbringt.
+Mindestmaß: druckgerecht gesetzt misst die Marke auf einem 42 mm breiten Motiv
+36 % der Bildbreite. Sie lag zuerst bei 21 % — damit fand der Sucher genau die
+Marken nicht, die das Repository selbst druckgerecht aufbringt.
 
 Gefunden ist nicht gleich in Ordnung. Beanstandet wird auch ein Vermerk, der
 vorhanden, aber zu klein gesetzt ist oder die Bildkante berührt — letzteres fällt

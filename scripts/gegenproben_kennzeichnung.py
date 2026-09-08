@@ -252,12 +252,29 @@ def main():
           f"{K.tb_mm(ohne, 1600, 85.0):.1f} mm auf 85 mm Bildbreite, "
           f"Mindestmass {regel['mindestbreite_mm']:g} mm")
 
-    treffer = []
-    for breite_mm in (174.0, 113.0, 85.0, 55.0):
-        px = K.marke_breite(1600, regel, breite_mm)
-        treffer.append(abs(K.tb_mm(px, 1600, breite_mm) - regel["mindestbreite_mm"]) < 0.15)
-    probe(all(treffer), "mit Platzierungsbreite trifft die Marke das Druckmindestmass",
-          "174, 113, 85 und 55 mm Bildbreite ergeben je %g mm Marke" % regel["mindestbreite_mm"])
+    # Es gilt der groessere der beiden Werte: der Anteil an der Bildbreite, und das
+    # Mindestmass fuer den Druck. Auf einem breit gesetzten Motiv gewinnt der Anteil -
+    # so bleibt die bestehende Praxis unangetastet, und angehoben werden nur die
+    # schmalen Bilder, auf denen der Anteil unter die Lesbarkeit faellt.
+    fehler, protokoll = [], []
+    for breite_mm in (210.0, 174.0, 158.0, 113.0, 85.0, 55.0):
+        gedruckt = K.tb_mm(K.marke_breite(1600, regel, breite_mm), 1600, breite_mm)
+        soll = max(breite_mm * regel["breite_anteil"], regel["mindestbreite_mm"])
+        if abs(gedruckt - soll) > 0.15:
+            fehler.append("%g mm: %.2f statt %.2f" % (breite_mm, gedruckt, soll))
+        protokoll.append("%g→%.1f" % (breite_mm, gedruckt))
+    probe(not fehler, "die Marke folgt dem groesseren aus Anteil und Mindestmass",
+          "; ".join(fehler) if fehler else " ".join(protokoll) + " mm")
+
+    # Der Umschlagpunkt ist die eigentliche Entscheidung: oberhalb bleibt alles beim
+    # Alten, unterhalb greift das Mindestmass.
+    umschlag = regel["mindestbreite_mm"] / regel["breite_anteil"]
+    oben = K.tb_mm(K.marke_breite(1600, regel, umschlag + 20), 1600, umschlag + 20)
+    unten = K.tb_mm(K.marke_breite(1600, regel, umschlag - 20), 1600, umschlag - 20)
+    probe(oben > regel["mindestbreite_mm"] and abs(unten - regel["mindestbreite_mm"]) < 0.15,
+          "oberhalb des Umschlagpunkts gilt der Anteil, unterhalb das Mindestmass",
+          "Umschlag bei %.0f mm Bildbreite: darueber %.1f mm, darunter %.1f mm"
+          % (umschlag, oben, unten))
 
     erg = K.stemple(quelle, Path(tmp) / "druck-gestempelt.png", druckbreite_mm=85.0)
     t = K.finde(Path(tmp) / "druck-gestempelt.png")

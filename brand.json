@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.29.0",
+  "version": "1.30.0",
   "updated": "2026-09-08",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -669,16 +669,21 @@
       "rand_anteil": 0.01,
       "rand_begruendung": "Abstand zu beiden angrenzenden Bildkanten, als Anteil der Bildbreite — in x und y derselbe Pixelwert, damit der Rand optisch gleich wirkt.",
       "mindestbreite_px": 90,
-      "mindestbreite_mm": 20.0,
+      "mindestbreite_mm": 15.0,
       "mindestbreite_begruendung": [
-        "Die Zeile „AI GENERATED“ misst 24 % der Logohöhe. Bei 20 mm Logobreite ergibt das",
-        "rund 1,14 mm Versalhöhe — die untere Grenze der Lesbarkeit im Druck.",
-        "Ein rein prozentualer Wert unterschreitet sie: 9,5 % erreichen 20 mm erst bei einer",
-        "Bildbreite von 211 mm, die im A4-Satzspiegel nie vorkommt. Auf 174 mm ergeben 9,5 %",
-        "0,94 mm Versalhöhe, auf 85 mm nur 0,46 mm — dort ist die Zeile nicht mehr zu entziffern.",
-        "Das Mindestmaß kostet umgekehrt Fläche: auf einem 85 mm breiten Motiv nimmt es 24 %",
-        "der Bildbreite ein, auf einem 55 mm breiten 36 %.",
-        "Am 08.09.2026 an sieben Formaten von 21:9 bis 9:16 gegenübergestellt."
+        "Entschieden am 08.09.2026, nach der Formatprobe über sieben Bildformate.",
+        "15 mm Logobreite ergeben rund 0,85 mm Versalhöhe in der Zeile „AI GENERATED“.",
+        "",
+        "Der Wert ist so gewählt, dass er die bestehende Praxis nicht antastet: 9,5 % der",
+        "Bildbreite erreichen 15 mm bereits bei 158 mm Bildbreite. Ein Motiv über die volle",
+        "Satzbreite von 174 mm behält deshalb seine 16,5 mm — dort greift weiterhin der",
+        "Anteil, nicht das Mindestmaß. Angehoben werden nur schmalere Bilder, bei denen",
+        "der Anteil unter die Lesbarkeit fällt: auf 85 mm wären es 8,1 mm und 0,46 mm",
+        "Versalhöhe, die Zeile ist dort nicht mehr zu entziffern.",
+        "",
+        "Zum Preis: auf 85 mm nimmt das Mindestmaß 17,6 % der Bildbreite ein, auf 55 mm",
+        "27,3 %. Ein zuvor geprüfter Wert von 20 mm hätte 1,14 mm Versalhöhe gehalten,",
+        "dafür aber 24 beziehungsweise 36 % beansprucht und wirkte am Motiv zu schwer."
       ],
       "ecken": [
         "unten_rechts",

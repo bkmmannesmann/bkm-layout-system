@@ -59,7 +59,7 @@ def regeln() -> dict:
         "breite_anteil": 0.083,
         "rand_anteil": 0.028,
         "mindestbreite_px": 90,
-        "mindestbreite_mm": 20.0,
+        "mindestbreite_mm": 15.0,
         "farbe": "#ffffff",
         "ecken": ["unten_rechts", "unten_links"],
     }
