@@ -1,0 +1,35 @@
+{
+  "$comment": [
+    "Welche Motive KI-generiert sind, kann kein Bildvergleich entscheiden — das weiss nur,",
+    "wer sie erzeugt hat. Diese Liste wird von Hand gepflegt und ist die Grundlage der",
+    "Prüfung in scripts/pruefe_kennzeichnung.py.",
+    "",
+    "  ki_motive  Braucht den Vermerk „AI GENERATED“. Fehlt er, meldet die Prüfung einen",
+    "             Fehler und die CI bricht ab.",
+    "  keine_ki   Braucht ihn nicht — fotografiert, gezeichnet oder gesetzt.",
+    "",
+    "Ein Bild in keiner der beiden Listen erzeugt einen Hinweis, keinen Fehler: es ist noch",
+    "nicht eingeordnet. Wer ein neues Motiv ablegt, trägt es hier ein.",
+    "Pfade relativ zur Wurzel des Repositories."
+  ],
+  "stand": "2026-09-08",
+  "ki_motive": [
+    "uploads/bkm-fachbetrieb-messergebnis-schadensanalyse.webp",
+    "uploads/bkm-fachbetrieb-sanierter-keller-ergebnis.webp",
+    "uploads/bkm-fachbetrieb-schadensanalyse-abplatzender-putz.webp",
+    "uploads/bkm-fachbetriebs-kunde-sucht-hilfe-beifeuchteschaden.webp",
+    "uploads/feuchte-waende-selbst-sanieren.webp",
+    "uploads/trockene-waende-mit-novusan.webp"
+  ],
+  "keine_ki": [
+    "assets/images/logos/bkm-logo-black.png",
+    "assets/images/logos/bkm-logo-stonegrey-puregreen.png",
+    "assets/images/logos/bkm-logo-white-puregreen.png",
+    "assets/images/logos/bkm-logo-white.png",
+    "assets/images/logos/logo-deepgreen-green.png",
+    "assets/images/badge-homeline.png",
+    "assets/images/badge-proline.png",
+    "assets/images/keyvisual-on-light.png",
+    "uploads/signatur-bkm-systempartner-logo.png"
+  ]
+}

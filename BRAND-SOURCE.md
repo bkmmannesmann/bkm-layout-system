@@ -25,6 +25,7 @@ geraten werden darf.
 | Technische Datenblätter | `templates/tds/` |
 | Titelblätter | `templates/cover/` |
 | Schriften, Logos, Keyvisual, Icons | `assets/` |
+| KI-Kennzeichnung „AI GENERATED“ | `assets/kennzeichnung/` |
 | Bilder und Texturen | `uploads/` |
 | Dateiliste mit Auflösungen | `docs/ASSET-MANIFEST.md` |
 
@@ -38,6 +39,7 @@ Die Prosa zu den Werten. Die Zahlen selbst stehen in `brand.json`.
 | `docs/BROSCHUERE-LAYOUT.md` | Broschüren, Produktionsebene |
 | `docs/LAYOUT-CONTRACT.md` | Technische Datenblätter |
 | `docs/REDAKTIONSSTANDARD.md` | Inhalt, Sprache, Freigabe |
+| `docs/KI-KENNZEICHNUNG.md` | Vermerk „AI GENERATED“ an KI-Motiven |
 | `AGENTS.md` | Arbeitsweise am Repository |
 
 ## Prüfen
@@ -47,6 +49,7 @@ python3 scripts/check_brand_drift.py <datei-oder-verzeichnis>   # Farben, Schrif
 python3 scripts/check_brand_drift.py --list                     # geltende Werte
 python3 scripts/validate_brochure.py                            # Broschüren-Layout
 python3 scripts/validate_layout.py                              # Datenblatt-Layout
+python3 scripts/pruefe_kennzeichnung.py                          # KI-Vermerk an den Motiven
 ```
 
 ## Herkunft

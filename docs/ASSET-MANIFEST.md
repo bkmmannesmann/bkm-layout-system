@@ -115,8 +115,15 @@ mit Suffix `-web` im Repository. Enthalten den 16:9-Farbbereich
 
 **Fotos** `*.webp` / `magnific_*.png`: Kundenreise und Fachbetriebs-Prozess.
 Casting-Konvention: Kunde grünes Hemd, Fachbetrieb schwarzes Polo.
-KI-generierte Motive tragen den Vermerk „AI GENERATED" unten rechts —
-nach EU-KI-Verordnung sichtbar lassen, nicht beschneiden.
+KI-generierte Motive tragen den Vermerk „AI GENERATED" in einer unteren Ecke —
+nach EU-KI-Verordnung sichtbar lassen, nicht beschneiden. Welches Motiv einen
+Vermerk braucht, steht in `assets/kennzeichnung/register.json`;
+`scripts/pruefe_kennzeichnung.py` sucht ihn im Bild. Siehe `docs/KI-KENNZEICHNUNG.md`.
+
+**KI-Kennzeichnung** `assets/kennzeichnung/bkm-ai-generated.svg`: die Sperrmarke
+selbst — BKM-Wortmarke, darunter „AI GENERATED", rechts die Signetstriche.
+195,131 × 47,307 Einheiten (4,125 : 1), Konturen statt Schrift, weiß.
+Gesetzt wird sie mit 9,5 % der Bildbreite und 1,0 % Abstand zu beiden Kanten.
 
 **Icons**: Phosphor Bold, `viewBox="0 0 256 256"`, `fill="currentColor"`.
 Im Canvas als CSS-Maske eingesetzt, deshalb ohne Inline-Füllung.

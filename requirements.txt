@@ -8,3 +8,9 @@ pypdf>=4.0.0
 # (check_fotolage in build_cover.py). Fehlt das Paket, faengt der ImportError
 # ab und die Pruefung meldet stillschweigend nichts - deshalb steht es hier.
 pymupdf>=1.24.0
+
+# Sucht den Vermerk „AI GENERATED“ im Motiv und bringt ihn auf
+# (scripts/kennzeichnung.py). Die Korrelation rechnet auf numpy-Feldern,
+# Pillow oeffnet und schreibt die Bilder, PyMuPDF rastert das SVG.
+numpy>=1.24.0
+pillow>=10.0.0

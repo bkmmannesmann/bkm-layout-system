@@ -6,8 +6,8 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.27.0",
-  "updated": "2026-08-25",
+  "version": "1.28.0",
+  "updated": "2026-09-08",
   "owner": "BKM Mannesmann AG",
   "upstream": {
     "repository": "bkmmannesmann/bkm-design-system",
@@ -641,7 +641,7 @@
   "ai_generated_images": {
     "rule": "Ein KI-generiertes Motiv trägt den Vermerk „AI GENERATED“ als kleines Symbol im Bild selbst — nicht als Bildunterschrift, nicht als Text im Layout. Nach EU-KI-Verordnung erforderlich.",
     "no_collective_notice": "Eine Sammelangabe im Impressum ersetzt den Vermerk am Bild nicht. Beides zugleich ist zulässig, der Vermerk am Bild bleibt Pflicht.",
-    "position": "Eine Ecke des Bildes, oben oder unten, links oder rechts. Welche, entscheidet sich am einzelnen Motiv — es gibt keine feste Ecke.",
+    "position": "Eine Ecke des Bildes. Bevorzugt unten rechts oder unten links, entschieden am einzelnen Motiv nach dem Kontrast: der Vermerk steht dort, wo er sich vom Grund abhebt und lesbar bleibt. Oben ist zulässig, wenn unten keine Ecke trägt.",
     "do_not": [
       "wegretuschieren",
       "überdecken",
@@ -652,6 +652,48 @@
       "rule": "Die Bildkomposition hat Vorrang. Ein Motiv wird **nicht** in ein abweichendes Format gepresst, nur damit der Vermerk sichtbar bleibt — weder durch Anpassen des Kastens noch durch Verzicht auf den Beschnitt.",
       "instead": "Wer ein Motiv platziert, prüft, welche Ecken der Beschnitt übriglässt, und setzt den Vermerk dorthin. Reicht keine Ecke, wird das Motiv neu ausgerichtet — der Bildausschnitt wandert, nicht der Kasten.",
       "check": "scripts/check_export.py meldet zu jedem beschnittenen Bild, welche Ecken sichtbar bleiben und welche verdeckt sind. Es ist ein Hinweis, kein Verstoß: die Entscheidung liegt bei der Bildredaktion."
+    },
+    "marke": {
+      "$comment": [
+        "Am 08.09.2026 an sechs bereits gekennzeichneten Motiven des Repositories gemessen,",
+        "nicht gesetzt: uploads/bkm-fachbetrieb-*.webp, feuchte-waende-selbst-sanieren.webp,",
+        "trockene-waende-mit-novusan.webp. Vier davon lagen exakt bei 9,50 % Breite und 10 px",
+        "Rand, zwei bei 9,00 %. Die Werte unten sind diese Messung, auf runde Zahlen gebracht."
+      ],
+      "datei": "assets/kennzeichnung/bkm-ai-generated.svg",
+      "seitenverhaeltnis": 4.125,
+      "aufbau": "BKM-Wortmarke, darunter die Zeile „AI GENERATED“, rechts die Signetstriche. Eine Sperrmarke, kein Wortzusatz — sie wird als Ganzes gesetzt und nicht auseinandergenommen.",
+      "farbe": "#ffffff",
+      "farbe_begruendung": "Weiss, immer. Die Ecke wird nach dem Kontrast gewählt, nicht die Farbe nach der Ecke — so bleibt die Kennzeichnung über alle Motive hinweg dieselbe Marke.",
+      "breite_anteil": 0.095,
+      "rand_anteil": 0.01,
+      "rand_begruendung": "Abstand zu beiden angrenzenden Bildkanten, als Anteil der Bildbreite — in x und y derselbe Pixelwert, damit der Rand optisch gleich wirkt.",
+      "mindestbreite_px": 90,
+      "mindestbreite_mm": 20.0,
+      "mindestbreite_begruendung": [
+        "Die Zeile „AI GENERATED“ misst 24 % der Logohöhe. Bei 20 mm Logobreite ergibt das",
+        "rund 1,2 mm Versalhöhe — die untere Grenze der Lesbarkeit im Druck.",
+        "Ein rein prozentualer Wert unterschreitet sie bei kleinen Bildern: ein 80 mm breit",
+        "gedrucktes Motiv käme mit 9,5 % auf 0,44 mm Versalhöhe und wäre damit unlesbar.",
+        "Bei kleinen Bildern greift deshalb die absolute Grenze, der Vermerk wird relativ grösser."
+      ],
+      "ecken": [
+        "unten_rechts",
+        "unten_links"
+      ],
+      "ecken_zulaessig": [
+        "unten_rechts",
+        "unten_links",
+        "oben_rechts",
+        "oben_links"
+      ]
+    },
+    "check": {
+      "skript": "scripts/pruefe_kennzeichnung.py",
+      "verfahren": "Normierte Kreuzkorrelation der Bildhelligkeit gegen die Deckungsmaske des Logos, über 16 Maßstäbe und alle vier Ecken, danach eine Feinsuche um den Treffer.",
+      "schwelle": 0.75,
+      "trennschaerfe": "An 16 Motiven des Repositories geprüft: 6 gekennzeichnete erreichen 0,945 bis 0,963, die 10 ungekennzeichneten bleiben unter 0,455. Die Schwelle liegt in der Lücke.",
+      "aufbringen": "Nur auf ausdrückliche Anweisung (--stempeln). Die Prüfung meldet Fehlstellen, sie setzt den Vermerk nicht von sich aus — eine automatisch falsch platzierte Kennzeichnung ist schlechter als eine gemeldete fehlende."
     }
   },
   "deviations_from_tds": {

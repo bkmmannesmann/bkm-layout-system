@@ -87,6 +87,15 @@ jobs:
           done
           exit $status
 
+      # Jedes im Register als KI-generiert gefuehrte Motiv muss den Vermerk
+      # „AI GENERATED“ tragen - Vorgabe nach EU-KI-Verordnung. Geprueft wird
+      # das Bild selbst, nicht eine Angabe daneben: gesucht wird die Marke im
+      # Motiv. Wer ein Motiv austauscht und den Vermerk dabei verliert,
+      # scheitert hier. Das Register steht in
+      # assets/kennzeichnung/register.json und wird von Hand gepflegt.
+      - name: KI-Kennzeichnung pruefen
+        run: python3 scripts/pruefe_kennzeichnung.py
+
       # Die Gegenproben pruefen die Pruefer: jede Regel bekommt einen Fall,
       # der sie anschlagen laesst, und einen, bei dem sie still zu bleiben
       # hat. Sie laufen hier und nicht im check-Auftrag, weil sie WeasyPrint
