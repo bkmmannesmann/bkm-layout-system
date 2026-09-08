@@ -96,6 +96,12 @@ jobs:
       - name: KI-Kennzeichnung pruefen
         run: python3 scripts/pruefe_kennzeichnung.py
 
+      # Ein Vermerk im Bild nuetzt nichts, wenn der Layoutkasten ihn wegschneidet.
+      # Der Schritt meldet, blockiert aber nicht: der Bestand hat offene Faelle,
+      # deren Loesung eine Entscheidung der Bildredaktion ist und nicht der CI.
+      - name: KI-Vermerk gegen den Beschnitt pruefen
+        run: python3 scripts/pruefe_kennzeichnung.py --platzierung
+
       # Die Gegenproben pruefen die Pruefer: jede Regel bekommt einen Fall,
       # der sie anschlagen laesst, und einen, bei dem sie still zu bleiben
       # hat. Sie laufen hier und nicht im check-Auftrag, weil sie WeasyPrint

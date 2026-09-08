@@ -158,6 +158,33 @@ die Ecke nicht mehr — dann wandert der Bildausschnitt, nicht die Farbe der Mar
 Ohne `--ausgabe` wird die Datei an Ort und Stelle ersetzt. Bildgröße und
 Farbmodell bleiben unverändert.
 
+## Der Beschnitt entscheidet mit
+
+```
+python3 scripts/pruefe_kennzeichnung.py --platzierung
+```
+
+Ein Vermerk, der im Bild steht, aber vom Layoutkasten weggeschnitten wird,
+erfüllt die Kennzeichnungspflicht **nicht** — im Dokument ist er nicht da.
+
+`object-fit: cover` füllt den Kasten und schneidet zentral weg, was übersteht.
+Weil der Vermerk in einer Ecke mit 1 % Randabstand sitzt, ist er das Erste, was
+verlorengeht: sobald der Kasten ein anderes Seitenverhältnis hat als das Motiv,
+fällt seine Ecke aus dem sichtbaren Bereich.
+
+Ein Beispiel aus dem Bestand: `magnific_ultrarealistic-architectu…` misst
+2,356 : 1 und steht im Titelblatt in einem Kasten von 210 × 179,5 mm, also
+1,17 : 1. Sichtbar bleiben davon **25,2 bis 74,8 %** der Bildbreite — der Vermerk
+bei 1,0 bis 10,5 % liegt weit außerhalb.
+
+Geprüft werden die Canvas-Vorlagen, nicht ein Export: was dort steht, geht in
+jede daraus gebaute Broschüre ein. `scripts/check_export.py` prüft dasselbe am
+exportierten PDF, setzt aber voraus, dass jemand exportiert hat.
+
+Abhilfe nach der Regel unten: der Bildausschnitt wandert, nicht der Kasten —
+also eine eigene, auf das Platzierungsformat zugeschnittene und dann gestempelte
+Fassung je Platzierung.
+
 ## Was nicht erlaubt ist
 
 Ein vorhandener Vermerk wird nicht wegretuschiert, nicht überdeckt und nicht

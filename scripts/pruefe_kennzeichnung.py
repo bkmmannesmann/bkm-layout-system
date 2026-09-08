@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -92,11 +93,85 @@ def bewerte(pfad: Path, regel: dict) -> dict:
     return befund
 
 
+# Ein Bild in einer Canvas-Vorlage: Quelle und Stilangabe.
+CANVAS_BILD = re.compile(r'<img[^>]*\bsrc="([^"]+)"[^>]*\bstyle="([^"]*)"')
+CANVAS_DIR = WURZEL / "templates" / "brochure"
+
+
+def _mm(stil: str, name: str):
+    m = re.search(r"\b" + name + r":\s*([\d.]+)mm", stil)
+    return float(m.group(1)) if m else None
+
+
+def sichtbarer_ausschnitt(bild_v: float, kasten_v: float, cover: bool):
+    """Welcher Teil des Motivs bleibt im Kasten stehen, als Anteil 0..1.
+
+    object-fit:cover fuellt den Kasten und schneidet zentral weg, was ueber
+    steht — waagerecht, wenn das Bild breiter ist als der Kasten, sonst senkrecht.
+    """
+    if not cover:
+        return (0.0, 1.0, 0.0, 1.0)
+    if bild_v > kasten_v:
+        breite, hoehe = kasten_v / bild_v, 1.0
+    else:
+        breite, hoehe = 1.0, bild_v / kasten_v
+    return ((1 - breite) / 2, 1 - (1 - breite) / 2,
+            (1 - hoehe) / 2, 1 - (1 - hoehe) / 2)
+
+
+def pruefe_platzierung(reg: dict) -> list[dict]:
+    """Ueberlebt der Vermerk den Beschnitt, mit dem das Motiv platziert ist?
+
+    Ein Vermerk, der im Bild steht, aber vom Layoutkasten weggeschnitten wird,
+    erfuellt die Kennzeichnungspflicht nicht — im Dokument ist er nicht da.
+    Geprueft werden die Canvas-Vorlagen, nicht ein Export: was hier steht, geht
+    in jede daraus gebaute Broschuere ein.
+    """
+    ki = set(reg.get("ki_motive", []))
+    lagen: dict[str, dict] = {}
+    befunde = []
+    if not CANVAS_DIR.is_dir():
+        return befunde
+
+    for datei in sorted(CANVAS_DIR.glob("*.dc.html")):
+        for m in CANVAS_BILD.finditer(datei.read_text(encoding="utf-8")):
+            quelle, stil = m.group(1), m.group(2)
+            if quelle not in ki or not (WURZEL / quelle).exists():
+                continue
+            kb, kh = _mm(stil, "width"), _mm(stil, "height")
+            if not kb or not kh:
+                continue
+            if quelle not in lagen:
+                t = K.finde(WURZEL / quelle)
+                if not t["gefunden"]:
+                    continue
+                bw, bh = t["bild"]
+                x, y, tb, th = t["kasten"]
+                lagen[quelle] = {"v": bw / bh,
+                                 "x0": x / bw, "x1": (x + tb) / bw,
+                                 "y0": y / bh, "y1": (y + th) / bh}
+            lage = lagen[quelle]
+            sx0, sx1, sy0, sy1 = sichtbarer_ausschnitt(
+                lage["v"], kb / kh, "object-fit:cover" in stil.replace(" ", ""))
+            if not (lage["x0"] >= sx0 and lage["x1"] <= sx1
+                    and lage["y0"] >= sy0 and lage["y1"] <= sy1):
+                befunde.append({
+                    "vorlage": datei.name, "motiv": quelle,
+                    "kasten": (kb, kh),
+                    "sichtbar": (sx0, sx1, sy0, sy1),
+                    "vermerk": (lage["x0"], lage["x1"], lage["y0"], lage["y1"]),
+                })
+    return befunde
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("pfade", nargs="*", help="Bilder oder Ordner; ohne Angabe das Register")
     ap.add_argument("--alle", action="store_true", help="alle Bilder in uploads/ und assets/images/")
+    ap.add_argument("--platzierung", action="store_true",
+                    help="prueft die Canvas-Vorlagen: ueberlebt der Vermerk den Beschnitt, "
+                         "mit dem das Motiv dort platziert ist?")
     ap.add_argument("--stempeln", action="store_true", help="fehlenden Vermerk aufbringen")
     ap.add_argument("--ecke", choices=K.ECKEN, help="Ecke erzwingen statt nach Kontrast wählen")
     ap.add_argument("--ausgabe", help="Zielordner beim Stempeln (Vorgabe: an Ort und Stelle)")
@@ -108,6 +183,28 @@ def main() -> int:
 
     regel = K.regeln()
     reg = register()
+
+    if args.platzierung:
+        befunde = pruefe_platzierung(reg)
+        print("Platzierung der KI-Motive in %s\n" % CANVAS_DIR.relative_to(WURZEL))
+        if not befunde:
+            print("Der Vermerk ueberlebt in allen Platzierungen den Beschnitt.")
+            return 0
+        for b in befunde:
+            sx0, sx1, sy0, sy1 = b["sichtbar"]
+            vx0, vx1, vy0, vy1 = b["vermerk"]
+            print("  ✗ %-24s %s" % (b["vorlage"], Path(b["motiv"]).name))
+            print("      Kasten %.0f × %.0f mm — sichtbar x %.1f–%.1f %%, y %.1f–%.1f %%"
+                  % (b["kasten"][0], b["kasten"][1], 100*sx0, 100*sx1, 100*sy0, 100*sy1))
+            print("      Vermerk liegt bei x %.1f–%.1f %%, y %.1f–%.1f %% — weggeschnitten"
+                  % (100*vx0, 100*vx1, 100*vy0, 100*vy1))
+        print("\n%d Platzierung(en) schneiden den Vermerk weg." % len(befunde))
+        print("Ein Vermerk, den der Kasten entfernt, erfuellt die Kennzeichnungspflicht nicht.")
+        print("Abhilfe nach brand.json, ai_generated_images.cropping: der Bildausschnitt")
+        print("wandert, nicht der Kasten — also eine eigene, zugeschnittene und dann")
+        print("gestempelte Fassung je Platzierung.")
+        return 0
+
     pfade = sammle(args.pfade, args.alle, reg)
     if not pfade:
         print("Keine Bilder zu prüfen. Register leer? %s" % REGISTER)
