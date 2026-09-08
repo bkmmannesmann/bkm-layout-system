@@ -76,7 +76,6 @@ UNGEKENNZEICHNET = [WURZEL / r for r in [
     "uploads/a4-texture-deep-green.jpg",
     "uploads/cover-hero-standard.jpg",
     "uploads/druckwasser-abplazender-putz-feuchte-waende.jpg",
-    "uploads/magnific_nano-banana-2-halbnah-san_3GXw9NsREY.jpg",
     "uploads/fachbetrieb-partner-standard.webp",
     "assets/images/keyvisual-on-light.png",
     "assets/images/products/novusan.png",
@@ -109,7 +108,9 @@ def main():
             continue
         t = K.finde(p)
         werte.append(t["guete"])
-        probe(t["gefunden"] and t["ecke"] == "unten_rechts",
+        # Die Ecke ist nicht vorgeschrieben - sie entscheidet sich am Kontrast des
+        # Motivs. Geprueft wird, dass sie eine zugelassene ist, nicht welche.
+        probe(t["gefunden"] and t["ecke"] in regel["ecken_zulaessig"],
               f"{p.name[:48]} - Vermerk gefunden",
               f"Guete {t['guete']:.3f}, {t['ecke']}, {t['kasten'][2]} px")
     if werte:

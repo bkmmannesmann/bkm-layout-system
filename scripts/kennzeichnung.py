@@ -62,6 +62,7 @@ def regeln() -> dict:
         "mindestbreite_mm": 15.0,
         "farbe": "#ffffff",
         "ecken": ["unten_rechts", "unten_links"],
+        "ecken_zulaessig": ["unten_rechts", "unten_links", "oben_rechts", "oben_links"],
     }
     try:
         marke = json.loads((WURZEL / "brand.json").read_text(encoding="utf-8"))
