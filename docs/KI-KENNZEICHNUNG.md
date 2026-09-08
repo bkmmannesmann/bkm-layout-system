@@ -181,9 +181,56 @@ Geprüft werden die Canvas-Vorlagen, nicht ein Export: was dort steht, geht in
 jede daraus gebaute Broschüre ein. `scripts/check_export.py` prüft dasselbe am
 exportierten PDF, setzt aber voraus, dass jemand exportiert hat.
 
-Abhilfe nach der Regel unten: der Bildausschnitt wandert, nicht der Kasten —
-also eine eigene, auf das Platzierungsformat zugeschnittene und dann gestempelte
-Fassung je Platzierung.
+## Der Vermerk über dem Bildkasten
+
+```
+python3 scripts/kennzeichnung_overlay.py              # prüfen
+python3 scripts/kennzeichnung_overlay.py --setzen     # fehlende ergänzen
+python3 scripts/kennzeichnung_overlay.py --entfernen  # zurücknehmen
+```
+
+Statt den Vermerk ins Motiv zu rechnen, wird er als eigenes Element über den
+Bildkasten gelegt. **Maßgebend ist dann allein das Endformat** — die Größe folgt
+der Kastenbreite, nicht der Bilddatei, und der Beschnitt kann ihm nichts anhaben.
+
+Zwei Wege, je nachdem wie das Bild eingebunden ist:
+
+- **Daneben.** Ein absolut gesetztes Bild kennt seine Lage in Millimetern; der
+  Vermerk wird als Geschwister danebengestellt. Das Dokument ändert sich um genau
+  ein zusätzliches Element.
+- **Im Rahmen.** Ein Bild mit `width:100%` oder `calc(100% + 8mm)` kennt seine
+  Lage nicht — sie ergibt sich erst aus dem Elternelement. Es bekommt einen
+  Rahmen mit `position:relative`, in dem der Vermerk prozentual sitzt. Die
+  Größenregel steht dabei im CSS: `width:9.5%; min-width:15mm` ist genau „der
+  größere aus Anteil und Mindestmaß", bezogen auf den Kasten.
+
+Die Layouteigenschaften des Bildes — `flex`, `margin`, `width`, `grid-area` und
+so fort — wandern an den Rahmen, sonst stünde er anders als das Bild zuvor.
+Nachgemessen an gerenderten Seiten: außerhalb des neuen Logos ändern sich
+0,04 bis 0,08 % der Pixel, das Layout bleibt.
+
+### Warum nicht überall
+
+Ein Vermerk über dem Kasten und einer im Motiv vertragen sich **nicht**. An zwei
+Ecken lesen sie sich als zwei Kennzeichnungen; an derselben Ecke überlagern sie
+sich versetzt zu einem unscharfen Doppelbild, weil ihre Ränder sich auf
+verschiedene Bezugsgrößen beziehen — der eine auf das Motiv, der andere auf den
+Kasten.
+
+Gesetzt wird deshalb nur, wo der gebrannte Vermerk sicher nicht im Bild steht.
+Alles andere wird gemeldet:
+
+| Fall | was geschieht |
+|:---|:---|
+| gebrannter Vermerk ganz weggeschnitten | Vermerk über dem Kasten |
+| Motiv trägt gar keinen | Vermerk über dem Kasten |
+| gebrannter Vermerk ganz sichtbar | nichts — er genügt |
+| angeschnitten | gemeldet; braucht einen anderen Bildausschnitt |
+| Kastenmaß nicht in mm | gemeldet; Beschnitt von außen nicht berechenbar |
+
+Abhilfe für die gemeldeten Fälle nach der Regel unten: der Bildausschnitt
+wandert, nicht der Kasten — also eine eigene, auf das Platzierungsformat
+zugeschnittene und dann gestempelte Fassung.
 
 ## Was nicht erlaubt ist
 

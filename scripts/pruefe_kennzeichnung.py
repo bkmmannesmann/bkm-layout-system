@@ -94,7 +94,12 @@ def bewerte(pfad: Path, regel: dict) -> dict:
 
 
 # Ein Bild in einer Canvas-Vorlage: Quelle und Stilangabe.
-CANVAS_BILD = re.compile(r'<img[^>]*\bsrc="([^"]+)"[^>]*\bstyle="([^"]*)"')
+CANVAS_BILD = re.compile(r'<img(?![^>]*\bdata-ki-vermerk)[^>]*\bsrc="([^"]+)"[^>]*\bstyle="([^"]*)"[^>]*>')
+# Ein Vermerk, der ueber dem Bildkasten liegt, steht unmittelbar hinter seinem
+# Bild. Er loest genau das Problem, das diese Pruefung meldet — also gilt eine
+# so versehene Platzierung als in Ordnung, auch wenn der Beschnitt den Vermerk
+# im Motiv selbst entfernt. Siehe scripts/kennzeichnung_overlay.py.
+CANVAS_UEBERDECKT = re.compile(r'\s*<img data-ki-vermerk')
 CANVAS_DIR = WURZEL / "templates" / "brochure"
 
 
@@ -129,17 +134,24 @@ def pruefe_platzierung(reg: dict) -> list[dict]:
     """
     ki = set(reg.get("ki_motive", []))
     lagen: dict[str, dict] = {}
-    befunde = []
+    befunde, ungeprueft = [], []
     if not CANVAS_DIR.is_dir():
-        return befunde
+        return befunde, ungeprueft
 
     for datei in sorted(CANVAS_DIR.glob("*.dc.html")):
-        for m in CANVAS_BILD.finditer(datei.read_text(encoding="utf-8")):
+        text = datei.read_text(encoding="utf-8")
+        for m in CANVAS_BILD.finditer(text):
             quelle, stil = m.group(1), m.group(2)
             if quelle not in ki or not (WURZEL / quelle).exists():
                 continue
+            if CANVAS_UEBERDECKT.match(text[m.end():m.end() + 40]):
+                continue
             kb, kh = _mm(stil, "width"), _mm(stil, "height")
             if not kb or not kh:
+                # width:100 % oder calc(…): die Kastengroesse ergibt sich erst aus
+                # dem Elternelement. Von hier aus laesst sich der Beschnitt nicht
+                # berechnen — das wird gezaehlt, nicht stillschweigend uebergangen.
+                ungeprueft.append((datei.name, quelle))
                 continue
             if quelle not in lagen:
                 t = K.finde(WURZEL / quelle)
@@ -161,7 +173,7 @@ def pruefe_platzierung(reg: dict) -> list[dict]:
                     "sichtbar": (sx0, sx1, sy0, sy1),
                     "vermerk": (lage["x0"], lage["x1"], lage["y0"], lage["y1"]),
                 })
-    return befunde
+    return befunde, ungeprueft
 
 
 def main() -> int:
@@ -185,10 +197,16 @@ def main() -> int:
     reg = register()
 
     if args.platzierung:
-        befunde = pruefe_platzierung(reg)
+        befunde, ungeprueft = pruefe_platzierung(reg)
         print("Platzierung der KI-Motive in %s\n" % CANVAS_DIR.relative_to(WURZEL))
+        def nachsatz():
+            if ungeprueft:
+                print("\n%d Platzierung(en) ohne Massangabe in Millimetern — width:100 %% oder"
+                      "\ncalc(…). Ihr Beschnitt ergibt sich erst aus dem Elternelement und ist"
+                      "\nvon hier aus nicht zu berechnen." % len(ungeprueft))
         if not befunde:
-            print("Der Vermerk ueberlebt in allen Platzierungen den Beschnitt.")
+            print("Der Vermerk ueberlebt in allen berechenbaren Platzierungen den Beschnitt.")
+            nachsatz()
             return 0
         for b in befunde:
             sx0, sx1, sy0, sy1 = b["sichtbar"]
@@ -203,6 +221,7 @@ def main() -> int:
         print("Abhilfe nach brand.json, ai_generated_images.cropping: der Bildausschnitt")
         print("wandert, nicht der Kasten — also eine eigene, zugeschnittene und dann")
         print("gestempelte Fassung je Platzierung.")
+        nachsatz()
         return 0
 
     pfade = sammle(args.pfade, args.alle, reg)
