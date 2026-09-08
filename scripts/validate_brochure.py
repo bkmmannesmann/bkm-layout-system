@@ -115,18 +115,42 @@ def strip_jinja_comments(text: str) -> str:
 # Canvas-Ebene: Fusssteg gegen Seitenzahl
 # --------------------------------------------------------------------------
 
-# Der Fusssteg jeder Satzseite. Siehe docs/BROSCHUERE-CANVAS.md, Abschnitt
-# "Ausnahme: Seiten ohne Seitenzahl".
-CANVAS_FOOT = "23.5mm"
+def _canvas_geometrie() -> tuple[str, str]:
+    """Fusssteg und Lage des Beiwerks aus brand.json, nicht hier verdrahtet.
 
-# Ein Seiten-Container im Canvas-Export.
-CANVAS_PAGE = re.compile(r'<div style="width:210mm;height:297mm;[^"]*"')
+    Beide Zahlen wurden am 07.09.2026 umgestellt. Standen sie an zwei Stellen,
+    lief die Pruefung danach gegen den alten Wert weiter - genau das ist
+    passiert und blieb unbemerkt, weil die Regel dadurch nicht laut wurde,
+    sondern still: sie fand die Seitenzahl nicht mehr und meldete nichts.
+    """
+    werte = json.loads((ROOT_DIR / "brand.json").read_text(encoding="utf-8"))
+    innen = werte["grid"]["interior"]["innenteil_canvas"]
+    return (f"{innen['margin_bottom_mm']:g}mm",
+            f"{innen['beiwerk']['oberkante_mm']:g}mm")
+
+
+# Der Fusssteg jeder Satzseite und die Oberkante des Beiwerks darunter.
+# Siehe docs/BROSCHUERE-CANVAS.md, Abschnitt "Ausnahme: Seiten ohne Seitenzahl".
+CANVAS_FOOT, CANVAS_BEIWERK = _canvas_geometrie()
+
+# Der Umschlag ist anders aufgebaut und bleibt aussen vor - so haelt es auch
+# brand.json unter innenteil_canvas.gilt_nicht_fuer.
+CANVAS_AUSGENOMMEN = ("A-Titelblaetter.dc.html",)
+
+# Ein Seiten-Container im Canvas-Export. Erkannt wird er am Blattmass, nicht am
+# Anfang der Stilangabe: als die Innenseiten am 07.09.2026 ein vorangestelltes
+# position:relative bekamen - noetig, damit das Beiwerk absolut sitzen kann -,
+# fielen 59 von 85 Containern aus dieser Regex und damit still aus der Pruefung.
+# Aus demselben Grund steht das Tag vorn und nicht die Stilangabe: die Seiten in
+# I-Anleitung.dc.html tragen id und data-screen-label vor dem style-Attribut.
+CANVAS_PAGE = re.compile(r'<div[^>]*\bstyle="[^"]*\bwidth:210mm;\s*height:297mm;')
 CANVAS_PADDING = re.compile(r"padding:([^;\"]+)")
-# Der Kolumnentitel: eine Flexzeile mit Rubrik links und Ziffer rechts. Anders
-# als im Produktionspfad, der die Ziffer ueber .page__footer in den Fusssteg
-# setzt, steht sie im Canvas am Kopf.
+# Der Kolumnentitel: eine Flexzeile mit Rubrik und Ziffer, absolut gesetzt auf
+# der Oberkante des Beiwerks. Er stand bis zum 07.09.2026 am Kopf der Seite;
+# seitdem steht er unten, unterhalb des Satzspiegels.
 CANVAS_RUNNING_HEAD = re.compile(
-    r'<div style="[^"]*justify-content:space-between[^"]*">(.{0,400}?)</div>', re.S)
+    r'top:' + re.escape(CANVAS_BEIWERK).replace("mm", r"mm") +
+    r';[^"]*justify-content:space-between[^"]*"[^>]*>(.{0,400}?)</div>', re.S)
 CANVAS_FOLIO = re.compile(r"<span[^>]*>\s*(\d{1,3})\s*</span>")
 
 
@@ -140,11 +164,15 @@ def canvas_pages(text: str):
 def canvas_folio(block: str) -> str | None:
     """Die Seitenzahl aus dem Kolumnentitel, falls die Seite eine traegt.
 
-    Gesucht wird nur im oberen Viertel des Containers: eine Ziffer weiter unten
-    ist ein Verweis im Inhaltsverzeichnis, keine Seitenzahl.
+    Erkannt wird die Zeile an ihrer Lage - absolut gesetzt auf der Oberkante
+    des Beiwerks. Frueher wurde stattdessen im oberen Viertel des Containers
+    nach einer Flexzeile mit Ziffer gesucht. Das traf, solange der
+    Kolumnentitel oben stand; seit er unten steht, fand es die Seitenzahl auf
+    keiner Seite mehr, dafuer gelegentlich eine Zeile aus dem
+    Inhaltsverzeichnis - "03 · Zwei Wege. Ein Ziel." mit der Ziffer 17.
+    Eine Lage ist eindeutig, eine Struktur nicht.
     """
-    kopf = block[:max(1, len(block) // 4)]
-    for zeile in CANVAS_RUNNING_HEAD.finditer(kopf):
+    for zeile in CANVAS_RUNNING_HEAD.finditer(block):
         treffer = CANVAS_FOLIO.search(zeile.group(1))
         if treffer:
             return treffer.group(1)
@@ -164,6 +192,8 @@ def check_canvas_footers() -> list[str]:
     if not CANVAS_DIR.is_dir():
         return errors
     for datei in sorted(CANVAS_DIR.glob("*.dc.html")):
+        if datei.name in CANVAS_AUSGENOMMEN:
+            continue
         text = datei.read_text(encoding="utf-8")
         for nummer, block in canvas_pages(text):
             padding = CANVAS_PADDING.search(block[:400])
