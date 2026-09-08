@@ -227,17 +227,26 @@ def beschnitt_zustand(lage, ausschnitt) -> str:
     return "angeschnitten"
 
 
-def bearbeite(datei: Path, ki: set[str], regel: dict, setzen: bool):
+def bearbeite(datei: Path, ki: set[str], regel: dict, setzen: bool, messung=None):
     """Prüft eine Canvas-Datei und ergänzt fehlende Vermerke, wenn setzen."""
     text = datei.read_text(encoding="utf-8")
     vorhanden = len(OVERLAY.findall(text))
     einfuegungen, berichte, offen = [], [], []
+    gezaehlt: dict[str, int] = {}
 
     for m, quelle, kasten, cover, kb, kh in stellen(text, ki, regel):
         im = Image.open(WURZEL / quelle)
         # Nur das Verhaeltnis des Kastens zaehlt fuer den Beschnitt. Steht es nicht
         # in Millimetern, ist wenigstens das Verhaeltnis oft ablesbar; sonst wird
         # der ganze Ausschnitt bewertet.
+        # Gemessene Kastengroessen schlagen die aus der Stilangabe gelesenen: sie
+        # gelten auch dort, wo width:100 % oder calc(…) steht.
+        nummer = gezaehlt.get(quelle, 0)
+        gezaehlt[quelle] = nummer + 1
+        gemessen = (messung or {}).get("%s#%d" % (quelle, nummer))
+        if gemessen and gemessen["breite_mm"]:
+            kb, kh = gemessen["breite_mm"], gemessen["hoehe_mm"]
+
         bekannt = bool(kb and kh)
         kv = (kb / kh) if bekannt else im.width / im.height
         aus = sichtbarer_ausschnitt(im.width / im.height, kv, cover)
@@ -314,11 +323,25 @@ def main() -> int:
     ap.add_argument("dateien", nargs="*", help="Canvas-Dateien; ohne Angabe templates/brochure/*.dc.html")
     ap.add_argument("--setzen", action="store_true", help="fehlende Vermerke ergänzen")
     ap.add_argument("--entfernen", action="store_true", help="gesetzte Vermerke herausnehmen")
+    ap.add_argument("--ohne-messung", action="store_true",
+                    help="Kastengroessen nicht im Browser messen, nur die Stilangaben lesen")
     args = ap.parse_args()
 
     dateien = [Path(d) for d in args.dateien] or sorted(CANVAS_DIR.glob("*.dc.html"))
     regel = K.regeln()
     ki = register()
+
+    # Ohne Messung bleiben die Kaesten mit width:100 % oder calc(…) unbestimmt und
+    # ihre Platzierungen unberuehrt. Mit ihr ist jeder Fall entschieden.
+    messungen = {}
+    if not args.ohne_messung:
+        import kasten_messen
+        gemessen = kasten_messen.messen(dateien, ki)
+        if gemessen is None:
+            print("Hinweis: Playwright oder Chromium fehlt — Kaesten ohne Massangabe\n"
+                  "bleiben unbestimmt und werden nicht angetastet.\n")
+        else:
+            messungen = gemessen
 
     if args.entfernen:
         gesamt = sum(entferne(d) for d in dateien)
@@ -329,7 +352,8 @@ def main() -> int:
     gesamt = schon = 0
     offene = []
     for datei in dateien:
-        berichte, vorhanden, offen = bearbeite(datei, ki, regel, args.setzen)
+        berichte, vorhanden, offen = bearbeite(datei, ki, regel, args.setzen,
+                                               messungen.get(datei.name))
         offene.extend(offen)
         if not berichte and not vorhanden:
             continue

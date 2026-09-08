@@ -226,11 +226,31 @@ Alles andere wird gemeldet:
 | Motiv trägt gar keinen | Vermerk über dem Kasten |
 | gebrannter Vermerk ganz sichtbar | nichts — er genügt |
 | angeschnitten | gemeldet; braucht einen anderen Bildausschnitt |
-| Kastenmaß nicht in mm | gemeldet; Beschnitt von außen nicht berechenbar |
 
 Abhilfe für die gemeldeten Fälle nach der Regel unten: der Bildausschnitt
 wandert, nicht der Kasten — also eine eigene, auf das Platzierungsformat
 zugeschnittene und dann gestempelte Fassung.
+
+### Der Kasten wird gemessen, nicht geraten
+
+```
+python3 scripts/kasten_messen.py
+```
+
+Ein Bild mit `width:100%` oder `calc(100% + 8mm)` kennt seine Größe nicht — sie
+ergibt sich erst aus dem Elternelement. Rechnerisch ist der Beschnitt damit von
+außen nicht zu bestimmen, und ohne ihn lässt sich nicht entscheiden, ob ein
+Vermerk nötig ist oder eine Doppelung erzeugen würde. 23 der 32 Platzierungen
+lagen aus diesem Grund lange unentschieden.
+
+Gemessen wird deshalb dort, wo die Frage entschieden ist: im Browser. Jede
+Vorlage wird gerendert, jedes KI-Motiv vorher markiert, und hinterher steht seine
+Kastengröße fest. Der Maßstab kommt vom Seitencontainer selbst — er ist 210 mm
+breit, das ist der einzige Bezug, den es braucht.
+
+`kennzeichnung_overlay.py` misst von sich aus, bevor es entscheidet. Fehlen
+Playwright oder Chromium, sagt es das und lässt die unbestimmten Kästen in Ruhe,
+statt zu raten. `--ohne-messung` erzwingt diesen Zustand.
 
 ## Was nicht erlaubt ist
 
