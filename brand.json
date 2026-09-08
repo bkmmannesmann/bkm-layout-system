@@ -6,7 +6,7 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.28.0",
+  "version": "1.29.0",
   "updated": "2026-09-08",
   "owner": "BKM Mannesmann AG",
   "upstream": {
@@ -672,10 +672,13 @@
       "mindestbreite_mm": 20.0,
       "mindestbreite_begruendung": [
         "Die Zeile „AI GENERATED“ misst 24 % der Logohöhe. Bei 20 mm Logobreite ergibt das",
-        "rund 1,2 mm Versalhöhe — die untere Grenze der Lesbarkeit im Druck.",
-        "Ein rein prozentualer Wert unterschreitet sie bei kleinen Bildern: ein 80 mm breit",
-        "gedrucktes Motiv käme mit 9,5 % auf 0,44 mm Versalhöhe und wäre damit unlesbar.",
-        "Bei kleinen Bildern greift deshalb die absolute Grenze, der Vermerk wird relativ grösser."
+        "rund 1,14 mm Versalhöhe — die untere Grenze der Lesbarkeit im Druck.",
+        "Ein rein prozentualer Wert unterschreitet sie: 9,5 % erreichen 20 mm erst bei einer",
+        "Bildbreite von 211 mm, die im A4-Satzspiegel nie vorkommt. Auf 174 mm ergeben 9,5 %",
+        "0,94 mm Versalhöhe, auf 85 mm nur 0,46 mm — dort ist die Zeile nicht mehr zu entziffern.",
+        "Das Mindestmaß kostet umgekehrt Fläche: auf einem 85 mm breiten Motiv nimmt es 24 %",
+        "der Bildbreite ein, auf einem 55 mm breiten 36 %.",
+        "Am 08.09.2026 an sieben Formaten von 21:9 bis 9:16 gegenübergestellt."
       ],
       "ecken": [
         "unten_rechts",
@@ -686,14 +689,22 @@
         "unten_links",
         "oben_rechts",
         "oben_links"
-      ]
+      ],
+      "druckbreite": {
+        "regel": "Die Marke wird ins Pixelbild gebrannt und skaliert mit der Platzierung mit. Ihre gedruckte Größe hängt allein an der Breite, in der das Motiv im Layout steht — nicht an seiner Auflösung.",
+        "folge": "Ein Stempellauf ohne Angabe der Platzierungsbreite kann mindestbreite_mm nicht einhalten. Wer für den Druck stempelt, gibt sie mit: scripts/pruefe_kennzeichnung.py --stempeln --druckbreite 85 …",
+        "ohne_angabe": "Es gilt breite_anteil, begrenzt durch mindestbreite_px. Das ist die Bildschirmrechnung und entspricht der bisherigen BKM-Praxis."
+      }
     },
     "check": {
       "skript": "scripts/pruefe_kennzeichnung.py",
       "verfahren": "Normierte Kreuzkorrelation der Bildhelligkeit gegen die Deckungsmaske des Logos, über 16 Maßstäbe und alle vier Ecken, danach eine Feinsuche um den Treffer.",
       "schwelle": 0.75,
       "trennschaerfe": "An 16 Motiven des Repositories geprüft: 6 gekennzeichnete erreichen 0,945 bis 0,963, die 10 ungekennzeichneten bleiben unter 0,455. Die Schwelle liegt in der Lücke.",
-      "aufbringen": "Nur auf ausdrückliche Anweisung (--stempeln). Die Prüfung meldet Fehlstellen, sie setzt den Vermerk nicht von sich aus — eine automatisch falsch platzierte Kennzeichnung ist schlechter als eine gemeldete fehlende."
+      "aufbringen": "Nur auf ausdrückliche Anweisung (--stempeln). Die Prüfung meldet Fehlstellen, sie setzt den Vermerk nicht von sich aus — eine automatisch falsch platzierte Kennzeichnung ist schlechter als eine gemeldete fehlende.",
+      "kontrast_mindestens": 0.45,
+      "kontrast_skala": "Wie gut eine Ecke die weisse Marke trägt, bewertet beste_ecke() zwischen 0 und 1. Zur Einordnung: eine sehr dunkle Ecke erreicht 0,89, die bereits gekennzeichneten BKM-Motive liegen bei 0,75 bis 0,80, eine mittelhelle Fläche bei 0,52, eine weisse bei 0,30. Unter 0,45 trägt die Ecke nicht mehr — dann wandert der Bildausschnitt, nicht die Farbe der Marke.",
+      "suchbereich": "5 % bis 45 % der Bildbreite. Die Obergrenze folgt aus mindestbreite_mm: druckgerecht gesetzt misst die Marke auf schmalen Motiven bis zu 36 % der Bildbreite."
     }
   },
   "deviations_from_tds": {

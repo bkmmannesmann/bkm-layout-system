@@ -28,6 +28,12 @@ SEITENVERHAELTNIS = 195.131 / 47.307
 
 # Mindeststreuung eines Suchfensters in Graustufen. Darunter ist die Fläche zu
 # gleichförmig, um den Vermerk zu enthalten — und die NCC dort nicht belastbar.
+# Die Zeile „AI GENERATED“ nimmt diesen Anteil der Logohöhe ein, ihre Versalien
+# wiederum diesen Anteil der Zeile. Aus beidem folgt, wie klein die Kennzeichnung
+# bei einer gegebenen Logobreite wird — die eigentliche Lesbarkeitsfrage.
+ZEILE_ANTEIL = 11.336 / 47.307
+VERSAL_ANTEIL = 0.98
+
 MIN_STREUUNG = 6.0
 
 # Unter dieser Musterbreite ist die Zeile „AI GENERATED“ nicht mehr lesbar — ein
@@ -52,7 +58,8 @@ def regeln() -> dict:
     vorgabe = {
         "breite_anteil": 0.083,
         "rand_anteil": 0.028,
-        "mindestbreite_px": 60,
+        "mindestbreite_px": 90,
+        "mindestbreite_mm": 20.0,
         "farbe": "#ffffff",
         "ecken": ["unten_rechts", "unten_links"],
     }
@@ -197,7 +204,12 @@ def finde(pfad, schwelle: float = SCHWELLE, breiten_anteile=None, fein: bool = T
     grau = np.asarray(bild, dtype=np.float32)
 
     if breiten_anteile is None:
-        breiten_anteile = [0.05 * (1.10 ** i) for i in range(16)]  # 5 % … 21 %
+        # 5 % bis 45 % der Bildbreite. Die Obergrenze ist nicht willkuerlich: wird
+        # die Marke nach dem Druckmindestmass von 20 mm gesetzt, misst sie auf einem
+        # 85 mm breiten Motiv 24 % und auf einem 55 mm breiten 36 % der Bildbreite.
+        # Der Bereich endete zuerst bei 21 % - der Sucher fand damit genau die
+        # Marken nicht, die das Repository selbst druckgerecht aufbringt.
+        breiten_anteile = [0.05 * (1.1226 ** i) for i in range(20)]
 
     bestes = {"gefunden": False, "guete": -1.0, "ecke": None, "kasten": None,
               "breite_anteil": None, "datei": str(pfad), "bild": (w0, h0)}
@@ -239,13 +251,33 @@ def _dunkelheit(grau: np.ndarray) -> float:
     return max(0.0, (1.0 - mittel)) * (1.0 - min(unruhe * 1.4, 0.6))
 
 
-def beste_ecke(pfad, regel: dict | None = None) -> list[dict]:
+def marke_breite(bildbreite_px: int, regel: dict, druckbreite_mm: float | None = None) -> int:
+    """Die Pixelbreite, in der die Marke ins Motiv gebrannt wird.
+
+    Ohne druckbreite_mm gilt der Anteil an der Bildbreite, nach unten begrenzt
+    durch das Mindestmaß in Pixeln. Das ist die Bildschirmrechnung.
+
+    Mit druckbreite_mm kommt die Rechnung für den Druck dazu: die Marke wird
+    mitskaliert, wenn das Motiv ins Layout gesetzt wird, und ihre gedruckte
+    Größe hängt deshalb nicht an der Auflösung des Motivs, sondern allein an
+    der Breite, in der es steht. Ein Skript, das das Motiv stempelt, ohne diese
+    Breite zu kennen, kann das Mindestmaß in Millimetern nicht einhalten — es
+    weiß nicht, wie gross das Bild am Ende wird.
+    """
+    breite = max(int(regel["mindestbreite_px"]), int(round(bildbreite_px * regel["breite_anteil"])))
+    if druckbreite_mm:
+        px_je_mm = bildbreite_px / float(druckbreite_mm)
+        breite = max(breite, int(round(float(regel["mindestbreite_mm"]) * px_je_mm)))
+    return min(breite, bildbreite_px)
+
+
+def beste_ecke(pfad, regel: dict | None = None, druckbreite_mm: float | None = None) -> list[dict]:
     """Bewertet die zugelassenen Ecken nach Kontrast — dunkelste zuerst."""
     regel = regel or regeln()
     bild = Image.open(pfad).convert("L")
     w, h = bild.size
     grau = np.asarray(bild, dtype=np.float32)
-    tb = max(int(regel["mindestbreite_px"]), int(round(w * regel["breite_anteil"])))
+    tb = marke_breite(w, regel, druckbreite_mm)
     th = int(round(tb / SEITENVERHAELTNIS))
     rand = int(round(w * regel["rand_anteil"]))
     luft = int(round(th * 0.45))  # etwas Umfeld mitbewerten
@@ -262,10 +294,15 @@ def beste_ecke(pfad, regel: dict | None = None) -> list[dict]:
     return ergebnis
 
 
-def stemple(pfad_ein, pfad_aus, ecke: str | None = None, regel: dict | None = None) -> dict:
-    """Setzt den Vermerk in die angegebene (oder kontraststärkste) Ecke."""
+def stemple(pfad_ein, pfad_aus, ecke: str | None = None, regel: dict | None = None,
+            druckbreite_mm: float | None = None) -> dict:
+    """Setzt den Vermerk in die angegebene (oder kontraststärkste) Ecke.
+
+    druckbreite_mm ist die Breite, in der das Motiv im Layout stehen wird. Nur
+    mit ihr lässt sich das Mindestmaß für den Druck einhalten.
+    """
     regel = regel or regeln()
-    rang = beste_ecke(pfad_ein, regel)
+    rang = beste_ecke(pfad_ein, regel, druckbreite_mm)
     gewaehlt = next((e for e in rang if e["ecke"] == ecke), rang[0])
 
     quelle = Image.open(pfad_ein)
@@ -280,5 +317,14 @@ def stemple(pfad_ein, pfad_aus, ecke: str | None = None, regel: dict | None = No
         bild.convert("RGB").save(ziel, quality=95)
     else:
         bild.save(ziel)
-    return {"ecke": gewaehlt["ecke"], "kasten": gewaehlt["kasten"],
-            "eignung": gewaehlt["eignung"], "ziel": str(ziel)}
+    ergebnis = {"ecke": gewaehlt["ecke"], "kasten": gewaehlt["kasten"],
+                "eignung": gewaehlt["eignung"], "ziel": str(ziel)}
+    if druckbreite_mm:
+        ergebnis["marke_mm"] = x_mm = tb_mm(gewaehlt["kasten"][2], bild.width, druckbreite_mm)
+        ergebnis["versalhoehe_mm"] = x_mm / SEITENVERHAELTNIS * ZEILE_ANTEIL * VERSAL_ANTEIL
+    return ergebnis
+
+
+def tb_mm(marke_px: int, bild_px: int, druckbreite_mm: float) -> float:
+    """Gedruckte Breite der Marke in Millimetern."""
+    return marke_px / bild_px * float(druckbreite_mm)

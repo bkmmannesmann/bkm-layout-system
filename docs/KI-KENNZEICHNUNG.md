@@ -44,10 +44,39 @@ auf das Motiv, nicht auf die Marke — dann wird der Bildausschnitt geändert.
 ### Warum eine Mindestbreite in Millimetern
 
 Die Zeile „AI GENERATED" misst 24 % der Logohöhe. Bei 20 mm Logobreite ergibt das
-rund 1,2 mm Versalhöhe — die untere Grenze der Lesbarkeit im Druck. Ein rein
-prozentualer Wert unterschreitet sie: ein 80 mm breit gedrucktes Motiv käme mit
-9,5 % auf 0,44 mm und wäre unlesbar. Bei kleinen Bildern greift deshalb die
-absolute Grenze, und der Vermerk wird relativ größer. Das ist gewollt.
+rund 1,14 mm Versalhöhe — die untere Grenze der Lesbarkeit im Druck.
+
+Ein rein prozentualer Wert unterschreitet sie fast immer: **9,5 % erreichen 20 mm
+erst bei 211 mm Bildbreite**, die im A4-Satzspiegel nicht vorkommt.
+
+| Bildbreite | 9,5 % | Versalhöhe | Mindestmaß 20 mm |
+|---:|---:|---:|---:|
+| 174 mm | 16,5 mm | 0,94 mm | 11 % der Bildbreite |
+| 113 mm | 10,7 mm | 0,61 mm | 18 % |
+| 85 mm | 8,1 mm | 0,46 mm | 24 % |
+| 55 mm | 5,2 mm | 0,30 mm | 36 % |
+
+Beide Regeln kosten etwas. Der Anteil hält die Marke unauffällig und wird auf
+kleinen Bildern unlesbar; das Mindestmaß bleibt lesbar und nimmt auf schmalen
+Motiven ein Viertel bis ein Drittel der Bildbreite ein. Gegenübergestellt an
+sieben Formaten von 21:9 bis 9:16 am 08.09.2026.
+
+### Die Platzierungsbreite gehört zum Stempeln
+
+Die Marke wird ins Pixelbild gebrannt und skaliert mit der Platzierung mit. Ihre
+gedruckte Größe hängt deshalb **allein an der Breite, in der das Motiv im Layout
+steht** — nicht an seiner Auflösung. Ein Stempellauf, der diese Breite nicht
+kennt, kann das Mindestmaß in Millimetern gar nicht einhalten; er weiß nicht, wie
+groß das Bild am Ende wird.
+
+Wer für den Druck stempelt, gibt sie mit:
+
+```
+python3 scripts/pruefe_kennzeichnung.py --stempeln --druckbreite 85 uploads/x.webp
+```
+
+Ohne `--druckbreite` gilt der Anteil an der Bildbreite — die Bildschirmrechnung
+und zugleich die bisherige BKM-Praxis.
 
 ## Das Register
 
@@ -88,6 +117,11 @@ gekennzeichneten erreichen 0,945 bis 0,963, die zehn ungekennzeichneten bleiben
 unter 0,455. Die Schwelle liegt bei 0,75, mitten in der Lücke. Reines Rauschen
 kommt über fünf Durchgänge nicht über 0,20.
 
+Gesucht wird über **5 % bis 45 % der Bildbreite**. Die Obergrenze folgt aus dem
+Mindestmaß: druckgerecht gesetzt misst die Marke auf schmalen Motiven bis zu 36 %.
+Sie lag zuerst bei 21 % — damit fand der Sucher genau die Marken nicht, die das
+Repository selbst druckgerecht aufbringt.
+
 Gefunden ist nicht gleich in Ordnung. Beanstandet wird auch ein Vermerk, der
 vorhanden, aber zu klein gesetzt ist oder die Bildkante berührt — letzteres fällt
 beim Beschnitt als Erstes weg.
@@ -108,6 +142,11 @@ Ohne `--ecke` entscheidet der Kontrast: bewertet wird für jede zugelassene Ecke
 wie dunkel und wie ruhig die Fläche dort ist. Eine ruhige dunkle Fläche schlägt
 eine ebenso dunkle, aber stark strukturierte — auf letzterer verliert sich die
 Marke, obwohl die Helligkeit stimmt.
+
+Die Bewertung läuft von 0 bis 1. Zur Einordnung: eine sehr dunkle Ecke erreicht
+**0,89**, die bereits gekennzeichneten BKM-Motive liegen bei **0,75 bis 0,80**,
+eine mittelhelle Fläche bei **0,52**, eine weiße bei **0,30**. Unter **0,45** trägt
+die Ecke nicht mehr — dann wandert der Bildausschnitt, nicht die Farbe der Marke.
 
 Ohne `--ausgabe` wird die Datei an Ort und Stelle ersetzt. Bildgröße und
 Farbmodell bleiben unverändert.

@@ -238,6 +238,38 @@ def main():
               "Stempeln aendert Bildgroesse und Farbmodell nicht",
               f"{vorher.size} {vorher.mode} -> {nachher.size} {nachher.mode}")
 
+    print("\nDie gedruckte Groesse")
+    print("-" * 64)
+
+    # Die Marke wird ins Pixelbild gebrannt und skaliert mit der Platzierung mit.
+    # Ohne die Platzierungsbreite ist das Mindestmass in Millimetern nicht
+    # durchsetzbar - der Anteil an der Bildbreite erreicht 20 mm erst bei einem
+    # 211 mm breit gesetzten Motiv, was im A4-Satzspiegel nie vorkommt.
+    quelle = als_datei(verlauf(1600, 900, 30, 70), tmp, "druck.png")
+    ohne = K.marke_breite(1600, regel)
+    probe(K.tb_mm(ohne, 1600, 85.0) < regel["mindestbreite_mm"],
+          "ohne Platzierungsbreite bleibt die Marke unter dem Druckmindestmass",
+          f"{K.tb_mm(ohne, 1600, 85.0):.1f} mm auf 85 mm Bildbreite, "
+          f"Mindestmass {regel['mindestbreite_mm']:g} mm")
+
+    treffer = []
+    for breite_mm in (174.0, 113.0, 85.0, 55.0):
+        px = K.marke_breite(1600, regel, breite_mm)
+        treffer.append(abs(K.tb_mm(px, 1600, breite_mm) - regel["mindestbreite_mm"]) < 0.15)
+    probe(all(treffer), "mit Platzierungsbreite trifft die Marke das Druckmindestmass",
+          "174, 113, 85 und 55 mm Bildbreite ergeben je %g mm Marke" % regel["mindestbreite_mm"])
+
+    erg = K.stemple(quelle, Path(tmp) / "druck-gestempelt.png", druckbreite_mm=85.0)
+    t = K.finde(Path(tmp) / "druck-gestempelt.png")
+    probe(t["gefunden"] and abs(erg["marke_mm"] - regel["mindestbreite_mm"]) < 0.15,
+          "die druckgerecht gestempelte Marke wird wiedergefunden",
+          f"{erg['marke_mm']:.1f} mm, Versalhoehe {erg['versalhoehe_mm']:.2f} mm, Guete {t['guete']:.3f}")
+
+    # Die Marke darf nie breiter werden als das Motiv selbst.
+    schmal = K.marke_breite(300, regel, 8.0)
+    probe(schmal <= 300, "die Marke wird nie breiter als das Motiv",
+          f"300 px Motiv auf 8 mm gesetzt ergibt {schmal} px Marke")
+
     print("\nRegister und Regelwerk")
     print("-" * 64)
 

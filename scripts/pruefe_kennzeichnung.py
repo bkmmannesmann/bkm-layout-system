@@ -100,6 +100,10 @@ def main() -> int:
     ap.add_argument("--stempeln", action="store_true", help="fehlenden Vermerk aufbringen")
     ap.add_argument("--ecke", choices=K.ECKEN, help="Ecke erzwingen statt nach Kontrast wählen")
     ap.add_argument("--ausgabe", help="Zielordner beim Stempeln (Vorgabe: an Ort und Stelle)")
+    ap.add_argument("--druckbreite", type=float, metavar="MM",
+                    help="Breite in mm, in der das Motiv im Layout stehen wird. Nur damit "
+                         "laesst sich das Mindestmass fuer den Druck einhalten: die Marke wird "
+                         "ins Pixelbild gebrannt und skaliert mit der Platzierung mit.")
     args = ap.parse_args()
 
     regel = K.regeln()
@@ -130,7 +134,7 @@ def main() -> int:
             print("  – %-52s kein KI-Motiv, kein Vermerk nötig" % rel[:52])
             continue
 
-        rang = K.beste_ecke(p, regel)
+        rang = K.beste_ecke(p, regel, args.druckbreite)
         vorschlag = rang[0]
         marke = "✗" if art == "ki" else "?"
         wort = "Vermerk fehlt" if art == "ki" else "kein Vermerk, nicht im Register"
@@ -139,8 +143,13 @@ def main() -> int:
 
         if args.stempeln:
             ziel = Path(args.ausgabe) / p.name if args.ausgabe else p
-            erg = K.stemple(p, ziel, args.ecke, regel)
-            print("      → gesetzt %s, %d px → %s" % (erg["ecke"], erg["kasten"][2], erg["ziel"]))
+            erg = K.stemple(p, ziel, args.ecke, regel, args.druckbreite)
+            masse = ""
+            if "marke_mm" in erg:
+                masse = ", %.1f mm bei %.0f mm Bildbreite (Versalhöhe %.2f mm)" % (
+                    erg["marke_mm"], args.druckbreite, erg["versalhoehe_mm"])
+            print("      → gesetzt %s, %d px%s → %s"
+                  % (erg["ecke"], erg["kasten"][2], masse, erg["ziel"]))
             gestempelt.append(rel)
         elif art == "ki":
             fehler.append("%s: Vermerk fehlt" % rel)
