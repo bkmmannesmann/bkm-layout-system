@@ -371,7 +371,7 @@ def pruefteil(content):
         "protokoll": review.get("protokoll"),
         "abgleich": review.get("abgleich"),
         "quelle": content.get("source_pdf", "keine Vorlage hinterlegt"),
-        "issued": content.get("issued", ""),
+        "created_date": content.get("created_date", ""),
         "seiten": content.get("page_total", len(seiten) + 1),
     }
 

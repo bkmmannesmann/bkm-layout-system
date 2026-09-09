@@ -353,7 +353,7 @@ werden:
 |---|---|
 | Offene Angaben | jeder `[ANGABE FEHLT: …]`-Marker, mit Seitenzahl |
 | Fehlende Motive | jedes `image_needed`, mit Seitenzahl und Bildunterschrift |
-| Quelle und Stand | `source_pdf`, `issued`, `page_total` |
+| Quelle und Stand | `source_pdf`, `created_date`, `page_total` |
 
 Was eine Maschine nicht wissen kann, steht im `review`-Block:
 `korrekturen` für Stellen, an denen die Vorlage einen Fehler hat und

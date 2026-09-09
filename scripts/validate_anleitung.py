@@ -26,12 +26,18 @@ TEMPLATE_DIR = ROOT_DIR / "templates" / "anleitung"
 ICON_DIR = TEMPLATE_DIR / "icons"
 
 PFLICHT = ("title", "product_name", "product_line", "document_rubrik",
-           "issued", "page_number_start", "page_total", "pages")
+           "created_date", "page_number_start", "page_total", "pages")
 # product_image und line_badge standen hier bis 31.08.2026 als Pflicht,
 # wurden aber weder im Innenteil noch im Titelblatt gesetzt. Ein Kollege
 # haette sie liefern muessen, ohne dass sie irgendwo erscheinen.
 LINIEN = ("PRO LINE", "HOME LINE")
 DATUM = re.compile(r"^\d{2}\.\d{2}\.\d{4}$")
+
+# Bis zum 09.09.2026 hiess das Feld issued und die Zeile im Impressum „Ausgegeben
+# am". Beides war irrefuehrend: gemeint war immer der Tag, an dem die Fassung
+# erzeugt wird, nie das Ausgabedatum der angelieferten Vorlage. Das Datenblatt
+# fuehrt dasselbe Datum seit jeher als created_date; jetzt heisst es hier ebenso.
+ALTFELDER = ("issued",)
 
 # Gemessen am 31.08.2026: 68 Zeichen laufen zwei Zeilen, 82 laufen drei.
 # Die Grenze steht als max_lines in brand.json; hier die Zeichenzahl, die
@@ -47,6 +53,12 @@ def pruefe(daten):
     for feld in PFLICHT:
         if feld not in daten:
             fehler.append(f"Pflichtfeld fehlt: {feld}")
+    for feld in ALTFELDER:
+        if feld in daten:
+            fehler.append(
+                f"{feld} ist kein Feld des Anleitungs-Datenvertrags; bitte entfernen. "
+                "Das Datum heisst created_date und ist der Tag, an dem die Fassung "
+                "erzeugt wird - nie das Ausgabedatum der angelieferten Vorlage.")
     if fehler:
         return fehler
 
@@ -64,8 +76,8 @@ def pruefe(daten):
             f"product_line ist {daten['product_line']}, erwartet {erwartet}: "
             f"Produkte mit dem Namensbestandteil Novu gehoeren zur Home Line, "
             f"alle uebrigen zur Pro Line.")
-    if not DATUM.match(str(daten["issued"])):
-        fehler.append(f"issued ist {daten['issued']!r}, erwartet TT.MM.JJJJ.")
+    if not DATUM.match(str(daten["created_date"])):
+        fehler.append(f"created_date ist {daten['created_date']!r}, erwartet TT.MM.JJJJ.")
 
     # Seitenzaehlung: das Titelblatt ist Blatt 1 und zaehlt mit.
     if daten["page_number_start"] != 2:
@@ -171,7 +183,7 @@ def pruefe_seiten(seiten):
                                   f"hat weder Text noch Liste noch Formel "
                                   f"noch Tabelle.")
         elif art == "nacharbeit":
-            for feld in ("headline", "steps", "issued", "copyright"):
+            for feld in ("headline", "steps", "created_date", "copyright"):
                 if not s.get(feld):
                     fehler.append(f"Seite {i}: {feld} fehlt.")
     return fehler

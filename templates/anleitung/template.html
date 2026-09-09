@@ -205,7 +205,7 @@
     {% for a in page.sections | default([]) %}{{ abschnitt(a) }}{% endfor %}
   </div>
   <div class="anl-impressum">
-    <span class="anl-impressum__datum">Ausgegeben am {{ page.issued }}</span><br>
+    <span class="anl-impressum__datum">Erstelldatum: {{ page.created_date }}</span><br>
     {{ page.copyright }}
   </div>
   {{ fuss(page, loop.index0) }}
@@ -253,7 +253,7 @@
     <div class="anl-pruef__bar">Quelle und Stand</div>
     <dl class="anl-pruef__quelle">
       <dt>Vorlage</dt><dd>{{ pruefteil.quelle }}</dd>
-      <dt>Ausgegeben am</dt><dd>{{ pruefteil.issued }}</dd>
+      <dt>Erstelldatum</dt><dd>{{ pruefteil.created_date }}</dd>
       <dt>Umfang</dt><dd>{{ pruefteil.seiten }} Seiten einschließlich Titelblatt</dd>
       {% if pruefteil.abgleich %}<dt>Abgleich</dt><dd>{{ pruefteil.abgleich }}</dd>{% endif %}
     </dl>

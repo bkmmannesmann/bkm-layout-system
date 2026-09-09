@@ -4,7 +4,7 @@
   "product_name": "BKM RD ReparaturDicht",
   "product_line": "PRO LINE",
   "document_rubrik": "Verarbeitungsanleitung",
-  "issued": "18.08.2026",
+  "created_date": "18.08.2026",
   "source_pdf": "VA_BKM_RD_ReparaturDicht_DE",
   "page_number_start": 2,
   "page_total": 5,
@@ -164,7 +164,7 @@
         "Produktreste und leere Gebinde fachgerecht entsorgen.",
         "Gebinde gut verschlossen sowie kühl und trocken lagern."
       ],
-      "issued": "18.08.2026",
+      "created_date": "18.08.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
   ],

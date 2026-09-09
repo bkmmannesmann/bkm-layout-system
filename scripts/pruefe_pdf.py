@@ -85,7 +85,10 @@ ABSTAND_MIN_LUECKEN = 3
 # Umschlagseiten - als Satzbegriff richtig, auf dem Blatt nicht.
 # Das Impressum. Steht in allen drei Dokumentarten im Fusssteg und ist
 # dort richtig.
-IMPRESSUM = re.compile(r"Copyright|Ausgegeben am|All rights reserved",
+# Erstelldatum steht seit dem 09.09.2026 in den Verarbeitungsanleitungen,
+# vorher stand dort Ausgegeben am. Beides bleibt erkannt, damit aeltere
+# Ausgaben nicht ploetzlich als impressumlos gelten.
+IMPRESSUM = re.compile(r"Copyright|Erstelldatum|Ausgegeben am|All rights reserved",
                        re.IGNORECASE)
 
 MARKER = re.compile(r"(?:^|\s)(U[234]|Artboard\s*\d*|Screen\s*\d+|Frame\s*\d+)(?:\s|$)")
