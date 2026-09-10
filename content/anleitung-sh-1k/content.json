@@ -4,7 +4,7 @@
   "product_name": "BKM SH-1K",
   "product_line": "PRO LINE",
   "document_rubrik": "Verarbeitungsanleitung",
-  "issued": "01.09.2026",
+  "created_date": "01.09.2026",
   "source_pdf": "VA_Entwurf_BKM_SH-1K",
   "page_number_start": 2,
   "page_total": 6,
@@ -218,7 +218,7 @@
         "Entferne Abdeckmaterial, reinige den Arbeitsbereich und entsorge Produktreste sowie Verpackungen sachgerecht.",
         "[ANGABE FEHLT: Lagerung von Restmaterial und angebrochenen Gebinden – bitte fachlich bestätigen.]"
       ],
-      "issued": "01.09.2026",
+      "created_date": "01.09.2026",
       "copyright": "Copyright BKM.MANNESMANN AG · Wideystraße 23 · 59174 Kamen · Germany · Phone: +49 (0) 2307-99034-0 · www.bkm-mannesmann.de · All rights reserved. Reproduction only with our permission."
     }
   ],

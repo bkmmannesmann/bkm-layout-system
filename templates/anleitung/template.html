@@ -194,13 +194,18 @@
   <img class="anl-keyvisual" src="../../assets/keyvisual/keyvisual-on-light.svg" alt="">
   <div class="anl-page__body">
     <h1 class="anl-rubrik">Nacharbeit</h1>
-    {% if page.headline %}<h2 class="anl-abschnitt__title">{{ page.headline }}</h2>{% endif %}
+    {#- page.icon stand seit dem ersten Bau im Content und im Datenvertrag
+        und wurde hier nie gesetzt: die Nacharbeitsseite war die einzige,
+        deren Ueberschrift ohne Icon blieb. Gefunden am 03.09.2026 vom
+        Feldabgleich in validate_anleitung.py. Gesetzt wie ueberall
+        sonst - ic() vor dem Titel, der Titel im span. -#}
+    {% if page.headline %}<h2 class="anl-abschnitt__title">{{ ic(page.icon, 'contact') if page.icon }}<span>{{ page.headline }}</span></h2>{% endif %}
     {% if page.leadline %}<p class="anl-text">{{ page.leadline }}</p>{% endif %}
     {% if page.steps %}<ul class="anl-schritte">{% for s in page.steps %}<li>{{ s }}</li>{% endfor %}</ul>{% endif %}
     {% for a in page.sections | default([]) %}{{ abschnitt(a) }}{% endfor %}
   </div>
   <div class="anl-impressum">
-    <span class="anl-impressum__datum">Ausgegeben am {{ page.issued }}</span><br>
+    <span class="anl-impressum__datum">Erstelldatum: {{ page.created_date }}</span><br>
     {{ page.copyright }}
   </div>
   {{ fuss(page, loop.index0) }}
@@ -248,7 +253,7 @@
     <div class="anl-pruef__bar">Quelle und Stand</div>
     <dl class="anl-pruef__quelle">
       <dt>Vorlage</dt><dd>{{ pruefteil.quelle }}</dd>
-      <dt>Ausgegeben am</dt><dd>{{ pruefteil.issued }}</dd>
+      <dt>Erstelldatum</dt><dd>{{ pruefteil.created_date }}</dd>
       <dt>Umfang</dt><dd>{{ pruefteil.seiten }} Seiten einschließlich Titelblatt</dd>
       {% if pruefteil.abgleich %}<dt>Abgleich</dt><dd>{{ pruefteil.abgleich }}</dd>{% endif %}
     </dl>

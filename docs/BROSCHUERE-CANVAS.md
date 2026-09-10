@@ -168,6 +168,44 @@ Der TDS löst dasselbe Problem über `.tds-band` mit `margin-top: -10px`. Beide 
 sind gültig; der Broschüren-Weg ist nötig, weil das Hero eine Grafikdatei ist und
 kein CSS-Balken.
 
+## Satzspiegel und Beiwerk der Innenseiten
+
+**Satzspiegel 18 bis 276 mm.** Kopfsteg 18 mm, Fußsteg 21 mm, Verhältnis
+1 : 1,17 — der Fußsteg ist größer als der Kopfsteg, damit der Satzspiegel
+optisch über der Blattmitte sitzt.
+
+**Kolumnentitel und Seitenzahl stehen unten**, in einer Zeile, Oberkante bei
+284,6 mm, Haarlinie 3 mm darüber bei 281,6 mm. Bis zur Blattkante bleiben
+8,6 mm. Ziffer außen, Kolumnentitel innen, im Bund wechselnd. TT Norms Pro
+Bold 8,5 pt, Versalien, Laufweite 0,12 em.
+
+Vorher stand das Beiwerk oben auf 26,7 mm — genau auf der Oberkante des
+Satzspiegels. Dort gehört es nicht hin: es fraß den Kopfsteg auf, die Headline
+begann erst bei 44,6 mm, und der Kopfsteg war größer als der Fußsteg, wodurch
+der Satz optisch absackte. Jetzt steht oben nichts mehr, und der Kopfsteg
+konnte auf 18 mm — das Grundmaß, auf dem auch der Seitenrand steht.
+
+An 65 Innenseiten nachgemessen:
+
+| | vorher | nachher |
+|:---|---:|---:|
+| Kopfsteg | 26,7 mm | 18,0 mm |
+| Fußsteg | 23,5 mm | 21,0 mm |
+| oberste Zeile im Mittel | 44,6 mm | 29,0 mm |
+| Beiwerk | oben, im Satzspiegel | unten, bei 284,6 mm |
+| Kopf : Fuß | 1 : 0,88 | 1 : 1,17 |
+
+**Was nicht dazugehört:** der Umschlag. Titelblätter und U4 in
+`A-Titelblaetter.dc.html` sind anders aufgebaut und bleiben unberührt. Ebenso
+der Druckweg in `templates/pages/`: er fährt weiter 26,7 und 23,5 mm und trug
+seine Seitenzahl schon immer unten. Ob beide Wege angeglichen werden, ist eine
+offene Entscheidung.
+
+Drei Innenseiten laufen auf mehr als ein Blatt — `B-Rahmenseiten` 3,
+`D-Textstrecken` 2 und `E-Strecken` 14. Alle drei taten das schon vorher; sie
+tragen mehr Inhalt, als ein Blatt fasst. Das ist redaktionell zu lösen, nicht
+über das Raster.
+
 ## Paginierung
 
 **Titel und Rückseite zählen nicht mit.** Die erste Seite danach trägt die Ziffer `1` —
@@ -280,6 +318,91 @@ Auszeichnungen, Zahlen und Preise.
 **Keine Monospace.** Auszeichnungszeilen mit Tracking laufen in TT Norms Pro Bold,
 eine halbe Punktgröße größer als der Fließtext — Monospace trägt optisch mehr und
 sah im Satz technisch statt redaktionell aus.
+
+### Im Canvas: Flattersatz, und weiche Trennzeichen in die langen Wörter
+
+**Browser und WeasyPrint brechen verschieden um.** Das ist der Grund, warum
+eine Broschüre im Repo-Bau sauber aussieht und in der Design-Vorschau nicht.
+
+Am 07.09.2026 an denselben zwölf Absätzen der Mitarbeiterbroschüre gemessen,
+Wortabstand im Blocksatz gegen den natürlichen Zwischenraum der Schrift:
+
+| Spalte | WeasyPrint | Chromium |
+|---:|---:|---:|
+| 55 mm | 1,31× | **2,21×** |
+| 85 mm | 1,19× | **1,63×** |
+| 114 mm | 1,20× | **1,46×** |
+
+Die Ursache: Browser trennen deutschen Text bei `hyphens: auto` nur, wenn sie
+ein Trennwörterbuch für die Sprache haben — und darauf ist kein Verlass. Der
+gemessene Chromium trennt gar nicht: `hyphens: none` und `hyphens: auto`
+liefern Zeile für Zeile dasselbe, mit und ohne `lang`-Attribut. Ohne Trennung
+reißt der Blocksatz in **jeder** Spaltenbreite des Innenteils auf, auch in der
+breitesten.
+
+**Deshalb im Canvas: Flattersatz.** Und weil ohne Trennung auch der Flatterrand
+zerklüftet, kommen weiche Trennzeichen U+00AD in die langen Wörter. Die wirken
+ohne Wörterbuch, in jedem Browser und in WeasyPrint gleichermaßen:
+
+| Flatterrand, gemessen an echtem Text | ohne Fugen | mit Fugen |
+|:---|---:|---:|
+| 55 mm | 23,4 % | **17,7 %** |
+| 85 mm | 13,7 % | **9,8 %** |
+
+Die geprüften Fugen stehen in `brand.json` unter `typography.trennfugen` —
+44 BKM-Fachwörter, deren Fugen die automatische Silbentrennung nicht kennt
+(`Bau-werksab-dich-tung` statt `Bauwerks-abdichtung`, `Schim-mel-s-chutz`,
+`Mau-e-r-werks-s-tär-ke`). Alles andere wird nach Silben getrennt, mit
+mindestens drei Zeichen zu jeder Seite.
+
+```bash
+python3 scripts/trennhilfe.py --wort Bauwerksabdichtung
+python3 scripts/trennhilfe.py content/<name>/content.json
+python3 scripts/trennhilfe.py --pruefe-liste
+```
+
+### Im Druckweg: Blocksatz erst ab 61 mm Spaltenbreite
+
+Für den Bau über `scripts/build_pages.py` gilt: `text-align: justify` für
+Fließtext **ab 61 mm** Spaltenbreite bei 9 pt, schmalere Spalten linksbündig.
+Dort trennt WeasyPrint selbst und erreicht 1,00× — weiche Trennzeichen sind
+dort nicht nötig und schaden leicht, weil sie den Umbruch verschieben. Silbentrennung bleibt überall an:
+`hyphens: auto; hyphenate-character: "-";`
+
+Der Grund steht in `brand.json` unter `typography.blocksatz`, gemessen an 1759
+Zeilen aus sechs Dokumenten. Blocksatz dehnt den Wortzwischenraum, bis die Zeile
+die Spalte füllt; passt das nächste Wort nicht mehr, reißt die Zeile auf:
+
+| Zeichen je Zeile | Wortabstand im Mittel | Zeilen über dem Doppelten |
+|---:|---:|---:|
+| 30–34 | 1,51× | 24 % |
+| 35–39 | 1,28× | 3 % |
+| **40–44** | **1,00×** | 1 % |
+| ab 45 | 1,00× | unter 2 % |
+
+Bei 9 pt trägt eine Zeile rund **0,66 Zeichen je Millimeter**: 55 mm sind 36
+Zeichen, 61 mm sind 40, 85 mm sind 55. Die dreispaltige Anlage liegt mit 55,4 mm
+unter der Schwelle und läuft deshalb linksbündig — betroffen sind `columns-3`,
+`columns-2` und die Spalten der beiden `flex-cols`. Alles ab 85 mm bleibt
+Blocksatz, und das ist der größere Teil jeder Seite.
+
+**Kein Schalter hilft dagegen.** Trennzone von 0 bis 20 %, Trennregeln von 4/2/2
+bis 5/3/3, engere Laufweite, kleinerer Grundwortabstand — alles gebaut und
+gemessen, alles unter einem Prozentpunkt Wirkung, und die strengere Trennregel
+machte es schlechter. Getrennt wird schon am Anschlag: 23 % der Zeilen endeten
+mit Trennstrich. Wer den Blocksatz in einer 55-mm-Spalte behalten will, bekommt
+die Löcher mit.
+
+Nachgemessen wird am fertigen PDF:
+
+```bash
+python3 scripts/pruefe_pdf.py broschuere.pdf
+```
+
+Jeder Bericht endet mit einer Zeile wie „1035 Fließtextzeilen gemessen,
+Wortabstand im Mittel 1.00-fach, 7 % über der Setzergrenze von 1.33, weiteste
+Zeile 2.3-fach". Über 1,00× im Mittel heißt: die Spalten sind zu schmal für den
+Blocksatz, der darin steht.
 
 ## Verhältnis zum TDS-Vertrag
 

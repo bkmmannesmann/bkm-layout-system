@@ -53,7 +53,10 @@ cp -R content/anleitung-hz250pro content/anleitung-neues-produkt
 ```
 
 **2. Werte ersetzen.** Nur `content.json`; HTML und CSS bleiben unberührt.
-`issued` trägt das Datum, an dem die Fassung erzeugt wird. Alles, was nicht
+`created_date` trägt das **Erstelldatum** im Format `TT.MM.JJJJ` — den Tag, an
+dem die Fassung erzeugt wird, nie das Ausgabedatum der angelieferten Vorlage.
+Es erscheint als „Erstelldatum“ im Impressum und im internen Prüfteil; das
+frühere Feld `issued` wird als Fehler gemeldet. Alles, was nicht
 belegt ist, bekommt einen sichtbaren Marker:
 
 ```

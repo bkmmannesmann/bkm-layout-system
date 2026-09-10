@@ -6,8 +6,8 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.27.0",
-  "updated": "2026-08-25",
+  "version": "1.30.0",
+  "updated": "2026-09-08",
   "owner": "BKM Mannesmann AG",
   "upstream": {
     "repository": "bkmmannesmann/bkm-design-system",
@@ -134,6 +134,110 @@
         "TT Norms Pro Bold",
         "TT Norms Pro Compact Regular"
       ]
+    },
+    "blocksatz": {
+      "$comment": "Blocksatz oder Flattersatz. Haengt an der Spaltenbreite - und daran, wer setzt.",
+      "regel": "text-align:justify erst ab 61 mm Spaltenbreite bei 9 pt. Darunter text-align:left.",
+      "schwelle_mm": 61.0,
+      "schwelle_zeichen": 40,
+      "gilt_fuer": "Broschuere, Canvas wie Druck. Verarbeitungsanleitungen und Datenblaetter setzen ohnehin 76 bis 114 mm breit.",
+      "css": "text-align: justify; hyphens: auto; hyphenate-character: \"-\";",
+      "why": "Blocksatz dehnt den Wortzwischenraum, bis die Zeile die Spalte fuellt. Passt das naechste Wort nicht mehr und laesst es sich nicht trennen, reisst die Zeile auf. Am 07.09.2026 an 1759 Zeilen aus sechs Dokumenten gemessen, jede Luecke gegen die 0,7303 mm, die TT Norms Pro bei 9 pt fuer das Leerzeichen vorsieht.",
+      "messung": {
+        "30-34 Zeichen": "Wortabstand im Mittel 1,51-fach, 24 Prozent der Zeilen ueber dem Doppelten",
+        "35-39 Zeichen": "1,28-fach, 3 Prozent",
+        "40-44 Zeichen": "1,00-fach, 1 Prozent",
+        "ab 45 Zeichen": "1,00-fach, unter 2 Prozent"
+      },
+      "kein_schalter_hilft": "hyphenate-limit-zone von 0 bis 20 Prozent, hyphenate-limit-chars von 4 2 2 bis 5 3 3, engere Laufweite, kleinerer Grundwortabstand: alles gebaut und gemessen, alles unter einem Prozentpunkt Wirkung, und die strengere Trennregel machte es schlechter. Getrennt wird bereits am Anschlag - dreiundzwanzig Prozent der Zeilen endeten mit Trennstrich.",
+      "dreispaltig": "Die dreispaltige Anlage traegt bei 55,4 mm und 9 pt sechsunddreissig Zeichen und laeuft deshalb linksbuendig: columns-3, columns-2 und die Spalten der beiden flex-cols. Alles ab 85 mm bleibt Blocksatz.",
+      "gemessen_mit": "scripts/pruefe_pdf.py, Kennzahl am Ende jedes Berichts",
+      "zwei_wege": {
+        "$comment": "Browser und WeasyPrint brechen verschieden um. Am 07.09.2026 an denselben zwoelf Absaetzen der Mitarbeiterbroschuere gemessen.",
+        "druckweg": {
+          "wer": "scripts/build_pages.py, WeasyPrint",
+          "satzart": "Blocksatz ab 61 mm, darunter linksbuendig",
+          "wortabstand_blocksatz": {
+            "55mm": "1,31x",
+            "85mm": "1,19x",
+            "114mm": "1,20x"
+          },
+          "weiche_trennzeichen": "nicht noetig und leicht schaedlich: WeasyPrint trennt selbst, zusaetzliche Fugen verschieben den Umbruch und hoben den Wortabstand von 1,19 auf 1,28"
+        },
+        "canvasweg": {
+          "wer": "Claude Design, Vorschau und PDF-Export im Browser",
+          "satzart": "Flattersatz, ueberall",
+          "warum": "Browser trennen deutschen Text nur mit Trennwoerterbuch, und darauf ist kein Verlass. Der gemessene Chromium trennt nicht: hyphens:none und hyphens:auto liefern Zeile fuer Zeile dasselbe, mit und ohne lang-Attribut. Der Blocksatz reisst dadurch in jeder Spaltenbreite des Innenteils auf - auch in der breitesten.",
+          "wortabstand_blocksatz": {
+            "55mm": "2,21x",
+            "85mm": "1,63x",
+            "114mm": "1,46x"
+          },
+          "weiche_trennzeichen": "noetig, siehe typography.trennfugen",
+          "flatterrand_ohne_fugen": {
+            "55mm": "23,4 %",
+            "85mm": "13,7 %"
+          },
+          "flatterrand_mit_fugen": {
+            "55mm": "17,7 %",
+            "85mm": "9,8 %"
+          }
+        }
+      }
+    },
+    "trennfugen": {
+      "$comment": "Wortfugen fuer weiche Trennzeichen U+00AD in langen Komposita.",
+      "warum": "Browser trennen deutschen Text bei hyphens:auto nur, wenn sie ein Trennwoerterbuch fuer die Sprache haben. Der Chromium, mit dem am 07.09.2026 gemessen wurde, tut es nicht: hyphens:none und hyphens:auto liefern Zeile fuer Zeile dasselbe, mit und ohne lang-Attribut. In einer 55-mm-Spalte schwankt der Flatterrand dadurch um 31 Prozent der Spaltenbreite, und der Blocksatz reisst auf. Ein weiches Trennzeichen im Text braucht kein Woerterbuch - es wirkt in jedem Browser und in WeasyPrint gleichermassen. Gemessen: Flatterrand von 31 auf 17,6 Prozent.",
+      "regel": "Woerter ab zwoelf Zeichen bekommen weiche Trennzeichen an den Fugen unten. Was hier nicht steht, wird nach Silben getrennt, mit mindestens drei Zeichen zu jeder Seite.",
+      "warum_liste": "pyphen trennt deutsche Komposita nach Sprechsilben quer ueber die Wortgrenze - 'Bau-werksab-dich-tung' statt 'Bauwerks-abdichtung', 'Schim-mel-s-chutz', 'Mau-e-r-werks-s-tär-ke'. Diese Liste setzt die Wortfugen, die es nicht kennt.",
+      "zeichen": "U+00AD",
+      "trennstrich_beim_umbruch": "U+002D, siehe typography.hyphenation",
+      "fugen": {
+        "Anwendungssicherheit": "Anwen|dungs|sicher|heit",
+        "Außenabdichtung": "Außen|abdich|tung",
+        "Bauteilsituation": "Bauteil|situa|tion",
+        "Bauwerksabdichtung": "Bau|werks|abdich|tung",
+        "Bauwerkserhaltung": "Bau|werks|erhal|tung",
+        "Bereichsclaims": "Bereichs|claims",
+        "Detailanschlüsse": "Detail|anschlüsse",
+        "Eigenanwendung": "Eigen|anwen|dung",
+        "Fachverarbeitung": "Fach|ver|arbei|tung",
+        "Feuchtehaushalt": "Feuchte|haus|halt",
+        "Feuchtigkeitsschaden": "Feuchtig|keits|schaden",
+        "Feuchtigkeitsschutz": "Feuchtig|keits|schutz",
+        "Feuchtigkeitsschäden": "Feuchtig|keits|schäden",
+        "Gebäudebestand": "Gebäude|bestand",
+        "Injektionsflaschen": "Injek|tions|flaschen",
+        "Injektionsverfahren": "Injek|tions|ver|fahren",
+        "Innenabdichtung": "Innen|abdich|tung",
+        "Internationales": "Inter|natio|nales",
+        "Kalksandstein": "Kalk|sand|stein",
+        "Kellerabdichtung": "Keller|abdich|tung",
+        "Kondensationsbeschichtung": "Konden|sations|beschich|tung",
+        "Materialbedarf": "Mate|rial|bedarf",
+        "Materialmenge": "Mate|rial|menge",
+        "Materialverbrauch": "Mate|rial|ver|brauch",
+        "Mauerwerk": "Mauer|werk",
+        "Mauerwerks": "Mauer|werks",
+        "Mauerwerksstärke": "Mauer|werks|stärke",
+        "Partnernetzwerk": "Partner|netz|werk",
+        "Positionierung": "Positio|nie|rung",
+        "Quadratmeter": "Quadrat|meter",
+        "Salzausblühungen": "Salz|ausblü|hungen",
+        "Salzbelastung": "Salz|belas|tung",
+        "Sanierungssituationen": "Sanie|rungs|situa|tionen",
+        "Schimmelschutz": "Schim|mel|schutz",
+        "Schulungsframework": "Schu|lungs|frame|work",
+        "Spezialisierung": "Spezia|lisie|rung",
+        "Systemarchitektur": "System|archi|tektur",
+        "Systemausarbeitung": "System|ausar|bei|tung",
+        "Technologiemarke": "Techno|logie|marke",
+        "Untergrundvorbereitung": "Unter|grund|vor|berei|tung",
+        "Verarbeitung": "Ver|arbei|tung",
+        "Verarbeitungsanleitung": "Ver|arbei|tungs|anlei|tung",
+        "Verbrauchstabelle": "Ver|brauchs|tabelle",
+        "Verbundabdichtung": "Verbund|abdich|tung"
+      }
     }
   },
   "grid": {
@@ -168,7 +272,26 @@
         "width_mm": 38,
         "gutter_mm": 6
       },
-      "column_width_note": "Die Spaltenbreite wird nicht gesetzt, sondern gerechnet: (174 − 2 × Steg) / 3. Bei 4,6 mm Steg sind das 54,933 mm. Zwei nebeneinander gesetzte Zahlen laufen auseinander — genau daran stand der Satz zeitweise 0,8 mm über der rechten Fluchtlinie."
+      "column_width_note": "Die Spaltenbreite wird nicht gesetzt, sondern gerechnet: (174 − 2 × Steg) / 3. Bei 4,6 mm Steg sind das 54,933 mm. Zwei nebeneinander gesetzte Zahlen laufen auseinander — genau daran stand der Satz zeitweise 0,8 mm über der rechten Fluchtlinie.",
+      "innenteil_canvas": {
+        "$comment": "Satzspiegel und Beiwerk der Broschueren-Innenseiten im Canvas. Entschieden am 07.09.2026 anhand von fuenf Kopfstegen und drei Fusszeilenlagen, jeweils an denselben Innenseiten gerendert.",
+        "margin_top_mm": 18.0,
+        "margin_bottom_mm": 21.0,
+        "satzspiegel_mm": "18,0 bis 276,0",
+        "verhaeltnis_kopf_fuss": "1 : 1,17",
+        "beiwerk": {
+          "wo": "unten, Kolumnentitel und Seitenzahl in einer Zeile",
+          "oberkante_mm": 284.6,
+          "haarlinie_mm": 281.6,
+          "bis_blattkante_mm": 8.6,
+          "schrift": "TT Norms Pro Bold 8,5 pt, Versalien, Laufweite 0,12 em",
+          "reihenfolge": "wie im Bund: Ziffer aussen, Kolumnentitel innen"
+        },
+        "warum_unten": "Beiwerk gehoert nicht in den Satzspiegel. Es stand oben auf 26,7 mm, also genau auf dessen Oberkante, und frass den Kopfsteg auf - die Headline begann erst bei 44,6 mm. Oben steht jetzt nichts mehr, deshalb konnte der Kopfsteg auf 18 mm, das Grundmass des Systems.",
+        "warum_fuss_groesser": "Der Fusssteg muss groesser sein als der Kopfsteg, sonst sitzt der Satzspiegel optisch zu tief. Vorher war es umgekehrt: 26,7 oben gegen 23,5 unten.",
+        "gilt_nicht_fuer": "Umschlag - Titelblaetter und U4 in A-Titelblaetter.dc.html sind anders aufgebaut und bleiben unberuehrt. Ebenso der Druckweg in templates/pages/, der weiter 26,7 und 23,5 faehrt und seine Seitenzahl schon immer unten trug.",
+        "gemessen": "65 Innenseiten. Oberste Zeile im Mittel von 12,0 auf 29,0 mm, Fusszeile auf allen 49 Seiten mit Beiwerk exakt bei 284,6 mm. Drei Seiten laufen auf mehr als ein Blatt - alle drei schon vorher, eine davon nun mit zwei Zeilen mehr auf dem ersten."
+      }
     },
     "anleitung": {
       "$comment": "Verarbeitungsanleitung. Eigener Satzspiegel, siehe why. Struktur und Rubrikenfolge abgelesen an sieben freigegebenen Fassungen: HZ 250 Pro, HZC Creme, SP Express, RD ReparaturDicht, Novusan, NovuSticks, NovuProtect.",
@@ -518,7 +641,7 @@
   "ai_generated_images": {
     "rule": "Ein KI-generiertes Motiv trägt den Vermerk „AI GENERATED“ als kleines Symbol im Bild selbst — nicht als Bildunterschrift, nicht als Text im Layout. Nach EU-KI-Verordnung erforderlich.",
     "no_collective_notice": "Eine Sammelangabe im Impressum ersetzt den Vermerk am Bild nicht. Beides zugleich ist zulässig, der Vermerk am Bild bleibt Pflicht.",
-    "position": "Eine Ecke des Bildes, oben oder unten, links oder rechts. Welche, entscheidet sich am einzelnen Motiv — es gibt keine feste Ecke.",
+    "position": "Eine Ecke des Bildes. Bevorzugt unten rechts oder unten links, entschieden am einzelnen Motiv nach dem Kontrast: der Vermerk steht dort, wo er sich vom Grund abhebt und lesbar bleibt. Oben ist zulässig, wenn unten keine Ecke trägt.",
     "do_not": [
       "wegretuschieren",
       "überdecken",
@@ -529,6 +652,64 @@
       "rule": "Die Bildkomposition hat Vorrang. Ein Motiv wird **nicht** in ein abweichendes Format gepresst, nur damit der Vermerk sichtbar bleibt — weder durch Anpassen des Kastens noch durch Verzicht auf den Beschnitt.",
       "instead": "Wer ein Motiv platziert, prüft, welche Ecken der Beschnitt übriglässt, und setzt den Vermerk dorthin. Reicht keine Ecke, wird das Motiv neu ausgerichtet — der Bildausschnitt wandert, nicht der Kasten.",
       "check": "scripts/check_export.py meldet zu jedem beschnittenen Bild, welche Ecken sichtbar bleiben und welche verdeckt sind. Es ist ein Hinweis, kein Verstoß: die Entscheidung liegt bei der Bildredaktion."
+    },
+    "marke": {
+      "$comment": [
+        "Am 08.09.2026 an sechs bereits gekennzeichneten Motiven des Repositories gemessen,",
+        "nicht gesetzt: uploads/bkm-fachbetrieb-*.webp, feuchte-waende-selbst-sanieren.webp,",
+        "trockene-waende-mit-novusan.webp. Vier davon lagen exakt bei 9,50 % Breite und 10 px",
+        "Rand, zwei bei 9,00 %. Die Werte unten sind diese Messung, auf runde Zahlen gebracht."
+      ],
+      "datei": "assets/kennzeichnung/bkm-ai-generated.svg",
+      "seitenverhaeltnis": 4.125,
+      "aufbau": "BKM-Wortmarke, darunter die Zeile „AI GENERATED“, rechts die Signetstriche. Eine Sperrmarke, kein Wortzusatz — sie wird als Ganzes gesetzt und nicht auseinandergenommen.",
+      "farbe": "#ffffff",
+      "farbe_begruendung": "Weiss, immer. Die Ecke wird nach dem Kontrast gewählt, nicht die Farbe nach der Ecke — so bleibt die Kennzeichnung über alle Motive hinweg dieselbe Marke.",
+      "breite_anteil": 0.095,
+      "rand_anteil": 0.01,
+      "rand_begruendung": "Abstand zu beiden angrenzenden Bildkanten, als Anteil der Bildbreite — in x und y derselbe Pixelwert, damit der Rand optisch gleich wirkt.",
+      "mindestbreite_px": 90,
+      "mindestbreite_mm": 15.0,
+      "mindestbreite_begruendung": [
+        "Entschieden am 08.09.2026, nach der Formatprobe über sieben Bildformate.",
+        "15 mm Logobreite ergeben rund 0,85 mm Versalhöhe in der Zeile „AI GENERATED“.",
+        "",
+        "Der Wert ist so gewählt, dass er die bestehende Praxis nicht antastet: 9,5 % der",
+        "Bildbreite erreichen 15 mm bereits bei 158 mm Bildbreite. Ein Motiv über die volle",
+        "Satzbreite von 174 mm behält deshalb seine 16,5 mm — dort greift weiterhin der",
+        "Anteil, nicht das Mindestmaß. Angehoben werden nur schmalere Bilder, bei denen",
+        "der Anteil unter die Lesbarkeit fällt: auf 85 mm wären es 8,1 mm und 0,46 mm",
+        "Versalhöhe, die Zeile ist dort nicht mehr zu entziffern.",
+        "",
+        "Zum Preis: auf 85 mm nimmt das Mindestmaß 17,6 % der Bildbreite ein, auf 55 mm",
+        "27,3 %. Ein zuvor geprüfter Wert von 20 mm hätte 1,14 mm Versalhöhe gehalten,",
+        "dafür aber 24 beziehungsweise 36 % beansprucht und wirkte am Motiv zu schwer."
+      ],
+      "ecken": [
+        "unten_rechts",
+        "unten_links"
+      ],
+      "ecken_zulaessig": [
+        "unten_rechts",
+        "unten_links",
+        "oben_rechts",
+        "oben_links"
+      ],
+      "druckbreite": {
+        "regel": "Die Marke wird ins Pixelbild gebrannt und skaliert mit der Platzierung mit. Ihre gedruckte Größe hängt allein an der Breite, in der das Motiv im Layout steht — nicht an seiner Auflösung.",
+        "folge": "Ein Stempellauf ohne Angabe der Platzierungsbreite kann mindestbreite_mm nicht einhalten. Wer für den Druck stempelt, gibt sie mit: scripts/pruefe_kennzeichnung.py --stempeln --druckbreite 85 …",
+        "ohne_angabe": "Es gilt breite_anteil, begrenzt durch mindestbreite_px. Das ist die Bildschirmrechnung und entspricht der bisherigen BKM-Praxis."
+      }
+    },
+    "check": {
+      "skript": "scripts/pruefe_kennzeichnung.py",
+      "verfahren": "Normierte Kreuzkorrelation der Bildhelligkeit gegen die Deckungsmaske des Logos, über 16 Maßstäbe und alle vier Ecken, danach eine Feinsuche um den Treffer.",
+      "schwelle": 0.75,
+      "trennschaerfe": "An 16 Motiven des Repositories geprüft: 6 gekennzeichnete erreichen 0,945 bis 0,963, die 10 ungekennzeichneten bleiben unter 0,455. Die Schwelle liegt in der Lücke.",
+      "aufbringen": "Nur auf ausdrückliche Anweisung (--stempeln). Die Prüfung meldet Fehlstellen, sie setzt den Vermerk nicht von sich aus — eine automatisch falsch platzierte Kennzeichnung ist schlechter als eine gemeldete fehlende.",
+      "kontrast_mindestens": 0.45,
+      "kontrast_skala": "Wie gut eine Ecke die weisse Marke trägt, bewertet beste_ecke() zwischen 0 und 1. Zur Einordnung: eine sehr dunkle Ecke erreicht 0,89, die bereits gekennzeichneten BKM-Motive liegen bei 0,75 bis 0,80, eine mittelhelle Fläche bei 0,52, eine weisse bei 0,30. Unter 0,45 trägt die Ecke nicht mehr — dann wandert der Bildausschnitt, nicht die Farbe der Marke.",
+      "suchbereich": "5 % bis 45 % der Bildbreite. Die Obergrenze folgt aus mindestbreite_mm: druckgerecht gesetzt misst die Marke auf schmalen Motiven bis zu 36 % der Bildbreite."
     }
   },
   "deviations_from_tds": {

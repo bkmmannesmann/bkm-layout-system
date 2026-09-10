@@ -25,6 +25,7 @@ geraten werden darf.
 | Technische Datenblätter | `templates/tds/` |
 | Titelblätter | `templates/cover/` |
 | Schriften, Logos, Keyvisual, Icons | `assets/` |
+| KI-Kennzeichnung „AI GENERATED“ | `assets/kennzeichnung/` |
 | Bilder und Texturen | `uploads/` |
 | Dateiliste mit Auflösungen | `docs/ASSET-MANIFEST.md` |
 
@@ -38,6 +39,7 @@ Die Prosa zu den Werten. Die Zahlen selbst stehen in `brand.json`.
 | `docs/BROSCHUERE-LAYOUT.md` | Broschüren, Produktionsebene |
 | `docs/LAYOUT-CONTRACT.md` | Technische Datenblätter |
 | `docs/REDAKTIONSSTANDARD.md` | Inhalt, Sprache, Freigabe |
+| `docs/KI-KENNZEICHNUNG.md` | Vermerk „AI GENERATED“ an KI-Motiven |
 | `AGENTS.md` | Arbeitsweise am Repository |
 
 ## Prüfen
@@ -47,7 +49,33 @@ python3 scripts/check_brand_drift.py <datei-oder-verzeichnis>   # Farben, Schrif
 python3 scripts/check_brand_drift.py --list                     # geltende Werte
 python3 scripts/validate_brochure.py                            # Broschüren-Layout
 python3 scripts/validate_layout.py                              # Datenblatt-Layout
+python3 scripts/pruefe_kennzeichnung.py                          # KI-Vermerk an den Motiven
 ```
+
+## Welchen Stand externe Werkzeuge lesen
+
+Claude Design, Manus und ChatGPT lesen dieses Repository über GitHub. **Welchen
+Branch sie dabei lesen, ist ihre Einstellung, nicht die des Repositories** — sie
+steht in der jeweiligen Konfiguration des Werkzeugs, in Claude Design etwa in
+`github.md`. Voreingestellt ist dort `main`.
+
+Das ist die Stelle, an der ein Werkzeug unbemerkt veraltet arbeitet: Es meldet
+keinen Fehler, es liest schlicht einen älteren Stand und erzeugt Unterlagen
+danach.
+
+**So prüft man es**, ohne etwas zu ändern — die Frage an das Werkzeug lautet:
+
+> Welche Versionsnummer steht in `brand.json`?
+
+Die Zahl in `version` steigt mit jeder Änderung der Markenwerte. Stimmt sie mit
+dem Stand überein, den dieses Repository führt, liest das Werkzeug aktuell.
+Weicht sie ab, liest es einen anderen Branch — dann bekommt es entweder den
+richtigen Branchnamen genannt, oder der Stand wird nach `main` gebracht.
+
+Am 09.09.2026 geprüft: Claude Design las `main` mit Version 1.27.0, während der
+Arbeitsstand bei 1.30.0 lag — dreiundzwanzig Commits Unterschied, darunter die
+KI-Kennzeichnung und die Umstellung des Anleitungsdatums auf `created_date`.
+Bemerkt wurde es nur, weil jemand nachgefragt hat.
 
 ## Herkunft
 

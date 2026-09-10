@@ -719,6 +719,12 @@
   font-family: 'TT Norms Pro', Arial, sans-serif;
   font-size: 9pt;
   color: var(--bkm-muted-grey);
+  /* Der Prueftteil erbt sonst den Blocksatz des Dokuments. Bei einem
+     kurzen Hinweis reisst der Loecher, und die letzte Zeile stand
+     0,9 mm hinter der rechten Fluchtlinie - von scripts/pruefe_pdf.py
+     am 03.09.2026 gemeldet. */
+  text-align: left;
+  hyphens: none;
 }
 .anl-pruef__liste { margin: 0 0 4.5mm; padding: 0; list-style: none; }
 .anl-pruef__liste li {

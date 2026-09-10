@@ -115,18 +115,42 @@ def strip_jinja_comments(text: str) -> str:
 # Canvas-Ebene: Fusssteg gegen Seitenzahl
 # --------------------------------------------------------------------------
 
-# Der Fusssteg jeder Satzseite. Siehe docs/BROSCHUERE-CANVAS.md, Abschnitt
-# "Ausnahme: Seiten ohne Seitenzahl".
-CANVAS_FOOT = "23.5mm"
+def _canvas_geometrie() -> tuple[str, str]:
+    """Fusssteg und Lage des Beiwerks aus brand.json, nicht hier verdrahtet.
 
-# Ein Seiten-Container im Canvas-Export.
-CANVAS_PAGE = re.compile(r'<div style="width:210mm;height:297mm;[^"]*"')
+    Beide Zahlen wurden am 07.09.2026 umgestellt. Standen sie an zwei Stellen,
+    lief die Pruefung danach gegen den alten Wert weiter - genau das ist
+    passiert und blieb unbemerkt, weil die Regel dadurch nicht laut wurde,
+    sondern still: sie fand die Seitenzahl nicht mehr und meldete nichts.
+    """
+    werte = json.loads((ROOT_DIR / "brand.json").read_text(encoding="utf-8"))
+    innen = werte["grid"]["interior"]["innenteil_canvas"]
+    return (f"{innen['margin_bottom_mm']:g}mm",
+            f"{innen['beiwerk']['oberkante_mm']:g}mm")
+
+
+# Der Fusssteg jeder Satzseite und die Oberkante des Beiwerks darunter.
+# Siehe docs/BROSCHUERE-CANVAS.md, Abschnitt "Ausnahme: Seiten ohne Seitenzahl".
+CANVAS_FOOT, CANVAS_BEIWERK = _canvas_geometrie()
+
+# Der Umschlag ist anders aufgebaut und bleibt aussen vor - so haelt es auch
+# brand.json unter innenteil_canvas.gilt_nicht_fuer.
+CANVAS_AUSGENOMMEN = ("A-Titelblaetter.dc.html",)
+
+# Ein Seiten-Container im Canvas-Export. Erkannt wird er am Blattmass, nicht am
+# Anfang der Stilangabe: als die Innenseiten am 07.09.2026 ein vorangestelltes
+# position:relative bekamen - noetig, damit das Beiwerk absolut sitzen kann -,
+# fielen 59 von 85 Containern aus dieser Regex und damit still aus der Pruefung.
+# Aus demselben Grund steht das Tag vorn und nicht die Stilangabe: die Seiten in
+# I-Anleitung.dc.html tragen id und data-screen-label vor dem style-Attribut.
+CANVAS_PAGE = re.compile(r'<div[^>]*\bstyle="[^"]*\bwidth:210mm;\s*height:297mm;')
 CANVAS_PADDING = re.compile(r"padding:([^;\"]+)")
-# Der Kolumnentitel: eine Flexzeile mit Rubrik links und Ziffer rechts. Anders
-# als im Produktionspfad, der die Ziffer ueber .page__footer in den Fusssteg
-# setzt, steht sie im Canvas am Kopf.
+# Der Kolumnentitel: eine Flexzeile mit Rubrik und Ziffer, absolut gesetzt auf
+# der Oberkante des Beiwerks. Er stand bis zum 07.09.2026 am Kopf der Seite;
+# seitdem steht er unten, unterhalb des Satzspiegels.
 CANVAS_RUNNING_HEAD = re.compile(
-    r'<div style="[^"]*justify-content:space-between[^"]*">(.{0,400}?)</div>', re.S)
+    r'top:' + re.escape(CANVAS_BEIWERK).replace("mm", r"mm") +
+    r';[^"]*justify-content:space-between[^"]*"[^>]*>(.{0,400}?)</div>', re.S)
 CANVAS_FOLIO = re.compile(r"<span[^>]*>\s*(\d{1,3})\s*</span>")
 
 
@@ -140,11 +164,15 @@ def canvas_pages(text: str):
 def canvas_folio(block: str) -> str | None:
     """Die Seitenzahl aus dem Kolumnentitel, falls die Seite eine traegt.
 
-    Gesucht wird nur im oberen Viertel des Containers: eine Ziffer weiter unten
-    ist ein Verweis im Inhaltsverzeichnis, keine Seitenzahl.
+    Erkannt wird die Zeile an ihrer Lage - absolut gesetzt auf der Oberkante
+    des Beiwerks. Frueher wurde stattdessen im oberen Viertel des Containers
+    nach einer Flexzeile mit Ziffer gesucht. Das traf, solange der
+    Kolumnentitel oben stand; seit er unten steht, fand es die Seitenzahl auf
+    keiner Seite mehr, dafuer gelegentlich eine Zeile aus dem
+    Inhaltsverzeichnis - "03 · Zwei Wege. Ein Ziel." mit der Ziffer 17.
+    Eine Lage ist eindeutig, eine Struktur nicht.
     """
-    kopf = block[:max(1, len(block) // 4)]
-    for zeile in CANVAS_RUNNING_HEAD.finditer(kopf):
+    for zeile in CANVAS_RUNNING_HEAD.finditer(block):
         treffer = CANVAS_FOLIO.search(zeile.group(1))
         if treffer:
             return treffer.group(1)
@@ -164,6 +192,8 @@ def check_canvas_footers() -> list[str]:
     if not CANVAS_DIR.is_dir():
         return errors
     for datei in sorted(CANVAS_DIR.glob("*.dc.html")):
+        if datei.name in CANVAS_AUSGENOMMEN:
+            continue
         text = datei.read_text(encoding="utf-8")
         for nummer, block in canvas_pages(text):
             padding = CANVAS_PADDING.search(block[:400])
@@ -422,6 +452,56 @@ def check_layout() -> list[str]:
 # Inhaltspruefung
 # --------------------------------------------------------------------------
 
+# Felder, die nicht im Seitentyp-Block stehen, sondern im folio-Makro und
+# darum auf jeder Seite gelten.
+FELDER_IMMER = {"type", "no_folio", "running_head", "folio_color"}
+
+
+def template_felder() -> dict[str, set[str]]:
+    """Liest aus page-template.html, welches Feld welcher Seitentyp setzt.
+
+    Ein Feld, das der Content fuehrt und das Template nicht liest, fehlt
+    im PDF - ohne dass irgendetwas meldet. Am 03.09.2026 kam eine
+    49-seitige Broschuere so zurueck: fuenfzehn list-Seiten trugen ihre
+    Eintraege unter 'items' und ihre Ueberschrift unter
+    'headline_section', das Template liest dort 'entries' und 'headline'.
+    Die Seiten kamen fast leer heraus, der Validator lief gruen durch.
+    """
+    quelle = (ROOT_DIR / "templates" / "pages" / "page-template.html")
+    if not quelle.is_file():
+        return {}
+    text = quelle.read_text(encoding="utf-8")
+    teile = re.split(r"\{%-?\s*(?:el)?if\s+page\.type\s*==\s*'([a-z]+)'\s*-?%\}",
+                     text)
+    karte: dict[str, set[str]] = {}
+    for i in range(1, len(teile), 2):
+        typ, block = teile[i], teile[i + 1]
+        felder = set(re.findall(r"page\.([a-zA-Z_][a-zA-Z0-9_]*)", block))
+        karte[typ] = felder | FELDER_IMMER
+    return karte
+
+
+def check_felder(data: dict) -> list[str]:
+    """Jedes Feld im Content muss vom Template auch gesetzt werden."""
+    karte = template_felder()
+    if not karte:
+        return []
+    errors = []
+    for i, seite in enumerate(data.get("pages", []), start=1):
+        typ = seite.get("type")
+        bekannt = karte.get(typ)
+        if bekannt is None:
+            continue          # unbekannter Typ meldet schon check_content
+        for feld in sorted(seite):
+            if feld.startswith("$") or feld in bekannt:
+                continue
+            errors.append(
+                f"Seite {i} ({typ}): Feld {feld!r} wird vom Template nicht "
+                f"gesetzt. Der Inhalt faellt still weg. Der Seitentyp liest: "
+                f"{', '.join(sorted(bekannt - FELDER_IMMER))}.")
+    return errors
+
+
 def check_content(path: Path) -> list[str]:
     errors: list[str] = []
 
@@ -440,6 +520,8 @@ def check_content(path: Path) -> list[str]:
 
     if not isinstance(data.get("pages"), list) or not data["pages"]:
         return [f"{path.name}: 'pages' ist leer"]
+
+    errors.extend(check_felder(data))
 
     absender = data.get("sender")
     if absender is not None and absender not in SENDERS:

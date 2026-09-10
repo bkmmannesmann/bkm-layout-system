@@ -26,12 +26,18 @@ TEMPLATE_DIR = ROOT_DIR / "templates" / "anleitung"
 ICON_DIR = TEMPLATE_DIR / "icons"
 
 PFLICHT = ("title", "product_name", "product_line", "document_rubrik",
-           "issued", "page_number_start", "page_total", "pages")
+           "created_date", "page_number_start", "page_total", "pages")
 # product_image und line_badge standen hier bis 31.08.2026 als Pflicht,
 # wurden aber weder im Innenteil noch im Titelblatt gesetzt. Ein Kollege
 # haette sie liefern muessen, ohne dass sie irgendwo erscheinen.
 LINIEN = ("PRO LINE", "HOME LINE")
 DATUM = re.compile(r"^\d{2}\.\d{2}\.\d{4}$")
+
+# Bis zum 09.09.2026 hiess das Feld issued und die Zeile im Impressum „Ausgegeben
+# am". Beides war irrefuehrend: gemeint war immer der Tag, an dem die Fassung
+# erzeugt wird, nie das Ausgabedatum der angelieferten Vorlage. Das Datenblatt
+# fuehrt dasselbe Datum seit jeher als created_date; jetzt heisst es hier ebenso.
+ALTFELDER = ("issued",)
 
 # Gemessen am 31.08.2026: 68 Zeichen laufen zwei Zeilen, 82 laufen drei.
 # Die Grenze steht als max_lines in brand.json; hier die Zeichenzahl, die
@@ -47,6 +53,12 @@ def pruefe(daten):
     for feld in PFLICHT:
         if feld not in daten:
             fehler.append(f"Pflichtfeld fehlt: {feld}")
+    for feld in ALTFELDER:
+        if feld in daten:
+            fehler.append(
+                f"{feld} ist kein Feld des Anleitungs-Datenvertrags; bitte entfernen. "
+                "Das Datum heisst created_date und ist der Tag, an dem die Fassung "
+                "erzeugt wird - nie das Ausgabedatum der angelieferten Vorlage.")
     if fehler:
         return fehler
 
@@ -64,8 +76,8 @@ def pruefe(daten):
             f"product_line ist {daten['product_line']}, erwartet {erwartet}: "
             f"Produkte mit dem Namensbestandteil Novu gehoeren zur Home Line, "
             f"alle uebrigen zur Pro Line.")
-    if not DATUM.match(str(daten["issued"])):
-        fehler.append(f"issued ist {daten['issued']!r}, erwartet TT.MM.JJJJ.")
+    if not DATUM.match(str(daten["created_date"])):
+        fehler.append(f"created_date ist {daten['created_date']!r}, erwartet TT.MM.JJJJ.")
 
     # Seitenzaehlung: das Titelblatt ist Blatt 1 und zaehlt mit.
     if daten["page_number_start"] != 2:
@@ -81,6 +93,7 @@ def pruefe(daten):
     fehler.extend(pruefe_cover(daten.get("cover")))
     fehler.extend(pruefe_seiten(seiten))
     fehler.extend(pruefe_verweise(daten))
+    fehler.extend(pruefe_felder(daten))
     return fehler
 
 
@@ -170,9 +183,59 @@ def pruefe_seiten(seiten):
                                   f"hat weder Text noch Liste noch Formel "
                                   f"noch Tabelle.")
         elif art == "nacharbeit":
-            for feld in ("headline", "steps", "issued", "copyright"):
+            for feld in ("headline", "steps", "created_date", "copyright"):
                 if not s.get(feld):
                     fehler.append(f"Seite {i}: {feld} fehlt.")
+    return fehler
+
+
+# Felder, die nicht im Seitentyp-Block stehen, sondern im fuss-Makro und
+# darum auf jeder Seite gelten.
+FELDER_IMMER = {"type", "running_head"}
+
+
+def template_felder():
+    """Liest aus template.html, welches Feld welcher Seitentyp setzt.
+
+    Ein Feld, das der Content fuehrt und das Template nicht liest, faellt
+    still weg. Am 03.09.2026 kam eine Broschuere so zurueck: fuenfzehn
+    Seiten trugen ihre Eintraege unter einem Namen, den das Template
+    nicht kennt, und kamen fast leer heraus. Der Datenvertrag verbietet
+    fremde Felder ueber additionalProperties, aber jsonschema liegt nicht
+    im Bestand - geprueft wird darum hier, gegen das Template selbst.
+    """
+    quelle = TEMPLATE_DIR / "template.html"
+    if not quelle.is_file():
+        return {}
+    text = quelle.read_text(encoding="utf-8")
+    teile = re.split(r"\{%-?\s*(?:el)?if\s+page\.type\s*==\s*'([a-z]+)'\s*-?%\}",
+                     text)
+    karte = {}
+    for i in range(1, len(teile), 2):
+        felder = set(re.findall(r"page\.([a-zA-Z_][a-zA-Z0-9_]*)", teile[i + 1]))
+        karte[teile[i]] = felder | FELDER_IMMER
+    return karte
+
+
+def pruefe_felder(daten):
+    """Jedes Feld im Content muss vom Template auch gesetzt werden."""
+    karte = template_felder()
+    if not karte:
+        return []
+    fehler = []
+    for i, seite in enumerate(daten.get("pages", []),
+                              start=daten.get("page_number_start", 1)):
+        bekannt = karte.get(seite.get("type"))
+        if bekannt is None:
+            continue
+        for feld in sorted(seite):
+            if feld.startswith("$") or feld in bekannt:
+                continue
+            fehler.append(
+                f"Seite {i}: Feld {feld!r} wird vom Template nicht gesetzt. "
+                f"Der Inhalt faellt still weg. Der Seitentyp "
+                f"{seite.get('type')!r} liest: "
+                f"{', '.join(sorted(bekannt - FELDER_IMMER))}.")
     return fehler
 
 

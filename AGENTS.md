@@ -41,9 +41,13 @@ will, ändert **erst** das Dokument, im selben Pull Request wie den Code.
    diese neun Dateien.
 6. **Fixbausteine sind unveränderlich.** Rechtliche Hinweise, Entsorgung und Schluss-Hinweis
    werden wörtlich übernommen — auch nicht in die Du-Form umgeschrieben.
-7. **Kennzeichnung KI-generierter Produktbilder nicht entfernen.** Trägt ein Produktbild den
-   Vermerk „AI GENERATED", bleibt er sichtbar im Bild — Vorgabe nach EU-KI-Verordnung. Nicht
-   wegretuschieren, nicht beschneiden, nicht überdecken.
+7. **Kennzeichnung KI-generierter Bilder nicht entfernen.** Trägt ein Motiv den Vermerk
+   „AI GENERATED", bleibt er sichtbar im Bild — Vorgabe nach EU-KI-Verordnung. Nicht
+   wegretuschieren, nicht beschneiden, nicht überdecken. Die Marke liegt unter
+   `assets/kennzeichnung/`, die Maße stehen in `brand.json` unter `ai_generated_images.marke`,
+   welches Motiv einen Vermerk braucht in `assets/kennzeichnung/register.json`.
+   `scripts/pruefe_kennzeichnung.py` sucht ihn im Bild selbst und bringt ihn mit `--stempeln`
+   auf — von sich aus stempelt es nicht. Siehe `docs/KI-KENNZEICHNUNG.md`.
 8. **Inhalt wird übernommen, nicht umformuliert.** Der Wortlaut der angelieferten Vorlage bleibt
    stehen. Was kritisch, unbelegt oder widersprüchlich ist, wird mit `[ANGABE FEHLT: …]` oder
    `[ZU PRÜFEN: …]` markiert und im `review`-Block erklärt — nicht besser geschrieben. Die

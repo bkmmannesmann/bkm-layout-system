@@ -9,7 +9,7 @@
     "product_name",
     "product_line",
     "document_rubrik",
-    "issued",
+    "created_date",
     "page_number_start",
     "page_total",
     "pages"
@@ -38,7 +38,7 @@
     "document_rubrik": {
       "const": "Verarbeitungsanleitung"
     },
-    "issued": {
+    "created_date": {
       "$ref": "#/$defs/datum"
     },
     "source_pdf": {
@@ -428,7 +428,7 @@
         "type",
         "headline",
         "steps",
-        "issued",
+        "created_date",
         "copyright"
       ],
       "description": "Letztes Blatt. Rubrik Nacharbeit, dazu Ausgabedatum und Impressum.",
@@ -535,7 +535,7 @@
             }
           }
         },
-        "issued": {
+        "created_date": {
           "$ref": "#/$defs/datum"
         },
         "copyright": {

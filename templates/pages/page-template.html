@@ -182,7 +182,10 @@
       {% if page.image %}<img src="{{ page.image }}" alt="">{% endif %}
     </div>
     <div class="feature-split__body">
-      <h2 class="headline-section">{{ page.headline }}</h2>
+      {% if page.headline_large %}
+      <h1 class="headline-large">{{ page.headline_large }}</h1>
+      {% endif %}
+      <h2 class="headline-section{% if page.headline_large %} gap-hl-to-section{% endif %}">{{ page.headline_section or page.headline }}</h2>
       {% if page.leadline %}
       <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
       {% endif %}
@@ -198,7 +201,10 @@
     {% if page.image %}<img src="{{ page.image }}" alt="">{% endif %}
   </div>
   <div class="feature-band feature-band__body">
-    <h2 class="headline-section">{{ page.headline }}</h2>
+    {% if page.headline_large %}
+    <h1 class="headline-large">{{ page.headline_large }}</h1>
+    {% endif %}
+    <h2 class="headline-section{% if page.headline_large %} gap-hl-to-section{% endif %}">{{ page.headline_section or page.headline }}</h2>
     {% if page.leadline %}
     <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
     {% endif %}
@@ -295,7 +301,10 @@
 <div class="page">
   {{ folio(page, loop.index0, page_number_start) }}
   <div class="page__content">
-    <h2 class="headline-section">{{ page.headline }}</h2>
+    {% if page.headline_large %}
+    <h1 class="headline-large">{{ page.headline_large }}</h1>
+    {% endif %}
+    <h2 class="headline-section{% if page.headline_large %} gap-hl-to-section{% endif %}">{{ page.headline_section or page.headline }}</h2>
     {% if page.leadline %}
     <p class="leadline" style="margin-top: 9.7mm;">{{ page.leadline }}</p>
     {% endif %}
