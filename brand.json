@@ -6,8 +6,8 @@
     "Bei Widerspruch zwischen dieser Datei und Code oder Prosa gewinnt diese Datei.",
     "scripts/check_brand_drift.py liest sie und prüft den Bestand dagegen."
   ],
-  "version": "1.30.0",
-  "updated": "2026-09-08",
+  "version": "1.31.0",
+  "updated": "2026-09-22",
   "owner": "BKM Mannesmann AG",
   "upstream": {
     "repository": "bkmmannesmann/bkm-design-system",
@@ -56,6 +56,47 @@
       "hex": "#d9d7d3",
       "role": "Kräftigere Linie, Bildplatzhalter"
     }
+  },
+  "status_colors": {
+    "$comment": "Funktionsfarben für Ampel, Warnung und Risiko — keine Markenfarben. Nur für Zustandsaussagen (Ampelpunkt, Warnkante, Risikowert), nie als Flächen- oder Headline-Farbe. Aufgenommen 22.09.2026 (Michael): vorher liefen in den Berichten des Support-Cockpits sieben Rot- und Amberwerte nebeneinander. Kontraste nach WCAG gemessen.",
+    "rot": {
+      "hex": "#b8372a",
+      "role": "Text und Grafik: Risiko, Sperre, Warnkante, Ampel rot",
+      "contrast": {
+        "on_white": 5.8,
+        "on_sand-white": 5.32,
+        "on_rot-flaeche": 5.11
+      }
+    },
+    "rot-flaeche": {
+      "hex": "#faeeeb",
+      "role": "Hinterlegung eines roten Befunds (Chip, Zeile) — nur mit Text in rot"
+    },
+    "amber": {
+      "hex": "#a8741a",
+      "role": "Nur Grafik: Ampelpunkt, Kante, Balken (≥ 3:1). Nicht als Fließtext.",
+      "contrast": {
+        "on_white": 4.06,
+        "on_sand-white": 3.72,
+        "on_amber-flaeche": 3.77
+      }
+    },
+    "amber-text": {
+      "hex": "#7a5a10",
+      "role": "Text in Amber-Lage (Hinweis, Chip-Text)",
+      "contrast": {
+        "on_white": 6.37,
+        "on_sand-white": 5.84,
+        "on_amber-flaeche": 5.92
+      }
+    },
+    "amber-flaeche": {
+      "hex": "#fdf6e7",
+      "role": "Hinterlegung eines Amber-Befunds — nur mit Text in amber-text"
+    },
+    "consumers": [
+      "michael-bkm/bkm-support-cockpit: app/src/cockpit/schadenscheck/markenPalette.ts (STATUS)"
+    ]
   },
   "forbidden_colors": {
     "$comment": "Altwerte aus früheren Ständen. Sie werden geprüft und dürfen nicht zurückkommen.",
