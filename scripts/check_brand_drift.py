@@ -77,6 +77,16 @@ def pruefe_marke(marke: dict) -> list[str]:
         if hexwert in normiert:
             fehler.append(f"colors.{name} traegt {hexwert} - das ist ein normierter Altwert")
 
+    marken_hex = {e["hex"].lower() for e in marke["colors"].values() if isinstance(e, dict) and "hex" in e}
+    for name, eintrag in marke.get("status_colors", {}).items():
+        if not isinstance(eintrag, dict) or "hex" not in eintrag:
+            continue
+        hexwert = eintrag["hex"].lower()
+        if hexwert in gesperrt or hexwert in normiert:
+            fehler.append(f"status_colors.{name} traegt {hexwert} - gesperrter oder normierter Altwert")
+        if hexwert in marken_hex:
+            fehler.append(f"status_colors.{name} traegt {hexwert} - das ist eine Markenfarbe, keine Funktionsfarbe")
+
     for rolle in ("display", "body"):
         familie = marke["typography"][rolle]
         for schnitt in familie["weights"]:
@@ -120,6 +130,14 @@ if _selbstpruefung:
 PALETTE = {
     eintrag["hex"].lower(): name.replace("-", " ").title()
     for name, eintrag in MARKE["colors"].items()
+    if isinstance(eintrag, dict) and "hex" in eintrag
+}
+# Funktionsfarben (Ampel/Warnung, seit brand.json 1.31.0) sind erlaubt,
+# werden aber nie als "naechster Ton" vorgeschlagen: ein Sandton, der knapp
+# daneben liegt, ist ein Sandton und keine Warnflaeche.
+STATUS = {
+    eintrag["hex"].lower(): "Status " + name.replace("-", " ").title()
+    for name, eintrag in MARKE.get("status_colors", {}).items()
     if isinstance(eintrag, dict) and "hex" in eintrag
 }
 # Zwei Toene, die brand.json nicht als Rolle fuehrt, im Bestand aber vorkommen:
@@ -254,7 +272,7 @@ def check_file(path: Path) -> list[str]:
                 f"NORMIERT  {colour}  wurde auf {NORMALISED[colour]} normiert "
                 f"und darf nicht zurueckkommen"
             )
-        elif colour in PALETTE:
+        elif colour in PALETTE or colour in STATUS:
             continue
         else:
             name, label, dist = nearest(colour)
@@ -319,6 +337,9 @@ def main() -> int:
     if args[0] == "--list":
         print("Geltende Palette:")
         for value, name in PALETTE.items():
+            print(f"  {value}  {name}")
+        print("\nFunktionsfarben (status_colors):")
+        for value, name in STATUS.items():
             print(f"  {value}  {name}")
         print("\nGesperrte Altwerte:")
         for value, name in FORBIDDEN.items():
