@@ -1,0 +1,88 @@
+{
+  "titel": "Zwei Wege · Der DIY-Weg",
+  "plan": "IG-001",
+  "quelle": "templates/instagram/referenz/ · Karussell 4a",
+  "caption": "[ANGABE FEHLT: Caption]",
+  "hashtags": [],
+  "folien": [
+    {
+      "flaeche": "dunkel", "textur": "deep-1",
+      "hintergrund": {"foto_box": {"bild": "foto-diy-paar.webp", "oben": 200, "hoehe": 486, "fokus": "50% 40%"}},
+      "ausrichtung": "unten", "abstand": 24,
+      "bloecke": [
+        {"typ": "rubrik", "text": "Der DIY-Weg", "akzent": true},
+        {"typ": "headline", "text": "Du packst das *selbst* an.", "groesse": 72, "versal": true, "max_breite": 860, "zeilenhoehe": 1.02},
+        {"typ": "text", "text": "Dein Plan für einen trockenen Keller – mit allem, was du wissen musst. Schritt für Schritt.", "groesse": 32, "max_breite": 760}
+      ]
+    },
+    {
+      "kapitel": "Kurz-Check", "textur": "deep-2",
+      "bloecke": [
+        {"typ": "rubrik", "text": "Ist das dein Weg?"},
+        {"typ": "headline", "text": "Selbst machen passt, *wenn …*", "groesse": 68},
+        {"typ": "punkte", "punkte": [
+          {"titel": "… die Ursache klar ist.", "text": "z. B. aufsteigende Feuchte oder Kondensat."},
+          {"titel": "… die Fläche überschaubar ist.", "text": "Eine Wand, ein Raum – kein ganzer Keller."},
+          {"titel": "… du von innen an die Wand kommst."},
+          {"titel": "… du ein, zwei Wochenenden Zeit hast."}
+        ]},
+        {"typ": "text", "text": "Nicht alles trifft zu? Dann schau dir den Fachbetrieb-Weg an – rechts angepinnt.", "groesse": 26}
+      ]
+    },
+    {
+      "kapitel": "Material", "textur": "deep-3",
+      "bloecke": [
+        {"typ": "rubrik", "text": "Was du brauchst"},
+        {"typ": "headline", "text": "Alles griffbereit, *bevor du startest.*"},
+        {"typ": "karten", "karten": [
+          {"icon": "clipboard-text", "titel": "Werkzeug", "zeilen": ["Bohrmaschine", "Hammer & Meißel", "Kelle & Reibebrett", "Brille, Handschuhe, Maske"]},
+          {"icon": "package", "titel": "Material", "bild": "produkt-injektion.png", "bild_alt": "Novusan", "zeilen": ["Injektionsmittel, z. B. Novusan", "Sanierputz-System", "Feuchtemessgerät (optional)"]}
+        ]},
+        {"typ": "text", "text": "Welche BKM-Produkte zu deiner Wand passen, findest du im Produktfinder – Link in Bio.", "groesse": 26}
+      ]
+    },
+    {
+      "kapitel": "Dein Plan", "textur": "deep-1", "abstand": 32,
+      "bloecke": [
+        {"typ": "headline", "text": "Dein Plan in *4 Schritten*"},
+        {"typ": "schritte", "schritte": [
+          {"titel": "Alten Putz entfernen", "text": "Großzügig – auch über die sichtbare Schadenszone hinaus."},
+          {"titel": "Horizontalsperre setzen", "text": "Bohrlöcher setzen, Injektionsmittel einfüllen. Stoppt die aufsteigende Feuchte."},
+          {"titel": "Sanierputz auftragen", "text": "Nimmt Salze auf und lässt die Wand austrocknen."},
+          {"titel": "Trocknen lassen", "text": "Geduld zahlt sich aus. Erst dann streichen."}
+        ]}
+      ]
+    },
+    {
+      "kapitel": "Sicher gehen", "textur": "deep-2",
+      "bloecke": [
+        {"typ": "rubrik", "text": "Damit es hält"},
+        {"typ": "headline", "text": "3 Fehler, die du dir *sparen* kannst"},
+        {"typ": "punkte", "icon": "warnung", "abstand": 30, "punkte": [
+          {"titel": "Dichte Farbe auf feuchter Wand", "text": "Sie sperrt die Feuchte ein – der Schaden kommt zurück."},
+          {"titel": "Zu früh dämmen oder tapezieren", "text": "Gib der Wand die Zeit, die sie zum Trocknen braucht."},
+          {"titel": "Nur das Symptom behandeln", "text": "Ein Entfeuchter hilft der Luft, nicht der Wand."}
+        ]}
+      ]
+    },
+    {
+      "kapitel": "Dein Ergebnis", "textur": "deep-3",
+      "hintergrund": {"foto_box": {"bild": "foto-ergebnis-wohnraum.webp", "oben": 190, "hoehe": 400, "fokus": "50% 50%"}},
+      "ausrichtung": "unten", "abstand": 32,
+      "bloecke": [
+        {"typ": "rubrik", "text": "Stell dir vor"},
+        {"typ": "headline", "text": "Ein Keller, der nach *nichts* riecht.", "groesse": 76},
+        {"typ": "text", "text": "Wände, die trocken bleiben. Ein Raum, den du wieder nutzt – als Werkstatt, Lager oder Hobbyraum. Und das gute Gefühl: **Das hast du gemacht.**", "groesse": 34}
+      ]
+    },
+    {
+      "flaeche": "dunkel", "chevrons": true, "cta": "Anleitung holen",
+      "bloecke": [
+        {"typ": "badge"},
+        {"typ": "rubrik", "text": "Leg los", "akzent": true},
+        {"typ": "headline", "text": "Dein Keller. *Dein Projekt.*", "groesse": 76, "versal": true, "max_breite": 560},
+        {"typ": "text", "text": "Verarbeitungsanleitungen, Produktfinder und Videos: Link in Bio. Speicher dir den Post für die Baustelle.", "max_breite": 540}
+      ]
+    }
+  ]
+}

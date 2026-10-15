@@ -1,0 +1,85 @@
+{
+  "titel": "Zwei Wege · Der Fachbetrieb-Weg",
+  "plan": "IG-003",
+  "quelle": "templates/instagram/referenz/ · Karussell 4c",
+  "caption": "[ANGABE FEHLT: Caption]",
+  "hashtags": [],
+  "folien": [
+    {
+      "typ": "cover-hell", "textur": "hell-2",
+      "foto": {"bild": "foto-kunde-telefon-keller.webp", "fokus": "40% 35%"},
+      "ausrichtung": "oben", "abstand": 24,
+      "bloecke": [
+        {"typ": "rubrik", "text": "Der Fachbetrieb-Weg"},
+        {"typ": "headline", "text": "Lehn dich *zurück.*", "groesse": 72, "versal": true, "max_breite": 560, "zeilenhoehe": 1.02},
+        {"typ": "text", "text": "So wird dein Keller trocken, ohne dass du selbst zur Kelle greifst.", "groesse": 32, "max_breite": 540}
+      ]
+    },
+    {
+      "kapitel": "Kurz-Check", "textur": "deep-2",
+      "hintergrund": {"foto_flaeche": {"bild": "foto-diy-putz-abschlagen.webp", "fokus": "40% 50%", "verlauf": "kraeftig"}},
+      "bloecke": [
+        {"typ": "rubrik", "text": "Ist das dein Weg?"},
+        {"typ": "headline", "text": "Machen lassen passt, *wenn …*", "groesse": 68},
+        {"typ": "punkte", "punkte": [
+          {"titel": "… die Ursache unklar ist.", "text": "Oder mehrere Ursachen zusammenkommen."},
+          {"titel": "… Wasser von außen drückt.", "text": "Dann muss oft von außen abgedichtet werden."},
+          {"titel": "… die Fläche groß ist."},
+          {"titel": "… du Gewährleistung und wenig Aufwand willst."}
+        ]},
+        {"typ": "text", "text": "Lieber selbst anpacken? Der DIY-Weg ist links angepinnt.", "groesse": 26}
+      ]
+    },
+    {
+      "kapitel": "Dein Plan", "flaeche": "hell", "textur": "hell-3", "abstand": 28,
+      "bloecke": [
+        {"typ": "headline", "text": "So läuft’s *ab*"},
+        {"typ": "schritte", "schritte": [
+          {"titel": "Anfragen", "text": "Beschreib kurz dein Problem – gern mit Fotos."},
+          {"titel": "Diagnose vor Ort", "text": "Messen statt raten."},
+          {"titel": "Klares Angebot", "text": "Du weißt vorher, was gemacht wird und was es kostet."},
+          {"titel": "Sanierung", "text": "Mit geprüften BKM-Systemen."},
+          {"titel": "Abnahme", "text": "Ihr geht das Ergebnis gemeinsam durch."}
+        ]}
+      ]
+    },
+    {
+      "kapitel": "Diagnose", "textur": "deep-3",
+      "hintergrund": {"foto_flaeche": {"bild": "foto-fachbetrieb-messung.webp", "fokus": "30% 50%", "verlauf": "mittel"}},
+      "bloecke": [
+        {"typ": "rubrik", "text": "Endlich Klarheit", "akzent": true},
+        {"typ": "headline", "text": "Nach der Diagnose *weißt du:*", "groesse": 68},
+        {"typ": "zeilen", "punkte": ["Wie feucht deine Wand wirklich ist", "Woher das Wasser kommt", "Welches Verfahren dauerhaft hilft"]}
+      ]
+    },
+    {
+      "kapitel": "Was du davon hast", "flaeche": "hell", "textur": "hell-2",
+      "bloecke": [
+        {"typ": "headline", "text": "Was du *davon hast*", "groesse": 68, "max_breite": 560, "produkt": "produkt-kanister.png", "produkt_alt": "BKM HZ250 Pro"},
+        {"typ": "vorteile", "vorteile": [
+          {"icon": "clock", "titel": "Kaum Aufwand für dich", "text": "Du musst nicht selbst ran."},
+          {"icon": "certificate", "titel": "Fachgerecht ausgeführt", "text": "Mit Verfahren und Produkten von BKM."},
+          {"icon": "check", "titel": "Gewährleistung", "text": "Auf die ausgeführte Arbeit."},
+          {"portrait": "portrait-fachbetrieb.webp", "titel": "Ein Ansprechpartner", "text": "Von der Diagnose bis zur Abnahme."}
+        ]}
+      ]
+    },
+    {
+      "kapitel": "Dein Ergebnis", "textur": "deep-1", "abstand": 30,
+      "bloecke": [
+        {"typ": "bild", "bild": "foto-fachbetrieb-beratung.webp", "hoehe": 460, "fokus": "50% 40%"},
+        {"typ": "rubrik", "text": "Stell dir vor"},
+        {"typ": "headline", "text": "Der Raum gehört *wieder dir.*"},
+        {"typ": "text", "text": "Du gehst in deinen Keller – und es riecht nach nichts."}
+      ]
+    },
+    {
+      "flaeche": "hell", "textur": "hell-2", "chevrons": true, "cta": "Fachbetrieb finden",
+      "bloecke": [
+        {"typ": "rubrik", "text": "Nächster Schritt"},
+        {"typ": "headline", "text": "Hol dir Hilfe *vor Ort.*", "groesse": 80, "versal": true, "max_breite": 560, "zeilenhoehe": 1.04},
+        {"typ": "text", "text": "Fachbetrieb in deiner Nähe: Link in Bio. Deine Anfrage ist unverbindlich.", "max_breite": 540}
+      ]
+    }
+  ]
+}

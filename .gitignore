@@ -27,3 +27,6 @@ Thumbs.db
 # Temporäre Dateien
 *.tmp
 *.bak
+
+# Instagram: entpackte Claude-Design-Archive (entstehen beim Bau neu)
+incoming/instagram/*/_entpackt/

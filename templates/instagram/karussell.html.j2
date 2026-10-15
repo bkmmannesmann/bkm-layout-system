@@ -1,0 +1,279 @@
+{#-
+  Instagram-Karussell, 1080 × 1350.
+  Abgeleitet aus templates/instagram/referenz/ (Claude Design, Runde 4 · Version 2).
+  Die Inline-Styles sind wörtlich aus der Referenz übernommen — nicht „aufräumen":
+  scripts/build_instagram.py --gegenprobe baut die Referenzposts aus content.json nach
+  und vergleicht sie pixelweise mit dem Export.
+
+  Inhalt kommt aus content/instagram/<post>/content.json, Aufbau in docs/INSTAGRAM.md.
+-#}
+{%- set D = "/templates/instagram/dateien/" -%}
+{%- set LIME = "#b4e717" -%}
+{%- set DEEP = "#1c4b42" -%}
+{%- set TRANS = "#287d4b" -%}
+{%- set STONE = "#494949" -%}
+
+{%- macro maske(datei, groesse, farbe) -%}
+<span style="width:{{ groesse }}px;height:{{ groesse }}px;flex:none;background:{{ farbe }};-webkit-mask:url(&quot;{{ D }}{{ datei }}&quot;) center/contain no-repeat;mask:url(&quot;{{ D }}{{ datei }}&quot;) center/contain no-repeat"></span>
+{%- endmacro -%}
+
+{%- macro icon_kachel(datei, kachel, icon, radius=8) -%}
+<span style="width:{{ kachel }}px;height:{{ kachel }}px;flex:none;border-radius:{{ radius }}px;background:{{ DEEP }};display:flex;align-items:center;justify-content:center">{{ maske(datei, icon, LIME) }}</span>
+{%- endmacro -%}
+
+{%- macro massband(n, gesamt, kapitel) -%}
+{%- set m = n - 1 -%}
+<div style="position:absolute;left:0;top:1200px;width:1080px;height:420px;z-index:5">
+<div style="position:absolute;left:0px;right:0;top:0;bottom:0;background:linear-gradient(180deg,#0f2620 0px,#163d35 60px,#1c4b42 140px);"></div>
+
+<div style="position:absolute;left:0px;width:540px;top:0;height:22px;background:repeating-linear-gradient(90deg,#b4e717 0 3px,transparent 3px 54px)"></div>
+<div style="position:absolute;left:540px;right:0;top:0;height:22px;background:repeating-linear-gradient(90deg,#b4e717 0 3px,transparent 3px 54px)"></div>
+<div style="position:absolute;left:0;top:0;width:6px;height:46px;background:#b4e717"></div>
+<div style="position:absolute;left:270px;top:0;width:3px;height:34px;background:#b4e717"></div>
+<div style="position:absolute;left:810px;top:0;width:3px;height:34px;background:#b4e717"></div>
+<div style="position:absolute;left:16px;top:52px;font-weight:700;font-size:20px;color:rgba(255,255,255,0.75)">{{ m }},0 m</div>
+{%- if n < gesamt %}
+<div style="position:absolute;left:540px;top:0;height:58px;padding:0 18px;display:flex;align-items:center;background:#b4e717;border-radius:0 0 6px 6px;font-family:'Unbounded',sans-serif;font-weight:900;font-size:28px;color:#1c4b42;white-space:nowrap">{{ m }},5 m</div>
+<div style="position:absolute;left:108px;top:96px;font-weight:700;font-size:20px;letter-spacing:0.14em;text-transform:uppercase;color:#fff">{{ "%02d"|format(n) }} · {{ kapitel|auszeichnen(LIME) }}</div>
+<div style="position:absolute;right:108px;top:92px;display:flex">{{ maske("icon-arrow-right.svg", 30, LIME) }}</div>
+{%- endif %}
+
+</div>
+{%- endmacro -%}
+
+{%- macro kopf(f, n, gesamt) -%}
+<div style="display:flex;justify-content:space-between;align-items:center;position:relative"><img src="{{ D }}{{ 'logo-white-puregreen.png' if f.dunkel else 'logo-stonegrey-puregreen.png' }}" alt="BKM Mannesmann" style="width:180px;display:block"><span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:{{ 'rgba(255,255,255,0.7)' if f.dunkel else STONE }}">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></div>
+{%- endmacro -%}
+
+{%- macro cta(text) -%}
+<div style="position:absolute;left:108px;top:1244px;z-index:6;font-family:'Unbounded',sans-serif;font-weight:900;font-size:24px;text-transform:uppercase;background:#b4e717;color:#1c4b42;padding:26px 34px;border-radius:4px;white-space:nowrap;display:flex;align-items:center;gap:16px">{{ text|auszeichnen(DEEP) }}{{ maske("icon-arrow-right.svg", 26, DEEP) }}</div>
+{%- endmacro -%}
+
+{%- macro ziel(text) -%}
+<div style="position:absolute;left:0;right:0;top:1236px;display:flex;justify-content:center;z-index:6"><span style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;letter-spacing:0.14em;text-transform:uppercase;background:#b4e717;color:#1c4b42;padding:8px 20px;border-radius:999px">{{ maske("icon-check-circle.svg", 22, DEEP) }}{{ text|auszeichnen(DEEP) }}</span></div>
+{%- endmacro -%}
+
+{#- KI-Label unten rechts im Maßband-Streifen, links neben dem Pfeil — dort liegt
+    nie ein Foto, und es steht beim Wischen auf jeder Folie an derselben Stelle.
+    Im Maßband immer die Lime-Pille; auf Covers ohne Maßband nach dem Grund dort.
+    post.ki = false schaltet es ab (Gegenprobe, Posts ohne KI-Inhalt). -#}
+{%- macro ki_label(hell=false) -%}
+{%- if post.ki -%}<img data-ki-vermerk src="/assets/kennzeichnung/bkm-ai-generated-{{ 'deep' if hell else 'lime' }}.svg" alt="AI generated" style="position:absolute;right:158px;top:1297px;height:20px;width:auto;display:block;z-index:6">{%- endif -%}
+{%- endmacro -%}
+
+{#- ── Blöcke ─────────────────────────────────────────────────────────── -#}
+
+{%- macro b_rubrik(b, f) -%}
+{%- if f.dunkel -%}
+<span style="font-weight:700;font-size:22px;letter-spacing:0.14em;text-transform:uppercase;color:{{ LIME if b.akzent else 'rgba(255,255,255,0.75)' }}">{{ b.text|auszeichnen(f.akzent) }}</span>
+{%- else -%}
+<span style="align-self:flex-start;font-weight:700;font-size:18px;letter-spacing:0.08em;text-transform:uppercase;color:#287d4b;background:rgba(77,175,70,0.12);border:1px solid rgba(77,175,70,0.35);border-radius:999px;padding:10px 22px">{{ b.text|auszeichnen(f.akzent) }}</span>
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro headline_div(b, f) -%}
+<div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:{{ b.groesse }}px;line-height:1.08;letter-spacing:-0.04em;{% if b.versal %}text-transform:uppercase;{% endif %}{% if b.max_breite %}max-width:{{ b.max_breite }}px;{% endif %}{% if b.zeilenhoehe %}line-height:{{ b.zeilenhoehe }};{% endif %}{% if not f.dunkel %}color:#494949{% endif %}">{{ b.text|auszeichnen(f.akzent) }}</div>
+{%- endmacro -%}
+
+{%- macro b_headline(b, f) -%}
+{%- if b.produkt -%}
+<div style="display:flex;align-items:center;justify-content:space-between;gap:24px">{{ headline_div(b, f) }}<img src="{{ b.produkt|pfad }}" alt="{{ b.produkt_alt or '' }}" style="width:220px;height:220px;flex:none;object-fit:contain;display:block"></div>
+{%- else -%}
+{{ headline_div(b, f) }}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro b_text(b, f) -%}
+<div style="font-size:{{ b.groesse }}px;line-height:1.4;max-width:{{ b.max_breite }}px;text-wrap:pretty;{% if f.dunkel %}color:rgba(255,255,255,0.88){% endif %}">{{ b.text|auszeichnen(f.akzent) }}</div>
+{%- endmacro -%}
+
+{%- macro b_punkte(b, f) -%}
+{%- set ic = "icon-warning.svg" if b.icon == "warnung" else "icon-check-circle.svg" -%}
+<div style="display:flex;flex-direction:column;gap:{{ b.abstand }}px">
+{% for p in b.punkte -%}
+<div style="display:flex;gap:24px;align-items:flex-start">{{ maske(ic, 36, f.akzent) }}<div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:30px;line-height:1.3;font-weight:700">{{ p.titel|auszeichnen(f.akzent) }}</span>{% if p.text %}<span style="font-size:26px;line-height:1.4;{% if f.dunkel %}color:rgba(255,255,255,0.82){% endif %}">{{ p.text|auszeichnen(f.akzent) }}</span>{% endif %}</div></div>
+{% endfor -%}
+</div>
+{%- endmacro -%}
+
+{%- macro b_zeilen(b, f) -%}
+{%- set linie = "rgba(255,255,255,0.2)" if f.dunkel else "rgba(40,125,75,0.25)" -%}
+<div style="display:flex;flex-direction:column">
+{% for p in b.punkte -%}
+<div style="display:flex;gap:28px;align-items:center;padding:26px 0;border-top:2px solid {{ linie }}{% if loop.last %};border-bottom:2px solid {{ linie }}{% endif %}">{{ maske("icon-check-circle.svg", 36, f.akzent) }}<span style="font-size:32px;line-height:1.35">{{ p|auszeichnen(f.akzent) }}</span></div>
+{%- endfor %}
+</div>
+{%- endmacro -%}
+
+{%- macro b_schritte(b, f) -%}
+{%- set linie = "rgba(255,255,255,0.18)" if f.dunkel else "rgba(40,125,75,0.25)" -%}
+<div style="display:flex;flex-direction:column">
+{% for s in b.schritte -%}
+<div style="display:flex;gap:28px;align-items:flex-start;padding:22px 0;border-top:2px solid {{ linie }}{% if loop.last %};border-bottom:2px solid {{ linie }}{% endif %}"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:34px;color:{{ f.akzent }};width:72px;flex:none">{{ "%02d"|format(loop.index) }}</span><div style="display:flex;flex-direction:column;gap:4px"><b style="font-size:30px">{{ s.titel|auszeichnen(f.akzent) }}</b>{% if s.text %}<span style="font-size:26px;line-height:1.4;{% if f.dunkel %}color:rgba(255,255,255,0.82){% endif %}">{{ s.text|auszeichnen(f.akzent) }}</span>{% endif %}</div></div>
+{% endfor -%}
+</div>
+{%- endmacro -%}
+
+{%- macro b_karten(b, f) -%}
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+{% for k in b.karten -%}
+<div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.12);border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:20px"><div style="display:flex;align-items:center;gap:16px">{{ maske(k.icon|icon_datei, 36, f.akzent) }}<span style="font-weight:700;font-size:22px;letter-spacing:0.14em;text-transform:uppercase;font-size:20px">{{ k.titel|auszeichnen(f.akzent) }}</span></div>{% if k.bild %}<img src="{{ k.bild|pfad }}" alt="{{ k.bild_alt or '' }}" style="height:150px;width:auto;align-self:flex-start;display:block;margin:-8px 0 -8px -12px">{% endif %}<div style="font-size:28px;line-height:1.55">{{ k.zeilen|map("auszeichnen", f.akzent)|join("<br>") }}</div></div>
+{% endfor -%}
+</div>
+{%- endmacro -%}
+
+{%- macro b_ursachen(b, f) -%}
+<div style="display:flex;flex-direction:column;gap:16px">
+{% for u in b.zeilen -%}
+<div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.12);border-radius:24px;padding:20px 28px 20px 20px;display:grid;grid-template-columns:120px minmax(0,1fr) 32px minmax(0,0.8fr);gap:20px;align-items:center"><img src="{{ u.bild|pfad }}" alt="" style="width:120px;height:120px;border-radius:12px;object-fit:cover;object-position:{{ u.fokus or '62% 55%' }};display:block"><span style="font-size:28px;line-height:1.35">{{ u.zeichen|auszeichnen(f.akzent) }}</span>{{ maske("icon-arrow-right.svg", 32, f.akzent) }}<b style="font-size:28px;line-height:1.3">{{ u.ursache|auszeichnen(f.akzent) }}</b></div>
+{% endfor -%}
+</div>
+{%- endmacro -%}
+
+{%- macro b_hinweis(b, f) -%}
+<div style="background:#1c4b42;border-radius:24px;padding:36px 40px;display:flex;gap:24px;align-items:flex-start;color:#fff">{{ maske("icon-info.svg", 40, LIME) }}<div style="font-size:32px;line-height:1.4">{{ b.text|auszeichnen(LIME) }}</div></div>
+{%- endmacro -%}
+
+{%- macro b_gegenueber(b, f) -%}
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:rgba(255,255,255,0.55);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.7);border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:22px"><span style="font-weight:700;font-size:22px;letter-spacing:0.14em;text-transform:uppercase;font-size:20px;color:#494949">{{ b.links.titel|auszeichnen(TRANS) }}</span>{% for p in b.links.punkte %}<div style="display:flex;gap:14px;align-items:flex-start">{{ maske("icon-warning.svg", 28, STONE) }}<span style="font-size:27px;line-height:1.35">{{ p|auszeichnen(TRANS) }}</span></div>{% endfor %}</div>
+<div style="background:#1c4b42;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:22px;color:#fff"><span style="font-weight:700;font-size:22px;letter-spacing:0.14em;text-transform:uppercase;font-size:20px;color:#b4e717">{{ b.rechts.titel|auszeichnen(LIME) }}</span>{% for p in b.rechts.punkte %}<div style="display:flex;gap:14px;align-items:flex-start">{{ maske("icon-check-circle.svg", 28, LIME) }}<span style="font-size:27px;line-height:1.35">{{ p|auszeichnen(LIME) }}</span></div>{% endfor %}</div>
+</div>
+{%- endmacro -%}
+
+{%- macro b_vorteile(b, f) -%}
+<div style="display:flex;flex-direction:column;gap:30px">
+{% for v in b.vorteile -%}
+<div style="display:flex;gap:24px;align-items:flex-start">{% if v.portrait %}<img src="{{ v.portrait|pfad }}" alt="" style="width:64px;height:64px;flex:none;border-radius:50%;object-fit:cover;object-position:50% 20%;display:block;box-shadow:0 0 0 3px #b4e717">{% else %}{{ icon_kachel(v.icon|icon_datei, 64, 32) }}{% endif %}<div style="display:flex;flex-direction:column;gap:4px;padding-top:4px"><b style="font-size:30px">{{ v.titel|auszeichnen(f.akzent) }}</b>{% if v.text %}<span style="font-size:26px;line-height:1.4">{{ v.text|auszeichnen(f.akzent) }}</span>{% endif %}</div></div>
+{% endfor -%}
+</div>
+{%- endmacro -%}
+
+{%- macro b_bild(b, f) -%}
+<img src="{{ b.bild|pfad }}" alt="" style="height:{{ b.hoehe }}px;width:100%;flex:none;border-radius:16px;object-fit:cover;object-position:{{ b.fokus }};display:block">
+{%- endmacro -%}
+
+{%- macro b_badge(b, f) -%}
+<img src="{{ D }}badge-homeline.png" alt="Home Line" style="width:240px;height:auto;display:block;align-self:flex-start">
+{%- endmacro -%}
+
+{%- macro bloecke(liste, f) -%}
+{%- for b in liste -%}
+{%- if b.typ == "rubrik" %}{{ b_rubrik(b, f) }}
+{%- elif b.typ == "headline" %}{{ b_headline(b, f) }}
+{%- elif b.typ == "text" %}{{ b_text(b, f) }}
+{%- elif b.typ == "punkte" %}{{ b_punkte(b, f) }}
+{%- elif b.typ == "zeilen" %}{{ b_zeilen(b, f) }}
+{%- elif b.typ == "schritte" %}{{ b_schritte(b, f) }}
+{%- elif b.typ == "karten" %}{{ b_karten(b, f) }}
+{%- elif b.typ == "ursachen" %}{{ b_ursachen(b, f) }}
+{%- elif b.typ == "hinweis" %}{{ b_hinweis(b, f) }}
+{%- elif b.typ == "gegenueber" %}{{ b_gegenueber(b, f) }}
+{%- elif b.typ == "vorteile" %}{{ b_vorteile(b, f) }}
+{%- elif b.typ == "bild" %}{{ b_bild(b, f) }}
+{%- elif b.typ == "badge" %}{{ b_badge(b, f) }}
+{%- endif %}
+{% endfor -%}
+{%- endmacro -%}
+
+{#- ── Folien ─────────────────────────────────────────────────────────── -#}
+
+{%- macro wurzel(f, n, padding, hintergrund) -%}
+<div data-slide="{{ '%02d'|format(n) }}{% if f.kapitel %} · {{ f.kapitel }}{% endif %}" style="position:relative;width:1080px;height:1350px;flex:none;overflow:hidden;box-sizing:border-box;padding:{{ padding }};display:flex;flex-direction:column;background:{{ hintergrund }};color:{{ '#fff' if f.dunkel else STONE }};font-family:'TT Norms Pro',sans-serif">
+{%- endmacro -%}
+
+{%- macro textur(name) -%}
+#{{ '0f2620' if name.startswith('deep') else 'f6f5f2' }} url(&quot;{{ D }}textur-{{ name }}.jpg&quot;) center/cover
+{%- endmacro -%}
+
+{%- macro geteilt(links, rechts) -%}
+<div style="position:absolute;left:0;top:0;width:540px;bottom:0;background:{{ textur(links) }}"></div><div style="position:absolute;left:540px;top:0;right:0;bottom:0;background:{{ textur(rechts) }}"></div>
+{%- endmacro -%}
+
+{%- macro inhalt(f) -%}
+<div data-ig-inhalt style="flex:1;display:flex;flex-direction:column;justify-content:{{ f.ausrichtung }};gap:{{ f.abstand }}px;position:relative">{{ bloecke(f.bloecke, f) }}</div>
+{%- endmacro -%}
+
+{#- Standardfolie: Rahmen + Blöcke. Deckt Cover, Inhalt und Schluss ab. -#}
+{%- macro standard(f, n, gesamt) -%}{%- set ki_hell = n == 1 and not f.dunkel -%}
+{%- if f.schluss and f.dunkel and not f.textur_gesetzt -%}{%- set bg = "#1c4b42" -%}{%- else -%}{%- set bg = textur(f.textur) -%}{%- endif -%}
+{{ wurzel(f, n, f.padding, bg) }}
+{%- set h = f.hintergrund -%}
+{%- if h.foto_box %}<div style="position:absolute;left:108px;top:{{ h.foto_box.oben }}px;width:864px;height:{{ h.foto_box.hoehe }}px;border-radius:16px;overflow:hidden"><img src="{{ h.foto_box.bild|pfad }}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:{{ h.foto_box.fokus }};display:block"></div>{% endif %}
+{%- if h.foto_flaeche %}<img src="{{ h.foto_flaeche.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;inset:0;width:100%;height:100%;object-position:{{ h.foto_flaeche.fokus }}"><div style="position:absolute;inset:0;background:{{ h.foto_flaeche.verlauf|verlauf }}"></div>{% endif %}
+{%- if f.chevrons %}<img src="{{ D }}chevrons-{{ 'weiss' if f.dunkel else 'gruen' }}.png" alt="" style="position:absolute;right:0;top:330px;height:640px;width:auto{% if f.dunkel %};opacity:0.85{% endif %}">{% endif %}
+{%- if n > 1 %}{{ massband(n, gesamt, f.kapitel) }}{% endif %}
+{%- if f.ziel %}{{ ziel(f.ziel) }}{% endif %}
+{{ kopf(f, n, gesamt) }}
+{%- if f.cta %}{{ cta(f.cta) }}{% endif %}
+{{ inhalt(f) }}{{ ki_label(ki_hell) }}</div>
+{%- endmacro -%}
+
+{#- Cover hell: Foto oben, Chevrons rechts (Referenz 4c-01). -#}
+{%- macro cover_hell(f, n, gesamt) -%}
+{{ wurzel(f, n, "660px 108px 300px", textur(f.textur)) }}<img src="{{ f.foto.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;left:0;top:0;width:1080px;height:608px;object-position:{{ f.foto.fokus }}"><img src="{{ D }}chevrons-gruen.png" alt="" style="position:absolute;right:0;top:608px;height:560px;width:auto"><div style="position:absolute;left:0;right:0;top:0;height:300px;background:linear-gradient(180deg,rgba(15,38,32,0.6) 0%,rgba(15,38,32,0) 100%)"></div><div style="position:absolute;left:108px;right:108px;top:96px;display:flex;justify-content:space-between;align-items:center;z-index:2"><img src="{{ D }}logo-white-puregreen.png" alt="BKM Mannesmann" style="width:180px;display:block"><span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:rgba(255,255,255,0.85)">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></div>
+{{ inhalt(f) }}{{ ki_label(true) }}</div>
+{%- endmacro -%}
+
+{#- Zwei-Wege-Cover und -Schluss (Referenz 4b-01, 4b-07). -#}
+{%- macro wege_rahmen(f, n, gesamt, padding, hoehe, verlauf) -%}
+{{ wurzel(f, n, padding, "#f6f5f2") }}{{ geteilt(f.textur_links, f.textur_rechts) }}
+<div style="position:absolute;left:0;right:0;top:0;height:{{ hoehe }}px;background:{{ textur(f.textur) }}"></div><img src="{{ f.foto.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;left:0;right:0;top:0;width:100%;height:{{ hoehe }}px;object-position:{{ f.foto.fokus }}"><div style="position:absolute;left:0;right:0;top:0;height:{{ hoehe }}px;background:{{ verlauf }}"></div>
+{%- endmacro -%}
+
+{%- macro cover_wege(f, n, gesamt) -%}
+{{ wege_rahmen(f, n, gesamt, "96px 108px 480px", 900, "linear-gradient(90deg,rgba(15,38,32,0.94) 0%,rgba(15,38,32,0.78) 55%,rgba(15,38,32,0.4) 100%)") }}
+{{ ziel(f.ziel) }}
+<div style="position:absolute;left:108px;top:990px;display:flex;align-items:center;gap:14px">{{ maske("icon-arrow-left.svg", 34, LIME) }}<span style="font-weight:700;font-size:22px;letter-spacing:0.14em;text-transform:uppercase;font-size:22px;color:#fff">{{ f.links|auszeichnen(LIME) }}</span></div>
+<div style="position:absolute;right:108px;top:990px;display:flex;align-items:center;gap:14px"><span style="font-weight:700;font-size:22px;letter-spacing:0.14em;text-transform:uppercase;font-size:22px;color:#287d4b">{{ f.rechts|auszeichnen(LIME) }}</span>{{ icon_kachel("icon-arrow-right.svg", 44, 22) }}</div>
+{{ kopf(f, n, gesamt) }}
+{{ inhalt(f) }}{{ ki_label(true) }}</div>
+{%- endmacro -%}
+
+{%- macro schluss_wege(f, n, gesamt) -%}
+{{ wege_rahmen(f, n, gesamt, "96px 108px 680px", 700, "linear-gradient(90deg,rgba(15,38,32,0.94) 0%,rgba(15,38,32,0.82) 60%,rgba(15,38,32,0.55) 100%)") }}
+{{ massband(n, gesamt, f.kapitel) }}{{ ziel(f.ziel) }}
+<div style="position:absolute;left:108px;width:380px;top:780px;display:flex;flex-direction:column;gap:18px;color:#fff">{{ maske("icon-arrow-left.svg", 48, LIME) }}<b style="font-size:30px;line-height:1.3">{{ f.links.titel|auszeichnen(LIME) }}</b><span style="font-size:24px;line-height:1.4">{{ f.links.text|auszeichnen(LIME) }}</span></div>
+<div style="position:absolute;right:108px;width:380px;top:780px;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:18px">{{ icon_kachel("icon-arrow-right.svg", 56, 28) }}<b style="font-size:30px;line-height:1.3">{{ f.rechts.titel|auszeichnen(LIME) }}</b><span style="font-size:24px;line-height:1.4">{{ f.rechts.text|auszeichnen(LIME) }}</span></div>
+{{ kopf(f, n, gesamt) }}
+{{ inhalt(f) }}{{ ki_label() }}</div>
+{%- endmacro -%}
+
+{#- Zwei Wege nebeneinander (Referenz 4b-05). -#}
+{%- macro wege_spalte(s, links) -%}
+{%- set farbe = LIME if links else TRANS -%}
+<div style="position:absolute;left:{{ 108 if links else 600 }}px;width:372px;top:240px{% if links %};color:#fff{% endif %}"><span style="font-weight:700;font-size:22px;letter-spacing:0.14em;text-transform:uppercase;color:{{ 'rgba(255,255,255,0.75)' if links else TRANS }}">{{ s.rubrik|auszeichnen(farbe) }}</span><div style="height:24px"></div><div style="display:flex;flex-direction:column;gap:28px"><img src="{{ s.portrait|pfad }}" alt="" style="width:140px;height:140px;border-radius:50%;object-fit:cover;object-position:50% 18%;display:block;background:#fff"><div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:44px;line-height:1.08;letter-spacing:-0.04em;text-transform:uppercase;color:{{ farbe }}">{{ s.titel|auszeichnen(farbe) }}</div><div style="display:flex;flex-direction:column;gap:18px">{% for p in s.punkte %}<div style="display:flex;gap:14px;align-items:flex-start">{% if links %}{{ maske("icon-check-circle.svg", 30, LIME) }}{% else %}{{ icon_kachel("icon-check.svg", 36, 18) }}{% endif %}<span style="font-size:26px;line-height:1.35">{{ p }}</span></div>{% endfor %}</div><div style="font-size:26px;line-height:1.4;padding-top:24px;border-top:2px solid {{ 'rgba(255,255,255,0.25)' if links else 'rgba(40,125,75,0.3)' }}">{{ s.fazit|auszeichnen(farbe) }}</div></div></div>
+{%- endmacro -%}
+
+{%- macro wege_vergleich(f, n, gesamt) -%}
+{{ wurzel(f, n, "96px 108px 300px", "#f6f5f2") }}{{ geteilt(f.textur_links, f.textur_rechts) }}
+{{ massband(n, gesamt, f.kapitel) }}<div style="position:absolute;left:108px;top:96px"><img src="{{ D }}logo-white-puregreen.png" alt="BKM Mannesmann" style="width:180px;display:block"></div><div style="position:absolute;right:108px;top:104px"><span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:#494949">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></div>
+{{ wege_spalte(f.links, true) }}
+{{ wege_spalte(f.rechts, false) }}{{ ki_label() }}</div>
+{%- endmacro -%}
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>{{ post.titel }}</title>
+<style>
+@font-face{font-family:'Unbounded';src:url("{{ D }}Unbounded-900.woff2") format('woff2');font-weight:900;font-style:normal;font-display:block}
+@font-face{font-family:'TT Norms Pro';src:url("{{ D }}TTNormsPro-400.woff2") format('woff2');font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:'TT Norms Pro';src:url("{{ D }}TTNormsPro-700.woff2") format('woff2');font-weight:700;font-style:normal;font-display:block}
+html,body{margin:0;background:#e4e2dd}
+body{display:flex;flex-wrap:wrap;gap:40px;padding:40px}
+</style>
+</head>
+<body>
+{% for f in post.folien -%}
+{%- set n = loop.index -%}
+{%- if f.typ == "cover-hell" %}{{ cover_hell(f, n, post.folien|length) }}
+{%- elif f.typ == "cover-wege" %}{{ cover_wege(f, n, post.folien|length) }}
+{%- elif f.typ == "wege-vergleich" %}{{ wege_vergleich(f, n, post.folien|length) }}
+{%- elif f.typ == "schluss-wege" %}{{ schluss_wege(f, n, post.folien|length) }}
+{%- else %}{{ standard(f, n, post.folien|length) }}
+{%- endif %}
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,86 @@
+{
+  "titel": "Zwei Wege · Der Feuchte-Check",
+  "plan": "IG-002",
+  "quelle": "templates/instagram/referenz/ · Karussell 4b",
+  "caption": "[ANGABE FEHLT: Caption]",
+  "hashtags": [],
+  "folien": [
+    {
+      "typ": "cover-wege", "textur": "deep-2", "textur_links": "deep-1", "textur_rechts": "hell-2",
+      "foto": {"bild": "foto-handy-check-dunkel.jpg", "fokus": "60% 50%"},
+      "ziel": "Ziel: trockener Keller", "links": "Selbst machen", "rechts": "Machen lassen",
+      "abstand": 36,
+      "bloecke": [
+        {"typ": "rubrik", "text": "Der Feuchte-Check", "akzent": true},
+        {"typ": "headline", "text": "Zwei Wege. *Ein Ziel.*", "groesse": 120, "versal": true, "zeilenhoehe": 1, "max_breite": 860},
+        {"typ": "text", "text": "Feuchter Keller? Finde in 7 Slides heraus, welcher Weg zu dir passt.", "groesse": 32, "max_breite": 700}
+      ]
+    },
+    {
+      "kapitel": "Das Problem", "textur": "deep-3",
+      "hintergrund": {"foto_flaeche": {"bild": "foto-problem-feuchte-wand.jpg", "fokus": "35% 30%", "verlauf": "leicht"}},
+      "bloecke": [
+        {"typ": "rubrik", "text": "Kennst du das?"},
+        {"typ": "headline", "text": "Es riecht muffig. Die Farbe blättert. Und du weißt nicht, *wo du anfangen sollst.*", "groesse": 58, "zeilenhoehe": 1.15},
+        {"typ": "text", "text": "Feuchtigkeit im Keller ist kein Schönheitsfehler. Sie greift Mauerwerk und Raumluft an – und sie verschwindet nicht von allein."}
+      ]
+    },
+    {
+      "kapitel": "Wer wir sind", "flaeche": "hell", "textur": "hell-1",
+      "bloecke": [
+        {"typ": "rubrik", "text": "Du bist nicht allein"},
+        {"typ": "headline", "text": "Wir *verstehen* das.", "groesse": 76},
+        {"typ": "text", "text": "Bautenschutz ist unser Fachgebiet. Wir entwickeln Lösungen gegen Feuchtigkeit – für alle, die selbst anpacken, und für Fachbetriebe, die es für dich tun.", "groesse": 32},
+        {"typ": "hinweis", "text": "***Endlich Klarheit.*** Die richtige Diagnose ist der Anfang der Lösung."}
+      ]
+    },
+    {
+      "kapitel": "Ursache finden", "textur": "deep-1", "abstand": 36,
+      "bloecke": [
+        {"typ": "rubrik", "text": "Schritt 1 – für beide Wege"},
+        {"typ": "headline", "text": "Erst die Ursache, *dann die Lösung.*"},
+        {"typ": "ursachen", "zeilen": [
+          {"bild": "schnitt-keller-3.jpg", "zeichen": "Feuchte unten an der Wand, weiße Salzränder", "ursache": "Aufsteigende Feuchtigkeit"},
+          {"bild": "schnitt-keller-2.jpg", "zeichen": "Nasse Flecken nach Regen, an Außenwänden", "ursache": "Seitlich eindringendes Wasser"},
+          {"bild": "schnitt-keller-1.jpg", "zeichen": "Beschlagene Flächen, vor allem im Sommer", "ursache": "Kondensat aus der Luft"}
+        ]}
+      ]
+    },
+    {
+      "typ": "wege-vergleich", "kapitel": "Dein Weg", "flaeche": "hell",
+      "textur_links": "deep-2", "textur_rechts": "hell-3",
+      "links": {
+        "rubrik": "Dein Weg, wenn …", "portrait": "portrait-diy.jpg", "titel": "Selbst machen",
+        "punkte": ["die Ursache klar ist", "die Fläche klein ist", "du Zeit und Lust hast"],
+        "fazit": "**Du gewinnst:** geringere Kosten und ein Haus, das du richtig kennst."
+      },
+      "rechts": {
+        "rubrik": "Dein Weg, wenn …", "portrait": "portrait-fachbetrieb.webp", "titel": "Machen lassen",
+        "punkte": ["die Ursache unklar ist", "Wasser von außen drückt oder die Fläche groß ist", "du wenig Zeit hast"],
+        "fazit": "**Du gewinnst:** Diagnose, Ausführung und Gewährleistung aus einer Hand."
+      }
+    },
+    {
+      "kapitel": "Was drin ist", "flaeche": "hell", "textur": "hell-2",
+      "bloecke": [
+        {"typ": "rubrik", "text": "Was auf dem Spiel steht"},
+        {"typ": "gegenueber",
+         "links": {"titel": "Wenn du wartest", "punkte": ["Schimmel und schlechte Luft", "Putz und Mauerwerk leiden", "Der Wert deines Hauses sinkt"]},
+         "rechts": {"titel": "Wenn du handelst", "punkte": ["Gesunde, trockene Räume", "Mehr nutzbare Fläche", "Werterhalt & Sicherheit"]}},
+        {"typ": "headline", "text": "Je früher du startest, desto *kleiner* das Projekt.", "groesse": 52, "zeilenhoehe": 1.15}
+      ]
+    },
+    {
+      "typ": "schluss-wege", "textur": "deep-1", "textur_links": "deep-3", "textur_rechts": "hell-1",
+      "foto": {"bild": "foto-handy-check-hell.jpg", "fokus": "50% 45%"},
+      "ziel": "Ziel: trockener Keller",
+      "links": {"titel": "Selbst machen", "text": "Der DIY-Post – links angepinnt"},
+      "rechts": {"titel": "Machen lassen", "text": "Der Fachbetrieb-Post – rechts angepinnt"},
+      "abstand": 32,
+      "bloecke": [
+        {"typ": "headline", "text": "Welcher Weg ist *deiner?*", "groesse": 84, "versal": true, "zeilenhoehe": 1.02, "max_breite": 860},
+        {"typ": "text", "text": "Beide führen zum gleichen Ziel. Du entscheidest, wie du hinkommst.", "max_breite": 700}
+      ]
+    }
+  ]
+}

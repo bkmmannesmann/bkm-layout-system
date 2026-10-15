@@ -277,3 +277,18 @@ gekennzeichnet frei, das es nicht ist. Deshalb sind die stummen Fälle in der
 Überzahl.
 
 Beide Prüfungen laufen in der CI (`.github/workflows/brochure.yml`).
+
+## Instagram: das Label
+
+Seit 15.10.2026 gibt es ein zweites Zeichen, das Label „AI GENERATED“ als Pille in zwei
+Fassungen: `bkm-ai-generated-lime.svg` (Lime-Pille, Deep-Green-Schrift) für dunklen Grund,
+`bkm-ai-generated-deep.svg` (Deep-Green-Pille, Lime-Schrift) für hellen. Benannt nach der
+Farbe der Pille.
+
+Es gilt vorerst nur für Instagram-Karussells. Dort wird nicht das einzelne Motiv
+gekennzeichnet, sondern der Post: jede Folie trägt das Label klein unten rechts im Maßband — siehe
+`docs/INSTAGRAM.md`, Abschnitt KI-Kennzeichnung. Die Bilder kommen ohne Vermerk aus der
+Erzeugung; ein eingebrannter Vermerk ist dort nicht nötig.
+
+Die weiße Sperrmarke `bkm-ai-generated.svg` bleibt im Repository: Broschüren nutzen sie
+weiter, und `kennzeichnung.py` erkennt eingebrannte Altvermerke an ihrer Form.

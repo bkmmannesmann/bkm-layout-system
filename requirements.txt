@@ -14,3 +14,8 @@ pymupdf>=1.24.0
 # Pillow oeffnet und schreibt die Bilder, PyMuPDF rastert das SVG.
 numpy>=1.24.0
 pillow>=10.0.0
+
+# Instagram-Karussells: scripts/build_instagram.py setzt die Claude-Design-HTML
+# mit Chromium, demselben Browser wie Claude Design. Lokal einmalig zusaetzlich:
+#   playwright install chromium
+playwright>=1.40
