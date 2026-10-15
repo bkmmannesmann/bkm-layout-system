@@ -285,11 +285,10 @@ Fassungen: `bkm-ai-generated-lime.svg` (Lime-Pille, Deep-Green-Schrift) für dun
 `bkm-ai-generated-deep.svg` (Deep-Green-Pille, Lime-Schrift) für hellen. Benannt nach der
 Farbe der Pille.
 
-Es gilt vorerst nur für Instagram-Karussells und wird dort vom Bau gesetzt, nicht ins Motiv
-gerechnet — siehe `docs/INSTAGRAM.md`, Abschnitt KI-Kennzeichnung. Anders als oben
-beschrieben gilt dort: **nicht eingeordnet heißt gekennzeichnet**. Die Bilder kommen ohne
-Vermerk aus der Erzeugung, und ein fehlendes Label ist das größere Risiko.
+Es gilt vorerst nur für Instagram-Karussells. Dort wird nicht das einzelne Motiv
+gekennzeichnet, sondern der Post: jede Folie trägt das Label im Kopf neben dem Zähler — siehe
+`docs/INSTAGRAM.md`, Abschnitt KI-Kennzeichnung. Die Bilder kommen ohne Vermerk aus der
+Erzeugung; ein eingebrannter Vermerk ist dort nicht nötig.
 
 Die weiße Sperrmarke `bkm-ai-generated.svg` bleibt im Repository: Broschüren nutzen sie
 weiter, und `kennzeichnung.py` erkennt eingebrannte Altvermerke an ihrer Form.
-

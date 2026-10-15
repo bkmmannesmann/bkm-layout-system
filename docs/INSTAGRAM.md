@@ -143,19 +143,22 @@ mit `fokus` so verschieben, dass er im Bild bleibt.
 
 ## KI-Kennzeichnung
 
-Bilder kommen **ohne** Vermerk aus der Erzeugung. Der Bau setzt ihn selbst: jedes Foto auf
-einer Folie bekommt das Label „AI GENERATED“ als eigenes Element über dem Bildkasten — außer
-es steht in `assets/kennzeichnung/register.json` unter `keine_ki` (echte Fotos). Im
-Zweifel wird gekennzeichnet.
+Ein Karussell gilt als Ganzes als KI-erzeugt. **Jede Folie trägt das Label „AI GENERATED“
+im Kopf, links neben dem Zähler** — fester Teil des Designs wie Logo und Seitenzahl, nicht
+auf einem Foto. So ist es auf jeder Folie beim ersten Blick sichtbar (EU-KI-Verordnung,
+Art. 50 Abs. 4), egal wie groß ein Bild steht oder wo es beschnitten wird.
 
 | | |
 |:---|:---|
 | Label | `assets/kennzeichnung/bkm-ai-generated-lime.svg` (Lime-Pille) und `-deep.svg` (Deep-Green-Pille) |
-| Wahl | dunkler oder abgedunkelter Grund → Lime-Pille, heller Grund → Deep-Green-Pille, gemessen unter dem Label |
-| Größe | 9,5 % der Kastenbreite, mindestens 90 px, 1 % Randabstand (`brand.json`, `ai_generated_images`) |
-| Ecke | unten rechts oder links, die ruhigere des sichtbaren Ausschnitts |
-| Altvermerk | Trägt ein Motiv noch den alten weißen Vermerk, deckt das Label ihn mittig ab |
-| Zu klein | Kästen unter 300 px (Porträtkreise, Thumbnails) bekommen kein Label; der Bau meldet sie. Ist das Bild keine KI, unter `keine_ki` eintragen — sonst größer setzen |
+| Wahl | dunkle Folie → Lime-Pille, helle Folie → Deep-Green-Pille; beim hellen Cover mit Foto im Kasten des Zählers |
+| Größe | 28 px hoch, Abstand 20 px zum Zähler |
+| Abschalten | `"ki": false` in der `content.json` — nur für Posts nachweislich ohne KI-Inhalt |
+
+**Zusätzlich beim Posten** in Instagram unter *Erweiterte Einstellungen* die KI-Kennzeichnung
+einschalten. Der Export schreibt die PNGs neu; Metadaten, an denen Meta KI-Bilder automatisch
+erkennt, gehen dabei verloren. Die Plattformkennzeichnung ersetzt das Label nicht: die Pflicht
+liegt bei dem, der veröffentlicht.
 
 Die Gegenprobe läuft ohne Label: verglichen wird die Vorlage mit dem Design.
 

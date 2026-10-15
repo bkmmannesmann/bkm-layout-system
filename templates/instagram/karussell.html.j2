@@ -42,7 +42,7 @@
 {%- endmacro -%}
 
 {%- macro kopf(f, n, gesamt) -%}
-<div style="display:flex;justify-content:space-between;align-items:center;position:relative"><img src="{{ D }}{{ 'logo-white-puregreen.png' if f.dunkel else 'logo-stonegrey-puregreen.png' }}" alt="BKM Mannesmann" style="width:180px;display:block"><span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:{{ 'rgba(255,255,255,0.7)' if f.dunkel else STONE }}">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;position:relative"><img src="{{ D }}{{ 'logo-white-puregreen.png' if f.dunkel else 'logo-stonegrey-puregreen.png' }}" alt="BKM Mannesmann" style="width:180px;display:block">{%- set z -%}<span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:{{ 'rgba(255,255,255,0.7)' if f.dunkel else STONE }}">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span>{%- endset -%}{{ zaehler_mit_label(f.dunkel, z) }}</div>
 {%- endmacro -%}
 
 {%- macro cta(text) -%}
@@ -53,12 +53,15 @@
 <div style="position:absolute;left:0;right:0;top:1236px;display:flex;justify-content:center;z-index:6"><span style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;letter-spacing:0.14em;text-transform:uppercase;background:#b4e717;color:#1c4b42;padding:8px 20px;border-radius:999px">{{ maske("icon-check-circle.svg", 22, DEEP) }}{{ text|auszeichnen(DEEP) }}</span></div>
 {%- endmacro -%}
 
-{#- KI-Vermerk über einem Bildkasten. Lage berechnet scripts/instagram_inhalt.py. -#}
-{%- macro vermerk(v, im_kasten=false) -%}
-{%- if v -%}
-{%- set marke -%}<img data-ki-vermerk src="{{ v.svg }}" alt="AI generated" style="position:absolute;left:{{ v.x }}px;top:{{ v.y }}px;width:{{ v.marke }}px;height:auto;display:block">{%- endset -%}
-{%- if im_kasten -%}{{ marke }}{%- else -%}<div style="position:absolute;left:{{ v.links }}px;top:{{ v.oben }}px;width:{{ v.breite }}px;height:{{ v.hoehe }}px;z-index:4;pointer-events:none">{{ marke }}</div>{%- endif -%}
-{%- endif -%}
+{#- KI-Label im Kopf jeder Folie, links neben dem Zähler. Lime-Pille auf dunkler,
+    Deep-Green-Pille auf heller Folie. post.ki = false schaltet es ab (Gegenprobe,
+    Posts ganz ohne KI-Inhalt). -#}
+{%- macro ki_label(dunkel) -%}
+<img data-ki-vermerk src="/assets/kennzeichnung/bkm-ai-generated-{{ 'lime' if dunkel else 'deep' }}.svg" alt="AI generated" style="height:28px;width:auto;display:block">
+{%- endmacro -%}
+
+{%- macro zaehler_mit_label(dunkel, zaehler) -%}
+{%- if post.ki -%}<span style="display:flex;align-items:center;gap:20px">{{ ki_label(dunkel) }}{{ zaehler }}</span>{%- else -%}{{ zaehler }}{%- endif -%}
 {%- endmacro -%}
 
 {#- ── Blöcke ─────────────────────────────────────────────────────────── -#}
@@ -150,9 +153,7 @@
 {%- endmacro -%}
 
 {%- macro b_bild(b, f) -%}
-{%- if b.vermerk %}<div style="position:relative;flex:none;height:{{ b.hoehe }}px">{% endif -%}
 <img src="{{ b.bild|pfad }}" alt="" style="height:{{ b.hoehe }}px;width:100%;flex:none;border-radius:16px;object-fit:cover;object-position:{{ b.fokus }};display:block">
-{%- if b.vermerk %}{{ vermerk(b.vermerk, true) }}</div>{% endif -%}
 {%- endmacro -%}
 
 {%- macro b_badge(b, f) -%}
@@ -201,8 +202,8 @@
 {%- if f.schluss and f.dunkel and not f.textur_gesetzt -%}{%- set bg = "#1c4b42" -%}{%- else -%}{%- set bg = textur(f.textur) -%}{%- endif -%}
 {{ wurzel(f, n, f.padding, bg) }}
 {%- set h = f.hintergrund -%}
-{%- if h.foto_box %}<div style="position:absolute;left:108px;top:{{ h.foto_box.oben }}px;width:864px;height:{{ h.foto_box.hoehe }}px;border-radius:16px;overflow:hidden"><img src="{{ h.foto_box.bild|pfad }}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:{{ h.foto_box.fokus }};display:block">{{ vermerk(h.foto_box.vermerk, true) }}</div>{% endif %}
-{%- if h.foto_flaeche %}<img src="{{ h.foto_flaeche.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;inset:0;width:100%;height:100%;object-position:{{ h.foto_flaeche.fokus }}"><div style="position:absolute;inset:0;background:{{ h.foto_flaeche.verlauf|verlauf }}"></div>{{ vermerk(h.foto_flaeche.vermerk) }}{% endif %}
+{%- if h.foto_box %}<div style="position:absolute;left:108px;top:{{ h.foto_box.oben }}px;width:864px;height:{{ h.foto_box.hoehe }}px;border-radius:16px;overflow:hidden"><img src="{{ h.foto_box.bild|pfad }}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:{{ h.foto_box.fokus }};display:block"></div>{% endif %}
+{%- if h.foto_flaeche %}<img src="{{ h.foto_flaeche.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;inset:0;width:100%;height:100%;object-position:{{ h.foto_flaeche.fokus }}"><div style="position:absolute;inset:0;background:{{ h.foto_flaeche.verlauf|verlauf }}"></div>{% endif %}
 {%- if f.chevrons %}<img src="{{ D }}chevrons-{{ 'weiss' if f.dunkel else 'gruen' }}.png" alt="" style="position:absolute;right:0;top:330px;height:640px;width:auto{% if f.dunkel %};opacity:0.85{% endif %}">{% endif %}
 {%- if n > 1 %}{{ massband(n, gesamt, f.kapitel) }}{% endif %}
 {%- if f.ziel %}{{ ziel(f.ziel) }}{% endif %}
@@ -213,14 +214,14 @@
 
 {#- Cover hell: Foto oben, Chevrons rechts (Referenz 4c-01). -#}
 {%- macro cover_hell(f, n, gesamt) -%}
-{{ wurzel(f, n, "660px 108px 300px", textur(f.textur)) }}<img src="{{ f.foto.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;left:0;top:0;width:1080px;height:608px;object-position:{{ f.foto.fokus }}">{{ vermerk(f.foto.vermerk) }}<img src="{{ D }}chevrons-gruen.png" alt="" style="position:absolute;right:0;top:608px;height:560px;width:auto"><div style="position:absolute;left:108px;right:108px;top:96px;display:flex;justify-content:space-between;align-items:center;z-index:2"><span style="background:#f6f5f2;border-radius:8px;padding:14px 18px;display:flex"><img src="{{ D }}logo-stonegrey-puregreen.png" alt="BKM Mannesmann" style="width:160px;display:block"></span><span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:#494949;background:#f6f5f2;border-radius:8px;padding:10px 14px">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></div>
+{{ wurzel(f, n, "660px 108px 300px", textur(f.textur)) }}<img src="{{ f.foto.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;left:0;top:0;width:1080px;height:608px;object-position:{{ f.foto.fokus }}"><img src="{{ D }}chevrons-gruen.png" alt="" style="position:absolute;right:0;top:608px;height:560px;width:auto"><div style="position:absolute;left:108px;right:108px;top:96px;display:flex;justify-content:space-between;align-items:center;z-index:2"><span style="background:#f6f5f2;border-radius:8px;padding:14px 18px;display:flex"><img src="{{ D }}logo-stonegrey-puregreen.png" alt="BKM Mannesmann" style="width:160px;display:block"></span>{%- if post.ki -%}<span style="display:flex;align-items:center;gap:16px;background:#f6f5f2;border-radius:8px;padding:8px 14px 8px 10px">{{ ki_label(false) }}<span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:#494949">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></span>{%- else -%}<span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:#494949;background:#f6f5f2;border-radius:8px;padding:10px 14px">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span>{%- endif -%}</div>
 {{ inhalt(f) }}</div>
 {%- endmacro -%}
 
 {#- Zwei-Wege-Cover und -Schluss (Referenz 4b-01, 4b-07). -#}
 {%- macro wege_rahmen(f, n, gesamt, padding, hoehe, verlauf) -%}
 {{ wurzel(f, n, padding, "#f6f5f2") }}{{ geteilt(f.textur_links, f.textur_rechts) }}
-<div style="position:absolute;left:0;right:0;top:0;height:{{ hoehe }}px;background:{{ textur(f.textur) }}"></div><img src="{{ f.foto.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;left:0;right:0;top:0;width:100%;height:{{ hoehe }}px;object-position:{{ f.foto.fokus }}"><div style="position:absolute;left:0;right:0;top:0;height:{{ hoehe }}px;background:{{ verlauf }}"></div>{{ vermerk(f.foto.vermerk) }}
+<div style="position:absolute;left:0;right:0;top:0;height:{{ hoehe }}px;background:{{ textur(f.textur) }}"></div><img src="{{ f.foto.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;left:0;right:0;top:0;width:100%;height:{{ hoehe }}px;object-position:{{ f.foto.fokus }}"><div style="position:absolute;left:0;right:0;top:0;height:{{ hoehe }}px;background:{{ verlauf }}"></div>
 {%- endmacro -%}
 
 {%- macro cover_wege(f, n, gesamt) -%}
@@ -249,7 +250,7 @@
 
 {%- macro wege_vergleich(f, n, gesamt) -%}
 {{ wurzel(f, n, "96px 108px 300px", "#f6f5f2") }}{{ geteilt(f.textur_links, f.textur_rechts) }}
-{{ massband(n, gesamt, f.kapitel) }}<div style="position:absolute;left:108px;top:96px"><img src="{{ D }}logo-white-puregreen.png" alt="BKM Mannesmann" style="width:180px;display:block"></div><div style="position:absolute;right:108px;top:104px"><span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:#494949">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></div>
+{{ massband(n, gesamt, f.kapitel) }}<div style="position:absolute;left:108px;top:96px"><img src="{{ D }}logo-white-puregreen.png" alt="BKM Mannesmann" style="width:180px;display:block"></div>{%- set z -%}<span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:#494949">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span>{%- endset -%}<div style="position:absolute;right:108px;top:{{ 98 if post.ki else 104 }}px">{{ zaehler_mit_label(false, z) }}</div>
 {{ wege_spalte(f.links, true) }}
 {{ wege_spalte(f.rechts, false) }}</div>
 {%- endmacro -%}

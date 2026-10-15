@@ -753,16 +753,16 @@
       "suchbereich": "5 % bis 45 % der Bildbreite. Die Obergrenze folgt aus mindestbreite_mm: druckgerecht gesetzt misst die Marke auf schmalen Motiven bis zu 36 % der Bildbreite."
     },
     "label": {
-      "$comment": "Neues Label „AI GENERATED“, eingeführt am 15.10.2026. Gilt vorerst für Instagram (scripts/instagram_inhalt.py). Broschüren und die Bildprüfung arbeiten weiter mit der weissen Sperrmarke unter 'marke' — kennzeichnung.py erkennt eingebrannte Altvermerke an deren Form.",
+      "$comment": "Neues Label „AI GENERATED“, eingeführt am 15.10.2026. Gilt vorerst für Instagram. Broschüren und die Bildprüfung arbeiten weiter mit der weissen Sperrmarke unter 'marke' — kennzeichnung.py erkennt eingebrannte Altvermerke an deren Form.",
       "dateien": {
         "lime": "assets/kennzeichnung/bkm-ai-generated-lime.svg",
         "deep": "assets/kennzeichnung/bkm-ai-generated-deep.svg"
       },
       "benennung": "Nach der Farbe der Pille: -lime = Lime-Pille mit Deep-Green-Schrift, -deep = Deep-Green-Pille mit Lime-Schrift.",
-      "wahl": "Nach dem Grund unter dem Label: dunkler oder abgedunkelter Grund → lime, heller Grund (mittlere Helligkeit ab 0,55) → deep. Die Pille trägt ihren Kontrast selbst; die Wahl verhindert nur, dass sie im Grund aufgeht.",
-      "seitenverhaeltnis": 5.196,
-      "groesse": "Wie die Marke: 9,5 % der Kastenbreite, mindestens 90 px, 1 % Randabstand. Liegt ein alter Vermerk im Motiv, deckt das Label ihn mittig ab.",
-      "einsatz": "Als eigenes Element über dem Bildkasten, nicht ins Motiv gerechnet. Jedes Foto auf einer Instagram-Folie bekommt es, außer es steht im Register unter keine_ki."
+      "wahl": "Nach der Fläche der Folie: dunkel → lime, hell → deep.",
+      "groesse": "Instagram: 28 px hoch im Kopf der Folie, 20 px Abstand zum Zähler.",
+      "einsatz": "Instagram: der Post gilt als Ganzes als KI-erzeugt; jede Folie trägt das Label im Kopf links neben dem Zähler, nicht auf einem Foto. Abschaltbar je Post mit \"ki\": false. Zusätzlich beim Posten die Instagram-Kennzeichnung setzen — sie ersetzt das Label nicht.",
+      "seitenverhaeltnis": 5.196
     }
   },
   "deviations_from_tds": {

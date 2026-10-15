@@ -439,12 +439,8 @@ def inhalt_setzen(datei: Path, args, kennzeichnen: bool = True) -> Path:
         for z in str(e).splitlines():
             fehler(z)
         return None
-    if kennzeichnen:
-        meldungen = instagram_inhalt.vermerke_setzen(post)
-        if meldungen:
-            print(f"\n{datei.parent.name}: KI-Kennzeichnung")
-        for m in meldungen:
-            hinweis(m)
+    if not kennzeichnen:
+        post["ki"] = False
     ziel = OUTPUT_DIR / "_html" / f"{datei.parent.name}.html"
     ziel.parent.mkdir(parents=True, exist_ok=True)
     ziel.write_text(instagram_inhalt.html_setzen(post), encoding="utf-8")
@@ -480,8 +476,8 @@ def gegenprobe(args) -> int:
         return 1
     status = 0
     for slug, runde in GEGENPROBE.items():
-        # Ohne KI-Vermerk: verglichen wird die Vorlage mit dem Design, und die
-        # Referenz trägt die Vermerke nur eingebrannt, nicht als eigenes Element.
+        # Ohne KI-Label: verglichen wird die Vorlage mit dem Design, und die
+        # Referenz trägt das Label im Kopf noch nicht.
         html = inhalt_setzen(CONTENT_DIR / slug / "content.json", args, kennzeichnen=False)
         if not html or not bauen(html, slug, args):
             status = 1
