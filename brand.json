@@ -759,9 +759,9 @@
         "deep": "assets/kennzeichnung/bkm-ai-generated-deep.svg"
       },
       "benennung": "Nach der Farbe der Pille: -lime = Lime-Pille mit Deep-Green-Schrift, -deep = Deep-Green-Pille mit Lime-Schrift.",
-      "wahl": "Nach der Fläche der Folie: dunkel → lime, hell → deep.",
-      "groesse": "Instagram: 28 px hoch im Kopf der Folie, 20 px Abstand zum Zähler.",
-      "einsatz": "Instagram: der Post gilt als Ganzes als KI-erzeugt; jede Folie trägt das Label im Kopf links neben dem Zähler, nicht auf einem Foto. Abschaltbar je Post mit \"ki\": false. Zusätzlich beim Posten die Instagram-Kennzeichnung setzen — sie ersetzt das Label nicht.",
+      "wahl": "Nach dem Grund unter dem Label: im Maßband-Streifen immer lime; auf Covers ohne Maßband hell → deep.",
+      "groesse": "Instagram: 20 px hoch, unten rechts im Maßband-Streifen links neben dem Pfeil (right 158 px, top 1297 px).",
+      "einsatz": "Instagram: der Post gilt als Ganzes als KI-erzeugt; jede Folie trägt das Label in der Rahmenzone unten rechts, nie auf einem Foto oder Gesicht. Abschaltbar je Post mit \"ki\": false. Zusätzlich beim Posten die Instagram-Kennzeichnung setzen — sie ersetzt das Label nicht.",
       "seitenverhaeltnis": 5.196
     }
   },

@@ -109,6 +109,8 @@ und Prüfungen: `docs/INSTAGRAM.md`.
    Zeile in `content/instagram/plan.csv`. Keine Farbwerte, keine eigenen Styles.
 3. **Kein Verkleinern, um Text unterzubringen.** Läuft eine Folie über, wird gekürzt oder auf
    zwei Folien verteilt.
+4. **Kein Logo in einem weißen Kasten, nichts auf Gesichtern.** Auf Fotos steht das weiß-grüne
+   Logo; das KI-Label steht klein im Maßband, nie im Motiv.
 
 ```bash
 python3 scripts/build_instagram.py --plan

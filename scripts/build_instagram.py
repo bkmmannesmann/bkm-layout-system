@@ -53,6 +53,12 @@ CONTENT_DIR = ROOT_DIR / "content" / "instagram"
 REFERENZ_DIR = ROOT_DIR / "templates" / "instagram" / "referenz"
 # Gegenprobe: diese Posts bauen die Referenz (Runde 4) aus content.json nach.
 GEGENPROBE = {"wege-diy": "4a", "wege-feuchte-check": "4b", "wege-fachbetrieb": "4c"}
+# Bewusste Abweichungen der Vorlage von der Referenz: Folie → (Bereich x0, y0, x1, y1, Grund).
+# Dort wird nicht verglichen; der Rest der Folie schon.
+ABWEICHUNGEN = {
+    "4c-01": (0, 0, 1080, 310, "Kopf ohne weiße Kästen: weißes Logo, weißer Zähler, Verlauf "
+                                "oben — Entscheidung 15.10.2026, Kästen brachen die Konsistenz"),
+}
 OUTPUT_DIR = ROOT_DIR / "output" / "instagram"
 
 FORMATE = {
@@ -486,6 +492,12 @@ def gegenprobe(args) -> int:
         for i in range(7):
             soll = _graustufen(OUTPUT_DIR / "referenz" / f"referenz-{start + i:02d}.png")
             ist = _graustufen(OUTPUT_DIR / slug / f"{slug}-{i + 1:02d}.png")
+            name = f"{runde}-{i + 1:02d}"
+            if name in ABWEICHUNGEN:
+                x0, y0, x1, y1, grund = ABWEICHUNGEN[name]
+                soll[max(0, y0 - 3):y1 - 3, max(0, x0 - 3):x1 - 3] = 0
+                ist[max(0, y0 - 3):y1 - 3, max(0, x0 - 3):x1 - 3] = 0
+                print(f"  {name}: Bereich {x0},{y0}–{x1},{y1} ausgenommen ({grund})")
             anteil = float((abs(soll - ist) > 40).mean())
             gleich = anteil <= 0.0005
             print(f"  {runde}-{i + 1:02d}: {'gleich' if gleich else 'WEICHT AB'}"

@@ -42,7 +42,7 @@
 {%- endmacro -%}
 
 {%- macro kopf(f, n, gesamt) -%}
-<div style="display:flex;justify-content:space-between;align-items:center;position:relative"><img src="{{ D }}{{ 'logo-white-puregreen.png' if f.dunkel else 'logo-stonegrey-puregreen.png' }}" alt="BKM Mannesmann" style="width:180px;display:block">{%- set z -%}<span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:{{ 'rgba(255,255,255,0.7)' if f.dunkel else STONE }}">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span>{%- endset -%}{{ zaehler_mit_label(f.dunkel, z) }}</div>
+<div style="display:flex;justify-content:space-between;align-items:center;position:relative"><img src="{{ D }}{{ 'logo-white-puregreen.png' if f.dunkel else 'logo-stonegrey-puregreen.png' }}" alt="BKM Mannesmann" style="width:180px;display:block"><span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:{{ 'rgba(255,255,255,0.7)' if f.dunkel else STONE }}">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></div>
 {%- endmacro -%}
 
 {%- macro cta(text) -%}
@@ -53,15 +53,12 @@
 <div style="position:absolute;left:0;right:0;top:1236px;display:flex;justify-content:center;z-index:6"><span style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;letter-spacing:0.14em;text-transform:uppercase;background:#b4e717;color:#1c4b42;padding:8px 20px;border-radius:999px">{{ maske("icon-check-circle.svg", 22, DEEP) }}{{ text|auszeichnen(DEEP) }}</span></div>
 {%- endmacro -%}
 
-{#- KI-Label im Kopf jeder Folie, links neben dem Zähler. Lime-Pille auf dunkler,
-    Deep-Green-Pille auf heller Folie. post.ki = false schaltet es ab (Gegenprobe,
-    Posts ganz ohne KI-Inhalt). -#}
-{%- macro ki_label(dunkel) -%}
-<img data-ki-vermerk src="/assets/kennzeichnung/bkm-ai-generated-{{ 'lime' if dunkel else 'deep' }}.svg" alt="AI generated" style="height:28px;width:auto;display:block">
-{%- endmacro -%}
-
-{%- macro zaehler_mit_label(dunkel, zaehler) -%}
-{%- if post.ki -%}<span style="display:flex;align-items:center;gap:20px">{{ ki_label(dunkel) }}{{ zaehler }}</span>{%- else -%}{{ zaehler }}{%- endif -%}
+{#- KI-Label unten rechts im Maßband-Streifen, links neben dem Pfeil — dort liegt
+    nie ein Foto, und es steht beim Wischen auf jeder Folie an derselben Stelle.
+    Im Maßband immer die Lime-Pille; auf Covers ohne Maßband nach dem Grund dort.
+    post.ki = false schaltet es ab (Gegenprobe, Posts ohne KI-Inhalt). -#}
+{%- macro ki_label(hell=false) -%}
+{%- if post.ki -%}<img data-ki-vermerk src="/assets/kennzeichnung/bkm-ai-generated-{{ 'deep' if hell else 'lime' }}.svg" alt="AI generated" style="position:absolute;right:158px;top:1297px;height:20px;width:auto;display:block;z-index:6">{%- endif -%}
 {%- endmacro -%}
 
 {#- ── Blöcke ─────────────────────────────────────────────────────────── -#}
@@ -198,7 +195,7 @@
 {%- endmacro -%}
 
 {#- Standardfolie: Rahmen + Blöcke. Deckt Cover, Inhalt und Schluss ab. -#}
-{%- macro standard(f, n, gesamt) -%}
+{%- macro standard(f, n, gesamt) -%}{%- set ki_hell = n == 1 and not f.dunkel -%}
 {%- if f.schluss and f.dunkel and not f.textur_gesetzt -%}{%- set bg = "#1c4b42" -%}{%- else -%}{%- set bg = textur(f.textur) -%}{%- endif -%}
 {{ wurzel(f, n, f.padding, bg) }}
 {%- set h = f.hintergrund -%}
@@ -209,13 +206,13 @@
 {%- if f.ziel %}{{ ziel(f.ziel) }}{% endif %}
 {{ kopf(f, n, gesamt) }}
 {%- if f.cta %}{{ cta(f.cta) }}{% endif %}
-{{ inhalt(f) }}</div>
+{{ inhalt(f) }}{{ ki_label(ki_hell) }}</div>
 {%- endmacro -%}
 
 {#- Cover hell: Foto oben, Chevrons rechts (Referenz 4c-01). -#}
 {%- macro cover_hell(f, n, gesamt) -%}
-{{ wurzel(f, n, "660px 108px 300px", textur(f.textur)) }}<img src="{{ f.foto.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;left:0;top:0;width:1080px;height:608px;object-position:{{ f.foto.fokus }}"><img src="{{ D }}chevrons-gruen.png" alt="" style="position:absolute;right:0;top:608px;height:560px;width:auto"><div style="position:absolute;left:108px;right:108px;top:96px;display:flex;justify-content:space-between;align-items:center;z-index:2"><span style="background:#f6f5f2;border-radius:8px;padding:14px 18px;display:flex"><img src="{{ D }}logo-stonegrey-puregreen.png" alt="BKM Mannesmann" style="width:160px;display:block"></span>{%- if post.ki -%}<span style="display:flex;align-items:center;gap:16px;background:#f6f5f2;border-radius:8px;padding:8px 14px 8px 10px">{{ ki_label(false) }}<span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:#494949">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></span>{%- else -%}<span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:#494949;background:#f6f5f2;border-radius:8px;padding:10px 14px">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span>{%- endif -%}</div>
-{{ inhalt(f) }}</div>
+{{ wurzel(f, n, "660px 108px 300px", textur(f.textur)) }}<img src="{{ f.foto.bild|pfad }}" alt="" style="position:absolute;object-fit:cover;left:0;top:0;width:1080px;height:608px;object-position:{{ f.foto.fokus }}"><img src="{{ D }}chevrons-gruen.png" alt="" style="position:absolute;right:0;top:608px;height:560px;width:auto"><div style="position:absolute;left:0;right:0;top:0;height:300px;background:linear-gradient(180deg,rgba(15,38,32,0.6) 0%,rgba(15,38,32,0) 100%)"></div><div style="position:absolute;left:108px;right:108px;top:96px;display:flex;justify-content:space-between;align-items:center;z-index:2"><img src="{{ D }}logo-white-puregreen.png" alt="BKM Mannesmann" style="width:180px;display:block"><span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:rgba(255,255,255,0.85)">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></div>
+{{ inhalt(f) }}{{ ki_label(true) }}</div>
 {%- endmacro -%}
 
 {#- Zwei-Wege-Cover und -Schluss (Referenz 4b-01, 4b-07). -#}
@@ -230,7 +227,7 @@
 <div style="position:absolute;left:108px;top:990px;display:flex;align-items:center;gap:14px">{{ maske("icon-arrow-left.svg", 34, LIME) }}<span style="font-weight:700;font-size:22px;letter-spacing:0.14em;text-transform:uppercase;font-size:22px;color:#fff">{{ f.links|auszeichnen(LIME) }}</span></div>
 <div style="position:absolute;right:108px;top:990px;display:flex;align-items:center;gap:14px"><span style="font-weight:700;font-size:22px;letter-spacing:0.14em;text-transform:uppercase;font-size:22px;color:#287d4b">{{ f.rechts|auszeichnen(LIME) }}</span>{{ icon_kachel("icon-arrow-right.svg", 44, 22) }}</div>
 {{ kopf(f, n, gesamt) }}
-{{ inhalt(f) }}</div>
+{{ inhalt(f) }}{{ ki_label(true) }}</div>
 {%- endmacro -%}
 
 {%- macro schluss_wege(f, n, gesamt) -%}
@@ -239,7 +236,7 @@
 <div style="position:absolute;left:108px;width:380px;top:780px;display:flex;flex-direction:column;gap:18px;color:#fff">{{ maske("icon-arrow-left.svg", 48, LIME) }}<b style="font-size:30px;line-height:1.3">{{ f.links.titel|auszeichnen(LIME) }}</b><span style="font-size:24px;line-height:1.4">{{ f.links.text|auszeichnen(LIME) }}</span></div>
 <div style="position:absolute;right:108px;width:380px;top:780px;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:18px">{{ icon_kachel("icon-arrow-right.svg", 56, 28) }}<b style="font-size:30px;line-height:1.3">{{ f.rechts.titel|auszeichnen(LIME) }}</b><span style="font-size:24px;line-height:1.4">{{ f.rechts.text|auszeichnen(LIME) }}</span></div>
 {{ kopf(f, n, gesamt) }}
-{{ inhalt(f) }}</div>
+{{ inhalt(f) }}{{ ki_label() }}</div>
 {%- endmacro -%}
 
 {#- Zwei Wege nebeneinander (Referenz 4b-05). -#}
@@ -250,9 +247,9 @@
 
 {%- macro wege_vergleich(f, n, gesamt) -%}
 {{ wurzel(f, n, "96px 108px 300px", "#f6f5f2") }}{{ geteilt(f.textur_links, f.textur_rechts) }}
-{{ massband(n, gesamt, f.kapitel) }}<div style="position:absolute;left:108px;top:96px"><img src="{{ D }}logo-white-puregreen.png" alt="BKM Mannesmann" style="width:180px;display:block"></div>{%- set z -%}<span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:#494949">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span>{%- endset -%}<div style="position:absolute;right:108px;top:{{ 98 if post.ki else 104 }}px">{{ zaehler_mit_label(false, z) }}</div>
+{{ massband(n, gesamt, f.kapitel) }}<div style="position:absolute;left:108px;top:96px"><img src="{{ D }}logo-white-puregreen.png" alt="BKM Mannesmann" style="width:180px;display:block"></div><div style="position:absolute;right:108px;top:104px"><span style="font-weight:700;font-size:18px;letter-spacing:0.14em;color:#494949">{{ "%02d"|format(n) }} / {{ "%02d"|format(gesamt) }}</span></div>
 {{ wege_spalte(f.links, true) }}
-{{ wege_spalte(f.rechts, false) }}</div>
+{{ wege_spalte(f.rechts, false) }}{{ ki_label() }}</div>
 {%- endmacro -%}
 
 <!DOCTYPE html>

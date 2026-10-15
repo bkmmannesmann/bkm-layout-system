@@ -144,15 +144,16 @@ mit `fokus` so verschieben, dass er im Bild bleibt.
 ## KI-Kennzeichnung
 
 Ein Karussell gilt als Ganzes als KI-erzeugt. **Jede Folie trägt das Label „AI GENERATED“
-im Kopf, links neben dem Zähler** — fester Teil des Designs wie Logo und Seitenzahl, nicht
-auf einem Foto. So ist es auf jeder Folie beim ersten Blick sichtbar (EU-KI-Verordnung,
-Art. 50 Abs. 4), egal wie groß ein Bild steht oder wo es beschnitten wird.
+unten rechts im Maßband-Streifen, links neben dem Pfeil** — klein, an derselben Stelle auf
+jeder Folie, nie auf einem Foto. So ist es beim ersten Blick sichtbar (EU-KI-Verordnung,
+Art. 50 Abs. 4), ohne ins Bild oder in den Kopf zu greifen.
 
 | | |
 |:---|:---|
 | Label | `assets/kennzeichnung/bkm-ai-generated-lime.svg` (Lime-Pille) und `-deep.svg` (Deep-Green-Pille) |
-| Wahl | dunkle Folie → Lime-Pille, helle Folie → Deep-Green-Pille; beim hellen Cover mit Foto im Kasten des Zählers |
-| Größe | 28 px hoch, Abstand 20 px zum Zähler |
+| Lage | `right:158px; top:1297px` — mittig in der unteren Zeile des Maßbands |
+| Größe | 20 px hoch, deutlich kleiner als das Logo |
+| Wahl | im Maßband immer Lime; auf Covers ohne Maßband nach dem Grund dort (hell → Deep Green) |
 | Abschalten | `"ki": false` in der `content.json` — nur für Posts nachweislich ohne KI-Inhalt |
 
 **Zusätzlich beim Posten** in Instagram unter *Erweiterte Einstellungen* die KI-Kennzeichnung
@@ -161,6 +162,17 @@ erkennt, gehen dabei verloren. Die Plattformkennzeichnung ersetzt das Label nich
 liegt bei dem, der veröffentlicht.
 
 Die Gegenprobe läuft ohne Label: verglichen wird die Vorlage mit dem Design.
+
+## Gestaltungsregeln über die Referenz hinaus
+
+Entscheidungen, die nach der Referenz getroffen wurden. Die Gegenprobe nimmt die betroffenen
+Bereiche aus (`ABWEICHUNGEN` in `scripts/build_instagram.py`).
+
+1. **Kein Logo und kein Zähler in einem weißen Kasten.** Auf einem Foto stehen das weiß-grüne
+   Logo und der Zähler in Weiß; lesbar macht sie ein Deep-Green-Verlauf über dem oberen
+   Bildrand, wie bei den Vollbild-Folien. (15.10.2026, Cover hell / 4c-01)
+2. **Nichts liegt auf Gesichtern.** Kennzeichnungen, Labels und Bedienelemente gehören in die
+   Rahmenzonen — Kopf, Maßband —, nicht ins Motiv.
 
 ## Bauen
 

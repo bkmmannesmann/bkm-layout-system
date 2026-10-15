@@ -286,7 +286,7 @@ Fassungen: `bkm-ai-generated-lime.svg` (Lime-Pille, Deep-Green-Schrift) für dun
 Farbe der Pille.
 
 Es gilt vorerst nur für Instagram-Karussells. Dort wird nicht das einzelne Motiv
-gekennzeichnet, sondern der Post: jede Folie trägt das Label im Kopf neben dem Zähler — siehe
+gekennzeichnet, sondern der Post: jede Folie trägt das Label klein unten rechts im Maßband — siehe
 `docs/INSTAGRAM.md`, Abschnitt KI-Kennzeichnung. Die Bilder kommen ohne Vermerk aus der
 Erzeugung; ein eingebrannter Vermerk ist dort nicht nötig.
 
