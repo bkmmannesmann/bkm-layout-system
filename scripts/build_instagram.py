@@ -45,8 +45,12 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
 import zipfile
+from functools import partial
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT_DIR = Path(__file__).parent.parent.resolve()
 SOCIAL_DIR = ROOT_DIR / "social" / "instagram"
@@ -231,6 +235,23 @@ def drift_pruefen(html: Path) -> None:
             print("           " + zeile)
 
 
+class _StillerHandler(SimpleHTTPRequestHandler):
+    def log_message(self, *_):
+        pass
+
+
+def webserver(wurzel: Path) -> ThreadingHTTPServer:
+    """Liefert die Dateien über http://127.0.0.1 aus.
+
+    Über file:// lädt Chromium CSS-Masken (mask: url(...)) nicht — sie gelten
+    dort als fremder Ursprung. Die Icons der Referenz sind so gesetzt und
+    fehlten im PNG, ohne dass eine Meldung kam.
+    """
+    httpd = ThreadingHTTPServer(("127.0.0.1", 0), partial(_StillerHandler, directory=str(wurzel)))
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    return httpd
+
+
 def bauen(html: Path, slug: str, args) -> bool:
     try:
         from playwright.sync_api import sync_playwright
@@ -249,6 +270,21 @@ def bauen(html: Path, slug: str, args) -> bool:
     drift_pruefen(html)
     ok = True
 
+    html = html.resolve()
+    wurzel = ROOT_DIR if ROOT_DIR in html.parents else html.parent
+    httpd = webserver(wurzel)
+    adresse = (f"http://127.0.0.1:{httpd.server_address[1]}/"
+               + quote(html.relative_to(wurzel).as_posix()))
+    fehlgeschlagen: list[str] = []
+
+    def mitschreiben(seite) -> None:
+        def antwort(r):
+            if r.status >= 400:
+                fehlgeschlagen.append(f"{r.status} {r.url}")
+        seite.on("response", antwort)
+        seite.on("requestfailed", lambda r: fehlgeschlagen.append(
+            f"{r.failure or 'abgebrochen'} {r.url}"))
+
     with sync_playwright() as pw:
         exe = chromium_pfad()
         browser = pw.chromium.launch(**({"executable_path": exe} if exe else {}))
@@ -257,12 +293,16 @@ def bauen(html: Path, slug: str, args) -> bool:
             ctx = browser.new_context(viewport={"width": 1600, "height": 1200},
                                       device_scale_factor=dsf)
             seite = ctx.new_page()
-            seite.goto(html.resolve().as_uri(), wait_until="networkidle", timeout=120_000)
+            mitschreiben(seite)
+            seite.goto(adresse, wait_until="networkidle", timeout=120_000)
             seite.wait_for_timeout(args.warten)
             # Animationen und Übergänge stehen im Endzustand.
             seite.add_style_tag(content="*,*::before,*::after{animation-duration:0s!important;"
                                         "animation-delay:0s!important;transition:none!important;"
-                                        "caret-color:transparent!important}")
+                                        "caret-color:transparent!important}"
+                                        # Badge, das Claude Design in Exporte setzt
+                                        "#__claude_design_branding,#__bundler_loading"
+                                        "{display:none!important}")
             info = seite.evaluate(FOLIEN_JS, [args.selector, ziel_verhaeltnis,
                                               VERHAELTNIS_TOLERANZ])
             # Der Viewport muss alle Folien fassen, sonst schneidet ein
@@ -308,6 +348,11 @@ def bauen(html: Path, slug: str, args) -> bool:
                 ok = False
             elif familie not in definiert and familie.lower() not in ("sans-serif", "serif"):
                 hinweis(f"Schrift {familie} hat kein @font-face — es greift die Systemschrift.")
+        for f in sorted(set(fehlgeschlagen)):
+            if f.split(" ", 1)[-1].startswith(("data:", "blob:")):
+                continue
+            fehler(f"Datei lädt nicht: {f[:160]}")
+            ok = False
         for b in pruefung["bilder"]:
             if not b["ok"]:
                 fehler(f"Bild lädt nicht: {b['src']}")
@@ -315,13 +360,18 @@ def bauen(html: Path, slug: str, args) -> bool:
         ctx.close()
 
         # Rendern: je Folienbreite die Pixeldichte, die genau das Zielformat ergibt.
+        # Folien gleicher Breite teilen sich einen Ladevorgang.
         dateien = []
+        offen: dict[float, tuple] = {}
         for f in folien:
-            dsf = breite / f["breite"]
-            ctx, seite, _ = laden(dsf)
+            dsf = round(breite / f["breite"], 4)
+            if dsf not in offen:
+                for alt in offen.values():
+                    alt[0].close()
+                offen = {dsf: laden(dsf)}
+            seite = offen[dsf][1]
             el = seite.locator(f'[data-ig-folie="{f["index"]}"]')
             png = el.screenshot(type="png", animations="disabled")
-            ctx.close()
             bild = Image.open(io.BytesIO(png))
             if bild.size != (breite, hoehe):
                 if max(abs(bild.size[0] - breite), abs(bild.size[1] - hoehe)) > 3:
@@ -339,7 +389,10 @@ def bauen(html: Path, slug: str, args) -> bool:
             dateien.append(name)
             label = f"  {f['label']}" if f["label"] else ""
             print(f"  {name.relative_to(ROOT_DIR)}  {bild.size[0]} × {bild.size[1]}{label}")
+        for alt in offen.values():
+            alt[0].close()
         browser.close()
+    httpd.shutdown()
 
     with zipfile.ZipFile(ausgabe / f"{slug}.zip", "w", zipfile.ZIP_STORED) as z:
         for d in dateien:
