@@ -97,6 +97,16 @@ python3 scripts/validate_brochure.py content/<ordner>/content.json
 python3 scripts/build_pages.py <ordner>
 ```
 
+## Instagram-Karussells
+
+Entwürfe aus Claude Design liegen unverändert unter `social/instagram/<post>/` und werden von
+Chromium zu PNGs gesetzt (1080 × 1350, 7–10 Folien). Kein Nachbau als Template, kein
+Umformulieren der Texte. Ablauf und Prüfungen: `docs/INSTAGRAM.md`.
+
+```bash
+python3 scripts/build_instagram.py social/instagram/<post>/
+```
+
 ## Dateien von außerhalb
 
 Entwürfe aus Claude Design, Dateien aus anderen BKM-Repositories und exportiertes HTML laufen

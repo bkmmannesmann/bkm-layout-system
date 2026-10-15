@@ -68,6 +68,17 @@ durch. Die verbindlichen Regeln stehen in [`docs/BROSCHUERE-LAYOUT.md`](docs/BRO
 Als Referenz liegt `content/broschuere-mannesmann/` im Repository — eine Unternehmensbroschüre,
 die alle sieben Seitentypen verwendet. Offene Punkte darin sind mit `[ANGABE FEHLT: …]` markiert.
 
+### Instagram-Karussells
+
+Karussell-Posts aus Claude Design (Project archive) nach `social/instagram/<post>/` legen und
+zu verlustfreien PNGs in 1080 × 1350 setzen — lokal oder per GitHub Action *Instagram*:
+
+```bash
+python3 scripts/build_instagram.py social/instagram/<post>/
+```
+
+Details in [`docs/INSTAGRAM.md`](docs/INSTAGRAM.md).
+
 ### Technisches Datenblatt erstellen
 
 Das TDS-System trennt Produktinhalt, Markenlayout und Freigabeprüfung. Kopiere für einen neuen Entwurf eine passende Referenz aus `content/tds*/`, pflege die bestätigten Produktdaten in `content.json` und führe anschließend die Entwurfsprüfung aus:

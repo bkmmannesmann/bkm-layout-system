@@ -1,0 +1,72 @@
+name: Instagram
+
+# Baut die Karussells unter social/instagram/ zu PNGs und haengt sie als
+# Artefakt an den Lauf: Actions -> Lauf oeffnen -> unten "Artifacts".
+# Bei einem Push nur die geaenderten Posts, von Hand (Run workflow) alle
+# oder einen bestimmten.
+
+on:
+  push:
+    paths:
+      - "social/instagram/**"
+      - "scripts/build_instagram.py"
+  workflow_dispatch:
+    inputs:
+      post:
+        description: "Ordnername unter social/instagram/ (leer = alle)"
+        required: false
+        default: ""
+
+jobs:
+  png:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Chromium und Pillow
+        run: |
+          pip install playwright pillow
+          python -m playwright install --with-deps chromium
+
+      - name: Posts bestimmen
+        id: posts
+        env:
+          EINGABE: ${{ github.event.inputs.post }}
+          VORHER: ${{ github.event.before }}
+        run: |
+          if [ -n "$EINGABE" ]; then
+            posts="$EINGABE"
+          elif [ "${{ github.event_name }}" = "push" ] && [ -n "$VORHER" ] \
+               && ! echo "$VORHER" | grep -q '^0*$' \
+               && ! git diff --name-only "$VORHER" HEAD | grep -q '^scripts/build_instagram.py$'; then
+            posts=$(git diff --name-only "$VORHER" HEAD -- social/instagram \
+                    | cut -d/ -f3 | sort -u | while read p; do [ -d "social/instagram/$p" ] && echo "$p"; done)
+          else
+            posts=$(ls social/instagram)
+          fi
+          echo "posts=$(echo $posts)" >> "$GITHUB_OUTPUT"
+          echo "Posts: $posts"
+
+      - name: PNGs bauen
+        if: steps.posts.outputs.posts != ''
+        run: |
+          status=0
+          for p in ${{ steps.posts.outputs.posts }}; do
+            python3 scripts/build_instagram.py "social/instagram/$p" || status=1
+          done
+          exit $status
+
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.posts.outputs.posts != ''
+        with:
+          name: instagram-png
+          path: |
+            output/instagram/*/*.png
+          if-no-files-found: warn
+          compression-level: 0

@@ -27,3 +27,6 @@ Thumbs.db
 # Temporäre Dateien
 *.tmp
 *.bak
+
+# Instagram: entpackte Project archives (entstehen beim Bau neu)
+social/instagram/*/_entpackt/
