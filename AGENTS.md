@@ -74,7 +74,7 @@ Für einen Release zusätzlich das freigestellte Produkt-PNG unter
 
 ## Was ohne Rückfrage nicht geändert wird
 
-`templates/tds/`, `templates/pages/`, `design-system/`, `components/`, die fünf Regeldokumente
+`templates/tds/`, `templates/pages/`, `templates/instagram/`, `design-system/`, `components/`, die fünf Regeldokumente
 und `scripts/validate_*.py`. Das sind Systemdateien. Inhaltliche Arbeit findet in
 `content/<ordner>/content.json` statt.
 
@@ -99,12 +99,21 @@ python3 scripts/build_pages.py <ordner>
 
 ## Instagram-Karussells
 
-Entwürfe aus Claude Design liegen unverändert unter `social/instagram/<post>/` und werden von
-Chromium zu PNGs gesetzt (1080 × 1350, 7–10 Folien). Kein Nachbau als Template, kein
-Umformulieren der Texte. Ablauf und Prüfungen: `docs/INSTAGRAM.md`.
+Gilt nur für Instagram, nichts davon für Broschüre, Datenblatt oder Anleitung. Ablauf, Folientypen
+und Prüfungen: `docs/INSTAGRAM.md`.
+
+1. **Die Referenz ist das Design.** `templates/instagram/referenz/` kommt aus Claude Design und
+   wird nicht gepostet und nicht verändert. Die Vorlage `templates/instagram/karussell.html.j2`
+   ist daraus abgeleitet; `--gegenprobe` muss nach jeder Änderung an ihr bestehen.
+2. **Posts sind Inhalt.** Jeder Post ist `content/instagram/<post>/content.json` und hat eine
+   Zeile in `content/instagram/plan.csv`. Keine Farbwerte, keine eigenen Styles.
+3. **Kein Verkleinern, um Text unterzubringen.** Läuft eine Folie über, wird gekürzt oder auf
+   zwei Folien verteilt.
 
 ```bash
-python3 scripts/build_instagram.py social/instagram/<post>/
+python3 scripts/build_instagram.py --plan
+python3 scripts/build_instagram.py content/instagram/<post>/
+python3 scripts/build_instagram.py --gegenprobe      # nach Änderungen an der Vorlage
 ```
 
 ## Dateien von außerhalb

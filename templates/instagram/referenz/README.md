@@ -12,11 +12,13 @@ dem Content-Plan gebaut werden.
 | Format | 1080 × 1350 px, je 7 Folien, StoryBrand: der Kunde ist der Held, BKM der Begleiter |
 
 `index.html` ist der Export ohne die Verpackung von Claude Design: dieselbe Vorlage, die
-eingebetteten Dateien liegen mit sprechenden Namen unter `dateien/`. React liegt lokal bei,
+eingebetteten Dateien liegen mit sprechenden Namen unter `../dateien/` — dieselben, die die
+Vorlage `../karussell.html.j2` benutzt. React liegt lokal bei,
 damit die Datei ohne Internet rendert. Kontrolle: alle 42 Folien pixelgleich mit dem Export.
 
 ```bash
 python3 scripts/build_instagram.py templates/instagram/referenz/ --slug referenz --min 1 --max 100
+python3 scripts/build_instagram.py --gegenprobe   # Vorlage gegen diese Referenz
 ```
 
 Die Fotos sind Kopien aus der Referenz. Trägt ein Motiv den Vermerk „AI GENERATED", bleibt er

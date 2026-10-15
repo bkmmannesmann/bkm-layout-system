@@ -28,5 +28,5 @@ Thumbs.db
 *.tmp
 *.bak
 
-# Instagram: entpackte Project archives (entstehen beim Bau neu)
-social/instagram/*/_entpackt/
+# Instagram: entpackte Claude-Design-Archive (entstehen beim Bau neu)
+incoming/instagram/*/_entpackt/

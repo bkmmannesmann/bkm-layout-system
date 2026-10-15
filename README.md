@@ -70,11 +70,14 @@ die alle sieben Seitentypen verwendet. Offene Punkte darin sind mit `[ANGABE FEH
 
 ### Instagram-Karussells
 
-Karussell-Posts aus Claude Design (Project archive) nach `social/instagram/<post>/` legen und
-zu verlustfreien PNGs in 1080 × 1350 setzen — lokal oder per GitHub Action *Instagram*:
+Designvorlage aus Claude Design unter `templates/instagram/referenz/`, Posts als
+`content/instagram/<post>/content.json`, gesteuert über den Content-Plan
+`content/instagram/plan.csv`. Ergebnis: verlustfreie PNGs in 1080 × 1350 — lokal oder per
+GitHub Action *Instagram*:
 
 ```bash
-python3 scripts/build_instagram.py social/instagram/<post>/
+python3 scripts/build_instagram.py --plan
+python3 scripts/build_instagram.py content/instagram/<post>/
 ```
 
 Details in [`docs/INSTAGRAM.md`](docs/INSTAGRAM.md).

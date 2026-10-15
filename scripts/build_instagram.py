@@ -1,45 +1,40 @@
 #!/usr/bin/env python3
-"""Rendert Instagram-Karussells aus Claude-Design-HTML zu verlustfreien PNGs.
+"""Baut Instagram-Karussells als verlustfreie PNGs (1080 × 1350).
 
-Der Entwurf entsteht in Claude Design und kommt unverändert hierher. Gesetzt
-wird er von Chromium, demselben Browser, in dem Claude Design ihn zeigt —
-deshalb sieht das PNG aus wie der Entwurf und nicht wie eine Nachbildung.
+Der Regelweg: ein Post ist content/instagram/<post>/content.json. Daraus setzt
+templates/instagram/karussell.html.j2 die Folien, und Chromium — derselbe
+Browser, in dem Claude Design die Referenz zeigt — rendert sie zu PNG.
 
-    python3 scripts/build_instagram.py social/instagram/<post>/
-    python3 scripts/build_instagram.py social/instagram/<post>/index.html
-    python3 scripts/build_instagram.py ~/Downloads/<projekt>.zip --slug <post>
-    python3 scripts/build_instagram.py --alle
+    python3 scripts/build_instagram.py content/instagram/<post>/
+    python3 scripts/build_instagram.py --alle          # jeder Post im Ordner
+    python3 scripts/build_instagram.py --plan          # Content-Plan prüfen
+    python3 scripts/build_instagram.py --gegenprobe    # Vorlage gegen Referenz
 
-Angenommen werden beide Exportwege aus Claude Design:
+Daneben nimmt es auch fertiges HTML aus Claude Design (Ordner, Datei, ZIP oder
+Standalone-Export). Ein ZIP wird nach incoming/instagram/<slug>/ entpackt:
 
-  Project archive   ZIP mit HTML und allen Dateien. Wird nach
-                    social/instagram/<slug>/ entpackt und von dort gebaut.
-  Standalone HTML   Eine Datei, alle Bilder und Schriften eingebettet.
+    python3 scripts/build_instagram.py templates/instagram/referenz/ --min 1 --max 100
+    python3 scripts/build_instagram.py ~/Downloads/<projekt>.zip --slug <name>
 
-Welche Elemente Folien sind, wird in dieser Reihenfolge gesucht:
+Folien sind Elemente mit data-slide (eigene Vorlage) oder data-screen-label
+(Artboards in Claude Design), sonst die äußersten Elemente im Zielformat.
+Jede Folie wird mit der Pixeldichte gerendert, die genau das Zielformat ergibt.
 
-  1. --selector, wenn angegeben
-  2. Elemente mit data-slide              (eigene Konvention)
-  3. Elemente mit data-screen-label       (Artboards in Claude Design)
-  4. die äußersten Elemente im Seitenverhältnis des Zielformats
+Ausgabe: output/instagram/<post>/<post>-01.png …, <post>.zip mit allen Folien
+und <post>-caption.txt. PNG, RGB ohne Alphakanal, sRGB.
 
-Jede Folie wird so skaliert, dass sie genau im Zielformat herauskommt
-(Standard 1080 × 1350, Instagram-Hochformat 4:5). Ein Artboard, das im
-Entwurf 540 px breit ist, wird mit doppelter Pixeldichte gerendert, nicht
-hochgerechnet.
-
-Ausgabe: output/instagram/<slug>/<slug>-01.png … sowie <slug>.zip mit allen
-Folien. PNG, RGB ohne Alphakanal, sRGB — direkt für den Upload.
-
-Abbruch (Exit-Code 1), wenn eine Schrift oder ein Bild nicht lädt, eine
-Folie nicht ins Format passt oder die Folienzahl außerhalb von 7 bis 10
-liegt (--min/--max). Fehlende Schriften ersetzt Chromium sonst still.
+Die Dateien kommen über einen lokalen Webserver, nicht über file:// — dort lädt
+Chromium CSS-Masken nicht, und die Icons fehlten still. Abbruch (Exit-Code 1),
+wenn eine Datei, Schrift oder ein Bild nicht lädt, Text über den Satzspiegel
+läuft, eine Folie nicht ins Format passt oder die Folienzahl außerhalb von
+7 bis 10 liegt (--min/--max).
 """
 
 from __future__ import annotations
 
 import argparse
 import io
+import json
 import os
 import re
 import shutil
@@ -53,7 +48,11 @@ from pathlib import Path
 from urllib.parse import quote
 
 ROOT_DIR = Path(__file__).parent.parent.resolve()
-SOCIAL_DIR = ROOT_DIR / "social" / "instagram"
+SOCIAL_DIR = ROOT_DIR / "incoming" / "instagram"   # Direktexporte aus Claude Design
+CONTENT_DIR = ROOT_DIR / "content" / "instagram"
+REFERENZ_DIR = ROOT_DIR / "templates" / "instagram" / "referenz"
+# Gegenprobe: diese Posts bauen die Referenz (Runde 4) aus content.json nach.
+GEGENPROBE = {"wege-diy": "4a", "wege-feuchte-check": "4b", "wege-fachbetrieb": "4c"}
 OUTPUT_DIR = ROOT_DIR / "output" / "instagram"
 
 FORMATE = {
@@ -139,7 +138,27 @@ async () => {
     const erste = cs.fontFamily.split(',')[0].trim().replace(/["']/g, '');
     verlangt.add(erste + '|' + cs.fontWeight);
   }
-  return {schriften, bilder, verlangt: [...verlangt]};
+  // Text, der über den Satzspiegel hinausläuft, liegt sonst unter dem Maßband
+  // oder wird an der Folienkante abgeschnitten.
+  const ueberlauf = [];
+  for (const inhalt of document.querySelectorAll('[data-ig-folie] [data-ig-inhalt]')) {
+    const folie = inhalt.closest('[data-ig-folie]');
+    const r = folie.getBoundingClientRect(), cs = getComputedStyle(folie);
+    const masstab = r.width / folie.offsetWidth;
+    const unten = r.bottom - parseFloat(cs.paddingBottom) * masstab;
+    const rechts = r.right - parseFloat(cs.paddingRight) * masstab;
+    let tief = 0, breit = 0;
+    for (const el of inhalt.querySelectorAll('*')) {
+      const e = el.getBoundingClientRect();
+      if (!e.width || !e.height) continue;
+      tief = Math.max(tief, e.bottom - unten);
+      breit = Math.max(breit, e.right - rechts);
+    }
+    if (tief > 2 || breit > 2)
+      ueberlauf.push({folie: Number(folie.dataset.igFolie) + 1,
+                      hoehe: Math.round(tief / masstab), breite: Math.round(breit / masstab)});
+  }
+  return {schriften, bilder, verlangt: [...verlangt], ueberlauf};
 }
 """
 
@@ -353,6 +372,10 @@ def bauen(html: Path, slug: str, args) -> bool:
                 continue
             fehler(f"Datei lädt nicht: {f[:160]}")
             ok = False
+        for u in pruefung["ueberlauf"]:
+            fehler(f"Folie {u['folie']}: Inhalt läuft über ({u['hoehe']} px zu hoch, "
+                   f"{u['breite']} px zu breit) — Text kürzen oder Schrift kleiner setzen.")
+            ok = False
         for b in pruefung["bilder"]:
             if not b["ok"]:
                 fehler(f"Bild lädt nicht: {b['src']}")
@@ -402,10 +425,137 @@ def bauen(html: Path, slug: str, args) -> bool:
     return ok
 
 
+def inhalt_setzen(datei: Path, args) -> Path:
+    """content.json → HTML unter output/instagram/_html/<slug>.html."""
+    sys.path.insert(0, str(ROOT_DIR / "scripts"))
+    import instagram_inhalt
+    try:
+        post = instagram_inhalt.laden(datei, args.min, args.max)
+    except instagram_inhalt.InhaltsFehler as e:
+        print(f"\n{datei.parent.name}: {datei.relative_to(ROOT_DIR)}")
+        for z in str(e).splitlines():
+            fehler(z)
+        return None
+    ziel = OUTPUT_DIR / "_html" / f"{datei.parent.name}.html"
+    ziel.parent.mkdir(parents=True, exist_ok=True)
+    ziel.write_text(instagram_inhalt.html_setzen(post), encoding="utf-8")
+    return ziel
+
+
+def caption_schreiben(datei: Path, slug: str) -> None:
+    post = json.loads(datei.read_text(encoding="utf-8"))
+    tags = " ".join("#" + t.lstrip("#") for t in post.get("hashtags", []))
+    text = (post.get("caption", "").strip() + ("\n\n" + tags if tags else "")).strip()
+    if text:
+        (OUTPUT_DIR / slug / f"{slug}-caption.txt").write_text(text + "\n", encoding="utf-8")
+
+
+def _graustufen(datei: Path):
+    """Für den Vergleich: weichgezeichnet und ohne 3 px Rand.
+
+    Im Claude-Design-Canvas liegen die Artboards auf halben Pixeln. Dadurch
+    sitzen im Export einzelne Kanten 1 px versetzt, und am Rand scheint der
+    Canvas-Grund durch. Beides ist Rundung, kein Layoutfehler; eine falsche
+    Schriftgröße oder ein verrutschter Block liegt weit über der Schwelle.
+    """
+    import numpy as np
+    from PIL import Image, ImageFilter
+    bild = Image.open(datei).convert("L").filter(ImageFilter.GaussianBlur(2))
+    return np.asarray(bild, dtype=int)[3:-3, 3:-3]
+
+
+def gegenprobe(args) -> int:
+    """Baut die Referenz-Posts aus content.json und vergleicht pixelweise mit dem Export."""
+    ref_args = argparse.Namespace(**{**vars(args), "min": 1, "max": 100, "selector": None})
+    if not bauen(html_finden(REFERENZ_DIR, None), "referenz", ref_args):
+        return 1
+    status = 0
+    for slug, runde in GEGENPROBE.items():
+        html = inhalt_setzen(CONTENT_DIR / slug / "content.json", args)
+        if not html or not bauen(html, slug, args):
+            status = 1
+            continue
+        start = {"4a": 1, "4b": 8, "4c": 15}[runde]
+        for i in range(7):
+            soll = _graustufen(OUTPUT_DIR / "referenz" / f"referenz-{start + i:02d}.png")
+            ist = _graustufen(OUTPUT_DIR / slug / f"{slug}-{i + 1:02d}.png")
+            anteil = float((abs(soll - ist) > 40).mean())
+            gleich = anteil <= 0.0005
+            print(f"  {runde}-{i + 1:02d}: {'gleich' if gleich else 'WEICHT AB'}"
+                  f" ({anteil:.3%} der Fläche über der Schwelle)")
+            status |= not gleich
+    print("\nGegenprobe", "bestanden" if status == 0 else "NICHT bestanden")
+    return status
+
+
+PLAN = CONTENT_DIR / "plan.csv"
+PLAN_STATUS = ("idee", "entwurf", "freigegeben", "gepostet")
+MARKER = re.compile(r"\[(ANGABE FEHLT|ZU PRÜFEN)[^\]]*\]")
+
+
+def plan_lesen() -> list[dict]:
+    import csv
+    with PLAN.open(encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f, delimiter=";"))
+
+
+def plan_pruefen(args) -> int:
+    """Übersicht über den Content-Plan und seine Widersprüche."""
+    sys.path.insert(0, str(ROOT_DIR / "scripts"))
+    import instagram_inhalt
+    zeilen = plan_lesen()
+    status = 0
+    zaehler: dict[str, int] = {}
+    gesehen: set[str] = set()
+    print(f"{'Nr':<8}{'Termin':<12}{'Status':<13}{'Ordner':<26}Befund")
+    for z in zeilen:
+        nr, ordner, st = z["nr"].strip(), z["ordner"].strip(), z["status"].strip()
+        zaehler[st] = zaehler.get(st, 0) + 1
+        befund = []
+        if st not in PLAN_STATUS:
+            befund.append(f"Status {st!r} unbekannt ({', '.join(PLAN_STATUS)})")
+        if nr in gesehen:
+            befund.append("Nummer doppelt")
+        gesehen.add(nr)
+        datei = CONTENT_DIR / ordner / "content.json" if ordner else None
+        if st != "idee":
+            if not datei or not datei.is_file():
+                befund.append("content.json fehlt")
+            else:
+                text = datei.read_text(encoding="utf-8")
+                post = json.loads(text)
+                if post.get("plan") != nr:
+                    befund.append(f"content.json trägt plan={post.get('plan')!r}")
+                try:
+                    instagram_inhalt.vorbereiten(post, args.min, args.max)
+                except instagram_inhalt.InhaltsFehler as e:
+                    befund.append(f"{len(str(e).splitlines())} Inhaltsfehler")
+                offen = MARKER.findall(text)
+                if offen and st in ("freigegeben", "gepostet"):
+                    befund.append(f"{len(offen)} offene Marker, aber {st}")
+                elif offen:
+                    befund.append(f"{len(offen)} offene Marker")
+        hart = [b for b in befund if not b.endswith("offene Marker")]
+        status |= bool(hart)
+        print(f"{nr:<8}{z['termin'].strip():<12}{st:<13}{ordner:<26}{'; '.join(befund) or 'ok'}")
+    ohne_plan = sorted(p.parent.name for p in CONTENT_DIR.glob("*/content.json")
+                       if p.parent.name not in {z["ordner"].strip() for z in zeilen})
+    for o in ohne_plan:
+        print(f"{'—':<8}{'':<12}{'':<13}{o:<26}nicht im Plan")
+        status = 1
+    print("\n" + ", ".join(f"{k}: {v}" for k, v in zaehler.items()))
+    return status
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("quelle", nargs="?", help="Ordner, HTML-Datei oder ZIP aus Claude Design")
-    ap.add_argument("--alle", action="store_true", help="jeden Ordner unter social/instagram/ bauen")
+    ap.add_argument("quelle", nargs="?",
+                    help="content.json, Post-Ordner, HTML-Datei oder ZIP aus Claude Design")
+    ap.add_argument("--alle", action="store_true", help="jeden Post unter content/instagram/ bauen")
+    ap.add_argument("--gegenprobe", action="store_true",
+                    help="Referenz-Posts aus content.json nachbauen und mit dem Export vergleichen")
+    ap.add_argument("--plan", action="store_true",
+                    help="Content-Plan (content/instagram/plan.csv) gegen die Posts prüfen")
     ap.add_argument("--slug", help="Name des Posts (Ordner und Dateinamen)")
     ap.add_argument("--datei", help="HTML-Datei im Ordner, falls es mehrere gibt")
     ap.add_argument("--selector", help="CSS-Selektor für die Folien")
@@ -415,31 +565,48 @@ def main() -> int:
     ap.add_argument("--warten", type=int, default=800, help="ms nach dem Laden (Standard 800)")
     args = ap.parse_args()
 
-    auftraege: list[tuple[Path, str]] = []
+    if args.gegenprobe:
+        return gegenprobe(args)
+    if args.plan:
+        return plan_pruefen(args)
+
+    auftraege: list[tuple[Path | None, str, Path | None]] = []
     if args.alle:
-        for ordner in sorted(p for p in SOCIAL_DIR.iterdir() if p.is_dir()):
-            auftraege.append((html_finden(ordner, None), ordner.name))
+        for datei in sorted(CONTENT_DIR.glob("*/content.json")):
+            auftraege.append((inhalt_setzen(datei, args), datei.parent.name, datei))
     elif args.quelle:
         quelle = Path(args.quelle).expanduser().resolve()
         if not quelle.exists():
             sys.exit(f"Nicht gefunden: {quelle}")
-        if quelle.suffix.lower() == ".zip" and quelle.parent.parent != SOCIAL_DIR:
+        if quelle.is_dir() and (quelle / "content.json").is_file():
+            quelle = quelle / "content.json"
+        if quelle.name == "content.json":
+            slug = args.slug or quelle.parent.name
+            auftraege.append((inhalt_setzen(quelle, args), slug, quelle))
+        elif quelle.suffix.lower() == ".zip" and quelle.parent.parent != SOCIAL_DIR:
             slug = args.slug or slug_aus(quelle.stem)
             ziel = SOCIAL_DIR / slug
             entpacken(quelle, ziel)
-            auftraege.append((html_finden(ziel, args.datei), slug))
+            auftraege.append((html_finden(ziel, args.datei), slug, None))
         else:
             if quelle.suffix.lower() == ".zip":
                 quelle = quelle.parent
             ordner = quelle if quelle.is_dir() else quelle.parent
             slug = args.slug or slug_aus(ordner.name if quelle.is_dir() or ordner != SOCIAL_DIR
                                          else quelle.stem)
-            auftraege.append((html_finden(quelle, args.datei), slug))
+            auftraege.append((html_finden(quelle, args.datei), slug, None))
     else:
         ap.print_help()
         return 2
 
-    ergebnisse = [bauen(html, slug, args) for html, slug in auftraege]
+    ergebnisse = []
+    for html, slug, inhalt in auftraege:
+        if html is None:
+            ergebnisse.append(False)
+            continue
+        ergebnisse.append(bauen(html, slug, args))
+        if inhalt:
+            caption_schreiben(inhalt, slug)
     return 0 if all(ergebnisse) else 1
 
 

@@ -1,19 +1,22 @@
 name: Instagram
 
-# Baut die Karussells unter social/instagram/ zu PNGs und haengt sie als
+# Baut die Karussells unter content/instagram/ zu PNGs und haengt sie als
 # Artefakt an den Lauf: Actions -> Lauf oeffnen -> unten "Artifacts".
-# Bei einem Push nur die geaenderten Posts, von Hand (Run workflow) alle
+# Bei einem Push nur die geaenderten Posts; aendert sich die Vorlage, alle
+# Posts plus Gegenprobe gegen die Referenz. Von Hand (Run workflow) alle
 # oder einen bestimmten.
 
 on:
   push:
     paths:
-      - "social/instagram/**"
+      - "content/instagram/**"
+      - "templates/instagram/**"
       - "scripts/build_instagram.py"
+      - "scripts/instagram_inhalt.py"
   workflow_dispatch:
     inputs:
       post:
-        description: "Ordnername unter social/instagram/ (leer = alle)"
+        description: "Ordnername unter content/instagram/ (leer = alle)"
         required: false
         default: ""
 
@@ -29,44 +32,60 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Chromium und Pillow
+      - name: Chromium, Jinja, Pillow
         run: |
-          pip install playwright pillow
+          pip install playwright jinja2 pillow numpy
           python -m playwright install --with-deps chromium
 
-      - name: Posts bestimmen
-        id: posts
+      - name: Umfang bestimmen
+        id: umfang
         env:
           EINGABE: ${{ github.event.inputs.post }}
           VORHER: ${{ github.event.before }}
         run: |
+          alle=$(ls -d content/instagram/*/ 2>/dev/null | xargs -n1 basename)
+          vorlage=nein
           if [ -n "$EINGABE" ]; then
             posts="$EINGABE"
           elif [ "${{ github.event_name }}" = "push" ] && [ -n "$VORHER" ] \
-               && ! echo "$VORHER" | grep -q '^0*$' \
-               && ! git diff --name-only "$VORHER" HEAD | grep -q '^scripts/build_instagram.py$'; then
-            posts=$(git diff --name-only "$VORHER" HEAD -- social/instagram \
-                    | cut -d/ -f3 | sort -u | while read p; do [ -d "social/instagram/$p" ] && echo "$p"; done)
+               && ! echo "$VORHER" | grep -q '^0*$'; then
+            geaendert=$(git diff --name-only "$VORHER" HEAD)
+            if echo "$geaendert" | grep -qE '^(templates/instagram/|scripts/(build_instagram|instagram_inhalt)\.py)'; then
+              posts="$alle"; vorlage=ja
+            else
+              posts=$(echo "$geaendert" | grep '^content/instagram/' | cut -d/ -f3 | sort -u \
+                      | while read p; do [ -f "content/instagram/$p/content.json" ] && echo "$p"; done)
+            fi
           else
-            posts=$(ls social/instagram)
+            posts="$alle"; vorlage=ja
           fi
           echo "posts=$(echo $posts)" >> "$GITHUB_OUTPUT"
-          echo "Posts: $posts"
+          echo "vorlage=$vorlage" >> "$GITHUB_OUTPUT"
+          echo "Posts: $posts  Vorlage geaendert: $vorlage"
+
+      - name: Content-Plan pruefen
+        run: python3 scripts/build_instagram.py --plan
+
+      - name: Gegenprobe gegen die Referenz
+        if: steps.umfang.outputs.vorlage == 'ja'
+        run: python3 scripts/build_instagram.py --gegenprobe
 
       - name: PNGs bauen
-        if: steps.posts.outputs.posts != ''
+        if: steps.umfang.outputs.posts != ''
         run: |
           status=0
-          for p in ${{ steps.posts.outputs.posts }}; do
-            python3 scripts/build_instagram.py "social/instagram/$p" || status=1
+          for p in ${{ steps.umfang.outputs.posts }}; do
+            python3 scripts/build_instagram.py "content/instagram/$p" || status=1
           done
           exit $status
 
       - uses: actions/upload-artifact@v4
-        if: always() && steps.posts.outputs.posts != ''
+        if: always() && steps.umfang.outputs.posts != ''
         with:
           name: instagram-png
           path: |
             output/instagram/*/*.png
+            output/instagram/*/*-caption.txt
+            !output/instagram/referenz/**
           if-no-files-found: warn
           compression-level: 0
