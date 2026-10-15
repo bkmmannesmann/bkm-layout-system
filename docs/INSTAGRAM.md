@@ -141,6 +141,24 @@ Repo-Wurzel, z. B. `uploads/feuchte-waende-selbst-sanieren.webp`. Fehlt eine Dat
 Prüfung ab. Motive mit dem Vermerk „AI GENERATED“ behalten ihn sichtbar (AGENTS.md, Regel 7) —
 mit `fokus` so verschieben, dass er im Bild bleibt.
 
+## KI-Kennzeichnung
+
+Bilder kommen **ohne** Vermerk aus der Erzeugung. Der Bau setzt ihn selbst: jedes Foto auf
+einer Folie bekommt das Label „AI GENERATED“ als eigenes Element über dem Bildkasten — außer
+es steht in `assets/kennzeichnung/register.json` unter `keine_ki` (echte Fotos). Im
+Zweifel wird gekennzeichnet.
+
+| | |
+|:---|:---|
+| Label | `assets/kennzeichnung/bkm-ai-generated-lime.svg` (Lime-Pille) und `-deep.svg` (Deep-Green-Pille) |
+| Wahl | dunkler oder abgedunkelter Grund → Lime-Pille, heller Grund → Deep-Green-Pille, gemessen unter dem Label |
+| Größe | 9,5 % der Kastenbreite, mindestens 90 px, 1 % Randabstand (`brand.json`, `ai_generated_images`) |
+| Ecke | unten rechts oder links, die ruhigere des sichtbaren Ausschnitts |
+| Altvermerk | Trägt ein Motiv noch den alten weißen Vermerk, deckt das Label ihn mittig ab |
+| Zu klein | Kästen unter 300 px (Porträtkreise, Thumbnails) bekommen kein Label; der Bau meldet sie. Ist das Bild keine KI, unter `keine_ki` eintragen — sonst größer setzen |
+
+Die Gegenprobe läuft ohne Label: verglichen wird die Vorlage mit dem Design.
+
 ## Bauen
 
 **Auf GitHub:** Jeder Push unter `content/instagram/` startet die Action *Instagram* und baut

@@ -286,7 +286,10 @@ def bauen(html: Path, slug: str, args) -> bool:
     ausgabe.mkdir(parents=True)
 
     print(f"\n{slug}: {html.relative_to(ROOT_DIR) if ROOT_DIR in html.parents else html}")
-    drift_pruefen(html)
+    if not html.is_relative_to(OUTPUT_DIR):
+        # Aus content.json gesetzte Posts prüft die Gegenprobe gegen die Referenz;
+        # die Markenprüfung meldete dort nur die Töne des freigegebenen Designs.
+        drift_pruefen(html)
     ok = True
 
     html = html.resolve()
@@ -425,7 +428,7 @@ def bauen(html: Path, slug: str, args) -> bool:
     return ok
 
 
-def inhalt_setzen(datei: Path, args) -> Path:
+def inhalt_setzen(datei: Path, args, kennzeichnen: bool = True) -> Path:
     """content.json → HTML unter output/instagram/_html/<slug>.html."""
     sys.path.insert(0, str(ROOT_DIR / "scripts"))
     import instagram_inhalt
@@ -436,6 +439,12 @@ def inhalt_setzen(datei: Path, args) -> Path:
         for z in str(e).splitlines():
             fehler(z)
         return None
+    if kennzeichnen:
+        meldungen = instagram_inhalt.vermerke_setzen(post)
+        if meldungen:
+            print(f"\n{datei.parent.name}: KI-Kennzeichnung")
+        for m in meldungen:
+            hinweis(m)
     ziel = OUTPUT_DIR / "_html" / f"{datei.parent.name}.html"
     ziel.parent.mkdir(parents=True, exist_ok=True)
     ziel.write_text(instagram_inhalt.html_setzen(post), encoding="utf-8")
@@ -471,7 +480,9 @@ def gegenprobe(args) -> int:
         return 1
     status = 0
     for slug, runde in GEGENPROBE.items():
-        html = inhalt_setzen(CONTENT_DIR / slug / "content.json", args)
+        # Ohne KI-Vermerk: verglichen wird die Vorlage mit dem Design, und die
+        # Referenz trägt die Vermerke nur eingebrannt, nicht als eigenes Element.
+        html = inhalt_setzen(CONTENT_DIR / slug / "content.json", args, kennzeichnen=False)
         if not html or not bauen(html, slug, args):
             status = 1
             continue

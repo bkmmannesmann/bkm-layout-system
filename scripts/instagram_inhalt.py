@@ -171,6 +171,151 @@ def vorbereiten(post: dict, min_folien: int = 7, max_folien: int = 10) -> dict:
     return post
 
 
+# ── KI-Kennzeichnung ──────────────────────────────────────────────────────
+#
+# Für Instagram gilt: jedes Foto bekommt den Vermerk „AI GENERATED" als eigenes
+# Element über dem Bildkasten — außer es steht im Register unter keine_ki. Die
+# Bilder kommen ohne Vermerk aus der Erzeugung; das Setzen ist Aufgabe des Baus.
+# Größe und Abstand nach brand.json (ai_generated_images.marke), gemessen am
+# Kasten, nicht an der Datei. Die Ecke nach dem Kontrast des sichtbaren
+# Ausschnitts. Trägt das Motiv bereits einen eingebrannten Vermerk, wird dessen
+# Ecke genommen, damit nicht zwei nebeneinander stehen.
+
+REGISTER = ROOT_DIR / "assets" / "kennzeichnung" / "register.json"
+# Zwei Fassungen desselben Labels, nach dem Grund unter dem Label gewählt:
+# Lime-Pille auf dunklem Grund, Deep-Green-Pille auf hellem. Benannt nach der
+# Farbe der Pille. Die Pille trägt ihren Kontrast selbst; die Wahl sorgt nur
+# dafür, dass sie sich vom Grund absetzt und nicht darin aufgeht.
+VERMERK_SVG = {"dunkel": "/assets/kennzeichnung/bkm-ai-generated-lime.svg",
+               "hell": "/assets/kennzeichnung/bkm-ai-generated-deep.svg"}
+VERMERK_VERHAELTNIS = 1384.24 / 266.41
+HELL_AB = 0.55   # mittlere Helligkeit unter dem Label, ab der der Grund als hell gilt
+KLEINSTER_KASTEN = 300   # darunter wäre die Marke (mind. 90 px) ein Drittel des Bildes
+
+
+def _fokus(text: str) -> tuple[float, float]:
+    teile = [float(t.rstrip("%")) / 100 for t in str(text).split()]
+    return (teile + [0.5, 0.5])[:2] if len(teile) == 1 else tuple(teile[:2])
+
+
+def _sichtbar(datei: Path, w: int, h: int, fokus: str, sicht_h: int | None = None):
+    """Der Ausschnitt, den object-fit:cover im Kasten zeigt, auf Kastengröße gerechnet."""
+    from PIL import Image
+    bild = Image.open(datei).convert("L")
+    bw, bh = bild.size
+    s = max(w / bw, h / bh)
+    fx, fy = _fokus(fokus)
+    x0 = (bw * s - w) * fx / s
+    y0 = (bh * s - h) * fy / s
+    ausschnitt = bild.crop((round(x0), round(y0), round(x0 + w / s), round(y0 + h / s)))
+    ausschnitt = ausschnitt.resize((w, h))
+    if sicht_h:
+        ausschnitt = ausschnitt.crop((0, 0, w, sicht_h))
+    return ausschnitt, (x0, y0, s, bw, bh)
+
+
+_eingebrannt_cache: dict[str, dict] = {}
+
+
+def _eingebrannt(datei: Path) -> dict:
+    schluessel = str(datei)
+    if schluessel not in _eingebrannt_cache:
+        sys.path.insert(0, str(ROOT_DIR / "scripts"))
+        import kennzeichnung as K
+        _eingebrannt_cache[schluessel] = K.finde(datei)
+    return _eingebrannt_cache[schluessel]
+
+
+def _keine_ki() -> set[str]:
+    if not REGISTER.exists():
+        return set()
+    return set(json.loads(REGISTER.read_text(encoding="utf-8")).get("keine_ki", []))
+
+
+def _vermerk(name: str, kasten: tuple[int, int, int, int], fokus: str, wo: str,
+             meldungen: list[str], sicht_h: int | None = None,
+             abgedunkelt: bool = False) -> dict | None:
+    """Lage des Vermerks im Kasten (links, top, breite, hoehe der Box; ecke, marke, rand)."""
+    import numpy as np
+    sys.path.insert(0, str(ROOT_DIR / "scripts"))
+    import kennzeichnung as K
+    rel = str(pfad_datei(name).relative_to(ROOT_DIR))
+    if rel in _keine_ki():
+        return None
+    kx, ky, w, h = kasten
+    if w < KLEINSTER_KASTEN:
+        meldungen.append(f"{wo}: {name} steht nur {w} px breit — kein Platz für den Vermerk. "
+                         f"Ist es kein KI-Bild, unter keine_ki in {REGISTER.relative_to(ROOT_DIR)} eintragen.")
+        return None
+    regel = K.regeln()
+    marke = max(int(regel["mindestbreite_px"]), round(w * regel["breite_anteil"]))
+    mh = round(marke / VERMERK_VERHAELTNIS)
+    rand = round(w * regel["rand_anteil"])
+    sicht, (x0, y0, s, bw, bh) = _sichtbar(pfad_datei(name), w, h, fokus, sicht_h)
+    hh = sicht.size[1]
+    grau = np.asarray(sicht, dtype=np.float32)
+    luft = round(mh * 0.45)
+
+    def eignung(ecke):
+        x = w - rand - marke if "rechts" in ecke else rand
+        y = hh - rand - mh
+        return K._dunkelheit(grau[max(0, y - luft):y + mh + luft, max(0, x - luft):x + marke + luft])
+
+    rang = sorted(regel["ecken"], key=eignung, reverse=True)
+    ecke = rang[0]
+    x = w - rand - marke if "rechts" in ecke else rand
+    y = hh - rand - mh
+    alt = _eingebrannt(pfad_datei(name))
+    if alt.get("gefunden"):
+        # Ein alter, weißer Vermerk ist eingebrannt. Die deckende Pille legt sich
+        # mittig darüber und ersetzt ihn sichtbar — sonst stünden zwei Marken da.
+        ax, ay, aw, ah = alt["kasten"]
+        ox, oy, ow, oh = (ax - x0) * s, (ay - y0) * s, aw * s, ah * s
+        if ox < w and oy < hh and ox + ow > 0 and oy + oh > 0:
+            marke = max(marke, round(ow) + 8, round((oh + 6) * VERMERK_VERHAELTNIS))
+            mh = round(marke / VERMERK_VERHAELTNIS)
+            x = min(max(rand, round(ox + ow / 2 - marke / 2)), w - marke - rand)
+            y = min(max(rand, round(oy + oh / 2 - mh / 2)), hh - mh - rand)
+    grund = grau[max(0, y - luft):y + mh + luft, max(0, x - luft):x + marke + luft]
+    hell = not abgedunkelt and float(grund.mean()) / 255 >= HELL_AB
+    return {"links": kx, "oben": ky, "breite": w, "hoehe": hh, "x": x, "y": y,
+            "marke": marke, "svg": VERMERK_SVG["hell" if hell else "dunkel"]}
+
+
+def vermerke_setzen(post: dict) -> list[str]:
+    """Hängt an jede Fotoplatzierung die Lage ihres Vermerks. Liefert Hinweise."""
+    meldungen: list[str] = []
+    for n, f in enumerate(post["folien"], 1):
+        wo = f"Folie {n}"
+        massband = n > 1
+        h = f.get("hintergrund", {})
+        if h.get("foto_box"):
+            fb = h["foto_box"]
+            fb["vermerk"] = _vermerk(fb["bild"], (108, fb["oben"], 864, fb["hoehe"]), fb["fokus"], wo, meldungen)
+        if h.get("foto_flaeche"):
+            ff = h["foto_flaeche"]
+            ff["vermerk"] = _vermerk(ff["bild"], (0, 0, 1080, 1350), ff["fokus"], wo, meldungen,
+                                     sicht_h=1200 if massband else None, abgedunkelt=True)
+        if f.get("foto"):
+            hoehe = {"cover-hell": 608, "cover-wege": 900, "schluss-wege": 700}.get(f["typ"])
+            if hoehe:
+                f["foto"]["vermerk"] = _vermerk(f["foto"]["bild"], (0, 0, 1080, hoehe),
+                                                f["foto"]["fokus"], wo, meldungen,
+                                                abgedunkelt=f["typ"] != "cover-hell")
+        for b in f.get("bloecke", []):
+            if b.get("typ") == "bild":
+                b["vermerk"] = _vermerk(b["bild"], (0, 0, 864, b["hoehe"]), b["fokus"], wo, meldungen)
+            for u in b.get("zeilen", []) if b.get("typ") == "ursachen" else []:
+                _vermerk(u["bild"], (0, 0, 120, 120), u.get("fokus", "62% 55%"), wo, meldungen)
+            for v in b.get("vorteile", []):
+                if v.get("portrait"):
+                    _vermerk(v["portrait"], (0, 0, 64, 64), "50% 20%", wo, meldungen)
+        if f.get("typ") == "wege-vergleich":
+            for seite in ("links", "rechts"):
+                _vermerk(f[seite]["portrait"], (0, 0, 140, 140), "50% 18%", wo, meldungen)
+    return meldungen
+
+
 def html_setzen(post: dict) -> str:
     from jinja2 import Environment, FileSystemLoader, StrictUndefined  # noqa: F401
     env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=False,

@@ -34,7 +34,7 @@ jobs:
 
       - name: Chromium, Jinja, Pillow
         run: |
-          pip install playwright jinja2 pillow numpy
+          pip install playwright jinja2 pillow numpy pymupdf
           python -m playwright install --with-deps chromium
 
       - name: Umfang bestimmen

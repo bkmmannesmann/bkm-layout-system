@@ -751,6 +751,18 @@
       "kontrast_mindestens": 0.45,
       "kontrast_skala": "Wie gut eine Ecke die weisse Marke trägt, bewertet beste_ecke() zwischen 0 und 1. Zur Einordnung: eine sehr dunkle Ecke erreicht 0,89, die bereits gekennzeichneten BKM-Motive liegen bei 0,75 bis 0,80, eine mittelhelle Fläche bei 0,52, eine weisse bei 0,30. Unter 0,45 trägt die Ecke nicht mehr — dann wandert der Bildausschnitt, nicht die Farbe der Marke.",
       "suchbereich": "5 % bis 45 % der Bildbreite. Die Obergrenze folgt aus mindestbreite_mm: druckgerecht gesetzt misst die Marke auf schmalen Motiven bis zu 36 % der Bildbreite."
+    },
+    "label": {
+      "$comment": "Neues Label „AI GENERATED“, eingeführt am 15.10.2026. Gilt vorerst für Instagram (scripts/instagram_inhalt.py). Broschüren und die Bildprüfung arbeiten weiter mit der weissen Sperrmarke unter 'marke' — kennzeichnung.py erkennt eingebrannte Altvermerke an deren Form.",
+      "dateien": {
+        "lime": "assets/kennzeichnung/bkm-ai-generated-lime.svg",
+        "deep": "assets/kennzeichnung/bkm-ai-generated-deep.svg"
+      },
+      "benennung": "Nach der Farbe der Pille: -lime = Lime-Pille mit Deep-Green-Schrift, -deep = Deep-Green-Pille mit Lime-Schrift.",
+      "wahl": "Nach dem Grund unter dem Label: dunkler oder abgedunkelter Grund → lime, heller Grund (mittlere Helligkeit ab 0,55) → deep. Die Pille trägt ihren Kontrast selbst; die Wahl verhindert nur, dass sie im Grund aufgeht.",
+      "seitenverhaeltnis": 5.196,
+      "groesse": "Wie die Marke: 9,5 % der Kastenbreite, mindestens 90 px, 1 % Randabstand. Liegt ein alter Vermerk im Motiv, deckt das Label ihn mittig ab.",
+      "einsatz": "Als eigenes Element über dem Bildkasten, nicht ins Motiv gerechnet. Jedes Foto auf einer Instagram-Folie bekommt es, außer es steht im Register unter keine_ki."
     }
   },
   "deviations_from_tds": {
