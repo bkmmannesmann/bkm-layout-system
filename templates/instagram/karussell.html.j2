@@ -157,6 +157,90 @@
 <img src="{{ D }}badge-homeline.png" alt="Home Line" style="width:240px;height:auto;display:block;align-self:flex-start">
 {%- endmacro -%}
 
+
+{#- ── Blöcke über die Referenz hinaus (freigegeben 16.10.2026, docs/INSTAGRAM.md) ── -#}
+
+{#- Kennzahl: eine bis drei große Zahlen mit Einheit und Erklärung. -#}
+{%- macro b_kennzahl(b, f) -%}
+{%- set n = b.zahlen|length -%}
+{%- set gr = 200 if n == 1 else (128 if n == 2 else 96) -%}
+{%- set linie = "rgba(255,255,255,0.2)" if f.dunkel else "rgba(40,125,75,0.25)" -%}
+<div style="display:grid;grid-template-columns:repeat({{ n }},minmax(0,1fr));gap:40px">
+{% for z in b.zahlen -%}
+<div style="display:flex;flex-direction:column;gap:14px;padding-top:28px;border-top:3px solid {{ f.akzent }}">
+<div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap"><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:{{ gr }}px;line-height:0.95;letter-spacing:-0.05em;color:{{ f.akzent }}">{{ z.zahl }}</span>{% if z.einheit %}<span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:{{ (gr * 0.24)|int if n == 1 else 28 }}px;text-transform:uppercase;letter-spacing:-0.02em;{% if not f.dunkel %}color:#494949{% endif %}">{{ z.einheit|auszeichnen(f.akzent) }}</span>{% endif %}</div>
+{% if z.text %}<div style="font-size:{{ 30 if n == 1 else 26 }}px;line-height:1.4;{% if f.dunkel %}color:rgba(255,255,255,0.88){% endif %}">{{ z.text|auszeichnen(f.akzent) }}</div>{% endif %}
+</div>
+{% endfor -%}
+</div>
+{%- endmacro -%}
+
+{#- Skizze: technische Zeichnung als Vektor, Strich und Fläche aus der Folienfläche. -#}
+{%- macro b_skizze(b, f) -%}
+{%- set ak = f.akzent -%}
+{%- set tx = "#ffffff" if f.dunkel else "#494949" -%}
+{%- set strich = "rgba(255,255,255,0.55)" if f.dunkel else "rgba(73,73,73,0.55)" -%}
+{%- set fuge = "rgba(255,255,255,0.10)" if f.dunkel else "rgba(28,75,66,0.12)" -%}
+{%- set wand = "rgba(255,255,255,0.06)" if f.dunkel else "rgba(28,75,66,0.06)" -%}
+{%- set loch = "#0f2620" if f.dunkel else "#ffffff" -%}
+{%- set pid = "fuge" ~ range(100000)|random -%}
+<div style="display:flex;flex-direction:column;gap:14px">
+<svg viewBox="0 0 864 440" width="864" height="440" style="display:block;overflow:visible;font-family:'TT Norms Pro',sans-serif">
+<defs><pattern id="{{ pid }}" width="96" height="52" patternUnits="userSpaceOnUse"><path d="M0 52H96M0 26H96M48 0V26M0 26V52M96 26V52" stroke="{{ fuge }}" stroke-width="2" fill="none"/></pattern>
+<marker id="{{ pid }}p" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 1L9 5L0 9z" fill="{{ tx }}"/></marker></defs>
+{%- if b.art == "bohrbild" %}
+{%- set boden = 380 -%}{%- set s = 8 -%}
+<rect x="40" y="20" width="824" height="{{ boden - 20 }}" fill="{{ wand }}"/><rect x="40" y="20" width="824" height="{{ boden - 20 }}" fill="url(#{{ pid }})"/>
+<line x1="40" y1="20" x2="40" y2="{{ boden }}" stroke="{{ tx }}" stroke-width="5"/>
+<line x1="0" y1="{{ boden }}" x2="864" y2="{{ boden }}" stroke="{{ tx }}" stroke-width="5"/>
+<text x="56" y="52" font-size="20" font-weight="700" letter-spacing="2.8" fill="{{ tx }}" opacity="0.7">ECKE</text>
+<text x="0" y="{{ boden + 34 }}" font-size="20" font-weight="700" letter-spacing="2.8" fill="{{ tx }}" opacity="0.7">BODEN</text>
+{%- for r in b.reihen %}
+{%- set y = boden - r.hoehe * s -%}
+{%- set xs = [0, 10, 30, 50, 70, 90] if not r.versetzt else [20, 40, 60, 80] -%}
+{%- for cm in xs %}<circle cx="{{ 56 + cm * s }}" cy="{{ y }}" r="14" fill="{{ loch }}" stroke="{{ ak }}" stroke-width="6"/>{% endfor %}
+{%- endfor %}
+{%- set y1 = boden - b.reihen[0].hoehe * s -%}
+{#- Maße der unteren Reihe -#}
+<line x1="56" y1="{{ y1 + 34 }}" x2="136" y2="{{ y1 + 34 }}" stroke="{{ tx }}" stroke-width="2" marker-start="url(#{{ pid }}p)" marker-end="url(#{{ pid }}p)"/>
+<line x1="136" y1="{{ y1 + 34 }}" x2="296" y2="{{ y1 + 34 }}" stroke="{{ tx }}" stroke-width="2" marker-start="url(#{{ pid }}p)" marker-end="url(#{{ pid }}p)"/>
+<text x="96" y="{{ y1 + 62 }}" text-anchor="middle" font-size="22" font-weight="700" fill="{{ tx }}">{{ b.masse.ecke }}</text>
+<text x="216" y="{{ y1 + 62 }}" text-anchor="middle" font-size="22" font-weight="700" fill="{{ tx }}">{{ b.masse.raster }}</text>
+<line x1="836" y1="{{ y1 }}" x2="836" y2="{{ boden }}" stroke="{{ tx }}" stroke-width="2" marker-start="url(#{{ pid }}p)" marker-end="url(#{{ pid }}p)"/>
+<text x="818" y="{{ (y1 + boden) / 2 + 8 }}" text-anchor="end" font-size="22" font-weight="700" fill="{{ tx }}">{{ b.masse.boden }}</text>
+{%- if b.reihen|length > 1 %}
+{%- set y2 = boden - b.reihen[1].hoehe * s -%}
+<line x1="836" y1="{{ y2 }}" x2="836" y2="{{ y1 }}" stroke="{{ ak }}" stroke-width="2" marker-start="url(#{{ pid }}p)" marker-end="url(#{{ pid }}p)"/>
+<text x="818" y="{{ (y1 + y2) / 2 + 8 }}" text-anchor="end" font-size="22" font-weight="700" fill="{{ ak }}">{{ b.masse.reihe }}</text>
+<line x1="136" y1="{{ y2 }}" x2="216" y2="{{ y2 }}" stroke="{{ ak }}" stroke-width="2" stroke-dasharray="6 6"/>
+<line x1="136" y1="{{ y2 - 30 }}" x2="136" y2="{{ y1 - 18 }}" stroke="{{ ak }}" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="216" y="{{ y2 - 30 }}" text-anchor="middle" font-size="20" font-weight="700" fill="{{ ak }}">{{ b.masse.versatz }}</text>
+{%- endif %}
+{%- elif b.art == "schnitt45" %}
+{%- set s = 9 -%}{%- set li = 290 -%}{%- set re = li + b.wand_cm * s -%}{%- set ey = 140 -%}
+{%- set tx2 = li + b.tiefe_cm * s -%}{%- set ty2 = ey + b.tiefe_cm * s -%}
+<rect x="{{ li }}" y="0" width="{{ re - li }}" height="440" fill="{{ wand }}"/><rect x="{{ li }}" y="0" width="{{ re - li }}" height="440" fill="url(#{{ pid }})"/>
+<rect x="{{ tx2 }}" y="0" width="{{ re - tx2 }}" height="440" fill="{{ ak }}" opacity="0.14"/>
+<line x1="{{ li }}" y1="0" x2="{{ li }}" y2="440" stroke="{{ tx }}" stroke-width="5"/><line x1="{{ re }}" y1="0" x2="{{ re }}" y2="440" stroke="{{ tx }}" stroke-width="5"/>
+<line x1="{{ tx2 }}" y1="0" x2="{{ tx2 }}" y2="440" stroke="{{ ak }}" stroke-width="2" stroke-dasharray="8 8"/>
+<text transform="translate({{ (tx2 + re) / 2 + 7 }} 250) rotate(-90)" text-anchor="middle" font-size="18" font-weight="700" letter-spacing="2.5" fill="{{ ak }}">{{ b.masse.drittel }}</text>
+<line x1="{{ li }}" y1="{{ ey }}" x2="{{ tx2 }}" y2="{{ ty2 }}" stroke="{{ ak }}" stroke-width="16" stroke-linecap="round"/>
+<line x1="{{ li }}" y1="{{ ey }}" x2="{{ tx2 }}" y2="{{ ty2 }}" stroke="{{ loch }}" stroke-width="6" stroke-linecap="round"/>
+<g transform="rotate(45 {{ li }} {{ ey }})"><rect x="{{ li - 190 }}" y="{{ ey - 26 }}" width="150" height="52" rx="14" fill="{{ ak }}"/><rect x="{{ li - 44 }}" y="{{ ey - 9 }}" width="44" height="18" rx="4" fill="{{ ak }}"/><text x="{{ li - 115 }}" y="{{ ey + 8 }}" text-anchor="middle" font-size="18" font-weight="700" fill="{{ '#1c4b42' if f.dunkel else '#ffffff' }}">500 ml</text></g>
+<line x1="{{ li }}" y1="{{ ey }}" x2="{{ li + 120 }}" y2="{{ ey }}" stroke="{{ tx }}" stroke-width="2" stroke-dasharray="4 6"/>
+<path d="M{{ li + 90 }} {{ ey }} A90 90 0 0 1 {{ li + 63.6 }} {{ ey + 63.6 }}" stroke="{{ tx }}" stroke-width="2" fill="none"/>
+<text x="{{ li + 100 }}" y="{{ ey + 44 }}" font-size="24" font-weight="700" fill="{{ tx }}">{{ b.masse.winkel }}</text>
+<text transform="translate({{ (li + tx2) / 2 - 22 }} {{ (ey + ty2) / 2 + 22 }}) rotate(45)" text-anchor="middle" font-size="22" font-weight="700" fill="{{ ak }}">{{ b.masse.bohrlaenge }}</text>
+<line x1="{{ li }}" y1="36" x2="{{ re }}" y2="36" stroke="{{ tx }}" stroke-width="2" marker-start="url(#{{ pid }}p)" marker-end="url(#{{ pid }}p)"/>
+<text x="{{ (li + re) / 2 }}" y="24" text-anchor="middle" font-size="22" font-weight="700" fill="{{ tx }}">{{ b.masse.wand }}</text>
+<line x1="{{ li }}" y1="{{ ty2 + 44 }}" x2="{{ tx2 }}" y2="{{ ty2 + 44 }}" stroke="{{ tx }}" stroke-width="2" marker-start="url(#{{ pid }}p)" marker-end="url(#{{ pid }}p)"/>
+<text x="{{ (li + tx2) / 2 }}" y="{{ ty2 + 72 }}" text-anchor="middle" font-size="22" font-weight="700" fill="{{ tx }}">{{ b.masse.tiefe }}</text>
+{%- endif %}
+</svg>
+{% if b.unterschrift %}<span style="font-weight:700;font-size:18px;letter-spacing:0.14em;text-transform:uppercase;{% if f.dunkel %}color:rgba(255,255,255,0.6){% else %}color:#494949;opacity:0.7{% endif %}">{{ b.unterschrift }}</span>{% endif %}
+</div>
+{%- endmacro -%}
+
 {%- macro bloecke(liste, f) -%}
 {%- for b in liste -%}
 {%- if b.typ == "rubrik" %}{{ b_rubrik(b, f) }}
@@ -172,6 +256,8 @@
 {%- elif b.typ == "vorteile" %}{{ b_vorteile(b, f) }}
 {%- elif b.typ == "bild" %}{{ b_bild(b, f) }}
 {%- elif b.typ == "badge" %}{{ b_badge(b, f) }}
+{%- elif b.typ == "kennzahl" %}{{ b_kennzahl(b, f) }}
+{%- elif b.typ == "skizze" %}{{ b_skizze(b, f) }}
 {%- endif %}
 {% endfor -%}
 {%- endmacro -%}

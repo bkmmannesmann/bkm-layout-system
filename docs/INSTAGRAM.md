@@ -121,6 +121,8 @@ Dunkle Schlussfolie ohne `textur` steht auf glattem Deep Green, wie in der Refer
 | `vorteile` | `vorteile: [{icon | portrait, titel, text?}]` | 4c-05 |
 | `bild` | `bild`, `hoehe` (460), `fokus` — Foto im Textfluss | 4c-06 |
 | `badge` | — Home-Line-Plakette | 4a-07 |
+| `kennzahl` | `zahlen: [{zahl, einheit?, text?}]` — eine bis drei große Zahlen, Größe nach Anzahl | — (16.10.2026) |
+| `skizze` | `art`: `bohrbild` oder `schnitt45`, dazu Maße als Text — technische Zeichnung, siehe unten | — (16.10.2026) |
 
 Icons: `check`, `check-circle`, `warning`, `clock`, `package`, `certificate`, `clipboard-text`,
 `info`, `arrow-right`, `arrow-left` (Phosphor, aus der Referenz).
@@ -173,6 +175,29 @@ Bereiche aus (`ABWEICHUNGEN` in `scripts/build_instagram.py`).
    Bildrand, wie bei den Vollbild-Folien. (15.10.2026, Cover hell / 4c-01)
 2. **Nichts liegt auf Gesichtern.** Kennzeichnungen, Labels und Bedienelemente gehören in die
    Rahmenzonen — Kopf, Maßband —, nicht ins Motiv.
+3. **Neue Blöcke statt Einzellösungen.** Fehlt für ein Thema eine Form, entsteht ein neuer
+   Blocktyp im bestehenden Rahmen (Fläche, Schrift, Akzentfarbe, Maßband unverändert), wird als
+   Testbild abgenommen und erst danach hier und in der Vorlage ergänzt. Die Gegenprobe muss
+   weiter bestehen — neue Blöcke kommen in der Referenz nicht vor und verändern sie nicht.
+   `kennzahl` und `skizze` sind so entstanden. (16.10.2026)
+
+### Skizzen
+
+Vektorzeichnung, 864 × 440 px; Strich, Wandfläche und Akzent folgen der Folienfläche. Die
+Maße stehen als Text im Inhalt und werden **wörtlich aus der Quelle** übernommen — die Zeichnung
+zeigt das Prinzip, sie ist nicht maßstäblich und ersetzt nicht die Verarbeitungsanleitung.
+`unterschrift` setzt eine graue Zeile darunter.
+
+| `art` | Felder |
+|:---|:---|
+| `bohrbild` | `reihen: [{hoehe, versetzt?}]` (Höhe in cm über Boden; erste Reihe Ecke, 10, 30 … cm, versetzte Reihe 20, 40 … cm), `masse: {ecke, raster, boden, reihe?, versatz?}` |
+| `schnitt45` | `wand_cm`, `tiefe_cm`, `masse: {wand, tiefe, bohrlaenge, winkel, drittel}` — Wandschnitt mit 45°-Bohrung und Injektionsflasche |
+
+```json
+{"typ": "skizze", "art": "bohrbild", "reihen": [{"hoehe": 10}, {"hoehe": 23.5, "versetzt": true}],
+ "masse": {"ecke": "10 cm", "raster": "20 cm", "boden": "5–15 cm", "reihe": "12–15 cm", "versatz": "mittig versetzt"},
+ "unterschrift": "Bohrlochmuster Horizontalsperre · über 50 cm Wandstärke"}
+```
 
 ## Bauen
 

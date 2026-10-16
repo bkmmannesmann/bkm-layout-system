@@ -29,7 +29,8 @@ LIME, TRANS = "#b4e717", "#287d4b"
 
 FOLIENTYPEN = {"standard", "cover-hell", "cover-wege", "wege-vergleich", "schluss-wege"}
 BLOCKTYPEN = {"rubrik", "headline", "text", "punkte", "zeilen", "schritte", "karten",
-              "ursachen", "hinweis", "gegenueber", "vorteile", "bild", "badge"}
+              "ursachen", "hinweis", "gegenueber", "vorteile", "bild", "badge",
+              "kennzahl", "skizze"}
 TEXTUREN = {"deep-1", "deep-2", "deep-3", "hell-1", "hell-2", "hell-3"}
 ICONS = {"check", "check-circle", "warning", "clock", "package", "certificate",
          "clipboard-text", "info", "arrow-right", "arrow-left"}
