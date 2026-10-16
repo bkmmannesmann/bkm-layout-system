@@ -49,7 +49,7 @@
         {
           "icon": "shield-check",
           "claim": "Für alle gängigen Mauerwerke außer WU Beton",
-          "detail": "Wirksam bis 99,9 % Durchfeuchtung"
+          "detail": "Wirksam bis 95 % Durchfeuchtung gemäß WTA-Merkblatt 4-10"
         }
       ],
       "workplace": {
@@ -270,7 +270,8 @@
   "review": {
     "abgleich": "58 von 66 Sätzen der Vorlage wiedergefunden. Die acht übrigen sind Artefakte der Textextraktion und wurden einzeln nachgeschlagen.",
     "korrekturen": [
-      "Die Vorlage schreibt „40 Flaschen Novusan Quadratmeter“. Hier steht „pro Quadratmeter“."
+      "Die Vorlage schreibt „40 Flaschen Novusan Quadratmeter“. Hier steht „pro Quadratmeter“.",
+      "Durchfeuchtungsgrad auf „bis 95 % gemäß WTA-Merkblatt 4-10“ gesetzt, gleichlautend mit dem Datenblatt (content/tds-novusan). Die Vorlage nennt 99,9 % ohne Nachweis; Festlegung 95 % am 16.10.2026."
     ],
     "eingriffe": [
       "Die Rubrik Anleitung steht in der Vorlage auf zwei Seiten, hier auf vier. Vollständiger Text passt nicht in weniger.",
