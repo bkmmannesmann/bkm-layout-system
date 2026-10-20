@@ -19,3 +19,7 @@ pillow>=10.0.0
 # mit Chromium, demselben Browser wie Claude Design. Lokal einmalig zusaetzlich:
 #   playwright install chromium
 playwright>=1.40
+
+# Animiertes Profilbild (scripts/build_profilbild_animation.py): Distanzfelder
+# für die Morphose Tropfen -> Logo. MP4 zusätzlich über ffmpeg.
+scipy>=1.10
