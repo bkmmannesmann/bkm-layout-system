@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BKM Motion</title>
+<style>
+  @font-face { font-family: 'Unbounded'; font-weight: 900; src: url('../../assets/fonts/Unbounded-Black.ttf') format('truetype'); }
+  @font-face { font-family: 'TT Norms Pro'; font-weight: 400; src: url('../../assets/fonts/TT_Norms_Pro_Regular.ttf') format('truetype'); }
+  @font-face { font-family: 'TT Norms Pro'; font-weight: 700; src: url('../../assets/fonts/TT_Norms_Pro_Bold.ttf') format('truetype'); }
+
+  :root {
+    --deep: #1c4b42; --transition: #287d4b; --pure: #4daf46; --lime: #b4e717;
+    --stone: #494949; --muted: #8a8a8a; --sand: #f6f5f2; --white: #ffffff;
+    --hairline: #e3e1dc; --radius: 5px;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 400 16px/1.5 'TT Norms Pro', sans-serif; color: var(--stone); background: var(--white); }
+  h1, h2 { font-family: 'Unbounded', sans-serif; font-weight: 900; line-height: 1.1; margin: 0 0 12px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 22px; }
+  .kicker { color: var(--transition); font-weight: 700; margin: 0 0 8px; }
+  section { padding: 56px 24px; }
+  .inner { max-width: 960px; margin: 0 auto; }
+  .deep { background: var(--deep); color: var(--white); }
+  .deep h1, .deep h2 { color: var(--white); }
+  .deep .kicker { color: var(--lime); }
+  .sand { background: var(--sand); }
+  .grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 28px; }
+  .note { font-size: 14px; color: var(--muted); margin-top: 8px; }
+  .deep .note { color: var(--hairline); }
+
+  .btn { font: 700 16px/1 'TT Norms Pro', sans-serif; border: 0; border-radius: var(--radius);
+         padding: 14px 22px; cursor: pointer; text-decoration: none; display: inline-block; }
+  .btn-lime { background: var(--lime); color: var(--deep); }
+  .btn-deep { background: var(--deep); color: var(--white); }
+  .btn-ghost { background: var(--deep); color: var(--white); border: 1px solid var(--transition); }
+
+  .field { display: flex; gap: 8px; background: var(--white); border: 1px solid var(--hairline);
+           border-radius: var(--radius); padding: 6px; }
+  .deep .field { background: var(--deep); border-color: var(--transition); }
+  .field input { flex: 1; border: 0; background: transparent; font: inherit; color: inherit; padding: 8px 10px; outline: none; }
+
+  .card { background: var(--white); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 20px; height: 100%; }
+  .card h2 { font-size: 18px; color: var(--deep); }
+  .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .status { min-height: 28px; margin-top: 16px; }
+  @media (max-width: 600px) { h1 { font-size: 28px; } section { padding: 40px 16px; } }
+</style>
+</head>
+<body>
+
+<section class="deep">
+  <div class="inner">
+    <p class="kicker">BKM Motion · Fläche deep</p>
+    <h1>Trockene Wände beginnen mit einer Frage.</h1>
+    <p>Beispiele für Bewegung in der BKM-Oberfläche. Jede Animation hat einen Anlass: hervorheben, warten, verkaufen.</p>
+
+    <div class="grid">
+      <div>
+        <h2>Eingabe hervorheben</h2>
+        <div class="field" data-bkm-beam="pulse-outside" data-bkm-surface="deep">
+          <input placeholder="Wo ist die Wand feucht?" aria-label="Frage zur Feuchtigkeit">
+        </div>
+        <p class="note">pulse-outside · nur das eine Hauptfeld einer Ansicht</p>
+      </div>
+      <div>
+        <h2>Button hervorheben</h2>
+        <button class="btn btn-lime" data-bkm-beam="pulse-inner" data-bkm-surface="deep">Feuchte-Check starten</button>
+        <p class="note">pulse-inner · ein Haupt-CTA</p>
+      </div>
+      <div>
+        <h2>Verkaufs-CTA</h2>
+        <a class="btn btn-ghost" href="#" data-bkm-metal data-bkm-surface="deep">Fachbetrieb finden</a>
+        <p class="note">Metallring, Silber · höchstens einer pro Ansicht</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <p class="kicker">Fläche white · Wartezustand</p>
+    <h2>Analyse mit Wartezeit-Regel</h2>
+    <p>Unter 2 Sekunden: nichts. Ab 2 Sekunden: Orb mit Text. Ab 3 Sekunden: zusätzlich die Lichtkante am arbeitenden Element.</p>
+
+    <div class="grid">
+      <div>
+        <div class="field" id="suche">
+          <input id="suche-text" value="Salzausblühungen im Keller" aria-label="Schadensbild">
+          <button class="btn btn-deep" id="start" type="button">Analysieren</button>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <label><input type="radio" name="dauer" value="1200"> 1,2 s</label>
+          <label><input type="radio" name="dauer" value="2600"> 2,6 s</label>
+          <label><input type="radio" name="dauer" value="6000" checked> 6 s</label>
+        </div>
+        <div class="status" id="status" aria-live="polite"></div>
+      </div>
+      <div>
+        <div class="row">
+          <span data-bkm-orb="sucht" data-bkm-label="Sucht passende Verfahren …"></span>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <span data-bkm-orb="prueft" data-bkm-label="Prüft Kennwerte …"></span>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <span data-bkm-orb="schreibt" data-bkm-label="Schreibt Empfehlung …"></span>
+        </div>
+        <p class="note">Orb 20 px in der Textzeile · Tinte Transition Green auf hellem Grund</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sand">
+  <div class="inner">
+    <p class="kicker">Fläche sand · Karten</p>
+    <div class="grid">
+      <article class="card" data-bkm-beam="pulse-inner" data-bkm-surface="white">
+        <h2>Empfohlen für Ihren Keller</h2>
+        <p>Horizontalsperre und Sanierputz-System. <span data-bkm-badge>Neu</span></p>
+        <p class="note">pulse-inner auf einer Karte, die eine Entscheidung erwartet</p>
+      </article>
+      <article class="card">
+        <span data-bkm-orb="denkt" data-bkm-size="64" data-bkm-surface="white"></span>
+        <h2 style="margin-top:12px">Assistent</h2>
+        <p>Orb 64 px im Avatar-Platz für „denkt nach".</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script src="dist/bkm-motion.js"></script>
+<script>
+  // Wartezeit-Regel an einer echten Aktion: Orb nach 2 s, Lichtkante nach 3 s.
+  const feld = document.getElementById('suche');
+  const status = document.getElementById('status');
+  const start = document.getElementById('start');
+  const kante = BkmMotion.beam(feld, { type: 'line', surface: 'white', active: false, strength: 1 });
+  let orb = null;
+
+  start.addEventListener('click', () => {
+    const dauer = Number(document.querySelector('input[name=dauer]:checked').value);
+    start.disabled = true;
+    status.textContent = '';
+    const ende = BkmMotion.whileWaiting({
+      onOrb(an) {
+        if (an) orb = BkmMotion.orb(status, { state: 'sucht', label: 'Analyse läuft …' });
+        else if (orb) { orb.destroy(); orb = null; }
+      },
+      onBeam(an) { kante.setActive(an); },
+    });
+    setTimeout(() => {
+      ende();
+      status.textContent = 'Fertig: 3 passende Verfahren gefunden.';
+      start.disabled = false;
+    }, dauer);
+  });
+</script>
+</body>
+</html>

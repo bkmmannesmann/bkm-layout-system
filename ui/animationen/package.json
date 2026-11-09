@@ -1,0 +1,22 @@
+{
+  "name": "bkm-motion",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Animationen für die BKM-Mannesmann-Oberfläche auf Basis von Libraries.dev",
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "src/bkm-motion.jsx",
+  "scripts": {
+    "build": "esbuild src/entry.jsx --bundle --minify --format=iife --global-name=BkmMotion --footer:js=\"BkmMotion=BkmMotion.default;\" --define:process.env.NODE_ENV=\\\"production\\\" --legal-comments=eof --banner:js=\"/*! BKM Motion. Enthält border-beam, thinking-orbs, metal-fx (MIT, (c) Jakub Antalik), Shader von Paper Design (Apache-2.0) und React (MIT). Lizenztexte: ui/animationen/lizenzen/ */\" --outfile=dist/bkm-motion.js"
+  },
+  "dependencies": {
+    "border-beam": "1.4.1",
+    "metal-fx": "2.0.11",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "thinking-orbs": "0.3.2"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  }
+}
